@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 15:27:05</td>
+            <td class="headerValue">2017-02-26 15:37:58</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">13</td>
@@ -677,7 +677,7 @@
 <span class="lineNum">     615 </span>            :  * Use this to create an object.
 <a name="616"><span class="lineNum">     616 </span>            :  */</a>
 <span class="lineNum">     617 </span>            : void
-<span class="lineNum">     618 </span><span class="lineCov">        121 : do_create(dbref player, char *name, char *acost)</span>
+<span class="lineNum">     618 </span><span class="lineCov">        126 : do_create(dbref player, char *name, char *acost)</span>
 <span class="lineNum">     619 </span>            : {
 <span class="lineNum">     620 </span>            :     dbref loc;
 <span class="lineNum">     621 </span>            :     dbref thing;
@@ -686,43 +686,43 @@
 <span class="lineNum">     624 </span>            :     char buf2[BUFFER_LEN];
 <span class="lineNum">     625 </span>            :     char *rname, *qname;
 <span class="lineNum">     626 </span>            : 
-<span class="lineNum">     627 </span><span class="lineCov">        121 :     strcpyn(buf2, sizeof(buf2), acost);</span>
-<span class="lineNum">     628 </span><span class="lineCov">        121 :     for (rname = buf2; (*rname &amp;&amp; (*rname != ARG_DELIMITER)); rname++) ;</span>
-<span class="lineNum">     629 </span><span class="lineCov">        121 :     qname = rname;</span>
-<span class="lineNum">     630 </span><span class="lineCov">        121 :     if (*rname)</span>
+<span class="lineNum">     627 </span><span class="lineCov">        126 :     strcpyn(buf2, sizeof(buf2), acost);</span>
+<span class="lineNum">     628 </span><span class="lineCov">        126 :     for (rname = buf2; (*rname &amp;&amp; (*rname != ARG_DELIMITER)); rname++) ;</span>
+<span class="lineNum">     629 </span><span class="lineCov">        126 :     qname = rname;</span>
+<span class="lineNum">     630 </span><span class="lineCov">        126 :     if (*rname)</span>
 <span class="lineNum">     631 </span><span class="lineNoCov">          0 :         *(rname++) = '\0';</span>
-<span class="lineNum">     632 </span><span class="lineCov">        242 :     while ((qname &gt; buf2) &amp;&amp; (isspace(*qname)))</span>
+<span class="lineNum">     632 </span><span class="lineCov">        252 :     while ((qname &gt; buf2) &amp;&amp; (isspace(*qname)))</span>
 <span class="lineNum">     633 </span><span class="lineNoCov">          0 :         *(qname--) = '\0';</span>
-<span class="lineNum">     634 </span><span class="lineCov">        121 :     qname = buf2;</span>
-<span class="lineNum">     635 </span><span class="lineCov">        121 :     for (; *rname &amp;&amp; isspace(*rname); rname++) ;</span>
+<span class="lineNum">     634 </span><span class="lineCov">        126 :     qname = buf2;</span>
+<span class="lineNum">     635 </span><span class="lineCov">        126 :     for (; *rname &amp;&amp; isspace(*rname); rname++) ;</span>
 <span class="lineNum">     636 </span>            : 
-<span class="lineNum">     637 </span><span class="lineCov">        121 :     cost = atoi(qname);</span>
-<span class="lineNum">     638 </span><span class="lineCov">        121 :     if (*name == '\0') {</span>
+<span class="lineNum">     637 </span><span class="lineCov">        126 :     cost = atoi(qname);</span>
+<span class="lineNum">     638 </span><span class="lineCov">        126 :     if (*name == '\0') {</span>
 <span class="lineNum">     639 </span><span class="lineNoCov">          0 :         notify(player, &quot;Create what?&quot;);</span>
 <span class="lineNum">     640 </span><span class="lineNoCov">          0 :         return;</span>
-<span class="lineNum">     641 </span><span class="lineCov">        121 :     } else if (!ok_ascii_thing(name)) {</span>
+<span class="lineNum">     641 </span><span class="lineCov">        126 :     } else if (!ok_ascii_thing(name)) {</span>
 <span class="lineNum">     642 </span><span class="lineNoCov">          0 :         notify(player, &quot;Thing names are limited to 7-bit ASCII.&quot;);</span>
 <span class="lineNum">     643 </span><span class="lineNoCov">          0 :         return;</span>
-<span class="lineNum">     644 </span><span class="lineCov">        121 :     } else if (!ok_name(name)) {</span>
+<span class="lineNum">     644 </span><span class="lineCov">        126 :     } else if (!ok_name(name)) {</span>
 <span class="lineNum">     645 </span><span class="lineNoCov">          0 :         notify(player, &quot;That's a strange name for a thing!&quot;);</span>
 <span class="lineNum">     646 </span><span class="lineNoCov">          0 :         return;</span>
-<span class="lineNum">     647 </span><span class="lineCov">        121 :     } else if (cost &lt; 0) {</span>
+<span class="lineNum">     647 </span><span class="lineCov">        126 :     } else if (cost &lt; 0) {</span>
 <span class="lineNum">     648 </span><span class="lineNoCov">          0 :         notify(player, &quot;You can't create an object for less than nothing!&quot;);</span>
 <span class="lineNum">     649 </span><span class="lineNoCov">          0 :         return;</span>
-<span class="lineNum">     650 </span><span class="lineCov">        121 :     } else if (cost &lt; tp_object_cost) {</span>
-<span class="lineNum">     651 </span><span class="lineCov">        121 :         cost = tp_object_cost;</span>
+<span class="lineNum">     650 </span><span class="lineCov">        126 :     } else if (cost &lt; tp_object_cost) {</span>
+<span class="lineNum">     651 </span><span class="lineCov">        126 :         cost = tp_object_cost;</span>
 <span class="lineNum">     652 </span>            :     }
-<span class="lineNum">     653 </span><span class="lineCov">        121 :     if (!payfor(player, cost)) {</span>
+<span class="lineNum">     653 </span><span class="lineCov">        126 :     if (!payfor(player, cost)) {</span>
 <span class="lineNum">     654 </span><span class="lineNoCov">          0 :         notifyf(player, &quot;Sorry, you don't have enough %s.&quot;, tp_pennies);</span>
 <span class="lineNum">     655 </span><span class="lineNoCov">          0 :         return;</span>
 <span class="lineNum">     656 </span>            :     }
 <span class="lineNum">     657 </span>            : 
-<span class="lineNum">     658 </span><span class="lineCov">        121 :     thing = create_thing(player, name, player); </span>
-<span class="lineNum">     659 </span><span class="lineCov">        121 :     SETVALUE(thing, MIN(OBJECT_ENDOWMENT(cost), tp_max_object_endowment));</span>
+<span class="lineNum">     658 </span><span class="lineCov">        126 :     thing = create_thing(player, name, player); </span>
+<span class="lineNum">     659 </span><span class="lineCov">        126 :     SETVALUE(thing, MIN(OBJECT_ENDOWMENT(cost), tp_max_object_endowment));</span>
 <span class="lineNum">     660 </span>            : 
-<span class="lineNum">     661 </span><span class="lineCov">        121 :     notifyf(player, &quot;Object %s created as #%d.&quot;, name, thing);</span>
+<span class="lineNum">     661 </span><span class="lineCov">        126 :     notifyf(player, &quot;Object %s created as #%d.&quot;, name, thing);</span>
 <span class="lineNum">     662 </span>            : 
-<span class="lineNum">     663 </span><span class="lineCov">        121 :     if (*rname) {</span>
+<span class="lineNum">     663 </span><span class="lineCov">        126 :     if (*rname) {</span>
 <span class="lineNum">     664 </span><span class="lineNoCov">          0 :         register_object(player, REGISTRATION_PROPDIR, rname, thing);</span>
 <span class="lineNum">     665 </span><span class="lineNoCov">          0 :         notifyf(player, &quot;Registered as $%s&quot;, rname);</span>
 <span class="lineNum">     666 </span>            :     }

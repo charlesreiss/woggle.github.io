@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 15:27:05</td>
+            <td class="headerValue">2017-02-26 15:37:58</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">7</td>
@@ -819,18 +819,18 @@
 <span class="lineNum">     757 </span>            : }
 <a name="758"><span class="lineNum">     758 </span>            : </a>
 <span class="lineNum">     759 </span>            : void
-<span class="lineNum">     760 </span><span class="lineCov">         38 : do_pcreate(dbref player, const char *user, const char *password)</span>
+<span class="lineNum">     760 </span><span class="lineCov">         40 : do_pcreate(dbref player, const char *user, const char *password)</span>
 <span class="lineNum">     761 </span>            : {
 <span class="lineNum">     762 </span>            :     dbref newguy;
 <span class="lineNum">     763 </span>            : 
-<span class="lineNum">     764 </span><span class="lineCov">         38 :     newguy = create_player(user, password);</span>
-<span class="lineNum">     765 </span><span class="lineCov">         38 :     if (newguy == NOTHING) {</span>
+<span class="lineNum">     764 </span><span class="lineCov">         40 :     newguy = create_player(user, password);</span>
+<span class="lineNum">     765 </span><span class="lineCov">         40 :     if (newguy == NOTHING) {</span>
 <span class="lineNum">     766 </span><span class="lineNoCov">          0 :         notify(player, &quot;Create failed.&quot;);</span>
 <span class="lineNum">     767 </span>            :     } else {
-<span class="lineNum">     768 </span><span class="lineCov">         38 :         log_status(&quot;PCREATED %s(%d) by %s(%d)&quot;, NAME(newguy), newguy, NAME(player), player);</span>
-<span class="lineNum">     769 </span><span class="lineCov">         38 :         notifyf(player, &quot;Player %s created as object #%d.&quot;, user, newguy);</span>
+<span class="lineNum">     768 </span><span class="lineCov">         40 :         log_status(&quot;PCREATED %s(%d) by %s(%d)&quot;, NAME(newguy), newguy, NAME(player), player);</span>
+<span class="lineNum">     769 </span><span class="lineCov">         40 :         notifyf(player, &quot;Player %s created as object #%d.&quot;, user, newguy);</span>
 <span class="lineNum">     770 </span>            :     }
-<span class="lineNum">     771 </span><span class="lineCov">         38 : }</span>
+<span class="lineNum">     771 </span><span class="lineCov">         40 : }</span>
 <span class="lineNum">     772 </span>            : 
 <a name="773"><span class="lineNum">     773 </span>            : #ifndef NO_USAGE_COMMAND</a>
 <span class="lineNum">     774 </span>            : void

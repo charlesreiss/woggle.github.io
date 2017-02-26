@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 15:27:05</td>
+            <td class="headerValue">2017-02-26 15:37:58</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">4</td>
@@ -132,22 +132,22 @@
 <span class="lineNum">      70 </span>            :  */
 <a name="71"><span class="lineNum">      71 </span>            : #ifdef _POSIX_VERSION</a>
 <span class="lineNum">      72 </span>            : void
-<span class="lineNum">      73 </span><span class="lineCov">       4672 : our_signal(int signo, void (*sighandler) (int))</span>
+<span class="lineNum">      73 </span><span class="lineCov">       4736 : our_signal(int signo, void (*sighandler) (int))</span>
 <span class="lineNum">      74 </span>            : {
 <span class="lineNum">      75 </span>            :     struct sigaction act, oact;
 <span class="lineNum">      76 </span>            : 
-<span class="lineNum">      77 </span><span class="lineCov">       4672 :     act.sa_handler = sighandler;</span>
-<span class="lineNum">      78 </span><span class="lineCov">       4672 :     sigemptyset(&amp;act.sa_mask);</span>
-<span class="lineNum">      79 </span><span class="lineCov">       4672 :     act.sa_flags = 0;</span>
+<span class="lineNum">      77 </span><span class="lineCov">       4736 :     act.sa_handler = sighandler;</span>
+<span class="lineNum">      78 </span><span class="lineCov">       4736 :     sigemptyset(&amp;act.sa_mask);</span>
+<span class="lineNum">      79 </span><span class="lineCov">       4736 :     act.sa_flags = 0;</span>
 <span class="lineNum">      80 </span>            : 
 <span class="lineNum">      81 </span>            :     /* Restart long system calls if a signal is caught. */
 <span class="lineNum">      82 </span>            : #ifdef SA_RESTART
-<span class="lineNum">      83 </span><span class="lineCov">       4672 :     act.sa_flags |= SA_RESTART;</span>
+<span class="lineNum">      83 </span><span class="lineCov">       4736 :     act.sa_flags |= SA_RESTART;</span>
 <span class="lineNum">      84 </span>            : #endif
 <span class="lineNum">      85 </span>            : 
 <span class="lineNum">      86 </span>            :     /* Make it so */
-<span class="lineNum">      87 </span><span class="lineCov">       4672 :     sigaction(signo, &amp;act, &amp;oact);</span>
-<span class="lineNum">      88 </span><span class="lineCov">       4672 : }</span>
+<span class="lineNum">      87 </span><span class="lineCov">       4736 :     sigaction(signo, &amp;act, &amp;oact);</span>
+<span class="lineNum">      88 </span><span class="lineCov">       4736 : }</span>
 <span class="lineNum">      89 </span>            : 
 <span class="lineNum">      90 </span>            : #endif                          /* _POSIX_VERSION */
 <a name="91"><span class="lineNum">      91 </span>            : </a>
@@ -205,86 +205,86 @@
 <span class="lineNum">     143 </span>            : #define SET_IGN  (bail ? SIG_DFL : SIG_IGN)
 <a name="144"><span class="lineNum">     144 </span>            : </a>
 <span class="lineNum">     145 </span>            : static void
-<span class="lineNum">     146 </span><span class="lineCov">        292 : set_sigs_intern(int bail)</span>
+<span class="lineNum">     146 </span><span class="lineCov">        296 : set_sigs_intern(int bail)</span>
 <span class="lineNum">     147 </span>            : {
 <span class="lineNum">     148 </span>            :     /* we don't care about SIGPIPE, we notice it in select() and write() */
-<span class="lineNum">     149 </span><span class="lineCov">        292 :     our_signal(SIGPIPE, SET_IGN);</span>
+<span class="lineNum">     149 </span><span class="lineCov">        296 :     our_signal(SIGPIPE, SET_IGN);</span>
 <span class="lineNum">     150 </span>            : 
 <span class="lineNum">     151 </span>            :     /* didn't manage to lose that control tty, did we? Ignore it anyway. */
-<span class="lineNum">     152 </span><span class="lineCov">        292 :     our_signal(SIGHUP, SET_IGN);</span>
+<span class="lineNum">     152 </span><span class="lineCov">        296 :     our_signal(SIGHUP, SET_IGN);</span>
 <span class="lineNum">     153 </span>            : 
 <span class="lineNum">     154 </span>            : #ifdef SPAWN_HOST_RESOLVER
 <span class="lineNum">     155 </span>            :     /* resolver's exited. Better clean up the mess our child leaves */
-<span class="lineNum">     156 </span><span class="lineCov">        292 :     our_signal(SIGCHLD, bail ? SIG_DFL : sig_reap);</span>
+<span class="lineNum">     156 </span><span class="lineCov">        296 :     our_signal(SIGCHLD, bail ? SIG_DFL : sig_reap);</span>
 <span class="lineNum">     157 </span>            : #endif
 <span class="lineNum">     158 </span>            :     /* standard termination signals */
-<span class="lineNum">     159 </span><span class="lineCov">        292 :     our_signal(SIGINT, SET_BAIL);</span>
-<span class="lineNum">     160 </span><span class="lineCov">        292 :     our_signal(SIGTERM, SET_BAIL);</span>
+<span class="lineNum">     159 </span><span class="lineCov">        296 :     our_signal(SIGINT, SET_BAIL);</span>
+<span class="lineNum">     160 </span><span class="lineCov">        296 :     our_signal(SIGTERM, SET_BAIL);</span>
 <span class="lineNum">     161 </span>            : 
 <span class="lineNum">     162 </span>            :     /* catch these because we might as well */
 <span class="lineNum">     163 </span>            : /*  our_signal(SIGQUIT, SET_BAIL);  */
 <span class="lineNum">     164 </span>            : #ifdef SIGTRAP
-<span class="lineNum">     165 </span><span class="lineCov">        292 :     our_signal(SIGTRAP, SET_IGN);</span>
+<span class="lineNum">     165 </span><span class="lineCov">        296 :     our_signal(SIGTRAP, SET_IGN);</span>
 <span class="lineNum">     166 </span>            : #endif
 <span class="lineNum">     167 </span>            : #ifdef SIGIOT
-<span class="lineNum">     168 </span><span class="lineCov">        292 :     our_signal(SIGIOT, SET_BAIL);</span>
+<span class="lineNum">     168 </span><span class="lineCov">        296 :     our_signal(SIGIOT, SET_BAIL);</span>
 <span class="lineNum">     169 </span>            : #endif
 <span class="lineNum">     170 </span>            : #ifdef SIGEMT
 <span class="lineNum">     171 </span>            :     our_signal(SIGEMT, SET_BAIL);
 <span class="lineNum">     172 </span>            : #endif
 <span class="lineNum">     173 </span>            : #ifdef SIGBUS
-<span class="lineNum">     174 </span><span class="lineCov">        292 :     our_signal(SIGBUS, SET_BAIL);</span>
+<span class="lineNum">     174 </span><span class="lineCov">        296 :     our_signal(SIGBUS, SET_BAIL);</span>
 <span class="lineNum">     175 </span>            : #endif
 <span class="lineNum">     176 </span>            : #ifdef SIGSYS
-<span class="lineNum">     177 </span><span class="lineCov">        292 :     our_signal(SIGSYS, SET_BAIL);</span>
+<span class="lineNum">     177 </span><span class="lineCov">        296 :     our_signal(SIGSYS, SET_BAIL);</span>
 <span class="lineNum">     178 </span>            : #endif
-<span class="lineNum">     179 </span><span class="lineCov">        292 :     our_signal(SIGFPE, SET_BAIL);</span>
+<span class="lineNum">     179 </span><span class="lineCov">        296 :     our_signal(SIGFPE, SET_BAIL);</span>
 <span class="lineNum">     180 </span>            : #if 0
 <span class="lineNum">     181 </span>            :     our_signal(SIGSEGV, SET_BAIL);
 <span class="lineNum">     182 </span>            : #endif
-<span class="lineNum">     183 </span><span class="lineCov">        292 :     our_signal(SIGTERM, bail ? SET_BAIL : sig_shutdown);</span>
+<span class="lineNum">     183 </span><span class="lineCov">        296 :     our_signal(SIGTERM, bail ? SET_BAIL : sig_shutdown);</span>
 <span class="lineNum">     184 </span>            : #ifdef SIGXCPU
-<span class="lineNum">     185 </span><span class="lineCov">        292 :     our_signal(SIGXCPU, SET_BAIL);</span>
+<span class="lineNum">     185 </span><span class="lineCov">        296 :     our_signal(SIGXCPU, SET_BAIL);</span>
 <span class="lineNum">     186 </span>            : #endif
 <span class="lineNum">     187 </span>            : #ifdef SIGXFSZ
-<span class="lineNum">     188 </span><span class="lineCov">        292 :     our_signal(SIGXFSZ, SET_BAIL);</span>
+<span class="lineNum">     188 </span><span class="lineCov">        296 :     our_signal(SIGXFSZ, SET_BAIL);</span>
 <span class="lineNum">     189 </span>            : #endif
 <span class="lineNum">     190 </span>            : #ifdef SIGVTALRM
-<span class="lineNum">     191 </span><span class="lineCov">        292 :     our_signal(SIGVTALRM, SET_BAIL);</span>
+<span class="lineNum">     191 </span><span class="lineCov">        296 :     our_signal(SIGVTALRM, SET_BAIL);</span>
 <span class="lineNum">     192 </span>            : #endif
 <span class="lineNum">     193 </span>            : #ifdef SIGEMERG
 <span class="lineNum">     194 </span>            :     /* Clean shutdown signal (may be used with UPS software when power goes down...) */
-<span class="lineNum">     195 </span><span class="lineCov">        292 :     our_signal(SIGUSR2, sig_emerg);</span>
+<span class="lineNum">     195 </span><span class="lineCov">        296 :     our_signal(SIGUSR2, sig_emerg);</span>
 <span class="lineNum">     196 </span>            : #else
 <span class="lineNum">     197 </span>            :     our_signal(SIGUSR2, SET_BAIL);
 <span class="lineNum">     198 </span>            : #endif
 <span class="lineNum">     199 </span>            : 
 <span class="lineNum">     200 </span>            :     /* status dumper (predates &quot;WHO&quot; command) */
-<span class="lineNum">     201 </span><span class="lineCov">        292 :     our_signal(SIGUSR1, bail ? SIG_DFL : sig_dump_status);</span>
+<span class="lineNum">     201 </span><span class="lineCov">        296 :     our_signal(SIGUSR1, bail ? SIG_DFL : sig_dump_status);</span>
 <span class="lineNum">     202 </span>            : 
 <span class="lineNum">     203 </span>            : #ifdef HAVE_PSELECT
-<span class="lineNum">     204 </span><span class="lineCov">        292 :     if (!set_pselect_signal_mask) {</span>
+<span class="lineNum">     204 </span><span class="lineCov">        296 :     if (!set_pselect_signal_mask) {</span>
 <span class="lineNum">     205 </span>            :         sigset_t signals_to_block;
 <span class="lineNum">     206 </span>            : 
-<span class="lineNum">     207 </span><span class="lineCov">        292 :         sigemptyset(&amp;signals_to_block);</span>
+<span class="lineNum">     207 </span><span class="lineCov">        296 :         sigemptyset(&amp;signals_to_block);</span>
 <span class="lineNum">     208 </span>            :         /* block signals we expect during normal operation from that it
 <span class="lineNum">     209 </span>            :            should be okay to wait for the current MUCK event to finish
 <span class="lineNum">     210 </span>            :            before processing */
-<span class="lineNum">     211 </span><span class="lineCov">        292 :         sigaddset(&amp;signals_to_block, SIGCHLD);</span>
-<span class="lineNum">     212 </span><span class="lineCov">        292 :         sigaddset(&amp;signals_to_block, SIGUSR1);</span>
+<span class="lineNum">     211 </span><span class="lineCov">        296 :         sigaddset(&amp;signals_to_block, SIGCHLD);</span>
+<span class="lineNum">     212 </span><span class="lineCov">        296 :         sigaddset(&amp;signals_to_block, SIGUSR1);</span>
 <span class="lineNum">     213 </span>            : 
 <span class="lineNum">     214 </span>            :         /* block signals and record current signal mask */
-<span class="lineNum">     215 </span><span class="lineCov">        292 :         sigprocmask(SIG_BLOCK, &amp;signals_to_block, &amp;pselect_signal_mask);</span>
-<span class="lineNum">     216 </span><span class="lineCov">        292 :         set_pselect_signal_mask = 1;</span>
+<span class="lineNum">     215 </span><span class="lineCov">        296 :         sigprocmask(SIG_BLOCK, &amp;signals_to_block, &amp;pselect_signal_mask);</span>
+<span class="lineNum">     216 </span><span class="lineCov">        296 :         set_pselect_signal_mask = 1;</span>
 <span class="lineNum">     217 </span>            :     }
 <span class="lineNum">     218 </span>            : #endif
-<span class="lineNum">     219 </span><span class="lineCov">        292 : }</span>
+<span class="lineNum">     219 </span><span class="lineCov">        296 : }</span>
 <a name="220"><span class="lineNum">     220 </span>            : </a>
 <span class="lineNum">     221 </span>            : void
-<span class="lineNum">     222 </span><span class="lineCov">        292 : set_signals(void)</span>
+<span class="lineNum">     222 </span><span class="lineCov">        296 : set_signals(void)</span>
 <span class="lineNum">     223 </span>            : {
-<span class="lineNum">     224 </span><span class="lineCov">        292 :     set_sigs_intern(0);</span>
-<span class="lineNum">     225 </span><span class="lineCov">        292 : }</span>
+<span class="lineNum">     224 </span><span class="lineCov">        296 :     set_sigs_intern(0);</span>
+<span class="lineNum">     225 </span><span class="lineCov">        296 : }</span>
 <span class="lineNum">     226 </span>            : 
 <span class="lineNum">     227 </span>            : /*
 <span class="lineNum">     228 </span>            :  * Signal handlers
@@ -340,12 +340,12 @@
 <span class="lineNum">     278 </span>            :  * Gracefully shut the server down.
 <a name="279"><span class="lineNum">     279 </span>            :  */</a>
 <span class="lineNum">     280 </span>            : RETSIGTYPE
-<span class="lineNum">     281 </span><span class="lineCov">        292 : sig_shutdown(int i)</span>
+<span class="lineNum">     281 </span><span class="lineCov">        296 : sig_shutdown(int i)</span>
 <span class="lineNum">     282 </span>            : {
-<span class="lineNum">     283 </span><span class="lineCov">        292 :     log_status(&quot;SHUTDOWN: via SIGNAL&quot;);</span>
-<span class="lineNum">     284 </span><span class="lineCov">        292 :     shutdown_flag = 1;</span>
-<span class="lineNum">     285 </span><span class="lineCov">        292 :     restart_flag = 0;</span>
-<span class="lineNum">     286 </span><span class="lineCov">        292 :     return RETSIGVAL;</span>
+<span class="lineNum">     283 </span><span class="lineCov">        296 :     log_status(&quot;SHUTDOWN: via SIGNAL&quot;);</span>
+<span class="lineNum">     284 </span><span class="lineCov">        296 :     shutdown_flag = 1;</span>
+<span class="lineNum">     285 </span><span class="lineCov">        296 :     restart_flag = 0;</span>
+<span class="lineNum">     286 </span><span class="lineCov">        296 :     return RETSIGVAL;</span>
 <span class="lineNum">     287 </span>            : }
 <span class="lineNum">     288 </span>            : 
 <span class="lineNum">     289 </span>            : #ifdef SPAWN_HOST_RESOLVER
