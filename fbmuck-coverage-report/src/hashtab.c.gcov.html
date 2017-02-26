@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 16:03:49</td>
+            <td class="headerValue">2017-02-26 16:11:52</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">5</td>
@@ -74,14 +74,14 @@
 <span class="lineNum">      12 </span>            :  */
 <a name="13"><span class="lineNum">      13 </span>            : </a>
 <span class="lineNum">      14 </span>            : unsigned int
-<span class="lineNum">      15 </span><span class="lineCov">     470963 : hash(register const char *s, unsigned int hash_size)</span>
+<span class="lineNum">      15 </span><span class="lineCov">     481560 : hash(register const char *s, unsigned int hash_size)</span>
 <span class="lineNum">      16 </span>            : {
 <span class="lineNum">      17 </span>            :     unsigned int hashval;
 <span class="lineNum">      18 </span>            : 
-<span class="lineNum">      19 </span><span class="lineCov">    2337661 :     for (hashval = 0; *s != '\0'; s++) {</span>
-<span class="lineNum">      20 </span><span class="lineCov">    1866698 :         hashval = (*s | 0x20) + 31 * hashval;</span>
+<span class="lineNum">      19 </span><span class="lineCov">    2420765 :     for (hashval = 0; *s != '\0'; s++) {</span>
+<span class="lineNum">      20 </span><span class="lineCov">    1939205 :         hashval = (*s | 0x20) + 31 * hashval;</span>
 <span class="lineNum">      21 </span>            :     }
-<span class="lineNum">      22 </span><span class="lineCov">     470963 :     return hashval % hash_size;</span>
+<span class="lineNum">      22 </span><span class="lineCov">     481560 :     return hashval % hash_size;</span>
 <span class="lineNum">      23 </span>            : }
 <span class="lineNum">      24 </span>            : 
 <span class="lineNum">      25 </span>            : /* find_hash:  lookup a name in a hash table
@@ -89,14 +89,14 @@
 <span class="lineNum">      27 </span>            :  * returns NULL if not found, otherwise a pointer to the data union.
 <a name="28"><span class="lineNum">      28 </span>            :  */</a>
 <span class="lineNum">      29 </span>            : hash_data *
-<span class="lineNum">      30 </span><span class="lineCov">     251202 : find_hash(register const char *s, hash_tab * table, unsigned int size)</span>
+<span class="lineNum">      30 </span><span class="lineCov">     254099 : find_hash(register const char *s, hash_tab * table, unsigned int size)</span>
 <span class="lineNum">      31 </span>            : {
-<span class="lineNum">      32 </span><span class="lineCov">     495427 :     for (register hash_entry *hp = table[hash(s, size)]; hp != NULL; hp = hp-&gt;next) {</span>
-<span class="lineNum">      33 </span><span class="lineCov">     248534 :         if (strcasecmp(s, hp-&gt;name) == 0) {</span>
-<span class="lineNum">      34 </span><span class="lineCov">       4309 :             return &amp;(hp-&gt;dat);   /* found */</span>
+<span class="lineNum">      32 </span><span class="lineCov">     499944 :     for (register hash_entry *hp = table[hash(s, size)]; hp != NULL; hp = hp-&gt;next) {</span>
+<span class="lineNum">      33 </span><span class="lineCov">     251288 :         if (strcasecmp(s, hp-&gt;name) == 0) {</span>
+<span class="lineNum">      34 </span><span class="lineCov">       5443 :             return &amp;(hp-&gt;dat);   /* found */</span>
 <span class="lineNum">      35 </span>            :         }
 <span class="lineNum">      36 </span>            :     }
-<span class="lineNum">      37 </span><span class="lineCov">     246893 :     return NULL;                /* not found */</span>
+<span class="lineNum">      37 </span><span class="lineCov">     248656 :     return NULL;                /* not found */</span>
 <span class="lineNum">      38 </span>            : }
 <span class="lineNum">      39 </span>            : 
 <span class="lineNum">      40 </span>            : /* add_hash:  add a string to a hash table
@@ -109,38 +109,38 @@
 <span class="lineNum">      47 </span>            :  * make a static copy of the name before adding it to the table.
 <a name="48"><span class="lineNum">      48 </span>            :  */</a>
 <span class="lineNum">      49 </span>            : hash_entry *
-<span class="lineNum">      50 </span><span class="lineCov">     176737 : add_hash(register const char *name, hash_data data, hash_tab * table, unsigned int size)</span>
+<span class="lineNum">      50 </span><span class="lineCov">     183067 : add_hash(register const char *name, hash_data data, hash_tab * table, unsigned int size)</span>
 <span class="lineNum">      51 </span>            : {
 <span class="lineNum">      52 </span>            :     register hash_entry *hp;
 <span class="lineNum">      53 </span>            :     unsigned int hashval;
 <span class="lineNum">      54 </span>            : 
-<span class="lineNum">      55 </span><span class="lineCov">     176737 :     hashval = hash(name, size);</span>
+<span class="lineNum">      55 </span><span class="lineCov">     183067 :     hashval = hash(name, size);</span>
 <span class="lineNum">      56 </span>            : 
 <span class="lineNum">      57 </span>            :     /* an inline find_hash */
-<span class="lineNum">      58 </span><span class="lineCov">     292585 :     for (hp = table[hashval]; hp != NULL; hp = hp-&gt;next) {</span>
-<span class="lineNum">      59 </span><span class="lineCov">     115848 :         if (strcasecmp(name, hp-&gt;name) == 0) {</span>
+<span class="lineNum">      58 </span><span class="lineCov">     302715 :     for (hp = table[hashval]; hp != NULL; hp = hp-&gt;next) {</span>
+<span class="lineNum">      59 </span><span class="lineCov">     119648 :         if (strcasecmp(name, hp-&gt;name) == 0) {</span>
 <span class="lineNum">      60 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">      61 </span>            :         }
 <span class="lineNum">      62 </span>            :     }
 <span class="lineNum">      63 </span>            : 
 <span class="lineNum">      64 </span>            :     /* If not found, set up a new entry */
-<span class="lineNum">      65 </span><span class="lineCov">     176737 :     if (hp == NULL) {</span>
-<span class="lineNum">      66 </span><span class="lineCov">     176737 :         hp = (hash_entry *) malloc(sizeof(hash_entry));</span>
-<span class="lineNum">      67 </span><span class="lineCov">     176737 :         if (hp == NULL) {</span>
+<span class="lineNum">      65 </span><span class="lineCov">     183067 :     if (hp == NULL) {</span>
+<span class="lineNum">      66 </span><span class="lineCov">     183067 :         hp = (hash_entry *) malloc(sizeof(hash_entry));</span>
+<span class="lineNum">      67 </span><span class="lineCov">     183067 :         if (hp == NULL) {</span>
 <span class="lineNum">      68 </span><span class="lineNoCov">          0 :             perror(&quot;add_hash: out of memory!&quot;);</span>
 <span class="lineNum">      69 </span><span class="lineNoCov">          0 :             abort();            /* can't allocate new entry -- die */</span>
 <span class="lineNum">      70 </span>            :         }
-<span class="lineNum">      71 </span><span class="lineCov">     176737 :         hp-&gt;next = table[hashval];</span>
-<span class="lineNum">      72 </span><span class="lineCov">     176737 :         table[hashval] = hp;</span>
-<span class="lineNum">      73 </span><span class="lineCov">     176737 :         hp-&gt;name = (char *) strdup(name);    /* This might be wasteful. */</span>
-<span class="lineNum">      74 </span><span class="lineCov">     176737 :         if (hp-&gt;name == NULL) {</span>
+<span class="lineNum">      71 </span><span class="lineCov">     183067 :         hp-&gt;next = table[hashval];</span>
+<span class="lineNum">      72 </span><span class="lineCov">     183067 :         table[hashval] = hp;</span>
+<span class="lineNum">      73 </span><span class="lineCov">     183067 :         hp-&gt;name = (char *) strdup(name);    /* This might be wasteful. */</span>
+<span class="lineNum">      74 </span><span class="lineCov">     183067 :         if (hp-&gt;name == NULL) {</span>
 <span class="lineNum">      75 </span><span class="lineNoCov">          0 :             perror(&quot;add_hash: out of memory!&quot;);</span>
 <span class="lineNum">      76 </span><span class="lineNoCov">          0 :             abort();            /* can't allocate new entry -- die */</span>
 <span class="lineNum">      77 </span>            :         }
 <span class="lineNum">      78 </span>            :     }
 <span class="lineNum">      79 </span>            :     /* One way or another, the pointer is now valid */
-<span class="lineNum">      80 </span><span class="lineCov">     176737 :     hp-&gt;dat = data;</span>
-<span class="lineNum">      81 </span><span class="lineCov">     176737 :     return hp;</span>
+<span class="lineNum">      80 </span><span class="lineCov">     183067 :     hp-&gt;dat = data;</span>
+<span class="lineNum">      81 </span><span class="lineCov">     183067 :     return hp;</span>
 <span class="lineNum">      82 </span>            : }
 <span class="lineNum">      83 </span>            : 
 <span class="lineNum">      84 </span>            : /* free_hash:  free a hash table entry
@@ -149,40 +149,40 @@
 <span class="lineNum">      87 </span>            :  * a name.  Returns 0 on success, or -1 if the name cannot be found.
 <a name="88"><span class="lineNum">      88 </span>            :  */</a>
 <span class="lineNum">      89 </span>            : int
-<span class="lineNum">      90 </span><span class="lineCov">      43024 : free_hash(register const char *name, hash_tab * table, unsigned int size)</span>
+<span class="lineNum">      90 </span><span class="lineCov">      44394 : free_hash(register const char *name, hash_tab * table, unsigned int size)</span>
 <span class="lineNum">      91 </span>            : {
 <span class="lineNum">      92 </span>            :     register hash_entry **lp;
 <span class="lineNum">      93 </span>            : 
-<span class="lineNum">      94 </span><span class="lineCov">      43024 :     lp = &amp;table[hash(name, size)];</span>
-<span class="lineNum">      95 </span><span class="lineCov">      54328 :     for (register hash_entry *hp = *lp; hp != NULL; lp = &amp;(hp-&gt;next), hp = hp-&gt;next) {</span>
-<span class="lineNum">      96 </span><span class="lineCov">      11310 :         if (strcasecmp(name, hp-&gt;name) == 0) {</span>
+<span class="lineNum">      94 </span><span class="lineCov">      44394 :     lp = &amp;table[hash(name, size)];</span>
+<span class="lineNum">      95 </span><span class="lineCov">      56058 :     for (register hash_entry *hp = *lp; hp != NULL; lp = &amp;(hp-&gt;next), hp = hp-&gt;next) {</span>
+<span class="lineNum">      96 </span><span class="lineCov">      11670 :         if (strcasecmp(name, hp-&gt;name) == 0) {</span>
 <span class="lineNum">      97 </span><span class="lineCov">          6 :             *lp = hp-&gt;next;  /* got it.  fix the pointers */</span>
 <span class="lineNum">      98 </span><span class="lineCov">          6 :             free((void *) hp-&gt;name);</span>
 <span class="lineNum">      99 </span><span class="lineCov">          6 :             free((void *) hp);</span>
 <span class="lineNum">     100 </span><span class="lineCov">          6 :             return 0;</span>
 <span class="lineNum">     101 </span>            :         }
 <span class="lineNum">     102 </span>            :     }
-<span class="lineNum">     103 </span><span class="lineCov">      43018 :     return -1;                  /* not found */</span>
+<span class="lineNum">     103 </span><span class="lineCov">      44388 :     return -1;                  /* not found */</span>
 <span class="lineNum">     104 </span>            : }
 <span class="lineNum">     105 </span>            : 
 <a name="106"><span class="lineNum">     106 </span>            : /* kill_hash:  kill an entire hash table, by freeing every entry */</a>
 <span class="lineNum">     107 </span>            : void
-<span class="lineNum">     108 </span><span class="lineCov">       1008 : kill_hash(hash_tab * table, unsigned int size, int freeptrs)</span>
+<span class="lineNum">     108 </span><span class="lineCov">       1048 : kill_hash(hash_tab * table, unsigned int size, int freeptrs)</span>
 <span class="lineNum">     109 </span>            : {
 <span class="lineNum">     110 </span>            :     register hash_entry *np;
 <span class="lineNum">     111 </span>            : 
-<span class="lineNum">     112 </span><span class="lineCov">     500208 :     for (unsigned int i = 0; i &lt; size; i++) {</span>
-<span class="lineNum">     113 </span><span class="lineCov">     505074 :         for (register hash_entry *hp = table[i]; hp != NULL; hp = np) {</span>
-<span class="lineNum">     114 </span><span class="lineCov">       5874 :             np = hp-&gt;next;   /* Don't dereference the pointer after */</span>
-<span class="lineNum">     115 </span><span class="lineCov">       5874 :             free((void *) hp-&gt;name);</span>
-<span class="lineNum">     116 </span><span class="lineCov">       5874 :             if (freeptrs) {</span>
-<span class="lineNum">     117 </span><span class="lineCov">       5874 :                 free((void *) hp-&gt;dat.pval);</span>
+<span class="lineNum">     112 </span><span class="lineCov">     518168 :     for (unsigned int i = 0; i &lt; size; i++) {</span>
+<span class="lineNum">     113 </span><span class="lineCov">     523884 :         for (register hash_entry *hp = table[i]; hp != NULL; hp = np) {</span>
+<span class="lineNum">     114 </span><span class="lineCov">       6764 :             np = hp-&gt;next;   /* Don't dereference the pointer after */</span>
+<span class="lineNum">     115 </span><span class="lineCov">       6764 :             free((void *) hp-&gt;name);</span>
+<span class="lineNum">     116 </span><span class="lineCov">       6764 :             if (freeptrs) {</span>
+<span class="lineNum">     117 </span><span class="lineCov">       6764 :                 free((void *) hp-&gt;dat.pval);</span>
 <span class="lineNum">     118 </span>            :             }
-<span class="lineNum">     119 </span><span class="lineCov">       5874 :             free((void *) hp);  /* we've freed it! */</span>
+<span class="lineNum">     119 </span><span class="lineCov">       6764 :             free((void *) hp);  /* we've freed it! */</span>
 <span class="lineNum">     120 </span>            :         }
-<span class="lineNum">     121 </span><span class="lineCov">     499200 :         table[i] = NULL;</span>
+<span class="lineNum">     121 </span><span class="lineCov">     517120 :         table[i] = NULL;</span>
 <span class="lineNum">     122 </span>            :     }
-<span class="lineNum">     123 </span><span class="lineCov">       1008 : }</span>
+<span class="lineNum">     123 </span><span class="lineCov">       1048 : }</span>
 </pre>
       </td>
     </tr>
