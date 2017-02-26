@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 12:37:22</td>
+            <td class="headerValue">2017-02-26 13:13:27</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -179,21 +179,21 @@
 <span class="lineNum">     117 </span>            : 
 <a name="118"><span class="lineNum">     118 </span>            : </a>
 <span class="lineNum">     119 </span>            : const char *
-<span class="lineNum">     120 </span><span class="lineCov">         16 : mfn_locked(MFUNARGS)</span>
+<span class="lineNum">     120 </span><span class="lineCov">         22 : mfn_locked(MFUNARGS)</span>
 <span class="lineNum">     121 </span>            : {
-<span class="lineNum">     122 </span><span class="lineCov">         16 :     dbref who = mesg_dbref_local(descr, player, what, perms, argv[0], mesgtyp);</span>
-<span class="lineNum">     123 </span><span class="lineCov">         16 :     dbref obj = mesg_dbref_local(descr, player, what, perms, argv[1], mesgtyp);</span>
+<span class="lineNum">     122 </span><span class="lineCov">         22 :     dbref who = mesg_dbref_local(descr, player, what, perms, argv[0], mesgtyp);</span>
+<span class="lineNum">     123 </span><span class="lineCov">         22 :     dbref obj = mesg_dbref_local(descr, player, what, perms, argv[1], mesgtyp);</span>
 <span class="lineNum">     124 </span>            : 
-<span class="lineNum">     125 </span><span class="lineCov">         16 :     if (who == AMBIGUOUS || who == UNKNOWN || who == NOTHING || who == HOME)</span>
+<span class="lineNum">     125 </span><span class="lineCov">         22 :     if (who == AMBIGUOUS || who == UNKNOWN || who == NOTHING || who == HOME)</span>
 <span class="lineNum">     126 </span><span class="lineNoCov">          0 :         ABORT_MPI(&quot;LOCKED&quot;, &quot;Match failed. (arg1)&quot;);</span>
-<span class="lineNum">     127 </span><span class="lineCov">         16 :     if (who == PERMDENIED)</span>
+<span class="lineNum">     127 </span><span class="lineCov">         22 :     if (who == PERMDENIED)</span>
 <span class="lineNum">     128 </span><span class="lineNoCov">          0 :         ABORT_MPI(&quot;LOCKED&quot;, &quot;Permission denied. (arg1)&quot;);</span>
-<span class="lineNum">     129 </span><span class="lineCov">         16 :     if (obj == AMBIGUOUS || obj == UNKNOWN || obj == NOTHING || obj == HOME)</span>
+<span class="lineNum">     129 </span><span class="lineCov">         22 :     if (obj == AMBIGUOUS || obj == UNKNOWN || obj == NOTHING || obj == HOME)</span>
 <span class="lineNum">     130 </span><span class="lineNoCov">          0 :         ABORT_MPI(&quot;LOCKED&quot;, &quot;Match failed. (arg2)&quot;);</span>
-<span class="lineNum">     131 </span><span class="lineCov">         16 :     if (obj == PERMDENIED)</span>
+<span class="lineNum">     131 </span><span class="lineCov">         22 :     if (obj == PERMDENIED)</span>
 <span class="lineNum">     132 </span><span class="lineNoCov">          0 :         ABORT_MPI(&quot;LOCKED&quot;, &quot;Permission denied. (arg2)&quot;);</span>
-<span class="lineNum">     133 </span><span class="lineCov">         16 :     snprintf(buf, BUFFER_LEN, &quot;%d&quot;, !could_doit(descr, who, obj));</span>
-<span class="lineNum">     134 </span><span class="lineCov">         16 :     return buf;</span>
+<span class="lineNum">     133 </span><span class="lineCov">         22 :     snprintf(buf, BUFFER_LEN, &quot;%d&quot;, !could_doit(descr, who, obj));</span>
+<span class="lineNum">     134 </span><span class="lineCov">         22 :     return buf;</span>
 <span class="lineNum">     135 </span>            : }
 <span class="lineNum">     136 </span>            : 
 <a name="137"><span class="lineNum">     137 </span>            : </a>
@@ -496,22 +496,22 @@
 <span class="lineNum">     434 </span>            : 
 <a name="435"><span class="lineNum">     435 </span>            : </a>
 <span class="lineNum">     436 </span>            : const char *
-<span class="lineNum">     437 </span><span class="lineCov">         90 : mfn_sublist(MFUNARGS)</span>
+<span class="lineNum">     437 </span><span class="lineCov">        130 : mfn_sublist(MFUNARGS)</span>
 <span class="lineNum">     438 </span>            : {
 <span class="lineNum">     439 </span>            :     char *ptr;
 <span class="lineNum">     440 </span>            :     char sepbuf[BUFFER_LEN];
 <span class="lineNum">     441 </span>            :     char buf2[BUFFER_LEN];
-<span class="lineNum">     442 </span><span class="lineCov">         90 :     int count = 1;</span>
+<span class="lineNum">     442 </span><span class="lineCov">        130 :     int count = 1;</span>
 <span class="lineNum">     443 </span>            :     int which;
 <span class="lineNum">     444 </span>            :     int end;
-<span class="lineNum">     445 </span><span class="lineCov">         90 :     int incr = 1;</span>
+<span class="lineNum">     445 </span><span class="lineCov">        130 :     int incr = 1;</span>
 <span class="lineNum">     446 </span>            :     int pflag;
 <span class="lineNum">     447 </span>            : 
-<span class="lineNum">     448 </span><span class="lineCov">         90 :     if (argc &gt; 1) {</span>
+<span class="lineNum">     448 </span><span class="lineCov">        130 :     if (argc &gt; 1) {</span>
 <span class="lineNum">     449 </span><span class="lineNoCov">          0 :         which = atoi(argv[1]);</span>
 <span class="lineNum">     450 </span>            :     } else {
-<span class="lineNum">     451 </span><span class="lineCov">         90 :         strcpyn(buf, buflen, argv[0]);</span>
-<span class="lineNum">     452 </span><span class="lineCov">         90 :         return buf;</span>
+<span class="lineNum">     451 </span><span class="lineCov">        130 :         strcpyn(buf, buflen, argv[0]);</span>
+<span class="lineNum">     452 </span><span class="lineCov">        130 :         return buf;</span>
 <span class="lineNum">     453 </span>            :     }
 <span class="lineNum">     454 </span>            : 
 <span class="lineNum">     455 </span><span class="lineNoCov">          0 :     strcpyn(sepbuf, sizeof(sepbuf), &quot;\r&quot;);</span>
@@ -1555,22 +1555,22 @@
 <span class="lineNum">    1493 </span>            : 
 <a name="1494"><span class="lineNum">    1494 </span>            : </a>
 <span class="lineNum">    1495 </span>            : const char *
-<span class="lineNum">    1496 </span><span class="lineCov">         18 : mfn_force(MFUNARGS)</span>
+<span class="lineNum">    1496 </span><span class="lineCov">         24 : mfn_force(MFUNARGS)</span>
 <span class="lineNum">    1497 </span>            : {
 <span class="lineNum">    1498 </span>            :     char *nxt, *ptr;
-<span class="lineNum">    1499 </span><span class="lineCov">         18 :     dbref obj = mesg_dbref_raw(descr, player, what, perms, argv[0]);</span>
+<span class="lineNum">    1499 </span><span class="lineCov">         24 :     dbref obj = mesg_dbref_raw(descr, player, what, perms, argv[0]);</span>
 <span class="lineNum">    1500 </span>            : 
-<span class="lineNum">    1501 </span><span class="lineCov">         18 :     if (obj == AMBIGUOUS || obj == UNKNOWN || obj == NOTHING || obj == HOME)</span>
+<span class="lineNum">    1501 </span><span class="lineCov">         24 :     if (obj == AMBIGUOUS || obj == UNKNOWN || obj == NOTHING || obj == HOME)</span>
 <span class="lineNum">    1502 </span><span class="lineNoCov">          0 :         ABORT_MPI(&quot;FORCE&quot;, &quot;Failed match. (arg1)&quot;);</span>
-<span class="lineNum">    1503 </span><span class="lineCov">         18 :     if (obj == PERMDENIED)</span>
+<span class="lineNum">    1503 </span><span class="lineCov">         24 :     if (obj == PERMDENIED)</span>
 <span class="lineNum">    1504 </span><span class="lineNoCov">          0 :         ABORT_MPI(&quot;FORCE&quot;, &quot;Permission denied. (arg1)&quot;);</span>
-<span class="lineNum">    1505 </span><span class="lineCov">         18 :     if (Typeof(obj) != TYPE_THING &amp;&amp; Typeof(obj) != TYPE_PLAYER)</span>
+<span class="lineNum">    1505 </span><span class="lineCov">         24 :     if (Typeof(obj) != TYPE_THING &amp;&amp; Typeof(obj) != TYPE_PLAYER)</span>
 <span class="lineNum">    1506 </span><span class="lineNoCov">          0 :         ABORT_MPI(&quot;FORCE&quot;, &quot;Bad object reference. (arg1)&quot;);</span>
-<span class="lineNum">    1507 </span><span class="lineCov">         18 :     if (!*argv[1])</span>
+<span class="lineNum">    1507 </span><span class="lineCov">         24 :     if (!*argv[1])</span>
 <span class="lineNum">    1508 </span><span class="lineNoCov">          0 :         ABORT_MPI(&quot;FORCE&quot;, &quot;Null command string. (arg2)&quot;);</span>
-<span class="lineNum">    1509 </span><span class="lineCov">         18 :     if (!tp_zombies &amp;&amp; !(mesgtyp &amp; MPI_ISBLESSED))</span>
+<span class="lineNum">    1509 </span><span class="lineCov">         24 :     if (!tp_zombies &amp;&amp; !(mesgtyp &amp; MPI_ISBLESSED))</span>
 <span class="lineNum">    1510 </span><span class="lineNoCov">          0 :         ABORT_MPI(&quot;FORCE&quot;, &quot;Permission Denied.&quot;);</span>
-<span class="lineNum">    1511 </span><span class="lineCov">         18 :     if (!(mesgtyp &amp; MPI_ISBLESSED)) {</span>
+<span class="lineNum">    1511 </span><span class="lineCov">         24 :     if (!(mesgtyp &amp; MPI_ISBLESSED)) {</span>
 <span class="lineNum">    1512 </span><span class="lineNoCov">          0 :         const char *ptr = NAME(obj);</span>
 <span class="lineNum">    1513 </span>            :         char objname[BUFFER_LEN], *ptr2;
 <span class="lineNum">    1514 </span><span class="lineNoCov">          0 :         dbref loc = LOCATION(obj);</span>
@@ -1596,40 +1596,40 @@
 <span class="lineNum">    1534 </span>            :         }
 <span class="lineNum">    1535 </span>            :     }
 <span class="lineNum">    1536 </span>            : #ifdef GOD_PRIV
-<span class="lineNum">    1537 </span><span class="lineCov">         18 :     if (God(obj))</span>
+<span class="lineNum">    1537 </span><span class="lineCov">         24 :     if (God(obj))</span>
 <span class="lineNum">    1538 </span><span class="lineNoCov">          0 :         ABORT_MPI(&quot;FORCE&quot;, &quot;Permission denied: You can't force God.&quot;);</span>
 <span class="lineNum">    1539 </span>            : #endif
 <span class="lineNum">    1540 </span>            : 
-<span class="lineNum">    1541 </span><span class="lineCov">         18 :     if (force_level &gt; (tp_max_force_level - 1))</span>
-<span class="lineNum">    1542 </span><span class="lineCov">          9 :         ABORT_MPI(&quot;FORCE&quot;, &quot;Permission denied: You can't force recursively.&quot;);</span>
-<span class="lineNum">    1543 </span><span class="lineCov">          9 :     strcpyn(buf, buflen, argv[1]);</span>
-<span class="lineNum">    1544 </span><span class="lineCov">          9 :     ptr = buf;</span>
+<span class="lineNum">    1541 </span><span class="lineCov">         24 :     if (force_level &gt; (tp_max_force_level - 1))</span>
+<span class="lineNum">    1542 </span><span class="lineCov">         12 :         ABORT_MPI(&quot;FORCE&quot;, &quot;Permission denied: You can't force recursively.&quot;);</span>
+<span class="lineNum">    1543 </span><span class="lineCov">         12 :     strcpyn(buf, buflen, argv[1]);</span>
+<span class="lineNum">    1544 </span><span class="lineCov">         12 :     ptr = buf;</span>
 <span class="lineNum">    1545 </span>            :     do {
-<span class="lineNum">    1546 </span><span class="lineCov">          9 :         const char *ptr2 = NAME(obj);</span>
+<span class="lineNum">    1546 </span><span class="lineCov">         12 :         const char *ptr2 = NAME(obj);</span>
 <span class="lineNum">    1547 </span>            :         char objname[BUFFER_LEN], *ptr3;
 <span class="lineNum">    1548 </span>            : 
-<span class="lineNum">    1549 </span><span class="lineCov">          9 :         nxt = index(ptr, '\r');</span>
-<span class="lineNum">    1550 </span><span class="lineCov">          9 :         if (nxt)</span>
+<span class="lineNum">    1549 </span><span class="lineCov">         12 :         nxt = index(ptr, '\r');</span>
+<span class="lineNum">    1550 </span><span class="lineCov">         12 :         if (nxt)</span>
 <span class="lineNum">    1551 </span><span class="lineNoCov">          0 :             *nxt++ = '\0';</span>
 <span class="lineNum">    1552 </span>            : 
 <span class="lineNum">    1553 </span>            :         /* fixing bug #986845 */
 <span class="lineNum">    1554 </span>            :         /* follows same definition above, with different variable names */
-<span class="lineNum">    1555 </span><span class="lineCov">        108 :         for (ptr3 = objname; *ptr2 &amp;&amp; !isspace(*ptr2);)</span>
-<span class="lineNum">    1556 </span><span class="lineCov">         90 :             *(ptr3++) = *(ptr2++);</span>
-<span class="lineNum">    1557 </span><span class="lineCov">          9 :         *ptr3 = '\0';</span>
-<span class="lineNum">    1558 </span><span class="lineCov">          9 :         if (lookup_player(objname) != NOTHING &amp;&amp; Typeof(obj) != TYPE_PLAYER) {</span>
+<span class="lineNum">    1555 </span><span class="lineCov">        144 :         for (ptr3 = objname; *ptr2 &amp;&amp; !isspace(*ptr2);)</span>
+<span class="lineNum">    1556 </span><span class="lineCov">        120 :             *(ptr3++) = *(ptr2++);</span>
+<span class="lineNum">    1557 </span><span class="lineCov">         12 :         *ptr3 = '\0';</span>
+<span class="lineNum">    1558 </span><span class="lineCov">         12 :         if (lookup_player(objname) != NOTHING &amp;&amp; Typeof(obj) != TYPE_PLAYER) {</span>
 <span class="lineNum">    1559 </span><span class="lineNoCov">          0 :             ABORT_MPI(&quot;FORCE&quot;, &quot;Cannot force a thing named after a player. [2]&quot;);</span>
 <span class="lineNum">    1560 </span>            :         }
-<span class="lineNum">    1561 </span><span class="lineCov">          9 :         objnode_push(&amp;forcelist, what);</span>
-<span class="lineNum">    1562 </span><span class="lineCov">          9 :         force_level++;</span>
-<span class="lineNum">    1563 </span><span class="lineCov">          9 :         if (*ptr)</span>
-<span class="lineNum">    1564 </span><span class="lineCov">          9 :             process_command(dbref_first_descr(obj), obj, ptr);</span>
-<span class="lineNum">    1565 </span><span class="lineCov">          9 :         force_level--;</span>
-<span class="lineNum">    1566 </span><span class="lineCov">          9 :         objnode_pop(&amp;forcelist);</span>
-<span class="lineNum">    1567 </span><span class="lineCov">          9 :         ptr = nxt;</span>
-<span class="lineNum">    1568 </span><span class="lineCov">          9 :     } while (ptr);</span>
-<span class="lineNum">    1569 </span><span class="lineCov">          9 :     *buf = '\0';</span>
-<span class="lineNum">    1570 </span><span class="lineCov">          9 :     return &quot;&quot;;</span>
+<span class="lineNum">    1561 </span><span class="lineCov">         12 :         objnode_push(&amp;forcelist, what);</span>
+<span class="lineNum">    1562 </span><span class="lineCov">         12 :         force_level++;</span>
+<span class="lineNum">    1563 </span><span class="lineCov">         12 :         if (*ptr)</span>
+<span class="lineNum">    1564 </span><span class="lineCov">         12 :             process_command(dbref_first_descr(obj), obj, ptr);</span>
+<span class="lineNum">    1565 </span><span class="lineCov">         12 :         force_level--;</span>
+<span class="lineNum">    1566 </span><span class="lineCov">         12 :         objnode_pop(&amp;forcelist);</span>
+<span class="lineNum">    1567 </span><span class="lineCov">         12 :         ptr = nxt;</span>
+<span class="lineNum">    1568 </span><span class="lineCov">         12 :     } while (ptr);</span>
+<span class="lineNum">    1569 </span><span class="lineCov">         12 :     *buf = '\0';</span>
+<span class="lineNum">    1570 </span><span class="lineCov">         12 :     return &quot;&quot;;</span>
 <span class="lineNum">    1571 </span>            : }
 <span class="lineNum">    1572 </span>            : 
 <a name="1573"><span class="lineNum">    1573 </span>            : </a>
