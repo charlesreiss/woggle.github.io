@@ -31,18 +31,18 @@
             <td class="headerValue">coverage-total</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">139</td>
+            <td class="headerCovTableEntry">247</td>
             <td class="headerCovTableEntry">582</td>
-            <td class="headerCovTableEntryLo">23.9 %</td>
+            <td class="headerCovTableEntryLo">42.4 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 15:10:19</td>
+            <td class="headerValue">2017-02-26 15:27:05</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntry">11</td>
             <td class="headerCovTableEntry">12</td>
-            <td class="headerCovTableEntryLo">50.0 %</td>
+            <td class="headerCovTableEntryHi">91.7 %</td>
           </tr>
           <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
         </table>
@@ -102,20 +102,20 @@
 <span class="lineNum">      40 </span>            : }
 <a name="41"><span class="lineNum">      41 </span>            : </a>
 <span class="lineNum">      42 </span>            : void
-<span class="lineNum">      43 </span><span class="lineCov">         12 : enter_room(int descr, dbref player, dbref loc, dbref exit)</span>
+<span class="lineNum">      43 </span><span class="lineCov">         17 : enter_room(int descr, dbref player, dbref loc, dbref exit)</span>
 <span class="lineNum">      44 </span>            : {
 <span class="lineNum">      45 </span>            :     dbref old;
 <span class="lineNum">      46 </span>            :     dbref dropto;
 <span class="lineNum">      47 </span>            :     char buf[BUFFER_LEN];
 <span class="lineNum">      48 </span>            : 
 <span class="lineNum">      49 </span>            :     /* check for room == HOME */
-<span class="lineNum">      50 </span><span class="lineCov">         12 :     if (loc == HOME)</span>
+<span class="lineNum">      50 </span><span class="lineCov">         17 :     if (loc == HOME)</span>
 <span class="lineNum">      51 </span><span class="lineNoCov">          0 :         loc = PLAYER_HOME(player);      /* home */</span>
 <span class="lineNum">      52 </span>            : 
 <span class="lineNum">      53 </span>            :     /* get old location */
-<span class="lineNum">      54 </span><span class="lineCov">         12 :     old = LOCATION(player);</span>
+<span class="lineNum">      54 </span><span class="lineCov">         17 :     old = LOCATION(player);</span>
 <span class="lineNum">      55 </span>            : 
-<span class="lineNum">      56 </span><span class="lineCov">         12 :     if (parent_loop_check(player, loc)) {</span>
+<span class="lineNum">      56 </span><span class="lineCov">         17 :     if (parent_loop_check(player, loc)) {</span>
 <span class="lineNum">      57 </span><span class="lineNoCov">          0 :         switch (Typeof(player)) {</span>
 <span class="lineNum">      58 </span>            :         case TYPE_PLAYER:
 <span class="lineNum">      59 </span><span class="lineNoCov">          0 :             loc = PLAYER_HOME(player);</span>
@@ -140,64 +140,64 @@
 <span class="lineNum">      78 </span>            :     /* check for self-loop */
 <span class="lineNum">      79 </span>            :     /* self-loops don't do move or other player notification */
 <span class="lineNum">      80 </span>            :     /* but you still get autolook and penny check */
-<span class="lineNum">      81 </span><span class="lineCov">         12 :     if (loc != old) {</span>
+<span class="lineNum">      81 </span><span class="lineCov">         17 :     if (loc != old) {</span>
 <span class="lineNum">      82 </span>            : 
 <span class="lineNum">      83 </span>            :         /* go there */
-<span class="lineNum">      84 </span><span class="lineCov">          9 :         moveto(player, loc);</span>
+<span class="lineNum">      84 </span><span class="lineCov">         14 :         moveto(player, loc);</span>
 <span class="lineNum">      85 </span>            : 
-<span class="lineNum">      86 </span><span class="lineCov">          9 :         if (old != NOTHING) {</span>
-<span class="lineNum">      87 </span><span class="lineCov">          9 :             propqueue(descr, player, old, exit, player, NOTHING, DEPART_PROPQUEUE, &quot;Depart&quot;, 1, 1);</span>
-<span class="lineNum">      88 </span><span class="lineCov">          9 :             envpropqueue(descr, player, old, exit, old, NOTHING, DEPART_PROPQUEUE, &quot;Depart&quot;, 1, 1);</span>
+<span class="lineNum">      86 </span><span class="lineCov">         14 :         if (old != NOTHING) {</span>
+<span class="lineNum">      87 </span><span class="lineCov">         14 :             propqueue(descr, player, old, exit, player, NOTHING, DEPART_PROPQUEUE, &quot;Depart&quot;, 1, 1);</span>
+<span class="lineNum">      88 </span><span class="lineCov">         14 :             envpropqueue(descr, player, old, exit, old, NOTHING, DEPART_PROPQUEUE, &quot;Depart&quot;, 1, 1);</span>
 <span class="lineNum">      89 </span>            : 
-<span class="lineNum">      90 </span><span class="lineCov">          9 :             propqueue(descr, player, old, exit, player, NOTHING, ODEPART_PROPQUEUE, &quot;Odepart&quot;, 1, 0);</span>
-<span class="lineNum">      91 </span><span class="lineCov">          9 :             envpropqueue(descr, player, old, exit, old, NOTHING, ODEPART_PROPQUEUE, &quot;Odepart&quot;, 1, 0);</span>
+<span class="lineNum">      90 </span><span class="lineCov">         14 :             propqueue(descr, player, old, exit, player, NOTHING, ODEPART_PROPQUEUE, &quot;Odepart&quot;, 1, 0);</span>
+<span class="lineNum">      91 </span><span class="lineCov">         14 :             envpropqueue(descr, player, old, exit, old, NOTHING, ODEPART_PROPQUEUE, &quot;Odepart&quot;, 1, 0);</span>
 <span class="lineNum">      92 </span>            : 
 <span class="lineNum">      93 </span>            :             /* notify others unless DARK */
-<span class="lineNum">      94 </span><span class="lineCov">         18 :             if (!tp_quiet_moves &amp;&amp;</span>
-<span class="lineNum">      95 </span><span class="lineCov">         18 :                 !Dark(old) &amp;&amp; !Dark(player) &amp;&amp;</span>
-<span class="lineNum">      96 </span><span class="lineCov">          9 :                 ((Typeof(player) != TYPE_THING) ||</span>
+<span class="lineNum">      94 </span><span class="lineCov">         28 :             if (!tp_quiet_moves &amp;&amp;</span>
+<span class="lineNum">      95 </span><span class="lineCov">         28 :                 !Dark(old) &amp;&amp; !Dark(player) &amp;&amp;</span>
+<span class="lineNum">      96 </span><span class="lineCov">         14 :                 ((Typeof(player) != TYPE_THING) ||</span>
 <span class="lineNum">      97 </span><span class="lineNoCov">          0 :                  ((Typeof(player) == TYPE_THING) &amp;&amp; (FLAGS(player) &amp; (ZOMBIE | VEHICLE))))</span>
-<span class="lineNum">      98 </span><span class="lineCov">          9 :                 &amp;&amp; (Typeof(exit) != TYPE_EXIT || !Dark(exit))) {</span>
-<span class="lineNum">      99 </span><span class="lineCov">          9 :                 snprintf(buf, sizeof(buf), &quot;%s has left.&quot;, NAME(player));</span>
-<span class="lineNum">     100 </span><span class="lineCov">          9 :                 notify_except(CONTENTS(old), player, buf, player);</span>
+<span class="lineNum">      98 </span><span class="lineCov">         14 :                 &amp;&amp; (Typeof(exit) != TYPE_EXIT || !Dark(exit))) {</span>
+<span class="lineNum">      99 </span><span class="lineCov">         14 :                 snprintf(buf, sizeof(buf), &quot;%s has left.&quot;, NAME(player));</span>
+<span class="lineNum">     100 </span><span class="lineCov">         14 :                 notify_except(CONTENTS(old), player, buf, player);</span>
 <span class="lineNum">     101 </span>            :             }
 <span class="lineNum">     102 </span>            :         }
 <span class="lineNum">     103 </span>            : 
 <span class="lineNum">     104 </span>            :         /* if old location has STICKY dropto, send stuff through it */
-<span class="lineNum">     105 </span><span class="lineCov">          9 :         if (old != NOTHING &amp;&amp; Typeof(old) == TYPE_ROOM</span>
-<span class="lineNum">     106 </span><span class="lineCov">          9 :             &amp;&amp; (dropto = DBFETCH(old)-&gt;sp.room.dropto) != NOTHING &amp;&amp; (FLAGS(old) &amp; STICKY)) {</span>
+<span class="lineNum">     105 </span><span class="lineCov">         14 :         if (old != NOTHING &amp;&amp; Typeof(old) == TYPE_ROOM</span>
+<span class="lineNum">     106 </span><span class="lineCov">         12 :             &amp;&amp; (dropto = DBFETCH(old)-&gt;sp.room.dropto) != NOTHING &amp;&amp; (FLAGS(old) &amp; STICKY)) {</span>
 <span class="lineNum">     107 </span><span class="lineNoCov">          0 :             maybe_dropto(descr, old, dropto);</span>
 <span class="lineNum">     108 </span>            :         }
 <span class="lineNum">     109 </span>            : 
 <span class="lineNum">     110 </span>            :         /* tell other folks in new location if not DARK */
-<span class="lineNum">     111 </span><span class="lineCov">         18 :         if (!tp_quiet_moves &amp;&amp;</span>
-<span class="lineNum">     112 </span><span class="lineCov">         18 :             !Dark(loc) &amp;&amp; !Dark(player) &amp;&amp;</span>
-<span class="lineNum">     113 </span><span class="lineCov">          9 :             ((Typeof(player) != TYPE_THING) ||</span>
+<span class="lineNum">     111 </span><span class="lineCov">         28 :         if (!tp_quiet_moves &amp;&amp;</span>
+<span class="lineNum">     112 </span><span class="lineCov">         28 :             !Dark(loc) &amp;&amp; !Dark(player) &amp;&amp;</span>
+<span class="lineNum">     113 </span><span class="lineCov">         14 :             ((Typeof(player) != TYPE_THING) ||</span>
 <span class="lineNum">     114 </span><span class="lineNoCov">          0 :              ((Typeof(player) == TYPE_THING) &amp;&amp; (FLAGS(player) &amp; (ZOMBIE | VEHICLE))))</span>
-<span class="lineNum">     115 </span><span class="lineCov">          9 :             &amp;&amp; (Typeof(exit) != TYPE_EXIT || !Dark(exit))) {</span>
-<span class="lineNum">     116 </span><span class="lineCov">          9 :             snprintf(buf, sizeof(buf), &quot;%s has arrived.&quot;, NAME(player));</span>
-<span class="lineNum">     117 </span><span class="lineCov">          9 :             notify_except(CONTENTS(loc), player, buf, player);</span>
+<span class="lineNum">     115 </span><span class="lineCov">         14 :             &amp;&amp; (Typeof(exit) != TYPE_EXIT || !Dark(exit))) {</span>
+<span class="lineNum">     116 </span><span class="lineCov">         14 :             snprintf(buf, sizeof(buf), &quot;%s has arrived.&quot;, NAME(player));</span>
+<span class="lineNum">     117 </span><span class="lineCov">         14 :             notify_except(CONTENTS(loc), player, buf, player);</span>
 <span class="lineNum">     118 </span>            :         }
 <span class="lineNum">     119 </span>            :     }
 <span class="lineNum">     120 </span>            :     /* autolook */
-<span class="lineNum">     121 </span><span class="lineCov">         12 :     if ((Typeof(player) != TYPE_THING) ||</span>
+<span class="lineNum">     121 </span><span class="lineCov">         17 :     if ((Typeof(player) != TYPE_THING) ||</span>
 <span class="lineNum">     122 </span><span class="lineNoCov">          0 :         ((Typeof(player) == TYPE_THING) &amp;&amp; (FLAGS(player) &amp; (ZOMBIE | VEHICLE)))) {</span>
-<span class="lineNum">     123 </span><span class="lineCov">         12 :         if (donelook &lt; 8) {</span>
-<span class="lineNum">     124 </span><span class="lineCov">         12 :             donelook++;</span>
-<span class="lineNum">     125 </span><span class="lineCov">         12 :             if (can_move(descr, player, tp_autolook_cmd, 1)) {</span>
+<span class="lineNum">     123 </span><span class="lineCov">         17 :         if (donelook &lt; 8) {</span>
+<span class="lineNum">     124 </span><span class="lineCov">         17 :             donelook++;</span>
+<span class="lineNum">     125 </span><span class="lineCov">         17 :             if (can_move(descr, player, tp_autolook_cmd, 1)) {</span>
 <span class="lineNum">     126 </span><span class="lineNoCov">          0 :                 do_move(descr, player, tp_autolook_cmd, 1);</span>
 <span class="lineNum">     127 </span>            :             } else {
-<span class="lineNum">     128 </span><span class="lineCov">         12 :                 do_look_around(descr, player);</span>
+<span class="lineNum">     128 </span><span class="lineCov">         17 :                 do_look_around(descr, player);</span>
 <span class="lineNum">     129 </span>            :             }
-<span class="lineNum">     130 </span><span class="lineCov">         12 :             donelook--;</span>
+<span class="lineNum">     130 </span><span class="lineCov">         17 :             donelook--;</span>
 <span class="lineNum">     131 </span>            :         } else {
 <span class="lineNum">     132 </span><span class="lineNoCov">          0 :             notify(player, &quot;Look aborted because of look action loop.&quot;);</span>
 <span class="lineNum">     133 </span>            :         }
 <span class="lineNum">     134 </span>            :     }
 <span class="lineNum">     135 </span>            : 
-<span class="lineNum">     136 </span><span class="lineCov">         12 :     if (tp_penny_rate != 0) {</span>
+<span class="lineNum">     136 </span><span class="lineCov">         17 :     if (tp_penny_rate != 0) {</span>
 <span class="lineNum">     137 </span>            :         /* check for pennies */
-<span class="lineNum">     138 </span><span class="lineCov">          9 :         if (!controls(player, loc)</span>
+<span class="lineNum">     138 </span><span class="lineCov">         14 :         if (!controls(player, loc)</span>
 <span class="lineNum">     139 </span><span class="lineCov">          3 :             &amp;&amp; GETVALUE(OWNER(player)) &lt;= tp_max_pennies &amp;&amp; RANDOM() % tp_penny_rate == 0) {</span>
 <span class="lineNum">     140 </span><span class="lineNoCov">          0 :             notifyf(player, &quot;You found one %s!&quot;, tp_penny);</span>
 <span class="lineNum">     141 </span><span class="lineNoCov">          0 :             SETVALUE(OWNER(player), GETVALUE(OWNER(player)) + 1);</span>
@@ -205,31 +205,31 @@
 <span class="lineNum">     143 </span>            :         }
 <span class="lineNum">     144 </span>            :     }
 <span class="lineNum">     145 </span>            : 
-<span class="lineNum">     146 </span><span class="lineCov">         12 :     if (loc != old) {</span>
-<span class="lineNum">     147 </span><span class="lineCov">          9 :         envpropqueue(descr, player, loc, exit, player, NOTHING, ARRIVE_PROPQUEUE, &quot;Arrive&quot;, 1, 1);</span>
-<span class="lineNum">     148 </span><span class="lineCov">          9 :         envpropqueue(descr, player, loc, exit, player, NOTHING, OARRIVE_PROPQUEUE, &quot;Oarrive&quot;, 1, 0);</span>
+<span class="lineNum">     146 </span><span class="lineCov">         17 :     if (loc != old) {</span>
+<span class="lineNum">     147 </span><span class="lineCov">         14 :         envpropqueue(descr, player, loc, exit, player, NOTHING, ARRIVE_PROPQUEUE, &quot;Arrive&quot;, 1, 1);</span>
+<span class="lineNum">     148 </span><span class="lineCov">         14 :         envpropqueue(descr, player, loc, exit, player, NOTHING, OARRIVE_PROPQUEUE, &quot;Oarrive&quot;, 1, 0);</span>
 <span class="lineNum">     149 </span>            :     }
-<span class="lineNum">     150 </span><span class="lineCov">         12 : }</span>
+<span class="lineNum">     150 </span><span class="lineCov">         17 : }</span>
 <a name="151"><span class="lineNum">     151 </span>            : </a>
 <span class="lineNum">     152 </span>            : void
-<span class="lineNum">     153 </span><span class="lineCov">         71 : moveto(dbref what, dbref where)</span>
+<span class="lineNum">     153 </span><span class="lineCov">         82 : moveto(dbref what, dbref where)</span>
 <span class="lineNum">     154 </span>            : {
 <span class="lineNum">     155 </span>            :     dbref loc;
 <span class="lineNum">     156 </span>            : 
 <span class="lineNum">     157 </span>            :     /* do NOT move garbage */
-<span class="lineNum">     158 </span><span class="lineCov">         71 :     if (what != NOTHING &amp;&amp; Typeof(what) == TYPE_GARBAGE) {</span>
+<span class="lineNum">     158 </span><span class="lineCov">         82 :     if (what != NOTHING &amp;&amp; Typeof(what) == TYPE_GARBAGE) {</span>
 <span class="lineNum">     159 </span><span class="lineNoCov">          0 :         return;</span>
 <span class="lineNum">     160 </span>            :     }
 <span class="lineNum">     161 </span>            : 
 <span class="lineNum">     162 </span>            :     /* remove what from old loc */
-<span class="lineNum">     163 </span><span class="lineCov">         71 :     if ((loc = LOCATION(what)) != NOTHING) {</span>
-<span class="lineNum">     164 </span><span class="lineCov">         68 :         DBSTORE(loc, contents, remove_first(CONTENTS(loc), what));</span>
+<span class="lineNum">     163 </span><span class="lineCov">         82 :     if ((loc = LOCATION(what)) != NOTHING) {</span>
+<span class="lineNum">     164 </span><span class="lineCov">         79 :         DBSTORE(loc, contents, remove_first(CONTENTS(loc), what));</span>
 <span class="lineNum">     165 </span>            :     }
 <span class="lineNum">     166 </span>            :     /* test for special cases */
-<span class="lineNum">     167 </span><span class="lineCov">         71 :     switch (where) {</span>
+<span class="lineNum">     167 </span><span class="lineCov">         82 :     switch (where) {</span>
 <span class="lineNum">     168 </span>            :     case NOTHING:
-<span class="lineNum">     169 </span><span class="lineNoCov">          0 :         DBSTORE(what, location, NOTHING);</span>
-<span class="lineNum">     170 </span><span class="lineNoCov">          0 :         return;                 /* NOTHING doesn't have contents */</span>
+<span class="lineNum">     169 </span><span class="lineCov">          2 :         DBSTORE(what, location, NOTHING);</span>
+<span class="lineNum">     170 </span><span class="lineCov">          2 :         return;                 /* NOTHING doesn't have contents */</span>
 <span class="lineNum">     171 </span>            :     case HOME:
 <span class="lineNum">     172 </span><span class="lineCov">          3 :         switch (Typeof(what)) {</span>
 <span class="lineNum">     173 </span>            :         case TYPE_PLAYER:
@@ -252,7 +252,7 @@
 <span class="lineNum">     190 </span>            :         }
 <span class="lineNum">     191 </span><span class="lineCov">          3 :         break;</span>
 <span class="lineNum">     192 </span>            :     default:
-<span class="lineNum">     193 </span><span class="lineCov">         68 :         if (parent_loop_check(what, where)) {</span>
+<span class="lineNum">     193 </span><span class="lineCov">         77 :         if (parent_loop_check(what, where)) {</span>
 <span class="lineNum">     194 </span><span class="lineNoCov">          0 :             switch (Typeof(what)) {</span>
 <span class="lineNum">     195 </span>            :             case TYPE_PLAYER:
 <span class="lineNum">     196 </span><span class="lineNoCov">          0 :                 where = PLAYER_HOME(what);</span>
@@ -276,27 +276,27 @@
 <span class="lineNum">     214 </span>            :     }
 <span class="lineNum">     215 </span>            : 
 <span class="lineNum">     216 </span>            :     /* now put what in where */
-<span class="lineNum">     217 </span><span class="lineCov">         71 :     PUSH(what, CONTENTS(where));</span>
-<span class="lineNum">     218 </span><span class="lineCov">         71 :     DBDIRTY(where);</span>
-<span class="lineNum">     219 </span><span class="lineCov">         71 :     DBSTORE(what, location, where);</span>
+<span class="lineNum">     217 </span><span class="lineCov">         80 :     PUSH(what, CONTENTS(where));</span>
+<span class="lineNum">     218 </span><span class="lineCov">         80 :     DBDIRTY(where);</span>
+<span class="lineNum">     219 </span><span class="lineCov">         80 :     DBSTORE(what, location, where);</span>
 <span class="lineNum">     220 </span>            : }
 <a name="221"><span class="lineNum">     221 </span>            : </a>
 <span class="lineNum">     222 </span>            : void
-<span class="lineNum">     223 </span><span class="lineCov">          6 : send_contents(int descr, dbref loc, dbref dest)</span>
+<span class="lineNum">     223 </span><span class="lineCov">          7 : send_contents(int descr, dbref loc, dbref dest)</span>
 <span class="lineNum">     224 </span>            : {
 <span class="lineNum">     225 </span>            :     dbref first;
 <span class="lineNum">     226 </span>            :     dbref rest;
 <span class="lineNum">     227 </span>            :     dbref where;
 <span class="lineNum">     228 </span>            : 
-<span class="lineNum">     229 </span><span class="lineCov">          6 :     first = CONTENTS(loc);</span>
-<span class="lineNum">     230 </span><span class="lineCov">          6 :     DBSTORE(loc, contents, NOTHING);</span>
+<span class="lineNum">     229 </span><span class="lineCov">          7 :     first = CONTENTS(loc);</span>
+<span class="lineNum">     230 </span><span class="lineCov">          7 :     DBSTORE(loc, contents, NOTHING);</span>
 <span class="lineNum">     231 </span>            : 
 <span class="lineNum">     232 </span>            :     /* blast locations of everything in list */
-<span class="lineNum">     233 </span><span class="lineCov">          9 :     DOLIST(rest, first) {</span>
+<span class="lineNum">     233 </span><span class="lineCov">         10 :     DOLIST(rest, first) {</span>
 <span class="lineNum">     234 </span><span class="lineCov">          3 :         DBSTORE(rest, location, NOTHING);</span>
 <span class="lineNum">     235 </span>            :     }
 <span class="lineNum">     236 </span>            : 
-<span class="lineNum">     237 </span><span class="lineCov">         15 :     while (first != NOTHING) {</span>
+<span class="lineNum">     237 </span><span class="lineCov">         17 :     while (first != NOTHING) {</span>
 <span class="lineNum">     238 </span><span class="lineCov">          3 :         rest = NEXTOBJ(first);</span>
 <span class="lineNum">     239 </span><span class="lineCov">          3 :         if ((Typeof(first) != TYPE_THING)</span>
 <span class="lineNum">     240 </span><span class="lineNoCov">          0 :             &amp;&amp; (Typeof(first) != TYPE_PROGRAM)) {</span>
@@ -313,19 +313,19 @@
 <span class="lineNum">     251 </span><span class="lineCov">          3 :         first = rest;</span>
 <span class="lineNum">     252 </span>            :     }
 <span class="lineNum">     253 </span>            : 
-<span class="lineNum">     254 </span><span class="lineCov">          6 :     DBSTORE(loc, contents, reverse(CONTENTS(loc)));</span>
-<span class="lineNum">     255 </span><span class="lineCov">          6 : }</span>
+<span class="lineNum">     254 </span><span class="lineCov">          7 :     DBSTORE(loc, contents, reverse(CONTENTS(loc)));</span>
+<span class="lineNum">     255 </span><span class="lineCov">          7 : }</span>
 <a name="256"><span class="lineNum">     256 </span>            : </a>
 <span class="lineNum">     257 </span>            : void
-<span class="lineNum">     258 </span><span class="lineNoCov">          0 : send_home(int descr, dbref thing, int puppethome)</span>
+<span class="lineNum">     258 </span><span class="lineCov">          1 : send_home(int descr, dbref thing, int puppethome)</span>
 <span class="lineNum">     259 </span>            : {
-<span class="lineNum">     260 </span><span class="lineNoCov">          0 :     switch (Typeof(thing)) {</span>
+<span class="lineNum">     260 </span><span class="lineCov">          1 :     switch (Typeof(thing)) {</span>
 <span class="lineNum">     261 </span>            :     case TYPE_PLAYER:
 <span class="lineNum">     262 </span>            :         /* send his possessions home first! */
 <span class="lineNum">     263 </span>            :         /* that way he sees them when he arrives */
-<span class="lineNum">     264 </span><span class="lineNoCov">          0 :         send_contents(descr, thing, HOME);</span>
-<span class="lineNum">     265 </span><span class="lineNoCov">          0 :         enter_room(descr, thing, PLAYER_HOME(thing), LOCATION(thing));</span>
-<span class="lineNum">     266 </span><span class="lineNoCov">          0 :         break;</span>
+<span class="lineNum">     264 </span><span class="lineCov">          1 :         send_contents(descr, thing, HOME);</span>
+<span class="lineNum">     265 </span><span class="lineCov">          1 :         enter_room(descr, thing, PLAYER_HOME(thing), LOCATION(thing));</span>
+<span class="lineNum">     266 </span><span class="lineCov">          1 :         break;</span>
 <span class="lineNum">     267 </span>            :     case TYPE_THING:
 <span class="lineNum">     268 </span><span class="lineNoCov">          0 :         if (puppethome)</span>
 <span class="lineNum">     269 </span><span class="lineNoCov">          0 :             send_contents(descr, thing, HOME);</span>
@@ -342,7 +342,7 @@
 <span class="lineNum">     280 </span>            :         /* no effect */
 <span class="lineNum">     281 </span><span class="lineNoCov">          0 :         break;</span>
 <span class="lineNum">     282 </span>            :     }
-<span class="lineNum">     283 </span><span class="lineNoCov">          0 :     return;</span>
+<span class="lineNum">     283 </span><span class="lineCov">          1 :     return;</span>
 <span class="lineNum">     284 </span>            : }
 <span class="lineNum">     285 </span>            : 
 <span class="lineNum">     286 </span>            : /*
@@ -512,27 +512,27 @@
 <span class="lineNum">     450 </span>            : }
 <a name="451"><span class="lineNum">     451 </span>            : </a>
 <span class="lineNum">     452 </span>            : void
-<span class="lineNum">     453 </span><span class="lineCov">         49 : do_move(int descr, dbref player, const char *direction, int lev)</span>
+<span class="lineNum">     453 </span><span class="lineCov">         50 : do_move(int descr, dbref player, const char *direction, int lev)</span>
 <span class="lineNum">     454 </span>            : {
 <span class="lineNum">     455 </span>            :     dbref exit;
 <span class="lineNum">     456 </span>            :     dbref loc;
 <span class="lineNum">     457 </span>            :     char buf[BUFFER_LEN];
 <span class="lineNum">     458 </span>            :     struct match_data md;
 <span class="lineNum">     459 </span>            : 
-<span class="lineNum">     460 </span><span class="lineCov">         49 :     if (tp_allow_home &amp;&amp; !strcasecmp(direction, &quot;home&quot;)) {</span>
+<span class="lineNum">     460 </span><span class="lineCov">         50 :     if (tp_allow_home &amp;&amp; !strcasecmp(direction, &quot;home&quot;)) {</span>
 <span class="lineNum">     461 </span>            :         /* send him home */
 <span class="lineNum">     462 </span>            :         /* but steal all his possessions */
-<span class="lineNum">     463 </span><span class="lineNoCov">          0 :         if ((loc = LOCATION(player)) != NOTHING) {</span>
+<span class="lineNum">     463 </span><span class="lineCov">          1 :         if ((loc = LOCATION(player)) != NOTHING) {</span>
 <span class="lineNum">     464 </span>            :             /* tell everybody else */
-<span class="lineNum">     465 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), &quot;%s goes home.&quot;, NAME(player));</span>
-<span class="lineNum">     466 </span><span class="lineNoCov">          0 :             notify_except(CONTENTS(loc), player, buf, player);</span>
+<span class="lineNum">     465 </span><span class="lineCov">          1 :             snprintf(buf, sizeof(buf), &quot;%s goes home.&quot;, NAME(player));</span>
+<span class="lineNum">     466 </span><span class="lineCov">          1 :             notify_except(CONTENTS(loc), player, buf, player);</span>
 <span class="lineNum">     467 </span>            :         }
 <span class="lineNum">     468 </span>            :         /* give the player the messages */
-<span class="lineNum">     469 </span><span class="lineNoCov">          0 :         notify(player, &quot;There's no place like home...&quot;);</span>
-<span class="lineNum">     470 </span><span class="lineNoCov">          0 :         notify(player, &quot;There's no place like home...&quot;);</span>
-<span class="lineNum">     471 </span><span class="lineNoCov">          0 :         notify(player, &quot;There's no place like home...&quot;);</span>
-<span class="lineNum">     472 </span><span class="lineNoCov">          0 :         notify(player, &quot;You wake up back home, without your possessions.&quot;);</span>
-<span class="lineNum">     473 </span><span class="lineNoCov">          0 :         send_home(descr, player, 1);</span>
+<span class="lineNum">     469 </span><span class="lineCov">          1 :         notify(player, &quot;There's no place like home...&quot;);</span>
+<span class="lineNum">     470 </span><span class="lineCov">          1 :         notify(player, &quot;There's no place like home...&quot;);</span>
+<span class="lineNum">     471 </span><span class="lineCov">          1 :         notify(player, &quot;There's no place like home...&quot;);</span>
+<span class="lineNum">     472 </span><span class="lineCov">          1 :         notify(player, &quot;You wake up back home, without your possessions.&quot;);</span>
+<span class="lineNum">     473 </span><span class="lineCov">          1 :         send_home(descr, player, 1);</span>
 <span class="lineNum">     474 </span>            :     } else {
 <span class="lineNum">     475 </span>            :         /* find the exit */
 <span class="lineNum">     476 </span><span class="lineCov">         49 :         init_match_check_keys(descr, player, direction, TYPE_EXIT, &amp;md);</span>
@@ -555,27 +555,27 @@
 <span class="lineNum">     493 </span><span class="lineCov">         49 :             break;</span>
 <span class="lineNum">     494 </span>            :         }
 <span class="lineNum">     495 </span>            :     }
-<span class="lineNum">     496 </span><span class="lineCov">         49 : }</span>
+<span class="lineNum">     496 </span><span class="lineCov">         50 : }</span>
 <span class="lineNum">     497 </span>            : 
 <a name="498"><span class="lineNum">     498 </span>            : </a>
 <span class="lineNum">     499 </span>            : void
-<span class="lineNum">     500 </span><span class="lineNoCov">          0 : do_leave(int descr, dbref player)</span>
+<span class="lineNum">     500 </span><span class="lineCov">          2 : do_leave(int descr, dbref player)</span>
 <span class="lineNum">     501 </span>            : {
 <span class="lineNum">     502 </span>            :     dbref loc, dest;
 <span class="lineNum">     503 </span>            : 
-<span class="lineNum">     504 </span><span class="lineNoCov">          0 :     loc = LOCATION(player);</span>
-<span class="lineNum">     505 </span><span class="lineNoCov">          0 :     if (loc == NOTHING || Typeof(loc) == TYPE_ROOM) {</span>
+<span class="lineNum">     504 </span><span class="lineCov">          2 :     loc = LOCATION(player);</span>
+<span class="lineNum">     505 </span><span class="lineCov">          2 :     if (loc == NOTHING || Typeof(loc) == TYPE_ROOM) {</span>
 <span class="lineNum">     506 </span><span class="lineNoCov">          0 :         notify(player, &quot;You can't go that way.&quot;);</span>
 <span class="lineNum">     507 </span><span class="lineNoCov">          0 :         return;</span>
 <span class="lineNum">     508 </span>            :     }
 <span class="lineNum">     509 </span>            : 
-<span class="lineNum">     510 </span><span class="lineNoCov">          0 :     if (!(FLAGS(loc) &amp; VEHICLE)) {</span>
+<span class="lineNum">     510 </span><span class="lineCov">          2 :     if (!(FLAGS(loc) &amp; VEHICLE)) {</span>
 <span class="lineNum">     511 </span><span class="lineNoCov">          0 :         notify(player, &quot;You can only exit vehicles.&quot;);</span>
 <span class="lineNum">     512 </span><span class="lineNoCov">          0 :         return;</span>
 <span class="lineNum">     513 </span>            :     }
 <span class="lineNum">     514 </span>            : 
-<span class="lineNum">     515 </span><span class="lineNoCov">          0 :     dest = LOCATION(loc);</span>
-<span class="lineNum">     516 </span><span class="lineNoCov">          0 :     if (Typeof(dest) != TYPE_ROOM &amp;&amp; Typeof(dest) != TYPE_THING) {</span>
+<span class="lineNum">     515 </span><span class="lineCov">          2 :     dest = LOCATION(loc);</span>
+<span class="lineNum">     516 </span><span class="lineCov">          2 :     if (Typeof(dest) != TYPE_ROOM &amp;&amp; Typeof(dest) != TYPE_THING) {</span>
 <span class="lineNum">     517 </span><span class="lineNoCov">          0 :         notify(player, &quot;You can't exit a vehicle inside of a player.&quot;);</span>
 <span class="lineNum">     518 </span><span class="lineNoCov">          0 :         return;</span>
 <span class="lineNum">     519 </span>            :     }
@@ -588,32 +588,32 @@
 <span class="lineNum">     526 </span>            :  *  }
 <span class="lineNum">     527 </span>            :  */
 <span class="lineNum">     528 </span>            : 
-<span class="lineNum">     529 </span><span class="lineNoCov">          0 :     if (parent_loop_check(player, dest)) {</span>
+<span class="lineNum">     529 </span><span class="lineCov">          2 :     if (parent_loop_check(player, dest)) {</span>
 <span class="lineNum">     530 </span><span class="lineNoCov">          0 :         notify(player, &quot;You can't go that way.&quot;);</span>
 <span class="lineNum">     531 </span><span class="lineNoCov">          0 :         return;</span>
 <span class="lineNum">     532 </span>            :     }
 <span class="lineNum">     533 </span>            : 
-<span class="lineNum">     534 </span><span class="lineNoCov">          0 :     notify(player, &quot;You exit the vehicle.&quot;);</span>
-<span class="lineNum">     535 </span><span class="lineNoCov">          0 :     enter_room(descr, player, dest, loc);</span>
+<span class="lineNum">     534 </span><span class="lineCov">          2 :     notify(player, &quot;You exit the vehicle.&quot;);</span>
+<span class="lineNum">     535 </span><span class="lineCov">          2 :     enter_room(descr, player, dest, loc);</span>
 <span class="lineNum">     536 </span>            : }
 <span class="lineNum">     537 </span>            : 
 <a name="538"><span class="lineNum">     538 </span>            : </a>
 <span class="lineNum">     539 </span>            : void
-<span class="lineNum">     540 </span><span class="lineNoCov">          0 : do_get(int descr, dbref player, const char *what, const char *obj)</span>
+<span class="lineNum">     540 </span><span class="lineCov">          1 : do_get(int descr, dbref player, const char *what, const char *obj)</span>
 <span class="lineNum">     541 </span>            : {
 <span class="lineNum">     542 </span>            :     dbref thing, cont;
 <span class="lineNum">     543 </span>            :     int cando;
 <span class="lineNum">     544 </span>            :     struct match_data md;
 <span class="lineNum">     545 </span>            : 
-<span class="lineNum">     546 </span><span class="lineNoCov">          0 :     init_match_check_keys(descr, player, what, TYPE_THING, &amp;md);</span>
-<span class="lineNum">     547 </span><span class="lineNoCov">          0 :     match_neighbor(&amp;md);</span>
-<span class="lineNum">     548 </span><span class="lineNoCov">          0 :     match_possession(&amp;md);</span>
-<span class="lineNum">     549 </span><span class="lineNoCov">          0 :     if (Wizard(OWNER(player)))</span>
-<span class="lineNum">     550 </span><span class="lineNoCov">          0 :         match_absolute(&amp;md);        /* the wizard has long fingers */</span>
+<span class="lineNum">     546 </span><span class="lineCov">          1 :     init_match_check_keys(descr, player, what, TYPE_THING, &amp;md);</span>
+<span class="lineNum">     547 </span><span class="lineCov">          1 :     match_neighbor(&amp;md);</span>
+<span class="lineNum">     548 </span><span class="lineCov">          1 :     match_possession(&amp;md);</span>
+<span class="lineNum">     549 </span><span class="lineCov">          1 :     if (Wizard(OWNER(player)))</span>
+<span class="lineNum">     550 </span><span class="lineCov">          1 :         match_absolute(&amp;md);        /* the wizard has long fingers */</span>
 <span class="lineNum">     551 </span>            : 
-<span class="lineNum">     552 </span><span class="lineNoCov">          0 :     if ((thing = noisy_match_result(&amp;md)) != NOTHING) {</span>
-<span class="lineNum">     553 </span><span class="lineNoCov">          0 :         cont = thing;</span>
-<span class="lineNum">     554 </span><span class="lineNoCov">          0 :         if (obj &amp;&amp; *obj) {</span>
+<span class="lineNum">     552 </span><span class="lineCov">          1 :     if ((thing = noisy_match_result(&amp;md)) != NOTHING) {</span>
+<span class="lineNum">     553 </span><span class="lineCov">          1 :         cont = thing;</span>
+<span class="lineNum">     554 </span><span class="lineCov">          1 :         if (obj &amp;&amp; *obj) {</span>
 <span class="lineNum">     555 </span><span class="lineNoCov">          0 :             init_match_check_keys(descr, player, obj, TYPE_THING, &amp;md);</span>
 <span class="lineNum">     556 </span><span class="lineNoCov">          0 :             match_rmatch(cont, &amp;md);</span>
 <span class="lineNum">     557 </span><span class="lineNoCov">          0 :             if (Wizard(OWNER(player)))</span>
@@ -630,7 +630,7 @@
 <span class="lineNum">     568 </span><span class="lineNoCov">          0 :                 return;</span>
 <span class="lineNum">     569 </span>            :             }
 <span class="lineNum">     570 </span>            :         }
-<span class="lineNum">     571 </span><span class="lineNoCov">          0 :         if (Typeof(player) != TYPE_PLAYER) {</span>
+<span class="lineNum">     571 </span><span class="lineCov">          1 :         if (Typeof(player) != TYPE_PLAYER) {</span>
 <span class="lineNum">     572 </span><span class="lineNoCov">          0 :             if (Typeof(LOCATION(thing)) != TYPE_ROOM) {</span>
 <span class="lineNum">     573 </span><span class="lineNoCov">          0 :                 if (OWNER(player) != OWNER(thing)) {</span>
 <span class="lineNum">     574 </span><span class="lineNoCov">          0 :                     notify(player, &quot;Zombies aren't allowed to be thieves!&quot;);</span>
@@ -638,38 +638,38 @@
 <span class="lineNum">     576 </span>            :                 }
 <span class="lineNum">     577 </span>            :             }
 <span class="lineNum">     578 </span>            :         }
-<span class="lineNum">     579 </span><span class="lineNoCov">          0 :         if (LOCATION(thing) == player) {</span>
+<span class="lineNum">     579 </span><span class="lineCov">          1 :         if (LOCATION(thing) == player) {</span>
 <span class="lineNum">     580 </span><span class="lineNoCov">          0 :             notify(player, &quot;You already have that!&quot;);</span>
 <span class="lineNum">     581 </span><span class="lineNoCov">          0 :             return;</span>
 <span class="lineNum">     582 </span>            :         }
-<span class="lineNum">     583 </span><span class="lineNoCov">          0 :         if (Typeof(cont) == TYPE_PLAYER) {</span>
+<span class="lineNum">     583 </span><span class="lineCov">          1 :         if (Typeof(cont) == TYPE_PLAYER) {</span>
 <span class="lineNum">     584 </span><span class="lineNoCov">          0 :             notify(player, &quot;You can't steal stuff from players.&quot;);</span>
 <span class="lineNum">     585 </span><span class="lineNoCov">          0 :             return;</span>
 <span class="lineNum">     586 </span>            :         }
-<span class="lineNum">     587 </span><span class="lineNoCov">          0 :         if (parent_loop_check(thing, player)) {</span>
+<span class="lineNum">     587 </span><span class="lineCov">          1 :         if (parent_loop_check(thing, player)) {</span>
 <span class="lineNum">     588 </span><span class="lineNoCov">          0 :             notify(player, &quot;You can't pick yourself up by your bootstraps!&quot;);</span>
 <span class="lineNum">     589 </span><span class="lineNoCov">          0 :             return;</span>
 <span class="lineNum">     590 </span>            :         }
-<span class="lineNum">     591 </span><span class="lineNoCov">          0 :         switch (Typeof(thing)) {</span>
+<span class="lineNum">     591 </span><span class="lineCov">          1 :         switch (Typeof(thing)) {</span>
 <span class="lineNum">     592 </span>            :         case TYPE_THING:
-<span class="lineNum">     593 </span><span class="lineNoCov">          0 :             ts_useobject(thing);</span>
+<span class="lineNum">     593 </span><span class="lineCov">          1 :             ts_useobject(thing);</span>
 <span class="lineNum">     594 </span>            :         case TYPE_PROGRAM:
-<span class="lineNum">     595 </span><span class="lineNoCov">          0 :             if (obj &amp;&amp; *obj) {</span>
+<span class="lineNum">     595 </span><span class="lineCov">          1 :             if (obj &amp;&amp; *obj) {</span>
 <span class="lineNum">     596 </span><span class="lineNoCov">          0 :                 cando = could_doit(descr, player, thing);</span>
 <span class="lineNum">     597 </span><span class="lineNoCov">          0 :                 if (!cando)</span>
 <span class="lineNum">     598 </span><span class="lineNoCov">          0 :                     notify(player, &quot;You can't get that.&quot;);</span>
 <span class="lineNum">     599 </span>            :             } else {
-<span class="lineNum">     600 </span><span class="lineNoCov">          0 :                 cando = can_doit(descr, player, thing, &quot;You can't pick that up.&quot;);</span>
+<span class="lineNum">     600 </span><span class="lineCov">          1 :                 cando = can_doit(descr, player, thing, &quot;You can't pick that up.&quot;);</span>
 <span class="lineNum">     601 </span>            :             }
-<span class="lineNum">     602 </span><span class="lineNoCov">          0 :             if (cando) {</span>
-<span class="lineNum">     603 </span><span class="lineNoCov">          0 :                 if (tp_thing_movement &amp;&amp; (Typeof(thing) == TYPE_THING)) {</span>
+<span class="lineNum">     602 </span><span class="lineCov">          1 :             if (cando) {</span>
+<span class="lineNum">     603 </span><span class="lineCov">          1 :                 if (tp_thing_movement &amp;&amp; (Typeof(thing) == TYPE_THING)) {</span>
 <span class="lineNum">     604 </span><span class="lineNoCov">          0 :                     enter_room(descr, thing, player, LOCATION(thing));</span>
 <span class="lineNum">     605 </span>            :                 } else {
-<span class="lineNum">     606 </span><span class="lineNoCov">          0 :                     moveto(thing, player);</span>
+<span class="lineNum">     606 </span><span class="lineCov">          1 :                     moveto(thing, player);</span>
 <span class="lineNum">     607 </span>            :                 }
-<span class="lineNum">     608 </span><span class="lineNoCov">          0 :                 notify(player, &quot;Taken.&quot;);</span>
+<span class="lineNum">     608 </span><span class="lineCov">          1 :                 notify(player, &quot;Taken.&quot;);</span>
 <span class="lineNum">     609 </span>            :             }
-<span class="lineNum">     610 </span><span class="lineNoCov">          0 :             break;</span>
+<span class="lineNum">     610 </span><span class="lineCov">          1 :             break;</span>
 <span class="lineNum">     611 </span>            :         default:
 <span class="lineNum">     612 </span><span class="lineNoCov">          0 :             notify(player, &quot;You can't take that!&quot;);</span>
 <span class="lineNum">     613 </span><span class="lineNoCov">          0 :             break;</span>
@@ -678,23 +678,23 @@
 <span class="lineNum">     616 </span>            : }
 <a name="617"><span class="lineNum">     617 </span>            : </a>
 <span class="lineNum">     618 </span>            : void
-<span class="lineNum">     619 </span><span class="lineCov">         19 : do_drop(int descr, dbref player, const char *name, const char *obj)</span>
+<span class="lineNum">     619 </span><span class="lineCov">         22 : do_drop(int descr, dbref player, const char *name, const char *obj)</span>
 <span class="lineNum">     620 </span>            : {
 <span class="lineNum">     621 </span>            :     dbref loc, cont;
 <span class="lineNum">     622 </span>            :     dbref thing;
 <span class="lineNum">     623 </span>            :     char buf[BUFFER_LEN];
 <span class="lineNum">     624 </span>            :     struct match_data md;
 <span class="lineNum">     625 </span>            : 
-<span class="lineNum">     626 </span><span class="lineCov">         19 :     if ((loc = LOCATION(player)) == NOTHING)</span>
+<span class="lineNum">     626 </span><span class="lineCov">         22 :     if ((loc = LOCATION(player)) == NOTHING)</span>
 <span class="lineNum">     627 </span><span class="lineCov">          3 :         return;</span>
 <span class="lineNum">     628 </span>            : 
-<span class="lineNum">     629 </span><span class="lineCov">         19 :     init_match(descr, player, name, NOTYPE, &amp;md);</span>
-<span class="lineNum">     630 </span><span class="lineCov">         19 :     match_possession(&amp;md);</span>
-<span class="lineNum">     631 </span><span class="lineCov">         19 :     if ((thing = noisy_match_result(&amp;md)) == NOTHING || thing == AMBIGUOUS)</span>
+<span class="lineNum">     629 </span><span class="lineCov">         22 :     init_match(descr, player, name, NOTYPE, &amp;md);</span>
+<span class="lineNum">     630 </span><span class="lineCov">         22 :     match_possession(&amp;md);</span>
+<span class="lineNum">     631 </span><span class="lineCov">         22 :     if ((thing = noisy_match_result(&amp;md)) == NOTHING || thing == AMBIGUOUS)</span>
 <span class="lineNum">     632 </span><span class="lineNoCov">          0 :         return;</span>
 <span class="lineNum">     633 </span>            : 
-<span class="lineNum">     634 </span><span class="lineCov">         19 :     cont = loc;</span>
-<span class="lineNum">     635 </span><span class="lineCov">         19 :     if (obj &amp;&amp; *obj) {</span>
+<span class="lineNum">     634 </span><span class="lineCov">         22 :     cont = loc;</span>
+<span class="lineNum">     635 </span><span class="lineCov">         22 :     if (obj &amp;&amp; *obj) {</span>
 <span class="lineNum">     636 </span><span class="lineCov">          3 :         init_match(descr, player, obj, NOTYPE, &amp;md);</span>
 <span class="lineNum">     637 </span><span class="lineCov">          3 :         match_possession(&amp;md);</span>
 <span class="lineNum">     638 </span><span class="lineCov">          3 :         match_neighbor(&amp;md);</span>
@@ -704,72 +704,72 @@
 <span class="lineNum">     642 </span><span class="lineNoCov">          0 :             return;</span>
 <span class="lineNum">     643 </span>            :         }
 <span class="lineNum">     644 </span>            :     }
-<span class="lineNum">     645 </span><span class="lineCov">         19 :     switch (Typeof(thing)) {</span>
+<span class="lineNum">     645 </span><span class="lineCov">         22 :     switch (Typeof(thing)) {</span>
 <span class="lineNum">     646 </span>            :     case TYPE_THING:
-<span class="lineNum">     647 </span><span class="lineCov">         19 :         ts_useobject(thing);</span>
+<span class="lineNum">     647 </span><span class="lineCov">         22 :         ts_useobject(thing);</span>
 <span class="lineNum">     648 </span>            :     case TYPE_PROGRAM:
-<span class="lineNum">     649 </span><span class="lineCov">         19 :         if (LOCATION(thing) != player) {</span>
+<span class="lineNum">     649 </span><span class="lineCov">         22 :         if (LOCATION(thing) != player) {</span>
 <span class="lineNum">     650 </span>            :             /* Shouldn't ever happen. */
 <span class="lineNum">     651 </span><span class="lineNoCov">          0 :             notify(player, &quot;You can't drop that.&quot;);</span>
 <span class="lineNum">     652 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     653 </span>            :         }
-<span class="lineNum">     654 </span><span class="lineCov">         19 :         if (Typeof(cont) != TYPE_ROOM &amp;&amp; Typeof(cont) != TYPE_PLAYER &amp;&amp;</span>
+<span class="lineNum">     654 </span><span class="lineCov">         22 :         if (Typeof(cont) != TYPE_ROOM &amp;&amp; Typeof(cont) != TYPE_PLAYER &amp;&amp;</span>
 <span class="lineNum">     655 </span><span class="lineCov">          3 :             Typeof(cont) != TYPE_THING) {</span>
 <span class="lineNum">     656 </span><span class="lineNoCov">          0 :             notify(player, &quot;You can't put anything in that.&quot;);</span>
 <span class="lineNum">     657 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     658 </span>            :         }
-<span class="lineNum">     659 </span><span class="lineCov">         22 :         if (Typeof(cont) != TYPE_ROOM &amp;&amp;</span>
+<span class="lineNum">     659 </span><span class="lineCov">         25 :         if (Typeof(cont) != TYPE_ROOM &amp;&amp;</span>
 <span class="lineNum">     660 </span><span class="lineCov">          3 :             !test_lock_false_default(descr, player, cont, MESGPROP_CONLOCK)) {</span>
 <span class="lineNum">     661 </span><span class="lineNoCov">          0 :             notify(player, &quot;You don't have permission to put something in that.&quot;);</span>
 <span class="lineNum">     662 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     663 </span>            :         }
-<span class="lineNum">     664 </span><span class="lineCov">         19 :         if (parent_loop_check(thing, cont)) {</span>
+<span class="lineNum">     664 </span><span class="lineCov">         22 :         if (parent_loop_check(thing, cont)) {</span>
 <span class="lineNum">     665 </span><span class="lineNoCov">          0 :             notify(player, &quot;You can't put something inside of itself.&quot;);</span>
 <span class="lineNum">     666 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     667 </span>            :         }
-<span class="lineNum">     668 </span><span class="lineCov">         19 :         if (Typeof(cont) == TYPE_ROOM &amp;&amp; (FLAGS(thing) &amp; STICKY) &amp;&amp;</span>
+<span class="lineNum">     668 </span><span class="lineCov">         22 :         if (Typeof(cont) == TYPE_ROOM &amp;&amp; (FLAGS(thing) &amp; STICKY) &amp;&amp;</span>
 <span class="lineNum">     669 </span><span class="lineNoCov">          0 :             Typeof(thing) == TYPE_THING) {</span>
 <span class="lineNum">     670 </span><span class="lineNoCov">          0 :             send_home(descr, thing, 0);</span>
 <span class="lineNum">     671 </span>            :         } else {
-<span class="lineNum">     672 </span><span class="lineCov">         54 :             int immediate_dropto = (Typeof(cont) == TYPE_ROOM &amp;&amp;</span>
-<span class="lineNum">     673 </span><span class="lineCov">         16 :                                     DBFETCH(cont)-&gt;sp.room.dropto != NOTHING</span>
-<span class="lineNum">     674 </span><span class="lineCov">         19 :                                     &amp;&amp; !(FLAGS(cont) &amp; STICKY));</span>
+<span class="lineNum">     672 </span><span class="lineCov">         63 :             int immediate_dropto = (Typeof(cont) == TYPE_ROOM &amp;&amp;</span>
+<span class="lineNum">     673 </span><span class="lineCov">         19 :                                     DBFETCH(cont)-&gt;sp.room.dropto != NOTHING</span>
+<span class="lineNum">     674 </span><span class="lineCov">         22 :                                     &amp;&amp; !(FLAGS(cont) &amp; STICKY));</span>
 <span class="lineNum">     675 </span>            : 
-<span class="lineNum">     676 </span><span class="lineCov">         19 :             if (tp_thing_movement &amp;&amp; (Typeof(thing) == TYPE_THING)) {</span>
+<span class="lineNum">     676 </span><span class="lineCov">         22 :             if (tp_thing_movement &amp;&amp; (Typeof(thing) == TYPE_THING)) {</span>
 <span class="lineNum">     677 </span><span class="lineNoCov">          0 :                 enter_room(descr, thing,</span>
 <span class="lineNum">     678 </span><span class="lineNoCov">          0 :                            immediate_dropto ? DBFETCH(cont)-&gt;sp.room.dropto : cont, player);</span>
 <span class="lineNum">     679 </span>            :             } else {
-<span class="lineNum">     680 </span><span class="lineCov">         19 :                 moveto(thing, immediate_dropto ? DBFETCH(cont)-&gt;sp.room.dropto : cont);</span>
+<span class="lineNum">     680 </span><span class="lineCov">         22 :                 moveto(thing, immediate_dropto ? DBFETCH(cont)-&gt;sp.room.dropto : cont);</span>
 <span class="lineNum">     681 </span>            :             }
 <span class="lineNum">     682 </span>            :         }
-<span class="lineNum">     683 </span><span class="lineCov">         19 :         if (Typeof(cont) == TYPE_THING) {</span>
+<span class="lineNum">     683 </span><span class="lineCov">         22 :         if (Typeof(cont) == TYPE_THING) {</span>
 <span class="lineNum">     684 </span><span class="lineCov">          3 :             notify(player, &quot;Put away.&quot;);</span>
 <span class="lineNum">     685 </span><span class="lineCov">          3 :             return;</span>
-<span class="lineNum">     686 </span><span class="lineCov">         16 :         } else if (Typeof(cont) == TYPE_PLAYER) {</span>
+<span class="lineNum">     686 </span><span class="lineCov">         19 :         } else if (Typeof(cont) == TYPE_PLAYER) {</span>
 <span class="lineNum">     687 </span><span class="lineNoCov">          0 :             notifyf(cont, &quot;%s hands you %s&quot;, NAME(player), NAME(thing));</span>
 <span class="lineNum">     688 </span><span class="lineNoCov">          0 :             notifyf(player, &quot;You hand %s to %s&quot;, NAME(thing), NAME(cont));</span>
 <span class="lineNum">     689 </span><span class="lineNoCov">          0 :             return;</span>
 <span class="lineNum">     690 </span>            :         }
 <span class="lineNum">     691 </span>            : 
-<span class="lineNum">     692 </span><span class="lineCov">         16 :         if (GETDROP(thing))</span>
+<span class="lineNum">     692 </span><span class="lineCov">         19 :         if (GETDROP(thing))</span>
 <span class="lineNum">     693 </span><span class="lineCov">          3 :             exec_or_notify_prop(descr, player, thing, MESGPROP_DROP, &quot;(@Drop)&quot;);</span>
 <span class="lineNum">     694 </span>            :         else
-<span class="lineNum">     695 </span><span class="lineCov">         13 :             notify(player, &quot;Dropped.&quot;);</span>
+<span class="lineNum">     695 </span><span class="lineCov">         16 :             notify(player, &quot;Dropped.&quot;);</span>
 <span class="lineNum">     696 </span>            : 
-<span class="lineNum">     697 </span><span class="lineCov">         16 :         if (GETDROP(loc))</span>
+<span class="lineNum">     697 </span><span class="lineCov">         19 :         if (GETDROP(loc))</span>
 <span class="lineNum">     698 </span><span class="lineNoCov">          0 :             exec_or_notify_prop(descr, player, loc, MESGPROP_DROP, &quot;(@Drop)&quot;);</span>
 <span class="lineNum">     699 </span>            : 
-<span class="lineNum">     700 </span><span class="lineCov">         16 :         if (GETODROP(thing)) {</span>
+<span class="lineNum">     700 </span><span class="lineCov">         19 :         if (GETODROP(thing)) {</span>
 <span class="lineNum">     701 </span><span class="lineCov">          3 :             parse_oprop(descr, player, loc, thing, MESGPROP_ODROP, NAME(player), &quot;(@Odrop)&quot;);</span>
 <span class="lineNum">     702 </span>            :         } else {
-<span class="lineNum">     703 </span><span class="lineCov">         13 :             snprintf(buf, sizeof(buf), &quot;%s drops %s.&quot;, NAME(player), NAME(thing));</span>
-<span class="lineNum">     704 </span><span class="lineCov">         13 :             notify_except(CONTENTS(loc), player, buf, player);</span>
+<span class="lineNum">     703 </span><span class="lineCov">         16 :             snprintf(buf, sizeof(buf), &quot;%s drops %s.&quot;, NAME(player), NAME(thing));</span>
+<span class="lineNum">     704 </span><span class="lineCov">         16 :             notify_except(CONTENTS(loc), player, buf, player);</span>
 <span class="lineNum">     705 </span>            :         }
 <span class="lineNum">     706 </span>            : 
-<span class="lineNum">     707 </span><span class="lineCov">         16 :         if (GETODROP(loc)) {</span>
+<span class="lineNum">     707 </span><span class="lineCov">         19 :         if (GETODROP(loc)) {</span>
 <span class="lineNum">     708 </span><span class="lineNoCov">          0 :             parse_oprop(descr, player, loc, loc, MESGPROP_ODROP, NAME(thing), &quot;(@Odrop)&quot;);</span>
 <span class="lineNum">     709 </span>            :         }
-<span class="lineNum">     710 </span><span class="lineCov">         16 :         break;</span>
+<span class="lineNum">     710 </span><span class="lineCov">         19 :         break;</span>
 <span class="lineNum">     711 </span>            :     default:
 <span class="lineNum">     712 </span><span class="lineNoCov">          0 :         notify(player, &quot;You can't drop that.&quot;);</span>
 <span class="lineNum">     713 </span><span class="lineNoCov">          0 :         break;</span>
@@ -777,7 +777,7 @@
 <span class="lineNum">     715 </span>            : }
 <a name="716"><span class="lineNum">     716 </span>            : </a>
 <span class="lineNum">     717 </span>            : void
-<span class="lineNum">     718 </span><span class="lineNoCov">          0 : recycle(int descr, dbref player, dbref thing)</span>
+<span class="lineNum">     718 </span><span class="lineCov">          2 : recycle(int descr, dbref player, dbref thing)</span>
 <span class="lineNum">     719 </span>            : {
 <span class="lineNum">     720 </span>            :     static int depth = 0;
 <span class="lineNum">     721 </span>            :     dbref first;
@@ -785,8 +785,8 @@
 <span class="lineNum">     723 </span>            :     char buf[2048];
 <span class="lineNum">     724 </span>            :     int looplimit;
 <span class="lineNum">     725 </span>            : 
-<span class="lineNum">     726 </span><span class="lineNoCov">          0 :     depth++;</span>
-<span class="lineNum">     727 </span><span class="lineNoCov">          0 :     if (force_level) {</span>
+<span class="lineNum">     726 </span><span class="lineCov">          2 :     depth++;</span>
+<span class="lineNum">     727 </span><span class="lineCov">          2 :     if (force_level) {</span>
 <span class="lineNum">     728 </span><span class="lineNoCov">          0 :         if (objnode_find(forcelist, thing)) {</span>
 <span class="lineNum">     729 </span><span class="lineNoCov">          0 :             log_status(&quot;SANITYCHECK: Was about to recycle FORCEing object #%d!&quot;, thing);</span>
 <span class="lineNum">     730 </span><span class="lineNoCov">          0 :             notify(player, &quot;ERROR: Cannot recycle an object FORCEing you!&quot;);</span>
@@ -800,8 +800,8 @@
 <span class="lineNum">     738 </span>            :         }
 <span class="lineNum">     739 </span>            :     }
 <span class="lineNum">     740 </span>            :     /* dequeue any MUF or MPI events for the given object */
-<span class="lineNum">     741 </span><span class="lineNoCov">          0 :     dequeue_prog(thing, 0);</span>
-<span class="lineNum">     742 </span><span class="lineNoCov">          0 :     switch (Typeof(thing)) {</span>
+<span class="lineNum">     741 </span><span class="lineCov">          2 :     dequeue_prog(thing, 0);</span>
+<span class="lineNum">     742 </span><span class="lineCov">          2 :     switch (Typeof(thing)) {</span>
 <span class="lineNum">     743 </span>            :     case TYPE_ROOM:
 <span class="lineNum">     744 </span><span class="lineNoCov">          0 :         if (!Wizard(OWNER(thing)))</span>
 <span class="lineNum">     745 </span><span class="lineNoCov">          0 :             SETVALUE(OWNER(thing), GETVALUE(OWNER(thing)) + tp_room_cost);</span>
@@ -814,15 +814,15 @@
 <span class="lineNum">     752 </span><span class="lineNoCov">          0 :         notify_except(CONTENTS(thing), NOTHING, &quot;You feel a wrenching sensation...&quot;, player);</span>
 <span class="lineNum">     753 </span><span class="lineNoCov">          0 :         break;</span>
 <span class="lineNum">     754 </span>            :     case TYPE_THING:
-<span class="lineNum">     755 </span><span class="lineNoCov">          0 :         if (!Wizard(OWNER(thing)))</span>
+<span class="lineNum">     755 </span><span class="lineCov">          2 :         if (!Wizard(OWNER(thing)))</span>
 <span class="lineNum">     756 </span><span class="lineNoCov">          0 :             SETVALUE(OWNER(thing), GETVALUE(OWNER(thing)) + GETVALUE(thing));</span>
-<span class="lineNum">     757 </span><span class="lineNoCov">          0 :         DBDIRTY(OWNER(thing));</span>
-<span class="lineNum">     758 </span><span class="lineNoCov">          0 :         for (first = EXITS(thing); first != NOTHING; first = rest) {</span>
+<span class="lineNum">     757 </span><span class="lineCov">          2 :         DBDIRTY(OWNER(thing));</span>
+<span class="lineNum">     758 </span><span class="lineCov">          2 :         for (first = EXITS(thing); first != NOTHING; first = rest) {</span>
 <span class="lineNum">     759 </span><span class="lineNoCov">          0 :             rest = NEXTOBJ(first);</span>
 <span class="lineNum">     760 </span><span class="lineNoCov">          0 :             if (LOCATION(first) == NOTHING || LOCATION(first) == thing)</span>
 <span class="lineNum">     761 </span><span class="lineNoCov">          0 :                 recycle(descr, player, first);</span>
 <span class="lineNum">     762 </span>            :         }
-<span class="lineNum">     763 </span><span class="lineNoCov">          0 :         break;</span>
+<span class="lineNum">     763 </span><span class="lineCov">          2 :         break;</span>
 <span class="lineNum">     764 </span>            :     case TYPE_EXIT:
 <span class="lineNum">     765 </span><span class="lineNoCov">          0 :         if (!Wizard(OWNER(thing)))</span>
 <span class="lineNum">     766 </span><span class="lineNoCov">          0 :             SETVALUE(OWNER(thing), GETVALUE(OWNER(thing)) + tp_exit_cost);</span>
@@ -837,24 +837,24 @@
 <span class="lineNum">     775 </span><span class="lineNoCov">          0 :         break;</span>
 <span class="lineNum">     776 </span>            :     }
 <span class="lineNum">     777 </span>            : 
-<span class="lineNum">     778 </span><span class="lineNoCov">          0 :     for (rest = 0; rest &lt; db_top; rest++) {</span>
-<span class="lineNum">     779 </span><span class="lineNoCov">          0 :         switch (Typeof(rest)) {</span>
+<span class="lineNum">     778 </span><span class="lineCov">          8 :     for (rest = 0; rest &lt; db_top; rest++) {</span>
+<span class="lineNum">     779 </span><span class="lineCov">          6 :         switch (Typeof(rest)) {</span>
 <span class="lineNum">     780 </span>            :         case TYPE_ROOM:
-<span class="lineNum">     781 </span><span class="lineNoCov">          0 :             if (DBFETCH(rest)-&gt;sp.room.dropto == thing) {</span>
+<span class="lineNum">     781 </span><span class="lineCov">          2 :             if (DBFETCH(rest)-&gt;sp.room.dropto == thing) {</span>
 <span class="lineNum">     782 </span><span class="lineNoCov">          0 :                 DBFETCH(rest)-&gt;sp.room.dropto = NOTHING;</span>
 <span class="lineNum">     783 </span><span class="lineNoCov">          0 :                 DBDIRTY(rest);</span>
 <span class="lineNum">     784 </span>            :             }
-<span class="lineNum">     785 </span><span class="lineNoCov">          0 :             if (EXITS(rest) == thing) {</span>
+<span class="lineNum">     785 </span><span class="lineCov">          2 :             if (EXITS(rest) == thing) {</span>
 <span class="lineNum">     786 </span><span class="lineNoCov">          0 :                 EXITS(rest) = NEXTOBJ(thing);</span>
 <span class="lineNum">     787 </span><span class="lineNoCov">          0 :                 DBDIRTY(rest);</span>
 <span class="lineNum">     788 </span>            :             }
-<span class="lineNum">     789 </span><span class="lineNoCov">          0 :             if (OWNER(rest) == thing) {</span>
+<span class="lineNum">     789 </span><span class="lineCov">          2 :             if (OWNER(rest) == thing) {</span>
 <span class="lineNum">     790 </span><span class="lineNoCov">          0 :                 OWNER(rest) = GOD;</span>
 <span class="lineNum">     791 </span><span class="lineNoCov">          0 :                 DBDIRTY(rest);</span>
 <span class="lineNum">     792 </span>            :             }
-<span class="lineNum">     793 </span><span class="lineNoCov">          0 :             break;</span>
+<span class="lineNum">     793 </span><span class="lineCov">          2 :             break;</span>
 <span class="lineNum">     794 </span>            :         case TYPE_THING:
-<span class="lineNum">     795 </span><span class="lineNoCov">          0 :             if (THING_HOME(rest) == thing) {</span>
+<span class="lineNum">     795 </span><span class="lineCov">          2 :             if (THING_HOME(rest) == thing) {</span>
 <span class="lineNum">     796 </span>            :                 dbref loc;
 <span class="lineNum">     797 </span>            : 
 <span class="lineNum">     798 </span><span class="lineNoCov">          0 :                 if (PLAYER_HOME(OWNER(rest)) == thing)</span>
@@ -869,15 +869,15 @@
 <span class="lineNum">     807 </span><span class="lineNoCov">          0 :                 THING_SET_HOME(rest, loc);</span>
 <span class="lineNum">     808 </span><span class="lineNoCov">          0 :                 DBDIRTY(rest);</span>
 <span class="lineNum">     809 </span>            :             }
-<span class="lineNum">     810 </span><span class="lineNoCov">          0 :             if (EXITS(rest) == thing) {</span>
+<span class="lineNum">     810 </span><span class="lineCov">          2 :             if (EXITS(rest) == thing) {</span>
 <span class="lineNum">     811 </span><span class="lineNoCov">          0 :                 EXITS(rest) = NEXTOBJ(thing);</span>
 <span class="lineNum">     812 </span><span class="lineNoCov">          0 :                 DBDIRTY(rest);</span>
 <span class="lineNum">     813 </span>            :             }
-<span class="lineNum">     814 </span><span class="lineNoCov">          0 :             if (OWNER(rest) == thing) {</span>
+<span class="lineNum">     814 </span><span class="lineCov">          2 :             if (OWNER(rest) == thing) {</span>
 <span class="lineNum">     815 </span><span class="lineNoCov">          0 :                 OWNER(rest) = GOD;</span>
 <span class="lineNum">     816 </span><span class="lineNoCov">          0 :                 DBDIRTY(rest);</span>
 <span class="lineNum">     817 </span>            :             }
-<span class="lineNum">     818 </span><span class="lineNoCov">          0 :             break;</span>
+<span class="lineNum">     818 </span><span class="lineCov">          2 :             break;</span>
 <span class="lineNum">     819 </span>            :         case TYPE_EXIT:
 <span class="lineNum">     820 </span>            :             {
 <span class="lineNum">     821 </span>            :                 int j;
@@ -899,7 +899,7 @@
 <span class="lineNum">     837 </span>            :             }
 <span class="lineNum">     838 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     839 </span>            :         case TYPE_PLAYER:
-<span class="lineNum">     840 </span><span class="lineNoCov">          0 :             if (Typeof(thing) == TYPE_PROGRAM &amp;&amp; (FLAGS(rest) &amp; INTERACTIVE)</span>
+<span class="lineNum">     840 </span><span class="lineCov">          2 :             if (Typeof(thing) == TYPE_PROGRAM &amp;&amp; (FLAGS(rest) &amp; INTERACTIVE)</span>
 <span class="lineNum">     841 </span><span class="lineNoCov">          0 :                 &amp;&amp; (PLAYER_CURR_PROG(rest) == thing)) {</span>
 <span class="lineNum">     842 </span><span class="lineNoCov">          0 :                 if (FLAGS(rest) &amp; READMODE) {</span>
 <span class="lineNum">     843 </span><span class="lineNoCov">          0 :                     notify(rest,</span>
@@ -915,17 +915,17 @@
 <span class="lineNum">     853 </span>            :                            &quot;The program you were editing has been recycled.  Exiting Editor.&quot;);
 <span class="lineNum">     854 </span>            :                 }
 <span class="lineNum">     855 </span>            :             }
-<span class="lineNum">     856 </span><span class="lineNoCov">          0 :             if (PLAYER_HOME(rest) == thing) {</span>
+<span class="lineNum">     856 </span><span class="lineCov">          2 :             if (PLAYER_HOME(rest) == thing) {</span>
 <span class="lineNum">     857 </span><span class="lineNoCov">          0 :                 PLAYER_SET_HOME(rest, tp_player_start);</span>
 <span class="lineNum">     858 </span><span class="lineNoCov">          0 :                 DBDIRTY(rest);</span>
 <span class="lineNum">     859 </span>            :             }
-<span class="lineNum">     860 </span><span class="lineNoCov">          0 :             if (EXITS(rest) == thing) {</span>
+<span class="lineNum">     860 </span><span class="lineCov">          2 :             if (EXITS(rest) == thing) {</span>
 <span class="lineNum">     861 </span><span class="lineNoCov">          0 :                 EXITS(rest) = NEXTOBJ(thing);</span>
 <span class="lineNum">     862 </span><span class="lineNoCov">          0 :                 DBDIRTY(rest);</span>
 <span class="lineNum">     863 </span>            :             }
-<span class="lineNum">     864 </span><span class="lineNoCov">          0 :             if (PLAYER_CURR_PROG(rest) == thing)</span>
+<span class="lineNum">     864 </span><span class="lineCov">          2 :             if (PLAYER_CURR_PROG(rest) == thing)</span>
 <span class="lineNum">     865 </span><span class="lineNoCov">          0 :                 PLAYER_SET_CURR_PROG(rest, 0);</span>
-<span class="lineNum">     866 </span><span class="lineNoCov">          0 :             break;</span>
+<span class="lineNum">     866 </span><span class="lineCov">          2 :             break;</span>
 <span class="lineNum">     867 </span>            :         case TYPE_PROGRAM:
 <span class="lineNum">     868 </span><span class="lineNoCov">          0 :             if (OWNER(rest) == thing) {</span>
 <span class="lineNum">     869 </span><span class="lineNoCov">          0 :                 OWNER(rest) = GOD;</span>
@@ -936,14 +936,14 @@
 <span class="lineNum">     874 </span>            :          *if (LOCATION(rest) == thing)
 <span class="lineNum">     875 </span>            :          *    DBSTORE(rest, location, NOTHING);
 <span class="lineNum">     876 </span>            :          */
-<span class="lineNum">     877 </span><span class="lineNoCov">          0 :         if (CONTENTS(rest) == thing)</span>
-<span class="lineNum">     878 </span><span class="lineNoCov">          0 :             DBSTORE(rest, contents, NEXTOBJ(thing));</span>
-<span class="lineNum">     879 </span><span class="lineNoCov">          0 :         if (NEXTOBJ(rest) == thing)</span>
+<span class="lineNum">     877 </span><span class="lineCov">          6 :         if (CONTENTS(rest) == thing)</span>
+<span class="lineNum">     878 </span><span class="lineCov">          2 :             DBSTORE(rest, contents, NEXTOBJ(thing));</span>
+<span class="lineNum">     879 </span><span class="lineCov">          6 :         if (NEXTOBJ(rest) == thing)</span>
 <span class="lineNum">     880 </span><span class="lineNoCov">          0 :             DBSTORE(rest, next, NEXTOBJ(thing));</span>
 <span class="lineNum">     881 </span>            :     }
 <span class="lineNum">     882 </span>            : 
-<span class="lineNum">     883 </span><span class="lineNoCov">          0 :     looplimit = db_top;</span>
-<span class="lineNum">     884 </span><span class="lineNoCov">          0 :     while ((looplimit-- &gt; 0) &amp;&amp; ((first = CONTENTS(thing)) != NOTHING)) {</span>
+<span class="lineNum">     883 </span><span class="lineCov">          2 :     looplimit = db_top;</span>
+<span class="lineNum">     884 </span><span class="lineCov">          4 :     while ((looplimit-- &gt; 0) &amp;&amp; ((first = CONTENTS(thing)) != NOTHING)) {</span>
 <span class="lineNum">     885 </span><span class="lineNoCov">          0 :         if (Typeof(first) == TYPE_PLAYER ||</span>
 <span class="lineNum">     886 </span><span class="lineNoCov">          0 :             (Typeof(first) == TYPE_THING &amp;&amp;</span>
 <span class="lineNum">     887 </span><span class="lineNoCov">          0 :              (FLAGS(first) &amp; (ZOMBIE | VEHICLE) || tp_thing_movement))</span>
@@ -962,58 +962,58 @@
 <span class="lineNum">     900 </span>            :     }
 <span class="lineNum">     901 </span>            : 
 <span class="lineNum">     902 </span>            : 
-<span class="lineNum">     903 </span><span class="lineNoCov">          0 :     moveto(thing, NOTHING);</span>
+<span class="lineNum">     903 </span><span class="lineCov">          2 :     moveto(thing, NOTHING);</span>
 <span class="lineNum">     904 </span>            : 
-<span class="lineNum">     905 </span><span class="lineNoCov">          0 :     depth--;</span>
+<span class="lineNum">     905 </span><span class="lineCov">          2 :     depth--;</span>
 <span class="lineNum">     906 </span>            : 
-<span class="lineNum">     907 </span><span class="lineNoCov">          0 :     db_free_object(thing);</span>
-<span class="lineNum">     908 </span><span class="lineNoCov">          0 :     db_clear_object(thing);</span>
-<span class="lineNum">     909 </span><span class="lineNoCov">          0 :     NAME(thing) = (char *) strdup(&quot;&lt;garbage&gt;&quot;);</span>
-<span class="lineNum">     910 </span><span class="lineNoCov">          0 :     SETDESC(thing, &quot;&lt;recyclable&gt;&quot;);</span>
-<span class="lineNum">     911 </span><span class="lineNoCov">          0 :     FLAGS(thing) = TYPE_GARBAGE;</span>
+<span class="lineNum">     907 </span><span class="lineCov">          2 :     db_free_object(thing);</span>
+<span class="lineNum">     908 </span><span class="lineCov">          2 :     db_clear_object(thing);</span>
+<span class="lineNum">     909 </span><span class="lineCov">          2 :     NAME(thing) = (char *) strdup(&quot;&lt;garbage&gt;&quot;);</span>
+<span class="lineNum">     910 </span><span class="lineCov">          2 :     SETDESC(thing, &quot;&lt;recyclable&gt;&quot;);</span>
+<span class="lineNum">     911 </span><span class="lineCov">          2 :     FLAGS(thing) = TYPE_GARBAGE;</span>
 <span class="lineNum">     912 </span>            : 
-<span class="lineNum">     913 </span><span class="lineNoCov">          0 :     NEXTOBJ(thing) = recyclable;</span>
-<span class="lineNum">     914 </span><span class="lineNoCov">          0 :     recyclable = thing;</span>
-<span class="lineNum">     915 </span><span class="lineNoCov">          0 :     DBDIRTY(thing);</span>
+<span class="lineNum">     913 </span><span class="lineCov">          2 :     NEXTOBJ(thing) = recyclable;</span>
+<span class="lineNum">     914 </span><span class="lineCov">          2 :     recyclable = thing;</span>
+<span class="lineNum">     915 </span><span class="lineCov">          2 :     DBDIRTY(thing);</span>
 <span class="lineNum">     916 </span>            : }
 <a name="917"><span class="lineNum">     917 </span>            : </a>
 <span class="lineNum">     918 </span>            : void
-<span class="lineNum">     919 </span><span class="lineNoCov">          0 : do_recycle(int descr, dbref player, const char *name)</span>
+<span class="lineNum">     919 </span><span class="lineCov">          2 : do_recycle(int descr, dbref player, const char *name)</span>
 <span class="lineNum">     920 </span>            : {
 <span class="lineNum">     921 </span>            :     dbref thing;
 <span class="lineNum">     922 </span>            :     char buf[BUFFER_LEN];
 <span class="lineNum">     923 </span>            :     struct match_data md;
-<span class="lineNum">     924 </span><span class="lineNoCov">          0 :     struct tune_ref_entry *tref = tune_ref_list;</span>
+<span class="lineNum">     924 </span><span class="lineCov">          2 :     struct tune_ref_entry *tref = tune_ref_list;</span>
 <span class="lineNum">     925 </span>            : 
-<span class="lineNum">     926 </span><span class="lineNoCov">          0 :     init_match(descr, player, name, TYPE_THING, &amp;md);</span>
-<span class="lineNum">     927 </span><span class="lineNoCov">          0 :     match_all_exits(&amp;md);</span>
-<span class="lineNum">     928 </span><span class="lineNoCov">          0 :     match_neighbor(&amp;md);</span>
-<span class="lineNum">     929 </span><span class="lineNoCov">          0 :     match_possession(&amp;md);</span>
-<span class="lineNum">     930 </span><span class="lineNoCov">          0 :     match_registered(&amp;md);</span>
-<span class="lineNum">     931 </span><span class="lineNoCov">          0 :     match_here(&amp;md);</span>
-<span class="lineNum">     932 </span><span class="lineNoCov">          0 :     match_absolute(&amp;md);</span>
-<span class="lineNum">     933 </span><span class="lineNoCov">          0 :     if ((thing = noisy_match_result(&amp;md)) != NOTHING) {</span>
+<span class="lineNum">     926 </span><span class="lineCov">          2 :     init_match(descr, player, name, TYPE_THING, &amp;md);</span>
+<span class="lineNum">     927 </span><span class="lineCov">          2 :     match_all_exits(&amp;md);</span>
+<span class="lineNum">     928 </span><span class="lineCov">          2 :     match_neighbor(&amp;md);</span>
+<span class="lineNum">     929 </span><span class="lineCov">          2 :     match_possession(&amp;md);</span>
+<span class="lineNum">     930 </span><span class="lineCov">          2 :     match_registered(&amp;md);</span>
+<span class="lineNum">     931 </span><span class="lineCov">          2 :     match_here(&amp;md);</span>
+<span class="lineNum">     932 </span><span class="lineCov">          2 :     match_absolute(&amp;md);</span>
+<span class="lineNum">     933 </span><span class="lineCov">          2 :     if ((thing = noisy_match_result(&amp;md)) != NOTHING) {</span>
 <span class="lineNum">     934 </span>            : #ifdef GOD_PRIV
-<span class="lineNum">     935 </span><span class="lineNoCov">          0 :         if (tp_strict_god_priv &amp;&amp; !God(player) &amp;&amp; God(OWNER(thing))) {</span>
+<span class="lineNum">     935 </span><span class="lineCov">          2 :         if (tp_strict_god_priv &amp;&amp; !God(player) &amp;&amp; God(OWNER(thing))) {</span>
 <span class="lineNum">     936 </span><span class="lineNoCov">          0 :             notify(player, &quot;Only God may reclaim God's property.&quot;);</span>
 <span class="lineNum">     937 </span><span class="lineNoCov">          0 :             return;</span>
 <span class="lineNum">     938 </span>            :         }
 <span class="lineNum">     939 </span>            : #endif
-<span class="lineNum">     940 </span><span class="lineNoCov">          0 :         if (!controls(player, thing)) {</span>
+<span class="lineNum">     940 </span><span class="lineCov">          2 :         if (!controls(player, thing)) {</span>
 <span class="lineNum">     941 </span><span class="lineNoCov">          0 :             if (Wizard(OWNER(player)) &amp;&amp; (Typeof(thing) == TYPE_GARBAGE))</span>
 <span class="lineNum">     942 </span><span class="lineNoCov">          0 :                 notify(player, &quot;That's already garbage!&quot;);</span>
 <span class="lineNum">     943 </span>            :             else
 <span class="lineNum">     944 </span><span class="lineNoCov">          0 :                 notify(player,</span>
 <span class="lineNum">     945 </span>            :                        &quot;Permission denied. (You don't control what you want to recycle)&quot;);
 <span class="lineNum">     946 </span>            :         } else {
-<span class="lineNum">     947 </span><span class="lineNoCov">          0 :             while (tref-&gt;name) {</span>
-<span class="lineNum">     948 </span><span class="lineNoCov">          0 :                 if (thing == *tref-&gt;ref) {</span>
+<span class="lineNum">     947 </span><span class="lineCov">         12 :             while (tref-&gt;name) {</span>
+<span class="lineNum">     948 </span><span class="lineCov">          8 :                 if (thing == *tref-&gt;ref) {</span>
 <span class="lineNum">     949 </span><span class="lineNoCov">          0 :                     notify(player, &quot;That object cannot currently be @recyled.&quot;);</span>
 <span class="lineNum">     950 </span><span class="lineNoCov">          0 :                     return;</span>
 <span class="lineNum">     951 </span>            :                 }
-<span class="lineNum">     952 </span><span class="lineNoCov">          0 :                 tref++;</span>
+<span class="lineNum">     952 </span><span class="lineCov">          8 :                 tref++;</span>
 <span class="lineNum">     953 </span>            :             }
-<span class="lineNum">     954 </span><span class="lineNoCov">          0 :             switch (Typeof(thing)) {</span>
+<span class="lineNum">     954 </span><span class="lineCov">          2 :             switch (Typeof(thing)) {</span>
 <span class="lineNum">     955 </span>            :             case TYPE_ROOM:
 <span class="lineNum">     956 </span><span class="lineNoCov">          0 :                 if (OWNER(thing) != OWNER(player)) {</span>
 <span class="lineNum">     957 </span><span class="lineNoCov">          0 :                     notify(player,</span>
@@ -1027,13 +1027,13 @@
 <span class="lineNum">     965 </span>            :                 }
 <span class="lineNum">     966 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">     967 </span>            :             case TYPE_THING:
-<span class="lineNum">     968 </span><span class="lineNoCov">          0 :                 if (OWNER(thing) != OWNER(player)) {</span>
+<span class="lineNum">     968 </span><span class="lineCov">          2 :                 if (OWNER(thing) != OWNER(player)) {</span>
 <span class="lineNum">     969 </span><span class="lineNoCov">          0 :                     notify(player,</span>
 <span class="lineNum">     970 </span>            :                            &quot;Permission denied. (You can't recycle a thing you don't control)&quot;);
 <span class="lineNum">     971 </span><span class="lineNoCov">          0 :                     return;</span>
 <span class="lineNum">     972 </span>            :                 }
 <span class="lineNum">     973 </span>            :                 /* player may be a zombie or puppet */
-<span class="lineNum">     974 </span><span class="lineNoCov">          0 :                 if (thing == player) {</span>
+<span class="lineNum">     974 </span><span class="lineCov">          2 :                 if (thing == player) {</span>
 <span class="lineNum">     975 </span><span class="lineNoCov">          0 :                     snprintf(buf, sizeof(buf),</span>
 <span class="lineNum">     976 </span>            :                              &quot;%.512s's owner commands it to kill itself.  It blinks a few times in shock, and says, \&quot;But.. but.. WHY?\&quot;  It suddenly clutches it's heart, grimacing with pain..  Staggers a few steps before falling to it's knees, then plops down on it's face.  *thud*  It kicks its legs a few times, with weakening force, as it suffers a seizure.  It's color slowly starts changing to purple, before it explodes with a fatal *POOF*!&quot;,
 <span class="lineNum">     977 </span><span class="lineNoCov">          0 :                              NAME(thing));</span>
@@ -1041,7 +1041,7 @@
 <span class="lineNum">     979 </span><span class="lineNoCov">          0 :                     notify(OWNER(player), buf);</span>
 <span class="lineNum">     980 </span><span class="lineNoCov">          0 :                     notify(OWNER(player), &quot;Now don't you feel guilty?&quot;);</span>
 <span class="lineNum">     981 </span>            :                 }
-<span class="lineNum">     982 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     982 </span><span class="lineCov">          2 :                 break;</span>
 <span class="lineNum">     983 </span>            :             case TYPE_EXIT:
 <span class="lineNum">     984 </span><span class="lineNoCov">          0 :                 if (OWNER(thing) != OWNER(player)) {</span>
 <span class="lineNum">     985 </span><span class="lineNoCov">          0 :                     notify(player,</span>
@@ -1077,10 +1077,10 @@
 <span class="lineNum">    1015 </span><span class="lineNoCov">          0 :                 notify(player, &quot;That's already garbage!&quot;);</span>
 <span class="lineNum">    1016 </span><span class="lineNoCov">          0 :                 return;</span>
 <span class="lineNum">    1017 </span>            :             }
-<span class="lineNum">    1018 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), &quot;Thank you for recycling %.512s (#%d).&quot;, NAME(thing),</span>
+<span class="lineNum">    1018 </span><span class="lineCov">          2 :             snprintf(buf, sizeof(buf), &quot;Thank you for recycling %.512s (#%d).&quot;, NAME(thing),</span>
 <span class="lineNum">    1019 </span>            :                      thing);
-<span class="lineNum">    1020 </span><span class="lineNoCov">          0 :             recycle(descr, player, thing);</span>
-<span class="lineNum">    1021 </span><span class="lineNoCov">          0 :             notify(player, buf);</span>
+<span class="lineNum">    1020 </span><span class="lineCov">          2 :             recycle(descr, player, thing);</span>
+<span class="lineNum">    1021 </span><span class="lineCov">          2 :             notify(player, buf);</span>
 <span class="lineNum">    1022 </span>            :         }
 <span class="lineNum">    1023 </span>            :     }
 <span class="lineNum">    1024 </span>            : }

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 15:10:19</td>
+            <td class="headerValue">2017-02-26 15:27:05</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">4</td>
@@ -283,14 +283,14 @@
 <span class="lineNum">     221 </span>            :  *     2: kill all matching foreground MUF processes
 <a name="222"><span class="lineNum">     222 </span>            :  */</a>
 <span class="lineNum">     223 </span>            : int
-<span class="lineNum">     224 </span><span class="lineCov">        286 : muf_event_dequeue(dbref prog, int killmode)</span>
+<span class="lineNum">     224 </span><span class="lineCov">        292 : muf_event_dequeue(dbref prog, int killmode)</span>
 <span class="lineNum">     225 </span>            : {
-<span class="lineNum">     226 </span><span class="lineCov">        286 :     int count = 0;</span>
+<span class="lineNum">     226 </span><span class="lineCov">        292 :     int count = 0;</span>
 <span class="lineNum">     227 </span>            : 
-<span class="lineNum">     228 </span><span class="lineCov">        286 :     if (killmode == 0)</span>
-<span class="lineNum">     229 </span><span class="lineCov">        286 :         killmode = 1;</span>
+<span class="lineNum">     228 </span><span class="lineCov">        292 :     if (killmode == 0)</span>
+<span class="lineNum">     229 </span><span class="lineCov">        292 :         killmode = 1;</span>
 <span class="lineNum">     230 </span>            : 
-<span class="lineNum">     231 </span><span class="lineCov">        286 :     for (struct mufevent_process *proc = mufevent_processes; proc; proc = proc-&gt;next) {</span>
+<span class="lineNum">     231 </span><span class="lineCov">        292 :     for (struct mufevent_process *proc = mufevent_processes; proc; proc = proc-&gt;next) {</span>
 <span class="lineNum">     232 </span><span class="lineNoCov">          0 :         if (proc-&gt;deleted) {</span>
 <span class="lineNum">     233 </span><span class="lineNoCov">          0 :             continue;</span>
 <span class="lineNum">     234 </span>            :         }
@@ -315,7 +315,7 @@
 <span class="lineNum">     253 </span><span class="lineNoCov">          0 :         proc-&gt;deleted = 1;</span>
 <span class="lineNum">     254 </span><span class="lineNoCov">          0 :         count++;</span>
 <span class="lineNum">     255 </span>            :     }
-<span class="lineNum">     256 </span><span class="lineCov">        286 :     return count;</span>
+<span class="lineNum">     256 </span><span class="lineCov">        292 :     return count;</span>
 <span class="lineNum">     257 </span>            : }
 <a name="258"><span class="lineNum">     258 </span>            : </a>
 <span class="lineNum">     259 </span>            : struct frame *
@@ -724,16 +724,16 @@
 <span class="lineNum">     662 </span>            :  * waiting for READ events.
 <a name="663"><span class="lineNum">     663 </span>            :  */</a>
 <span class="lineNum">     664 </span>            : void
-<span class="lineNum">     665 </span><span class="lineCov">       2036 : muf_event_process(void)</span>
+<span class="lineNum">     665 </span><span class="lineCov">       2072 : muf_event_process(void)</span>
 <span class="lineNum">     666 </span>            : {
-<span class="lineNum">     667 </span><span class="lineCov">       2036 :     int limit = 10;</span>
+<span class="lineNum">     667 </span><span class="lineCov">       2072 :     int limit = 10;</span>
 <span class="lineNum">     668 </span>            :     struct mufevent_process *proc, *next;
 <span class="lineNum">     669 </span>            :     struct mufevent *ev;
 <span class="lineNum">     670 </span>            :     dbref current_program;
 <span class="lineNum">     671 </span>            :     int block, is_fg;
 <span class="lineNum">     672 </span>            : 
-<span class="lineNum">     673 </span><span class="lineCov">       2036 :     proc = mufevent_processes;</span>
-<span class="lineNum">     674 </span><span class="lineCov">       4072 :     while (proc != NULL) {</span>
+<span class="lineNum">     673 </span><span class="lineCov">       2072 :     proc = mufevent_processes;</span>
+<span class="lineNum">     674 </span><span class="lineCov">       4144 :     while (proc != NULL) {</span>
 <span class="lineNum">     675 </span><span class="lineNoCov">          0 :         next = proc-&gt;next;</span>
 <span class="lineNum">     676 </span><span class="lineNoCov">          0 :         if (proc-&gt;deleted) {</span>
 <span class="lineNum">     677 </span><span class="lineNoCov">          0 :             muf_event_process_free(proc);</span>
@@ -741,8 +741,8 @@
 <span class="lineNum">     679 </span><span class="lineNoCov">          0 :         proc = next;</span>
 <span class="lineNum">     680 </span>            :     }
 <span class="lineNum">     681 </span>            : 
-<span class="lineNum">     682 </span><span class="lineCov">       2036 :     proc = mufevent_processes;</span>
-<span class="lineNum">     683 </span><span class="lineCov">       4072 :     while (proc != NULL &amp;&amp; limit &gt; 0) {</span>
+<span class="lineNum">     682 </span><span class="lineCov">       2072 :     proc = mufevent_processes;</span>
+<span class="lineNum">     683 </span><span class="lineCov">       4144 :     while (proc != NULL &amp;&amp; limit &gt; 0) {</span>
 <span class="lineNum">     684 </span><span class="lineNoCov">          0 :         if (!proc-&gt;deleted &amp;&amp; proc-&gt;fr) {</span>
 <span class="lineNum">     685 </span><span class="lineNoCov">          0 :             if (proc-&gt;filtercount &gt; 0) {</span>
 <span class="lineNum">     686 </span>            :                 /* Make sure it's not waiting for a READ event, if it's
@@ -814,15 +814,15 @@
 <span class="lineNum">     752 </span>            :         }
 <span class="lineNum">     753 </span><span class="lineNoCov">          0 :         proc = proc-&gt;next;</span>
 <span class="lineNum">     754 </span>            :     }
-<span class="lineNum">     755 </span><span class="lineCov">       2036 :     proc = mufevent_processes;</span>
-<span class="lineNum">     756 </span><span class="lineCov">       4072 :     while (proc != NULL) {</span>
+<span class="lineNum">     755 </span><span class="lineCov">       2072 :     proc = mufevent_processes;</span>
+<span class="lineNum">     756 </span><span class="lineCov">       4144 :     while (proc != NULL) {</span>
 <span class="lineNum">     757 </span><span class="lineNoCov">          0 :         next = proc-&gt;next;</span>
 <span class="lineNum">     758 </span><span class="lineNoCov">          0 :         if (proc-&gt;deleted) {</span>
 <span class="lineNum">     759 </span><span class="lineNoCov">          0 :             muf_event_process_free(proc);</span>
 <span class="lineNum">     760 </span>            :         }
 <span class="lineNum">     761 </span><span class="lineNoCov">          0 :         proc = next;</span>
 <span class="lineNum">     762 </span>            :     }
-<span class="lineNum">     763 </span><span class="lineCov">       2036 : }</span>
+<span class="lineNum">     763 </span><span class="lineCov">       2072 : }</span>
 </pre>
       </td>
     </tr>

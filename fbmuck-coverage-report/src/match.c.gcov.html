@@ -31,13 +31,13 @@
             <td class="headerValue">coverage-total</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">234</td>
+            <td class="headerCovTableEntry">238</td>
             <td class="headerCovTableEntry">330</td>
-            <td class="headerCovTableEntryLo">70.9 %</td>
+            <td class="headerCovTableEntryLo">72.1 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 15:10:19</td>
+            <td class="headerValue">2017-02-26 15:27:05</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">28</td>
@@ -79,29 +79,29 @@
 <span class="lineNum">      17 </span>            : char match_args[BUFFER_LEN];    /* remaining text */
 <a name="18"><span class="lineNum">      18 </span>            : </a>
 <span class="lineNum">      19 </span>            : void
-<span class="lineNum">      20 </span><span class="lineCov">       4326 : init_match(int descr, dbref player, const char *name, int type, struct match_data *md)</span>
+<span class="lineNum">      20 </span><span class="lineCov">       4402 : init_match(int descr, dbref player, const char *name, int type, struct match_data *md)</span>
 <span class="lineNum">      21 </span>            : {
-<span class="lineNum">      22 </span><span class="lineCov">       4326 :     md-&gt;exact_match = md-&gt;last_match = NOTHING;</span>
-<span class="lineNum">      23 </span><span class="lineCov">       4326 :     md-&gt;match_count = 0;</span>
-<span class="lineNum">      24 </span><span class="lineCov">       4326 :     md-&gt;match_who = player;</span>
-<span class="lineNum">      25 </span><span class="lineCov">       4326 :     md-&gt;match_from = player;</span>
-<span class="lineNum">      26 </span><span class="lineCov">       4326 :     md-&gt;match_descr = descr;</span>
-<span class="lineNum">      27 </span><span class="lineCov">       4326 :     md-&gt;match_name = name;</span>
-<span class="lineNum">      28 </span><span class="lineCov">       4326 :     md-&gt;check_keys = 0;</span>
-<span class="lineNum">      29 </span><span class="lineCov">       4326 :     md-&gt;preferred_type = type;</span>
-<span class="lineNum">      30 </span><span class="lineCov">       4326 :     md-&gt;longest_match = 0;</span>
-<span class="lineNum">      31 </span><span class="lineCov">       4326 :     md-&gt;match_level = 0;</span>
-<span class="lineNum">      32 </span><span class="lineCov">       4326 :     md-&gt;block_equals = 0;</span>
-<span class="lineNum">      33 </span><span class="lineCov">       4326 :     md-&gt;partial_exits = (TYPE_EXIT == type);</span>
-<span class="lineNum">      34 </span><span class="lineCov">       4326 : }</span>
+<span class="lineNum">      22 </span><span class="lineCov">       4402 :     md-&gt;exact_match = md-&gt;last_match = NOTHING;</span>
+<span class="lineNum">      23 </span><span class="lineCov">       4402 :     md-&gt;match_count = 0;</span>
+<span class="lineNum">      24 </span><span class="lineCov">       4402 :     md-&gt;match_who = player;</span>
+<span class="lineNum">      25 </span><span class="lineCov">       4402 :     md-&gt;match_from = player;</span>
+<span class="lineNum">      26 </span><span class="lineCov">       4402 :     md-&gt;match_descr = descr;</span>
+<span class="lineNum">      27 </span><span class="lineCov">       4402 :     md-&gt;match_name = name;</span>
+<span class="lineNum">      28 </span><span class="lineCov">       4402 :     md-&gt;check_keys = 0;</span>
+<span class="lineNum">      29 </span><span class="lineCov">       4402 :     md-&gt;preferred_type = type;</span>
+<span class="lineNum">      30 </span><span class="lineCov">       4402 :     md-&gt;longest_match = 0;</span>
+<span class="lineNum">      31 </span><span class="lineCov">       4402 :     md-&gt;match_level = 0;</span>
+<span class="lineNum">      32 </span><span class="lineCov">       4402 :     md-&gt;block_equals = 0;</span>
+<span class="lineNum">      33 </span><span class="lineCov">       4402 :     md-&gt;partial_exits = (TYPE_EXIT == type);</span>
+<span class="lineNum">      34 </span><span class="lineCov">       4402 : }</span>
 <a name="35"><span class="lineNum">      35 </span>            : </a>
 <span class="lineNum">      36 </span>            : void
-<span class="lineNum">      37 </span><span class="lineCov">         49 : init_match_check_keys(int descr, dbref player, const char *name, int type,</span>
+<span class="lineNum">      37 </span><span class="lineCov">         50 : init_match_check_keys(int descr, dbref player, const char *name, int type,</span>
 <span class="lineNum">      38 </span>            :                       struct match_data *md)
 <span class="lineNum">      39 </span>            : {
-<span class="lineNum">      40 </span><span class="lineCov">         49 :     init_match(descr, player, name, type, md);</span>
-<span class="lineNum">      41 </span><span class="lineCov">         49 :     md-&gt;check_keys = 1;</span>
-<span class="lineNum">      42 </span><span class="lineCov">         49 : }</span>
+<span class="lineNum">      40 </span><span class="lineCov">         50 :     init_match(descr, player, name, type, md);</span>
+<span class="lineNum">      41 </span><span class="lineCov">         50 :     md-&gt;check_keys = 1;</span>
+<span class="lineNum">      42 </span><span class="lineCov">         50 : }</span>
 <a name="43"><span class="lineNum">      43 </span>            : </a>
 <span class="lineNum">      44 </span>            : void
 <span class="lineNum">      45 </span><span class="lineCov">          6 : init_match_remote(int descr, dbref player, dbref what, const char *name, int type,</span>
@@ -112,14 +112,14 @@
 <span class="lineNum">      50 </span><span class="lineCov">          6 : }</span>
 <a name="51"><span class="lineNum">      51 </span>            : </a>
 <span class="lineNum">      52 </span>            : static dbref
-<span class="lineNum">      53 </span><span class="lineCov">        869 : choose_thing(int descr, dbref thing1, dbref thing2, struct match_data *md)</span>
+<span class="lineNum">      53 </span><span class="lineCov">        881 : choose_thing(int descr, dbref thing1, dbref thing2, struct match_data *md)</span>
 <span class="lineNum">      54 </span>            : {
 <span class="lineNum">      55 </span>            :     int has1;
 <span class="lineNum">      56 </span>            :     int has2;
-<span class="lineNum">      57 </span><span class="lineCov">        869 :     int preferred = md-&gt;preferred_type;</span>
+<span class="lineNum">      57 </span><span class="lineCov">        881 :     int preferred = md-&gt;preferred_type;</span>
 <span class="lineNum">      58 </span>            : 
-<span class="lineNum">      59 </span><span class="lineCov">        869 :     if (thing1 == NOTHING) {</span>
-<span class="lineNum">      60 </span><span class="lineCov">        862 :         return thing2;</span>
+<span class="lineNum">      59 </span><span class="lineCov">        881 :     if (thing1 == NOTHING) {</span>
+<span class="lineNum">      60 </span><span class="lineCov">        874 :         return thing2;</span>
 <span class="lineNum">      61 </span><span class="lineCov">          7 :     } else if (thing2 == NOTHING) {</span>
 <span class="lineNum">      62 </span><span class="lineNoCov">          0 :         return thing1;</span>
 <span class="lineNum">      63 </span>            :     }
@@ -147,30 +147,30 @@
 <span class="lineNum">      85 </span>            : }
 <a name="86"><span class="lineNum">      86 </span>            : </a>
 <span class="lineNum">      87 </span>            : void
-<span class="lineNum">      88 </span><span class="lineCov">       1022 : match_player(struct match_data *md)</span>
+<span class="lineNum">      88 </span><span class="lineCov">       1039 : match_player(struct match_data *md)</span>
 <span class="lineNum">      89 </span>            : {
 <span class="lineNum">      90 </span>            :     dbref match;
 <span class="lineNum">      91 </span>            :     const char *p;
 <span class="lineNum">      92 </span>            : 
-<span class="lineNum">      93 </span><span class="lineCov">       1022 :     if (*(md-&gt;match_name) == LOOKUP_TOKEN &amp;&amp; payfor(OWNER(md-&gt;match_from), tp_lookup_cost)) {</span>
+<span class="lineNum">      93 </span><span class="lineCov">       1039 :     if (*(md-&gt;match_name) == LOOKUP_TOKEN &amp;&amp; payfor(OWNER(md-&gt;match_from), tp_lookup_cost)) {</span>
 <span class="lineNum">      94 </span><span class="lineCov">         24 :         for (p = (md-&gt;match_name) + 1; isspace(*p); p++) ;</span>
 <span class="lineNum">      95 </span><span class="lineCov">         24 :         if ((match = lookup_player(p)) != NOTHING) {</span>
 <span class="lineNum">      96 </span><span class="lineCov">         24 :             md-&gt;exact_match = match;</span>
 <span class="lineNum">      97 </span>            :         }
 <span class="lineNum">      98 </span>            :     }
-<span class="lineNum">      99 </span><span class="lineCov">       1022 : }</span>
+<span class="lineNum">      99 </span><span class="lineCov">       1039 : }</span>
 <span class="lineNum">     100 </span>            : 
 <a name="101"><span class="lineNum">     101 </span>            : /* returns dbref if registered object found for name, else NOTHING */</a>
 <span class="lineNum">     102 </span>            : dbref
-<span class="lineNum">     103 </span><span class="lineCov">       1589 : find_registered_obj(dbref player, const char *name)</span>
+<span class="lineNum">     103 </span><span class="lineCov">       1609 : find_registered_obj(dbref player, const char *name)</span>
 <span class="lineNum">     104 </span>            : {
 <span class="lineNum">     105 </span>            :     dbref match;
 <span class="lineNum">     106 </span>            :     const char *p;
 <span class="lineNum">     107 </span>            :     char buf[BUFFER_LEN];
 <span class="lineNum">     108 </span>            :     PropPtr ptr;
 <span class="lineNum">     109 </span>            : 
-<span class="lineNum">     110 </span><span class="lineCov">       1589 :     if (*name != REGISTERED_TOKEN)</span>
-<span class="lineNum">     111 </span><span class="lineCov">       1589 :         return (NOTHING);</span>
+<span class="lineNum">     110 </span><span class="lineCov">       1609 :     if (*name != REGISTERED_TOKEN)</span>
+<span class="lineNum">     111 </span><span class="lineCov">       1609 :         return (NOTHING);</span>
 <span class="lineNum">     112 </span><span class="lineNoCov">          0 :     for (p = name + 1; *p &amp;&amp; isspace(*p); p++) ;</span>
 <span class="lineNum">     113 </span><span class="lineNoCov">          0 :     if (!*p)</span>
 <span class="lineNum">     114 </span><span class="lineNoCov">          0 :         return (NOTHING);</span>
@@ -210,23 +210,23 @@
 <span class="lineNum">     148 </span>            : 
 <a name="149"><span class="lineNum">     149 </span>            : </a>
 <span class="lineNum">     150 </span>            : void
-<span class="lineNum">     151 </span><span class="lineCov">       1589 : match_registered(struct match_data *md)</span>
+<span class="lineNum">     151 </span><span class="lineCov">       1609 : match_registered(struct match_data *md)</span>
 <span class="lineNum">     152 </span>            : {
 <span class="lineNum">     153 </span>            :     dbref match;
 <span class="lineNum">     154 </span>            : 
-<span class="lineNum">     155 </span><span class="lineCov">       1589 :     match = find_registered_obj(md-&gt;match_from, md-&gt;match_name);</span>
-<span class="lineNum">     156 </span><span class="lineCov">       1589 :     if (match != NOTHING)</span>
+<span class="lineNum">     155 </span><span class="lineCov">       1609 :     match = find_registered_obj(md-&gt;match_from, md-&gt;match_name);</span>
+<span class="lineNum">     156 </span><span class="lineCov">       1609 :     if (match != NOTHING)</span>
 <span class="lineNum">     157 </span><span class="lineNoCov">          0 :         md-&gt;exact_match = match;</span>
-<span class="lineNum">     158 </span><span class="lineCov">       1589 : }</span>
+<span class="lineNum">     158 </span><span class="lineCov">       1609 : }</span>
 <a name="159"><span class="lineNum">     159 </span>            : </a>
 <span class="lineNum">     160 </span>            : dbref
-<span class="lineNum">     161 </span><span class="lineCov">        666 : parse_dbref(const char *s)</span>
+<span class="lineNum">     161 </span><span class="lineCov">        680 : parse_dbref(const char *s)</span>
 <span class="lineNum">     162 </span>            : {
 <span class="lineNum">     163 </span>            :     long x;
 <span class="lineNum">     164 </span>            : 
-<span class="lineNum">     165 </span><span class="lineCov">        666 :     x = atol(s);</span>
-<span class="lineNum">     166 </span><span class="lineCov">        666 :     if (x &gt; 0) {</span>
-<span class="lineNum">     167 </span><span class="lineCov">        636 :         return x;</span>
+<span class="lineNum">     165 </span><span class="lineCov">        680 :     x = atol(s);</span>
+<span class="lineNum">     166 </span><span class="lineCov">        680 :     if (x &gt; 0) {</span>
+<span class="lineNum">     167 </span><span class="lineCov">        650 :         return x;</span>
 <span class="lineNum">     168 </span><span class="lineCov">         30 :     } else if (x == 0) {</span>
 <span class="lineNum">     169 </span>            :         /* check for 0 */
 <span class="lineNum">     170 </span><span class="lineCov">         30 :         for (const char *p = s; *p; p++) {</span>
@@ -242,55 +242,55 @@
 <span class="lineNum">     180 </span>            : 
 <a name="181"><span class="lineNum">     181 </span>            : /* returns nnn if name = #nnn, else NOTHING */</a>
 <span class="lineNum">     182 </span>            : static dbref
-<span class="lineNum">     183 </span><span class="lineCov">       6268 : absolute_name(struct match_data *md)</span>
+<span class="lineNum">     183 </span><span class="lineCov">       6337 : absolute_name(struct match_data *md)</span>
 <span class="lineNum">     184 </span>            : {
 <span class="lineNum">     185 </span>            :     dbref match;
 <span class="lineNum">     186 </span>            : 
-<span class="lineNum">     187 </span><span class="lineCov">       6268 :     if (*(md-&gt;match_name) == NUMBER_TOKEN) {</span>
-<span class="lineNum">     188 </span><span class="lineCov">        666 :         match = parse_dbref((md-&gt;match_name) + 1);</span>
-<span class="lineNum">     189 </span><span class="lineCov">        666 :         if (!ObjExists(match)) {</span>
+<span class="lineNum">     187 </span><span class="lineCov">       6337 :     if (*(md-&gt;match_name) == NUMBER_TOKEN) {</span>
+<span class="lineNum">     188 </span><span class="lineCov">        680 :         match = parse_dbref((md-&gt;match_name) + 1);</span>
+<span class="lineNum">     189 </span><span class="lineCov">        680 :         if (!ObjExists(match)) {</span>
 <span class="lineNum">     190 </span><span class="lineCov">          3 :             return NOTHING;</span>
 <span class="lineNum">     191 </span>            :         } else {
-<span class="lineNum">     192 </span><span class="lineCov">        663 :             return match;</span>
+<span class="lineNum">     192 </span><span class="lineCov">        677 :             return match;</span>
 <span class="lineNum">     193 </span>            :         }
 <span class="lineNum">     194 </span>            :     } else {
-<span class="lineNum">     195 </span><span class="lineCov">       5602 :         return NOTHING;</span>
+<span class="lineNum">     195 </span><span class="lineCov">       5657 :         return NOTHING;</span>
 <span class="lineNum">     196 </span>            :     }
 <span class="lineNum">     197 </span>            : }
 <a name="198"><span class="lineNum">     198 </span>            : </a>
 <span class="lineNum">     199 </span>            : void
-<span class="lineNum">     200 </span><span class="lineCov">       2246 : match_absolute(struct match_data *md)</span>
+<span class="lineNum">     200 </span><span class="lineCov">       2271 : match_absolute(struct match_data *md)</span>
 <span class="lineNum">     201 </span>            : {
 <span class="lineNum">     202 </span>            :     dbref match;
 <span class="lineNum">     203 </span>            : 
-<span class="lineNum">     204 </span><span class="lineCov">       2246 :     if ((match = absolute_name(md)) != NOTHING) {</span>
-<span class="lineNum">     205 </span><span class="lineCov">        258 :         md-&gt;exact_match = match;</span>
+<span class="lineNum">     204 </span><span class="lineCov">       2271 :     if ((match = absolute_name(md)) != NOTHING) {</span>
+<span class="lineNum">     205 </span><span class="lineCov">        263 :         md-&gt;exact_match = match;</span>
 <span class="lineNum">     206 </span>            :     }
-<span class="lineNum">     207 </span><span class="lineCov">       2246 : }</span>
+<span class="lineNum">     207 </span><span class="lineCov">       2271 : }</span>
 <a name="208"><span class="lineNum">     208 </span>            : </a>
 <span class="lineNum">     209 </span>            : void
-<span class="lineNum">     210 </span><span class="lineCov">       1084 : match_me(struct match_data *md)</span>
+<span class="lineNum">     210 </span><span class="lineCov">       1102 : match_me(struct match_data *md)</span>
 <span class="lineNum">     211 </span>            : {
-<span class="lineNum">     212 </span><span class="lineCov">       1084 :     if (!strcasecmp(md-&gt;match_name, &quot;me&quot;)) {</span>
-<span class="lineNum">     213 </span><span class="lineCov">        152 :         md-&gt;exact_match = md-&gt;match_who;</span>
+<span class="lineNum">     212 </span><span class="lineCov">       1102 :     if (!strcasecmp(md-&gt;match_name, &quot;me&quot;)) {</span>
+<span class="lineNum">     213 </span><span class="lineCov">        159 :         md-&gt;exact_match = md-&gt;match_who;</span>
 <span class="lineNum">     214 </span>            :     }
-<span class="lineNum">     215 </span><span class="lineCov">       1084 : }</span>
+<span class="lineNum">     215 </span><span class="lineCov">       1102 : }</span>
 <a name="216"><span class="lineNum">     216 </span>            : </a>
 <span class="lineNum">     217 </span>            : void
-<span class="lineNum">     218 </span><span class="lineCov">       1093 : match_here(struct match_data *md)</span>
+<span class="lineNum">     218 </span><span class="lineCov">       1113 : match_here(struct match_data *md)</span>
 <span class="lineNum">     219 </span>            : {
-<span class="lineNum">     220 </span><span class="lineCov">       1093 :     if (!strcasecmp(md-&gt;match_name, &quot;here&quot;)</span>
+<span class="lineNum">     220 </span><span class="lineCov">       1113 :     if (!strcasecmp(md-&gt;match_name, &quot;here&quot;)</span>
 <span class="lineNum">     221 </span><span class="lineCov">         58 :         &amp;&amp; LOCATION(md-&gt;match_who) != NOTHING) {</span>
 <span class="lineNum">     222 </span><span class="lineCov">         58 :         md-&gt;exact_match = LOCATION(md-&gt;match_who);</span>
 <span class="lineNum">     223 </span>            :     }
-<span class="lineNum">     224 </span><span class="lineCov">       1093 : }</span>
+<span class="lineNum">     224 </span><span class="lineCov">       1113 : }</span>
 <a name="225"><span class="lineNum">     225 </span>            : </a>
 <span class="lineNum">     226 </span>            : void
-<span class="lineNum">     227 </span><span class="lineCov">        150 : match_home(struct match_data *md)</span>
+<span class="lineNum">     227 </span><span class="lineCov">        152 : match_home(struct match_data *md)</span>
 <span class="lineNum">     228 </span>            : {
-<span class="lineNum">     229 </span><span class="lineCov">        150 :     if (!strcasecmp(md-&gt;match_name, &quot;home&quot;))</span>
+<span class="lineNum">     229 </span><span class="lineCov">        152 :     if (!strcasecmp(md-&gt;match_name, &quot;home&quot;))</span>
 <span class="lineNum">     230 </span><span class="lineCov">          6 :         md-&gt;exact_match = HOME;</span>
-<span class="lineNum">     231 </span><span class="lineCov">        150 : }</span>
+<span class="lineNum">     231 </span><span class="lineCov">        152 : }</span>
 <a name="232"><span class="lineNum">     232 </span>            : </a>
 <span class="lineNum">     233 </span>            : void
 <span class="lineNum">     234 </span><span class="lineCov">        102 : match_nil(struct match_data *md)</span>
@@ -300,24 +300,24 @@
 <span class="lineNum">     238 </span><span class="lineCov">        102 : }</span>
 <a name="239"><span class="lineNum">     239 </span>            : </a>
 <span class="lineNum">     240 </span>            : static void
-<span class="lineNum">     241 </span><span class="lineCov">       3176 : match_contents(dbref obj, struct match_data *md)</span>
+<span class="lineNum">     241 </span><span class="lineCov">       3220 : match_contents(dbref obj, struct match_data *md)</span>
 <span class="lineNum">     242 </span>            : {
 <span class="lineNum">     243 </span>            :     dbref absolute, first;
 <span class="lineNum">     244 </span>            : 
-<span class="lineNum">     245 </span><span class="lineCov">       3176 :     absolute = absolute_name(md);</span>
-<span class="lineNum">     246 </span><span class="lineCov">       3176 :     if (!controls(OWNER(md-&gt;match_from), absolute))</span>
-<span class="lineNum">     247 </span><span class="lineCov">       2840 :         absolute = NOTHING;</span>
+<span class="lineNum">     245 </span><span class="lineCov">       3220 :     absolute = absolute_name(md);</span>
+<span class="lineNum">     246 </span><span class="lineCov">       3220 :     if (!controls(OWNER(md-&gt;match_from), absolute))</span>
+<span class="lineNum">     247 </span><span class="lineCov">       2879 :         absolute = NOTHING;</span>
 <span class="lineNum">     248 </span>            : 
-<span class="lineNum">     249 </span><span class="lineCov">       3176 :     first = CONTENTS(obj);</span>
+<span class="lineNum">     249 </span><span class="lineCov">       3220 :     first = CONTENTS(obj);</span>
 <span class="lineNum">     250 </span>            : 
-<span class="lineNum">     251 </span><span class="lineCov">       6286 :     DOLIST(first, first) {</span>
-<span class="lineNum">     252 </span><span class="lineCov">       3242 :         if (first == absolute) {</span>
-<span class="lineNum">     253 </span><span class="lineCov">        132 :             md-&gt;exact_match = first;</span>
-<span class="lineNum">     254 </span><span class="lineCov">        132 :             return;</span>
-<span class="lineNum">     255 </span><span class="lineCov">       3110 :         } else if (!strcasecmp(NAME(first), md-&gt;match_name)) {</span>
+<span class="lineNum">     251 </span><span class="lineCov">       6364 :     DOLIST(first, first) {</span>
+<span class="lineNum">     252 </span><span class="lineCov">       3279 :         if (first == absolute) {</span>
+<span class="lineNum">     253 </span><span class="lineCov">        135 :             md-&gt;exact_match = first;</span>
+<span class="lineNum">     254 </span><span class="lineCov">        135 :             return;</span>
+<span class="lineNum">     255 </span><span class="lineCov">       3144 :         } else if (!strcasecmp(NAME(first), md-&gt;match_name)) {</span>
 <span class="lineNum">     256 </span>            :             /* if there are multiple exact matches, randomly choose one */
-<span class="lineNum">     257 </span><span class="lineCov">        869 :             md-&gt;exact_match = choose_thing(md-&gt;match_descr, md-&gt;exact_match, first, md);</span>
-<span class="lineNum">     258 </span><span class="lineCov">       2241 :         } else if (string_match(NAME(first), md-&gt;match_name)) {</span>
+<span class="lineNum">     257 </span><span class="lineCov">        881 :             md-&gt;exact_match = choose_thing(md-&gt;match_descr, md-&gt;exact_match, first, md);</span>
+<span class="lineNum">     258 </span><span class="lineCov">       2263 :         } else if (string_match(NAME(first), md-&gt;match_name)) {</span>
 <span class="lineNum">     259 </span><span class="lineCov">         35 :             md-&gt;last_match = first;</span>
 <span class="lineNum">     260 </span><span class="lineCov">         35 :             (md-&gt;match_count)++;</span>
 <span class="lineNum">     261 </span>            :         }
@@ -325,36 +325,36 @@
 <span class="lineNum">     263 </span>            : }
 <a name="264"><span class="lineNum">     264 </span>            : </a>
 <span class="lineNum">     265 </span>            : void
-<span class="lineNum">     266 </span><span class="lineCov">       1593 : match_possession(struct match_data *md)</span>
+<span class="lineNum">     266 </span><span class="lineCov">       1616 : match_possession(struct match_data *md)</span>
 <span class="lineNum">     267 </span>            : {
-<span class="lineNum">     268 </span><span class="lineCov">       1593 :     match_contents(md-&gt;match_from, md);</span>
-<span class="lineNum">     269 </span><span class="lineCov">       1593 : }</span>
+<span class="lineNum">     268 </span><span class="lineCov">       1616 :     match_contents(md-&gt;match_from, md);</span>
+<span class="lineNum">     269 </span><span class="lineCov">       1616 : }</span>
 <a name="270"><span class="lineNum">     270 </span>            : </a>
 <span class="lineNum">     271 </span>            : void
-<span class="lineNum">     272 </span><span class="lineCov">       1583 : match_neighbor(struct match_data *md)</span>
+<span class="lineNum">     272 </span><span class="lineCov">       1604 : match_neighbor(struct match_data *md)</span>
 <span class="lineNum">     273 </span>            : {
 <span class="lineNum">     274 </span>            :     dbref loc;
 <span class="lineNum">     275 </span>            : 
-<span class="lineNum">     276 </span><span class="lineCov">       1583 :     if ((loc = LOCATION(md-&gt;match_from)) != NOTHING) {</span>
-<span class="lineNum">     277 </span><span class="lineCov">       1583 :         match_contents(loc, md);</span>
+<span class="lineNum">     276 </span><span class="lineCov">       1604 :     if ((loc = LOCATION(md-&gt;match_from)) != NOTHING) {</span>
+<span class="lineNum">     277 </span><span class="lineCov">       1604 :         match_contents(loc, md);</span>
 <span class="lineNum">     278 </span>            :     }
-<span class="lineNum">     279 </span><span class="lineCov">       1583 : }</span>
+<span class="lineNum">     279 </span><span class="lineCov">       1604 : }</span>
 <span class="lineNum">     280 </span>            : 
 <span class="lineNum">     281 </span>            : /*
 <span class="lineNum">     282 </span>            :  * match_exits matches a list of exits, starting with 'first'.
 <span class="lineNum">     283 </span>            :  * It will match exits of players, rooms, or things.
 <a name="284"><span class="lineNum">     284 </span>            :  */</a>
 <span class="lineNum">     285 </span>            : void
-<span class="lineNum">     286 </span><span class="lineCov">       7311 : match_exits(dbref obj, struct match_data *md)</span>
+<span class="lineNum">     286 </span><span class="lineCov">       7457 : match_exits(dbref obj, struct match_data *md)</span>
 <span class="lineNum">     287 </span>            : {
 <span class="lineNum">     288 </span>            :     dbref exit, absolute, first;
 <span class="lineNum">     289 </span>            :     const char *exitname, *p;
 <span class="lineNum">     290 </span>            :     int exitprog, lev, partial;
 <span class="lineNum">     291 </span>            : 
-<span class="lineNum">     292 </span><span class="lineCov">       7311 :     first = EXITS(obj);</span>
+<span class="lineNum">     292 </span><span class="lineCov">       7457 :     first = EXITS(obj);</span>
 <span class="lineNum">     293 </span>            : 
-<span class="lineNum">     294 </span><span class="lineCov">       7311 :     if (first == NOTHING)</span>
-<span class="lineNum">     295 </span><span class="lineCov">       6465 :         return;                 /* Easy fail match */</span>
+<span class="lineNum">     294 </span><span class="lineCov">       7457 :     if (first == NOTHING)</span>
+<span class="lineNum">     295 </span><span class="lineCov">       6611 :         return;                 /* Easy fail match */</span>
 <span class="lineNum">     296 </span><span class="lineCov">        846 :     if ((LOCATION(md-&gt;match_from)) == NOTHING)</span>
 <span class="lineNum">     297 </span><span class="lineNoCov">          0 :         return;</span>
 <span class="lineNum">     298 </span>            : 
@@ -482,14 +482,14 @@
 <span class="lineNum">     420 </span>            :  * matches actions attached to objects in inventory
 <a name="421"><span class="lineNum">     421 </span>            :  */</a>
 <span class="lineNum">     422 </span>            : void
-<span class="lineNum">     423 </span><span class="lineCov">       3580 : match_invobj_actions(struct match_data *md)</span>
+<span class="lineNum">     423 </span><span class="lineCov">       3647 : match_invobj_actions(struct match_data *md)</span>
 <span class="lineNum">     424 </span>            : {
 <span class="lineNum">     425 </span>            :     dbref thing;
 <span class="lineNum">     426 </span>            : 
-<span class="lineNum">     427 </span><span class="lineCov">       3580 :     if (CONTENTS(md-&gt;match_from) == NOTHING)</span>
-<span class="lineNum">     428 </span><span class="lineCov">       1773 :         return;</span>
-<span class="lineNum">     429 </span><span class="lineCov">       3782 :     DOLIST(thing, CONTENTS(md-&gt;match_from)) {</span>
-<span class="lineNum">     430 </span><span class="lineCov">       1975 :         if (Typeof(thing) == TYPE_THING &amp;&amp; EXITS(thing) != NOTHING) {</span>
+<span class="lineNum">     427 </span><span class="lineCov">       3647 :     if (CONTENTS(md-&gt;match_from) == NOTHING)</span>
+<span class="lineNum">     428 </span><span class="lineCov">       1826 :         return;</span>
+<span class="lineNum">     429 </span><span class="lineCov">       3810 :     DOLIST(thing, CONTENTS(md-&gt;match_from)) {</span>
+<span class="lineNum">     430 </span><span class="lineCov">       1989 :         if (Typeof(thing) == TYPE_THING &amp;&amp; EXITS(thing) != NOTHING) {</span>
 <span class="lineNum">     431 </span><span class="lineCov">         36 :             match_exits(thing, md);</span>
 <span class="lineNum">     432 </span>            :         }
 <span class="lineNum">     433 </span>            :     }
@@ -500,16 +500,16 @@
 <span class="lineNum">     438 </span>            :  * matches actions attached to objects in the room
 <a name="439"><span class="lineNum">     439 </span>            :  */</a>
 <span class="lineNum">     440 </span>            : void
-<span class="lineNum">     441 </span><span class="lineCov">       3580 : match_roomobj_actions(struct match_data *md)</span>
+<span class="lineNum">     441 </span><span class="lineCov">       3647 : match_roomobj_actions(struct match_data *md)</span>
 <span class="lineNum">     442 </span>            : {
 <span class="lineNum">     443 </span>            :     dbref thing, loc;
 <span class="lineNum">     444 </span>            : 
-<span class="lineNum">     445 </span><span class="lineCov">       3580 :     if ((loc = LOCATION(md-&gt;match_from)) == NOTHING)</span>
+<span class="lineNum">     445 </span><span class="lineCov">       3647 :     if ((loc = LOCATION(md-&gt;match_from)) == NOTHING)</span>
 <span class="lineNum">     446 </span><span class="lineNoCov">          0 :         return;</span>
-<span class="lineNum">     447 </span><span class="lineCov">       3580 :     if (CONTENTS(loc) == NOTHING)</span>
+<span class="lineNum">     447 </span><span class="lineCov">       3647 :     if (CONTENTS(loc) == NOTHING)</span>
 <span class="lineNum">     448 </span><span class="lineNoCov">          0 :         return;</span>
-<span class="lineNum">     449 </span><span class="lineCov">       8272 :     DOLIST(thing, CONTENTS(loc)) {</span>
-<span class="lineNum">     450 </span><span class="lineCov">       4692 :         if (Typeof(thing) == TYPE_THING &amp;&amp; EXITS(thing) != NOTHING) {</span>
+<span class="lineNum">     449 </span><span class="lineCov">       8423 :     DOLIST(thing, CONTENTS(loc)) {</span>
+<span class="lineNum">     450 </span><span class="lineCov">       4776 :         if (Typeof(thing) == TYPE_THING &amp;&amp; EXITS(thing) != NOTHING) {</span>
 <span class="lineNum">     451 </span><span class="lineCov">         94 :             match_exits(thing, md);</span>
 <span class="lineNum">     452 </span>            :         }
 <span class="lineNum">     453 </span>            :     }
@@ -520,17 +520,17 @@
 <span class="lineNum">     458 </span>            :  * matches actions attached to player
 <a name="459"><span class="lineNum">     459 </span>            :  */</a>
 <span class="lineNum">     460 </span>            : void
-<span class="lineNum">     461 </span><span class="lineCov">       3580 : match_player_actions(struct match_data *md)</span>
+<span class="lineNum">     461 </span><span class="lineCov">       3647 : match_player_actions(struct match_data *md)</span>
 <span class="lineNum">     462 </span>            : {
-<span class="lineNum">     463 </span><span class="lineCov">       3580 :     switch (Typeof(md-&gt;match_from)) {</span>
+<span class="lineNum">     463 </span><span class="lineCov">       3647 :     switch (Typeof(md-&gt;match_from)) {</span>
 <span class="lineNum">     464 </span>            :     case TYPE_PLAYER:
 <span class="lineNum">     465 </span>            :     case TYPE_ROOM:
 <span class="lineNum">     466 </span>            :     case TYPE_THING:
-<span class="lineNum">     467 </span><span class="lineCov">       3574 :         match_exits(md-&gt;match_from, md);</span>
+<span class="lineNum">     467 </span><span class="lineCov">       3641 :         match_exits(md-&gt;match_from, md);</span>
 <span class="lineNum">     468 </span>            :     default:
-<span class="lineNum">     469 </span><span class="lineCov">       3580 :         break;</span>
+<span class="lineNum">     469 </span><span class="lineCov">       3647 :         break;</span>
 <span class="lineNum">     470 </span>            :     }
-<span class="lineNum">     471 </span><span class="lineCov">       3580 : }</span>
+<span class="lineNum">     471 </span><span class="lineCov">       3647 : }</span>
 <span class="lineNum">     472 </span>            : 
 <span class="lineNum">     473 </span>            : /*
 <span class="lineNum">     474 </span>            :  * match_room_exits
@@ -538,18 +538,18 @@
 <span class="lineNum">     476 </span>            :  * Formerly 'match_exit'.
 <a name="477"><span class="lineNum">     477 </span>            :  */</a>
 <span class="lineNum">     478 </span>            : void
-<span class="lineNum">     479 </span><span class="lineCov">       3607 : match_room_exits(dbref loc, struct match_data *md)</span>
+<span class="lineNum">     479 </span><span class="lineCov">       3686 : match_room_exits(dbref loc, struct match_data *md)</span>
 <span class="lineNum">     480 </span>            : {
-<span class="lineNum">     481 </span><span class="lineCov">       3607 :     switch (Typeof(loc)) {</span>
+<span class="lineNum">     481 </span><span class="lineCov">       3686 :     switch (Typeof(loc)) {</span>
 <span class="lineNum">     482 </span>            :     case TYPE_PLAYER:
 <span class="lineNum">     483 </span>            :     case TYPE_ROOM:
 <span class="lineNum">     484 </span>            :     case TYPE_THING:
-<span class="lineNum">     485 </span><span class="lineCov">       3607 :         match_exits(loc, md);</span>
+<span class="lineNum">     485 </span><span class="lineCov">       3686 :         match_exits(loc, md);</span>
 <span class="lineNum">     486 </span>            :     default:
-<span class="lineNum">     487 </span><span class="lineCov">       3607 :         break;</span>
+<span class="lineNum">     487 </span><span class="lineCov">       3686 :         break;</span>
 <span class="lineNum">     488 </span>            :     }
 <span class="lineNum">     489 </span>            : 
-<span class="lineNum">     490 </span><span class="lineCov">       3607 : }</span>
+<span class="lineNum">     490 </span><span class="lineCov">       3686 : }</span>
 <span class="lineNum">     491 </span>            : 
 <span class="lineNum">     492 </span>            : /*
 <span class="lineNum">     493 </span>            :  * match_all_exits
@@ -557,85 +557,85 @@
 <span class="lineNum">     495 </span>            :  * and room actions/exits (in reverse order of priority order).
 <a name="496"><span class="lineNum">     496 </span>            :  */</a>
 <span class="lineNum">     497 </span>            : void
-<span class="lineNum">     498 </span><span class="lineCov">       3580 : match_all_exits(struct match_data *md)</span>
+<span class="lineNum">     498 </span><span class="lineCov">       3647 : match_all_exits(struct match_data *md)</span>
 <span class="lineNum">     499 </span>            : {
 <span class="lineNum">     500 </span>            :     dbref loc;
-<span class="lineNum">     501 </span><span class="lineCov">       3580 :     int limit = 88;</span>
-<span class="lineNum">     502 </span><span class="lineCov">       3580 :     int blocking = 0;</span>
+<span class="lineNum">     501 </span><span class="lineCov">       3647 :     int limit = 88;</span>
+<span class="lineNum">     502 </span><span class="lineCov">       3647 :     int blocking = 0;</span>
 <span class="lineNum">     503 </span>            : 
-<span class="lineNum">     504 </span><span class="lineCov">       3580 :     strcpyn(match_args, sizeof(match_args), &quot;\0&quot;);</span>
-<span class="lineNum">     505 </span><span class="lineCov">       3580 :     strcpyn(match_cmdname, sizeof(match_cmdname), &quot;\0&quot;);</span>
-<span class="lineNum">     506 </span><span class="lineCov">       3580 :     if ((loc = LOCATION(md-&gt;match_from)) != NOTHING)</span>
-<span class="lineNum">     507 </span><span class="lineCov">       3580 :         match_room_exits(loc, md);</span>
+<span class="lineNum">     504 </span><span class="lineCov">       3647 :     strcpyn(match_args, sizeof(match_args), &quot;\0&quot;);</span>
+<span class="lineNum">     505 </span><span class="lineCov">       3647 :     strcpyn(match_cmdname, sizeof(match_cmdname), &quot;\0&quot;);</span>
+<span class="lineNum">     506 </span><span class="lineCov">       3647 :     if ((loc = LOCATION(md-&gt;match_from)) != NOTHING)</span>
+<span class="lineNum">     507 </span><span class="lineCov">       3647 :         match_room_exits(loc, md);</span>
 <span class="lineNum">     508 </span>            : 
-<span class="lineNum">     509 </span><span class="lineCov">       3580 :     if (md-&gt;exact_match != NOTHING)</span>
+<span class="lineNum">     509 </span><span class="lineCov">       3647 :     if (md-&gt;exact_match != NOTHING)</span>
 <span class="lineNum">     510 </span><span class="lineCov">        258 :         md-&gt;block_equals = 1;</span>
-<span class="lineNum">     511 </span><span class="lineCov">       3580 :     match_invobj_actions(md);</span>
+<span class="lineNum">     511 </span><span class="lineCov">       3647 :     match_invobj_actions(md);</span>
 <span class="lineNum">     512 </span>            : 
-<span class="lineNum">     513 </span><span class="lineCov">       3580 :     if (md-&gt;exact_match != NOTHING)</span>
+<span class="lineNum">     513 </span><span class="lineCov">       3647 :     if (md-&gt;exact_match != NOTHING)</span>
 <span class="lineNum">     514 </span><span class="lineCov">        270 :         md-&gt;block_equals = 1;</span>
-<span class="lineNum">     515 </span><span class="lineCov">       3580 :     match_roomobj_actions(md);</span>
+<span class="lineNum">     515 </span><span class="lineCov">       3647 :     match_roomobj_actions(md);</span>
 <span class="lineNum">     516 </span>            : 
-<span class="lineNum">     517 </span><span class="lineCov">       3580 :     if (md-&gt;exact_match != NOTHING)</span>
+<span class="lineNum">     517 </span><span class="lineCov">       3647 :     if (md-&gt;exact_match != NOTHING)</span>
 <span class="lineNum">     518 </span><span class="lineCov">        310 :         md-&gt;block_equals = 1;</span>
-<span class="lineNum">     519 </span><span class="lineCov">       3580 :     match_player_actions(md);</span>
+<span class="lineNum">     519 </span><span class="lineCov">       3647 :     match_player_actions(md);</span>
 <span class="lineNum">     520 </span>            : 
-<span class="lineNum">     521 </span><span class="lineCov">       3580 :     if (loc == NOTHING)</span>
+<span class="lineNum">     521 </span><span class="lineCov">       3647 :     if (loc == NOTHING)</span>
 <span class="lineNum">     522 </span><span class="lineNoCov">          0 :         return;</span>
 <span class="lineNum">     523 </span>            : 
 <span class="lineNum">     524 </span>            :     /* if player is in a vehicle, use environment of vehicle's home */
-<span class="lineNum">     525 </span><span class="lineCov">       3580 :     if (Typeof(loc) == TYPE_THING) {</span>
-<span class="lineNum">     526 </span><span class="lineNoCov">          0 :         loc = THING_HOME(loc);</span>
-<span class="lineNum">     527 </span><span class="lineNoCov">          0 :         if (loc == NOTHING)</span>
+<span class="lineNum">     525 </span><span class="lineCov">       3647 :     if (Typeof(loc) == TYPE_THING) {</span>
+<span class="lineNum">     526 </span><span class="lineCov">          8 :         loc = THING_HOME(loc);</span>
+<span class="lineNum">     527 </span><span class="lineCov">          8 :         if (loc == NOTHING)</span>
 <span class="lineNum">     528 </span><span class="lineNoCov">          0 :             return;</span>
-<span class="lineNum">     529 </span><span class="lineNoCov">          0 :         if (md-&gt;exact_match != NOTHING)</span>
+<span class="lineNum">     529 </span><span class="lineCov">          8 :         if (md-&gt;exact_match != NOTHING)</span>
 <span class="lineNum">     530 </span><span class="lineNoCov">          0 :             md-&gt;block_equals = 1;</span>
-<span class="lineNum">     531 </span><span class="lineNoCov">          0 :         match_room_exits(loc, md);</span>
+<span class="lineNum">     531 </span><span class="lineCov">          8 :         match_room_exits(loc, md);</span>
 <span class="lineNum">     532 </span>            :     }
 <span class="lineNum">     533 </span>            : 
 <span class="lineNum">     534 </span>            :     /* Walk the environment chain to #0, or until depth chain limit
 <span class="lineNum">     535 </span>            :        has been hit, looking for a match. */
-<span class="lineNum">     536 </span><span class="lineCov">       7187 :     while ((loc = LOCATION(loc)) != NOTHING) {</span>
+<span class="lineNum">     536 </span><span class="lineCov">       7325 :     while ((loc = LOCATION(loc)) != NOTHING) {</span>
 <span class="lineNum">     537 </span>            :         /* If we're blocking (because of a yield), only match a room if
 <span class="lineNum">     538 </span>            :            and only if it has overt set on it. */
-<span class="lineNum">     539 </span><span class="lineCov">         27 :         if ((blocking &amp;&amp; FLAGS(loc) &amp; OVERT) || !blocking) {</span>
-<span class="lineNum">     540 </span><span class="lineCov">         27 :             if (md-&gt;exact_match != NOTHING)</span>
+<span class="lineNum">     539 </span><span class="lineCov">         31 :         if ((blocking &amp;&amp; FLAGS(loc) &amp; OVERT) || !blocking) {</span>
+<span class="lineNum">     540 </span><span class="lineCov">         31 :             if (md-&gt;exact_match != NOTHING)</span>
 <span class="lineNum">     541 </span><span class="lineCov">          9 :                 md-&gt;block_equals = 1;</span>
-<span class="lineNum">     542 </span><span class="lineCov">         27 :             match_room_exits(loc, md);</span>
+<span class="lineNum">     542 </span><span class="lineCov">         31 :             match_room_exits(loc, md);</span>
 <span class="lineNum">     543 </span>            :         }
-<span class="lineNum">     544 </span><span class="lineCov">         27 :         if (!limit--)</span>
+<span class="lineNum">     544 </span><span class="lineCov">         31 :         if (!limit--)</span>
 <span class="lineNum">     545 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     546 </span>            :         /* Does this room have env-chain exit blocking enabled? */
-<span class="lineNum">     547 </span><span class="lineCov">         27 :         if (!blocking &amp;&amp; tp_enable_match_yield &amp;&amp; FLAGS(loc) &amp; YIELD) {</span>
+<span class="lineNum">     547 </span><span class="lineCov">         31 :         if (!blocking &amp;&amp; tp_enable_match_yield &amp;&amp; FLAGS(loc) &amp; YIELD) {</span>
 <span class="lineNum">     548 </span><span class="lineNoCov">          0 :             blocking = 1;</span>
 <span class="lineNum">     549 </span>            :         }
 <span class="lineNum">     550 </span>            :     }
 <span class="lineNum">     551 </span>            : }
 <a name="552"><span class="lineNum">     552 </span>            : </a>
 <span class="lineNum">     553 </span>            : void
-<span class="lineNum">     554 </span><span class="lineCov">        675 : match_everything(struct match_data *md)</span>
+<span class="lineNum">     554 </span><span class="lineCov">        679 : match_everything(struct match_data *md)</span>
 <span class="lineNum">     555 </span>            : {
-<span class="lineNum">     556 </span><span class="lineCov">        675 :     match_all_exits(md);</span>
-<span class="lineNum">     557 </span><span class="lineCov">        675 :     match_neighbor(md);</span>
-<span class="lineNum">     558 </span><span class="lineCov">        675 :     match_possession(md);</span>
-<span class="lineNum">     559 </span><span class="lineCov">        675 :     match_me(md);</span>
-<span class="lineNum">     560 </span><span class="lineCov">        675 :     match_here(md);</span>
-<span class="lineNum">     561 </span><span class="lineCov">        675 :     match_registered(md);</span>
-<span class="lineNum">     562 </span><span class="lineCov">        675 :     if (Wizard(OWNER(md-&gt;match_from)) || Wizard(md-&gt;match_who)) {</span>
-<span class="lineNum">     563 </span><span class="lineCov">        672 :         match_absolute(md);</span>
-<span class="lineNum">     564 </span><span class="lineCov">        672 :         match_player(md);</span>
+<span class="lineNum">     556 </span><span class="lineCov">        679 :     match_all_exits(md);</span>
+<span class="lineNum">     557 </span><span class="lineCov">        679 :     match_neighbor(md);</span>
+<span class="lineNum">     558 </span><span class="lineCov">        679 :     match_possession(md);</span>
+<span class="lineNum">     559 </span><span class="lineCov">        679 :     match_me(md);</span>
+<span class="lineNum">     560 </span><span class="lineCov">        679 :     match_here(md);</span>
+<span class="lineNum">     561 </span><span class="lineCov">        679 :     match_registered(md);</span>
+<span class="lineNum">     562 </span><span class="lineCov">        679 :     if (Wizard(OWNER(md-&gt;match_from)) || Wizard(md-&gt;match_who)) {</span>
+<span class="lineNum">     563 </span><span class="lineCov">        676 :         match_absolute(md);</span>
+<span class="lineNum">     564 </span><span class="lineCov">        676 :         match_player(md);</span>
 <span class="lineNum">     565 </span>            :     }
-<span class="lineNum">     566 </span><span class="lineCov">        675 : }</span>
+<span class="lineNum">     566 </span><span class="lineCov">        679 : }</span>
 <a name="567"><span class="lineNum">     567 </span>            : </a>
 <span class="lineNum">     568 </span>            : dbref
-<span class="lineNum">     569 </span><span class="lineCov">       1957 : match_result(struct match_data *md)</span>
+<span class="lineNum">     569 </span><span class="lineCov">       1987 : match_result(struct match_data *md)</span>
 <span class="lineNum">     570 </span>            : {
-<span class="lineNum">     571 </span><span class="lineCov">       1957 :     if (md-&gt;exact_match != NOTHING) {</span>
-<span class="lineNum">     572 </span><span class="lineCov">       1573 :         return (md-&gt;exact_match);</span>
+<span class="lineNum">     571 </span><span class="lineCov">       1987 :     if (md-&gt;exact_match != NOTHING) {</span>
+<span class="lineNum">     572 </span><span class="lineCov">       1597 :         return (md-&gt;exact_match);</span>
 <span class="lineNum">     573 </span>            :     } else {
-<span class="lineNum">     574 </span><span class="lineCov">        384 :         switch (md-&gt;match_count) {</span>
+<span class="lineNum">     574 </span><span class="lineCov">        390 :         switch (md-&gt;match_count) {</span>
 <span class="lineNum">     575 </span>            :         case 0:
-<span class="lineNum">     576 </span><span class="lineCov">        384 :             return NOTHING;</span>
+<span class="lineNum">     576 </span><span class="lineCov">        390 :             return NOTHING;</span>
 <span class="lineNum">     577 </span>            :         case 1:
 <span class="lineNum">     578 </span><span class="lineNoCov">          0 :             return (md-&gt;last_match);</span>
 <span class="lineNum">     579 </span>            :         default:
@@ -646,21 +646,21 @@
 <span class="lineNum">     584 </span>            : 
 <a name="585"><span class="lineNum">     585 </span>            : /* use this if you don't care about ambiguity */</a>
 <span class="lineNum">     586 </span>            : dbref
-<span class="lineNum">     587 </span><span class="lineCov">       2369 : last_match_result(struct match_data * md)</span>
+<span class="lineNum">     587 </span><span class="lineCov">       2415 : last_match_result(struct match_data * md)</span>
 <span class="lineNum">     588 </span>            : {
-<span class="lineNum">     589 </span><span class="lineCov">       2369 :     if (md-&gt;exact_match != NOTHING) {</span>
+<span class="lineNum">     589 </span><span class="lineCov">       2415 :     if (md-&gt;exact_match != NOTHING) {</span>
 <span class="lineNum">     590 </span><span class="lineCov">         49 :         return (md-&gt;exact_match);</span>
 <span class="lineNum">     591 </span>            :     } else {
-<span class="lineNum">     592 </span><span class="lineCov">       2320 :         return (md-&gt;last_match);</span>
+<span class="lineNum">     592 </span><span class="lineCov">       2366 :         return (md-&gt;last_match);</span>
 <span class="lineNum">     593 </span>            :     }
 <span class="lineNum">     594 </span>            : }
 <a name="595"><span class="lineNum">     595 </span>            : </a>
 <span class="lineNum">     596 </span>            : dbref
-<span class="lineNum">     597 </span><span class="lineCov">       1282 : noisy_match_result(struct match_data * md)</span>
+<span class="lineNum">     597 </span><span class="lineCov">       1304 : noisy_match_result(struct match_data * md)</span>
 <span class="lineNum">     598 </span>            : {
 <span class="lineNum">     599 </span>            :     dbref match;
 <span class="lineNum">     600 </span>            : 
-<span class="lineNum">     601 </span><span class="lineCov">       1282 :     switch (match = match_result(md)) {</span>
+<span class="lineNum">     601 </span><span class="lineCov">       1304 :     switch (match = match_result(md)) {</span>
 <span class="lineNum">     602 </span>            :     case NOTHING:
 <span class="lineNum">     603 </span><span class="lineNoCov">          0 :         notify(md-&gt;match_who, NOMATCH_MESSAGE);</span>
 <span class="lineNum">     604 </span><span class="lineNoCov">          0 :         return NOTHING;</span>
@@ -668,7 +668,7 @@
 <span class="lineNum">     606 </span><span class="lineNoCov">          0 :         notify(md-&gt;match_who, AMBIGUOUS_MESSAGE);</span>
 <span class="lineNum">     607 </span><span class="lineNoCov">          0 :         return NOTHING;</span>
 <span class="lineNum">     608 </span>            :     default:
-<span class="lineNum">     609 </span><span class="lineCov">       1282 :         return match;</span>
+<span class="lineNum">     609 </span><span class="lineCov">       1304 :         return match;</span>
 <span class="lineNum">     610 </span>            :     }
 <span class="lineNum">     611 </span>            : }
 <a name="612"><span class="lineNum">     612 </span>            : </a>
@@ -688,21 +688,21 @@
 <span class="lineNum">     626 </span>            : }
 <a name="627"><span class="lineNum">     627 </span>            : </a>
 <span class="lineNum">     628 </span>            : dbref
-<span class="lineNum">     629 </span><span class="lineCov">        510 : match_controlled(int descr, dbref player, const char *name)</span>
+<span class="lineNum">     629 </span><span class="lineCov">        514 : match_controlled(int descr, dbref player, const char *name)</span>
 <span class="lineNum">     630 </span>            : {
 <span class="lineNum">     631 </span>            :     dbref match;
 <span class="lineNum">     632 </span>            :     struct match_data md;
 <span class="lineNum">     633 </span>            : 
-<span class="lineNum">     634 </span><span class="lineCov">        510 :     init_match(descr, player, name, NOTYPE, &amp;md);</span>
-<span class="lineNum">     635 </span><span class="lineCov">        510 :     match_absolute(&amp;md);</span>
-<span class="lineNum">     636 </span><span class="lineCov">        510 :     match_everything(&amp;md);</span>
+<span class="lineNum">     634 </span><span class="lineCov">        514 :     init_match(descr, player, name, NOTYPE, &amp;md);</span>
+<span class="lineNum">     635 </span><span class="lineCov">        514 :     match_absolute(&amp;md);</span>
+<span class="lineNum">     636 </span><span class="lineCov">        514 :     match_everything(&amp;md);</span>
 <span class="lineNum">     637 </span>            : 
-<span class="lineNum">     638 </span><span class="lineCov">        510 :     match = noisy_match_result(&amp;md);</span>
-<span class="lineNum">     639 </span><span class="lineCov">        510 :     if (match != NOTHING &amp;&amp; !controls(player, match)) {</span>
+<span class="lineNum">     638 </span><span class="lineCov">        514 :     match = noisy_match_result(&amp;md);</span>
+<span class="lineNum">     639 </span><span class="lineCov">        514 :     if (match != NOTHING &amp;&amp; !controls(player, match)) {</span>
 <span class="lineNum">     640 </span><span class="lineNoCov">          0 :         notify(player, &quot;Permission denied. (You don't control what was matched)&quot;);</span>
 <span class="lineNum">     641 </span><span class="lineNoCov">          0 :         return NOTHING;</span>
 <span class="lineNum">     642 </span>            :     } else {
-<span class="lineNum">     643 </span><span class="lineCov">        510 :         return match;</span>
+<span class="lineNum">     643 </span><span class="lineCov">        514 :         return match;</span>
 <span class="lineNum">     644 </span>            :     }
 <span class="lineNum">     645 </span>            : }
 </pre>

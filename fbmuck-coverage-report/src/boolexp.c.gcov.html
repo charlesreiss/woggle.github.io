@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 15:10:19</td>
+            <td class="headerValue">2017-02-26 15:27:05</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">16</td>
@@ -84,12 +84,12 @@
 <span class="lineNum">      22 </span><span class="lineCov">        103 : }</span>
 <a name="23"><span class="lineNum">      23 </span>            : </a>
 <span class="lineNum">      24 </span>            : struct boolexp *
-<span class="lineNum">      25 </span><span class="lineCov">        461 : copy_bool(struct boolexp *old)</span>
+<span class="lineNum">      25 </span><span class="lineCov">        471 : copy_bool(struct boolexp *old)</span>
 <span class="lineNum">      26 </span>            : {
 <span class="lineNum">      27 </span>            :     struct boolexp *o;
 <span class="lineNum">      28 </span>            : 
-<span class="lineNum">      29 </span><span class="lineCov">        461 :     if (old == TRUE_BOOLEXP)</span>
-<span class="lineNum">      30 </span><span class="lineCov">        355 :         return TRUE_BOOLEXP;</span>
+<span class="lineNum">      29 </span><span class="lineCov">        471 :     if (old == TRUE_BOOLEXP)</span>
+<span class="lineNum">      30 </span><span class="lineCov">        365 :         return TRUE_BOOLEXP;</span>
 <span class="lineNum">      31 </span>            : 
 <span class="lineNum">      32 </span><span class="lineCov">        106 :     o = alloc_boolnode();</span>
 <span class="lineNum">      33 </span>            : 
@@ -133,10 +133,10 @@
 <span class="lineNum">      71 </span>            : }
 <a name="72"><span class="lineNum">      72 </span>            : </a>
 <span class="lineNum">      73 </span>            : static int
-<span class="lineNum">      74 </span><span class="lineCov">        440 : eval_boolexp_rec(int descr, dbref player, struct boolexp *b, dbref thing)</span>
+<span class="lineNum">      74 </span><span class="lineCov">        450 : eval_boolexp_rec(int descr, dbref player, struct boolexp *b, dbref thing)</span>
 <span class="lineNum">      75 </span>            : {
-<span class="lineNum">      76 </span><span class="lineCov">        440 :     if (b == TRUE_BOOLEXP) {</span>
-<span class="lineNum">      77 </span><span class="lineCov">        355 :         return 1;</span>
+<span class="lineNum">      76 </span><span class="lineCov">        450 :     if (b == TRUE_BOOLEXP) {</span>
+<span class="lineNum">      77 </span><span class="lineCov">        365 :         return 1;</span>
 <span class="lineNum">      78 </span>            :     } else {
 <span class="lineNum">      79 </span><span class="lineCov">         85 :         switch (b-&gt;type) {</span>
 <span class="lineNum">      80 </span>            :         case BOOLEXP_AND:
@@ -195,14 +195,14 @@
 <span class="lineNum">     133 </span>            : }
 <a name="134"><span class="lineNum">     134 </span>            : </a>
 <span class="lineNum">     135 </span>            : int
-<span class="lineNum">     136 </span><span class="lineCov">        392 : eval_boolexp(int descr, dbref player, struct boolexp *b, dbref thing)</span>
+<span class="lineNum">     136 </span><span class="lineCov">        402 : eval_boolexp(int descr, dbref player, struct boolexp *b, dbref thing)</span>
 <span class="lineNum">     137 </span>            : {
 <span class="lineNum">     138 </span>            :     int result;
 <span class="lineNum">     139 </span>            : 
-<span class="lineNum">     140 </span><span class="lineCov">        392 :     b = copy_bool(b);</span>
-<span class="lineNum">     141 </span><span class="lineCov">        392 :     result = eval_boolexp_rec(descr, player, b, thing);</span>
-<span class="lineNum">     142 </span><span class="lineCov">        392 :     free_boolexp(b);</span>
-<span class="lineNum">     143 </span><span class="lineCov">        392 :     return (result);</span>
+<span class="lineNum">     140 </span><span class="lineCov">        402 :     b = copy_bool(b);</span>
+<span class="lineNum">     141 </span><span class="lineCov">        402 :     result = eval_boolexp_rec(descr, player, b, thing);</span>
+<span class="lineNum">     142 </span><span class="lineCov">        402 :     free_boolexp(b);</span>
+<span class="lineNum">     143 </span><span class="lineCov">        402 :     return (result);</span>
 <span class="lineNum">     144 </span>            : }
 <span class="lineNum">     145 </span>            : 
 <span class="lineNum">     146 </span>            : static struct boolexp *parse_boolexp_E(int descr, const char **parsebuf, dbref player, int dbloadp);    /* defined below */
@@ -452,9 +452,9 @@
 <span class="lineNum">     390 </span>            : }
 <a name="391"><span class="lineNum">     391 </span>            : </a>
 <span class="lineNum">     392 </span>            : void
-<span class="lineNum">     393 </span><span class="lineCov">        458 : free_boolexp(struct boolexp *b)</span>
+<span class="lineNum">     393 </span><span class="lineCov">        468 : free_boolexp(struct boolexp *b)</span>
 <span class="lineNum">     394 </span>            : {
-<span class="lineNum">     395 </span><span class="lineCov">        458 :     if (b != TRUE_BOOLEXP) {</span>
+<span class="lineNum">     395 </span><span class="lineCov">        468 :     if (b != TRUE_BOOLEXP) {</span>
 <span class="lineNum">     396 </span><span class="lineCov">        103 :         switch (b-&gt;type) {</span>
 <span class="lineNum">     397 </span>            :         case BOOLEXP_AND:
 <span class="lineNum">     398 </span>            :         case BOOLEXP_OR:
@@ -475,19 +475,19 @@
 <span class="lineNum">     413 </span><span class="lineCov">         15 :             break;</span>
 <span class="lineNum">     414 </span>            :         }
 <span class="lineNum">     415 </span>            :     }
-<span class="lineNum">     416 </span><span class="lineCov">        458 : }</span>
+<span class="lineNum">     416 </span><span class="lineCov">        468 : }</span>
 <span class="lineNum">     417 </span>            : 
 <span class="lineNum">     418 </span>            : static char boolexp_buf[BUFFER_LEN];
 <span class="lineNum">     419 </span>            : static char *buftop;
 <a name="420"><span class="lineNum">     420 </span>            : </a>
 <span class="lineNum">     421 </span>            : static void
-<span class="lineNum">     422 </span><span class="lineCov">        641 : unparse_boolexp1(dbref player, struct boolexp *b, short outer_type, int fullname)</span>
+<span class="lineNum">     422 </span><span class="lineCov">        683 : unparse_boolexp1(dbref player, struct boolexp *b, short outer_type, int fullname)</span>
 <span class="lineNum">     423 </span>            : {
-<span class="lineNum">     424 </span><span class="lineCov">        641 :     if ((buftop - boolexp_buf) &gt; (BUFFER_LEN / 2))</span>
+<span class="lineNum">     424 </span><span class="lineCov">        683 :     if ((buftop - boolexp_buf) &gt; (BUFFER_LEN / 2))</span>
 <span class="lineNum">     425 </span><span class="lineNoCov">          0 :         return;</span>
-<span class="lineNum">     426 </span><span class="lineCov">        641 :     if (b == TRUE_BOOLEXP) {</span>
-<span class="lineNum">     427 </span><span class="lineCov">        378 :         strcpyn(buftop, sizeof(boolexp_buf) - (buftop - boolexp_buf), PROP_UNLOCKED_VAL);</span>
-<span class="lineNum">     428 </span><span class="lineCov">        378 :         buftop += strlen(buftop);</span>
+<span class="lineNum">     426 </span><span class="lineCov">        683 :     if (b == TRUE_BOOLEXP) {</span>
+<span class="lineNum">     427 </span><span class="lineCov">        420 :         strcpyn(buftop, sizeof(boolexp_buf) - (buftop - boolexp_buf), PROP_UNLOCKED_VAL);</span>
+<span class="lineNum">     428 </span><span class="lineCov">        420 :         buftop += strlen(buftop);</span>
 <span class="lineNum">     429 </span>            :     } else {
 <span class="lineNum">     430 </span><span class="lineCov">        263 :         switch (b-&gt;type) {</span>
 <span class="lineNum">     431 </span>            :         case BOOLEXP_AND:
@@ -544,13 +544,13 @@
 <span class="lineNum">     482 </span>            : }
 <a name="483"><span class="lineNum">     483 </span>            : </a>
 <span class="lineNum">     484 </span>            : const char *
-<span class="lineNum">     485 </span><span class="lineCov">        536 : unparse_boolexp(dbref player, struct boolexp *b, int fullname)</span>
+<span class="lineNum">     485 </span><span class="lineCov">        578 : unparse_boolexp(dbref player, struct boolexp *b, int fullname)</span>
 <span class="lineNum">     486 </span>            : {
-<span class="lineNum">     487 </span><span class="lineCov">        536 :     buftop = boolexp_buf;</span>
-<span class="lineNum">     488 </span><span class="lineCov">        536 :     unparse_boolexp1(player, b, BOOLEXP_CONST, fullname);       /* no outer type */</span>
-<span class="lineNum">     489 </span><span class="lineCov">        536 :     *buftop++ = '\0';</span>
+<span class="lineNum">     487 </span><span class="lineCov">        578 :     buftop = boolexp_buf;</span>
+<span class="lineNum">     488 </span><span class="lineCov">        578 :     unparse_boolexp1(player, b, BOOLEXP_CONST, fullname);       /* no outer type */</span>
+<span class="lineNum">     489 </span><span class="lineCov">        578 :     *buftop++ = '\0';</span>
 <span class="lineNum">     490 </span>            : 
-<span class="lineNum">     491 </span><span class="lineCov">        536 :     return boolexp_buf;</span>
+<span class="lineNum">     491 </span><span class="lineCov">        578 :     return boolexp_buf;</span>
 <span class="lineNum">     492 </span>            : }
 <a name="493"><span class="lineNum">     493 </span>            : </a>
 <span class="lineNum">     494 </span>            : int
@@ -564,14 +564,14 @@
 <span class="lineNum">     502 </span>            : 
 <a name="503"><span class="lineNum">     503 </span>            : </a>
 <span class="lineNum">     504 </span>            : int
-<span class="lineNum">     505 </span><span class="lineCov">         58 : test_lock_false_default(int descr, dbref player, dbref thing, const char *lockprop)</span>
+<span class="lineNum">     505 </span><span class="lineCov">         60 : test_lock_false_default(int descr, dbref player, dbref thing, const char *lockprop)</span>
 <span class="lineNum">     506 </span>            : {
 <span class="lineNum">     507 </span>            :     struct boolexp *lok;
 <span class="lineNum">     508 </span>            : 
-<span class="lineNum">     509 </span><span class="lineCov">         58 :     lok = get_property_lock(thing, lockprop);</span>
+<span class="lineNum">     509 </span><span class="lineCov">         60 :     lok = get_property_lock(thing, lockprop);</span>
 <span class="lineNum">     510 </span>            : 
-<span class="lineNum">     511 </span><span class="lineCov">         58 :     if (lok == TRUE_BOOLEXP)</span>
-<span class="lineNum">     512 </span><span class="lineCov">         52 :         return 0;</span>
+<span class="lineNum">     511 </span><span class="lineCov">         60 :     if (lok == TRUE_BOOLEXP)</span>
+<span class="lineNum">     512 </span><span class="lineCov">         54 :         return 0;</span>
 <span class="lineNum">     513 </span><span class="lineCov">          6 :     return (eval_boolexp(descr, player, lok, thing));</span>
 <span class="lineNum">     514 </span>            : }
 </pre>
