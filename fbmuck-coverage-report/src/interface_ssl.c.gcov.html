@@ -1,0 +1,303 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage-total - src/interface_ssl.c</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">src</a> - interface_ssl.c<span style="font-size: 80%;"> (source / <a href="interface_ssl.c.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage-total</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">16</td>
+            <td class="headerCovTableEntry">54</td>
+            <td class="headerCovTableEntryLo">29.6 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2017-02-26 00:20:31</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &quot;config.h&quot;</a>
+<span class="lineNum">       2 </span>            : 
+<span class="lineNum">       3 </span>            : #ifdef USE_SSL
+<span class="lineNum">       4 </span>            : 
+<span class="lineNum">       5 </span>            : #include &quot;interface_ssl.h&quot;
+<span class="lineNum">       6 </span>            : #include &quot;log.h&quot;
+<span class="lineNum">       7 </span>            : 
+<span class="lineNum">       8 </span>            : ///
+<span class="lineNum">       9 </span>            : /// Converts an SSL protocol version string to a version number
+<span class="lineNum">      10 </span>            : ///
+<span class="lineNum">      11 </span>            : /// Inspired by 'set_protocol_version' and 'protocol_from_string' in
+<span class="lineNum">      12 </span>            : /// https://github.com/openssl/openssl/blob/OpenSSL_1_1_0-stable/test/ssltest_old.c
+<span class="lineNum">      13 </span>            : ///
+<span class="lineNum">      14 </span>            : /// @param[in] value Name of SSL protocol version
+<span class="lineNum">      15 </span>            : /// @returns   Version number if found, SSL_UNSUPPORTED_PROTOCOL if unsupported, or -1 if not found
+<a name="16"><span class="lineNum">      16 </span>            : ///</a>
+<span class="lineNum">      17 </span>            : int
+<span class="lineNum">      18 </span><span class="lineCov">         26 : ssl_protocol_from_string(const char *value)</span>
+<span class="lineNum">      19 </span>            : {
+<span class="lineNum">      20 </span>            :         // Find the desired version
+<span class="lineNum">      21 </span><span class="lineCov">         26 :         for (size_t i = 0; i &lt; SSL_PROTOCOLS_SIZE; i++)</span>
+<span class="lineNum">      22 </span><span class="lineCov">         26 :                 if (strcmp(SSL_PROTOCOLS[i].name, value) == 0)</span>
+<span class="lineNum">      23 </span><span class="lineCov">         26 :                         return SSL_PROTOCOLS[i].version;</span>
+<span class="lineNum">      24 </span>            : 
+<span class="lineNum">      25 </span>            :         // Not found, return failure
+<span class="lineNum">      26 </span>            :         return -1;
+<span class="lineNum">      27 </span>            : }
+<span class="lineNum">      28 </span>            : 
+<span class="lineNum">      29 </span>            : ///
+<span class="lineNum">      30 </span>            : /// Sets the minimum SSL protocol version given a version string
+<span class="lineNum">      31 </span>            : ///
+<span class="lineNum">      32 </span>            : /// If None, no change will be made to the SSL context.  If version string is invalid or unsupported
+<span class="lineNum">      33 </span>            : /// in this build (see SSL_PROTOCOLS), an error is logged to offer guidance on fixing the problem.
+<span class="lineNum">      34 </span>            : ///
+<span class="lineNum">      35 </span>            : /// @param[in,out] ssl_ctx      SSL context
+<span class="lineNum">      36 </span>            : /// @param[in]     min_version  Name of minimum required SSL protocol version, or &quot;None&quot;
+<span class="lineNum">      37 </span>            : /// @returns       1 if successful, otherwise 0
+<a name="38"><span class="lineNum">      38 </span>            : ///</a>
+<span class="lineNum">      39 </span>            : int
+<span class="lineNum">      40 </span><span class="lineCov">         26 : set_ssl_ctx_min_version(SSL_CTX * ssl_ctx, const char *min_version)</span>
+<span class="lineNum">      41 </span>            : {
+<span class="lineNum">      42 </span><span class="lineCov">         26 :         int min_version_num = ssl_protocol_from_string(min_version);</span>
+<span class="lineNum">      43 </span><span class="lineCov">         26 :         switch (min_version_num) {</span>
+<span class="lineNum">      44 </span>            :         case 0:
+<span class="lineNum">      45 </span>            :                 // None specified, no changes needed
+<span class="lineNum">      46 </span>            :                 return 1;
+<span class="lineNum">      47 </span>            :         case -1:
+<span class="lineNum">      48 </span><span class="lineNoCov">          0 :                 log_status(&quot;ERROR: Unknown ssl_min_protocol_version '%s'.  Specify one of: %s&quot;,</span>
+<span class="lineNum">      49 </span>            :                            min_version, SSL_KNOWN_PROTOCOLS);
+<span class="lineNum">      50 </span><span class="lineNoCov">          0 :                 fprintf(stderr,</span>
+<span class="lineNum">      51 </span>            :                         &quot;ERROR: Unknown ssl_min_protocol_version '%s'.  Specify one of: %s\n&quot;,
+<span class="lineNum">      52 </span>            :                         min_version, SSL_KNOWN_PROTOCOLS);
+<span class="lineNum">      53 </span><span class="lineNoCov">          0 :                 return 0;</span>
+<span class="lineNum">      54 </span>            :         case SSL_UNSUPPORTED_PROTOCOL:
+<span class="lineNum">      55 </span><span class="lineNoCov">          0 :                 log_status(&quot;ERROR: ssl_min_protocol_version '%s' not supported by the SSL library &quot;</span>
+<span class="lineNum">      56 </span>            :                            &quot;in this build.  Specify one of: %s&quot;,
+<span class="lineNum">      57 </span>            :                            min_version, SSL_KNOWN_PROTOCOLS);
+<span class="lineNum">      58 </span><span class="lineNoCov">          0 :                 fprintf(stderr,</span>
+<span class="lineNum">      59 </span>            :                         &quot;ERROR: ssl_min_protocol_version '%s' not supported by the SSL library &quot;
+<span class="lineNum">      60 </span>            :                         &quot;in this build.  Specify one of: %s\n&quot;,
+<span class="lineNum">      61 </span>            :                         min_version, SSL_KNOWN_PROTOCOLS);
+<span class="lineNum">      62 </span><span class="lineNoCov">          0 :                 return 0;</span>
+<span class="lineNum">      63 </span>            :         default:
+<span class="lineNum">      64 </span><span class="lineNoCov">          0 :                 log_status(&quot;Requiring SSL protocol version '%s' or higher for encrypted connections&quot;,</span>
+<span class="lineNum">      65 </span>            :                            min_version);
+<span class="lineNum">      66 </span>            : #if defined(SSL_CTX_set_min_proto_version)
+<span class="lineNum">      67 </span>            :                 // Added in OpenSSL &gt;= 1.1.0
+<span class="lineNum">      68 </span>            :                 // See: https://www.openssl.org/docs/man1.1.0/ssl/SSL_CTX_set_min_proto_version.html
+<span class="lineNum">      69 </span>            :                 return SSL_CTX_set_min_proto_version(ssl_ctx, min_version_num);
+<span class="lineNum">      70 </span>            : #elif defined(SSL_CTX_set_options)
+<span class="lineNum">      71 </span>            :                 // Easy way not implemented, manually turn off protocols to match the minimum version.
+<span class="lineNum">      72 </span>            :                 // FB_*_VERSION macros are guaranteed to be defined regardless of OpenSSL version,
+<span class="lineNum">      73 </span>            :                 // either as a real version or SSL_UNSUPPORTED_PROTOCOL, which will never be greater
+<span class="lineNum">      74 </span>            :                 // than min_version_num.
+<span class="lineNum">      75 </span><span class="lineNoCov">          0 :                 if (min_version_num &gt; FB_SSL3_VERSION)</span>
+<span class="lineNum">      76 </span><span class="lineNoCov">          0 :                         SSL_CTX_set_options(ssl_ctx, SSL_OP_NO_SSLv3);</span>
+<span class="lineNum">      77 </span><span class="lineNoCov">          0 :                 if (min_version_num &gt; FB_TLS1_VERSION)</span>
+<span class="lineNum">      78 </span><span class="lineNoCov">          0 :                         SSL_CTX_set_options(ssl_ctx, SSL_OP_NO_TLSv1);</span>
+<span class="lineNum">      79 </span><span class="lineNoCov">          0 :                 if (min_version_num &gt; FB_TLS1_1_VERSION)</span>
+<span class="lineNum">      80 </span><span class="lineNoCov">          0 :                         SSL_CTX_set_options(ssl_ctx, SSL_OP_NO_TLSv1_1);</span>
+<span class="lineNum">      81 </span><span class="lineNoCov">          0 :                 if (min_version_num &gt; FB_TLS1_2_VERSION)</span>
+<span class="lineNum">      82 </span><span class="lineNoCov">          0 :                         SSL_CTX_set_options(ssl_ctx, SSL_OP_NO_TLSv1_2);</span>
+<span class="lineNum">      83 </span>            :                 // No need to add newer versions as OpenSSL &gt;= 1.1.0 supports the much-nicer
+<span class="lineNum">      84 </span>            :                 // SSL_CTX_set_min_proto_version - see above
+<span class="lineNum">      85 </span>            :                 return 1;
+<span class="lineNum">      86 </span>            : #else
+<span class="lineNum">      87 </span>            :                 // A minimum version was requested, but the SSL library doesn't support specifying that.
+<span class="lineNum">      88 </span>            :                 // Error out with some advice.
+<span class="lineNum">      89 </span>            :                 log_status(&quot;ERROR: specifying ssl_min_protocol_version is not supported by the SSL &quot;
+<span class="lineNum">      90 </span>            :                            &quot;library used in this build.  Set to 'None', or maybe use OpenSSL?&quot;);
+<span class="lineNum">      91 </span>            :                 fprintf(stderr,
+<span class="lineNum">      92 </span>            :                         &quot;specifying ssl_min_protocol_version is not supported by the SSL &quot;
+<span class="lineNum">      93 </span>            :                         &quot;library used in this build.  Set to 'None', or maybe use OpenSSL?\n&quot;);
+<span class="lineNum">      94 </span>            :                 return 0;
+<span class="lineNum">      95 </span>            : #endif
+<span class="lineNum">      96 </span>            :         }
+<span class="lineNum">      97 </span>            : }
+<span class="lineNum">      98 </span>            : 
+<span class="lineNum">      99 </span>            : ///
+<span class="lineNum">     100 </span>            : /// Checks for the last SSL error, if any, recording it to the log
+<span class="lineNum">     101 </span>            : ///
+<span class="lineNum">     102 </span>            : /// If log_all is set to 0, this ignores any usually irrelevant error conditions to avoid spamming
+<span class="lineNum">     103 </span>            : /// the log, only handling a small subset.
+<span class="lineNum">     104 </span>            : ///
+<span class="lineNum">     105 </span>            : /// @param[in,out] d          Connection descriptor data
+<span class="lineNum">     106 </span>            : /// @param[in]     ret_value  Return value from SSL function call
+<span class="lineNum">     107 </span>            : /// @param[in]     log_level  Amount of logging to do according to ssl_logging_t
+<span class="lineNum">     108 </span>            : /// @returns       SSL_ERROR_NONE if successful or unknown, otherwise value from SSL_get_error()
+<a name="109"><span class="lineNum">     109 </span>            : ///</a>
+<span class="lineNum">     110 </span>            : int
+<span class="lineNum">     111 </span><span class="lineCov">         54 : ssl_check_error(struct descriptor_data *d, const int ret_value, const ssl_logging_t log_level)</span>
+<span class="lineNum">     112 </span>            : {
+<span class="lineNum">     113 </span>            :         // Errors require a valid SSL structure, and errors only occur when ret_value is not 1.
+<span class="lineNum">     114 </span>            :         // Bail out early if these conditions aren't met.
+<span class="lineNum">     115 </span>            :         // See https://www.openssl.org/docs/man1.1.0/ssl/SSL_accept.html
+<span class="lineNum">     116 </span><span class="lineCov">         54 :         if (!d-&gt;ssl_session || ret_value == 1) {</span>
+<span class="lineNum">     117 </span>            :                 return SSL_ERROR_NONE;
+<span class="lineNum">     118 </span>            :         }
+<span class="lineNum">     119 </span>            : 
+<span class="lineNum">     120 </span>            :         // Get the error value first; otherwise, requesting the error reason clears the error
+<span class="lineNum">     121 </span><span class="lineCov">         54 :         int ssl_error_value = SSL_get_error(d-&gt;ssl_session, ret_value);</span>
+<span class="lineNum">     122 </span>            : 
+<span class="lineNum">     123 </span>            :         // Only log if logging is enabled, avoiding any performance impact when the value's not used
+<span class="lineNum">     124 </span><span class="lineCov">         54 :         if (log_level != SSL_LOGGING_NONE) {</span>
+<span class="lineNum">     125 </span>            : #ifdef HAVE_OPENSSL
+<span class="lineNum">     126 </span>            :                 // OpenSSL has support for getting the error reason string...
+<span class="lineNum">     127 </span><span class="lineCov">         18 :                 const char *reason_str_buf = ERR_reason_error_string(ERR_get_error());</span>
+<span class="lineNum">     128 </span>            :                 // Use the specific error message if available, or fall back to a generic error if not
+<span class="lineNum">     129 </span>            :                 // available (assumptions could mislead an unwary sysadmin).
+<span class="lineNum">     130 </span><span class="lineCov">         18 :                 if (reason_str_buf == NULL) {</span>
+<span class="lineNum">     131 </span><span class="lineCov">         18 :                         reason_str_buf = &quot;unknown reason&quot;;</span>
+<span class="lineNum">     132 </span>            :                 }
+<span class="lineNum">     133 </span>            : #else
+<span class="lineNum">     134 </span>            :                 // ...but other SSL libraries might not, so assume an unknown error.  Remove this check if
+<span class="lineNum">     135 </span>            :                 // not actually needed.
+<span class="lineNum">     136 </span>            :                 const char *reason_str_buf = &quot;unknown reason&quot;;
+<span class="lineNum">     137 </span>            : #endif
+<span class="lineNum">     138 </span>            : 
+<span class="lineNum">     139 </span>            :                 // Handle each possible case for SSL logging
+<span class="lineNum">     140 </span><span class="lineCov">         18 :                 switch (ssl_error_value) {</span>
+<span class="lineNum">     141 </span>            :                 case SSL_ERROR_NONE:
+<span class="lineNum">     142 </span>            :                         // No error, no need to log anything.  This shouldn't happen, but just in case...
+<span class="lineNum">     143 </span>            :                         break;
+<span class="lineNum">     144 </span>            :                 // Errors that usually mean bad things happened
+<span class="lineNum">     145 </span>            :                 case SSL_ERROR_SSL:
+<span class="lineNum">     146 </span>            :                         if (log_level &lt; SSL_LOGGING_ERROR)
+<span class="lineNum">     147 </span>            :                                 break;
+<span class="lineNum">     148 </span>            :                         // These are logged even when SSL protocol considers it intentional.  This allows
+<span class="lineNum">     149 </span>            :                         // tracking when clients connect that don't support the latest protocols
+<span class="lineNum">     150 </span>            :                         // (e.g. when SSLv3 is disabled).
+<span class="lineNum">     151 </span><span class="lineNoCov">          0 :                         log_status(&quot;SSL: Error negotiating encrypted connection (%s, SSL_ERROR_SSL)&quot;</span>
+<span class="lineNum">     152 </span>            :                                    &quot; on descriptor %d from %s(%s)&quot;,
+<span class="lineNum">     153 </span>            :                                    reason_str_buf, d-&gt;descriptor, d-&gt;hostname, d-&gt;username);
+<span class="lineNum">     154 </span><span class="lineNoCov">          0 :                         break;</span>
+<span class="lineNum">     155 </span>            :                 case SSL_ERROR_SYSCALL:
+<span class="lineNum">     156 </span>            :                         if (log_level &lt; SSL_LOGGING_ERROR)
+<span class="lineNum">     157 </span>            :                                 break;
+<span class="lineNum">     158 </span><span class="lineNoCov">          0 :                         log_status(&quot;SSL: Error with input/output of connection (%s, SSL_ERROR_SYSCALL)&quot;</span>
+<span class="lineNum">     159 </span>            :                                    &quot; on descriptor %d from %s(%s)&quot;,
+<span class="lineNum">     160 </span>            :                                    reason_str_buf, d-&gt;descriptor, d-&gt;hostname, d-&gt;username);
+<span class="lineNum">     161 </span>            :                         // The original log_ssl_error function called this instead...
+<span class="lineNum">     162 </span>            :                         //   log_status(&quot;SSL %s: sock %d, Error SSL_ERROR_SYSCALL: %s&quot;, text, descr,
+<span class="lineNum">     163 </span>            :                         //   strerror(errno));
+<span class="lineNum">     164 </span>            :                         // However, errno is specific to interface.c, and might be redundant now that
+<span class="lineNum">     165 </span>            :                         // reason_str exists.  If it's actually needed, just modify this function, passing it
+<span class="lineNum">     166 </span>            :                         // in here.
+<span class="lineNum">     167 </span><span class="lineNoCov">          0 :                         break;</span>
+<span class="lineNum">     168 </span>            :                 case SSL_ERROR_ZERO_RETURN:
+<span class="lineNum">     169 </span>            :                         if (log_level &lt; SSL_LOGGING_ERROR)
+<span class="lineNum">     170 </span>            :                                 break;
+<span class="lineNum">     171 </span><span class="lineNoCov">          0 :                         log_status(&quot;SSL: Error connection is already closed (%s, SSL_ERROR_ZERO_RETURN)&quot;</span>
+<span class="lineNum">     172 </span>            :                                    &quot; on descriptor %d from %s(%s)&quot;,
+<span class="lineNum">     173 </span>            :                                    reason_str_buf, d-&gt;descriptor, d-&gt;hostname, d-&gt;username);
+<span class="lineNum">     174 </span><span class="lineNoCov">          0 :                         break;</span>
+<span class="lineNum">     175 </span>            :                 // Errors that might occur during normal operation (only logged at DEBUG or higher)
+<span class="lineNum">     176 </span>            :                 case SSL_ERROR_WANT_READ:
+<span class="lineNum">     177 </span><span class="lineCov">         18 :                         if (log_level &lt; SSL_LOGGING_DEBUG)</span>
+<span class="lineNum">     178 </span>            :                                 break;
+<span class="lineNum">     179 </span><span class="lineNoCov">          0 :                         log_status(&quot;SSL: Error pending read operation, retry later (%s, SSL_ERROR_WANT_READ)&quot;</span>
+<span class="lineNum">     180 </span>            :                                    &quot; on descriptor %d from %s(%s)&quot;,
+<span class="lineNum">     181 </span>            :                                    reason_str_buf, d-&gt;descriptor, d-&gt;hostname, d-&gt;username);
+<span class="lineNum">     182 </span><span class="lineNoCov">          0 :                         break;</span>
+<span class="lineNum">     183 </span>            :                 case SSL_ERROR_WANT_WRITE:
+<span class="lineNum">     184 </span><span class="lineNoCov">          0 :                         if (log_level &lt; SSL_LOGGING_DEBUG)</span>
+<span class="lineNum">     185 </span>            :                                 break;
+<span class="lineNum">     186 </span><span class="lineNoCov">          0 :                         log_status(&quot;SSL: Error pending write operation, retry later (%s, SSL_ERROR_WANT_WRITE)&quot;</span>
+<span class="lineNum">     187 </span>            :                                    &quot; on descriptor %d from %s(%s)&quot;,
+<span class="lineNum">     188 </span>            :                                    reason_str_buf, d-&gt;descriptor, d-&gt;hostname, d-&gt;username);
+<span class="lineNum">     189 </span><span class="lineNoCov">          0 :                         break;</span>
+<span class="lineNum">     190 </span>            :                 case SSL_ERROR_WANT_X509_LOOKUP:
+<span class="lineNum">     191 </span><span class="lineNoCov">          0 :                         if (log_level &lt; SSL_LOGGING_DEBUG)</span>
+<span class="lineNum">     192 </span>            :                                 break;
+<span class="lineNum">     193 </span><span class="lineNoCov">          0 :                         log_status(&quot;SSL: Error pending X509 lookup, retry later (%s, SSL_ERROR_WANT_X509_LOOKUP)&quot;</span>
+<span class="lineNum">     194 </span>            :                                    &quot; on descriptor %d from %s(%s)&quot;,
+<span class="lineNum">     195 </span>            :                                    reason_str_buf, d-&gt;descriptor, d-&gt;hostname, d-&gt;username);
+<span class="lineNum">     196 </span><span class="lineNoCov">          0 :                         break;</span>
+<span class="lineNum">     197 </span>            :                 case SSL_ERROR_WANT_CONNECT:
+<span class="lineNum">     198 </span><span class="lineNoCov">          0 :                         if (log_level &lt; SSL_LOGGING_DEBUG)</span>
+<span class="lineNum">     199 </span>            :                                 break;
+<span class="lineNum">     200 </span><span class="lineNoCov">          0 :                         log_status(&quot;SSL: Error pending connection, retry later (%s, SSL_ERROR_WANT_CONNECT)&quot;</span>
+<span class="lineNum">     201 </span>            :                                    &quot; on descriptor %d from %s(%s)&quot;,
+<span class="lineNum">     202 </span>            :                                    reason_str_buf, d-&gt;descriptor, d-&gt;hostname, d-&gt;username);
+<span class="lineNum">     203 </span><span class="lineNoCov">          0 :                         break;</span>
+<span class="lineNum">     204 </span>            :                 case SSL_ERROR_WANT_ACCEPT:
+<span class="lineNum">     205 </span><span class="lineNoCov">          0 :                         if (log_level &lt; SSL_LOGGING_DEBUG)</span>
+<span class="lineNum">     206 </span>            :                                 break;
+<span class="lineNum">     207 </span><span class="lineNoCov">          0 :                         log_status(&quot;SSL: Error pending connection accept, retry later (%s, SSL_ERROR_WANT_ACCEPT)&quot;</span>
+<span class="lineNum">     208 </span>            :                                    &quot; on descriptor %d from %s(%s)&quot;,
+<span class="lineNum">     209 </span>            :                                    reason_str_buf, d-&gt;descriptor, d-&gt;hostname, d-&gt;username);
+<span class="lineNum">     210 </span><span class="lineNoCov">          0 :                         break;</span>
+<span class="lineNum">     211 </span>            :                 // Unknown errors - something bad happened, or it's a version of SSL with new error messages
+<span class="lineNum">     212 </span>            :                 default:
+<span class="lineNum">     213 </span><span class="lineNoCov">          0 :                         if (log_level &lt; SSL_LOGGING_WARN)</span>
+<span class="lineNum">     214 </span>            :                                 break;
+<span class="lineNum">     215 </span><span class="lineNoCov">          0 :                         log_status(&quot;SSL: Unknown error (%s)&quot;</span>
+<span class="lineNum">     216 </span>            :                                    &quot; on descriptor %d from %s(%s)&quot;,
+<span class="lineNum">     217 </span>            :                                    reason_str_buf, d-&gt;descriptor, d-&gt;hostname, d-&gt;username);
+<span class="lineNum">     218 </span><span class="lineNoCov">          0 :                         break;</span>
+<span class="lineNum">     219 </span>            :                 }
+<span class="lineNum">     220 </span>            :         }
+<span class="lineNum">     221 </span>            :         // Do post-logging things here that don't rely on logging being enabled
+<span class="lineNum">     222 </span>            : 
+<span class="lineNum">     223 </span>            :         // Pass on the SSL error value so the calling function can use it
+<span class="lineNum">     224 </span>            :         return ssl_error_value;
+<span class="lineNum">     225 </span>            : }
+<span class="lineNum">     226 </span>            : 
+<span class="lineNum">     227 </span>            : #endif                          // USE_SSL
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.12</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

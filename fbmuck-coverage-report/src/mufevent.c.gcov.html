@@ -1,0 +1,839 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage-total - src/mufevent.c</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">src</a> - mufevent.c<span style="font-size: 80%;"> (source / <a href="mufevent.c.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage-total</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">15</td>
+            <td class="headerCovTableEntry">372</td>
+            <td class="headerCovTableEntryLo">4.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2017-02-26 00:20:31</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">19</td>
+            <td class="headerCovTableEntryLo">10.5 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &quot;config.h&quot;</a>
+<span class="lineNum">       2 </span>            : 
+<span class="lineNum">       3 </span>            : #include &quot;array.h&quot;
+<span class="lineNum">       4 </span>            : #include &quot;db.h&quot;
+<span class="lineNum">       5 </span>            : #include &quot;fbstrings.h&quot;
+<span class="lineNum">       6 </span>            : #include &quot;fbtime.h&quot;
+<span class="lineNum">       7 </span>            : #include &quot;inst.h&quot;
+<span class="lineNum">       8 </span>            : #include &quot;interface.h&quot;
+<span class="lineNum">       9 </span>            : #include &quot;interp.h&quot;
+<span class="lineNum">      10 </span>            : #include &quot;mufevent.h&quot;
+<span class="lineNum">      11 </span>            : 
+<span class="lineNum">      12 </span>            : struct mufevent {
+<span class="lineNum">      13 </span>            :     struct mufevent *next;
+<span class="lineNum">      14 </span>            :     char *event;
+<span class="lineNum">      15 </span>            :     struct inst data;
+<span class="lineNum">      16 </span>            : };
+<span class="lineNum">      17 </span>            : 
+<span class="lineNum">      18 </span>            : static struct mufevent_process {
+<span class="lineNum">      19 </span>            :     struct mufevent_process *prev, *next;
+<span class="lineNum">      20 </span>            :     dbref player;
+<span class="lineNum">      21 </span>            :     dbref prog;
+<span class="lineNum">      22 </span>            :     short filtercount;
+<span class="lineNum">      23 </span>            :     short deleted;
+<span class="lineNum">      24 </span>            :     char **filters;
+<span class="lineNum">      25 </span>            :     struct frame *fr;
+<span class="lineNum">      26 </span>            : } *mufevent_processes;
+<span class="lineNum">      27 </span>            : 
+<span class="lineNum">      28 </span>            : #define MUFEVENT_FIRST  -2
+<span class="lineNum">      29 </span>            : #define MUFEVENT_LAST   -3
+<span class="lineNum">      30 </span>            : 
+<span class="lineNum">      31 </span>            : /*
+<span class="lineNum">      32 </span>            :  * Frees up a mufevent_process once you are done with it.
+<span class="lineNum">      33 </span>            :  * This shouldn't be used outside this module.
+<a name="34"><span class="lineNum">      34 </span>            :  */</a>
+<span class="lineNum">      35 </span>            : static void
+<span class="lineNum">      36 </span><span class="lineNoCov">          0 : muf_event_process_free(struct mufevent_process *ptr)</span>
+<span class="lineNum">      37 </span>            : {
+<span class="lineNum">      38 </span><span class="lineNoCov">          0 :     if (ptr-&gt;next) {</span>
+<span class="lineNum">      39 </span><span class="lineNoCov">          0 :         ptr-&gt;next-&gt;prev = ptr-&gt;prev;</span>
+<span class="lineNum">      40 </span>            :     }
+<span class="lineNum">      41 </span><span class="lineNoCov">          0 :     if (ptr-&gt;prev) {</span>
+<span class="lineNum">      42 </span><span class="lineNoCov">          0 :         ptr-&gt;prev-&gt;next = ptr-&gt;next;</span>
+<span class="lineNum">      43 </span>            :     } else {
+<span class="lineNum">      44 </span><span class="lineNoCov">          0 :         mufevent_processes = ptr-&gt;next;</span>
+<span class="lineNum">      45 </span>            :     }
+<span class="lineNum">      46 </span>            : 
+<span class="lineNum">      47 </span><span class="lineNoCov">          0 :     ptr-&gt;prev = NULL;</span>
+<span class="lineNum">      48 </span><span class="lineNoCov">          0 :     ptr-&gt;next = NULL;</span>
+<span class="lineNum">      49 </span><span class="lineNoCov">          0 :     ptr-&gt;player = NOTHING;</span>
+<span class="lineNum">      50 </span><span class="lineNoCov">          0 :     if (ptr-&gt;fr) {</span>
+<span class="lineNum">      51 </span><span class="lineNoCov">          0 :         if (PROGRAM_INSTANCES(ptr-&gt;prog)) {</span>
+<span class="lineNum">      52 </span><span class="lineNoCov">          0 :             prog_clean(ptr-&gt;fr);</span>
+<span class="lineNum">      53 </span>            :         }
+<span class="lineNum">      54 </span><span class="lineNoCov">          0 :         ptr-&gt;fr = NULL;</span>
+<span class="lineNum">      55 </span>            :     }
+<span class="lineNum">      56 </span><span class="lineNoCov">          0 :     ptr-&gt;prog = NOTHING;</span>
+<span class="lineNum">      57 </span><span class="lineNoCov">          0 :     if (ptr-&gt;filters) {</span>
+<span class="lineNum">      58 </span><span class="lineNoCov">          0 :         for (int i = 0; i &lt; ptr-&gt;filtercount; i++) {</span>
+<span class="lineNum">      59 </span><span class="lineNoCov">          0 :             if (ptr-&gt;filters[i]) {</span>
+<span class="lineNum">      60 </span><span class="lineNoCov">          0 :                 free(ptr-&gt;filters[i]);</span>
+<span class="lineNum">      61 </span><span class="lineNoCov">          0 :                 ptr-&gt;filters[i] = NULL;</span>
+<span class="lineNum">      62 </span>            :             }
+<span class="lineNum">      63 </span>            :         }
+<span class="lineNum">      64 </span><span class="lineNoCov">          0 :         free(ptr-&gt;filters);</span>
+<span class="lineNum">      65 </span>            :         ptr-&gt;filters = NULL;
+<span class="lineNum">      66 </span>            :         ptr-&gt;filtercount = 0;
+<span class="lineNum">      67 </span>            :     }
+<span class="lineNum">      68 </span>            :     ptr-&gt;deleted = 1;
+<span class="lineNum">      69 </span><span class="lineNoCov">          0 :     free(ptr);</span>
+<span class="lineNum">      70 </span><span class="lineNoCov">          0 : }</span>
+<span class="lineNum">      71 </span>            : 
+<span class="lineNum">      72 </span>            : /*
+<span class="lineNum">      73 </span>            :  * Called when a MUF program enters EVENT_WAITFOR, to register that
+<span class="lineNum">      74 </span>            :  * the program is ready to process MUF events of the given ID type.
+<span class="lineNum">      75 </span>            :  * This duplicates the eventids list for itself, so the caller is
+<span class="lineNum">      76 </span>            :  * responsible for freeing the original eventids list passed.
+<a name="77"><span class="lineNum">      77 </span>            :  */</a>
+<span class="lineNum">      78 </span>            : void
+<span class="lineNum">      79 </span><span class="lineNoCov">          0 : muf_event_register_specific(dbref player, dbref prog, struct frame *fr, int eventcount,</span>
+<span class="lineNum">      80 </span>            :                             char **eventids)
+<span class="lineNum">      81 </span>            : {
+<span class="lineNum">      82 </span>            :     struct mufevent_process *newproc;
+<span class="lineNum">      83 </span>            :     struct mufevent_process *ptr;
+<span class="lineNum">      84 </span>            : 
+<span class="lineNum">      85 </span><span class="lineNoCov">          0 :     newproc = (struct mufevent_process *) malloc(sizeof(struct mufevent_process));</span>
+<span class="lineNum">      86 </span>            : 
+<span class="lineNum">      87 </span><span class="lineNoCov">          0 :     newproc-&gt;prev = NULL;</span>
+<span class="lineNum">      88 </span><span class="lineNoCov">          0 :     newproc-&gt;next = NULL;</span>
+<span class="lineNum">      89 </span><span class="lineNoCov">          0 :     newproc-&gt;player = player;</span>
+<span class="lineNum">      90 </span><span class="lineNoCov">          0 :     newproc-&gt;prog = prog;</span>
+<span class="lineNum">      91 </span><span class="lineNoCov">          0 :     newproc-&gt;fr = fr;</span>
+<span class="lineNum">      92 </span><span class="lineNoCov">          0 :     newproc-&gt;deleted = 0;</span>
+<span class="lineNum">      93 </span><span class="lineNoCov">          0 :     newproc-&gt;filtercount = eventcount;</span>
+<span class="lineNum">      94 </span><span class="lineNoCov">          0 :     if (eventcount &gt; 0) {</span>
+<span class="lineNum">      95 </span><span class="lineNoCov">          0 :         newproc-&gt;filters = (char **) malloc(eventcount * sizeof(char **));</span>
+<span class="lineNum">      96 </span><span class="lineNoCov">          0 :         for (int i = 0; i &lt; eventcount; i++) {</span>
+<span class="lineNum">      97 </span><span class="lineNoCov">          0 :             newproc-&gt;filters[i] = strdup(eventids[i]);</span>
+<span class="lineNum">      98 </span>            :         }
+<span class="lineNum">      99 </span>            :     } else {
+<span class="lineNum">     100 </span><span class="lineNoCov">          0 :         newproc-&gt;filters = NULL;</span>
+<span class="lineNum">     101 </span>            :     }
+<span class="lineNum">     102 </span>            : 
+<span class="lineNum">     103 </span><span class="lineNoCov">          0 :     ptr = mufevent_processes;</span>
+<span class="lineNum">     104 </span><span class="lineNoCov">          0 :     while ((ptr != NULL) &amp;&amp; ptr-&gt;next) {</span>
+<span class="lineNum">     105 </span>            :         ptr = ptr-&gt;next;
+<span class="lineNum">     106 </span>            :     }
+<span class="lineNum">     107 </span><span class="lineNoCov">          0 :     if (!ptr) {</span>
+<span class="lineNum">     108 </span><span class="lineNoCov">          0 :         mufevent_processes = newproc;</span>
+<span class="lineNum">     109 </span>            :     } else {
+<span class="lineNum">     110 </span><span class="lineNoCov">          0 :         ptr-&gt;next = newproc;</span>
+<span class="lineNum">     111 </span><span class="lineNoCov">          0 :         newproc-&gt;prev = ptr;</span>
+<span class="lineNum">     112 </span>            :     }
+<span class="lineNum">     113 </span><span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     114 </span>            : 
+<span class="lineNum">     115 </span>            : /*
+<span class="lineNum">     116 </span>            :  * Called when a MUF program enters EVENT_WAIT, to register that
+<span class="lineNum">     117 </span>            :  * the program is ready to process any type of MUF events.
+<span class="lineNum">     118 </span>            :  */
+<span class="lineNum">     119 </span>            : static void
+<span class="lineNum">     120 </span>            : muf_event_register(dbref player, dbref prog, struct frame *fr)
+<span class="lineNum">     121 </span>            : {
+<span class="lineNum">     122 </span>            :     muf_event_register_specific(player, prog, fr, 0, NULL);
+<span class="lineNum">     123 </span>            : }
+<span class="lineNum">     124 </span>            : 
+<span class="lineNum">     125 </span>            : /*
+<span class="lineNum">     126 </span>            :  * Sends a &quot;READ&quot; event to the first foreground or preempt muf process
+<span class="lineNum">     127 </span>            :  * that is owned by the given player.  Returns 1 if an event was sent,
+<span class="lineNum">     128 </span>            :  * 0 otherwise.
+<a name="129"><span class="lineNum">     129 </span>            :  */</a>
+<span class="lineNum">     130 </span>            : int
+<span class="lineNum">     131 </span><span class="lineNoCov">          0 : muf_event_read_notify(int descr, dbref player, const char *cmd)</span>
+<span class="lineNum">     132 </span>            : {
+<span class="lineNum">     133 </span>            :     struct mufevent_process *ptr;
+<span class="lineNum">     134 </span>            : 
+<span class="lineNum">     135 </span><span class="lineNoCov">          0 :     ptr = mufevent_processes;</span>
+<span class="lineNum">     136 </span><span class="lineNoCov">          0 :     while (ptr) {</span>
+<span class="lineNum">     137 </span><span class="lineNoCov">          0 :         if (!ptr-&gt;deleted) {</span>
+<span class="lineNum">     138 </span><span class="lineNoCov">          0 :             if (ptr-&gt;player == player) {</span>
+<span class="lineNum">     139 </span><span class="lineNoCov">          0 :                 if (ptr-&gt;fr &amp;&amp; ptr-&gt;fr-&gt;multitask != BACKGROUND) {</span>
+<span class="lineNum">     140 </span><span class="lineNoCov">          0 :                     if (*cmd || ptr-&gt;fr-&gt;wantsblanks) {</span>
+<span class="lineNum">     141 </span>            :                         struct inst temp;
+<span class="lineNum">     142 </span>            : 
+<span class="lineNum">     143 </span><span class="lineNoCov">          0 :                         temp.type = PROG_INTEGER;</span>
+<span class="lineNum">     144 </span><span class="lineNoCov">          0 :                         temp.data.number = descr;</span>
+<span class="lineNum">     145 </span><span class="lineNoCov">          0 :                         muf_event_add(ptr-&gt;fr, &quot;READ&quot;, &amp;temp, 1);</span>
+<span class="lineNum">     146 </span>            :                         return 1;
+<span class="lineNum">     147 </span>            :                     }
+<span class="lineNum">     148 </span>            :                 }
+<span class="lineNum">     149 </span>            :             }
+<span class="lineNum">     150 </span>            :         }
+<span class="lineNum">     151 </span><span class="lineNoCov">          0 :         ptr = ptr-&gt;next;</span>
+<span class="lineNum">     152 </span>            :     }
+<span class="lineNum">     153 </span>            :     return 0;
+<span class="lineNum">     154 </span>            : }
+<span class="lineNum">     155 </span>            : 
+<span class="lineNum">     156 </span>            : /*
+<span class="lineNum">     157 </span>            :  * removes the MUF program with the given PID from the EVENT_WAIT queue.
+<a name="158"><span class="lineNum">     158 </span>            :  */</a>
+<span class="lineNum">     159 </span>            : int
+<span class="lineNum">     160 </span><span class="lineNoCov">          0 : muf_event_dequeue_pid(int pid)</span>
+<span class="lineNum">     161 </span>            : {
+<span class="lineNum">     162 </span>            :     struct mufevent_process *proc;
+<span class="lineNum">     163 </span><span class="lineNoCov">          0 :     int count = 0;</span>
+<span class="lineNum">     164 </span>            : 
+<span class="lineNum">     165 </span><span class="lineNoCov">          0 :     proc = mufevent_processes;</span>
+<span class="lineNum">     166 </span><span class="lineNoCov">          0 :     while (proc) {</span>
+<span class="lineNum">     167 </span><span class="lineNoCov">          0 :         if (!proc-&gt;deleted) {</span>
+<span class="lineNum">     168 </span><span class="lineNoCov">          0 :             if (proc-&gt;fr-&gt;pid == pid) {</span>
+<span class="lineNum">     169 </span><span class="lineNoCov">          0 :                 if (!proc-&gt;fr-&gt;been_background)</span>
+<span class="lineNum">     170 </span><span class="lineNoCov">          0 :                     PLAYER_SET_BLOCK(proc-&gt;player, 0);</span>
+<span class="lineNum">     171 </span><span class="lineNoCov">          0 :                 muf_event_purge(proc-&gt;fr);</span>
+<span class="lineNum">     172 </span><span class="lineNoCov">          0 :                 proc-&gt;deleted = 1;</span>
+<span class="lineNum">     173 </span><span class="lineNoCov">          0 :                 count++;</span>
+<span class="lineNum">     174 </span>            :             }
+<span class="lineNum">     175 </span>            :         }
+<span class="lineNum">     176 </span><span class="lineNoCov">          0 :         proc = proc-&gt;next;</span>
+<span class="lineNum">     177 </span>            :     }
+<span class="lineNum">     178 </span><span class="lineNoCov">          0 :     return count;</span>
+<span class="lineNum">     179 </span>            : }
+<span class="lineNum">     180 </span>            : 
+<span class="lineNum">     181 </span>            : /*
+<span class="lineNum">     182 </span>            :  * Checks the MUF event queue for address references on the stack or
+<span class="lineNum">     183 </span>            :  * dbref references on the callstack
+<a name="184"><span class="lineNum">     184 </span>            :  */</a>
+<span class="lineNum">     185 </span>            : static int
+<span class="lineNum">     186 </span><span class="lineNoCov">          0 : event_has_refs(dbref program, struct mufevent_process *proc)</span>
+<span class="lineNum">     187 </span>            : {
+<span class="lineNum">     188 </span><span class="lineNoCov">          0 :     struct frame *fr = NULL;</span>
+<span class="lineNum">     189 </span>            : 
+<span class="lineNum">     190 </span><span class="lineNoCov">          0 :     if (proc-&gt;deleted) {</span>
+<span class="lineNum">     191 </span>            :         return 0;
+<span class="lineNum">     192 </span>            :     }
+<span class="lineNum">     193 </span><span class="lineNoCov">          0 :     fr = proc-&gt;fr;</span>
+<span class="lineNum">     194 </span><span class="lineNoCov">          0 :     if (!fr) {</span>
+<span class="lineNum">     195 </span>            :         return 0;
+<span class="lineNum">     196 </span>            :     }
+<span class="lineNum">     197 </span>            : 
+<span class="lineNum">     198 </span>            : 
+<span class="lineNum">     199 </span><span class="lineNoCov">          0 :     for (int loop = 1; loop &lt; fr-&gt;caller.top; loop++) {</span>
+<span class="lineNum">     200 </span><span class="lineNoCov">          0 :         if (fr-&gt;caller.st[loop] == program) {</span>
+<span class="lineNum">     201 </span>            :             return 1;
+<span class="lineNum">     202 </span>            :         }
+<span class="lineNum">     203 </span>            :     }
+<span class="lineNum">     204 </span>            : 
+<span class="lineNum">     205 </span>            : 
+<span class="lineNum">     206 </span><span class="lineNoCov">          0 :     for (int loop = 0; loop &lt; fr-&gt;argument.top; loop++) {</span>
+<span class="lineNum">     207 </span><span class="lineNoCov">          0 :         if (fr-&gt;argument.st[loop].type == PROG_ADD &amp;&amp;</span>
+<span class="lineNum">     208 </span><span class="lineNoCov">          0 :             fr-&gt;argument.st[loop].data.addr-&gt;progref == program) {</span>
+<span class="lineNum">     209 </span>            :             return 1;
+<span class="lineNum">     210 </span>            :         }
+<span class="lineNum">     211 </span>            :     }
+<span class="lineNum">     212 </span>            : 
+<span class="lineNum">     213 </span>            :     return 0;
+<span class="lineNum">     214 </span>            : }
+<span class="lineNum">     215 </span>            : 
+<span class="lineNum">     216 </span>            : /*
+<span class="lineNum">     217 </span>            :  * Deregisters a program from any instances of it in the EVENT_WAIT queue.
+<span class="lineNum">     218 </span>            :  * killmode values:
+<span class="lineNum">     219 </span>            :  *     0: kill all matching processes (Equivalent to 1)
+<span class="lineNum">     220 </span>            :  *     1: kill all matching MUF processes
+<span class="lineNum">     221 </span>            :  *     2: kill all matching foreground MUF processes
+<a name="222"><span class="lineNum">     222 </span>            :  */</a>
+<span class="lineNum">     223 </span>            : int
+<span class="lineNum">     224 </span><span class="lineCov">         26 : muf_event_dequeue(dbref prog, int killmode)</span>
+<span class="lineNum">     225 </span>            : {
+<span class="lineNum">     226 </span><span class="lineCov">         26 :     int count = 0;</span>
+<span class="lineNum">     227 </span>            : 
+<span class="lineNum">     228 </span><span class="lineCov">         26 :     if (killmode == 0)</span>
+<span class="lineNum">     229 </span><span class="lineCov">         26 :         killmode = 1;</span>
+<span class="lineNum">     230 </span>            : 
+<span class="lineNum">     231 </span><span class="lineCov">         26 :     for (struct mufevent_process *proc = mufevent_processes; proc; proc = proc-&gt;next) {</span>
+<span class="lineNum">     232 </span><span class="lineNoCov">          0 :         if (proc-&gt;deleted) {</span>
+<span class="lineNum">     233 </span><span class="lineNoCov">          0 :             continue;</span>
+<span class="lineNum">     234 </span>            :         }
+<span class="lineNum">     235 </span><span class="lineNoCov">          0 :         if (proc-&gt;prog != prog &amp;&amp; !event_has_refs(prog, proc) &amp;&amp; proc-&gt;player != prog) {</span>
+<span class="lineNum">     236 </span><span class="lineNoCov">          0 :             continue;</span>
+<span class="lineNum">     237 </span>            :         }
+<span class="lineNum">     238 </span><span class="lineNoCov">          0 :         if (killmode == 2) {</span>
+<span class="lineNum">     239 </span><span class="lineNoCov">          0 :             if (proc-&gt;fr &amp;&amp; proc-&gt;fr-&gt;multitask == BACKGROUND) {</span>
+<span class="lineNum">     240 </span><span class="lineNoCov">          0 :                 continue;</span>
+<span class="lineNum">     241 </span>            :             }
+<span class="lineNum">     242 </span><span class="lineNoCov">          0 :         } else if (killmode == 1) {</span>
+<span class="lineNum">     243 </span><span class="lineNoCov">          0 :             if (!proc-&gt;fr) {</span>
+<span class="lineNum">     244 </span><span class="lineNoCov">          0 :                 continue;</span>
+<span class="lineNum">     245 </span>            :             }
+<span class="lineNum">     246 </span>            :         }
+<span class="lineNum">     247 </span><span class="lineNoCov">          0 :         if (proc-&gt;fr) {</span>
+<span class="lineNum">     248 </span><span class="lineNoCov">          0 :             if (!proc-&gt;fr-&gt;been_background)</span>
+<span class="lineNum">     249 </span><span class="lineNoCov">          0 :                 PLAYER_SET_BLOCK(proc-&gt;player, 0);</span>
+<span class="lineNum">     250 </span><span class="lineNoCov">          0 :             muf_event_purge(proc-&gt;fr);</span>
+<span class="lineNum">     251 </span><span class="lineNoCov">          0 :             prog_clean(proc-&gt;fr);</span>
+<span class="lineNum">     252 </span>            :         }
+<span class="lineNum">     253 </span><span class="lineNoCov">          0 :         proc-&gt;deleted = 1;</span>
+<span class="lineNum">     254 </span><span class="lineNoCov">          0 :         count++;</span>
+<span class="lineNum">     255 </span>            :     }
+<span class="lineNum">     256 </span><span class="lineCov">         26 :     return count;</span>
+<span class="lineNum">     257 </span>            : }
+<a name="258"><span class="lineNum">     258 </span>            : </a>
+<span class="lineNum">     259 </span>            : struct frame *
+<span class="lineNum">     260 </span><span class="lineNoCov">          0 : muf_event_pid_frame(int pid)</span>
+<span class="lineNum">     261 </span>            : {
+<span class="lineNum">     262 </span><span class="lineNoCov">          0 :     struct mufevent_process *ptr = mufevent_processes;</span>
+<span class="lineNum">     263 </span>            : 
+<span class="lineNum">     264 </span><span class="lineNoCov">          0 :     while (ptr) {</span>
+<span class="lineNum">     265 </span><span class="lineNoCov">          0 :         if (!ptr-&gt;deleted &amp;&amp; ptr-&gt;fr &amp;&amp; ptr-&gt;fr-&gt;pid == pid)</span>
+<span class="lineNum">     266 </span>            :             return ptr-&gt;fr;
+<span class="lineNum">     267 </span><span class="lineNoCov">          0 :         ptr = ptr-&gt;next;</span>
+<span class="lineNum">     268 </span>            :     }
+<span class="lineNum">     269 </span>            :     return NULL;
+<span class="lineNum">     270 </span>            : }
+<span class="lineNum">     271 </span>            : 
+<span class="lineNum">     272 </span>            : /*
+<span class="lineNum">     273 </span>            :  * Returns true if the given player controls the given PID.
+<a name="274"><span class="lineNum">     274 </span>            :  */</a>
+<span class="lineNum">     275 </span>            : int
+<span class="lineNum">     276 </span><span class="lineNoCov">          0 : muf_event_controls(dbref player, int pid)</span>
+<span class="lineNum">     277 </span>            : {
+<span class="lineNum">     278 </span><span class="lineNoCov">          0 :     struct mufevent_process *proc = mufevent_processes;</span>
+<span class="lineNum">     279 </span>            : 
+<span class="lineNum">     280 </span><span class="lineNoCov">          0 :     while (proc &amp;&amp; (proc-&gt;deleted || pid != proc-&gt;fr-&gt;pid)) {</span>
+<span class="lineNum">     281 </span><span class="lineNoCov">          0 :         proc = proc-&gt;next;</span>
+<span class="lineNum">     282 </span>            :     }
+<span class="lineNum">     283 </span>            : 
+<span class="lineNum">     284 </span><span class="lineNoCov">          0 :     if (!proc) {</span>
+<span class="lineNum">     285 </span>            :         return 0;
+<span class="lineNum">     286 </span>            :     }
+<span class="lineNum">     287 </span><span class="lineNoCov">          0 :     if (!controls(player, proc-&gt;prog) &amp;&amp; player != proc-&gt;player) {</span>
+<span class="lineNum">     288 </span>            :         return 0;
+<span class="lineNum">     289 </span>            :     }
+<span class="lineNum">     290 </span>            : 
+<span class="lineNum">     291 </span><span class="lineNoCov">          0 :     return 1;</span>
+<span class="lineNum">     292 </span>            : }
+<span class="lineNum">     293 </span>            : 
+<span class="lineNum">     294 </span>            : /*
+<span class="lineNum">     295 </span>            :  * List all processes in the EVENT_WAIT queue that the given player controls.
+<span class="lineNum">     296 </span>            :  * This is used by the @ps command.
+<a name="297"><span class="lineNum">     297 </span>            :  */</a>
+<span class="lineNum">     298 </span>            : int
+<span class="lineNum">     299 </span><span class="lineNoCov">          0 : muf_event_list(dbref player, const char *pat)</span>
+<span class="lineNum">     300 </span>            : {
+<span class="lineNum">     301 </span>            :     char buf[BUFFER_LEN];
+<span class="lineNum">     302 </span>            :     char pidstr[BUFFER_LEN];
+<span class="lineNum">     303 </span>            :     char inststr[BUFFER_LEN];
+<span class="lineNum">     304 </span>            :     char cpustr[BUFFER_LEN];
+<span class="lineNum">     305 </span>            :     char progstr[BUFFER_LEN];
+<span class="lineNum">     306 </span>            :     char prognamestr[BUFFER_LEN];
+<span class="lineNum">     307 </span><span class="lineNoCov">          0 :     int count = 0;</span>
+<span class="lineNum">     308 </span><span class="lineNoCov">          0 :     time_t rtime = time((time_t *) NULL);</span>
+<span class="lineNum">     309 </span>            :     time_t etime;
+<span class="lineNum">     310 </span><span class="lineNoCov">          0 :     double pcnt = 0;</span>
+<span class="lineNum">     311 </span><span class="lineNoCov">          0 :     struct mufevent_process *proc = mufevent_processes;</span>
+<span class="lineNum">     312 </span>            : 
+<span class="lineNum">     313 </span><span class="lineNoCov">          0 :     while (proc) {</span>
+<span class="lineNum">     314 </span><span class="lineNoCov">          0 :         if (!proc-&gt;deleted) {</span>
+<span class="lineNum">     315 </span><span class="lineNoCov">          0 :             if (proc-&gt;fr) {</span>
+<span class="lineNum">     316 </span><span class="lineNoCov">          0 :                 etime = rtime - proc-&gt;fr-&gt;started;</span>
+<span class="lineNum">     317 </span><span class="lineNoCov">          0 :                 if (etime &gt; 0) {</span>
+<span class="lineNum">     318 </span><span class="lineNoCov">          0 :                     pcnt = proc-&gt;fr-&gt;totaltime.tv_sec;</span>
+<span class="lineNum">     319 </span><span class="lineNoCov">          0 :                     pcnt += proc-&gt;fr-&gt;totaltime.tv_usec / 1000000;</span>
+<span class="lineNum">     320 </span><span class="lineNoCov">          0 :                     pcnt = pcnt * 100 / etime;</span>
+<span class="lineNum">     321 </span><span class="lineNoCov">          0 :                     if (pcnt &gt; 99.9) {</span>
+<span class="lineNum">     322 </span><span class="lineNoCov">          0 :                         pcnt = 99.9;</span>
+<span class="lineNum">     323 </span>            :                     }
+<span class="lineNum">     324 </span>            :                 } else {
+<span class="lineNum">     325 </span>            :                     pcnt = 0.0;
+<span class="lineNum">     326 </span>            :                 }
+<span class="lineNum">     327 </span><span class="lineNoCov">          0 :             } else continue;</span>
+<span class="lineNum">     328 </span><span class="lineNoCov">          0 :             snprintf(pidstr, sizeof(pidstr), &quot;%d&quot;, proc-&gt;fr-&gt;pid);</span>
+<span class="lineNum">     329 </span><span class="lineNoCov">          0 :             snprintf(inststr, sizeof(inststr), &quot;%d&quot;, (proc-&gt;fr-&gt;instcnt / 1000));</span>
+<span class="lineNum">     330 </span><span class="lineNoCov">          0 :             snprintf(cpustr, sizeof(cpustr), &quot;%4.1f&quot;, pcnt);</span>
+<span class="lineNum">     331 </span><span class="lineNoCov">          0 :             if (proc-&gt;fr) {</span>
+<span class="lineNum">     332 </span><span class="lineNoCov">          0 :                 snprintf(progstr, sizeof(progstr), &quot;#%d&quot;, proc-&gt;fr-&gt;caller.st[1]);</span>
+<span class="lineNum">     333 </span><span class="lineNoCov">          0 :                 snprintf(prognamestr, sizeof(prognamestr), &quot;%s&quot;, NAME(proc-&gt;fr-&gt;caller.st[1]));</span>
+<span class="lineNum">     334 </span>            :             } else {
+<span class="lineNum">     335 </span><span class="lineNoCov">          0 :                 snprintf(progstr, sizeof(progstr), &quot;#%d&quot;, proc-&gt;prog);</span>
+<span class="lineNum">     336 </span><span class="lineNoCov">          0 :                 snprintf(prognamestr, sizeof(prognamestr), &quot;%s&quot;, NAME(proc-&gt;prog));</span>
+<span class="lineNum">     337 </span>            :             }
+<span class="lineNum">     338 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), pat, pidstr, &quot;--&quot;,</span>
+<span class="lineNum">     339 </span><span class="lineNoCov">          0 :                      time_format_2((time_t) (rtime - proc-&gt;fr-&gt;started)),</span>
+<span class="lineNum">     340 </span><span class="lineNoCov">          0 :                      inststr, cpustr, progstr, prognamestr, NAME(proc-&gt;player),</span>
+<span class="lineNum">     341 </span>            :                      &quot;EVENT_WAITFOR&quot;);
+<span class="lineNum">     342 </span><span class="lineNoCov">          0 :             if (Wizard(OWNER(player)) || (OWNER(proc-&gt;prog) == OWNER(player))</span>
+<span class="lineNum">     343 </span><span class="lineNoCov">          0 :                 || (proc-&gt;player == player))</span>
+<span class="lineNum">     344 </span><span class="lineNoCov">          0 :                 notify_nolisten(player, buf, 1);</span>
+<span class="lineNum">     345 </span><span class="lineNoCov">          0 :             count++;</span>
+<span class="lineNum">     346 </span>            :         }
+<span class="lineNum">     347 </span><span class="lineNoCov">          0 :         proc = proc-&gt;next;</span>
+<span class="lineNum">     348 </span>            :     }
+<span class="lineNum">     349 </span><span class="lineNoCov">          0 :     return count;</span>
+<span class="lineNum">     350 </span>            : }
+<span class="lineNum">     351 </span>            : 
+<span class="lineNum">     352 </span>            : /*
+<span class="lineNum">     353 </span>            :  * Given a muf list array, appends pids to it where ref
+<span class="lineNum">     354 </span>            :  * matches the trigger, program, or player.  If ref is #-1
+<span class="lineNum">     355 </span>            :  * then all processes waiting for mufevents are added.
+<a name="356"><span class="lineNum">     356 </span>            :  */</a>
+<span class="lineNum">     357 </span>            : stk_array *
+<span class="lineNum">     358 </span><span class="lineNoCov">          0 : get_mufevent_pids(stk_array * nw, dbref ref)</span>
+<span class="lineNum">     359 </span>            : {
+<span class="lineNum">     360 </span>            :     struct inst temp1, temp2;
+<span class="lineNum">     361 </span><span class="lineNoCov">          0 :     int count = 0;</span>
+<span class="lineNum">     362 </span>            : 
+<span class="lineNum">     363 </span><span class="lineNoCov">          0 :     struct mufevent_process *proc = mufevent_processes;</span>
+<span class="lineNum">     364 </span><span class="lineNoCov">          0 :     while (proc) {</span>
+<span class="lineNum">     365 </span><span class="lineNoCov">          0 :         if (!proc-&gt;deleted) {</span>
+<span class="lineNum">     366 </span><span class="lineNoCov">          0 :             if (proc-&gt;player == ref || proc-&gt;prog == ref || proc-&gt;fr-&gt;trig == ref || ref &lt; 0) {</span>
+<span class="lineNum">     367 </span><span class="lineNoCov">          0 :                 temp1.type = PROG_INTEGER;</span>
+<span class="lineNum">     368 </span><span class="lineNoCov">          0 :                 temp1.data.number = count++;</span>
+<span class="lineNum">     369 </span><span class="lineNoCov">          0 :                 temp2.type = PROG_INTEGER;</span>
+<span class="lineNum">     370 </span><span class="lineNoCov">          0 :                 temp2.data.number = proc-&gt;fr-&gt;pid;</span>
+<span class="lineNum">     371 </span><span class="lineNoCov">          0 :                 array_setitem(&amp;nw, &amp;temp1, &amp;temp2);</span>
+<span class="lineNum">     372 </span><span class="lineNoCov">          0 :                 CLEAR(&amp;temp1);</span>
+<span class="lineNum">     373 </span><span class="lineNoCov">          0 :                 CLEAR(&amp;temp2);</span>
+<span class="lineNum">     374 </span>            :             }
+<span class="lineNum">     375 </span>            :         }
+<span class="lineNum">     376 </span><span class="lineNoCov">          0 :         proc = proc-&gt;next;</span>
+<span class="lineNum">     377 </span>            :     }
+<span class="lineNum">     378 </span><span class="lineNoCov">          0 :     return nw;</span>
+<span class="lineNum">     379 </span>            : }
+<span class="lineNum">     380 </span>            : 
+<a name="381"><span class="lineNum">     381 </span>            : </a>
+<span class="lineNum">     382 </span>            : stk_array *
+<span class="lineNum">     383 </span><span class="lineNoCov">          0 : get_mufevent_pidinfo(stk_array * nw, int pid)</span>
+<span class="lineNum">     384 </span>            : {
+<span class="lineNum">     385 </span>            :     struct inst temp1, temp2;
+<span class="lineNum">     386 </span>            :     stk_array *arr;
+<span class="lineNum">     387 </span><span class="lineNoCov">          0 :     time_t rtime = time(NULL);</span>
+<span class="lineNum">     388 </span><span class="lineNoCov">          0 :     time_t etime = 0;</span>
+<span class="lineNum">     389 </span><span class="lineNoCov">          0 :     double pcnt = 0.0;</span>
+<span class="lineNum">     390 </span>            : 
+<span class="lineNum">     391 </span><span class="lineNoCov">          0 :     struct mufevent_process *proc = mufevent_processes;</span>
+<span class="lineNum">     392 </span><span class="lineNoCov">          0 :     while (proc &amp;&amp; (proc-&gt;deleted || proc-&gt;fr-&gt;pid != pid)) {</span>
+<span class="lineNum">     393 </span><span class="lineNoCov">          0 :         proc = proc-&gt;next;</span>
+<span class="lineNum">     394 </span>            :     }
+<span class="lineNum">     395 </span><span class="lineNoCov">          0 :     if (proc &amp;&amp; (proc-&gt;fr-&gt;pid == pid)) {</span>
+<span class="lineNum">     396 </span><span class="lineNoCov">          0 :         if (proc-&gt;fr) {</span>
+<span class="lineNum">     397 </span><span class="lineNoCov">          0 :             etime = rtime - proc-&gt;fr-&gt;started;</span>
+<span class="lineNum">     398 </span><span class="lineNoCov">          0 :             if (etime &gt; 0) {</span>
+<span class="lineNum">     399 </span><span class="lineNoCov">          0 :                 pcnt = proc-&gt;fr-&gt;totaltime.tv_sec;</span>
+<span class="lineNum">     400 </span><span class="lineNoCov">          0 :                 pcnt += proc-&gt;fr-&gt;totaltime.tv_usec / 1000000;</span>
+<span class="lineNum">     401 </span><span class="lineNoCov">          0 :                 pcnt = pcnt * 100 / etime;</span>
+<span class="lineNum">     402 </span><span class="lineNoCov">          0 :                 if (pcnt &gt; 100.0) {</span>
+<span class="lineNum">     403 </span><span class="lineNoCov">          0 :                     pcnt = 100.0;</span>
+<span class="lineNum">     404 </span>            :                 }
+<span class="lineNum">     405 </span>            :             } else {
+<span class="lineNum">     406 </span>            :                 pcnt = 0.0;
+<span class="lineNum">     407 </span>            :             }
+<span class="lineNum">     408 </span>            :         }
+<span class="lineNum">     409 </span><span class="lineNoCov">          0 :         temp1.type = PROG_STRING;</span>
+<span class="lineNum">     410 </span><span class="lineNoCov">          0 :         temp1.data.string = alloc_prog_string(&quot;PID&quot;);</span>
+<span class="lineNum">     411 </span><span class="lineNoCov">          0 :         temp2.type = PROG_INTEGER;</span>
+<span class="lineNum">     412 </span><span class="lineNoCov">          0 :         temp2.data.number = proc-&gt;fr-&gt;pid;</span>
+<span class="lineNum">     413 </span><span class="lineNoCov">          0 :         array_setitem(&amp;nw, &amp;temp1, &amp;temp2);</span>
+<span class="lineNum">     414 </span><span class="lineNoCov">          0 :         CLEAR(&amp;temp1);</span>
+<span class="lineNum">     415 </span><span class="lineNoCov">          0 :         CLEAR(&amp;temp2);</span>
+<span class="lineNum">     416 </span><span class="lineNoCov">          0 :         temp1.type = PROG_STRING;</span>
+<span class="lineNum">     417 </span><span class="lineNoCov">          0 :         temp1.data.string = alloc_prog_string(&quot;CALLED_PROG&quot;);</span>
+<span class="lineNum">     418 </span><span class="lineNoCov">          0 :         temp2.type = PROG_OBJECT;</span>
+<span class="lineNum">     419 </span><span class="lineNoCov">          0 :         temp2.data.objref = proc-&gt;prog;</span>
+<span class="lineNum">     420 </span><span class="lineNoCov">          0 :         array_setitem(&amp;nw, &amp;temp1, &amp;temp2);</span>
+<span class="lineNum">     421 </span><span class="lineNoCov">          0 :         CLEAR(&amp;temp1);</span>
+<span class="lineNum">     422 </span><span class="lineNoCov">          0 :         CLEAR(&amp;temp2);</span>
+<span class="lineNum">     423 </span><span class="lineNoCov">          0 :         temp1.type = PROG_STRING;</span>
+<span class="lineNum">     424 </span><span class="lineNoCov">          0 :         temp1.data.string = alloc_prog_string(&quot;TRIG&quot;);</span>
+<span class="lineNum">     425 </span><span class="lineNoCov">          0 :         temp2.type = PROG_OBJECT;</span>
+<span class="lineNum">     426 </span><span class="lineNoCov">          0 :         temp2.data.objref = proc-&gt;fr-&gt;trig;</span>
+<span class="lineNum">     427 </span><span class="lineNoCov">          0 :         array_setitem(&amp;nw, &amp;temp1, &amp;temp2);</span>
+<span class="lineNum">     428 </span><span class="lineNoCov">          0 :         CLEAR(&amp;temp1);</span>
+<span class="lineNum">     429 </span><span class="lineNoCov">          0 :         CLEAR(&amp;temp2);</span>
+<span class="lineNum">     430 </span><span class="lineNoCov">          0 :         temp1.type = PROG_STRING;</span>
+<span class="lineNum">     431 </span><span class="lineNoCov">          0 :         temp1.data.string = alloc_prog_string(&quot;PLAYER&quot;);</span>
+<span class="lineNum">     432 </span><span class="lineNoCov">          0 :         temp2.type = PROG_OBJECT;</span>
+<span class="lineNum">     433 </span><span class="lineNoCov">          0 :         temp2.data.objref = proc-&gt;player;</span>
+<span class="lineNum">     434 </span><span class="lineNoCov">          0 :         array_setitem(&amp;nw, &amp;temp1, &amp;temp2);</span>
+<span class="lineNum">     435 </span><span class="lineNoCov">          0 :         CLEAR(&amp;temp1);</span>
+<span class="lineNum">     436 </span><span class="lineNoCov">          0 :         CLEAR(&amp;temp2);</span>
+<span class="lineNum">     437 </span><span class="lineNoCov">          0 :         temp1.type = PROG_STRING;</span>
+<span class="lineNum">     438 </span><span class="lineNoCov">          0 :         temp1.data.string = alloc_prog_string(&quot;CALLED_DATA&quot;);</span>
+<span class="lineNum">     439 </span><span class="lineNoCov">          0 :         temp2.type = PROG_STRING;</span>
+<span class="lineNum">     440 </span><span class="lineNoCov">          0 :         temp2.data.string = alloc_prog_string(&quot;EVENT_WAITFOR&quot;);</span>
+<span class="lineNum">     441 </span><span class="lineNoCov">          0 :         array_setitem(&amp;nw, &amp;temp1, &amp;temp2);</span>
+<span class="lineNum">     442 </span><span class="lineNoCov">          0 :         CLEAR(&amp;temp1);</span>
+<span class="lineNum">     443 </span><span class="lineNoCov">          0 :         CLEAR(&amp;temp2);</span>
+<span class="lineNum">     444 </span><span class="lineNoCov">          0 :         temp1.type = PROG_STRING;</span>
+<span class="lineNum">     445 </span><span class="lineNoCov">          0 :         temp1.data.string = alloc_prog_string(&quot;INSTCNT&quot;);</span>
+<span class="lineNum">     446 </span><span class="lineNoCov">          0 :         temp2.type = PROG_INTEGER;</span>
+<span class="lineNum">     447 </span><span class="lineNoCov">          0 :         temp2.data.number = proc-&gt;fr-&gt;instcnt;</span>
+<span class="lineNum">     448 </span><span class="lineNoCov">          0 :         array_setitem(&amp;nw, &amp;temp1, &amp;temp2);</span>
+<span class="lineNum">     449 </span><span class="lineNoCov">          0 :         CLEAR(&amp;temp1);</span>
+<span class="lineNum">     450 </span><span class="lineNoCov">          0 :         CLEAR(&amp;temp2);</span>
+<span class="lineNum">     451 </span><span class="lineNoCov">          0 :         temp1.type = PROG_STRING;</span>
+<span class="lineNum">     452 </span><span class="lineNoCov">          0 :         temp1.data.string = alloc_prog_string(&quot;DESCR&quot;);</span>
+<span class="lineNum">     453 </span><span class="lineNoCov">          0 :         temp2.type = PROG_INTEGER;</span>
+<span class="lineNum">     454 </span><span class="lineNoCov">          0 :         temp2.data.number = proc-&gt;fr-&gt;descr;</span>
+<span class="lineNum">     455 </span><span class="lineNoCov">          0 :         array_setitem(&amp;nw, &amp;temp1, &amp;temp2);</span>
+<span class="lineNum">     456 </span><span class="lineNoCov">          0 :         CLEAR(&amp;temp1);</span>
+<span class="lineNum">     457 </span><span class="lineNoCov">          0 :         CLEAR(&amp;temp2);</span>
+<span class="lineNum">     458 </span><span class="lineNoCov">          0 :         temp1.type = PROG_STRING;</span>
+<span class="lineNum">     459 </span><span class="lineNoCov">          0 :         temp1.data.string = alloc_prog_string(&quot;CPU&quot;);</span>
+<span class="lineNum">     460 </span><span class="lineNoCov">          0 :         temp2.type = PROG_FLOAT;</span>
+<span class="lineNum">     461 </span><span class="lineNoCov">          0 :         temp2.data.fnumber = pcnt;</span>
+<span class="lineNum">     462 </span><span class="lineNoCov">          0 :         array_setitem(&amp;nw, &amp;temp1, &amp;temp2);</span>
+<span class="lineNum">     463 </span><span class="lineNoCov">          0 :         CLEAR(&amp;temp1);</span>
+<span class="lineNum">     464 </span><span class="lineNoCov">          0 :         CLEAR(&amp;temp2);</span>
+<span class="lineNum">     465 </span><span class="lineNoCov">          0 :         temp1.type = PROG_STRING;</span>
+<span class="lineNum">     466 </span><span class="lineNoCov">          0 :         temp1.data.string = alloc_prog_string(&quot;NEXTRUN&quot;);</span>
+<span class="lineNum">     467 </span><span class="lineNoCov">          0 :         temp2.type = PROG_INTEGER;</span>
+<span class="lineNum">     468 </span><span class="lineNoCov">          0 :         temp2.data.number = -1;</span>
+<span class="lineNum">     469 </span><span class="lineNoCov">          0 :         array_setitem(&amp;nw, &amp;temp1, &amp;temp2);</span>
+<span class="lineNum">     470 </span><span class="lineNoCov">          0 :         CLEAR(&amp;temp1);</span>
+<span class="lineNum">     471 </span><span class="lineNoCov">          0 :         CLEAR(&amp;temp2);</span>
+<span class="lineNum">     472 </span><span class="lineNoCov">          0 :         temp1.type = PROG_STRING;</span>
+<span class="lineNum">     473 </span><span class="lineNoCov">          0 :         temp1.data.string = alloc_prog_string(&quot;STARTED&quot;);</span>
+<span class="lineNum">     474 </span><span class="lineNoCov">          0 :         temp2.type = PROG_INTEGER;</span>
+<span class="lineNum">     475 </span><span class="lineNoCov">          0 :         temp2.data.number = (int) proc-&gt;fr-&gt;started;</span>
+<span class="lineNum">     476 </span><span class="lineNoCov">          0 :         array_setitem(&amp;nw, &amp;temp1, &amp;temp2);</span>
+<span class="lineNum">     477 </span><span class="lineNoCov">          0 :         CLEAR(&amp;temp1);</span>
+<span class="lineNum">     478 </span><span class="lineNoCov">          0 :         CLEAR(&amp;temp2);</span>
+<span class="lineNum">     479 </span><span class="lineNoCov">          0 :         temp1.type = PROG_STRING;</span>
+<span class="lineNum">     480 </span><span class="lineNoCov">          0 :         temp1.data.string = alloc_prog_string(&quot;TYPE&quot;);</span>
+<span class="lineNum">     481 </span><span class="lineNoCov">          0 :         temp2.type = PROG_STRING;</span>
+<span class="lineNum">     482 </span><span class="lineNoCov">          0 :         temp2.data.string = alloc_prog_string(&quot;MUFEVENT&quot;);</span>
+<span class="lineNum">     483 </span><span class="lineNoCov">          0 :         array_setitem(&amp;nw, &amp;temp1, &amp;temp2);</span>
+<span class="lineNum">     484 </span><span class="lineNoCov">          0 :         CLEAR(&amp;temp1);</span>
+<span class="lineNum">     485 </span><span class="lineNoCov">          0 :         CLEAR(&amp;temp2);</span>
+<span class="lineNum">     486 </span><span class="lineNoCov">          0 :         temp1.type = PROG_STRING;</span>
+<span class="lineNum">     487 </span><span class="lineNoCov">          0 :         temp1.data.string = alloc_prog_string(&quot;SUBTYPE&quot;);</span>
+<span class="lineNum">     488 </span><span class="lineNoCov">          0 :         temp2.type = PROG_STRING;</span>
+<span class="lineNum">     489 </span><span class="lineNoCov">          0 :         temp2.data.string = alloc_prog_string(&quot;&quot;);</span>
+<span class="lineNum">     490 </span><span class="lineNoCov">          0 :         array_setitem(&amp;nw, &amp;temp1, &amp;temp2);</span>
+<span class="lineNum">     491 </span><span class="lineNoCov">          0 :         CLEAR(&amp;temp1);</span>
+<span class="lineNum">     492 </span><span class="lineNoCov">          0 :         CLEAR(&amp;temp2);</span>
+<span class="lineNum">     493 </span><span class="lineNoCov">          0 :         temp1.type = PROG_STRING;</span>
+<span class="lineNum">     494 </span><span class="lineNoCov">          0 :         temp1.data.string = alloc_prog_string(&quot;FILTERS&quot;);</span>
+<span class="lineNum">     495 </span><span class="lineNoCov">          0 :         arr = new_array_packed(0);</span>
+<span class="lineNum">     496 </span><span class="lineNoCov">          0 :         for (int i = 0; i &lt; proc-&gt;filtercount; i++) {</span>
+<span class="lineNum">     497 </span><span class="lineNoCov">          0 :             array_set_intkey_strval(&amp;arr, i, proc-&gt;filters[i]);</span>
+<span class="lineNum">     498 </span>            :         }
+<span class="lineNum">     499 </span><span class="lineNoCov">          0 :         temp2.type = PROG_ARRAY;</span>
+<span class="lineNum">     500 </span><span class="lineNoCov">          0 :         temp2.data.array = arr;</span>
+<span class="lineNum">     501 </span><span class="lineNoCov">          0 :         array_setitem(&amp;nw, &amp;temp1, &amp;temp2);</span>
+<span class="lineNum">     502 </span><span class="lineNoCov">          0 :         CLEAR(&amp;temp1);</span>
+<span class="lineNum">     503 </span><span class="lineNoCov">          0 :         CLEAR(&amp;temp2);</span>
+<span class="lineNum">     504 </span>            :     }
+<span class="lineNum">     505 </span><span class="lineNoCov">          0 :     return nw;</span>
+<span class="lineNum">     506 </span>            : }
+<span class="lineNum">     507 </span>            : 
+<span class="lineNum">     508 </span>            : /*
+<span class="lineNum">     509 </span>            :  * Returns how many events are waiting to be processed.
+<a name="510"><span class="lineNum">     510 </span>            :  */</a>
+<span class="lineNum">     511 </span>            : int
+<span class="lineNum">     512 </span><span class="lineNoCov">          0 : muf_event_count(struct frame *fr)</span>
+<span class="lineNum">     513 </span>            : {
+<span class="lineNum">     514 </span><span class="lineNoCov">          0 :     int count = 0;</span>
+<span class="lineNum">     515 </span>            : 
+<span class="lineNum">     516 </span><span class="lineNoCov">          0 :     for (struct mufevent *ptr = fr-&gt;events; ptr; ptr = ptr-&gt;next)</span>
+<span class="lineNum">     517 </span><span class="lineNoCov">          0 :         count++;</span>
+<span class="lineNum">     518 </span>            : 
+<span class="lineNum">     519 </span><span class="lineNoCov">          0 :     return count;</span>
+<span class="lineNum">     520 </span>            : }
+<span class="lineNum">     521 </span>            : 
+<span class="lineNum">     522 </span>            : /*
+<span class="lineNum">     523 </span>            :  * Returns how many events of the given event type are waiting to be processed.
+<span class="lineNum">     524 </span>            :  * The eventid passed can be an smatch string.
+<a name="525"><span class="lineNum">     525 </span>            :  */</a>
+<span class="lineNum">     526 </span>            : int
+<span class="lineNum">     527 </span><span class="lineNoCov">          0 : muf_event_exists(struct frame *fr, const char *eventid)</span>
+<span class="lineNum">     528 </span>            : {
+<span class="lineNum">     529 </span><span class="lineNoCov">          0 :     int count = 0;</span>
+<span class="lineNum">     530 </span>            :     char pattern[BUFFER_LEN];
+<span class="lineNum">     531 </span>            : 
+<span class="lineNum">     532 </span><span class="lineNoCov">          0 :     strcpyn(pattern, sizeof(pattern), eventid);</span>
+<span class="lineNum">     533 </span>            : 
+<span class="lineNum">     534 </span><span class="lineNoCov">          0 :     for (struct mufevent *ptr = fr-&gt;events; ptr; ptr = ptr-&gt;next)</span>
+<span class="lineNum">     535 </span><span class="lineNoCov">          0 :         if (equalstr(pattern, ptr-&gt;event))</span>
+<span class="lineNum">     536 </span><span class="lineNoCov">          0 :             count++;</span>
+<span class="lineNum">     537 </span>            : 
+<span class="lineNum">     538 </span><span class="lineNoCov">          0 :     return count;</span>
+<span class="lineNum">     539 </span>            : }
+<span class="lineNum">     540 </span>            : 
+<span class="lineNum">     541 </span>            : /*
+<span class="lineNum">     542 </span>            :  * Frees up a MUF event once you are done with it.  This shouldn't be used
+<span class="lineNum">     543 </span>            :  * outside this module.
+<a name="544"><span class="lineNum">     544 </span>            :  */</a>
+<span class="lineNum">     545 </span>            : static void
+<span class="lineNum">     546 </span><span class="lineNoCov">          0 : muf_event_free(struct mufevent *ptr)</span>
+<span class="lineNum">     547 </span>            : {
+<span class="lineNum">     548 </span><span class="lineNoCov">          0 :     CLEAR(&amp;ptr-&gt;data);</span>
+<span class="lineNum">     549 </span><span class="lineNoCov">          0 :     free(ptr-&gt;event);</span>
+<span class="lineNum">     550 </span>            :     ptr-&gt;event = NULL;
+<span class="lineNum">     551 </span>            :     ptr-&gt;next = NULL;
+<span class="lineNum">     552 </span><span class="lineNoCov">          0 :     free(ptr);</span>
+<span class="lineNum">     553 </span><span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     554 </span>            : 
+<span class="lineNum">     555 </span>            : /*
+<span class="lineNum">     556 </span>            :  * Adds a MUF event to the event queue for the given program instance.
+<span class="lineNum">     557 </span>            :  * If the exclusive flag is true, and if an item of the same event type
+<span class="lineNum">     558 </span>            :  * already exists in the queue, the new one will NOT be added.
+<a name="559"><span class="lineNum">     559 </span>            :  */</a>
+<span class="lineNum">     560 </span>            : void
+<span class="lineNum">     561 </span><span class="lineNoCov">          0 : muf_event_add(struct frame *fr, char *event, struct inst *val, int exclusive)</span>
+<span class="lineNum">     562 </span>            : {
+<span class="lineNum">     563 </span>            :     struct mufevent *newevent;
+<span class="lineNum">     564 </span>            :     struct mufevent *ptr;
+<span class="lineNum">     565 </span>            : 
+<span class="lineNum">     566 </span><span class="lineNoCov">          0 :     ptr = fr-&gt;events;</span>
+<span class="lineNum">     567 </span><span class="lineNoCov">          0 :     while (ptr &amp;&amp; ptr-&gt;next) {</span>
+<span class="lineNum">     568 </span><span class="lineNoCov">          0 :         if (exclusive &amp;&amp; !strcmp(event, ptr-&gt;event)) {</span>
+<span class="lineNum">     569 </span>            :             return;
+<span class="lineNum">     570 </span>            :         }
+<span class="lineNum">     571 </span>            :         ptr = ptr-&gt;next;
+<span class="lineNum">     572 </span>            :     }
+<span class="lineNum">     573 </span>            : 
+<span class="lineNum">     574 </span><span class="lineNoCov">          0 :     if (exclusive &amp;&amp; ptr &amp;&amp; !strcmp(event, ptr-&gt;event)) {</span>
+<span class="lineNum">     575 </span>            :         return;
+<span class="lineNum">     576 </span>            :     }
+<span class="lineNum">     577 </span>            : 
+<span class="lineNum">     578 </span><span class="lineNoCov">          0 :     newevent = (struct mufevent *) malloc(sizeof(struct mufevent));</span>
+<span class="lineNum">     579 </span><span class="lineNoCov">          0 :     newevent-&gt;event = strdup(event);</span>
+<span class="lineNum">     580 </span><span class="lineNoCov">          0 :     copyinst(val, &amp;newevent-&gt;data);</span>
+<span class="lineNum">     581 </span><span class="lineNoCov">          0 :     newevent-&gt;next = NULL;</span>
+<span class="lineNum">     582 </span>            : 
+<span class="lineNum">     583 </span><span class="lineNoCov">          0 :     if (!ptr) {</span>
+<span class="lineNum">     584 </span><span class="lineNoCov">          0 :         fr-&gt;events = newevent;</span>
+<span class="lineNum">     585 </span>            :     } else {
+<span class="lineNum">     586 </span><span class="lineNoCov">          0 :         ptr-&gt;next = newevent;</span>
+<span class="lineNum">     587 </span>            :     }
+<span class="lineNum">     588 </span>            : }
+<span class="lineNum">     589 </span>            : 
+<span class="lineNum">     590 </span>            : /*
+<span class="lineNum">     591 </span>            :  * Removes the first event of one of the specified types from the event queue
+<span class="lineNum">     592 </span>            :  * of the given program instance.
+<span class="lineNum">     593 </span>            :  * Returns a pointer to the removed event to the caller.
+<span class="lineNum">     594 </span>            :  * Returns NULL if no matching events are found.
+<span class="lineNum">     595 </span>            :  * You will need to call muf_event_free() on the returned data when you
+<span class="lineNum">     596 </span>            :  * are done with it and wish to free it from memory.
+<a name="597"><span class="lineNum">     597 </span>            :  */</a>
+<span class="lineNum">     598 </span>            : struct mufevent *
+<span class="lineNum">     599 </span><span class="lineNoCov">          0 : muf_event_pop_specific(struct frame *fr, int eventcount, char **events)</span>
+<span class="lineNum">     600 </span>            : {
+<span class="lineNum">     601 </span><span class="lineNoCov">          0 :     struct mufevent *tmp = NULL;</span>
+<span class="lineNum">     602 </span><span class="lineNoCov">          0 :     struct mufevent *ptr = NULL;</span>
+<span class="lineNum">     603 </span>            : 
+<span class="lineNum">     604 </span><span class="lineNoCov">          0 :     for (int i = 0; i &lt; eventcount; i++) {</span>
+<span class="lineNum">     605 </span><span class="lineNoCov">          0 :         if (fr-&gt;events &amp;&amp; equalstr(events[i], fr-&gt;events-&gt;event)) {</span>
+<span class="lineNum">     606 </span><span class="lineNoCov">          0 :             tmp = fr-&gt;events;</span>
+<span class="lineNum">     607 </span><span class="lineNoCov">          0 :             fr-&gt;events = tmp-&gt;next;</span>
+<span class="lineNum">     608 </span><span class="lineNoCov">          0 :             return tmp;</span>
+<span class="lineNum">     609 </span>            :         }
+<span class="lineNum">     610 </span>            :     }
+<span class="lineNum">     611 </span>            : 
+<span class="lineNum">     612 </span><span class="lineNoCov">          0 :     ptr = fr-&gt;events;</span>
+<span class="lineNum">     613 </span><span class="lineNoCov">          0 :     while (ptr &amp;&amp; ptr-&gt;next) {</span>
+<span class="lineNum">     614 </span><span class="lineNoCov">          0 :         for (int i = 0; i &lt; eventcount; i++) {</span>
+<span class="lineNum">     615 </span><span class="lineNoCov">          0 :             if (equalstr(events[i], ptr-&gt;next-&gt;event)) {</span>
+<span class="lineNum">     616 </span><span class="lineNoCov">          0 :                 tmp = ptr-&gt;next;</span>
+<span class="lineNum">     617 </span><span class="lineNoCov">          0 :                 ptr-&gt;next = tmp-&gt;next;</span>
+<span class="lineNum">     618 </span><span class="lineNoCov">          0 :                 return tmp;</span>
+<span class="lineNum">     619 </span>            :             }
+<span class="lineNum">     620 </span>            :         }
+<span class="lineNum">     621 </span><span class="lineNoCov">          0 :         ptr = ptr-&gt;next;</span>
+<span class="lineNum">     622 </span>            :     }
+<span class="lineNum">     623 </span>            : 
+<span class="lineNum">     624 </span>            :     return NULL;
+<span class="lineNum">     625 </span>            : }
+<span class="lineNum">     626 </span>            : 
+<span class="lineNum">     627 </span>            : /*
+<span class="lineNum">     628 </span>            :  * This pops the top muf event off of the given program instance's
+<span class="lineNum">     629 </span>            :  * event queue, and returns it to the caller.  The caller should
+<span class="lineNum">     630 </span>            :  * call muf_event_free() on the data when it is done with it.
+<a name="631"><span class="lineNum">     631 </span>            :  */</a>
+<span class="lineNum">     632 </span>            : static struct mufevent *
+<span class="lineNum">     633 </span><span class="lineNoCov">          0 : muf_event_pop(struct frame *fr)</span>
+<span class="lineNum">     634 </span>            : {
+<span class="lineNum">     635 </span><span class="lineNoCov">          0 :     struct mufevent *ptr = NULL;</span>
+<span class="lineNum">     636 </span>            : 
+<span class="lineNum">     637 </span><span class="lineNoCov">          0 :     if (fr-&gt;events) {</span>
+<span class="lineNum">     638 </span><span class="lineNoCov">          0 :         ptr = fr-&gt;events;</span>
+<span class="lineNum">     639 </span><span class="lineNoCov">          0 :         fr-&gt;events = fr-&gt;events-&gt;next;</span>
+<span class="lineNum">     640 </span>            :     }
+<span class="lineNum">     641 </span><span class="lineNoCov">          0 :     return ptr;</span>
+<span class="lineNum">     642 </span>            : }
+<span class="lineNum">     643 </span>            : 
+<span class="lineNum">     644 </span>            : /*
+<span class="lineNum">     645 </span>            :  * purges all muf events from the given program instance's event queue.
+<a name="646"><span class="lineNum">     646 </span>            :  */</a>
+<span class="lineNum">     647 </span>            : void
+<span class="lineNum">     648 </span><span class="lineNoCov">          0 : muf_event_purge(struct frame *fr)</span>
+<span class="lineNum">     649 </span>            : {
+<span class="lineNum">     650 </span><span class="lineNoCov">          0 :     while (fr-&gt;events) {</span>
+<span class="lineNum">     651 </span><span class="lineNoCov">          0 :         muf_event_free(muf_event_pop(fr));</span>
+<span class="lineNum">     652 </span>            :     }
+<span class="lineNum">     653 </span><span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     654 </span>            : 
+<span class="lineNum">     655 </span>            : /*
+<span class="lineNum">     656 </span>            :  * For all program instances who are in the EVENT_WAIT queue,
+<span class="lineNum">     657 </span>            :  * check to see if they have any items in their event queue.
+<span class="lineNum">     658 </span>            :  * If so, then process one each.  Up to ten programs can have
+<span class="lineNum">     659 </span>            :  * events processed at a time.
+<span class="lineNum">     660 </span>            :  *
+<span class="lineNum">     661 </span>            :  * This also needs to make sure that background processes aren't
+<span class="lineNum">     662 </span>            :  * waiting for READ events.
+<a name="663"><span class="lineNum">     663 </span>            :  */</a>
+<span class="lineNum">     664 </span>            : void
+<span class="lineNum">     665 </span><span class="lineCov">        227 : muf_event_process(void)</span>
+<span class="lineNum">     666 </span>            : {
+<span class="lineNum">     667 </span><span class="lineCov">        227 :     int limit = 10;</span>
+<span class="lineNum">     668 </span>            :     struct mufevent_process *proc, *next;
+<span class="lineNum">     669 </span>            :     struct mufevent *ev;
+<span class="lineNum">     670 </span>            :     dbref current_program;
+<span class="lineNum">     671 </span>            :     int block, is_fg;
+<span class="lineNum">     672 </span>            : 
+<span class="lineNum">     673 </span><span class="lineCov">        227 :     proc = mufevent_processes;</span>
+<span class="lineNum">     674 </span><span class="lineCov">        454 :     while (proc != NULL) {</span>
+<span class="lineNum">     675 </span><span class="lineNoCov">          0 :         next = proc-&gt;next;</span>
+<span class="lineNum">     676 </span><span class="lineNoCov">          0 :         if (proc-&gt;deleted) {</span>
+<span class="lineNum">     677 </span><span class="lineNoCov">          0 :             muf_event_process_free(proc);</span>
+<span class="lineNum">     678 </span>            :         }
+<span class="lineNum">     679 </span>            :         proc = next;
+<span class="lineNum">     680 </span>            :     }
+<span class="lineNum">     681 </span>            : 
+<span class="lineNum">     682 </span><span class="lineCov">        227 :     proc = mufevent_processes;</span>
+<span class="lineNum">     683 </span><span class="lineCov">        454 :     while (proc != NULL &amp;&amp; limit &gt; 0) {</span>
+<span class="lineNum">     684 </span><span class="lineNoCov">          0 :         if (!proc-&gt;deleted &amp;&amp; proc-&gt;fr) {</span>
+<span class="lineNum">     685 </span><span class="lineNoCov">          0 :             if (proc-&gt;filtercount &gt; 0) {</span>
+<span class="lineNum">     686 </span>            :                 /* Make sure it's not waiting for a READ event, if it's
+<span class="lineNum">     687 </span>            :                  * backgrounded */
+<span class="lineNum">     688 </span>            : 
+<span class="lineNum">     689 </span><span class="lineNoCov">          0 :                 if (proc-&gt;fr-&gt;been_background) {</span>
+<span class="lineNum">     690 </span><span class="lineNoCov">          0 :                     for (int cnt = 0; cnt &lt; proc-&gt;filtercount; cnt++) {</span>
+<span class="lineNum">     691 </span><span class="lineNoCov">          0 :                         if (0 == strcasecmp(proc-&gt;filters[cnt], &quot;READ&quot;)) {</span>
+<span class="lineNum">     692 </span>            :                             /* It's a backgrounded process, waiting for a READ...
+<span class="lineNum">     693 </span>            :                              * should we throw an error?  Should we push a
+<span class="lineNum">     694 </span>            :                              * null event onto the list?  At this point, I'm
+<span class="lineNum">     695 </span>            :                              * pushing a READ event with descr = -1, so that
+<span class="lineNum">     696 </span>            :                              * it will at least get out of its loop. -winged
+<span class="lineNum">     697 </span>            :                              */
+<span class="lineNum">     698 </span>            :                             struct inst temp;
+<span class="lineNum">     699 </span><span class="lineNoCov">          0 :                             temp.type = PROG_INTEGER;</span>
+<span class="lineNum">     700 </span><span class="lineNoCov">          0 :                             temp.data.number = -1;</span>
+<span class="lineNum">     701 </span><span class="lineNoCov">          0 :                             muf_event_add(proc-&gt;fr, &quot;READ&quot;, &amp;temp, 0);</span>
+<span class="lineNum">     702 </span><span class="lineNoCov">          0 :                             CLEAR(&amp;temp);</span>
+<span class="lineNum">     703 </span>            :                             break;
+<span class="lineNum">     704 </span>            :                         }
+<span class="lineNum">     705 </span>            :                     }
+<span class="lineNum">     706 </span>            :                 }
+<span class="lineNum">     707 </span>            : 
+<span class="lineNum">     708 </span>            : 
+<span class="lineNum">     709 </span>            :                 /* Search prog's event list for the apropriate event type. */
+<span class="lineNum">     710 </span>            : 
+<span class="lineNum">     711 </span>            :                 /* HACK:  This is probably inefficient to be walking this
+<span class="lineNum">     712 </span>            :                  * queue over and over. Hopefully it's usually a short list.
+<span class="lineNum">     713 </span>            :                  *
+<span class="lineNum">     714 </span>            :                  * Would it be more efficient to use a hash table?  It'd
+<span class="lineNum">     715 </span>            :                  * be more wasteful of memory, I think. -winged
+<span class="lineNum">     716 </span>            :                  */
+<span class="lineNum">     717 </span><span class="lineNoCov">          0 :                 ev = muf_event_pop_specific(proc-&gt;fr, proc-&gt;filtercount, proc-&gt;filters);</span>
+<span class="lineNum">     718 </span>            :             } else {
+<span class="lineNum">     719 </span>            :                 /* Pop first event off of prog's event queue. */
+<span class="lineNum">     720 </span><span class="lineNoCov">          0 :                 ev = muf_event_pop(proc-&gt;fr);</span>
+<span class="lineNum">     721 </span>            :             }
+<span class="lineNum">     722 </span><span class="lineNoCov">          0 :             if (ev) {</span>
+<span class="lineNum">     723 </span><span class="lineNoCov">          0 :                 --limit;</span>
+<span class="lineNum">     724 </span><span class="lineNoCov">          0 :                 if (proc-&gt;fr-&gt;argument.top + 1 &gt;= STACK_SIZE) {</span>
+<span class="lineNum">     725 </span>            :                     /* Uh oh! That MUF program's stack is full!
+<span class="lineNum">     726 </span>            :                      * Print an error, free the frame, and exit.
+<span class="lineNum">     727 </span>            :                      */
+<span class="lineNum">     728 </span><span class="lineNoCov">          0 :                     notify_nolisten(proc-&gt;player, &quot;Program stack overflow.&quot;, 1);</span>
+<span class="lineNum">     729 </span><span class="lineNoCov">          0 :                     prog_clean(proc-&gt;fr);</span>
+<span class="lineNum">     730 </span>            :                 } else {
+<span class="lineNum">     731 </span><span class="lineNoCov">          0 :                     current_program = PLAYER_CURR_PROG(proc-&gt;player);</span>
+<span class="lineNum">     732 </span><span class="lineNoCov">          0 :                     block = PLAYER_BLOCK(proc-&gt;player);</span>
+<span class="lineNum">     733 </span><span class="lineNoCov">          0 :                     is_fg = (proc-&gt;fr-&gt;multitask != BACKGROUND);</span>
+<span class="lineNum">     734 </span>            : 
+<span class="lineNum">     735 </span><span class="lineNoCov">          0 :                     copyinst(&amp;ev-&gt;data, &amp;(proc-&gt;fr-&gt;argument.st[proc-&gt;fr-&gt;argument.top]));</span>
+<span class="lineNum">     736 </span><span class="lineNoCov">          0 :                     proc-&gt;fr-&gt;argument.top++;</span>
+<span class="lineNum">     737 </span><span class="lineNoCov">          0 :                     push(proc-&gt;fr-&gt;argument.st, &amp;(proc-&gt;fr-&gt;argument.top),</span>
+<span class="lineNum">     738 </span><span class="lineNoCov">          0 :                          PROG_STRING, MIPSCAST alloc_prog_string(ev-&gt;event));</span>
+<span class="lineNum">     739 </span>            : 
+<span class="lineNum">     740 </span><span class="lineNoCov">          0 :                     interp_loop(proc-&gt;player, proc-&gt;prog, proc-&gt;fr, 0);</span>
+<span class="lineNum">     741 </span>            : 
+<span class="lineNum">     742 </span><span class="lineNoCov">          0 :                     if (!is_fg) {</span>
+<span class="lineNum">     743 </span><span class="lineNoCov">          0 :                         PLAYER_SET_BLOCK(proc-&gt;player, block);</span>
+<span class="lineNum">     744 </span><span class="lineNoCov">          0 :                         PLAYER_SET_CURR_PROG(proc-&gt;player, current_program);</span>
+<span class="lineNum">     745 </span>            :                     }
+<span class="lineNum">     746 </span>            :                 }
+<span class="lineNum">     747 </span><span class="lineNoCov">          0 :                 muf_event_free(ev);</span>
+<span class="lineNum">     748 </span>            : 
+<span class="lineNum">     749 </span><span class="lineNoCov">          0 :                 proc-&gt;fr = NULL;     /* We do NOT want to free this program after every EVENT_WAIT. */</span>
+<span class="lineNum">     750 </span><span class="lineNoCov">          0 :                 proc-&gt;deleted = 1;</span>
+<span class="lineNum">     751 </span>            :             }
+<span class="lineNum">     752 </span>            :         }
+<span class="lineNum">     753 </span><span class="lineNoCov">          0 :         proc = proc-&gt;next;</span>
+<span class="lineNum">     754 </span>            :     }
+<span class="lineNum">     755 </span><span class="lineCov">        227 :     proc = mufevent_processes;</span>
+<span class="lineNum">     756 </span><span class="lineCov">        454 :     while (proc != NULL) {</span>
+<span class="lineNum">     757 </span><span class="lineNoCov">          0 :         next = proc-&gt;next;</span>
+<span class="lineNum">     758 </span><span class="lineNoCov">          0 :         if (proc-&gt;deleted) {</span>
+<span class="lineNum">     759 </span><span class="lineNoCov">          0 :             muf_event_process_free(proc);</span>
+<span class="lineNum">     760 </span>            :         }
+<span class="lineNum">     761 </span>            :         proc = next;
+<span class="lineNum">     762 </span>            :     }
+<span class="lineNum">     763 </span><span class="lineCov">        227 : }</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.12</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

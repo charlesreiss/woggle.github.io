@@ -1,0 +1,340 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage-total - src/help.c</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">src</a> - help.c<span style="font-size: 80%;"> (source / <a href="help.c.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage-total</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">113</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2017-02-26 00:20:31</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">9</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &quot;config.h&quot;</a>
+<span class="lineNum">       2 </span>            : 
+<span class="lineNum">       3 </span>            : #include &quot;db.h&quot;
+<span class="lineNum">       4 </span>            : #include &quot;fbstrings.h&quot;
+<span class="lineNum">       5 </span>            : #include &quot;interface.h&quot;
+<span class="lineNum">       6 </span>            : #include &quot;log.h&quot;
+<span class="lineNum">       7 </span>            : #include &quot;tune.h&quot;
+<span class="lineNum">       8 </span>            : 
+<span class="lineNum">       9 </span>            : #include &lt;stdarg.h&gt;
+<a name="10"><span class="lineNum">      10 </span>            : </a>
+<span class="lineNum">      11 </span>            : static void
+<span class="lineNum">      12 </span><span class="lineNoCov">          0 : index_file(dbref player, const char *onwhat, const char *file)</span>
+<span class="lineNum">      13 </span>            : {
+<span class="lineNum">      14 </span>            :     FILE *f;
+<span class="lineNum">      15 </span>            :     char buf[BUFFER_LEN];
+<span class="lineNum">      16 </span>            :     char topic[BUFFER_LEN];
+<span class="lineNum">      17 </span>            :     char *p;
+<span class="lineNum">      18 </span>            :     int arglen, found;
+<span class="lineNum">      19 </span>            : 
+<span class="lineNum">      20 </span><span class="lineNoCov">          0 :     *topic = '\0';</span>
+<span class="lineNum">      21 </span><span class="lineNoCov">          0 :     strcpyn(topic, sizeof(topic), onwhat);</span>
+<span class="lineNum">      22 </span><span class="lineNoCov">          0 :     if (*onwhat) {</span>
+<span class="lineNum">      23 </span><span class="lineNoCov">          0 :         strcatn(topic, sizeof(topic), &quot;|&quot;);</span>
+<span class="lineNum">      24 </span>            :     }
+<span class="lineNum">      25 </span>            : 
+<span class="lineNum">      26 </span><span class="lineNoCov">          0 :     if ((f = fopen(file, &quot;rb&quot;)) == NULL) {</span>
+<span class="lineNum">      27 </span><span class="lineNoCov">          0 :         notifyf(player, &quot;Sorry, %s is missing.  Management has been notified.&quot;, file);</span>
+<span class="lineNum">      28 </span><span class="lineNoCov">          0 :         fprintf(stderr, &quot;help: No file %s!\n&quot;, file);</span>
+<span class="lineNum">      29 </span>            :     } else {
+<span class="lineNum">      30 </span><span class="lineNoCov">          0 :         if (*topic) {</span>
+<span class="lineNum">      31 </span><span class="lineNoCov">          0 :             arglen = strlen(topic);</span>
+<span class="lineNum">      32 </span>            :             do {
+<span class="lineNum">      33 </span>            :                 do {
+<span class="lineNum">      34 </span><span class="lineNoCov">          0 :                     if (!(fgets(buf, sizeof buf, f))) {</span>
+<span class="lineNum">      35 </span><span class="lineNoCov">          0 :                         notifyf(player, &quot;Sorry, no help available on topic \&quot;%s\&quot;&quot;, onwhat);</span>
+<span class="lineNum">      36 </span><span class="lineNoCov">          0 :                         fclose(f);</span>
+<span class="lineNum">      37 </span><span class="lineNoCov">          0 :                         return;</span>
+<span class="lineNum">      38 </span>            :                     }
+<span class="lineNum">      39 </span><span class="lineNoCov">          0 :                 } while (*buf != '~');</span>
+<span class="lineNum">      40 </span>            :                 do {
+<span class="lineNum">      41 </span><span class="lineNoCov">          0 :                     if (!(fgets(buf, sizeof buf, f))) {</span>
+<span class="lineNum">      42 </span><span class="lineNoCov">          0 :                         notifyf(player, &quot;Sorry, no help available on topic \&quot;%s\&quot;&quot;, onwhat);</span>
+<span class="lineNum">      43 </span><span class="lineNoCov">          0 :                         fclose(f);</span>
+<span class="lineNum">      44 </span><span class="lineNoCov">          0 :                         return;</span>
+<span class="lineNum">      45 </span>            :                     }
+<span class="lineNum">      46 </span><span class="lineNoCov">          0 :                 } while (*buf == '~');</span>
+<span class="lineNum">      47 </span><span class="lineNoCov">          0 :                 p = buf;</span>
+<span class="lineNum">      48 </span><span class="lineNoCov">          0 :                 found = 0;</span>
+<span class="lineNum">      49 </span><span class="lineNoCov">          0 :                 buf[strlen(buf) - 1] = '|';</span>
+<span class="lineNum">      50 </span><span class="lineNoCov">          0 :                 while (*p &amp;&amp; !found) {</span>
+<span class="lineNum">      51 </span><span class="lineNoCov">          0 :                     if (strncasecmp(p, topic, arglen)) {</span>
+<span class="lineNum">      52 </span><span class="lineNoCov">          0 :                         while (*p &amp;&amp; (*p != '|'))</span>
+<span class="lineNum">      53 </span><span class="lineNoCov">          0 :                             p++;</span>
+<span class="lineNum">      54 </span><span class="lineNoCov">          0 :                         if (*p)</span>
+<span class="lineNum">      55 </span><span class="lineNoCov">          0 :                             p++;</span>
+<span class="lineNum">      56 </span>            :                     } else {
+<span class="lineNum">      57 </span>            :                         found = 1;
+<span class="lineNum">      58 </span>            :                     }
+<span class="lineNum">      59 </span>            :                 }
+<span class="lineNum">      60 </span><span class="lineNoCov">          0 :             } while (!found);</span>
+<span class="lineNum">      61 </span>            :         }
+<span class="lineNum">      62 </span><span class="lineNoCov">          0 :         while (fgets(buf, sizeof buf, f)) {</span>
+<span class="lineNum">      63 </span><span class="lineNoCov">          0 :             if (*buf == '~')</span>
+<span class="lineNum">      64 </span>            :                 break;
+<span class="lineNum">      65 </span><span class="lineNoCov">          0 :             for (p = buf; *p; p++) {</span>
+<span class="lineNum">      66 </span><span class="lineNoCov">          0 :                 if (*p == '\n' || *p == '\r') {</span>
+<span class="lineNum">      67 </span><span class="lineNoCov">          0 :                     *p = '\0';</span>
+<span class="lineNum">      68 </span><span class="lineNoCov">          0 :                     break;</span>
+<span class="lineNum">      69 </span>            :                 }
+<span class="lineNum">      70 </span>            :             }
+<span class="lineNum">      71 </span><span class="lineNoCov">          0 :             if (*buf) {</span>
+<span class="lineNum">      72 </span><span class="lineNoCov">          0 :                 notify(player, buf);</span>
+<span class="lineNum">      73 </span>            :             } else {
+<span class="lineNum">      74 </span><span class="lineNoCov">          0 :                 notify(player, &quot;  &quot;);</span>
+<span class="lineNum">      75 </span>            :             }
+<span class="lineNum">      76 </span>            :         }
+<span class="lineNum">      77 </span><span class="lineNoCov">          0 :         fclose(f);</span>
+<span class="lineNum">      78 </span>            :     }
+<span class="lineNum">      79 </span>            : }
+<a name="80"><span class="lineNum">      80 </span>            : </a>
+<span class="lineNum">      81 </span>            : void
+<span class="lineNum">      82 </span><span class="lineNoCov">          0 : do_man(dbref player, char *topic, char *seg)</span>
+<span class="lineNum">      83 </span>            : {
+<span class="lineNum">      84 </span><span class="lineNoCov">          0 :     if (show_subfile(player, tp_file_man_dir, topic, seg, 0))</span>
+<span class="lineNum">      85 </span>            :         return;
+<span class="lineNum">      86 </span><span class="lineNoCov">          0 :     index_file(player, topic, tp_file_man);</span>
+<span class="lineNum">      87 </span>            : }
+<a name="88"><span class="lineNum">      88 </span>            : </a>
+<span class="lineNum">      89 </span>            : void
+<span class="lineNum">      90 </span><span class="lineNoCov">          0 : do_mpihelp(dbref player, char *topic, char *seg)</span>
+<span class="lineNum">      91 </span>            : {
+<span class="lineNum">      92 </span><span class="lineNoCov">          0 :     if (show_subfile(player, tp_file_mpihelp_dir, topic, seg, 0))</span>
+<span class="lineNum">      93 </span>            :         return;
+<span class="lineNum">      94 </span><span class="lineNoCov">          0 :     index_file(player, topic, tp_file_mpihelp);</span>
+<span class="lineNum">      95 </span>            : }
+<a name="96"><span class="lineNum">      96 </span>            : </a>
+<span class="lineNum">      97 </span>            : void
+<span class="lineNum">      98 </span><span class="lineNoCov">          0 : do_help(dbref player, char *topic, char *seg)</span>
+<span class="lineNum">      99 </span>            : {
+<span class="lineNum">     100 </span><span class="lineNoCov">          0 :     if (show_subfile(player, tp_file_help_dir, topic, seg, 0))</span>
+<span class="lineNum">     101 </span>            :         return;
+<span class="lineNum">     102 </span><span class="lineNoCov">          0 :     index_file(player, topic, tp_file_help);</span>
+<span class="lineNum">     103 </span>            : }
+<a name="104"><span class="lineNum">     104 </span>            : </a>
+<span class="lineNum">     105 </span>            : void
+<span class="lineNum">     106 </span><span class="lineNoCov">          0 : do_news(dbref player, char *topic, char *seg)</span>
+<span class="lineNum">     107 </span>            : {
+<span class="lineNum">     108 </span><span class="lineNoCov">          0 :     if (show_subfile(player, tp_file_news_dir, topic, seg, 0))</span>
+<span class="lineNum">     109 </span>            :         return;
+<span class="lineNum">     110 </span><span class="lineNoCov">          0 :     index_file(player, topic, tp_file_news);</span>
+<span class="lineNum">     111 </span>            : }
+<a name="112"><span class="lineNum">     112 </span>            : </a>
+<span class="lineNum">     113 </span>            : static void
+<span class="lineNum">     114 </span><span class="lineNoCov">          0 : add_motd_text_fmt(const char *text)</span>
+<span class="lineNum">     115 </span>            : {
+<span class="lineNum">     116 </span>            :     char buf[80];
+<span class="lineNum">     117 </span><span class="lineNoCov">          0 :     const char *p = text;</span>
+<span class="lineNum">     118 </span><span class="lineNoCov">          0 :     int count = 4;</span>
+<span class="lineNum">     119 </span>            : 
+<span class="lineNum">     120 </span><span class="lineNoCov">          0 :     buf[0] = buf[1] = buf[2] = buf[3] = ' ';</span>
+<span class="lineNum">     121 </span><span class="lineNoCov">          0 :     while (*p) {</span>
+<span class="lineNum">     122 </span><span class="lineNoCov">          0 :         while (*p &amp;&amp; (count &lt; 68))</span>
+<span class="lineNum">     123 </span><span class="lineNoCov">          0 :             buf[count++] = *p++;</span>
+<span class="lineNum">     124 </span><span class="lineNoCov">          0 :         while (*p &amp;&amp; !isspace(*p) &amp;&amp; (count &lt; 76))</span>
+<span class="lineNum">     125 </span><span class="lineNoCov">          0 :             buf[count++] = *p++;</span>
+<span class="lineNum">     126 </span><span class="lineNoCov">          0 :         buf[count] = '\0';</span>
+<span class="lineNum">     127 </span><span class="lineNoCov">          0 :         log2file(tp_file_motd, &quot;%s&quot;, buf);</span>
+<span class="lineNum">     128 </span><span class="lineNoCov">          0 :         while (*p &amp;&amp; isspace(*p))</span>
+<span class="lineNum">     129 </span><span class="lineNoCov">          0 :             p++;</span>
+<span class="lineNum">     130 </span>            :         count = 0;
+<span class="lineNum">     131 </span>            :     }
+<span class="lineNum">     132 </span><span class="lineNoCov">          0 : }</span>
+<a name="133"><span class="lineNum">     133 </span>            : </a>
+<span class="lineNum">     134 </span>            : void
+<span class="lineNum">     135 </span><span class="lineNoCov">          0 : do_motd(dbref player, char *text)</span>
+<span class="lineNum">     136 </span>            : {
+<span class="lineNum">     137 </span>            :     time_t lt;
+<span class="lineNum">     138 </span>            : 
+<span class="lineNum">     139 </span><span class="lineNoCov">          0 :     if (!*text || !Wizard(OWNER(player))) {</span>
+<span class="lineNum">     140 </span><span class="lineNoCov">          0 :         spit_file(player, tp_file_motd);</span>
+<span class="lineNum">     141 </span><span class="lineNoCov">          0 :         return;</span>
+<span class="lineNum">     142 </span>            :     }
+<span class="lineNum">     143 </span><span class="lineNoCov">          0 :     if (!strcasecmp(text, &quot;clear&quot;)) {</span>
+<span class="lineNum">     144 </span><span class="lineNoCov">          0 :         unlink(tp_file_motd);</span>
+<span class="lineNum">     145 </span><span class="lineNoCov">          0 :         log2file(tp_file_motd, &quot;%s %s&quot;, &quot;- - - - - - - - - - - - - - - - - - -&quot;,</span>
+<span class="lineNum">     146 </span>            :                  &quot;- - - - - - - - - - - - - - - - - - -&quot;);
+<span class="lineNum">     147 </span><span class="lineNoCov">          0 :         notify(player, &quot;MOTD cleared.&quot;);</span>
+<span class="lineNum">     148 </span><span class="lineNoCov">          0 :         return;</span>
+<span class="lineNum">     149 </span>            :     }
+<span class="lineNum">     150 </span><span class="lineNoCov">          0 :     lt = time(NULL);</span>
+<span class="lineNum">     151 </span><span class="lineNoCov">          0 :     log2file(tp_file_motd, &quot;%.16s&quot;, ctime(&amp;lt));</span>
+<span class="lineNum">     152 </span><span class="lineNoCov">          0 :     add_motd_text_fmt(text);</span>
+<span class="lineNum">     153 </span><span class="lineNoCov">          0 :     log2file(tp_file_motd, &quot;%s %s&quot;, &quot;- - - - - - - - - - - - - - - - - - -&quot;,</span>
+<span class="lineNum">     154 </span>            :              &quot;- - - - - - - - - - - - - - - - - - -&quot;);
+<span class="lineNum">     155 </span><span class="lineNoCov">          0 :     notify(player, &quot;MOTD updated.&quot;);</span>
+<span class="lineNum">     156 </span>            : }
+<a name="157"><span class="lineNum">     157 </span>            : </a>
+<span class="lineNum">     158 </span>            : void
+<span class="lineNum">     159 </span><span class="lineNoCov">          0 : do_info(dbref player, const char *topic, const char *seg)</span>
+<span class="lineNum">     160 </span>            : {
+<span class="lineNum">     161 </span>            :     char *buf;
+<span class="lineNum">     162 </span>            :     int f;
+<span class="lineNum">     163 </span>            :     int cols;
+<span class="lineNum">     164 </span><span class="lineNoCov">          0 :     int buflen = 80;</span>
+<span class="lineNum">     165 </span>            : 
+<span class="lineNum">     166 </span>            : #ifdef DIR_AVALIBLE
+<span class="lineNum">     167 </span>            :     DIR *df;
+<span class="lineNum">     168 </span>            :     struct dirent *dp;
+<span class="lineNum">     169 </span>            : #endif
+<span class="lineNum">     170 </span>            : #ifdef WIN32
+<span class="lineNum">     171 </span>            :     HANDLE hFind;
+<span class="lineNum">     172 </span>            :     BOOL bMore;
+<span class="lineNum">     173 </span>            :     WIN32_FIND_DATA finddata;
+<span class="lineNum">     174 </span>            :     char *dirname;
+<span class="lineNum">     175 </span>            :     int dirnamelen = 0;
+<span class="lineNum">     176 </span>            : #endif
+<span class="lineNum">     177 </span>            : 
+<span class="lineNum">     178 </span><span class="lineNoCov">          0 :     if (*topic) {</span>
+<span class="lineNum">     179 </span><span class="lineNoCov">          0 :         if (!show_subfile(player, tp_file_info_dir, topic, seg, 1)) {</span>
+<span class="lineNum">     180 </span><span class="lineNoCov">          0 :             notify(player, NO_INFO_MSG);</span>
+<span class="lineNum">     181 </span>            :         }
+<span class="lineNum">     182 </span>            :     } else {
+<span class="lineNum">     183 </span>            : #ifdef DIR_AVALIBLE
+<span class="lineNum">     184 </span><span class="lineNoCov">          0 :         buf = (char *) calloc(1, buflen);</span>
+<span class="lineNum">     185 </span><span class="lineNoCov">          0 :         (void) strcpyn(buf, buflen, &quot;    &quot;);</span>
+<span class="lineNum">     186 </span><span class="lineNoCov">          0 :         f = 0;</span>
+<span class="lineNum">     187 </span><span class="lineNoCov">          0 :         cols = 0;</span>
+<span class="lineNum">     188 </span><span class="lineNoCov">          0 :         if ((df = (DIR *) opendir(tp_file_info_dir))) {</span>
+<span class="lineNum">     189 </span><span class="lineNoCov">          0 :             while ((dp = readdir(df))) {</span>
+<span class="lineNum">     190 </span>            : 
+<span class="lineNum">     191 </span><span class="lineNoCov">          0 :                 if (*(dp-&gt;d_name) != '.') {</span>
+<span class="lineNum">     192 </span><span class="lineNoCov">          0 :                     if (!f)</span>
+<span class="lineNum">     193 </span><span class="lineNoCov">          0 :                         notify(player, &quot;Available information files are:&quot;);</span>
+<span class="lineNum">     194 </span><span class="lineNoCov">          0 :                     if ((cols++ &gt; 2) || ((strlen(buf) + strlen(dp-&gt;d_name)) &gt; 63)) {</span>
+<span class="lineNum">     195 </span><span class="lineNoCov">          0 :                         notify(player, buf);</span>
+<span class="lineNum">     196 </span><span class="lineNoCov">          0 :                         strcpyn(buf, buflen, &quot;    &quot;);</span>
+<span class="lineNum">     197 </span><span class="lineNoCov">          0 :                         cols = 0;</span>
+<span class="lineNum">     198 </span>            :                     }
+<span class="lineNum">     199 </span><span class="lineNoCov">          0 :                     strcatn(buf, buflen, dp-&gt;d_name);</span>
+<span class="lineNum">     200 </span><span class="lineNoCov">          0 :                     strcatn(buf, buflen, &quot; &quot;);</span>
+<span class="lineNum">     201 </span><span class="lineNoCov">          0 :                     f = strlen(buf);</span>
+<span class="lineNum">     202 </span><span class="lineNoCov">          0 :                     while ((f % 20) != 4)</span>
+<span class="lineNum">     203 </span><span class="lineNoCov">          0 :                         buf[f++] = ' ';</span>
+<span class="lineNum">     204 </span><span class="lineNoCov">          0 :                     buf[f] = '\0';</span>
+<span class="lineNum">     205 </span>            :                 }
+<span class="lineNum">     206 </span>            :             }
+<span class="lineNum">     207 </span><span class="lineNoCov">          0 :             closedir(df);</span>
+<span class="lineNum">     208 </span>            :         }
+<span class="lineNum">     209 </span><span class="lineNoCov">          0 :         if (f)</span>
+<span class="lineNum">     210 </span><span class="lineNoCov">          0 :             notify(player, buf);</span>
+<span class="lineNum">     211 </span>            :         else
+<span class="lineNum">     212 </span><span class="lineNoCov">          0 :             notify(player, &quot;No information files are available.&quot;);</span>
+<span class="lineNum">     213 </span><span class="lineNoCov">          0 :         free(buf);</span>
+<span class="lineNum">     214 </span>            : #elif WIN32
+<span class="lineNum">     215 </span>            :         buf = (char *) calloc(1, buflen);
+<span class="lineNum">     216 </span>            :         (void) strcpyn(buf, buflen, &quot;    &quot;);
+<span class="lineNum">     217 </span>            :         f = 0;
+<span class="lineNum">     218 </span>            :         cols = 0;
+<span class="lineNum">     219 </span>            : 
+<span class="lineNum">     220 </span>            :         dirnamelen = strlen(tp_file_info_dir) + 4;
+<span class="lineNum">     221 </span>            :         dirname = (char *) malloc(dirnamelen);
+<span class="lineNum">     222 </span>            :         strcpyn(dirname, dirnamelen, tp_file_info_dir);
+<span class="lineNum">     223 </span>            :         strcatn(dirname, dirnamelen, &quot;*.*&quot;);
+<span class="lineNum">     224 </span>            :         hFind = FindFirstFile(dirname, &amp;finddata);
+<span class="lineNum">     225 </span>            :         bMore = (hFind != (HANDLE) - 1);
+<span class="lineNum">     226 </span>            : 
+<span class="lineNum">     227 </span>            :         free(dirname);
+<span class="lineNum">     228 </span>            : 
+<span class="lineNum">     229 </span>            :         while (bMore) {
+<span class="lineNum">     230 </span>            :             if (!(finddata.dwFileAttributes &amp; FILE_ATTRIBUTE_DIRECTORY)) {
+<span class="lineNum">     231 </span>            :                 if (!f)
+<span class="lineNum">     232 </span>            :                     notify(player, &quot;Available information files are:&quot;);
+<span class="lineNum">     233 </span>            :                 if ((cols++ &gt; 2) || ((strlen(buf) + strlen(finddata.cFileName)) &gt; 63)) {
+<span class="lineNum">     234 </span>            :                     notify(player, buf);
+<span class="lineNum">     235 </span>            :                     (void) strcpyn(buf, buflen, &quot;    &quot;);
+<span class="lineNum">     236 </span>            :                     cols = 0;
+<span class="lineNum">     237 </span>            :                 }
+<span class="lineNum">     238 </span>            :                 strcatn(buf, buflen, finddata.cFileName);
+<span class="lineNum">     239 </span>            :                 strcatn(buf, buflen, &quot; &quot;);
+<span class="lineNum">     240 </span>            :                 f = strlen(buf);
+<span class="lineNum">     241 </span>            :                 while ((f % 20) != 4)
+<span class="lineNum">     242 </span>            :                     buf[f++] = ' ';
+<span class="lineNum">     243 </span>            :                 buf[f] = '\0';
+<span class="lineNum">     244 </span>            :             }
+<span class="lineNum">     245 </span>            :             bMore = FindNextFile(hFind, &amp;finddata);
+<span class="lineNum">     246 </span>            :         }
+<span class="lineNum">     247 </span>            : 
+<span class="lineNum">     248 </span>            :         if (f)
+<span class="lineNum">     249 </span>            :             notify(player, buf);
+<span class="lineNum">     250 </span>            :         else
+<span class="lineNum">     251 </span>            :             notify(player, &quot;There are no information files available.&quot;);
+<span class="lineNum">     252 </span>            : 
+<span class="lineNum">     253 </span>            :         free(buf);
+<span class="lineNum">     254 </span>            : #else                           /* !DIR_AVALIBLE &amp;&amp; !WIN32 */
+<span class="lineNum">     255 </span>            :         notify(player, &quot;Index not available on this system.&quot;);
+<span class="lineNum">     256 </span>            : #endif                          /* !DIR_AVALIBLE &amp;&amp; !WIN32 */
+<span class="lineNum">     257 </span>            :     }
+<span class="lineNum">     258 </span><span class="lineNoCov">          0 : }</span>
+<a name="259"><span class="lineNum">     259 </span>            : </a>
+<span class="lineNum">     260 </span>            : void
+<span class="lineNum">     261 </span><span class="lineNoCov">          0 : do_credits(dbref player)</span>
+<span class="lineNum">     262 </span>            : {
+<span class="lineNum">     263 </span><span class="lineNoCov">          0 :     spit_file(player, tp_file_credits);</span>
+<span class="lineNum">     264 </span><span class="lineNoCov">          0 : }</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.12</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

@@ -1,0 +1,1496 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage-total - src/db.c</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">src</a> - db.c<span style="font-size: 80%;"> (source / <a href="db.c.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage-total</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">433</td>
+            <td class="headerCovTableEntry">655</td>
+            <td class="headerCovTableEntryLo">66.1 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2017-02-26 00:20:31</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">41</td>
+            <td class="headerCovTableEntry">46</td>
+            <td class="headerCovTableEntryMed">89.1 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &quot;config.h&quot;</a>
+<span class="lineNum">       2 </span>            : 
+<span class="lineNum">       3 </span>            : #include &quot;compile.h&quot;
+<span class="lineNum">       4 </span>            : #include &quot;db.h&quot;
+<span class="lineNum">       5 </span>            : #ifdef DISKBASE
+<span class="lineNum">       6 </span>            : #include &quot;diskprop.h&quot;
+<span class="lineNum">       7 </span>            : #endif
+<span class="lineNum">       8 </span>            : #include &quot;edit.h&quot;
+<span class="lineNum">       9 </span>            : #include &quot;fbstrings.h&quot;
+<span class="lineNum">      10 </span>            : #include &quot;fbtime.h&quot;
+<span class="lineNum">      11 </span>            : #include &quot;game.h&quot;
+<span class="lineNum">      12 </span>            : #include &quot;interface.h&quot;
+<span class="lineNum">      13 </span>            : #include &quot;match.h&quot;
+<span class="lineNum">      14 </span>            : #include &quot;log.h&quot;
+<span class="lineNum">      15 </span>            : #include &quot;player.h&quot;
+<span class="lineNum">      16 </span>            : #include &quot;predicates.h&quot;
+<span class="lineNum">      17 </span>            : #include &quot;props.h&quot;
+<span class="lineNum">      18 </span>            : #include &quot;tune.h&quot;
+<span class="lineNum">      19 </span>            : 
+<span class="lineNum">      20 </span>            : struct object *db = 0;
+<span class="lineNum">      21 </span>            : objnode *forcelist = 0;
+<span class="lineNum">      22 </span>            : dbref db_top = 0;
+<span class="lineNum">      23 </span>            : dbref recyclable = NOTHING;
+<span class="lineNum">      24 </span>            : static int db_load_format = 0;
+<span class="lineNum">      25 </span>            : 
+<span class="lineNum">      26 </span>            : #ifndef DB_INITIAL_SIZE
+<span class="lineNum">      27 </span>            : #define DB_INITIAL_SIZE 10000
+<span class="lineNum">      28 </span>            : #endif                          /* DB_INITIAL_SIZE */
+<span class="lineNum">      29 </span>            : 
+<span class="lineNum">      30 </span>            : #ifdef DB_DOUBLING
+<span class="lineNum">      31 </span>            : 
+<span class="lineNum">      32 </span>            : dbref db_size = DB_INITIAL_SIZE;
+<span class="lineNum">      33 </span>            : 
+<span class="lineNum">      34 </span>            : #endif                          /* DB_DOUBLING */
+<span class="lineNum">      35 </span>            : 
+<span class="lineNum">      36 </span>            : struct macrotable *macrotop;
+<span class="lineNum">      37 </span>            : 
+<span class="lineNum">      38 </span>            : #ifdef DB_DOUBLING
+<span class="lineNum">      39 </span>            : 
+<span class="lineNum">      40 </span>            : static void
+<span class="lineNum">      41 </span>            : db_grow(dbref newtop)
+<span class="lineNum">      42 </span>            : {
+<span class="lineNum">      43 </span>            :     struct object *newdb;
+<span class="lineNum">      44 </span>            : 
+<span class="lineNum">      45 </span>            :     if (newtop &gt; db_top) {
+<span class="lineNum">      46 </span>            :         db_top = newtop;
+<span class="lineNum">      47 </span>            :         if (!db) {
+<span class="lineNum">      48 </span>            :             /* make the initial one */
+<span class="lineNum">      49 </span>            :             db_size = DB_INITIAL_SIZE;
+<span class="lineNum">      50 </span>            :             while (db_top &gt; db_size)
+<span class="lineNum">      51 </span>            :                 db_size += 1000;
+<span class="lineNum">      52 </span>            :             if ((db = (struct object *) malloc(db_size * sizeof(struct object))) == 0) {
+<span class="lineNum">      53 </span>            :                 abort();
+<span class="lineNum">      54 </span>            :             }
+<span class="lineNum">      55 </span>            :         }
+<span class="lineNum">      56 </span>            :         /* maybe grow it */
+<span class="lineNum">      57 </span>            :         if (db_top &gt; db_size) {
+<span class="lineNum">      58 </span>            :             /* make sure it's big enough */
+<span class="lineNum">      59 </span>            :             while (db_top &gt; db_size)
+<span class="lineNum">      60 </span>            :                 db_size += 1000;
+<span class="lineNum">      61 </span>            :             if ((newdb = (struct object *) realloc((void *) db,
+<span class="lineNum">      62 </span>            :                                                    db_size * sizeof(struct object))) == 0) {
+<span class="lineNum">      63 </span>            :                 abort();
+<span class="lineNum">      64 </span>            :             }
+<span class="lineNum">      65 </span>            :             db = newdb;
+<span class="lineNum">      66 </span>            :         }
+<span class="lineNum">      67 </span>            :     }
+<span class="lineNum">      68 </span>            : }
+<span class="lineNum">      69 </span>            : 
+<span class="lineNum">      70 </span>            : #else                           /* DB_DOUBLING */
+<a name="71"><span class="lineNum">      71 </span>            : </a>
+<span class="lineNum">      72 </span>            : static void
+<span class="lineNum">      73 </span><span class="lineCov">         49 : db_grow(dbref newtop)</span>
+<span class="lineNum">      74 </span>            : {
+<span class="lineNum">      75 </span>            :     struct object *newdb;
+<span class="lineNum">      76 </span>            : 
+<span class="lineNum">      77 </span><span class="lineCov">         49 :     if (newtop &gt; db_top) {</span>
+<span class="lineNum">      78 </span><span class="lineCov">         49 :         db_top = newtop;</span>
+<span class="lineNum">      79 </span><span class="lineCov">         49 :         if (db) {</span>
+<span class="lineNum">      80 </span><span class="lineCov">         23 :             if ((newdb = (struct object *)</span>
+<span class="lineNum">      81 </span><span class="lineCov">         23 :                  realloc((void *) db, db_top * sizeof(struct object))) == 0) {</span>
+<span class="lineNum">      82 </span><span class="lineNoCov">          0 :                 abort();</span>
+<span class="lineNum">      83 </span>            :             }
+<span class="lineNum">      84 </span><span class="lineCov">         23 :             db = newdb;</span>
+<span class="lineNum">      85 </span>            :         } else {
+<span class="lineNum">      86 </span>            :             /* make the initial one */
+<span class="lineNum">      87 </span><span class="lineCov">         26 :             int startsize = (newtop &gt;= DB_INITIAL_SIZE) ? newtop : DB_INITIAL_SIZE;</span>
+<span class="lineNum">      88 </span>            : 
+<span class="lineNum">      89 </span><span class="lineCov">         26 :             if ((db = (struct object *)</span>
+<span class="lineNum">      90 </span><span class="lineCov">         26 :                  malloc(startsize * sizeof(struct object))) == 0) {</span>
+<span class="lineNum">      91 </span><span class="lineNoCov">          0 :                 abort();</span>
+<span class="lineNum">      92 </span>            :             }
+<span class="lineNum">      93 </span>            :         }
+<span class="lineNum">      94 </span>            :     }
+<span class="lineNum">      95 </span><span class="lineCov">         49 : }</span>
+<span class="lineNum">      96 </span>            : 
+<span class="lineNum">      97 </span>            : #endif                          /* DB_DOUBLING */
+<a name="98"><span class="lineNum">      98 </span>            : </a>
+<span class="lineNum">      99 </span>            : void
+<span class="lineNum">     100 </span><span class="lineCov">         75 : db_clear_object(dbref i)</span>
+<span class="lineNum">     101 </span>            : {
+<span class="lineNum">     102 </span><span class="lineCov">         75 :     struct object *o = DBFETCH(i);</span>
+<span class="lineNum">     103 </span>            : 
+<span class="lineNum">     104 </span><span class="lineCov">         75 :     bzero(o, sizeof(struct object));</span>
+<span class="lineNum">     105 </span>            : 
+<span class="lineNum">     106 </span><span class="lineCov">         75 :     NAME(i) = 0;</span>
+<span class="lineNum">     107 </span><span class="lineCov">         75 :     ts_newobject(i);</span>
+<span class="lineNum">     108 </span><span class="lineCov">         75 :     o-&gt;location = NOTHING;</span>
+<span class="lineNum">     109 </span><span class="lineCov">         75 :     o-&gt;contents = NOTHING;</span>
+<span class="lineNum">     110 </span><span class="lineCov">         75 :     o-&gt;exits = NOTHING;</span>
+<span class="lineNum">     111 </span><span class="lineCov">         75 :     o-&gt;next = NOTHING;</span>
+<span class="lineNum">     112 </span><span class="lineCov">         75 :     o-&gt;properties = 0;</span>
+<span class="lineNum">     113 </span>            : 
+<span class="lineNum">     114 </span>            : #ifdef DISKBASE
+<span class="lineNum">     115 </span>            :     o-&gt;propsfpos = 0;
+<span class="lineNum">     116 </span>            :     o-&gt;propstime = 0;
+<span class="lineNum">     117 </span>            :     o-&gt;propsmode = PROPS_UNLOADED;
+<span class="lineNum">     118 </span>            :     o-&gt;nextold = NOTHING;
+<span class="lineNum">     119 </span>            :     o-&gt;prevold = NOTHING;
+<span class="lineNum">     120 </span>            : #endif
+<span class="lineNum">     121 </span>            : 
+<span class="lineNum">     122 </span>            :     /* DBDIRTY(i); */
+<span class="lineNum">     123 </span>            :     /* flags you must initialize yourself */
+<span class="lineNum">     124 </span>            :     /* type-specific fields you must also initialize */
+<span class="lineNum">     125 </span><span class="lineCov">         75 : }</span>
+<a name="126"><span class="lineNum">     126 </span>            : </a>
+<span class="lineNum">     127 </span>            : dbref
+<span class="lineNum">     128 </span><span class="lineCov">         23 : new_object(void)</span>
+<span class="lineNum">     129 </span>            : {
+<span class="lineNum">     130 </span>            :     dbref newobj;
+<span class="lineNum">     131 </span>            : 
+<span class="lineNum">     132 </span><span class="lineCov">         23 :     if (recyclable != NOTHING) {</span>
+<span class="lineNum">     133 </span><span class="lineNoCov">          0 :         newobj = recyclable;</span>
+<span class="lineNum">     134 </span><span class="lineNoCov">          0 :         recyclable = NEXTOBJ(newobj);</span>
+<span class="lineNum">     135 </span><span class="lineNoCov">          0 :         db_free_object(newobj);</span>
+<span class="lineNum">     136 </span>            :     } else {
+<span class="lineNum">     137 </span><span class="lineCov">         23 :         newobj = db_top;</span>
+<span class="lineNum">     138 </span><span class="lineCov">         23 :         db_grow(db_top + 1);</span>
+<span class="lineNum">     139 </span>            :     }
+<span class="lineNum">     140 </span>            : 
+<span class="lineNum">     141 </span>            :     /* clear it out */
+<span class="lineNum">     142 </span><span class="lineCov">         23 :     db_clear_object(newobj);</span>
+<span class="lineNum">     143 </span><span class="lineCov">         23 :     DBDIRTY(newobj);</span>
+<span class="lineNum">     144 </span><span class="lineCov">         23 :     return newobj;</span>
+<span class="lineNum">     145 </span>            : }
+<a name="146"><span class="lineNum">     146 </span>            : </a>
+<span class="lineNum">     147 </span>            : dbref
+<span class="lineNum">     148 </span><span class="lineCov">          6 : create_action(dbref player, const char *name, dbref source)</span>
+<span class="lineNum">     149 </span>            : {
+<span class="lineNum">     150 </span>            :     dbref newact;
+<span class="lineNum">     151 </span>            : 
+<span class="lineNum">     152 </span><span class="lineCov">          6 :     newact = new_object();</span>
+<span class="lineNum">     153 </span><span class="lineCov">          6 :     NAME(newact) = alloc_string(name);</span>
+<span class="lineNum">     154 </span><span class="lineCov">          6 :     FLAGS(newact) = TYPE_EXIT;</span>
+<span class="lineNum">     155 </span><span class="lineCov">          6 :     OWNER(newact) = OWNER(player);</span>
+<span class="lineNum">     156 </span>            : 
+<span class="lineNum">     157 </span><span class="lineCov">          6 :     set_source(player, newact, source);</span>
+<span class="lineNum">     158 </span>            : 
+<span class="lineNum">     159 </span><span class="lineCov">          6 :     DBFETCH(newact)-&gt;sp.exit.ndest = 0;</span>
+<span class="lineNum">     160 </span><span class="lineCov">          6 :     DBFETCH(newact)-&gt;sp.exit.dest = NULL;</span>
+<span class="lineNum">     161 </span>            : 
+<span class="lineNum">     162 </span><span class="lineCov">          6 :     if (tp_autolink_actions) {</span>
+<span class="lineNum">     163 </span><span class="lineNoCov">          0 :         DBFETCH(newact)-&gt;sp.exit.ndest = 1;</span>
+<span class="lineNum">     164 </span><span class="lineNoCov">          0 :         DBFETCH(newact)-&gt;sp.exit.dest = (dbref *) malloc(sizeof(dbref));</span>
+<span class="lineNum">     165 </span><span class="lineNoCov">          0 :         (DBFETCH(newact)-&gt;sp.exit.dest)[0] = NIL;</span>
+<span class="lineNum">     166 </span>            :     }
+<span class="lineNum">     167 </span>            : 
+<span class="lineNum">     168 </span><span class="lineCov">          6 :     return newact;</span>
+<span class="lineNum">     169 </span>            : }
+<a name="170"><span class="lineNum">     170 </span>            : </a>
+<span class="lineNum">     171 </span>            : dbref
+<span class="lineNum">     172 </span><span class="lineCov">          9 : create_program(dbref player, const char *name)</span>
+<span class="lineNum">     173 </span>            : {
+<span class="lineNum">     174 </span>            :     dbref newprog;
+<span class="lineNum">     175 </span>            :     char buf[BUFFER_LEN];
+<span class="lineNum">     176 </span>            :     int jj;
+<span class="lineNum">     177 </span>            : 
+<span class="lineNum">     178 </span><span class="lineCov">          9 :     newprog = new_object();</span>
+<span class="lineNum">     179 </span><span class="lineCov">          9 :     NAME(newprog) = alloc_string(name);</span>
+<span class="lineNum">     180 </span><span class="lineCov">          9 :     snprintf(buf, sizeof(buf), &quot;A scroll containing a spell called %s&quot;, name);</span>
+<span class="lineNum">     181 </span><span class="lineCov">          9 :     SETDESC(newprog, buf);</span>
+<span class="lineNum">     182 </span><span class="lineCov">          9 :     LOCATION(newprog) = player;</span>
+<span class="lineNum">     183 </span><span class="lineCov">          9 :     FLAGS(newprog) = TYPE_PROGRAM;</span>
+<span class="lineNum">     184 </span><span class="lineCov">          9 :     jj = MLevel(player);</span>
+<span class="lineNum">     185 </span><span class="lineCov">          9 :     if (jj &lt; 1)</span>
+<span class="lineNum">     186 </span><span class="lineNoCov">          0 :         jj = 2;</span>
+<span class="lineNum">     187 </span><span class="lineCov">          9 :     if (jj &gt; 3)</span>
+<span class="lineNum">     188 </span><span class="lineCov">          9 :         jj = 3;</span>
+<span class="lineNum">     189 </span><span class="lineCov">          9 :     SetMLevel(newprog, jj);</span>
+<span class="lineNum">     190 </span>            : 
+<span class="lineNum">     191 </span><span class="lineCov">          9 :     OWNER(newprog) = OWNER(player);</span>
+<span class="lineNum">     192 </span><span class="lineCov">          9 :     ALLOC_PROGRAM_SP(newprog);</span>
+<span class="lineNum">     193 </span><span class="lineCov">          9 :     PROGRAM_SET_FIRST(newprog, NULL);</span>
+<span class="lineNum">     194 </span><span class="lineCov">          9 :     PROGRAM_SET_CURR_LINE(newprog, 0);</span>
+<span class="lineNum">     195 </span><span class="lineCov">          9 :     PROGRAM_SET_SIZ(newprog, 0);</span>
+<span class="lineNum">     196 </span><span class="lineCov">          9 :     PROGRAM_SET_CODE(newprog, NULL);</span>
+<span class="lineNum">     197 </span><span class="lineCov">          9 :     PROGRAM_SET_START(newprog, NULL);</span>
+<span class="lineNum">     198 </span><span class="lineCov">          9 :     PROGRAM_SET_PUBS(newprog, NULL);</span>
+<span class="lineNum">     199 </span>            : #ifdef MCP_SUPPORT
+<span class="lineNum">     200 </span><span class="lineCov">          9 :     PROGRAM_SET_MCPBINDS(newprog, NULL);</span>
+<span class="lineNum">     201 </span>            : #endif
+<span class="lineNum">     202 </span><span class="lineCov">          9 :     PROGRAM_SET_PROFTIME(newprog, 0, 0);</span>
+<span class="lineNum">     203 </span><span class="lineCov">          9 :     PROGRAM_SET_PROFSTART(newprog, 0);</span>
+<span class="lineNum">     204 </span><span class="lineCov">          9 :     PROGRAM_SET_PROF_USES(newprog, 0);</span>
+<span class="lineNum">     205 </span><span class="lineCov">          9 :     PROGRAM_SET_INSTANCES(newprog, 0);</span>
+<span class="lineNum">     206 </span>            : 
+<span class="lineNum">     207 </span><span class="lineCov">          9 :     PLAYER_SET_CURR_PROG(player, newprog);</span>
+<span class="lineNum">     208 </span>            : 
+<span class="lineNum">     209 </span><span class="lineCov">          9 :     PUSH(newprog, CONTENTS(player));</span>
+<span class="lineNum">     210 </span><span class="lineCov">          9 :     DBDIRTY(newprog);</span>
+<span class="lineNum">     211 </span><span class="lineCov">          9 :     DBDIRTY(player);</span>
+<span class="lineNum">     212 </span>            : 
+<span class="lineNum">     213 </span><span class="lineCov">          9 :     return newprog;</span>
+<span class="lineNum">     214 </span>            : }
+<a name="215"><span class="lineNum">     215 </span>            : </a>
+<span class="lineNum">     216 </span>            : dbref
+<span class="lineNum">     217 </span><span class="lineCov">          5 : create_room(dbref player, const char *name, dbref parent)</span>
+<span class="lineNum">     218 </span>            : {
+<span class="lineNum">     219 </span>            :     dbref newroom;
+<span class="lineNum">     220 </span>            : 
+<span class="lineNum">     221 </span><span class="lineCov">          5 :     newroom = new_object();</span>
+<span class="lineNum">     222 </span><span class="lineCov">          5 :     NAME(newroom) = alloc_string(name);</span>
+<span class="lineNum">     223 </span><span class="lineCov">          5 :     LOCATION(newroom) = parent;</span>
+<span class="lineNum">     224 </span><span class="lineCov">          5 :     PUSH(newroom, CONTENTS(parent));</span>
+<span class="lineNum">     225 </span><span class="lineCov">          5 :     FLAGS(newroom) = TYPE_ROOM | (FLAGS(player) &amp; JUMP_OK);</span>
+<span class="lineNum">     226 </span><span class="lineCov">          5 :     OWNER(newroom) = OWNER(player);</span>
+<span class="lineNum">     227 </span><span class="lineCov">          5 :     EXITS(newroom) = NOTHING;</span>
+<span class="lineNum">     228 </span><span class="lineCov">          5 :     DBFETCH(newroom)-&gt;sp.room.dropto = NOTHING;</span>
+<span class="lineNum">     229 </span>            : 
+<span class="lineNum">     230 </span><span class="lineCov">          5 :     DBDIRTY(parent);</span>
+<span class="lineNum">     231 </span>            : 
+<span class="lineNum">     232 </span><span class="lineCov">          5 :     return newroom;</span>
+<span class="lineNum">     233 </span>            : }
+<a name="234"><span class="lineNum">     234 </span>            : </a>
+<span class="lineNum">     235 </span>            : dbref
+<span class="lineNum">     236 </span><span class="lineCov">          1 : create_thing(dbref player, const char *name, dbref location)</span>
+<span class="lineNum">     237 </span>            : {
+<span class="lineNum">     238 </span>            :     dbref newthing, loc;
+<span class="lineNum">     239 </span>            : 
+<span class="lineNum">     240 </span><span class="lineCov">          1 :     newthing = new_object();</span>
+<span class="lineNum">     241 </span>            : 
+<span class="lineNum">     242 </span><span class="lineCov">          1 :     NAME(newthing) = alloc_string(name);</span>
+<span class="lineNum">     243 </span><span class="lineCov">          1 :     ALLOC_THING_SP(newthing);</span>
+<span class="lineNum">     244 </span><span class="lineCov">          1 :     LOCATION(newthing) = location;</span>
+<span class="lineNum">     245 </span><span class="lineCov">          1 :     PUSH(newthing, CONTENTS(location));</span>
+<span class="lineNum">     246 </span><span class="lineCov">          1 :     FLAGS(newthing) = TYPE_THING;</span>
+<span class="lineNum">     247 </span><span class="lineCov">          1 :     OWNER(newthing) = OWNER(player);</span>
+<span class="lineNum">     248 </span><span class="lineCov">          1 :     EXITS(newthing) = NOTHING;</span>
+<span class="lineNum">     249 </span><span class="lineCov">          1 :     SETVALUE(newthing, 1);</span>
+<span class="lineNum">     250 </span>            : 
+<span class="lineNum">     251 </span><span class="lineCov">          1 :     if ((loc = LOCATION(player)) != NOTHING &amp;&amp; controls(player, loc)) {</span>
+<span class="lineNum">     252 </span><span class="lineCov">          1 :         THING_SET_HOME(newthing, loc);</span>
+<span class="lineNum">     253 </span>            :     } else {
+<span class="lineNum">     254 </span><span class="lineNoCov">          0 :         THING_SET_HOME(newthing, player);</span>
+<span class="lineNum">     255 </span>            :     }
+<span class="lineNum">     256 </span>            : 
+<span class="lineNum">     257 </span><span class="lineCov">          1 :     DBDIRTY(location);</span>
+<span class="lineNum">     258 </span>            : 
+<span class="lineNum">     259 </span><span class="lineCov">          1 :     return newthing;</span>
+<span class="lineNum">     260 </span>            : }
+<a name="261"><span class="lineNum">     261 </span>            : </a>
+<span class="lineNum">     262 </span>            : void
+<span class="lineNum">     263 </span><span class="lineCov">        856 : putref(FILE * f, dbref ref)</span>
+<span class="lineNum">     264 </span>            : {
+<span class="lineNum">     265 </span><span class="lineCov">        856 :     if (fprintf(f, &quot;%d\n&quot;, ref) &lt; 0) {</span>
+<span class="lineNum">     266 </span><span class="lineNoCov">          0 :         abort();</span>
+<span class="lineNum">     267 </span>            :     }
+<span class="lineNum">     268 </span><span class="lineCov">        856 : }</span>
+<a name="269"><span class="lineNum">     269 </span>            : </a>
+<span class="lineNum">     270 </span>            : void
+<span class="lineNum">     271 </span><span class="lineCov">        305 : putstring(FILE * f, const char *s)</span>
+<span class="lineNum">     272 </span>            : {
+<span class="lineNum">     273 </span><span class="lineCov">        305 :     if (s) {</span>
+<span class="lineNum">     274 </span><span class="lineCov">        305 :         if (fputs(s, f) == EOF) {</span>
+<span class="lineNum">     275 </span><span class="lineNoCov">          0 :             abort();</span>
+<span class="lineNum">     276 </span>            :         }
+<span class="lineNum">     277 </span>            :     }
+<span class="lineNum">     278 </span><span class="lineCov">        305 :     if (putc('\n', f) == EOF) {</span>
+<span class="lineNum">     279 </span><span class="lineNoCov">          0 :         abort();</span>
+<span class="lineNum">     280 </span>            :     }
+<span class="lineNum">     281 </span><span class="lineCov">        305 : }</span>
+<a name="282"><span class="lineNum">     282 </span>            : </a>
+<span class="lineNum">     283 </span>            : void
+<span class="lineNum">     284 </span><span class="lineCov">         75 : putproperties(FILE * f, dbref obj)</span>
+<span class="lineNum">     285 </span>            : {
+<span class="lineNum">     286 </span><span class="lineCov">         75 :     putstring(f, &quot;*Props*&quot;);</span>
+<span class="lineNum">     287 </span><span class="lineCov">         75 :     db_dump_props(f, obj);</span>
+<span class="lineNum">     288 </span><span class="lineCov">         75 :     putstring(f, &quot;*End*&quot;);</span>
+<span class="lineNum">     289 </span><span class="lineCov">         75 : }</span>
+<a name="290"><span class="lineNum">     290 </span>            : </a>
+<span class="lineNum">     291 </span>            : int
+<span class="lineNum">     292 </span><span class="lineCov">         75 : db_write_object(FILE * f, dbref i)</span>
+<span class="lineNum">     293 </span>            : {
+<span class="lineNum">     294 </span><span class="lineCov">         75 :     struct object *o = DBFETCH(i);</span>
+<span class="lineNum">     295 </span>            : #ifdef DISKBASE
+<span class="lineNum">     296 </span>            :     long tmppos;
+<span class="lineNum">     297 </span>            : #endif                          /* DISKBASE */
+<span class="lineNum">     298 </span>            : 
+<span class="lineNum">     299 </span><span class="lineCov">         75 :     putstring(f, NAME(i));</span>
+<span class="lineNum">     300 </span><span class="lineCov">         75 :     putref(f, o-&gt;location);</span>
+<span class="lineNum">     301 </span><span class="lineCov">         75 :     putref(f, o-&gt;contents);</span>
+<span class="lineNum">     302 </span><span class="lineCov">         75 :     putref(f, o-&gt;next);</span>
+<span class="lineNum">     303 </span><span class="lineCov">         75 :     putref(f, FLAGS(i) &amp; ~DUMP_MASK);       /* write non-internal flags */</span>
+<span class="lineNum">     304 </span>            : 
+<span class="lineNum">     305 </span><span class="lineCov">         75 :     putref(f, (int)o-&gt;ts_created);</span>
+<span class="lineNum">     306 </span><span class="lineCov">         75 :     putref(f, (int)o-&gt;ts_lastused);</span>
+<span class="lineNum">     307 </span><span class="lineCov">         75 :     putref(f, o-&gt;ts_usecount);</span>
+<span class="lineNum">     308 </span><span class="lineCov">         75 :     putref(f, (int)o-&gt;ts_modified);</span>
+<span class="lineNum">     309 </span>            : 
+<span class="lineNum">     310 </span>            : 
+<span class="lineNum">     311 </span>            : #ifdef DISKBASE
+<span class="lineNum">     312 </span>            :     tmppos = ftell(f) + 1;
+<span class="lineNum">     313 </span>            :     putprops_copy(f, i);
+<span class="lineNum">     314 </span>            :     o-&gt;propsfpos = tmppos;
+<span class="lineNum">     315 </span>            :     undirtyprops(i);
+<span class="lineNum">     316 </span>            : #else                           /* !DISKBASE */
+<span class="lineNum">     317 </span><span class="lineCov">         75 :     putproperties(f, i);</span>
+<span class="lineNum">     318 </span>            : #endif                          /* DISKBASE */
+<span class="lineNum">     319 </span>            : 
+<span class="lineNum">     320 </span>            : 
+<span class="lineNum">     321 </span><span class="lineCov">         75 :     switch (Typeof(i)) {</span>
+<span class="lineNum">     322 </span>            :     case TYPE_THING:
+<span class="lineNum">     323 </span><span class="lineCov">          1 :         putref(f, THING_HOME(i));</span>
+<span class="lineNum">     324 </span><span class="lineCov">          1 :         putref(f, o-&gt;exits);</span>
+<span class="lineNum">     325 </span><span class="lineCov">          1 :         putref(f, OWNER(i));</span>
+<span class="lineNum">     326 </span><span class="lineCov">          1 :         break;</span>
+<span class="lineNum">     327 </span>            : 
+<span class="lineNum">     328 </span>            :     case TYPE_ROOM:
+<span class="lineNum">     329 </span><span class="lineCov">         31 :         putref(f, o-&gt;sp.room.dropto);</span>
+<span class="lineNum">     330 </span><span class="lineCov">         31 :         putref(f, o-&gt;exits);</span>
+<span class="lineNum">     331 </span><span class="lineCov">         31 :         putref(f, OWNER(i));</span>
+<span class="lineNum">     332 </span><span class="lineCov">         31 :         break;</span>
+<span class="lineNum">     333 </span>            : 
+<span class="lineNum">     334 </span>            :     case TYPE_EXIT:
+<span class="lineNum">     335 </span><span class="lineCov">          6 :         putref(f, o-&gt;sp.exit.ndest);</span>
+<span class="lineNum">     336 </span><span class="lineCov">         11 :         for (int j = 0; j &lt; o-&gt;sp.exit.ndest; j++) {</span>
+<span class="lineNum">     337 </span><span class="lineCov">          5 :             putref(f, (o-&gt;sp.exit.dest)[j]);</span>
+<span class="lineNum">     338 </span>            :         }
+<span class="lineNum">     339 </span><span class="lineCov">          6 :         putref(f, OWNER(i));</span>
+<span class="lineNum">     340 </span><span class="lineCov">          6 :         break;</span>
+<span class="lineNum">     341 </span>            : 
+<span class="lineNum">     342 </span>            :     case TYPE_PLAYER:
+<span class="lineNum">     343 </span><span class="lineCov">         28 :         putref(f, PLAYER_HOME(i));</span>
+<span class="lineNum">     344 </span><span class="lineCov">         28 :         putref(f, o-&gt;exits);</span>
+<span class="lineNum">     345 </span><span class="lineCov">         28 :         putstring(f, PLAYER_PASSWORD(i));</span>
+<span class="lineNum">     346 </span><span class="lineCov">         28 :         break;</span>
+<span class="lineNum">     347 </span>            : 
+<span class="lineNum">     348 </span>            :     case TYPE_PROGRAM:
+<span class="lineNum">     349 </span><span class="lineCov">          9 :         putref(f, OWNER(i));</span>
+<span class="lineNum">     350 </span><span class="lineCov">          9 :         break;</span>
+<span class="lineNum">     351 </span>            :     }
+<span class="lineNum">     352 </span>            : 
+<span class="lineNum">     353 </span><span class="lineCov">         75 :     return 0;</span>
+<span class="lineNum">     354 </span>            : }
+<a name="355"><span class="lineNum">     355 </span>            : </a>
+<span class="lineNum">     356 </span>            : static int
+<span class="lineNum">     357 </span><span class="lineCov">        780 : do_peek(FILE * f)</span>
+<span class="lineNum">     358 </span>            : {
+<span class="lineNum">     359 </span>            :     int peekch;
+<span class="lineNum">     360 </span>            : 
+<span class="lineNum">     361 </span><span class="lineCov">        780 :     ungetc((peekch = getc(f)), f);</span>
+<span class="lineNum">     362 </span>            : 
+<span class="lineNum">     363 </span><span class="lineCov">        780 :     return peekch;</span>
+<span class="lineNum">     364 </span>            : }
+<a name="365"><span class="lineNum">     365 </span>            : </a>
+<span class="lineNum">     366 </span>            : dbref
+<span class="lineNum">     367 </span><span class="lineCov">        754 : getref(FILE * f)</span>
+<span class="lineNum">     368 </span>            : {
+<span class="lineNum">     369 </span>            :     static char buf[BUFFER_LEN];
+<span class="lineNum">     370 </span>            :     int peekch;
+<span class="lineNum">     371 </span>            : 
+<span class="lineNum">     372 </span>            :     /*
+<span class="lineNum">     373 </span>            :      * Compiled in with or without timestamps, Sep 1, 1990 by Fuzzy, added to
+<span class="lineNum">     374 </span>            :      * Muck by Kinomon.  Thanks Kino!
+<span class="lineNum">     375 </span>            :      */
+<span class="lineNum">     376 </span><span class="lineCov">        754 :     if ((peekch = do_peek(f)) == NUMBER_TOKEN || peekch == LOOKUP_TOKEN) {</span>
+<span class="lineNum">     377 </span>            :         return (0);
+<span class="lineNum">     378 </span>            :     }
+<span class="lineNum">     379 </span><span class="lineCov">        754 :     fgets(buf, sizeof(buf), f);</span>
+<span class="lineNum">     380 </span><span class="lineCov">        754 :     return atol(buf);</span>
+<span class="lineNum">     381 </span>            : }
+<a name="382"><span class="lineNum">     382 </span>            : </a>
+<span class="lineNum">     383 </span>            : static char *
+<span class="lineNum">     384 </span><span class="lineCov">        182 : getstring(FILE * f)</span>
+<span class="lineNum">     385 </span>            : {
+<span class="lineNum">     386 </span>            :     static char buf[BUFFER_LEN];
+<span class="lineNum">     387 </span>            :     char c;
+<span class="lineNum">     388 </span>            : 
+<span class="lineNum">     389 </span><span class="lineCov">        182 :     if (fgets(buf, sizeof(buf), f) == NULL) {</span>
+<span class="lineNum">     390 </span><span class="lineCov">         26 :         return alloc_string(&quot;&quot;);</span>
+<span class="lineNum">     391 </span>            :     }
+<span class="lineNum">     392 </span>            : 
+<span class="lineNum">     393 </span><span class="lineCov">        156 :     if (strlen(buf) == BUFFER_LEN - 1) {</span>
+<span class="lineNum">     394 </span>            :         /* ignore whatever comes after */
+<span class="lineNum">     395 </span><span class="lineNoCov">          0 :         if (buf[BUFFER_LEN - 2] != '\n')</span>
+<span class="lineNum">     396 </span><span class="lineNoCov">          0 :             while ((c = fgetc(f)) != '\n') ;</span>
+<span class="lineNum">     397 </span>            :     }
+<span class="lineNum">     398 </span><span class="lineCov">       3224 :     for (char *p = buf; *p; p++) {</span>
+<span class="lineNum">     399 </span><span class="lineCov">       3224 :         if (*p == '\n') {</span>
+<span class="lineNum">     400 </span><span class="lineCov">        156 :             *p = '\0';</span>
+<span class="lineNum">     401 </span><span class="lineCov">        156 :             break;</span>
+<span class="lineNum">     402 </span>            :         }
+<span class="lineNum">     403 </span>            :     }
+<span class="lineNum">     404 </span>            : 
+<span class="lineNum">     405 </span><span class="lineCov">        156 :     return alloc_string(buf);</span>
+<span class="lineNum">     406 </span>            : }
+<a name="407"><span class="lineNum">     407 </span>            : </a>
+<span class="lineNum">     408 </span>            : static int
+<span class="lineNum">     409 </span><span class="lineCov">         26 : db_read_header(FILE * f, int *grow)</span>
+<span class="lineNum">     410 </span>            : {
+<span class="lineNum">     411 </span><span class="lineCov">         26 :     int result = 0;</span>
+<span class="lineNum">     412 </span><span class="lineCov">         26 :     int load_format = 0;</span>
+<span class="lineNum">     413 </span>            :     char *special;
+<span class="lineNum">     414 </span>            : 
+<span class="lineNum">     415 </span><span class="lineCov">         26 :     *grow = 0;</span>
+<span class="lineNum">     416 </span>            : 
+<span class="lineNum">     417 </span><span class="lineCov">         26 :     if (do_peek(f) != '*') {</span>
+<span class="lineNum">     418 </span>            :         return result;
+<span class="lineNum">     419 </span>            :     }
+<span class="lineNum">     420 </span>            : 
+<span class="lineNum">     421 </span><span class="lineCov">         26 :     special = getstring(f);</span>
+<span class="lineNum">     422 </span>            : 
+<span class="lineNum">     423 </span><span class="lineCov">         26 :     if (!strcmp(special, &quot;***Foxen8 TinyMUCK DUMP Format***&quot;)) {</span>
+<span class="lineNum">     424 </span>            :         load_format = 10;
+<span class="lineNum">     425 </span><span class="lineCov">         26 :     } else if (!strcmp(special, DB_VERSION_STRING)) {</span>
+<span class="lineNum">     426 </span><span class="lineCov">         26 :         load_format = 11;</span>
+<span class="lineNum">     427 </span>            :     }
+<span class="lineNum">     428 </span>            : 
+<span class="lineNum">     429 </span><span class="lineCov">         26 :     free(special);</span>
+<span class="lineNum">     430 </span>            : 
+<span class="lineNum">     431 </span><span class="lineCov">         26 :     *grow = getref(f);</span>
+<span class="lineNum">     432 </span>            : 
+<span class="lineNum">     433 </span><span class="lineCov">         26 :     getref(f);                  /* ignore dbflags value */</span>
+<span class="lineNum">     434 </span>            : 
+<span class="lineNum">     435 </span><span class="lineCov">         26 :     tune_load_parms_from_file(f, NOTHING, getref(f));</span>
+<span class="lineNum">     436 </span>            : 
+<span class="lineNum">     437 </span><span class="lineCov">         26 :     return load_format;</span>
+<span class="lineNum">     438 </span>            : }
+<a name="439"><span class="lineNum">     439 </span>            : </a>
+<span class="lineNum">     440 </span>            : static void
+<span class="lineNum">     441 </span><span class="lineCov">         26 : db_write_header(FILE * f)</span>
+<span class="lineNum">     442 </span>            : {
+<span class="lineNum">     443 </span><span class="lineCov">         26 :     putstring(f, DB_VERSION_STRING);</span>
+<span class="lineNum">     444 </span>            : 
+<span class="lineNum">     445 </span><span class="lineCov">         26 :     putref(f, db_top);</span>
+<span class="lineNum">     446 </span><span class="lineCov">         26 :     putref(f, DB_PARMSINFO);</span>
+<span class="lineNum">     447 </span><span class="lineCov">         26 :     putref(f, tune_count_parms());</span>
+<span class="lineNum">     448 </span><span class="lineCov">         26 :     tune_save_parms_to_file(f);</span>
+<span class="lineNum">     449 </span><span class="lineCov">         26 : }</span>
+<a name="450"><span class="lineNum">     450 </span>            : </a>
+<span class="lineNum">     451 </span>            : dbref
+<span class="lineNum">     452 </span><span class="lineCov">         26 : db_write(FILE * f)</span>
+<span class="lineNum">     453 </span>            : {
+<span class="lineNum">     454 </span><span class="lineCov">         26 :     db_write_header(f);</span>
+<span class="lineNum">     455 </span>            : 
+<span class="lineNum">     456 </span><span class="lineCov">        127 :     for (dbref i = db_top; i-- &gt; 0;) {</span>
+<span class="lineNum">     457 </span><span class="lineCov">         75 :         if (fprintf(f, &quot;#%d\n&quot;, i) &lt; 0)</span>
+<span class="lineNum">     458 </span><span class="lineNoCov">          0 :             abort();</span>
+<span class="lineNum">     459 </span><span class="lineCov">         75 :         db_write_object(f, i);</span>
+<span class="lineNum">     460 </span><span class="lineCov">         75 :         FLAGS(i) &amp;= ~OBJECT_CHANGED;        /* clear changed flag */</span>
+<span class="lineNum">     461 </span>            :     }
+<span class="lineNum">     462 </span>            : 
+<span class="lineNum">     463 </span><span class="lineCov">         26 :     fseek(f, 0L, 2);</span>
+<span class="lineNum">     464 </span><span class="lineCov">         26 :     putstring(f, &quot;***END OF DUMP***&quot;);</span>
+<span class="lineNum">     465 </span>            : 
+<span class="lineNum">     466 </span><span class="lineCov">         26 :     fflush(f);</span>
+<span class="lineNum">     467 </span><span class="lineCov">         26 :     return db_top;</span>
+<span class="lineNum">     468 </span>            : }
+<a name="469"><span class="lineNum">     469 </span>            : </a>
+<span class="lineNum">     470 </span>            : void
+<span class="lineNum">     471 </span><span class="lineCov">         52 : getproperties(FILE * f, dbref obj, const char *pdir)</span>
+<span class="lineNum">     472 </span>            : {
+<span class="lineNum">     473 </span>            :     char buf[BUFFER_LEN * 3], *p;
+<span class="lineNum">     474 </span>            :     int datalen;
+<span class="lineNum">     475 </span>            : 
+<span class="lineNum">     476 </span>            : #ifdef DISKBASE
+<span class="lineNum">     477 </span>            :     /* if no props, then don't bother looking. */
+<span class="lineNum">     478 </span>            :     if (!DBFETCH(obj)-&gt;propsfpos)
+<span class="lineNum">     479 </span>            :         return;
+<span class="lineNum">     480 </span>            : 
+<span class="lineNum">     481 </span>            :     /* seek to the proper file position. */
+<span class="lineNum">     482 </span>            :     fseek(f, DBFETCH(obj)-&gt;propsfpos, 0);
+<span class="lineNum">     483 </span>            : #endif
+<span class="lineNum">     484 </span>            : 
+<span class="lineNum">     485 </span>            :     /* get rid of first line */
+<span class="lineNum">     486 </span><span class="lineCov">         52 :     fgets(buf, sizeof(buf), f);</span>
+<span class="lineNum">     487 </span>            : 
+<span class="lineNum">     488 </span><span class="lineCov">         52 :     if (strcmp(buf, &quot;Props*\n&quot;)) {</span>
+<span class="lineNum">     489 </span>            :         /* initialize first line stuff */
+<span class="lineNum">     490 </span>            :         fgets(buf, sizeof(buf), f);
+<span class="lineNum">     491 </span>            :         while (1) {
+<span class="lineNum">     492 </span>            :             /* fgets reads in \n too! */
+<span class="lineNum">     493 </span><span class="lineNoCov">          0 :             if (!strcmp(buf, &quot;*End*\n&quot;))</span>
+<span class="lineNum">     494 </span>            :                 break;
+<span class="lineNum">     495 </span><span class="lineNoCov">          0 :             p = index(buf, PROP_DELIMITER);</span>
+<span class="lineNum">     496 </span><span class="lineNoCov">          0 :             *(p++) = '\0';      /* Purrrrrrrrrr... */</span>
+<span class="lineNum">     497 </span><span class="lineNoCov">          0 :             datalen = strlen(p);</span>
+<span class="lineNum">     498 </span><span class="lineNoCov">          0 :             p[datalen - 1] = '\0';</span>
+<span class="lineNum">     499 </span>            : 
+<span class="lineNum">     500 </span><span class="lineNoCov">          0 :             if ((p - buf) &gt;= BUFFER_LEN)</span>
+<span class="lineNum">     501 </span><span class="lineNoCov">          0 :                 buf[BUFFER_LEN - 1] = '\0';</span>
+<span class="lineNum">     502 </span><span class="lineNoCov">          0 :             if (datalen &gt;= BUFFER_LEN)</span>
+<span class="lineNum">     503 </span><span class="lineNoCov">          0 :                 p[BUFFER_LEN - 1] = '\0';</span>
+<span class="lineNum">     504 </span>            : 
+<span class="lineNum">     505 </span><span class="lineNoCov">          0 :             if ((*p == '^') &amp;&amp; (number(p + 1))) {</span>
+<span class="lineNum">     506 </span><span class="lineNoCov">          0 :                 add_prop_nofetch(obj, buf, NULL, atol(p + 1));</span>
+<span class="lineNum">     507 </span>            :             } else {
+<span class="lineNum">     508 </span><span class="lineNoCov">          0 :                 if (*buf) {</span>
+<span class="lineNum">     509 </span><span class="lineNoCov">          0 :                     add_prop_nofetch(obj, buf, p, 0);</span>
+<span class="lineNum">     510 </span>            :                 }
+<span class="lineNum">     511 </span>            :             }
+<span class="lineNum">     512 </span>            :             fgets(buf, sizeof(buf), f);
+<span class="lineNum">     513 </span>            :         }
+<span class="lineNum">     514 </span>            :     } else {
+<span class="lineNum">     515 </span><span class="lineCov">         52 :         db_getprops(f, obj, pdir);</span>
+<span class="lineNum">     516 </span>            :     }
+<span class="lineNum">     517 </span><span class="lineCov">         52 : }</span>
+<a name="518"><span class="lineNum">     518 </span>            : </a>
+<span class="lineNum">     519 </span>            : void
+<span class="lineNum">     520 </span><span class="lineNoCov">          0 : db_free_object(dbref i)</span>
+<span class="lineNum">     521 </span>            : {
+<span class="lineNum">     522 </span>            :     struct object *o;
+<span class="lineNum">     523 </span>            : 
+<span class="lineNum">     524 </span><span class="lineNoCov">          0 :     o = DBFETCH(i);</span>
+<span class="lineNum">     525 </span><span class="lineNoCov">          0 :     if (NAME(i))</span>
+<span class="lineNum">     526 </span><span class="lineNoCov">          0 :         free((void *) NAME(i));</span>
+<span class="lineNum">     527 </span>            : 
+<span class="lineNum">     528 </span>            : #ifdef DISKBASE
+<span class="lineNum">     529 </span>            :     unloadprops_with_prejudice(i);
+<span class="lineNum">     530 </span>            : #else
+<span class="lineNum">     531 </span><span class="lineNoCov">          0 :     if (o-&gt;properties) {</span>
+<span class="lineNum">     532 </span><span class="lineNoCov">          0 :         delete_proplist(o-&gt;properties);</span>
+<span class="lineNum">     533 </span>            :     }
+<span class="lineNum">     534 </span>            : #endif
+<span class="lineNum">     535 </span>            : 
+<span class="lineNum">     536 </span><span class="lineNoCov">          0 :     if (Typeof(i) == TYPE_EXIT &amp;&amp; o-&gt;sp.exit.dest) {</span>
+<span class="lineNum">     537 </span><span class="lineNoCov">          0 :         free((void *) o-&gt;sp.exit.dest);</span>
+<span class="lineNum">     538 </span><span class="lineNoCov">          0 :     } else if (Typeof(i) == TYPE_PLAYER) {</span>
+<span class="lineNum">     539 </span><span class="lineNoCov">          0 :         if (PLAYER_PASSWORD(i)) {</span>
+<span class="lineNum">     540 </span><span class="lineNoCov">          0 :             free((void *) PLAYER_PASSWORD(i));</span>
+<span class="lineNum">     541 </span>            :         }
+<span class="lineNum">     542 </span><span class="lineNoCov">          0 :         if (PLAYER_DESCRS(i)) {</span>
+<span class="lineNum">     543 </span><span class="lineNoCov">          0 :             free(PLAYER_DESCRS(i));</span>
+<span class="lineNum">     544 </span><span class="lineNoCov">          0 :             PLAYER_SET_DESCRS(i, NULL);</span>
+<span class="lineNum">     545 </span><span class="lineNoCov">          0 :             PLAYER_SET_DESCRCOUNT(i, 0);</span>
+<span class="lineNum">     546 </span>            :         }
+<span class="lineNum">     547 </span><span class="lineNoCov">          0 :         ignore_flush_cache(i);</span>
+<span class="lineNum">     548 </span>            :     }
+<span class="lineNum">     549 </span><span class="lineNoCov">          0 :     if (Typeof(i) == TYPE_THING) {</span>
+<span class="lineNum">     550 </span><span class="lineNoCov">          0 :         FREE_THING_SP(i);</span>
+<span class="lineNum">     551 </span>            :     }
+<span class="lineNum">     552 </span><span class="lineNoCov">          0 :     if (Typeof(i) == TYPE_PLAYER) {</span>
+<span class="lineNum">     553 </span><span class="lineNoCov">          0 :         FREE_PLAYER_SP(i);</span>
+<span class="lineNum">     554 </span>            :     }
+<span class="lineNum">     555 </span><span class="lineNoCov">          0 :     if (Typeof(i) == TYPE_PROGRAM) {</span>
+<span class="lineNum">     556 </span><span class="lineNoCov">          0 :         uncompile_program(i);</span>
+<span class="lineNum">     557 </span><span class="lineNoCov">          0 :         FREE_PROGRAM_SP(i);</span>
+<span class="lineNum">     558 </span>            :     }
+<span class="lineNum">     559 </span><span class="lineNoCov">          0 : }</span>
+<a name="560"><span class="lineNum">     560 </span>            : </a>
+<span class="lineNum">     561 </span>            : void
+<span class="lineNum">     562 </span><span class="lineCov">         26 : db_free(void)</span>
+<span class="lineNum">     563 </span>            : {
+<span class="lineNum">     564 </span><span class="lineCov">         26 :     if (db) {</span>
+<span class="lineNum">     565 </span><span class="lineNoCov">          0 :         for (dbref i = 0; i &lt; db_top; i++)</span>
+<span class="lineNum">     566 </span><span class="lineNoCov">          0 :             db_free_object(i);</span>
+<span class="lineNum">     567 </span><span class="lineNoCov">          0 :         free((void *) db);</span>
+<span class="lineNum">     568 </span><span class="lineNoCov">          0 :         db = 0;</span>
+<span class="lineNum">     569 </span><span class="lineNoCov">          0 :         db_top = 0;</span>
+<span class="lineNum">     570 </span>            :     }
+<span class="lineNum">     571 </span><span class="lineCov">         26 :     clear_players();</span>
+<span class="lineNum">     572 </span><span class="lineCov">         26 :     clear_primitives();</span>
+<span class="lineNum">     573 </span><span class="lineCov">         26 :     recyclable = NOTHING;</span>
+<span class="lineNum">     574 </span><span class="lineCov">         26 : }</span>
+<a name="575"><span class="lineNum">     575 </span>            : </a>
+<span class="lineNum">     576 </span>            : static void
+<span class="lineNum">     577 </span><span class="lineCov">         52 : db_read_object(FILE * f, dbref objno, int dtype)</span>
+<span class="lineNum">     578 </span>            : {
+<span class="lineNum">     579 </span><span class="lineCov">         52 :     int tmp, c, prop_flag = 0;</span>
+<span class="lineNum">     580 </span><span class="lineCov">         52 :     int j = 0;</span>
+<span class="lineNum">     581 </span>            :     const char *password;
+<span class="lineNum">     582 </span>            :     struct object *o;
+<span class="lineNum">     583 </span>            : 
+<span class="lineNum">     584 </span><span class="lineCov">         52 :     if (dtype == 0)</span>
+<span class="lineNum">     585 </span>            :         return;
+<span class="lineNum">     586 </span>            : 
+<span class="lineNum">     587 </span><span class="lineCov">         52 :     db_clear_object(objno);</span>
+<span class="lineNum">     588 </span>            : 
+<span class="lineNum">     589 </span><span class="lineCov">         52 :     FLAGS(objno) = 0;</span>
+<span class="lineNum">     590 </span><span class="lineCov">         52 :     NAME(objno) = getstring(f);</span>
+<span class="lineNum">     591 </span>            : 
+<span class="lineNum">     592 </span><span class="lineCov">         52 :     o = DBFETCH(objno);</span>
+<span class="lineNum">     593 </span><span class="lineCov">         52 :     o-&gt;location = getref(f);</span>
+<span class="lineNum">     594 </span><span class="lineCov">         52 :     o-&gt;contents = getref(f);</span>
+<span class="lineNum">     595 </span><span class="lineCov">         52 :     o-&gt;next = getref(f);</span>
+<span class="lineNum">     596 </span>            : 
+<span class="lineNum">     597 </span><span class="lineCov">         52 :     tmp = getref(f);            /* flags list */</span>
+<span class="lineNum">     598 </span><span class="lineCov">         52 :     tmp &amp;= ~DUMP_MASK;</span>
+<span class="lineNum">     599 </span><span class="lineCov">         52 :     FLAGS(objno) |= tmp;</span>
+<span class="lineNum">     600 </span>            : 
+<span class="lineNum">     601 </span><span class="lineCov">         52 :     o-&gt;ts_created = getref(f);</span>
+<span class="lineNum">     602 </span><span class="lineCov">         52 :     o-&gt;ts_lastused = getref(f);</span>
+<span class="lineNum">     603 </span><span class="lineCov">         52 :     o-&gt;ts_usecount = getref(f);</span>
+<span class="lineNum">     604 </span><span class="lineCov">         52 :     o-&gt;ts_modified = getref(f);</span>
+<span class="lineNum">     605 </span>            : 
+<span class="lineNum">     606 </span><span class="lineCov">         52 :     c = getc(f);</span>
+<span class="lineNum">     607 </span><span class="lineCov">         52 :     if (c == '*') {</span>
+<span class="lineNum">     608 </span>            : 
+<span class="lineNum">     609 </span>            : #ifdef DISKBASE
+<span class="lineNum">     610 </span>            :         o-&gt;propsfpos = ftell(f);
+<span class="lineNum">     611 </span>            :         if (o-&gt;propsmode == PROPS_CHANGED) {
+<span class="lineNum">     612 </span>            :             getproperties(f, objno, NULL);
+<span class="lineNum">     613 </span>            :         } else {
+<span class="lineNum">     614 </span>            :             skipproperties(f, objno);
+<span class="lineNum">     615 </span>            :         }
+<span class="lineNum">     616 </span>            : #else
+<span class="lineNum">     617 </span><span class="lineCov">         52 :         getproperties(f, objno, NULL);</span>
+<span class="lineNum">     618 </span>            : #endif
+<span class="lineNum">     619 </span>            : 
+<span class="lineNum">     620 </span><span class="lineCov">         52 :         prop_flag++;</span>
+<span class="lineNum">     621 </span>            :     } else {
+<span class="lineNum">     622 </span>            :         /* do our own getref */
+<span class="lineNum">     623 </span><span class="lineNoCov">          0 :         int sign = 0;</span>
+<span class="lineNum">     624 </span>            :         char buf[BUFFER_LEN];
+<span class="lineNum">     625 </span><span class="lineNoCov">          0 :         int i = 0;</span>
+<span class="lineNum">     626 </span>            : 
+<span class="lineNum">     627 </span><span class="lineNoCov">          0 :         if (c == '-')</span>
+<span class="lineNum">     628 </span>            :             sign = 1;
+<span class="lineNum">     629 </span><span class="lineNoCov">          0 :         else if (c != '+') {</span>
+<span class="lineNum">     630 </span><span class="lineNoCov">          0 :             buf[i] = c;</span>
+<span class="lineNum">     631 </span><span class="lineNoCov">          0 :             i++;</span>
+<span class="lineNum">     632 </span>            :         }
+<span class="lineNum">     633 </span><span class="lineNoCov">          0 :         while ((c = getc(f)) != '\n') {</span>
+<span class="lineNum">     634 </span><span class="lineNoCov">          0 :             buf[i] = c;</span>
+<span class="lineNum">     635 </span><span class="lineNoCov">          0 :             i++;</span>
+<span class="lineNum">     636 </span>            :         }
+<span class="lineNum">     637 </span><span class="lineNoCov">          0 :         buf[i] = '\0';</span>
+<span class="lineNum">     638 </span><span class="lineNoCov">          0 :         j = atol(buf);</span>
+<span class="lineNum">     639 </span><span class="lineNoCov">          0 :         if (sign)</span>
+<span class="lineNum">     640 </span><span class="lineNoCov">          0 :             j = -j;</span>
+<span class="lineNum">     641 </span>            :     }
+<span class="lineNum">     642 </span>            : 
+<span class="lineNum">     643 </span><span class="lineCov">         52 :     switch (FLAGS(objno) &amp; TYPE_MASK) {</span>
+<span class="lineNum">     644 </span>            :     case TYPE_THING:
+<span class="lineNum">     645 </span><span class="lineNoCov">          0 :         ALLOC_THING_SP(objno);</span>
+<span class="lineNum">     646 </span><span class="lineNoCov">          0 :         THING_SET_HOME(objno, prop_flag ? getref(f) : j);</span>
+<span class="lineNum">     647 </span><span class="lineNoCov">          0 :         o-&gt;exits = getref(f);</span>
+<span class="lineNum">     648 </span><span class="lineNoCov">          0 :         OWNER(objno) = getref(f);</span>
+<span class="lineNum">     649 </span><span class="lineNoCov">          0 :         break;</span>
+<span class="lineNum">     650 </span>            :     case TYPE_ROOM:
+<span class="lineNum">     651 </span><span class="lineCov">         26 :         o-&gt;sp.room.dropto = prop_flag ? getref(f) : j;</span>
+<span class="lineNum">     652 </span><span class="lineCov">         26 :         o-&gt;exits = getref(f);</span>
+<span class="lineNum">     653 </span><span class="lineCov">         26 :         OWNER(objno) = getref(f);</span>
+<span class="lineNum">     654 </span><span class="lineCov">         26 :         break;</span>
+<span class="lineNum">     655 </span>            :     case TYPE_EXIT:
+<span class="lineNum">     656 </span><span class="lineNoCov">          0 :         o-&gt;sp.exit.ndest = prop_flag ? getref(f) : j;</span>
+<span class="lineNum">     657 </span><span class="lineNoCov">          0 :         if (o-&gt;sp.exit.ndest &gt; 0) /* only allocate space for linked exits */</span>
+<span class="lineNum">     658 </span><span class="lineNoCov">          0 :             o-&gt;sp.exit.dest = (dbref *) malloc(sizeof(dbref) * (o-&gt;sp.exit.ndest));</span>
+<span class="lineNum">     659 </span><span class="lineNoCov">          0 :         for (j = 0; j &lt; o-&gt;sp.exit.ndest; j++) {</span>
+<span class="lineNum">     660 </span><span class="lineNoCov">          0 :             (o-&gt;sp.exit.dest)[j] = getref(f);</span>
+<span class="lineNum">     661 </span>            :         }
+<span class="lineNum">     662 </span><span class="lineNoCov">          0 :         OWNER(objno) = getref(f);</span>
+<span class="lineNum">     663 </span><span class="lineNoCov">          0 :         break;</span>
+<span class="lineNum">     664 </span>            :     case TYPE_PLAYER:
+<span class="lineNum">     665 </span><span class="lineCov">         52 :         ALLOC_PLAYER_SP(objno);</span>
+<span class="lineNum">     666 </span><span class="lineCov">         26 :         PLAYER_SET_HOME(objno, prop_flag ? getref(f) : j);</span>
+<span class="lineNum">     667 </span><span class="lineCov">         26 :         o-&gt;exits = getref(f);</span>
+<span class="lineNum">     668 </span><span class="lineCov">         26 :         password = getstring(f);</span>
+<span class="lineNum">     669 </span><span class="lineCov">         26 :         set_password_raw(objno, password);</span>
+<span class="lineNum">     670 </span><span class="lineCov">         26 :         PLAYER_SET_CURR_PROG(objno, NOTHING);</span>
+<span class="lineNum">     671 </span><span class="lineCov">         26 :         PLAYER_SET_INSERT_MODE(objno, 0);</span>
+<span class="lineNum">     672 </span><span class="lineCov">         26 :         PLAYER_SET_DESCRS(objno, NULL);</span>
+<span class="lineNum">     673 </span><span class="lineCov">         26 :         PLAYER_SET_DESCRCOUNT(objno, 0);</span>
+<span class="lineNum">     674 </span><span class="lineCov">         26 :         PLAYER_SET_IGNORE_CACHE(objno, NULL);</span>
+<span class="lineNum">     675 </span><span class="lineCov">         26 :         PLAYER_SET_IGNORE_COUNT(objno, 0);</span>
+<span class="lineNum">     676 </span><span class="lineCov">         26 :         PLAYER_SET_IGNORE_LAST(objno, NOTHING);</span>
+<span class="lineNum">     677 </span><span class="lineCov">         26 :         OWNER(objno) = objno;</span>
+<span class="lineNum">     678 </span><span class="lineCov">         26 :         add_player(objno);</span>
+<span class="lineNum">     679 </span><span class="lineCov">         26 :         break;</span>
+<span class="lineNum">     680 </span>            :     case TYPE_PROGRAM:
+<span class="lineNum">     681 </span><span class="lineNoCov">          0 :         ALLOC_PROGRAM_SP(objno);</span>
+<span class="lineNum">     682 </span><span class="lineNoCov">          0 :         OWNER(objno) = prop_flag ? getref(f) : j;</span>
+<span class="lineNum">     683 </span><span class="lineNoCov">          0 :         FLAGS(objno) &amp;= ~INTERNAL;</span>
+<span class="lineNum">     684 </span><span class="lineNoCov">          0 :         PROGRAM_SET_CURR_LINE(objno, 0);</span>
+<span class="lineNum">     685 </span><span class="lineNoCov">          0 :         PROGRAM_SET_FIRST(objno, 0);</span>
+<span class="lineNum">     686 </span><span class="lineNoCov">          0 :         PROGRAM_SET_CODE(objno, 0);</span>
+<span class="lineNum">     687 </span><span class="lineNoCov">          0 :         PROGRAM_SET_SIZ(objno, 0);</span>
+<span class="lineNum">     688 </span><span class="lineNoCov">          0 :         PROGRAM_SET_START(objno, 0);</span>
+<span class="lineNum">     689 </span><span class="lineNoCov">          0 :         PROGRAM_SET_PUBS(objno, 0);</span>
+<span class="lineNum">     690 </span>            : #ifdef MCP_SUPPORT
+<span class="lineNum">     691 </span><span class="lineNoCov">          0 :         PROGRAM_SET_MCPBINDS(objno, 0);</span>
+<span class="lineNum">     692 </span>            : #endif
+<span class="lineNum">     693 </span><span class="lineNoCov">          0 :         PROGRAM_SET_PROFTIME(objno, 0, 0);</span>
+<span class="lineNum">     694 </span><span class="lineNoCov">          0 :         PROGRAM_SET_PROFSTART(objno, 0);</span>
+<span class="lineNum">     695 </span><span class="lineNoCov">          0 :         PROGRAM_SET_PROF_USES(objno, 0);</span>
+<span class="lineNum">     696 </span><span class="lineNoCov">          0 :         PROGRAM_SET_INSTANCES(objno, 0);</span>
+<span class="lineNum">     697 </span><span class="lineNoCov">          0 :         break;</span>
+<span class="lineNum">     698 </span>            :     case TYPE_GARBAGE:
+<span class="lineNum">     699 </span>            :         break;
+<span class="lineNum">     700 </span>            :     }
+<span class="lineNum">     701 </span>            : }
+<a name="702"><span class="lineNum">     702 </span>            : </a>
+<span class="lineNum">     703 </span>            : void
+<span class="lineNum">     704 </span><span class="lineCov">         26 : autostart_progs(void)</span>
+<span class="lineNum">     705 </span>            : {
+<span class="lineNum">     706 </span>            :     struct line *tmp;
+<span class="lineNum">     707 </span>            : 
+<span class="lineNum">     708 </span><span class="lineCov">         26 :     if (db_conversion_flag) {</span>
+<span class="lineNum">     709 </span>            :         return;
+<span class="lineNum">     710 </span>            :     }
+<span class="lineNum">     711 </span>            : 
+<span class="lineNum">     712 </span><span class="lineCov">         52 :     for (dbref i = 0; i &lt; db_top; i++) {</span>
+<span class="lineNum">     713 </span><span class="lineCov">         52 :         if (Typeof(i) == TYPE_PROGRAM) {</span>
+<span class="lineNum">     714 </span><span class="lineNoCov">          0 :             if ((FLAGS(i) &amp; ABODE) &amp;&amp; TrueWizard(OWNER(i))) {</span>
+<span class="lineNum">     715 </span>            :                 /* pre-compile AUTOSTART programs. */
+<span class="lineNum">     716 </span>            :                 /* They queue up when they finish compiling. */
+<span class="lineNum">     717 </span>            :                 /* Uncomment when DBFETCH &quot;does&quot; something. */
+<span class="lineNum">     718 </span>            :                 /* FIXME: DBFETCH(i); */
+<span class="lineNum">     719 </span><span class="lineNoCov">          0 :                 tmp = PROGRAM_FIRST(i);</span>
+<span class="lineNum">     720 </span><span class="lineNoCov">          0 :                 PROGRAM_SET_FIRST(i, (struct line *) read_program(i));</span>
+<span class="lineNum">     721 </span><span class="lineNoCov">          0 :                 do_compile(-1, OWNER(i), i, 0);</span>
+<span class="lineNum">     722 </span><span class="lineNoCov">          0 :                 free_prog_text(PROGRAM_FIRST(i));</span>
+<span class="lineNum">     723 </span><span class="lineNoCov">          0 :                 PROGRAM_SET_FIRST(i, tmp);</span>
+<span class="lineNum">     724 </span>            :             }
+<span class="lineNum">     725 </span>            :         }
+<span class="lineNum">     726 </span>            :     }
+<span class="lineNum">     727 </span>            : }
+<a name="728"><span class="lineNum">     728 </span>            : </a>
+<span class="lineNum">     729 </span>            : dbref
+<span class="lineNum">     730 </span><span class="lineCov">         26 : db_read(FILE * f)</span>
+<span class="lineNum">     731 </span>            : {
+<span class="lineNum">     732 </span>            :     dbref grow;
+<span class="lineNum">     733 </span>            :     const char *special;
+<span class="lineNum">     734 </span>            :     char c;
+<span class="lineNum">     735 </span>            : 
+<span class="lineNum">     736 </span>            :     /* Parse the header */
+<span class="lineNum">     737 </span><span class="lineCov">         26 :     db_load_format = db_read_header(f, &amp;grow);</span>
+<span class="lineNum">     738 </span><span class="lineCov">         26 :     if (db_load_format == 0) {</span>
+<span class="lineNum">     739 </span>            :         return -1;
+<span class="lineNum">     740 </span>            :     }
+<span class="lineNum">     741 </span>            : 
+<span class="lineNum">     742 </span><span class="lineCov">         26 :     db_grow(grow);</span>
+<span class="lineNum">     743 </span>            : 
+<span class="lineNum">     744 </span><span class="lineCov">         26 :     c = getc(f);                /* get next char */</span>
+<span class="lineNum">     745 </span><span class="lineCov">         78 :     for (int i = 0; ; i++) {</span>
+<span class="lineNum">     746 </span><span class="lineCov">        130 :         switch (c) {</span>
+<span class="lineNum">     747 </span>            :         case NUMBER_TOKEN:
+<span class="lineNum">     748 </span><span class="lineCov">         52 :             db_read_object(f, getref(f), db_load_format);</span>
+<span class="lineNum">     749 </span>            :             break;
+<span class="lineNum">     750 </span>            :         case LOOKUP_TOKEN:
+<span class="lineNum">     751 </span><span class="lineCov">         26 :             special = getstring(f);</span>
+<span class="lineNum">     752 </span><span class="lineCov">         26 :             if (strcmp(special, &quot;**END OF DUMP***&quot;)) {</span>
+<span class="lineNum">     753 </span><span class="lineNoCov">          0 :                 free((void *) special);</span>
+<span class="lineNum">     754 </span><span class="lineNoCov">          0 :                 return -1;</span>
+<span class="lineNum">     755 </span>            :             } else {
+<span class="lineNum">     756 </span><span class="lineCov">         26 :                 free((void *) special);</span>
+<span class="lineNum">     757 </span><span class="lineCov">         26 :                 special = getstring(f);</span>
+<span class="lineNum">     758 </span><span class="lineCov">         26 :                 if (special)</span>
+<span class="lineNum">     759 </span><span class="lineNoCov">          0 :                     free((void *) special);</span>
+<span class="lineNum">     760 </span>            : 
+<span class="lineNum">     761 </span><span class="lineCov">         26 :                 rewind(f);</span>
+<span class="lineNum">     762 </span><span class="lineCov">         26 :                 free((void *) getstring(f));</span>
+<span class="lineNum">     763 </span><span class="lineCov">         26 :                 getref(f);</span>
+<span class="lineNum">     764 </span><span class="lineCov">         26 :                 getref(f);</span>
+<span class="lineNum">     765 </span><span class="lineCov">         26 :                 tune_load_parms_from_file(f, NOTHING, getref(f));</span>
+<span class="lineNum">     766 </span>            : 
+<span class="lineNum">     767 </span><span class="lineCov">         78 :                 for (dbref j = 0; j &lt; db_top; j++) {</span>
+<span class="lineNum">     768 </span><span class="lineCov">         52 :                     if (Typeof(j) == TYPE_GARBAGE) {</span>
+<span class="lineNum">     769 </span><span class="lineNoCov">          0 :                         NEXTOBJ(j) = recyclable;</span>
+<span class="lineNum">     770 </span><span class="lineNoCov">          0 :                         recyclable = j;</span>
+<span class="lineNum">     771 </span>            :                     }
+<span class="lineNum">     772 </span>            :                 }
+<span class="lineNum">     773 </span><span class="lineCov">         26 :                 autostart_progs();</span>
+<span class="lineNum">     774 </span><span class="lineCov">         26 :                 return db_top;</span>
+<span class="lineNum">     775 </span>            :             }
+<span class="lineNum">     776 </span>            :         default:
+<span class="lineNum">     777 </span>            :             return -1;
+<span class="lineNum">     778 </span>            :             /* break; */
+<span class="lineNum">     779 </span>            :         }
+<span class="lineNum">     780 </span><span class="lineCov">         52 :         c = getc(f);</span>
+<span class="lineNum">     781 </span>            :     }                           /* for */
+<span class="lineNum">     782 </span>            : }                               /* db_read */
+<a name="783"><span class="lineNum">     783 </span>            : </a>
+<span class="lineNum">     784 </span>            : int
+<span class="lineNum">     785 </span><span class="lineNoCov">          0 : objnode_find(objnode *head, dbref data)</span>
+<span class="lineNum">     786 </span>            : {
+<span class="lineNum">     787 </span><span class="lineNoCov">          0 :     objnode *tmp = head;</span>
+<span class="lineNum">     788 </span>            : 
+<span class="lineNum">     789 </span><span class="lineNoCov">          0 :     while (tmp) {</span>
+<span class="lineNum">     790 </span><span class="lineNoCov">          0 :         if (tmp-&gt;data == data) return 1;</span>
+<span class="lineNum">     791 </span><span class="lineNoCov">          0 :         tmp = tmp-&gt;next;</span>
+<span class="lineNum">     792 </span>            :     }
+<span class="lineNum">     793 </span>            : 
+<span class="lineNum">     794 </span>            :     return 0;
+<span class="lineNum">     795 </span>            : }
+<a name="796"><span class="lineNum">     796 </span>            : </a>
+<span class="lineNum">     797 </span>            : void
+<span class="lineNum">     798 </span><span class="lineCov">          1 : objnode_push(objnode **head, dbref data)</span>
+<span class="lineNum">     799 </span>            : {
+<span class="lineNum">     800 </span>            :     objnode *tmp;
+<span class="lineNum">     801 </span>            : 
+<span class="lineNum">     802 </span><span class="lineCov">          1 :     if (!(tmp = (objnode *)malloc(sizeof(objnode)))) {</span>
+<span class="lineNum">     803 </span><span class="lineNoCov">          0 :         fprintf(stderr, &quot;objnode_push: out of memory\n&quot;);</span>
+<span class="lineNum">     804 </span>            :         return;
+<span class="lineNum">     805 </span>            :     }
+<span class="lineNum">     806 </span>            : 
+<span class="lineNum">     807 </span><span class="lineCov">          1 :     tmp-&gt;data = data;</span>
+<span class="lineNum">     808 </span><span class="lineCov">          1 :     tmp-&gt;next = *head;</span>
+<span class="lineNum">     809 </span><span class="lineCov">          1 :     *head = tmp;</span>
+<a name="810"><span class="lineNum">     810 </span>            : }</a>
+<span class="lineNum">     811 </span>            : 
+<span class="lineNum">     812 </span><span class="lineCov">          1 : void objnode_pop(objnode **head)</span>
+<span class="lineNum">     813 </span>            : {
+<span class="lineNum">     814 </span><span class="lineCov">          1 :     if (!*head) return;</span>
+<span class="lineNum">     815 </span>            : 
+<span class="lineNum">     816 </span><span class="lineCov">          1 :     objnode *tmp = *head;</span>
+<span class="lineNum">     817 </span><span class="lineCov">          1 :     *head = tmp-&gt;next;</span>
+<span class="lineNum">     818 </span><span class="lineCov">          1 :     free(tmp);</span>
+<span class="lineNum">     819 </span>            : }
+<a name="820"><span class="lineNum">     820 </span>            : </a>
+<span class="lineNum">     821 </span>            : const char *
+<span class="lineNum">     822 </span><span class="lineCov">         74 : unparse_flags(dbref thing)</span>
+<span class="lineNum">     823 </span>            : {
+<span class="lineNum">     824 </span>            :     static char buf[BUFFER_LEN];
+<span class="lineNum">     825 </span>            :     char *p;
+<span class="lineNum">     826 </span><span class="lineCov">         74 :     const char *type_codes = &quot;R-EPFG&quot;;</span>
+<span class="lineNum">     827 </span>            : 
+<span class="lineNum">     828 </span><span class="lineCov">         74 :     p = buf;</span>
+<span class="lineNum">     829 </span><span class="lineCov">         74 :     if (Typeof(thing) != TYPE_THING)</span>
+<span class="lineNum">     830 </span><span class="lineCov">         72 :         *p++ = type_codes[Typeof(thing)];</span>
+<span class="lineNum">     831 </span><span class="lineCov">         74 :     if (FLAGS(thing) &amp; ~TYPE_MASK) {</span>
+<span class="lineNum">     832 </span>            :         /* print flags */
+<span class="lineNum">     833 </span><span class="lineCov">         73 :         if (FLAGS(thing) &amp; WIZARD)</span>
+<span class="lineNum">     834 </span><span class="lineCov">          3 :             *p++ = 'W';</span>
+<span class="lineNum">     835 </span><span class="lineCov">         73 :         if (FLAGS(thing) &amp; LINK_OK)</span>
+<span class="lineNum">     836 </span><span class="lineNoCov">          0 :             *p++ = 'L';</span>
+<span class="lineNum">     837 </span>            : 
+<span class="lineNum">     838 </span><span class="lineCov">         73 :         if (FLAGS(thing) &amp; KILL_OK)</span>
+<span class="lineNum">     839 </span><span class="lineNoCov">          0 :             *p++ = 'K';</span>
+<span class="lineNum">     840 </span>            : 
+<span class="lineNum">     841 </span><span class="lineCov">         73 :         if (FLAGS(thing) &amp; DARK)</span>
+<span class="lineNum">     842 </span><span class="lineNoCov">          0 :             *p++ = 'D';</span>
+<span class="lineNum">     843 </span><span class="lineCov">         73 :         if (FLAGS(thing) &amp; STICKY)</span>
+<span class="lineNum">     844 </span><span class="lineNoCov">          0 :             *p++ = 'S';</span>
+<span class="lineNum">     845 </span><span class="lineCov">         73 :         if (FLAGS(thing) &amp; QUELL)</span>
+<span class="lineNum">     846 </span><span class="lineNoCov">          0 :             *p++ = 'Q';</span>
+<span class="lineNum">     847 </span><span class="lineCov">         73 :         if (FLAGS(thing) &amp; BUILDER)</span>
+<span class="lineNum">     848 </span><span class="lineCov">          3 :             *p++ = 'B';</span>
+<span class="lineNum">     849 </span><span class="lineCov">         73 :         if (FLAGS(thing) &amp; CHOWN_OK)</span>
+<span class="lineNum">     850 </span><span class="lineNoCov">          0 :             *p++ = 'C';</span>
+<span class="lineNum">     851 </span><span class="lineCov">         73 :         if (FLAGS(thing) &amp; JUMP_OK)</span>
+<span class="lineNum">     852 </span><span class="lineNoCov">          0 :             *p++ = 'J';</span>
+<span class="lineNum">     853 </span><span class="lineCov">         73 :         if (FLAGS(thing) &amp; GUEST)</span>
+<span class="lineNum">     854 </span><span class="lineNoCov">          0 :             *p++ = 'G';</span>
+<span class="lineNum">     855 </span><span class="lineCov">         73 :         if (FLAGS(thing) &amp; HAVEN)</span>
+<span class="lineNum">     856 </span><span class="lineCov">          3 :             *p++ = 'H';</span>
+<span class="lineNum">     857 </span><span class="lineCov">         73 :         if (FLAGS(thing) &amp; ABODE)</span>
+<span class="lineNum">     858 </span><span class="lineNoCov">          0 :             *p++ = 'A';</span>
+<span class="lineNum">     859 </span><span class="lineCov">         73 :         if (FLAGS(thing) &amp; VEHICLE)</span>
+<span class="lineNum">     860 </span><span class="lineNoCov">          0 :             *p++ = 'V';</span>
+<span class="lineNum">     861 </span><span class="lineCov">         73 :         if (FLAGS(thing) &amp; XFORCIBLE)</span>
+<span class="lineNum">     862 </span><span class="lineNoCov">          0 :             *p++ = 'X';</span>
+<span class="lineNum">     863 </span><span class="lineCov">         73 :         if (FLAGS(thing) &amp; ZOMBIE)</span>
+<span class="lineNum">     864 </span><span class="lineNoCov">          0 :             *p++ = 'Z';</span>
+<span class="lineNum">     865 </span><span class="lineCov">         73 :         if (FLAGS(thing) &amp; YIELD &amp;&amp; tp_enable_match_yield)</span>
+<span class="lineNum">     866 </span><span class="lineNoCov">          0 :             *p++ = 'Y';</span>
+<span class="lineNum">     867 </span><span class="lineCov">         73 :         if (FLAGS(thing) &amp; OVERT &amp;&amp; tp_enable_match_yield)</span>
+<span class="lineNum">     868 </span><span class="lineNoCov">          0 :             *p++ = 'O';</span>
+<span class="lineNum">     869 </span><span class="lineCov">         73 :         if (MLevRaw(thing)) {</span>
+<span class="lineNum">     870 </span><span class="lineCov">         30 :             *p++ = 'M';</span>
+<span class="lineNum">     871 </span><span class="lineCov">         30 :             switch (MLevRaw(thing)) {</span>
+<span class="lineNum">     872 </span>            :             case 1:
+<span class="lineNum">     873 </span><span class="lineNoCov">          0 :                 *p++ = '1';</span>
+<span class="lineNum">     874 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     875 </span>            :             case 2:
+<span class="lineNum">     876 </span><span class="lineNoCov">          0 :                 *p++ = '2';</span>
+<span class="lineNum">     877 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     878 </span>            :             case 3:
+<span class="lineNum">     879 </span><span class="lineCov">         30 :                 *p++ = '3';</span>
+<span class="lineNum">     880 </span><span class="lineCov">         30 :                 break;</span>
+<span class="lineNum">     881 </span>            :             }
+<span class="lineNum">     882 </span>            :         }
+<span class="lineNum">     883 </span>            :     }
+<span class="lineNum">     884 </span><span class="lineCov">         74 :     *p = '\0';</span>
+<span class="lineNum">     885 </span><span class="lineCov">         74 :     return buf;</span>
+<span class="lineNum">     886 </span>            : }
+<a name="887"><span class="lineNum">     887 </span>            : </a>
+<span class="lineNum">     888 </span>            : void
+<span class="lineNum">     889 </span><span class="lineCov">         77 : unparse_object(dbref player, dbref loc, char *buffer, size_t size)</span>
+<span class="lineNum">     890 </span>            : {
+<span class="lineNum">     891 </span><span class="lineCov">         77 :     if (player != NOTHING)</span>
+<span class="lineNum">     892 </span><span class="lineCov">         77 :         player = OWNER(player);</span>
+<span class="lineNum">     893 </span>            : 
+<span class="lineNum">     894 </span><span class="lineCov">         77 :     switch (loc) {</span>
+<span class="lineNum">     895 </span>            :     case NOTHING:
+<span class="lineNum">     896 </span><span class="lineNoCov">          0 :         strcpyn(buffer, size, &quot;*NOTHING*&quot;);</span>
+<span class="lineNum">     897 </span><span class="lineNoCov">          0 :         return;</span>
+<span class="lineNum">     898 </span>            :     case AMBIGUOUS:
+<span class="lineNum">     899 </span><span class="lineNoCov">          0 :         strcpyn(buffer, size, &quot;*AMBIGUOUS*&quot;);</span>
+<span class="lineNum">     900 </span><span class="lineNoCov">          0 :         return;</span>
+<span class="lineNum">     901 </span>            :     case HOME:
+<span class="lineNum">     902 </span><span class="lineNoCov">          0 :         strcpyn(buffer, size, &quot;*HOME*&quot;);</span>
+<span class="lineNum">     903 </span><span class="lineNoCov">          0 :         return;</span>
+<span class="lineNum">     904 </span>            :     case NIL:
+<span class="lineNum">     905 </span><span class="lineNoCov">          0 :         strcpyn(buffer, size, &quot;*NIL*&quot;);</span>
+<span class="lineNum">     906 </span><span class="lineNoCov">          0 :         return;</span>
+<span class="lineNum">     907 </span>            :     default:
+<span class="lineNum">     908 </span><span class="lineCov">         77 :         if (!ObjExists(loc)) {</span>
+<span class="lineNum">     909 </span><span class="lineNoCov">          0 :             strcpyn(buffer, size, &quot;*INVALID*&quot;);</span>
+<span class="lineNum">     910 </span><span class="lineNoCov">          0 :             return;</span>
+<span class="lineNum">     911 </span>            :         }
+<span class="lineNum">     912 </span>            : 
+<span class="lineNum">     913 </span><span class="lineCov">        154 :         if ((player == NOTHING) || (!(FLAGS(player) &amp; STICKY) &amp;&amp;</span>
+<span class="lineNum">     914 </span><span class="lineCov">         80 :                                     (can_link_to(player, NOTYPE, loc) ||</span>
+<span class="lineNum">     915 </span><span class="lineCov">          5 :                                      ((Typeof(loc) != TYPE_PLAYER) &amp;&amp;</span>
+<span class="lineNum">     916 </span><span class="lineCov">          2 :                                       (controls_link(player, loc)</span>
+<span class="lineNum">     917 </span><span class="lineCov">          2 :                                        || (FLAGS(loc) &amp; CHOWN_OK)))))) {</span>
+<span class="lineNum">     918 </span>            :             /* show everything */
+<span class="lineNum">     919 </span><span class="lineCov">         74 :             snprintf(buffer, size, &quot;%.*s(#%d%s)&quot;, (BUFFER_LEN / 2), NAME(loc), loc,</span>
+<span class="lineNum">     920 </span>            :                      unparse_flags(loc));
+<span class="lineNum">     921 </span>            :         } else {
+<span class="lineNum">     922 </span>            :             /* show only the name */
+<span class="lineNum">     923 </span><span class="lineCov">          3 :             strcpyn(buffer, size, NAME(loc));</span>
+<span class="lineNum">     924 </span>            :         }
+<span class="lineNum">     925 </span>            :     }
+<span class="lineNum">     926 </span>            : }
+<a name="927"><span class="lineNum">     927 </span>            : </a>
+<span class="lineNum">     928 </span>            : dbref
+<span class="lineNum">     929 </span><span class="lineCov">          7 : remove_first(dbref first, dbref what)</span>
+<span class="lineNum">     930 </span>            : {
+<span class="lineNum">     931 </span>            :     dbref prev;
+<span class="lineNum">     932 </span>            : 
+<span class="lineNum">     933 </span>            :     /* special case if it's the first one */
+<span class="lineNum">     934 </span><span class="lineCov">          7 :     if (first == what) {</span>
+<span class="lineNum">     935 </span><span class="lineCov">          6 :         return NEXTOBJ(first);</span>
+<span class="lineNum">     936 </span>            :     } else {
+<span class="lineNum">     937 </span>            :         /* have to find it */
+<span class="lineNum">     938 </span><span class="lineCov">          1 :         DOLIST(prev, first) {</span>
+<span class="lineNum">     939 </span><span class="lineCov">          1 :             if (NEXTOBJ(prev) == what) {</span>
+<span class="lineNum">     940 </span><span class="lineCov">          1 :                 DBSTORE(prev, next, NEXTOBJ(what));</span>
+<span class="lineNum">     941 </span><span class="lineCov">          1 :                 return first;</span>
+<span class="lineNum">     942 </span>            :             }
+<span class="lineNum">     943 </span>            :         }
+<span class="lineNum">     944 </span>            :         return first;
+<span class="lineNum">     945 </span>            :     }
+<span class="lineNum">     946 </span>            : }
+<a name="947"><span class="lineNum">     947 </span>            : </a>
+<span class="lineNum">     948 </span>            : int
+<span class="lineNum">     949 </span><span class="lineCov">          2 : member(dbref thing, dbref list)</span>
+<span class="lineNum">     950 </span>            : {
+<span class="lineNum">     951 </span><span class="lineCov">          2 :     DOLIST(list, list) {</span>
+<span class="lineNum">     952 </span><span class="lineNoCov">          0 :         if (list == thing)</span>
+<span class="lineNum">     953 </span>            :             return 1;
+<span class="lineNum">     954 </span><span class="lineNoCov">          0 :         if ((CONTENTS(list)) &amp;&amp; (member(thing, CONTENTS(list)))) {</span>
+<span class="lineNum">     955 </span>            :             return 1;
+<span class="lineNum">     956 </span>            :         }
+<span class="lineNum">     957 </span>            :     }
+<span class="lineNum">     958 </span>            : 
+<span class="lineNum">     959 </span>            :     return 0;
+<span class="lineNum">     960 </span>            : }
+<a name="961"><span class="lineNum">     961 </span>            : </a>
+<span class="lineNum">     962 </span>            : dbref
+<span class="lineNum">     963 </span><span class="lineNoCov">          0 : reverse(dbref list)</span>
+<span class="lineNum">     964 </span>            : {
+<span class="lineNum">     965 </span>            :     dbref newlist;
+<span class="lineNum">     966 </span>            :     dbref rest;
+<span class="lineNum">     967 </span>            : 
+<span class="lineNum">     968 </span><span class="lineNoCov">          0 :     newlist = NOTHING;</span>
+<span class="lineNum">     969 </span><span class="lineNoCov">          0 :     while (list != NOTHING) {</span>
+<span class="lineNum">     970 </span><span class="lineNoCov">          0 :         rest = NEXTOBJ(list);</span>
+<span class="lineNum">     971 </span><span class="lineNoCov">          0 :         PUSH(list, newlist);</span>
+<span class="lineNum">     972 </span>            :         DBDIRTY(newlist);
+<span class="lineNum">     973 </span><span class="lineNoCov">          0 :         list = rest;</span>
+<span class="lineNum">     974 </span>            :     }
+<span class="lineNum">     975 </span><span class="lineNoCov">          0 :     return newlist;</span>
+<span class="lineNum">     976 </span>            : }
+<a name="977"><span class="lineNum">     977 </span>            : </a>
+<span class="lineNum">     978 </span>            : long
+<span class="lineNum">     979 </span><span class="lineCov">          3 : size_object(dbref i, int load)</span>
+<span class="lineNum">     980 </span>            : {
+<span class="lineNum">     981 </span>            :     long byts;
+<span class="lineNum">     982 </span><span class="lineCov">          3 :     byts = sizeof(struct object);</span>
+<span class="lineNum">     983 </span>            : 
+<span class="lineNum">     984 </span><span class="lineCov">          3 :     if (NAME(i)) {</span>
+<span class="lineNum">     985 </span><span class="lineCov">          3 :         byts += strlen(NAME(i)) + 1;</span>
+<span class="lineNum">     986 </span>            :     }
+<span class="lineNum">     987 </span><span class="lineCov">          3 :     byts += size_properties(i, load);</span>
+<span class="lineNum">     988 </span>            : 
+<span class="lineNum">     989 </span><span class="lineCov">          3 :     if (Typeof(i) == TYPE_EXIT &amp;&amp; DBFETCH(i)-&gt;sp.exit.dest) {</span>
+<span class="lineNum">     990 </span><span class="lineCov">          1 :         byts += sizeof(dbref) * DBFETCH(i)-&gt;sp.exit.ndest;</span>
+<span class="lineNum">     991 </span><span class="lineCov">          2 :     } else if (Typeof(i) == TYPE_PLAYER &amp;&amp; PLAYER_PASSWORD(i)) {</span>
+<span class="lineNum">     992 </span><span class="lineCov">          1 :         byts += strlen(PLAYER_PASSWORD(i)) + 1;</span>
+<span class="lineNum">     993 </span><span class="lineCov">          1 :     } else if (Typeof(i) == TYPE_PROGRAM) {</span>
+<span class="lineNum">     994 </span><span class="lineNoCov">          0 :         byts += size_prog(i);</span>
+<span class="lineNum">     995 </span>            :     }
+<span class="lineNum">     996 </span><span class="lineCov">          3 :     return byts;</span>
+<span class="lineNum">     997 </span>            : }
+<span class="lineNum">     998 </span>            : 
+<a name="999"><span class="lineNum">     999 </span>            : </a>
+<span class="lineNum">    1000 </span>            : static int
+<span class="lineNum">    1001 </span><span class="lineCov">          1 : ok_ascii_any(const char *name)</span>
+<span class="lineNum">    1002 </span>            : {
+<span class="lineNum">    1003 </span><span class="lineCov">          4 :     for (const unsigned char *scan = (const unsigned char *) name; *scan; ++scan) {</span>
+<span class="lineNum">    1004 </span><span class="lineCov">          3 :         if (*scan &gt; 127)</span>
+<span class="lineNum">    1005 </span>            :             return 0;
+<span class="lineNum">    1006 </span>            :     }
+<span class="lineNum">    1007 </span>            :     return 1;
+<span class="lineNum">    1008 </span>            : }
+<a name="1009"><span class="lineNum">    1009 </span>            : </a>
+<span class="lineNum">    1010 </span>            : int
+<span class="lineNum">    1011 </span><span class="lineCov">          1 : ok_ascii_thing(const char *name)</span>
+<span class="lineNum">    1012 </span>            : {
+<span class="lineNum">    1013 </span><span class="lineCov">          1 :     return !tp_7bit_thing_names || ok_ascii_any(name);</span>
+<span class="lineNum">    1014 </span>            : }
+<a name="1015"><span class="lineNum">    1015 </span>            : </a>
+<span class="lineNum">    1016 </span>            : int
+<span class="lineNum">    1017 </span><span class="lineCov">         20 : ok_ascii_other(const char *name)</span>
+<span class="lineNum">    1018 </span>            : {
+<span class="lineNum">    1019 </span><span class="lineCov">         20 :     return !tp_7bit_other_names || ok_ascii_any(name);</span>
+<span class="lineNum">    1020 </span>            : }
+<a name="1021"><span class="lineNum">    1021 </span>            : </a>
+<span class="lineNum">    1022 </span>            : int
+<span class="lineNum">    1023 </span><span class="lineCov">         23 : ok_name(const char *name)</span>
+<span class="lineNum">    1024 </span>            : {
+<span class="lineNum">    1025 </span>            :     return (name
+<span class="lineNum">    1026 </span><span class="lineCov">         23 :             &amp;&amp; *name</span>
+<span class="lineNum">    1027 </span><span class="lineCov">         23 :             &amp;&amp; *name != NOT_TOKEN</span>
+<span class="lineNum">    1028 </span><span class="lineCov">         23 :             &amp;&amp; *name != LOOKUP_TOKEN</span>
+<span class="lineNum">    1029 </span><span class="lineCov">         23 :             &amp;&amp; *name != REGISTERED_TOKEN</span>
+<span class="lineNum">    1030 </span><span class="lineCov">         23 :             &amp;&amp; *name != NUMBER_TOKEN</span>
+<span class="lineNum">    1031 </span><span class="lineCov">         23 :             &amp;&amp; !index(name, ARG_DELIMITER)</span>
+<span class="lineNum">    1032 </span><span class="lineCov">         23 :             &amp;&amp; !index(name, AND_TOKEN)</span>
+<span class="lineNum">    1033 </span><span class="lineCov">         23 :             &amp;&amp; !index(name, OR_TOKEN)</span>
+<span class="lineNum">    1034 </span><span class="lineCov">         23 :             &amp;&amp; !index(name, '\r')</span>
+<span class="lineNum">    1035 </span><span class="lineCov">         23 :             &amp;&amp; !index(name, ESCAPE_CHAR)</span>
+<span class="lineNum">    1036 </span><span class="lineCov">         23 :             &amp;&amp; strcasecmp(name, &quot;me&quot;)</span>
+<span class="lineNum">    1037 </span><span class="lineCov">         23 :             &amp;&amp; strcasecmp(name, &quot;here&quot;)</span>
+<span class="lineNum">    1038 </span><span class="lineCov">         23 :             &amp;&amp; strcasecmp(name, &quot;home&quot;)</span>
+<span class="lineNum">    1039 </span><span class="lineCov">         46 :             &amp;&amp; (!*tp_reserved_names || !equalstr((char *) tp_reserved_names, (char *) name)</span>
+<span class="lineNum">    1040 </span>            :             ));
+<span class="lineNum">    1041 </span>            : }
+<a name="1042"><span class="lineNum">    1042 </span>            : </a>
+<span class="lineNum">    1043 </span>            : static dbref
+<span class="lineNum">    1044 </span><span class="lineCov">        845 : getparent_logic(dbref obj)</span>
+<span class="lineNum">    1045 </span>            : {
+<span class="lineNum">    1046 </span><span class="lineCov">        845 :     if (obj == NOTHING)</span>
+<span class="lineNum">    1047 </span>            :         return NOTHING;
+<span class="lineNum">    1048 </span><span class="lineCov">        610 :     if (Typeof(obj) == TYPE_THING &amp;&amp; (FLAGS(obj) &amp; VEHICLE)) {</span>
+<span class="lineNum">    1049 </span><span class="lineNoCov">          0 :         obj = THING_HOME(obj);</span>
+<span class="lineNum">    1050 </span><span class="lineNoCov">          0 :         if (obj != NOTHING &amp;&amp; Typeof(obj) == TYPE_PLAYER) {</span>
+<span class="lineNum">    1051 </span><span class="lineNoCov">          0 :             obj = PLAYER_HOME(obj);</span>
+<span class="lineNum">    1052 </span>            :         }
+<span class="lineNum">    1053 </span>            :     } else {
+<span class="lineNum">    1054 </span><span class="lineCov">        610 :         obj = LOCATION(obj);</span>
+<span class="lineNum">    1055 </span>            :     }
+<span class="lineNum">    1056 </span>            :     return obj;
+<span class="lineNum">    1057 </span>            : }
+<a name="1058"><span class="lineNum">    1058 </span>            : </a>
+<span class="lineNum">    1059 </span>            : dbref
+<span class="lineNum">    1060 </span><span class="lineCov">        243 : getparent(dbref obj)</span>
+<span class="lineNum">    1061 </span>            : {
+<span class="lineNum">    1062 </span>            :     dbref ptr, oldptr;
+<span class="lineNum">    1063 </span>            : 
+<span class="lineNum">    1064 </span><span class="lineCov">        243 :     if (tp_thing_movement) {</span>
+<span class="lineNum">    1065 </span><span class="lineNoCov">          0 :         obj = LOCATION(obj);</span>
+<span class="lineNum">    1066 </span>            :     } else {
+<span class="lineNum">    1067 </span><span class="lineCov">        243 :         ptr = getparent_logic(obj);</span>
+<span class="lineNum">    1068 </span>            :         do {
+<span class="lineNum">    1069 </span><span class="lineCov">        243 :             obj = getparent_logic(obj);</span>
+<span class="lineNum">    1070 </span><span class="lineCov">        359 :         } while (obj != (oldptr = ptr = getparent_logic(ptr)) &amp;&amp;</span>
+<span class="lineNum">    1071 </span><span class="lineCov">        116 :                  obj != (ptr = getparent_logic(ptr)) &amp;&amp;</span>
+<span class="lineNum">    1072 </span><span class="lineCov">        602 :                  obj != NOTHING &amp;&amp; Typeof(obj) == TYPE_THING);</span>
+<span class="lineNum">    1073 </span><span class="lineCov">        243 :         if (obj != NOTHING &amp;&amp; (obj == oldptr || obj == ptr)) {</span>
+<span class="lineNum">    1074 </span><span class="lineNoCov">          0 :             obj = GLOBAL_ENVIRONMENT;</span>
+<span class="lineNum">    1075 </span>            :         }
+<span class="lineNum">    1076 </span>            :     }
+<span class="lineNum">    1077 </span><span class="lineCov">        243 :     return obj;</span>
+<span class="lineNum">    1078 </span>            : }
+<a name="1079"><span class="lineNum">    1079 </span>            : </a>
+<span class="lineNum">    1080 </span>            : int
+<span class="lineNum">    1081 </span><span class="lineCov">        734 : controls(dbref who, dbref what)</span>
+<span class="lineNum">    1082 </span>            : {
+<span class="lineNum">    1083 </span>            :     /* No one controls invalid objects */
+<span class="lineNum">    1084 </span><span class="lineCov">        734 :     if (!OkObj(what))</span>
+<span class="lineNum">    1085 </span>            :         return 0;
+<span class="lineNum">    1086 </span>            : 
+<span class="lineNum">    1087 </span><span class="lineCov">        275 :     who = OWNER(who);</span>
+<span class="lineNum">    1088 </span>            : 
+<span class="lineNum">    1089 </span>            :     /* Wizard controls everything */
+<span class="lineNum">    1090 </span><span class="lineCov">        275 :     if (Wizard(who)) {</span>
+<span class="lineNum">    1091 </span>            : #ifdef GOD_PRIV
+<span class="lineNum">    1092 </span><span class="lineCov">        272 :         if (tp_strict_god_priv &amp;&amp; God(OWNER(what)) &amp;&amp; !God(who))</span>
+<span class="lineNum">    1093 </span>            :             /* Only God controls God's objects */
+<span class="lineNum">    1094 </span>            :             return 0;
+<span class="lineNum">    1095 </span>            :         else
+<span class="lineNum">    1096 </span>            : #endif
+<span class="lineNum">    1097 </span><span class="lineCov">        272 :             return 1;</span>
+<span class="lineNum">    1098 </span>            :     }
+<span class="lineNum">    1099 </span>            : 
+<span class="lineNum">    1100 </span><span class="lineCov">          3 :     if (tp_realms_control) {</span>
+<span class="lineNum">    1101 </span>            :         /* Realm Owner controls everything under his environment. */
+<span class="lineNum">    1102 </span>            :         /* To set up a Realm, a Wizard sets the W flag on a room.  The
+<span class="lineNum">    1103 </span>            :          * owner of that room controls every Room object contained within
+<span class="lineNum">    1104 </span>            :          * that room, all the way to the leaves of the tree.
+<span class="lineNum">    1105 </span>            :          * -winged */
+<span class="lineNum">    1106 </span><span class="lineNoCov">          0 :         for (dbref index = what; index != NOTHING; index = LOCATION(index)) {</span>
+<span class="lineNum">    1107 </span><span class="lineNoCov">          0 :             if ((OWNER(index) == who) &amp;&amp; (Typeof(index) == TYPE_ROOM)</span>
+<span class="lineNum">    1108 </span><span class="lineNoCov">          0 :                 &amp;&amp; Wizard(index)) {</span>
+<span class="lineNum">    1109 </span>            :                 /* Realm Owner doesn't control other Player objects */
+<span class="lineNum">    1110 </span><span class="lineNoCov">          0 :                 if (Typeof(what) == TYPE_PLAYER) {</span>
+<span class="lineNum">    1111 </span>            :                     return 0;
+<span class="lineNum">    1112 </span>            :                 } else {
+<span class="lineNum">    1113 </span><span class="lineNoCov">          0 :                     return 1;</span>
+<span class="lineNum">    1114 </span>            :                 }
+<span class="lineNum">    1115 </span>            :             }
+<span class="lineNum">    1116 </span>            :         }
+<span class="lineNum">    1117 </span>            :     }
+<span class="lineNum">    1118 </span>            : 
+<span class="lineNum">    1119 </span>            :     /* exits are also controlled by the owners of the source and destination */
+<span class="lineNum">    1120 </span>            :     /* ACTUALLY, THEY AREN'T.  IT OPENS A BAD MPI SECURITY HOLE. */
+<span class="lineNum">    1121 </span>            :     /* any MPI on an exit's @succ or @fail would be run in the context
+<span class="lineNum">    1122 </span>            :      * of the owner, which would allow the owner of the src or dest to
+<span class="lineNum">    1123 </span>            :      * write malicious code for the owner of the exit to run.  Allowing them
+<span class="lineNum">    1124 </span>            :      * control would allow them to modify _ properties, thus enabling the
+<span class="lineNum">    1125 </span>            :      * security hole. -winged */
+<span class="lineNum">    1126 </span>            :     /*
+<span class="lineNum">    1127 </span>            :      * if (Typeof(what) == TYPE_EXIT) {
+<span class="lineNum">    1128 </span>            :      *    int     i = DBFETCH(what)-&gt;sp.exit.ndest;
+<span class="lineNum">    1129 </span>            :      *
+<span class="lineNum">    1130 </span>            :      *    while (i &gt; 0) {
+<span class="lineNum">    1131 </span>            :      *        if (who == OWNER(DBFETCH(what)-&gt;sp.exit.dest[--i]))
+<span class="lineNum">    1132 </span>            :      *            return 1;
+<span class="lineNum">    1133 </span>            :      *    }
+<span class="lineNum">    1134 </span>            :      *    if (who == OWNER(LOCATION(what)))
+<span class="lineNum">    1135 </span>            :      *        return 1;
+<span class="lineNum">    1136 </span>            :      * }
+<span class="lineNum">    1137 </span>            :      */
+<span class="lineNum">    1138 </span>            : 
+<span class="lineNum">    1139 </span>            :     /* owners control their own stuff */
+<span class="lineNum">    1140 </span><span class="lineCov">          3 :     if (who == OWNER(what))</span>
+<span class="lineNum">    1141 </span>            :         return 1;
+<span class="lineNum">    1142 </span>            : 
+<span class="lineNum">    1143 </span><span class="lineCov">          3 :     return (test_lock_false_default(NOTHING, who, what, MESGPROP_OWNLOCK));</span>
+<span class="lineNum">    1144 </span>            : }
+<a name="1145"><span class="lineNum">    1145 </span>            : </a>
+<span class="lineNum">    1146 </span>            : int
+<span class="lineNum">    1147 </span><span class="lineCov">          2 : controls_link(dbref who, dbref what)</span>
+<span class="lineNum">    1148 </span>            : {
+<span class="lineNum">    1149 </span><span class="lineCov">          2 :     switch (Typeof(what)) {</span>
+<span class="lineNum">    1150 </span>            :     case TYPE_EXIT:
+<span class="lineNum">    1151 </span>            :         {
+<span class="lineNum">    1152 </span><span class="lineNoCov">          0 :             int i = DBFETCH(what)-&gt;sp.exit.ndest;</span>
+<span class="lineNum">    1153 </span>            : 
+<span class="lineNum">    1154 </span><span class="lineNoCov">          0 :             while (i &gt; 0) {</span>
+<span class="lineNum">    1155 </span><span class="lineNoCov">          0 :                 if (controls(who, DBFETCH(what)-&gt;sp.exit.dest[--i]))</span>
+<span class="lineNum">    1156 </span>            :                     return 1;
+<span class="lineNum">    1157 </span>            :             }
+<span class="lineNum">    1158 </span><span class="lineNoCov">          0 :             if (who == OWNER(LOCATION(what)))</span>
+<span class="lineNum">    1159 </span>            :                 return 1;
+<span class="lineNum">    1160 </span><span class="lineNoCov">          0 :             return 0;</span>
+<span class="lineNum">    1161 </span>            :         }
+<span class="lineNum">    1162 </span>            : 
+<span class="lineNum">    1163 </span>            :     case TYPE_ROOM:
+<span class="lineNum">    1164 </span>            :         {
+<span class="lineNum">    1165 </span><span class="lineCov">          2 :             if (controls(who, DBFETCH(what)-&gt;sp.room.dropto))</span>
+<span class="lineNum">    1166 </span>            :                 return 1;
+<span class="lineNum">    1167 </span><span class="lineCov">          2 :             return 0;</span>
+<span class="lineNum">    1168 </span>            :         } 
+<span class="lineNum">    1169 </span>            : 
+<span class="lineNum">    1170 </span>            :     case TYPE_PLAYER:
+<span class="lineNum">    1171 </span>            :         {
+<span class="lineNum">    1172 </span><span class="lineNoCov">          0 :             if (controls(who, PLAYER_HOME(what)))</span>
+<span class="lineNum">    1173 </span>            :                 return 1;
+<span class="lineNum">    1174 </span><span class="lineNoCov">          0 :             return 0;</span>
+<span class="lineNum">    1175 </span>            :         }
+<span class="lineNum">    1176 </span>            : 
+<span class="lineNum">    1177 </span>            :     case TYPE_THING:
+<span class="lineNum">    1178 </span>            :         {
+<span class="lineNum">    1179 </span><span class="lineNoCov">          0 :             if (controls(who, THING_HOME(what)))</span>
+<span class="lineNum">    1180 </span>            :                 return 1;
+<span class="lineNum">    1181 </span><span class="lineNoCov">          0 :             return 0;</span>
+<span class="lineNum">    1182 </span>            :         }
+<span class="lineNum">    1183 </span>            : 
+<span class="lineNum">    1184 </span>            :     case TYPE_PROGRAM:
+<span class="lineNum">    1185 </span>            :     default:
+<span class="lineNum">    1186 </span>            :         return 0;
+<span class="lineNum">    1187 </span>            :     }
+<span class="lineNum">    1188 </span>            : }
+<span class="lineNum">    1189 </span>            : 
+<span class="lineNum">    1190 </span>            : /*
+<span class="lineNum">    1191 </span>            :  * set_source()
+<span class="lineNum">    1192 </span>            :  *
+<span class="lineNum">    1193 </span>            :  * This routine sets the source of an action to the specified source.
+<span class="lineNum">    1194 </span>            :  * It is called by do_action and do_attach.
+<span class="lineNum">    1195 </span>            :  *
+<a name="1196"><span class="lineNum">    1196 </span>            :  */</a>
+<span class="lineNum">    1197 </span>            : void
+<span class="lineNum">    1198 </span><span class="lineCov">          6 : set_source(dbref player, dbref action, dbref source)</span>
+<span class="lineNum">    1199 </span>            : {
+<span class="lineNum">    1200 </span><span class="lineCov">          6 :     switch (Typeof(source)) {</span>
+<span class="lineNum">    1201 </span>            :     case TYPE_ROOM:
+<span class="lineNum">    1202 </span>            :     case TYPE_THING:
+<span class="lineNum">    1203 </span>            :     case TYPE_PLAYER:
+<span class="lineNum">    1204 </span><span class="lineCov">          6 :         PUSH(action, EXITS(source));</span>
+<span class="lineNum">    1205 </span>            :         break;
+<span class="lineNum">    1206 </span>            :     default:
+<span class="lineNum">    1207 </span><span class="lineNoCov">          0 :         notify(player, &quot;Internal error: weird object type.&quot;);</span>
+<span class="lineNum">    1208 </span><span class="lineNoCov">          0 :         log_status(&quot;PANIC: tried to source %d to %d: type: %d&quot;,</span>
+<span class="lineNum">    1209 </span><span class="lineNoCov">          0 :                    action, source, Typeof(source));</span>
+<span class="lineNum">    1210 </span><span class="lineNoCov">          0 :         return;</span>
+<span class="lineNum">    1211 </span>            :     }
+<span class="lineNum">    1212 </span><span class="lineCov">          6 :     DBDIRTY(source);</span>
+<span class="lineNum">    1213 </span><span class="lineCov">          6 :     DBSTORE(action, location, source);</span>
+<span class="lineNum">    1214 </span><span class="lineCov">          6 :     return;</span>
+<span class="lineNum">    1215 </span>            : }
+<a name="1216"><span class="lineNum">    1216 </span>            : </a>
+<span class="lineNum">    1217 </span>            : int
+<span class="lineNum">    1218 </span><span class="lineNoCov">          0 : unset_source(dbref player, dbref action)</span>
+<span class="lineNum">    1219 </span>            : {
+<span class="lineNum">    1220 </span>            :     dbref oldsrc;
+<span class="lineNum">    1221 </span>            : 
+<span class="lineNum">    1222 </span><span class="lineNoCov">          0 :     if ((oldsrc = LOCATION(action)) == NOTHING) {</span>
+<span class="lineNum">    1223 </span><span class="lineNoCov">          0 :         DBSTORE(LOCATION(player), exits, remove_first(EXITS(LOCATION(player)), action));</span>
+<span class="lineNum">    1224 </span>            :     } else {
+<span class="lineNum">    1225 </span><span class="lineNoCov">          0 :         switch (Typeof(oldsrc)) {</span>
+<span class="lineNum">    1226 </span>            :         case TYPE_PLAYER:
+<span class="lineNum">    1227 </span>            :         case TYPE_ROOM:
+<span class="lineNum">    1228 </span>            :         case TYPE_THING:
+<span class="lineNum">    1229 </span><span class="lineNoCov">          0 :             DBSTORE(oldsrc, exits, remove_first(EXITS(oldsrc), action));</span>
+<span class="lineNum">    1230 </span><span class="lineNoCov">          0 :             break;</span>
+<span class="lineNum">    1231 </span>            :         default:
+<span class="lineNum">    1232 </span><span class="lineNoCov">          0 :             log_status(&quot;PANIC: source of action #%d was type: %d.&quot;, action, Typeof(oldsrc));</span>
+<span class="lineNum">    1233 </span><span class="lineNoCov">          0 :             return 0;</span>
+<span class="lineNum">    1234 </span>            :         }
+<span class="lineNum">    1235 </span>            :     }
+<span class="lineNum">    1236 </span>            :     return 1;
+<span class="lineNum">    1237 </span>            : }
+<span class="lineNum">    1238 </span>            : 
+<span class="lineNum">    1239 </span>            : /* parse_linkable_dest()
+<span class="lineNum">    1240 </span>            :  *
+<span class="lineNum">    1241 </span>            :  * A utility for open and link which checks whether a given destination
+<span class="lineNum">    1242 </span>            :  * string is valid.  It returns a parsed dbref on success, and NOTHING
+<span class="lineNum">    1243 </span>            :  * on failure.
+<span class="lineNum">    1244 </span>            :  */
+<a name="1245"><span class="lineNum">    1245 </span>            : </a>
+<span class="lineNum">    1246 </span>            : static dbref
+<span class="lineNum">    1247 </span><span class="lineCov">          5 : parse_linkable_dest(int descr, dbref player, dbref exit, const char *dest_name)</span>
+<span class="lineNum">    1248 </span>            : {
+<span class="lineNum">    1249 </span>            :     dbref dobj;                 /* destination room/player/thing/link */
+<span class="lineNum">    1250 </span>            :     struct match_data md;
+<span class="lineNum">    1251 </span>            : 
+<span class="lineNum">    1252 </span><span class="lineCov">          5 :     init_match(descr, player, dest_name, NOTYPE, &amp;md);</span>
+<span class="lineNum">    1253 </span><span class="lineCov">          5 :     match_absolute(&amp;md);</span>
+<span class="lineNum">    1254 </span><span class="lineCov">          5 :     match_everything(&amp;md);</span>
+<span class="lineNum">    1255 </span><span class="lineCov">          5 :     match_home(&amp;md);</span>
+<span class="lineNum">    1256 </span><span class="lineCov">          5 :     match_nil(&amp;md);</span>
+<span class="lineNum">    1257 </span>            : 
+<span class="lineNum">    1258 </span><span class="lineCov">          5 :     if ((dobj = match_result(&amp;md)) == NOTHING || dobj == AMBIGUOUS) {</span>
+<span class="lineNum">    1259 </span><span class="lineNoCov">          0 :         notifyf(player, &quot;I couldn't find '%s'.&quot;, dest_name);</span>
+<span class="lineNum">    1260 </span><span class="lineNoCov">          0 :         return NOTHING;</span>
+<span class="lineNum">    1261 </span>            : 
+<span class="lineNum">    1262 </span>            :     }
+<span class="lineNum">    1263 </span>            : 
+<span class="lineNum">    1264 </span><span class="lineCov">          5 :     if (!tp_teleport_to_player &amp;&amp; Typeof(dobj) == TYPE_PLAYER) {</span>
+<span class="lineNum">    1265 </span>            :         char unparse_buf[BUFFER_LEN];
+<span class="lineNum">    1266 </span><span class="lineNoCov">          0 :         unparse_object(player, dobj, unparse_buf, sizeof(unparse_buf));</span>
+<span class="lineNum">    1267 </span><span class="lineNoCov">          0 :         notifyf(player, &quot;You can't link to players.  Destination %s ignored.&quot;,</span>
+<span class="lineNum">    1268 </span>            :                 unparse_buf);
+<span class="lineNum">    1269 </span>            :         return NOTHING;
+<span class="lineNum">    1270 </span>            :     }
+<span class="lineNum">    1271 </span>            : 
+<span class="lineNum">    1272 </span><span class="lineCov">          5 :     if (!can_link(player, exit)) {</span>
+<span class="lineNum">    1273 </span><span class="lineNoCov">          0 :         notify(player, &quot;You can't link that.&quot;);</span>
+<span class="lineNum">    1274 </span><span class="lineNoCov">          0 :         return NOTHING;</span>
+<span class="lineNum">    1275 </span>            :     }
+<span class="lineNum">    1276 </span><span class="lineCov">          5 :     if (!can_link_to(player, Typeof(exit), dobj)) {</span>
+<span class="lineNum">    1277 </span>            :         char unparse_buf[BUFFER_LEN];
+<span class="lineNum">    1278 </span><span class="lineNoCov">          0 :         unparse_object(player, dobj, unparse_buf, sizeof(unparse_buf));</span>
+<span class="lineNum">    1279 </span><span class="lineNoCov">          0 :         notifyf(player, &quot;You can't link to %s.&quot;, unparse_buf);</span>
+<span class="lineNum">    1280 </span>            :         return NOTHING;
+<span class="lineNum">    1281 </span>            :     } else {
+<span class="lineNum">    1282 </span>            :         return dobj;
+<span class="lineNum">    1283 </span>            :     }
+<span class="lineNum">    1284 </span>            : }
+<a name="1285"><span class="lineNum">    1285 </span>            : </a>
+<span class="lineNum">    1286 </span>            : static int
+<span class="lineNum">    1287 </span><span class="lineCov">          5 : _link_exit(int descr, dbref player, dbref exit, char *dest_name, dbref * dest_list, int dryrun)</span>
+<span class="lineNum">    1288 </span>            : {
+<span class="lineNum">    1289 </span>            :     char *p, *q;
+<span class="lineNum">    1290 </span>            :     int prdest;
+<span class="lineNum">    1291 </span>            :     dbref dest;
+<span class="lineNum">    1292 </span>            :     int ndest, error;
+<span class="lineNum">    1293 </span>            :     char qbuf[BUFFER_LEN];
+<span class="lineNum">    1294 </span>            :     char unparse_buf[BUFFER_LEN];
+<span class="lineNum">    1295 </span>            : 
+<span class="lineNum">    1296 </span><span class="lineCov">          5 :     prdest = 0;</span>
+<span class="lineNum">    1297 </span><span class="lineCov">          5 :     ndest = 0;</span>
+<span class="lineNum">    1298 </span><span class="lineCov">          5 :     error = 0;</span>
+<span class="lineNum">    1299 </span>            : 
+<span class="lineNum">    1300 </span><span class="lineCov">         15 :     while (*dest_name) {</span>
+<span class="lineNum">    1301 </span><span class="lineCov">          5 :         while (isspace(*dest_name))</span>
+<span class="lineNum">    1302 </span><span class="lineNoCov">          0 :             dest_name++;        /* skip white space */</span>
+<span class="lineNum">    1303 </span>            :         p = dest_name;
+<span class="lineNum">    1304 </span><span class="lineCov">         19 :         while (*dest_name &amp;&amp; (*dest_name != EXIT_DELIMITER))</span>
+<span class="lineNum">    1305 </span><span class="lineCov">         14 :             dest_name++;</span>
+<span class="lineNum">    1306 </span><span class="lineCov">          5 :         q = (char *) strncpy(qbuf, p, BUFFER_LEN);      /* copy word */</span>
+<span class="lineNum">    1307 </span><span class="lineCov">          5 :         q[(dest_name - p)] = '\0';      /* terminate it */</span>
+<span class="lineNum">    1308 </span><span class="lineCov">          5 :         if (*dest_name)</span>
+<span class="lineNum">    1309 </span><span class="lineNoCov">          0 :             for (dest_name++; *dest_name &amp;&amp; isspace(*dest_name); dest_name++) ;</span>
+<span class="lineNum">    1310 </span>            : 
+<span class="lineNum">    1311 </span><span class="lineCov">          5 :         if ((dest = parse_linkable_dest(descr, player, exit, q)) == NOTHING)</span>
+<span class="lineNum">    1312 </span><span class="lineNoCov">          0 :             continue;</span>
+<span class="lineNum">    1313 </span>            : 
+<span class="lineNum">    1314 </span><span class="lineCov">          5 :         if (dest == NIL) {</span>
+<span class="lineNum">    1315 </span><span class="lineNoCov">          0 :             if (!dryrun) {</span>
+<span class="lineNum">    1316 </span><span class="lineNoCov">          0 :                 notify(player, &quot;Linked to NIL.&quot;);</span>
+<span class="lineNum">    1317 </span>            :             }
+<span class="lineNum">    1318 </span><span class="lineNoCov">          0 :             dest_list[ndest++] = dest;</span>
+<span class="lineNum">    1319 </span><span class="lineNoCov">          0 :             continue;</span>
+<span class="lineNum">    1320 </span>            :         }
+<span class="lineNum">    1321 </span>            : 
+<span class="lineNum">    1322 </span><span class="lineCov">          5 :         unparse_object(player, dest, unparse_buf, sizeof(unparse_buf));</span>
+<span class="lineNum">    1323 </span>            : 
+<span class="lineNum">    1324 </span><span class="lineCov">          5 :         switch (Typeof(dest)) {</span>
+<span class="lineNum">    1325 </span>            :         case TYPE_PLAYER:
+<span class="lineNum">    1326 </span>            :         case TYPE_ROOM:
+<span class="lineNum">    1327 </span>            :         case TYPE_PROGRAM:
+<span class="lineNum">    1328 </span><span class="lineCov">          5 :             if (prdest) {</span>
+<span class="lineNum">    1329 </span>            :                 char unparse_buf[BUFFER_LEN];
+<span class="lineNum">    1330 </span><span class="lineNoCov">          0 :                 notifyf(player,</span>
+<span class="lineNum">    1331 </span>            :                         &quot;Only one player, room, or program destination allowed. Destination %s ignored.&quot;,
+<span class="lineNum">    1332 </span>            :                         unparse_buf);
+<span class="lineNum">    1333 </span>            : 
+<span class="lineNum">    1334 </span><span class="lineNoCov">          0 :                 if (dryrun)</span>
+<span class="lineNum">    1335 </span><span class="lineNoCov">          0 :                     error = 1;</span>
+<span class="lineNum">    1336 </span>            : 
+<span class="lineNum">    1337 </span><span class="lineNoCov">          0 :                 continue;</span>
+<span class="lineNum">    1338 </span>            :             }
+<span class="lineNum">    1339 </span><span class="lineCov">          5 :             dest_list[ndest++] = dest;</span>
+<span class="lineNum">    1340 </span><span class="lineCov">          5 :             prdest = 1;</span>
+<span class="lineNum">    1341 </span><span class="lineCov">          5 :             break;</span>
+<span class="lineNum">    1342 </span>            :         case TYPE_THING:
+<span class="lineNum">    1343 </span><span class="lineNoCov">          0 :             dest_list[ndest++] = dest;</span>
+<span class="lineNum">    1344 </span><span class="lineNoCov">          0 :             break;</span>
+<span class="lineNum">    1345 </span>            :         case TYPE_EXIT:
+<span class="lineNum">    1346 </span><span class="lineNoCov">          0 :             if (exit_loop_check(exit, dest)) {</span>
+<span class="lineNum">    1347 </span><span class="lineNoCov">          0 :                 notifyf(player, &quot;Destination %s would create a loop, ignored.&quot;,</span>
+<span class="lineNum">    1348 </span>            :                         unparse_buf);
+<span class="lineNum">    1349 </span>            : 
+<span class="lineNum">    1350 </span><span class="lineNoCov">          0 :                 if (dryrun)</span>
+<span class="lineNum">    1351 </span><span class="lineNoCov">          0 :                     error = 1;</span>
+<span class="lineNum">    1352 </span>            : 
+<span class="lineNum">    1353 </span><span class="lineNoCov">          0 :                 continue;</span>
+<span class="lineNum">    1354 </span>            :             }
+<span class="lineNum">    1355 </span><span class="lineNoCov">          0 :             dest_list[ndest++] = dest;</span>
+<span class="lineNum">    1356 </span><span class="lineNoCov">          0 :             break;</span>
+<span class="lineNum">    1357 </span>            :         default:
+<span class="lineNum">    1358 </span><span class="lineNoCov">          0 :             notify(player, &quot;Internal error: weird object type.&quot;);</span>
+<span class="lineNum">    1359 </span><span class="lineNoCov">          0 :             log_status(&quot;PANIC: weird object: Typeof(%d) = %d&quot;, dest, Typeof(dest));</span>
+<span class="lineNum">    1360 </span>            : 
+<span class="lineNum">    1361 </span><span class="lineNoCov">          0 :             if (dryrun)</span>
+<span class="lineNum">    1362 </span><span class="lineNoCov">          0 :                 error = 1;</span>
+<span class="lineNum">    1363 </span>            : 
+<span class="lineNum">    1364 </span>            :             break;
+<span class="lineNum">    1365 </span>            :         }
+<span class="lineNum">    1366 </span><span class="lineCov">          5 :         if (!dryrun) {</span>
+<span class="lineNum">    1367 </span><span class="lineCov">          5 :             if (dest == HOME) {</span>
+<span class="lineNum">    1368 </span><span class="lineNoCov">          0 :                 notify(player, &quot;Linked to HOME.&quot;);</span>
+<span class="lineNum">    1369 </span>            :             } else {
+<span class="lineNum">    1370 </span><span class="lineCov">          5 :                 notifyf(player, &quot;Linked to %s.&quot;, unparse_buf);</span>
+<span class="lineNum">    1371 </span>            :             }
+<span class="lineNum">    1372 </span>            :         }
+<span class="lineNum">    1373 </span>            : 
+<span class="lineNum">    1374 </span><span class="lineCov">          5 :         if (ndest &gt;= MAX_LINKS) {</span>
+<span class="lineNum">    1375 </span><span class="lineNoCov">          0 :             notify(player, &quot;Too many destinations, rest ignored.&quot;);</span>
+<span class="lineNum">    1376 </span>            : 
+<span class="lineNum">    1377 </span><span class="lineNoCov">          0 :             if (dryrun)</span>
+<span class="lineNum">    1378 </span><span class="lineNoCov">          0 :                 error = 1;</span>
+<span class="lineNum">    1379 </span>            : 
+<span class="lineNum">    1380 </span>            :             break;
+<span class="lineNum">    1381 </span>            :         }
+<span class="lineNum">    1382 </span>            :     }
+<span class="lineNum">    1383 </span>            : 
+<span class="lineNum">    1384 </span><span class="lineCov">          5 :     if (dryrun &amp;&amp; error)</span>
+<span class="lineNum">    1385 </span>            :         return 0;
+<span class="lineNum">    1386 </span>            : 
+<span class="lineNum">    1387 </span><span class="lineCov">          5 :     return ndest;</span>
+<span class="lineNum">    1388 </span>            : }
+<span class="lineNum">    1389 </span>            : 
+<span class="lineNum">    1390 </span>            : /*
+<span class="lineNum">    1391 </span>            :  * link_exit()
+<span class="lineNum">    1392 </span>            :  *
+<span class="lineNum">    1393 </span>            :  * This routine connects an exit to a bunch of destinations.
+<span class="lineNum">    1394 </span>            :  *
+<span class="lineNum">    1395 </span>            :  * 'player' contains the player's name.
+<span class="lineNum">    1396 </span>            :  * 'exit' is the the exit whose destinations are to be linked.
+<span class="lineNum">    1397 </span>            :  * 'dest_name' is a character string containing the list of exits.
+<span class="lineNum">    1398 </span>            :  *
+<span class="lineNum">    1399 </span>            :  * 'dest_list' is an array of dbref's where the valid destinations are
+<span class="lineNum">    1400 </span>            :  * stored.
+<span class="lineNum">    1401 </span>            :  *
+<span class="lineNum">    1402 </span>            :  */
+<a name="1403"><span class="lineNum">    1403 </span>            : </a>
+<span class="lineNum">    1404 </span>            : int
+<span class="lineNum">    1405 </span><span class="lineCov">          5 : link_exit(int descr, dbref player, dbref exit, char *dest_name, dbref * dest_list)</span>
+<span class="lineNum">    1406 </span>            : {
+<span class="lineNum">    1407 </span><span class="lineCov">          5 :     return _link_exit(descr, player, exit, dest_name, dest_list, 0);</span>
+<span class="lineNum">    1408 </span>            : }
+<span class="lineNum">    1409 </span>            : 
+<span class="lineNum">    1410 </span>            : /*
+<span class="lineNum">    1411 </span>            :  * link_exit_dry()
+<span class="lineNum">    1412 </span>            :  *
+<span class="lineNum">    1413 </span>            :  * like link_exit(), but only checks whether the link would be ok or not.
+<span class="lineNum">    1414 </span>            :  * error messages are still output.
+<a name="1415"><span class="lineNum">    1415 </span>            :  */</a>
+<span class="lineNum">    1416 </span>            : int
+<span class="lineNum">    1417 </span><span class="lineNoCov">          0 : link_exit_dry(int descr, dbref player, dbref exit, char *dest_name, dbref * dest_list)</span>
+<span class="lineNum">    1418 </span>            : {
+<span class="lineNum">    1419 </span><span class="lineNoCov">          0 :     return _link_exit(descr, player, exit, dest_name, dest_list, 1);</span>
+<span class="lineNum">    1420 </span>            : }
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.12</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

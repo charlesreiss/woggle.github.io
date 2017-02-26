@@ -1,0 +1,512 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage-total - src/mkversion.c</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">src</a> - mkversion.c<span style="font-size: 80%;"> (source / <a href="mkversion.c.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage-total</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">132</td>
+            <td class="headerCovTableEntry">146</td>
+            <td class="headerCovTableEntryHi">90.4 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2017-02-26 00:20:31</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">9</td>
+            <td class="headerCovTableEntry">9</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : /*</a>
+<span class="lineNum">       2 </span>            : * Copyright (c) 2015 by Fuzzball Software
+<span class="lineNum">       3 </span>            : * under the GNU Public License
+<span class="lineNum">       4 </span>            : *
+<span class="lineNum">       5 </span>            : * This program reads in version.tpl and creates a version.c(pp) file as output.
+<span class="lineNum">       6 </span>            : * It scans for $generation and $creation tags in the source and replaces them
+<span class="lineNum">       7 </span>            : * provided they are on DIFFERENT lines. The matcher below only does one match
+<span class="lineNum">       8 </span>            : * per line as C has no native growing string functionality. It could be
+<span class="lineNum">       9 </span>            : * rewritten to use malloc and unlimited line lengths, but it seems a bit
+<span class="lineNum">      10 </span>            : * overkill for such a simple substituion.
+<span class="lineNum">      11 </span>            : */
+<span class="lineNum">      12 </span>            : 
+<span class="lineNum">      13 </span>            : #include &quot;sha1.h&quot;
+<span class="lineNum">      14 </span>            : 
+<span class="lineNum">      15 </span>            : #include &lt;ctype.h&gt;
+<span class="lineNum">      16 </span>            : #include &lt;stdio.h&gt;
+<span class="lineNum">      17 </span>            : #include &lt;stdlib.h&gt;
+<span class="lineNum">      18 </span>            : #include &lt;string.h&gt;
+<span class="lineNum">      19 </span>            : #include &lt;time.h&gt;
+<span class="lineNum">      20 </span>            : 
+<span class="lineNum">      21 </span>            : #ifndef WIN32
+<span class="lineNum">      22 </span>            : #include &lt;dirent.h&gt;
+<span class="lineNum">      23 </span>            : #else
+<span class="lineNum">      24 </span>            : #include &quot;win32.h&quot;
+<span class="lineNum">      25 </span>            : #endif
+<span class="lineNum">      26 </span>            : 
+<span class="lineNum">      27 </span>            : /* Define if you want the timezone to show UTC. Windows doesn't do
+<span class="lineNum">      28 </span>            :    abbreviations for timezone, so this is the only way to get it shortened. */
+<span class="lineNum">      29 </span>            : #undef USE_UTC
+<span class="lineNum">      30 </span>            : 
+<span class="lineNum">      31 </span>            : /* Maximum size of a line in the template and version files */
+<span class="lineNum">      32 </span>            : #define LINE_SIZE 1024
+<span class="lineNum">      33 </span>            : 
+<span class="lineNum">      34 </span>            : /* Strings to search for in tpl/version */
+<span class="lineNum">      35 </span>            : #define GENLINE &quot;$generation&quot;
+<span class="lineNum">      36 </span>            : #define CRELINE &quot;$creation&quot;
+<span class="lineNum">      37 </span>            : #define GITAVAIL &quot;$gitavail&quot;
+<span class="lineNum">      38 </span>            : #define GENDEF  &quot;#define generation&quot;
+<span class="lineNum">      39 </span>            : #define HASHARRAY &quot;$hasharray&quot;
+<span class="lineNum">      40 </span>            : #define HASH_ARRAY_TPL &quot;    { \&quot;%s\&quot;, \&quot;%s\&quot;, \&quot;%s\&quot; },\n&quot;
+<span class="lineNum">      41 </span>            : #define DEF_GITYES &quot;#define GIT_AVAILABLE&quot;
+<span class="lineNum">      42 </span>            : #define DEF_GITNO  &quot;#undef GIT_AVAILABLE&quot;
+<span class="lineNum">      43 </span>            : 
+<span class="lineNum">      44 </span>            : /* Filenames &amp; paths */
+<span class="lineNum">      45 </span>            : #define TPL_FILE &quot;version.tpl&quot;
+<span class="lineNum">      46 </span>            : #define VERSION_FILE &quot;version.c&quot;
+<span class="lineNum">      47 </span>            : #define DIR_SOURCE &quot;.&quot;
+<span class="lineNum">      48 </span>            : #define DIR_INCLUDE &quot;../include&quot;
+<span class="lineNum">      49 </span>            : #define EXT_SRC_FILE &quot;.c&quot;
+<span class="lineNum">      50 </span>            : #define EXT_INC_FILE &quot;.h&quot;
+<span class="lineNum">      51 </span>            : 
+<span class="lineNum">      52 </span>            : /* Git commands */
+<span class="lineNum">      53 </span>            : #define GIT_CHECK_CMD &quot;git --version 2&gt;&amp;1&quot;
+<span class="lineNum">      54 </span>            : #define GIT_BLOB_CMD &quot;git hash-object %s 2&gt;&amp;1&quot;
+<span class="lineNum">      55 </span>            : 
+<span class="lineNum">      56 </span>            : // Prototypes
+<span class="lineNum">      57 </span>            : unsigned int getgeneration();
+<span class="lineNum">      58 </span>            : void getnow(char *timestr, size_t len);
+<span class="lineNum">      59 </span>            : int test_git();
+<span class="lineNum">      60 </span>            : void print_hash_array(FILE * out);
+<span class="lineNum">      61 </span>            : char *get_git_hash(const char *name, char *hash, size_t hash_len);
+<span class="lineNum">      62 </span>            : char *get_sha1_hash(const char *name, char *hash, size_t hash_len);
+<span class="lineNum">      63 </span>            : int endswith(const char *str, const char *suf);
+<span class="lineNum">      64 </span>            : int qcmp(const void *arg1, const void *arg2);
+<span class="lineNum">      65 </span>            : 
+<span class="lineNum">      66 </span>            : static int git_available = 0;
+<span class="lineNum">      67 </span>            : 
+<span class="lineNum">      68 </span>            : typedef struct file_entry {
+<span class="lineNum">      69 </span>            :     char *filepath;
+<span class="lineNum">      70 </span>            :     char *filename;
+<span class="lineNum">      71 </span>            : } file_entry;
+<a name="72"><span class="lineNum">      72 </span>            : </a>
+<span class="lineNum">      73 </span>            : int
+<span class="lineNum">      74 </span><span class="lineCov">          1 : main(int argc, char *argv[])</span>
+<span class="lineNum">      75 </span>            : {
+<span class="lineNum">      76 </span><span class="lineCov">          1 :     unsigned int generation = 0;</span>
+<span class="lineNum">      77 </span>            :     FILE *ver, *tpl;
+<span class="lineNum">      78 </span>            :     char line[LINE_SIZE], creation[LINE_SIZE];
+<span class="lineNum">      79 </span>            :     char *pos;
+<span class="lineNum">      80 </span>            : 
+<span class="lineNum">      81 </span><span class="lineCov">          1 :     generation = getgeneration();</span>
+<span class="lineNum">      82 </span><span class="lineCov">          1 :     getnow(creation, LINE_SIZE);</span>
+<span class="lineNum">      83 </span><span class="lineCov">          1 :     git_available = test_git();</span>
+<span class="lineNum">      84 </span>            : 
+<span class="lineNum">      85 </span>            :     /* Read this like it were linux with rb */
+<span class="lineNum">      86 </span><span class="lineCov">          1 :     if (!(tpl = fopen(TPL_FILE, &quot;rb&quot;))) {</span>
+<span class="lineNum">      87 </span><span class="lineNoCov">          0 :         fprintf(stderr, &quot;error: could not open %s\n&quot;, TPL_FILE);</span>
+<span class="lineNum">      88 </span><span class="lineNoCov">          0 :         return -1;</span>
+<span class="lineNum">      89 </span>            :     }
+<span class="lineNum">      90 </span>            : 
+<span class="lineNum">      91 </span>            :     /* Specify wb so windows doesn't add \r */
+<span class="lineNum">      92 </span><span class="lineCov">          1 :     if (!(ver = fopen(VERSION_FILE, &quot;wb&quot;))) {</span>
+<span class="lineNum">      93 </span><span class="lineNoCov">          0 :         fclose(tpl);</span>
+<span class="lineNum">      94 </span><span class="lineNoCov">          0 :         fprintf(stderr, &quot;error: could not open %s\n&quot;, VERSION_FILE);</span>
+<span class="lineNum">      95 </span><span class="lineNoCov">          0 :         return -1;</span>
+<span class="lineNum">      96 </span>            :     }
+<span class="lineNum">      97 </span>            : 
+<span class="lineNum">      98 </span><span class="lineCov">         94 :     while (!feof(tpl)) {</span>
+<span class="lineNum">      99 </span><span class="lineCov">         94 :         if (!fgets(line, LINE_SIZE, tpl))</span>
+<span class="lineNum">     100 </span>            :             break;
+<span class="lineNum">     101 </span>            : 
+<span class="lineNum">     102 </span>            :         /* fgets gives us \n, and we don't want them */
+<span class="lineNum">     103 </span>            :         pos = line;
+<span class="lineNum">     104 </span><span class="lineCov">       2110 :         while (*pos) {</span>
+<span class="lineNum">     105 </span><span class="lineCov">       2017 :             if (*pos == '\r' || *pos == '\n')</span>
+<span class="lineNum">     106 </span><span class="lineCov">         93 :                 *pos = '\0';</span>
+<span class="lineNum">     107 </span><span class="lineCov">       2017 :             pos++;</span>
+<span class="lineNum">     108 </span>            :         }
+<span class="lineNum">     109 </span>            : 
+<span class="lineNum">     110 </span><span class="lineCov">         93 :         if ((pos = strstr(line, GENLINE))) {</span>
+<span class="lineNum">     111 </span><span class="lineCov">          1 :             *pos = '\0';</span>
+<span class="lineNum">     112 </span><span class="lineCov">          1 :             fprintf(ver, &quot;%s%d%s\n&quot;, line, generation, pos + strlen(GENLINE));</span>
+<span class="lineNum">     113 </span><span class="lineCov">         92 :         } else if ((pos = strstr(line, CRELINE))) {</span>
+<span class="lineNum">     114 </span><span class="lineCov">          1 :             *pos = '\0';</span>
+<span class="lineNum">     115 </span><span class="lineCov">          1 :             fprintf(ver, &quot;%s%s%s\n&quot;, line, creation, pos + strlen(CRELINE));</span>
+<span class="lineNum">     116 </span><span class="lineCov">         91 :         } else if ((pos = strstr(line, HASHARRAY))) {</span>
+<span class="lineNum">     117 </span><span class="lineCov">          1 :             print_hash_array(ver);</span>
+<span class="lineNum">     118 </span><span class="lineCov">         90 :         } else if ((pos = strstr(line, GITAVAIL))) {</span>
+<span class="lineNum">     119 </span><span class="lineCov">          1 :             fprintf(ver, &quot;%s\n&quot;, (git_available ? DEF_GITYES : DEF_GITNO));</span>
+<span class="lineNum">     120 </span>            :         } else {
+<span class="lineNum">     121 </span>            :             fprintf(ver, &quot;%s\n&quot;, line);
+<span class="lineNum">     122 </span>            :         }
+<span class="lineNum">     123 </span>            :     }
+<span class="lineNum">     124 </span>            : 
+<span class="lineNum">     125 </span><span class="lineCov">          1 :     fclose(ver);</span>
+<span class="lineNum">     126 </span><span class="lineCov">          1 :     fclose(tpl);</span>
+<span class="lineNum">     127 </span>            : 
+<span class="lineNum">     128 </span><span class="lineCov">          1 :     return 0;</span>
+<span class="lineNum">     129 </span>            : }
+<span class="lineNum">     130 </span>            : 
+<a name="131"><span class="lineNum">     131 </span>            : // Return a time in format of &quot;Mon Apr 14 2008 at 12:01:17 EDT&quot;</a>
+<span class="lineNum">     132 </span>            : void
+<span class="lineNum">     133 </span><span class="lineCov">          1 : getnow(char *timestr, size_t len)</span>
+<span class="lineNum">     134 </span>            : {
+<span class="lineNum">     135 </span>            : #ifdef WIN32
+<span class="lineNum">     136 </span>            :     time_t t = time(NULL);
+<span class="lineNum">     137 </span>            :     struct tm info;
+<span class="lineNum">     138 </span>            : 
+<span class="lineNum">     139 </span>            : #ifdef USE_UTC
+<span class="lineNum">     140 </span>            :     gmtime_s(&amp;info, &amp;t);
+<span class="lineNum">     141 </span>            :     strftime(timestr, len, &quot;%a %b %d %Y at %H:%M:%S UTC&quot;, &amp;info);
+<span class="lineNum">     142 </span>            : #else
+<span class="lineNum">     143 </span>            :     localtime_s(&amp;info, &amp;t);
+<span class="lineNum">     144 </span>            :     strftime(timestr, len, &quot;%a %b %d %Y at %H:%M:%S %Z&quot;, &amp;info);
+<span class="lineNum">     145 </span>            : #endif
+<span class="lineNum">     146 </span>            : #else                           /* !WIN32 */
+<span class="lineNum">     147 </span><span class="lineCov">          1 :     time_t t = time(NULL);</span>
+<span class="lineNum">     148 </span>            :     struct tm *info;
+<span class="lineNum">     149 </span>            : #ifdef USE_UTC
+<span class="lineNum">     150 </span>            :     info = gmtime(&amp;t);
+<span class="lineNum">     151 </span>            :     strftime(timestr, len, &quot;%a %b %d %Y at %H:%M:%S UTC&quot;, info);
+<span class="lineNum">     152 </span>            : #else
+<span class="lineNum">     153 </span><span class="lineCov">          1 :     info = localtime(&amp;t);</span>
+<span class="lineNum">     154 </span><span class="lineCov">          1 :     strftime(timestr, len, &quot;%a %b %d %Y at %H:%M:%S %Z&quot;, info);</span>
+<span class="lineNum">     155 </span>            : #endif
+<span class="lineNum">     156 </span>            : #endif
+<span class="lineNum">     157 </span><span class="lineCov">          1 : }</span>
+<span class="lineNum">     158 </span>            : 
+<a name="159"><span class="lineNum">     159 </span>            : // Get the generation value from the existing cpp file.</a>
+<span class="lineNum">     160 </span>            : unsigned int
+<span class="lineNum">     161 </span><span class="lineCov">          1 : getgeneration()</span>
+<span class="lineNum">     162 </span>            : {
+<span class="lineNum">     163 </span>            :     char line[LINE_SIZE];
+<span class="lineNum">     164 </span>            :     char *pos, *number;
+<span class="lineNum">     165 </span>            :     FILE *v;
+<span class="lineNum">     166 </span>            : 
+<span class="lineNum">     167 </span><span class="lineCov">          1 :     if (!(v = fopen(VERSION_FILE, &quot;rb&quot;)))</span>
+<span class="lineNum">     168 </span>            :         return 0;
+<span class="lineNum">     169 </span>            : 
+<span class="lineNum">     170 </span><span class="lineCov">         18 :     while (!feof(v)) {</span>
+<span class="lineNum">     171 </span><span class="lineCov">         18 :         if (!fgets(line, LINE_SIZE, v))</span>
+<span class="lineNum">     172 </span>            :             break;
+<span class="lineNum">     173 </span>            : 
+<span class="lineNum">     174 </span><span class="lineCov">         18 :         if (!(pos = strstr(line, GENDEF)))</span>
+<span class="lineNum">     175 </span><span class="lineCov">         17 :             continue;</span>
+<span class="lineNum">     176 </span>            : 
+<span class="lineNum">     177 </span>            :         /* Skip over the text */
+<span class="lineNum">     178 </span><span class="lineCov">          1 :         pos += strlen(GENDEF);</span>
+<span class="lineNum">     179 </span>            : 
+<span class="lineNum">     180 </span>            :         /* Find the start of the digit */
+<span class="lineNum">     181 </span><span class="lineCov">          4 :         while (*pos &amp;&amp; !isdigit(*pos))</span>
+<span class="lineNum">     182 </span><span class="lineCov">          2 :             pos++;</span>
+<span class="lineNum">     183 </span>            : 
+<span class="lineNum">     184 </span>            :         /* Find the end of the digit */
+<span class="lineNum">     185 </span>            :         number = pos;
+<span class="lineNum">     186 </span><span class="lineCov">          3 :         while (*pos &amp;&amp; isdigit(*pos))</span>
+<span class="lineNum">     187 </span><span class="lineCov">          2 :             pos++;</span>
+<span class="lineNum">     188 </span><span class="lineCov">          1 :         *pos = '\0';</span>
+<span class="lineNum">     189 </span>            : 
+<span class="lineNum">     190 </span><span class="lineCov">          1 :         fclose(v);</span>
+<span class="lineNum">     191 </span><span class="lineCov">          1 :         return atoi(number) + 1;</span>
+<span class="lineNum">     192 </span>            :     }
+<span class="lineNum">     193 </span>            : 
+<span class="lineNum">     194 </span><span class="lineNoCov">          0 :     fclose(v);</span>
+<span class="lineNum">     195 </span><span class="lineNoCov">          0 :     return 0;</span>
+<span class="lineNum">     196 </span>            : }
+<a name="197"><span class="lineNum">     197 </span>            : </a>
+<span class="lineNum">     198 </span>            : int
+<span class="lineNum">     199 </span><span class="lineCov">          1 : test_git()</span>
+<span class="lineNum">     200 </span>            : {
+<span class="lineNum">     201 </span>            :     FILE *gitpipe;
+<span class="lineNum">     202 </span>            :     char line[LINE_SIZE];
+<span class="lineNum">     203 </span>            : 
+<span class="lineNum">     204 </span><span class="lineCov">          1 :     if (!(gitpipe = popen(GIT_CHECK_CMD, &quot;r&quot;))) {</span>
+<span class="lineNum">     205 </span><span class="lineNoCov">          0 :         printf(&quot;Error opening git command&quot;);</span>
+<span class="lineNum">     206 </span><span class="lineNoCov">          0 :         return 0;</span>
+<span class="lineNum">     207 </span>            :     }
+<span class="lineNum">     208 </span>            : 
+<span class="lineNum">     209 </span>            :     /* Read until eof */
+<span class="lineNum">     210 </span><span class="lineCov">          2 :     while (fgets(line, LINE_SIZE, gitpipe)) ;</span>
+<span class="lineNum">     211 </span>            : 
+<span class="lineNum">     212 </span><span class="lineCov">          1 :     if (pclose(gitpipe) == 0)</span>
+<span class="lineNum">     213 </span>            :         return 1;
+<span class="lineNum">     214 </span>            : 
+<span class="lineNum">     215 </span><span class="lineNoCov">          0 :     return 0;</span>
+<span class="lineNum">     216 </span>            : }
+<a name="217"><span class="lineNum">     217 </span>            : </a>
+<span class="lineNum">     218 </span>            : void
+<span class="lineNum">     219 </span><span class="lineCov">          1 : print_hash_array(FILE * out)</span>
+<span class="lineNum">     220 </span>            : {
+<span class="lineNum">     221 </span><span class="lineCov">          1 :     char *filename = NULL;</span>
+<span class="lineNum">     222 </span><span class="lineCov">          1 :     file_entry **files = NULL, **temp = NULL;</span>
+<span class="lineNum">     223 </span><span class="lineCov">          1 :     size_t filecount = 0, i;</span>
+<span class="lineNum">     224 </span>            : #ifdef WIN32
+<span class="lineNum">     225 </span>            :     HANDLE hFind;
+<span class="lineNum">     226 </span>            :     BOOL bMore;
+<span class="lineNum">     227 </span>            :     WIN32_FIND_DATA finddata;
+<span class="lineNum">     228 </span>            :     char githash[LINE_SIZE];
+<span class="lineNum">     229 </span>            :     char shahash[LINE_SIZE];
+<span class="lineNum">     230 </span>            : 
+<span class="lineNum">     231 </span>            :     /* C files in src dir */
+<span class="lineNum">     232 </span>            :     hFind = FindFirstFile(DIR_SOURCE &quot;/*&quot; EXT_SRC_FILE, &amp;finddata);
+<span class="lineNum">     233 </span>            :     bMore = (hFind != (HANDLE) - 1);
+<span class="lineNum">     234 </span>            : 
+<span class="lineNum">     235 </span>            :     while (bMore) {
+<span class="lineNum">     236 </span>            :         if (!(finddata.dwFileAttributes &amp; FILE_ATTRIBUTE_DIRECTORY)
+<span class="lineNum">     237 </span>            :             &amp;&amp; strcmp(finddata.cFileName, VERSION_FILE)) {
+<span class="lineNum">     238 </span>            :             filename = finddata.cFileName;
+<span class="lineNum">     239 </span>            : #else
+<span class="lineNum">     240 </span>            :     DIR *dir;
+<span class="lineNum">     241 </span>            :     struct dirent *file;
+<span class="lineNum">     242 </span>            :     char shahash[LINE_SIZE];
+<span class="lineNum">     243 </span>            :     char githash[LINE_SIZE];
+<span class="lineNum">     244 </span>            : 
+<span class="lineNum">     245 </span>            :     /* If we can't open the source directory, quit */
+<span class="lineNum">     246 </span><span class="lineCov">          1 :     if (!(dir = opendir(DIR_SOURCE)))</span>
+<span class="lineNum">     247 </span><span class="lineNoCov">          0 :         return;</span>
+<span class="lineNum">     248 </span>            : 
+<span class="lineNum">     249 </span><span class="lineCov">        189 :     while ((file = readdir(dir))) {</span>
+<span class="lineNum">     250 </span><span class="lineCov">        188 :         if (endswith(file-&gt;d_name, EXT_SRC_FILE) &amp;&amp; strcmp(file-&gt;d_name, VERSION_FILE)) {</span>
+<span class="lineNum">     251 </span><span class="lineCov">         60 :             filename = file-&gt;d_name;</span>
+<span class="lineNum">     252 </span>            : #endif
+<span class="lineNum">     253 </span><span class="lineCov">         60 :             filecount++;</span>
+<span class="lineNum">     254 </span>            :             /* Copy over the array, if it exists */
+<span class="lineNum">     255 </span><span class="lineCov">         60 :             if (files) {</span>
+<span class="lineNum">     256 </span><span class="lineCov">         59 :                 temp = (file_entry **) malloc(sizeof(file_entry *) * (filecount));</span>
+<span class="lineNum">     257 </span><span class="lineCov">        118 :                 memcpy(temp, files, (filecount - 1) * sizeof(file_entry *));</span>
+<span class="lineNum">     258 </span><span class="lineCov">         59 :                 free(files);</span>
+<span class="lineNum">     259 </span><span class="lineCov">         59 :                 files = temp;</span>
+<span class="lineNum">     260 </span>            :             } else {
+<span class="lineNum">     261 </span><span class="lineCov">          1 :                 files = (file_entry **) malloc(sizeof(file_entry *) * (filecount));</span>
+<span class="lineNum">     262 </span>            :             }
+<span class="lineNum">     263 </span>            : 
+<span class="lineNum">     264 </span><span class="lineCov">         60 :             files[filecount - 1] = (file_entry *) malloc(sizeof(file_entry));</span>
+<span class="lineNum">     265 </span><span class="lineCov">         60 :             i = strlen(filename) + strlen(DIR_SOURCE) + strlen(&quot;/&quot;);</span>
+<span class="lineNum">     266 </span><span class="lineCov">         60 :             files[filecount - 1]-&gt;filepath = (char *) malloc(sizeof(char) * (i + 1));</span>
+<span class="lineNum">     267 </span><span class="lineCov">        120 :             snprintf(files[filecount - 1]-&gt;filepath, i + 1, &quot;%s/%s&quot;, DIR_SOURCE, filename);</span>
+<span class="lineNum">     268 </span><span class="lineCov">         60 :             i = strlen(filename);</span>
+<span class="lineNum">     269 </span><span class="lineCov">         60 :             files[filecount - 1]-&gt;filename = (char *) malloc(sizeof(char) * (i + 1));</span>
+<span class="lineNum">     270 </span><span class="lineCov">         60 :             snprintf(files[filecount - 1]-&gt;filename, i + 1, &quot;%s&quot;, filename);</span>
+<span class="lineNum">     271 </span>            : #ifdef WIN32
+<span class="lineNum">     272 </span>            :         }
+<span class="lineNum">     273 </span>            :         bMore = FindNextFile(hFind, &amp;finddata);
+<span class="lineNum">     274 </span>            :     }
+<span class="lineNum">     275 </span>            :     FindClose(hFind);
+<span class="lineNum">     276 </span>            : #else
+<span class="lineNum">     277 </span>            :         }
+<span class="lineNum">     278 </span>            :     }
+<span class="lineNum">     279 </span><span class="lineCov">          1 :     closedir(dir);</span>
+<span class="lineNum">     280 </span>            : #endif
+<span class="lineNum">     281 </span>            : 
+<span class="lineNum">     282 </span>            : 
+<span class="lineNum">     283 </span>            : #ifdef WIN32
+<span class="lineNum">     284 </span>            :     /* H files in include dir */
+<span class="lineNum">     285 </span>            :     hFind = FindFirstFile(DIR_INCLUDE &quot;/*&quot; EXT_INC_FILE, &amp;finddata);
+<span class="lineNum">     286 </span>            :     bMore = (hFind != (HANDLE) - 1);
+<span class="lineNum">     287 </span>            : 
+<span class="lineNum">     288 </span>            :     while (bMore) {
+<span class="lineNum">     289 </span>            :         if (!(finddata.dwFileAttributes &amp; FILE_ATTRIBUTE_DIRECTORY)
+<span class="lineNum">     290 </span>            :             &amp;&amp; strcmp(finddata.cFileName, VERSION_FILE)) {
+<span class="lineNum">     291 </span>            :             filename = finddata.cFileName;
+<span class="lineNum">     292 </span>            : #else
+<span class="lineNum">     293 </span>            : 
+<span class="lineNum">     294 </span>            :     /* If we can't open the source directory, quit */
+<span class="lineNum">     295 </span><span class="lineCov">          1 :     if (!(dir = opendir(DIR_INCLUDE)))</span>
+<span class="lineNum">     296 </span>            :         return;
+<span class="lineNum">     297 </span>            : 
+<span class="lineNum">     298 </span><span class="lineCov">         60 :     while ((file = readdir(dir))) {</span>
+<span class="lineNum">     299 </span><span class="lineCov">         59 :         if (endswith(file-&gt;d_name, EXT_INC_FILE) &amp;&amp; strcmp(file-&gt;d_name, VERSION_FILE)) {</span>
+<span class="lineNum">     300 </span><span class="lineCov">         55 :             filename = file-&gt;d_name;</span>
+<span class="lineNum">     301 </span>            : #endif
+<span class="lineNum">     302 </span><span class="lineCov">         55 :             filecount++;</span>
+<span class="lineNum">     303 </span>            :             /* Copy over the array, if it exists */
+<span class="lineNum">     304 </span><span class="lineCov">         55 :             if (files) {</span>
+<span class="lineNum">     305 </span><span class="lineCov">         55 :                 temp = (file_entry **) malloc(sizeof(file_entry *) * (filecount));</span>
+<span class="lineNum">     306 </span><span class="lineCov">        110 :                 memcpy(temp, files, (filecount - 1) * sizeof(file_entry *));</span>
+<span class="lineNum">     307 </span><span class="lineCov">         55 :                 free(files);</span>
+<span class="lineNum">     308 </span><span class="lineCov">         55 :                 files = temp;</span>
+<span class="lineNum">     309 </span>            :             } else {
+<span class="lineNum">     310 </span><span class="lineNoCov">          0 :                 files = (file_entry **) malloc(sizeof(file_entry *) * (filecount));</span>
+<span class="lineNum">     311 </span>            :             }
+<span class="lineNum">     312 </span>            : 
+<span class="lineNum">     313 </span><span class="lineCov">         55 :             files[filecount - 1] = (file_entry *) malloc(sizeof(file_entry));</span>
+<span class="lineNum">     314 </span><span class="lineCov">         55 :             i = strlen(filename) + strlen(DIR_INCLUDE) + strlen(&quot;/&quot;);</span>
+<span class="lineNum">     315 </span><span class="lineCov">         55 :             files[filecount - 1]-&gt;filepath = (char *) malloc(sizeof(char) * (i + 1));</span>
+<span class="lineNum">     316 </span><span class="lineCov">        110 :             snprintf(files[filecount - 1]-&gt;filepath, i + 1, &quot;%s/%s&quot;, DIR_INCLUDE, filename);</span>
+<span class="lineNum">     317 </span><span class="lineCov">         55 :             i = strlen(filename);</span>
+<span class="lineNum">     318 </span><span class="lineCov">         55 :             files[filecount - 1]-&gt;filename = (char *) malloc(sizeof(char) * (i + 1));</span>
+<span class="lineNum">     319 </span><span class="lineCov">         55 :             snprintf(files[filecount - 1]-&gt;filename, i + 1, &quot;%s&quot;, filename);</span>
+<span class="lineNum">     320 </span>            : #ifdef WIN32
+<span class="lineNum">     321 </span>            :         }
+<span class="lineNum">     322 </span>            :         bMore = FindNextFile(hFind, &amp;finddata);
+<span class="lineNum">     323 </span>            :     }
+<span class="lineNum">     324 </span>            :     FindClose(hFind);
+<span class="lineNum">     325 </span>            : #else
+<span class="lineNum">     326 </span>            :         }
+<span class="lineNum">     327 </span>            :     }
+<span class="lineNum">     328 </span><span class="lineCov">          1 :     closedir(dir);</span>
+<span class="lineNum">     329 </span>            : #endif
+<span class="lineNum">     330 </span>            : 
+<span class="lineNum">     331 </span>            :     /* Sort the array */
+<span class="lineNum">     332 </span><span class="lineCov">          1 :     qsort((void *) files, filecount, sizeof(file_entry *), qcmp);</span>
+<span class="lineNum">     333 </span>            : 
+<span class="lineNum">     334 </span>            :     /* Output the array to the file */
+<span class="lineNum">     335 </span><span class="lineCov">        116 :     for (i = 0; i &lt; filecount; i++) {</span>
+<span class="lineNum">     336 </span><span class="lineCov">        460 :         fprintf(out,</span>
+<span class="lineNum">     337 </span>            :                 HASH_ARRAY_TPL,
+<span class="lineNum">     338 </span><span class="lineCov">        115 :                 files[i]-&gt;filename,</span>
+<span class="lineNum">     339 </span><span class="lineCov">        115 :                 get_git_hash(files[i]-&gt;filepath, githash, LINE_SIZE),</span>
+<span class="lineNum">     340 </span><span class="lineCov">        115 :                 get_sha1_hash(files[i]-&gt;filepath, shahash, LINE_SIZE)</span>
+<span class="lineNum">     341 </span>            :                 );
+<span class="lineNum">     342 </span><span class="lineCov">        115 :         free(files[i]-&gt;filename);</span>
+<span class="lineNum">     343 </span><span class="lineCov">        115 :         free(files[i]-&gt;filepath);</span>
+<span class="lineNum">     344 </span><span class="lineCov">        115 :         free(files[i]);</span>
+<span class="lineNum">     345 </span>            :     }
+<span class="lineNum">     346 </span><span class="lineCov">          1 :     free(files);</span>
+<span class="lineNum">     347 </span>            : }
+<a name="348"><span class="lineNum">     348 </span>            : </a>
+<span class="lineNum">     349 </span>            : int
+<span class="lineNum">     350 </span><span class="lineCov">        649 : qcmp(const void *arg1, const void *arg2)</span>
+<span class="lineNum">     351 </span>            : {
+<span class="lineNum">     352 </span><span class="lineCov">        649 :     return strcasecmp((*(file_entry **) arg1)-&gt;filename, (*(file_entry **) arg2)-&gt;filename);</span>
+<span class="lineNum">     353 </span>            : }
+<span class="lineNum">     354 </span>            : 
+<a name="355"><span class="lineNum">     355 </span>            : </a>
+<span class="lineNum">     356 </span>            : char *
+<span class="lineNum">     357 </span><span class="lineCov">        115 : get_git_hash(const char *name, char *hash, size_t hash_len)</span>
+<span class="lineNum">     358 </span>            : {
+<span class="lineNum">     359 </span>            :     FILE *gitpipe;
+<span class="lineNum">     360 </span>            :     char line[LINE_SIZE];
+<span class="lineNum">     361 </span>            :     char *ptr;
+<span class="lineNum">     362 </span>            : 
+<span class="lineNum">     363 </span><span class="lineCov">        115 :     hash[0] = '\0';</span>
+<span class="lineNum">     364 </span>            : 
+<span class="lineNum">     365 </span><span class="lineCov">        115 :     if (!git_available)</span>
+<span class="lineNum">     366 </span>            :         return hash;
+<span class="lineNum">     367 </span>            : 
+<span class="lineNum">     368 </span><span class="lineCov">        115 :     snprintf(line, LINE_SIZE, GIT_BLOB_CMD, name);</span>
+<span class="lineNum">     369 </span><span class="lineCov">        115 :     if (!(gitpipe = popen(line, &quot;r&quot;)))</span>
+<span class="lineNum">     370 </span>            :         return hash;
+<span class="lineNum">     371 </span>            : 
+<span class="lineNum">     372 </span>            :     /* Get a line of output */
+<span class="lineNum">     373 </span><span class="lineCov">        115 :     if (!fgets(line, LINE_SIZE, gitpipe)) {</span>
+<span class="lineNum">     374 </span><span class="lineNoCov">          0 :         pclose(gitpipe);</span>
+<span class="lineNum">     375 </span><span class="lineNoCov">          0 :         return hash;</span>
+<span class="lineNum">     376 </span>            :     }
+<span class="lineNum">     377 </span>            : 
+<span class="lineNum">     378 </span>            :     /* Close the pipe and check return status */
+<span class="lineNum">     379 </span><span class="lineCov">        115 :     if (pclose(gitpipe) != 0) {</span>
+<span class="lineNum">     380 </span>            :         return hash;
+<span class="lineNum">     381 </span>            :     }
+<span class="lineNum">     382 </span>            : 
+<span class="lineNum">     383 </span>            :     /* Success! Copy the hash and return */
+<span class="lineNum">     384 </span><span class="lineCov">        230 :     strncpy(hash, line, hash_len - 1);</span>
+<span class="lineNum">     385 </span><span class="lineCov">        115 :     hash[hash_len - 1] = '\0';</span>
+<span class="lineNum">     386 </span>            : 
+<span class="lineNum">     387 </span>            :     /* Strip out the newlines and such */
+<span class="lineNum">     388 </span><span class="lineCov">        115 :     ptr = hash;</span>
+<span class="lineNum">     389 </span><span class="lineCov">       4945 :     while (*ptr) {</span>
+<span class="lineNum">     390 </span><span class="lineCov">       4715 :         if (*ptr == '\r' || *ptr == '\n')</span>
+<span class="lineNum">     391 </span><span class="lineCov">        115 :             *ptr = '\0';</span>
+<span class="lineNum">     392 </span><span class="lineCov">       4715 :         ptr++;</span>
+<span class="lineNum">     393 </span>            :     }
+<span class="lineNum">     394 </span>            : 
+<span class="lineNum">     395 </span>            :     return hash;
+<span class="lineNum">     396 </span>            : }
+<a name="397"><span class="lineNum">     397 </span>            : </a>
+<span class="lineNum">     398 </span>            : char *
+<span class="lineNum">     399 </span><span class="lineCov">        115 : get_sha1_hash(const char *name, char *hash, size_t hash_len)</span>
+<span class="lineNum">     400 </span>            : {
+<span class="lineNum">     401 </span>            :     FILE *f;
+<span class="lineNum">     402 </span>            :     int c;
+<span class="lineNum">     403 </span><span class="lineCov">        115 :     hash[0] = '\0';</span>
+<span class="lineNum">     404 </span>            : 
+<span class="lineNum">     405 </span><span class="lineCov">        115 :     if (!(f = fopen(name, &quot;rb&quot;)))</span>
+<span class="lineNum">     406 </span>            :         return hash;
+<span class="lineNum">     407 </span>            : 
+<span class="lineNum">     408 </span>            :     sha1nfo info;
+<span class="lineNum">     409 </span><span class="lineCov">        115 :     sha1_init(&amp;info);</span>
+<span class="lineNum">     410 </span><span class="lineCov">    1735628 :     while ((c = fgetc(f)) != EOF) {</span>
+<span class="lineNum">     411 </span><span class="lineCov">    1735398 :         sha1_writebyte(&amp;info, (uint8_t) c);</span>
+<span class="lineNum">     412 </span>            :     }
+<span class="lineNum">     413 </span><span class="lineCov">        115 :     hash2hex(sha1_result(&amp;info), hash, hash_len);</span>
+<span class="lineNum">     414 </span><span class="lineCov">        115 :     fclose(f);</span>
+<span class="lineNum">     415 </span>            : 
+<span class="lineNum">     416 </span><span class="lineCov">        115 :     return hash;</span>
+<span class="lineNum">     417 </span>            : }
+<a name="418"><span class="lineNum">     418 </span>            : </a>
+<span class="lineNum">     419 </span>            : int
+<span class="lineNum">     420 </span><span class="lineCov">        247 : endswith(const char *str, const char *suf)</span>
+<span class="lineNum">     421 </span>            : {
+<span class="lineNum">     422 </span>            :     size_t str_len, suf_len;
+<span class="lineNum">     423 </span>            :     const char *ptr;
+<span class="lineNum">     424 </span>            : 
+<span class="lineNum">     425 </span><span class="lineCov">        247 :     if (!str || !suf)</span>
+<span class="lineNum">     426 </span>            :         return 0;
+<span class="lineNum">     427 </span>            : 
+<span class="lineNum">     428 </span><span class="lineCov">        247 :     str_len = strlen(str);</span>
+<span class="lineNum">     429 </span><span class="lineCov">        247 :     suf_len = strlen(suf);</span>
+<span class="lineNum">     430 </span>            : 
+<span class="lineNum">     431 </span><span class="lineCov">        247 :     if (suf_len &gt; str_len)</span>
+<span class="lineNum">     432 </span>            :         return 0;
+<span class="lineNum">     433 </span>            : 
+<span class="lineNum">     434 </span><span class="lineCov">        245 :     ptr = str + str_len - suf_len;</span>
+<span class="lineNum">     435 </span><span class="lineCov">        245 :     return (0 == strcmp(ptr, suf) ? 1 : 0);</span>
+<span class="lineNum">     436 </span>            : }
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.12</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

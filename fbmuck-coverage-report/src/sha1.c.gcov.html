@@ -1,0 +1,256 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage-total - src/sha1.c</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">src</a> - sha1.c<span style="font-size: 80%;"> (source / <a href="sha1.c.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage-total</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">89</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2017-02-26 00:20:31</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">9</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &quot;config.h&quot;</a>
+<span class="lineNum">       2 </span>            : 
+<span class="lineNum">       3 </span>            : #include &quot;sha1.h&quot;
+<span class="lineNum">       4 </span>            : 
+<span class="lineNum">       5 </span>            : /* Test for endian options -- Windows is LITTLE by default */
+<span class="lineNum">       6 </span>            : #ifdef __BIG_ENDIAN__
+<span class="lineNum">       7 </span>            : # define SHA_BIG_ENDIAN
+<span class="lineNum">       8 </span>            : #elif defined __LITTLE_ENDIAN__
+<span class="lineNum">       9 </span>            : #elif defined __BYTE_ORDER
+<span class="lineNum">      10 </span>            : # if __BYTE_ORDER__ ==  __ORDER_BIG_ENDIAN__
+<span class="lineNum">      11 </span>            : # define SHA_BIG_ENDIAN
+<span class="lineNum">      12 </span>            : # endif
+<span class="lineNum">      13 </span>            : #elif defined WIN32
+<span class="lineNum">      14 </span>            : #else                           // ! defined __LITTLE_ENDIAN__
+<span class="lineNum">      15 </span>            : # include &lt;endian.h&gt;              // machine/endian.h
+<span class="lineNum">      16 </span>            : # if __BYTE_ORDER__ ==  __ORDER_BIG_ENDIAN__
+<span class="lineNum">      17 </span>            : #  define SHA_BIG_ENDIAN
+<span class="lineNum">      18 </span>            : # endif
+<span class="lineNum">      19 </span>            : #endif
+<span class="lineNum">      20 </span>            : 
+<span class="lineNum">      21 </span>            : /* K values for SHA1 */
+<span class="lineNum">      22 </span>            : #define SHA1_K0  0x5a827999
+<span class="lineNum">      23 </span>            : #define SHA1_K20 0x6ed9eba1
+<span class="lineNum">      24 </span>            : #define SHA1_K40 0x8f1bbcdc
+<span class="lineNum">      25 </span>            : #define SHA1_K60 0xca62c1d6
+<span class="lineNum">      26 </span>            : 
+<a name="27"><span class="lineNum">      27 </span>            : /* Starting values */</a>
+<span class="lineNum">      28 </span>            : void
+<span class="lineNum">      29 </span><span class="lineNoCov">          0 : sha1_init(sha1nfo * s)</span>
+<span class="lineNum">      30 </span>            : {
+<span class="lineNum">      31 </span><span class="lineNoCov">          0 :     s-&gt;state[0] = 0x67452301;</span>
+<span class="lineNum">      32 </span><span class="lineNoCov">          0 :     s-&gt;state[1] = 0xefcdab89;</span>
+<span class="lineNum">      33 </span><span class="lineNoCov">          0 :     s-&gt;state[2] = 0x98badcfe;</span>
+<span class="lineNum">      34 </span><span class="lineNoCov">          0 :     s-&gt;state[3] = 0x10325476;</span>
+<span class="lineNum">      35 </span><span class="lineNoCov">          0 :     s-&gt;state[4] = 0xc3d2e1f0;</span>
+<span class="lineNum">      36 </span><span class="lineNoCov">          0 :     s-&gt;byteCount = 0;</span>
+<span class="lineNum">      37 </span><span class="lineNoCov">          0 :     s-&gt;bufferOffset = 0;</span>
+<span class="lineNum">      38 </span><span class="lineNoCov">          0 : }</span>
+<span class="lineNum">      39 </span>            : 
+<a name="40"><span class="lineNum">      40 </span>            : /* Roll bits */</a>
+<span class="lineNum">      41 </span>            : static uint32_t
+<span class="lineNum">      42 </span><span class="lineNoCov">          0 : sha1_rol32(uint32_t number, uint8_t bits)</span>
+<span class="lineNum">      43 </span>            : {
+<span class="lineNum">      44 </span><span class="lineNoCov">          0 :     return ((number &lt;&lt; bits) | (number &gt;&gt; (32 - bits)));</span>
+<span class="lineNum">      45 </span>            : }
+<span class="lineNum">      46 </span>            : 
+<a name="47"><span class="lineNum">      47 </span>            : /* Hash the data in the block */</a>
+<span class="lineNum">      48 </span>            : static void
+<span class="lineNum">      49 </span><span class="lineNoCov">          0 : sha1_hashBlock(sha1nfo * s)</span>
+<span class="lineNum">      50 </span>            : {
+<span class="lineNum">      51 </span>            :     uint32_t a, b, c, d, e, t;
+<span class="lineNum">      52 </span>            : 
+<span class="lineNum">      53 </span><span class="lineNoCov">          0 :     a = s-&gt;state[0];</span>
+<span class="lineNum">      54 </span><span class="lineNoCov">          0 :     b = s-&gt;state[1];</span>
+<span class="lineNum">      55 </span><span class="lineNoCov">          0 :     c = s-&gt;state[2];</span>
+<span class="lineNum">      56 </span><span class="lineNoCov">          0 :     d = s-&gt;state[3];</span>
+<span class="lineNum">      57 </span><span class="lineNoCov">          0 :     e = s-&gt;state[4];</span>
+<span class="lineNum">      58 </span><span class="lineNoCov">          0 :     for (uint8_t i = 0; i &lt; 80; i++) {</span>
+<span class="lineNum">      59 </span><span class="lineNoCov">          0 :         if (i &gt;= 16) {</span>
+<span class="lineNum">      60 </span><span class="lineNoCov">          0 :             t = s-&gt;buffer[(i + 13) &amp; 15] ^ s-&gt;buffer[(i + 8) &amp; 15] ^ s-&gt;buffer[(i +</span>
+<span class="lineNum">      61 </span><span class="lineNoCov">          0 :                                                                                 2) &amp; 15] ^ s-&gt;</span>
+<span class="lineNum">      62 </span><span class="lineNoCov">          0 :                     buffer[i &amp; 15];</span>
+<span class="lineNum">      63 </span><span class="lineNoCov">          0 :             s-&gt;buffer[i &amp; 15] = sha1_rol32(t, 1);</span>
+<span class="lineNum">      64 </span>            :         }
+<span class="lineNum">      65 </span><span class="lineNoCov">          0 :         if (i &lt; 20) {</span>
+<span class="lineNum">      66 </span><span class="lineNoCov">          0 :             t = (d ^ (b &amp; (c ^ d))) + SHA1_K0;</span>
+<span class="lineNum">      67 </span><span class="lineNoCov">          0 :         } else if (i &lt; 40) {</span>
+<span class="lineNum">      68 </span><span class="lineNoCov">          0 :             t = (b ^ c ^ d) + SHA1_K20;</span>
+<span class="lineNum">      69 </span><span class="lineNoCov">          0 :         } else if (i &lt; 60) {</span>
+<span class="lineNum">      70 </span><span class="lineNoCov">          0 :             t = ((b &amp; c) | (d &amp; (b | c))) + SHA1_K40;</span>
+<span class="lineNum">      71 </span>            :         } else {
+<span class="lineNum">      72 </span><span class="lineNoCov">          0 :             t = (b ^ c ^ d) + SHA1_K60;</span>
+<span class="lineNum">      73 </span>            :         }
+<span class="lineNum">      74 </span><span class="lineNoCov">          0 :         t += sha1_rol32(a, 5) + e + s-&gt;buffer[i &amp; 15];</span>
+<span class="lineNum">      75 </span><span class="lineNoCov">          0 :         e = d;</span>
+<span class="lineNum">      76 </span><span class="lineNoCov">          0 :         d = c;</span>
+<span class="lineNum">      77 </span><span class="lineNoCov">          0 :         c = sha1_rol32(b, 30);</span>
+<span class="lineNum">      78 </span><span class="lineNoCov">          0 :         b = a;</span>
+<span class="lineNum">      79 </span><span class="lineNoCov">          0 :         a = t;</span>
+<span class="lineNum">      80 </span>            :     }
+<span class="lineNum">      81 </span><span class="lineNoCov">          0 :     s-&gt;state[0] += a;</span>
+<span class="lineNum">      82 </span><span class="lineNoCov">          0 :     s-&gt;state[1] += b;</span>
+<span class="lineNum">      83 </span><span class="lineNoCov">          0 :     s-&gt;state[2] += c;</span>
+<span class="lineNum">      84 </span><span class="lineNoCov">          0 :     s-&gt;state[3] += d;</span>
+<span class="lineNum">      85 </span><span class="lineNoCov">          0 :     s-&gt;state[4] += e;</span>
+<span class="lineNum">      86 </span><span class="lineNoCov">          0 : }</span>
+<span class="lineNum">      87 </span>            : 
+<a name="88"><span class="lineNum">      88 </span>            : /* Used to add single bytes of data in case of padding */</a>
+<span class="lineNum">      89 </span>            : static void
+<span class="lineNum">      90 </span><span class="lineNoCov">          0 : sha1_addUncounted(sha1nfo * s, uint8_t data)</span>
+<span class="lineNum">      91 </span>            : {
+<span class="lineNum">      92 </span><span class="lineNoCov">          0 :     uint8_t *const b = (uint8_t *) s-&gt;buffer;</span>
+<span class="lineNum">      93 </span>            : #ifdef SHA_BIG_ENDIAN
+<span class="lineNum">      94 </span>            :     b[s-&gt;bufferOffset] = data;
+<span class="lineNum">      95 </span>            : #else
+<span class="lineNum">      96 </span><span class="lineNoCov">          0 :     b[s-&gt;bufferOffset ^ 3] = data;</span>
+<span class="lineNum">      97 </span>            : #endif
+<span class="lineNum">      98 </span><span class="lineNoCov">          0 :     s-&gt;bufferOffset++;</span>
+<span class="lineNum">      99 </span><span class="lineNoCov">          0 :     if (s-&gt;bufferOffset == BLOCK_LENGTH) {</span>
+<span class="lineNum">     100 </span><span class="lineNoCov">          0 :         sha1_hashBlock(s);</span>
+<span class="lineNum">     101 </span><span class="lineNoCov">          0 :         s-&gt;bufferOffset = 0;</span>
+<span class="lineNum">     102 </span>            :     }
+<span class="lineNum">     103 </span><span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     104 </span>            : 
+<a name="105"><span class="lineNum">     105 </span>            : /* Write a single byte of data into the buffer */</a>
+<span class="lineNum">     106 </span>            : void
+<span class="lineNum">     107 </span><span class="lineNoCov">          0 : sha1_writebyte(sha1nfo * s, uint8_t data)</span>
+<span class="lineNum">     108 </span>            : {
+<span class="lineNum">     109 </span><span class="lineNoCov">          0 :     ++s-&gt;byteCount;</span>
+<span class="lineNum">     110 </span><span class="lineNoCov">          0 :     sha1_addUncounted(s, data);</span>
+<span class="lineNum">     111 </span><span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     112 </span>            : 
+<a name="113"><span class="lineNum">     113 </span>            : /* Write a length of data into the buffer */</a>
+<span class="lineNum">     114 </span>            : void
+<span class="lineNum">     115 </span><span class="lineNoCov">          0 : sha1_write(sha1nfo * s, const char *data, size_t len)</span>
+<span class="lineNum">     116 </span>            : {
+<span class="lineNum">     117 </span><span class="lineNoCov">          0 :     for (; len--;)</span>
+<span class="lineNum">     118 </span><span class="lineNoCov">          0 :         sha1_writebyte(s, (uint8_t) * data++);</span>
+<span class="lineNum">     119 </span><span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     120 </span>            : 
+<a name="121"><span class="lineNum">     121 </span>            : /* Pad if not enough data when finalized */</a>
+<span class="lineNum">     122 </span>            : static void
+<span class="lineNum">     123 </span><span class="lineNoCov">          0 : sha1_pad(sha1nfo * s)</span>
+<span class="lineNum">     124 </span>            : {
+<span class="lineNum">     125 </span>            :     // Implement SHA-1 padding
+<span class="lineNum">     126 </span>            :     // Pad with 0x80 followed by 0x00 until the end of the block
+<span class="lineNum">     127 </span><span class="lineNoCov">          0 :     sha1_addUncounted(s, 0x80);</span>
+<span class="lineNum">     128 </span><span class="lineNoCov">          0 :     while (s-&gt;bufferOffset != 56)</span>
+<span class="lineNum">     129 </span><span class="lineNoCov">          0 :         sha1_addUncounted(s, 0x00);</span>
+<span class="lineNum">     130 </span>            : 
+<span class="lineNum">     131 </span>            :     // Append length in the last 8 bytes
+<span class="lineNum">     132 </span><span class="lineNoCov">          0 :     sha1_addUncounted(s, 0);    // We're only using 32 bit lengths</span>
+<span class="lineNum">     133 </span><span class="lineNoCov">          0 :     sha1_addUncounted(s, 0);    // But SHA-1 supports 64 bit lengths</span>
+<span class="lineNum">     134 </span><span class="lineNoCov">          0 :     sha1_addUncounted(s, 0);    // So zero pad the top bits</span>
+<span class="lineNum">     135 </span><span class="lineNoCov">          0 :     sha1_addUncounted(s, s-&gt;byteCount &gt;&gt; 29);  // Shifting to multiply by 8</span>
+<span class="lineNum">     136 </span><span class="lineNoCov">          0 :     sha1_addUncounted(s, s-&gt;byteCount &gt;&gt; 21);  // as SHA-1 supports bitstreams as well as</span>
+<span class="lineNum">     137 </span><span class="lineNoCov">          0 :     sha1_addUncounted(s, s-&gt;byteCount &gt;&gt; 13);  // byte.</span>
+<span class="lineNum">     138 </span><span class="lineNoCov">          0 :     sha1_addUncounted(s, s-&gt;byteCount &gt;&gt; 5);</span>
+<span class="lineNum">     139 </span><span class="lineNoCov">          0 :     sha1_addUncounted(s, s-&gt;byteCount &lt;&lt; 3);</span>
+<span class="lineNum">     140 </span><span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     141 </span>            : 
+<a name="142"><span class="lineNum">     142 </span>            : /* Get the sha1 result */</a>
+<span class="lineNum">     143 </span>            : uint8_t *
+<span class="lineNum">     144 </span><span class="lineNoCov">          0 : sha1_result(sha1nfo * s)</span>
+<span class="lineNum">     145 </span>            : {
+<span class="lineNum">     146 </span>            :     // Pad to complete the last block
+<span class="lineNum">     147 </span><span class="lineNoCov">          0 :     sha1_pad(s);</span>
+<span class="lineNum">     148 </span>            : 
+<span class="lineNum">     149 </span>            : #ifndef SHA_BIG_ENDIAN
+<span class="lineNum">     150 </span>            :     // Swap byte order back
+<span class="lineNum">     151 </span><span class="lineNoCov">          0 :     for (int i = 0; i &lt; 5; i++) {</span>
+<span class="lineNum">     152 </span><span class="lineNoCov">          0 :         s-&gt;state[i] = (((s-&gt;state[i]) &lt;&lt; 24) &amp; 0xff000000)</span>
+<span class="lineNum">     153 </span><span class="lineNoCov">          0 :                 | (((s-&gt;state[i]) &lt;&lt; 8) &amp; 0x00ff0000)</span>
+<span class="lineNum">     154 </span><span class="lineNoCov">          0 :                 | (((s-&gt;state[i]) &gt;&gt; 8) &amp; 0x0000ff00)</span>
+<span class="lineNum">     155 </span><span class="lineNoCov">          0 :                 | (((s-&gt;state[i]) &gt;&gt; 24) &amp; 0x000000ff);</span>
+<span class="lineNum">     156 </span>            :     }
+<span class="lineNum">     157 </span>            : #endif
+<span class="lineNum">     158 </span>            : 
+<span class="lineNum">     159 </span>            :     // Return pointer to hash (20 characters)
+<span class="lineNum">     160 </span><span class="lineNoCov">          0 :     return (uint8_t *) s-&gt;state;</span>
+<span class="lineNum">     161 </span>            : }
+<span class="lineNum">     162 </span>            : 
+<a name="163"><span class="lineNum">     163 </span>            : /* Turn a 20 byte hash into a 41 byte hex c-string */</a>
+<span class="lineNum">     164 </span>            : void
+<span class="lineNum">     165 </span><span class="lineNoCov">          0 : hash2hex(uint8_t * hash, char *buffer, size_t buflen)</span>
+<span class="lineNum">     166 </span>            : {
+<span class="lineNum">     167 </span>            :     uint8_t low, high;
+<span class="lineNum">     168 </span>            : 
+<span class="lineNum">     169 </span><span class="lineNoCov">          0 :     buffer[0] = '\0';</span>
+<span class="lineNum">     170 </span><span class="lineNoCov">          0 :     for (size_t i = 0; i &lt; 20; i++) {</span>
+<span class="lineNum">     171 </span>            :         /* Make sure the buffer has two bytes + null */
+<span class="lineNum">     172 </span><span class="lineNoCov">          0 :         if (i * 2 + 3 &gt; buflen)</span>
+<span class="lineNum">     173 </span>            :             break;
+<span class="lineNum">     174 </span><span class="lineNoCov">          0 :         high = (hash[i] &amp; 0xF0) &gt;&gt; 4;</span>
+<span class="lineNum">     175 </span><span class="lineNoCov">          0 :         low = hash[i] &amp; 0x0F;</span>
+<span class="lineNum">     176 </span><span class="lineNoCov">          0 :         buffer[i * 2] = (high &lt;= 9 ? high + 48 : high + 87);</span>
+<span class="lineNum">     177 </span><span class="lineNoCov">          0 :         buffer[i * 2 + 1] = (low &lt;= 9 ? low + 48 : low + 87);</span>
+<span class="lineNum">     178 </span><span class="lineNoCov">          0 :         buffer[i * 2 + 2] = '\0';</span>
+<span class="lineNum">     179 </span>            :     }
+<span class="lineNum">     180 </span><span class="lineNoCov">          0 : }</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.12</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
