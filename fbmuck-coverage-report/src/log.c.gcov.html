@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 01:21:31</td>
+            <td class="headerValue">2017-02-26 12:37:22</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">5</td>
@@ -75,32 +75,32 @@
 <span class="lineNum">      13 </span>            :    USE ANSI C varargs features, no? Sigh. */
 <a name="14"><span class="lineNum">      14 </span>            : </a>
 <span class="lineNum">      15 </span>            : void
-<span class="lineNum">      16 </span><span class="lineCov">      41602 : vlog2file(int prepend_time, const char *filename, char *format, va_list args)</span>
+<span class="lineNum">      16 </span><span class="lineCov">     334870 : vlog2file(int prepend_time, const char *filename, char *format, va_list args)</span>
 <span class="lineNum">      17 </span>            : {
 <span class="lineNum">      18 </span>            :     FILE *fp;
 <span class="lineNum">      19 </span>            :     time_t lt;
 <span class="lineNum">      20 </span>            :     char buf[40];
-<span class="lineNum">      21 </span><span class="lineCov">      41602 :     lt = time(NULL);</span>
-<span class="lineNum">      22 </span><span class="lineCov">      41602 :     *buf = '\0';</span>
+<span class="lineNum">      21 </span><span class="lineCov">     334870 :     lt = time(NULL);</span>
+<span class="lineNum">      22 </span><span class="lineCov">     334870 :     *buf = '\0';</span>
 <span class="lineNum">      23 </span>            : 
-<span class="lineNum">      24 </span><span class="lineCov">      41602 :     if ((fp = fopen(filename, &quot;ab&quot;)) == NULL) {</span>
+<span class="lineNum">      24 </span><span class="lineCov">     334870 :     if ((fp = fopen(filename, &quot;ab&quot;)) == NULL) {</span>
 <span class="lineNum">      25 </span><span class="lineNoCov">          0 :         fprintf(stderr, &quot;Unable to open %s!\n&quot;, filename);</span>
 <span class="lineNum">      26 </span><span class="lineNoCov">          0 :         if (prepend_time)</span>
 <span class="lineNum">      27 </span><span class="lineNoCov">          0 :             format_time(buf, 32, &quot;%Y-%m-%dT%H:%M:%S&quot;, MUCK_LOCALTIME(lt));</span>
 <span class="lineNum">      28 </span><span class="lineNoCov">          0 :             fprintf(fp, &quot;%.32s: &quot;, buf);</span>
 <span class="lineNum">      29 </span><span class="lineNoCov">          0 :         vfprintf(stderr, format, args);</span>
 <span class="lineNum">      30 </span>            :     } else {
-<span class="lineNum">      31 </span><span class="lineCov">      41602 :         if (prepend_time) {</span>
-<span class="lineNum">      32 </span><span class="lineCov">      41602 :             format_time(buf, 32, &quot;%Y-%m-%dT%H:%M:%S&quot;, MUCK_LOCALTIME(lt));</span>
-<span class="lineNum">      33 </span><span class="lineCov">      41602 :             fprintf(fp, &quot;%.32s: &quot;, buf);</span>
+<span class="lineNum">      31 </span><span class="lineCov">     334870 :         if (prepend_time) {</span>
+<span class="lineNum">      32 </span><span class="lineCov">     334870 :             format_time(buf, 32, &quot;%Y-%m-%dT%H:%M:%S&quot;, MUCK_LOCALTIME(lt));</span>
+<span class="lineNum">      33 </span><span class="lineCov">     334870 :             fprintf(fp, &quot;%.32s: &quot;, buf);</span>
 <span class="lineNum">      34 </span>            :         }
 <span class="lineNum">      35 </span>            : 
-<span class="lineNum">      36 </span><span class="lineCov">      41602 :         vfprintf(fp, format, args);</span>
-<span class="lineNum">      37 </span><span class="lineCov">      41602 :         fprintf(fp, &quot;\n&quot;);</span>
+<span class="lineNum">      36 </span><span class="lineCov">     334870 :         vfprintf(fp, format, args);</span>
+<span class="lineNum">      37 </span><span class="lineCov">     334870 :         fprintf(fp, &quot;\n&quot;);</span>
 <span class="lineNum">      38 </span>            : 
-<span class="lineNum">      39 </span><span class="lineCov">      41602 :         fclose(fp);</span>
+<span class="lineNum">      39 </span><span class="lineCov">     334870 :         fclose(fp);</span>
 <span class="lineNum">      40 </span>            :     }
-<span class="lineNum">      41 </span><span class="lineCov">      41602 : }</span>
+<span class="lineNum">      41 </span><span class="lineCov">     334870 : }</span>
 <a name="42"><span class="lineNum">      42 </span>            : </a>
 <span class="lineNum">      43 </span>            : void
 <span class="lineNum">      44 </span><span class="lineNoCov">          0 : log2file(const char *filename, char *format, ...)</span>
@@ -128,8 +128,8 @@
 <span class="lineNum">      66 </span><span class="lineNoCov">          0 : log_function(tp_file_log_sanfix)</span>
 <a name="67"><span class="lineNum">      67 </span>            : </a>
 <span class="lineNum">      68 </span>            : void
-<span class="lineNum">      69 </span><span class="lineCov">        448 : log_status(char *format, ...)</span>
-<span class="lineNum">      70 </span><span class="lineCov">        448 : log_function(tp_file_log_status)</span>
+<span class="lineNum">      69 </span><span class="lineCov">       4894 : log_status(char *format, ...)</span>
+<span class="lineNum">      70 </span><span class="lineCov">       4894 : log_function(tp_file_log_status)</span>
 <a name="71"><span class="lineNum">      71 </span>            : </a>
 <span class="lineNum">      72 </span>            : void
 <span class="lineNum">      73 </span><span class="lineNoCov">          0 : log_muf(char *format, ...)</span>
@@ -140,8 +140,8 @@
 <span class="lineNum">      78 </span><span class="lineNoCov">          0 : log_function(tp_file_log_gripes)</span>
 <a name="79"><span class="lineNum">      79 </span>            : </a>
 <span class="lineNum">      80 </span>            : void
-<span class="lineNum">      81 </span><span class="lineCov">      41154 : log_command(char *format, ...)</span>
-<span class="lineNum">      82 </span><span class="lineCov">      41154 : log_function(tp_file_log_commands)</span>
+<span class="lineNum">      81 </span><span class="lineCov">     329976 : log_command(char *format, ...)</span>
+<span class="lineNum">      82 </span><span class="lineCov">     329976 : log_function(tp_file_log_commands)</span>
 <a name="83"><span class="lineNum">      83 </span>            : </a>
 <span class="lineNum">      84 </span>            : void
 <span class="lineNum">      85 </span><span class="lineNoCov">          0 : strip_evil_characters(char *badstring)</span>
@@ -186,53 +186,53 @@
 <span class="lineNum">     124 </span><span class="lineNoCov">          0 : }</span>
 <a name="125"><span class="lineNum">     125 </span>            : </a>
 <span class="lineNum">     126 </span>            : void
-<span class="lineNum">     127 </span><span class="lineCov">          9 : log_program_text(struct line *first, dbref player, dbref i)</span>
+<span class="lineNum">     127 </span><span class="lineCov">         72 : log_program_text(struct line *first, dbref player, dbref i)</span>
 <span class="lineNum">     128 </span>            : {
 <span class="lineNum">     129 </span>            :     FILE *f;
 <span class="lineNum">     130 </span>            :     char fname[BUFFER_LEN];
 <span class="lineNum">     131 </span>            :     char unparse_buf[BUFFER_LEN];
 <span class="lineNum">     132 </span>            :     char tbuf[24];
-<span class="lineNum">     133 </span><span class="lineCov">          9 :     time_t lt = time(NULL);</span>
+<span class="lineNum">     133 </span><span class="lineCov">         72 :     time_t lt = time(NULL);</span>
 <span class="lineNum">     134 </span>            : 
-<span class="lineNum">     135 </span><span class="lineCov">          9 :     strcpyn(fname, sizeof(fname), tp_file_log_programs);</span>
-<span class="lineNum">     136 </span><span class="lineCov">          9 :     f = fopen(fname, &quot;ab&quot;);</span>
-<span class="lineNum">     137 </span><span class="lineCov">          9 :     if (!f) {</span>
+<span class="lineNum">     135 </span><span class="lineCov">         72 :     strcpyn(fname, sizeof(fname), tp_file_log_programs);</span>
+<span class="lineNum">     136 </span><span class="lineCov">         72 :     f = fopen(fname, &quot;ab&quot;);</span>
+<span class="lineNum">     137 </span><span class="lineCov">         72 :     if (!f) {</span>
 <span class="lineNum">     138 </span><span class="lineNoCov">          0 :         log_status(&quot;Couldn't open file %s!&quot;, fname);</span>
 <span class="lineNum">     139 </span><span class="lineNoCov">          0 :         return;</span>
 <span class="lineNum">     140 </span>            :     }
 <span class="lineNum">     141 </span>            : 
-<span class="lineNum">     142 </span><span class="lineCov">          9 :     format_time(tbuf, sizeof(tbuf), &quot;%Y-%m-%dT%H:%M:%S&quot;, MUCK_LOCALTIME(lt));</span>
-<span class="lineNum">     143 </span><span class="lineCov">          9 :     fputs(&quot;#######################################&quot;, f);</span>
-<span class="lineNum">     144 </span><span class="lineCov">          9 :     fputs(&quot;#######################################\n&quot;, f);</span>
-<span class="lineNum">     145 </span><span class="lineCov">          9 :     unparse_object(player, i, unparse_buf, sizeof(unparse_buf));</span>
-<span class="lineNum">     146 </span><span class="lineCov">          9 :     fprintf(f, &quot;%s: %s SAVED BY %s(#%d)\n&quot;,</span>
-<span class="lineNum">     147 </span><span class="lineCov">          9 :             tbuf, unparse_buf, NAME(player), player);</span>
-<span class="lineNum">     148 </span><span class="lineCov">          9 :     fputs(&quot;#######################################&quot;, f);</span>
-<span class="lineNum">     149 </span><span class="lineCov">          9 :     fputs(&quot;#######################################\n\n&quot;, f);</span>
+<span class="lineNum">     142 </span><span class="lineCov">         72 :     format_time(tbuf, sizeof(tbuf), &quot;%Y-%m-%dT%H:%M:%S&quot;, MUCK_LOCALTIME(lt));</span>
+<span class="lineNum">     143 </span><span class="lineCov">         72 :     fputs(&quot;#######################################&quot;, f);</span>
+<span class="lineNum">     144 </span><span class="lineCov">         72 :     fputs(&quot;#######################################\n&quot;, f);</span>
+<span class="lineNum">     145 </span><span class="lineCov">         72 :     unparse_object(player, i, unparse_buf, sizeof(unparse_buf));</span>
+<span class="lineNum">     146 </span><span class="lineCov">         72 :     fprintf(f, &quot;%s: %s SAVED BY %s(#%d)\n&quot;,</span>
+<span class="lineNum">     147 </span><span class="lineCov">         72 :             tbuf, unparse_buf, NAME(player), player);</span>
+<span class="lineNum">     148 </span><span class="lineCov">         72 :     fputs(&quot;#######################################&quot;, f);</span>
+<span class="lineNum">     149 </span><span class="lineCov">         72 :     fputs(&quot;#######################################\n\n&quot;, f);</span>
 <span class="lineNum">     150 </span>            : 
-<span class="lineNum">     151 </span><span class="lineCov">      40899 :     while (first) {</span>
-<span class="lineNum">     152 </span><span class="lineCov">      40881 :         if (!first-&gt;this_line)</span>
+<span class="lineNum">     151 </span><span class="lineCov">     327192 :     while (first) {</span>
+<span class="lineNum">     152 </span><span class="lineCov">     327048 :         if (!first-&gt;this_line)</span>
 <span class="lineNum">     153 </span><span class="lineNoCov">          0 :             continue;</span>
-<span class="lineNum">     154 </span><span class="lineCov">      40881 :         fputs(first-&gt;this_line, f);</span>
-<span class="lineNum">     155 </span><span class="lineCov">      40881 :         fputc('\n', f);</span>
-<span class="lineNum">     156 </span><span class="lineCov">      40881 :         first = first-&gt;next;</span>
+<span class="lineNum">     154 </span><span class="lineCov">     327048 :         fputs(first-&gt;this_line, f);</span>
+<span class="lineNum">     155 </span><span class="lineCov">     327048 :         fputc('\n', f);</span>
+<span class="lineNum">     156 </span><span class="lineCov">     327048 :         first = first-&gt;next;</span>
 <span class="lineNum">     157 </span>            :     }
-<span class="lineNum">     158 </span><span class="lineCov">          9 :     fputs(&quot;\n\n\n&quot;, f);</span>
-<span class="lineNum">     159 </span><span class="lineCov">          9 :     fclose(f);</span>
+<span class="lineNum">     158 </span><span class="lineCov">         72 :     fputs(&quot;\n\n\n&quot;, f);</span>
+<span class="lineNum">     159 </span><span class="lineCov">         72 :     fclose(f);</span>
 <span class="lineNum">     160 </span>            : }
 <a name="161"><span class="lineNum">     161 </span>            : </a>
 <span class="lineNum">     162 </span>            : char *
-<span class="lineNum">     163 </span><span class="lineCov">      41168 : whowhere(dbref who)</span>
+<span class="lineNum">     163 </span><span class="lineCov">     330189 : whowhere(dbref who)</span>
 <span class="lineNum">     164 </span>            : {
 <span class="lineNum">     165 </span>            :     char buf[BUFFER_LEN];
 <span class="lineNum">     166 </span>            : 
-<span class="lineNum">     167 </span><span class="lineCov">     205838 :     snprintf(buf, sizeof(buf), &quot;%s%s%s%s(#%d) in %s(#%d)&quot;,</span>
-<span class="lineNum">     168 </span><span class="lineCov">      82334 :              Wizard(OWNER(who)) ? &quot;WIZ: &quot; : &quot;&quot;,</span>
-<span class="lineNum">     169 </span><span class="lineCov">      41168 :              (Typeof(who) != TYPE_PLAYER) ? NAME(who) : &quot;&quot;,</span>
-<span class="lineNum">     170 </span><span class="lineCov">      41168 :              (Typeof(who) != TYPE_PLAYER) ? &quot; owned by &quot; : &quot;&quot;,</span>
-<span class="lineNum">     171 </span><span class="lineCov">     123504 :              NAME(OWNER(who)), who, NAME(LOCATION(who)), LOCATION(who));</span>
+<span class="lineNum">     167 </span><span class="lineCov">    1650924 :     snprintf(buf, sizeof(buf), &quot;%s%s%s%s(#%d) in %s(#%d)&quot;,</span>
+<span class="lineNum">     168 </span><span class="lineCov">     660357 :              Wizard(OWNER(who)) ? &quot;WIZ: &quot; : &quot;&quot;,</span>
+<span class="lineNum">     169 </span><span class="lineCov">     330189 :              (Typeof(who) != TYPE_PLAYER) ? NAME(who) : &quot;&quot;,</span>
+<span class="lineNum">     170 </span><span class="lineCov">     330189 :              (Typeof(who) != TYPE_PLAYER) ? &quot; owned by &quot; : &quot;&quot;,</span>
+<span class="lineNum">     171 </span><span class="lineCov">     990567 :              NAME(OWNER(who)), who, NAME(LOCATION(who)), LOCATION(who));</span>
 <span class="lineNum">     172 </span>            : 
-<span class="lineNum">     173 </span><span class="lineCov">      41168 :     return strdup(buf);</span>
+<span class="lineNum">     173 </span><span class="lineCov">     330189 :     return strdup(buf);</span>
 <span class="lineNum">     174 </span>            : }
 </pre>
       </td>
