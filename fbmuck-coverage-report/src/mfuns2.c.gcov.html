@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">45</td>
-            <td class="headerCovTableEntry">1103</td>
-            <td class="headerCovTableEntryLo">4.1 %</td>
+            <td class="headerCovTableEntry">1174</td>
+            <td class="headerCovTableEntryLo">3.8 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 00:20:31</td>
+            <td class="headerValue">2017-02-26 01:21:31</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -122,7 +122,7 @@
 <span class="lineNum">      60 </span><span class="lineNoCov">          0 :         obj2 = OWNER(perms);</span>
 <span class="lineNum">      61 </span>            :     }
 <span class="lineNum">      62 </span><span class="lineNoCov">          0 :     if (controls(obj2, obj)) {</span>
-<span class="lineNum">      63 </span>            :         return &quot;1&quot;;
+<span class="lineNum">      63 </span><span class="lineNoCov">          0 :         return &quot;1&quot;;</span>
 <span class="lineNum">      64 </span>            :     } else {
 <span class="lineNum">      65 </span><span class="lineNoCov">          0 :         return &quot;0&quot;;</span>
 <span class="lineNum">      66 </span>            :     }
@@ -166,13 +166,13 @@
 <span class="lineNum">     104 </span><span class="lineNoCov">          0 :                     strcatn(buf, BUFFER_LEN, buf2);</span>
 <span class="lineNum">     105 </span>            :                 }
 <span class="lineNum">     106 </span>            :             }
-<span class="lineNum">     107 </span>            :             return buf;
+<span class="lineNum">     107 </span><span class="lineNoCov">          0 :             return buf;</span>
 <span class="lineNum">     108 </span>            :         } else {
-<span class="lineNum">     109 </span>            :             return &quot;#-1&quot;;
+<span class="lineNum">     109 </span><span class="lineNoCov">          0 :             return &quot;#-1&quot;;</span>
 <span class="lineNum">     110 </span>            :         }
 <span class="lineNum">     111 </span>            :     case TYPE_PROGRAM:
 <span class="lineNum">     112 </span>            :     default:
-<span class="lineNum">     113 </span>            :         return &quot;#-1&quot;;
+<span class="lineNum">     113 </span><span class="lineNoCov">          0 :         return &quot;#-1&quot;;</span>
 <span class="lineNum">     114 </span>            :     }
 <span class="lineNum">     115 </span><span class="lineNoCov">          0 :     return ref2str(obj, buf, BUFFER_LEN);</span>
 <span class="lineNum">     116 </span>            : }
@@ -192,7 +192,7 @@
 <span class="lineNum">     130 </span><span class="lineNoCov">          0 :         ABORT_MPI(&quot;LOCKED&quot;, &quot;Match failed. (arg2)&quot;);</span>
 <span class="lineNum">     131 </span><span class="lineCov">          2 :     if (obj == PERMDENIED)</span>
 <span class="lineNum">     132 </span><span class="lineNoCov">          0 :         ABORT_MPI(&quot;LOCKED&quot;, &quot;Permission denied. (arg2)&quot;);</span>
-<span class="lineNum">     133 </span><span class="lineCov">          4 :     snprintf(buf, BUFFER_LEN, &quot;%d&quot;, !could_doit(descr, who, obj));</span>
+<span class="lineNum">     133 </span><span class="lineCov">          2 :     snprintf(buf, BUFFER_LEN, &quot;%d&quot;, !could_doit(descr, who, obj));</span>
 <span class="lineNum">     134 </span><span class="lineCov">          2 :     return buf;</span>
 <span class="lineNum">     135 </span>            : }
 <span class="lineNum">     136 </span>            : 
@@ -230,7 +230,7 @@
 <span class="lineNum">     168 </span><span class="lineNoCov">          0 :     if (argc &gt; 3 &amp;&amp; lok == TRUE_BOOLEXP)</span>
 <span class="lineNum">     169 </span><span class="lineNoCov">          0 :         return (argv[3]);</span>
 <span class="lineNum">     170 </span><span class="lineNoCov">          0 :     if (eval_boolexp(descr, who, lok, obj)) {</span>
-<span class="lineNum">     171 </span>            :         return &quot;1&quot;;
+<span class="lineNum">     171 </span><span class="lineNoCov">          0 :         return &quot;1&quot;;</span>
 <span class="lineNum">     172 </span>            :     } else {
 <span class="lineNum">     173 </span><span class="lineNoCov">          0 :         return &quot;0&quot;;</span>
 <span class="lineNum">     174 </span>            :     }
@@ -254,15 +254,15 @@
 <span class="lineNum">     192 </span><span class="lineNoCov">          0 :     typchk = NOTYPE;</span>
 <span class="lineNum">     193 </span><span class="lineNoCov">          0 :     if (argc &gt; 1) {</span>
 <span class="lineNum">     194 </span><span class="lineNoCov">          0 :         if (!strcasecmp(argv[1], &quot;Room&quot;)) {</span>
-<span class="lineNum">     195 </span>            :             typchk = TYPE_ROOM;
+<span class="lineNum">     195 </span><span class="lineNoCov">          0 :             typchk = TYPE_ROOM;</span>
 <span class="lineNum">     196 </span><span class="lineNoCov">          0 :         } else if (!strcasecmp(argv[1], &quot;Exit&quot;)) {</span>
-<span class="lineNum">     197 </span>            :             typchk = TYPE_EXIT; /* won't find any, though */
+<span class="lineNum">     197 </span><span class="lineNoCov">          0 :             typchk = TYPE_EXIT; /* won't find any, though */</span>
 <span class="lineNum">     198 </span><span class="lineNoCov">          0 :         } else if (!strcasecmp(argv[1], &quot;Player&quot;)) {</span>
-<span class="lineNum">     199 </span>            :             typchk = TYPE_PLAYER;
+<span class="lineNum">     199 </span><span class="lineNoCov">          0 :             typchk = TYPE_PLAYER;</span>
 <span class="lineNum">     200 </span><span class="lineNoCov">          0 :         } else if (!strcasecmp(argv[1], &quot;Program&quot;)) {</span>
-<span class="lineNum">     201 </span>            :             typchk = TYPE_PROGRAM;
+<span class="lineNum">     201 </span><span class="lineNoCov">          0 :             typchk = TYPE_PROGRAM;</span>
 <span class="lineNum">     202 </span><span class="lineNoCov">          0 :         } else if (!strcasecmp(argv[1], &quot;Thing&quot;)) {</span>
-<span class="lineNum">     203 </span>            :             typchk = TYPE_THING;
+<span class="lineNum">     203 </span><span class="lineNoCov">          0 :             typchk = TYPE_THING;</span>
 <span class="lineNum">     204 </span>            :         } else {
 <span class="lineNum">     205 </span><span class="lineNoCov">          0 :             ABORT_MPI(&quot;CONTENTS&quot;,</span>
 <span class="lineNum">     206 </span>            :                       &quot;Type must be 'player', 'room', 'thing', 'program', or 'exit'. (arg2).&quot;);
@@ -281,7 +281,7 @@
 <span class="lineNum">     219 </span><span class="lineNoCov">          0 :             ref2str(obj, buf2, sizeof(buf2));</span>
 <span class="lineNum">     220 </span><span class="lineNoCov">          0 :             nextlen = strlen(buf2);</span>
 <span class="lineNum">     221 </span><span class="lineNoCov">          0 :             if ((outlen + nextlen) &gt;= (BUFFER_LEN - 3))</span>
-<span class="lineNum">     222 </span>            :                 break;
+<span class="lineNum">     222 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">     223 </span><span class="lineNoCov">          0 :             if (outlen) {</span>
 <span class="lineNum">     224 </span><span class="lineNoCov">          0 :                 strcatn(buf + outlen, BUFFER_LEN - outlen, &quot;\r&quot;);</span>
 <span class="lineNum">     225 </span><span class="lineNoCov">          0 :                 outlen++;</span>
@@ -292,7 +292,7 @@
 <span class="lineNum">     230 </span>            :         }
 <span class="lineNum">     231 </span><span class="lineNoCov">          0 :         obj = NEXTOBJ(obj);</span>
 <span class="lineNum">     232 </span>            :     }
-<span class="lineNum">     233 </span>            :     return buf;
+<span class="lineNum">     233 </span><span class="lineNoCov">          0 :     return buf;</span>
 <span class="lineNum">     234 </span>            : }
 <span class="lineNum">     235 </span>            : 
 <span class="lineNum">     236 </span>            : 
@@ -317,8 +317,8 @@
 <span class="lineNum">     255 </span><span class="lineNoCov">          0 :         obj = EXITS(obj);</span>
 <span class="lineNum">     256 </span><span class="lineNoCov">          0 :         break;</span>
 <span class="lineNum">     257 </span>            :     default:
-<span class="lineNum">     258 </span>            :         obj = NOTHING;
-<span class="lineNum">     259 </span>            :         break;
+<span class="lineNum">     258 </span><span class="lineNoCov">          0 :         obj = NOTHING;</span>
+<span class="lineNum">     259 </span><span class="lineNoCov">          0 :         break;</span>
 <span class="lineNum">     260 </span>            :     }
 <span class="lineNum">     261 </span><span class="lineNoCov">          0 :     *buf = '\0';</span>
 <span class="lineNum">     262 </span><span class="lineNoCov">          0 :     outlen = 0;</span>
@@ -326,7 +326,7 @@
 <span class="lineNum">     264 </span><span class="lineNoCov">          0 :         ref2str(obj, buf2, sizeof(buf2));</span>
 <span class="lineNum">     265 </span><span class="lineNoCov">          0 :         nextlen = strlen(buf2);</span>
 <span class="lineNum">     266 </span><span class="lineNoCov">          0 :         if ((outlen + nextlen) &gt;= (BUFFER_LEN - 3))</span>
-<span class="lineNum">     267 </span>            :             break;
+<span class="lineNum">     267 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     268 </span><span class="lineNoCov">          0 :         if (outlen) {</span>
 <span class="lineNum">     269 </span><span class="lineNoCov">          0 :             strcatn(buf + outlen, BUFFER_LEN - outlen, &quot;\r&quot;);</span>
 <span class="lineNum">     270 </span><span class="lineNoCov">          0 :             outlen++;</span>
@@ -336,7 +336,7 @@
 <span class="lineNum">     274 </span><span class="lineNoCov">          0 :         list_limit--;</span>
 <span class="lineNum">     275 </span><span class="lineNoCov">          0 :         obj = NEXTOBJ(obj);</span>
 <span class="lineNum">     276 </span>            :     }
-<span class="lineNum">     277 </span>            :     return buf;
+<span class="lineNum">     277 </span><span class="lineNoCov">          0 :     return buf;</span>
 <span class="lineNum">     278 </span>            : }
 <span class="lineNum">     279 </span>            : 
 <a name="280"><span class="lineNum">     280 </span>            : </a>
@@ -347,7 +347,7 @@
 <span class="lineNum">     285 </span>            : 
 <span class="lineNum">     286 </span><span class="lineNoCov">          0 :     if (!ptr)</span>
 <span class="lineNum">     287 </span><span class="lineNoCov">          0 :         ABORT_MPI(&quot;V&quot;, &quot;No such variable defined.&quot;);</span>
-<span class="lineNum">     288 </span>            :     return ptr;
+<span class="lineNum">     288 </span><span class="lineNoCov">          0 :     return ptr;</span>
 <span class="lineNum">     289 </span>            : }
 <span class="lineNum">     290 </span>            : 
 <a name="291"><span class="lineNum">     291 </span>            : </a>
@@ -412,7 +412,7 @@
 <span class="lineNum">     350 </span><span class="lineNoCov">          0 :         if (ptr)</span>
 <span class="lineNum">     351 </span><span class="lineNoCov">          0 :             *ptr = '\0';</span>
 <span class="lineNum">     352 </span>            :     }
-<span class="lineNum">     353 </span>            :     return buf;
+<span class="lineNum">     353 </span><span class="lineNoCov">          0 :     return buf;</span>
 <span class="lineNum">     354 </span>            : }
 <span class="lineNum">     355 </span>            : 
 <a name="356"><span class="lineNum">     356 </span>            : </a>
@@ -450,7 +450,7 @@
 <span class="lineNum">     388 </span><span class="lineNoCov">          0 :     int count = 1;</span>
 <span class="lineNum">     389 </span>            : 
 <span class="lineNum">     390 </span><span class="lineNoCov">          0 :     if (!list || !*list)</span>
-<span class="lineNum">     391 </span>            :         return 0;
+<span class="lineNum">     391 </span><span class="lineNoCov">          0 :         return 0;</span>
 <span class="lineNum">     392 </span><span class="lineNoCov">          0 :     seplen = strlen(sep);</span>
 <span class="lineNum">     393 </span><span class="lineNoCov">          0 :     ptr = list;</span>
 <span class="lineNum">     394 </span><span class="lineNoCov">          0 :     while (*ptr) {</span>
@@ -461,7 +461,7 @@
 <span class="lineNum">     399 </span><span class="lineNoCov">          0 :             count++;</span>
 <span class="lineNum">     400 </span>            :         }
 <span class="lineNum">     401 </span>            :     }
-<span class="lineNum">     402 </span>            :     return count;
+<span class="lineNum">     402 </span><span class="lineNoCov">          0 :     return count;</span>
 <span class="lineNum">     403 </span>            : }
 <span class="lineNum">     404 </span>            : 
 <span class="lineNum">     405 </span>            : 
@@ -481,11 +481,11 @@
 <span class="lineNum">     419 </span><span class="lineNoCov">          0 :     while (*ptr &amp;&amp; line--) {</span>
 <span class="lineNum">     420 </span><span class="lineNoCov">          0 :         for (ptr2 = ptr; *ptr2 &amp;&amp; strncmp(ptr2, sep, seplen); ptr2++) ;</span>
 <span class="lineNum">     421 </span><span class="lineNoCov">          0 :         if (!line)</span>
-<span class="lineNum">     422 </span>            :             break;
+<span class="lineNum">     422 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     423 </span><span class="lineNoCov">          0 :         if (*ptr2) {</span>
 <span class="lineNum">     424 </span><span class="lineNoCov">          0 :             ptr2 += seplen;</span>
 <span class="lineNum">     425 </span>            :         }
-<span class="lineNum">     426 </span>            :         ptr = ptr2;
+<span class="lineNum">     426 </span><span class="lineNoCov">          0 :         ptr = ptr2;</span>
 <span class="lineNum">     427 </span>            :     }
 <span class="lineNum">     428 </span><span class="lineNoCov">          0 :     tmpchr = *ptr2;</span>
 <span class="lineNum">     429 </span><span class="lineNoCov">          0 :     *ptr2 = '\0';</span>
@@ -496,22 +496,22 @@
 <span class="lineNum">     434 </span>            : 
 <a name="435"><span class="lineNum">     435 </span>            : </a>
 <span class="lineNum">     436 </span>            : const char *
-<span class="lineNum">     437 </span><span class="lineCov">          1 : mfn_sublist(MFUNARGS)</span>
+<span class="lineNum">     437 </span><span class="lineCov">         10 : mfn_sublist(MFUNARGS)</span>
 <span class="lineNum">     438 </span>            : {
 <span class="lineNum">     439 </span>            :     char *ptr;
 <span class="lineNum">     440 </span>            :     char sepbuf[BUFFER_LEN];
 <span class="lineNum">     441 </span>            :     char buf2[BUFFER_LEN];
-<span class="lineNum">     442 </span><span class="lineCov">          1 :     int count = 1;</span>
+<span class="lineNum">     442 </span><span class="lineCov">         10 :     int count = 1;</span>
 <span class="lineNum">     443 </span>            :     int which;
 <span class="lineNum">     444 </span>            :     int end;
-<span class="lineNum">     445 </span><span class="lineCov">          1 :     int incr = 1;</span>
+<span class="lineNum">     445 </span><span class="lineCov">         10 :     int incr = 1;</span>
 <span class="lineNum">     446 </span>            :     int pflag;
 <span class="lineNum">     447 </span>            : 
-<span class="lineNum">     448 </span><span class="lineCov">          1 :     if (argc &gt; 1) {</span>
+<span class="lineNum">     448 </span><span class="lineCov">         10 :     if (argc &gt; 1) {</span>
 <span class="lineNum">     449 </span><span class="lineNoCov">          0 :         which = atoi(argv[1]);</span>
 <span class="lineNum">     450 </span>            :     } else {
-<span class="lineNum">     451 </span><span class="lineCov">          1 :         strcpyn(buf, buflen, argv[0]);</span>
-<span class="lineNum">     452 </span><span class="lineCov">          1 :         return buf;</span>
+<span class="lineNum">     451 </span><span class="lineCov">         10 :         strcpyn(buf, buflen, argv[0]);</span>
+<span class="lineNum">     452 </span><span class="lineCov">         10 :         return buf;</span>
 <span class="lineNum">     453 </span>            :     }
 <span class="lineNum">     454 </span>            : 
 <span class="lineNum">     455 </span><span class="lineNoCov">          0 :     strcpyn(sepbuf, sizeof(sepbuf), &quot;\r&quot;);</span>
@@ -524,7 +524,7 @@
 <span class="lineNum">     462 </span><span class="lineNoCov">          0 :     count = countlitems(argv[0], sepbuf);       /* count of items in list */</span>
 <span class="lineNum">     463 </span>            : 
 <span class="lineNum">     464 </span><span class="lineNoCov">          0 :     if (which == 0)</span>
-<span class="lineNum">     465 </span>            :         return &quot;&quot;;
+<span class="lineNum">     465 </span><span class="lineNoCov">          0 :         return &quot;&quot;;</span>
 <span class="lineNum">     466 </span><span class="lineNoCov">          0 :     if (which &gt; count)</span>
 <span class="lineNum">     467 </span><span class="lineNoCov">          0 :         which = count;</span>
 <span class="lineNum">     468 </span><span class="lineNoCov">          0 :     if (which &lt; 0)</span>
@@ -539,7 +539,7 @@
 <span class="lineNum">     477 </span>            :     }
 <span class="lineNum">     478 </span>            : 
 <span class="lineNum">     479 </span><span class="lineNoCov">          0 :     if (end == 0)</span>
-<span class="lineNum">     480 </span>            :         return &quot;&quot;;
+<span class="lineNum">     480 </span><span class="lineNoCov">          0 :         return &quot;&quot;;</span>
 <span class="lineNum">     481 </span><span class="lineNoCov">          0 :     if (end &gt; count)</span>
 <span class="lineNum">     482 </span><span class="lineNoCov">          0 :         end = count;</span>
 <span class="lineNum">     483 </span><span class="lineNoCov">          0 :     if (end &lt; 0)</span>
@@ -562,7 +562,7 @@
 <span class="lineNum">     500 </span><span class="lineNoCov">          0 :         ptr = getlitem(buf2, sizeof(buf2), argv[0], sepbuf, i);</span>
 <span class="lineNum">     501 </span><span class="lineNoCov">          0 :         strcatn(buf, BUFFER_LEN, ptr);</span>
 <span class="lineNum">     502 </span>            :     }
-<span class="lineNum">     503 </span>            :     return buf;
+<span class="lineNum">     503 </span><span class="lineNoCov">          0 :     return buf;</span>
 <span class="lineNum">     504 </span>            : }
 <span class="lineNum">     505 </span>            : 
 <a name="506"><span class="lineNum">     506 </span>            : </a>
@@ -588,7 +588,7 @@
 <span class="lineNum">     526 </span>            :     } else {
 <span class="lineNum">     527 </span><span class="lineNoCov">          0 :         *buf = '\0';</span>
 <span class="lineNum">     528 </span>            :     }
-<span class="lineNum">     529 </span>            :     return buf;
+<span class="lineNum">     529 </span><span class="lineNoCov">          0 :     return buf;</span>
 <span class="lineNum">     530 </span>            : }
 <span class="lineNum">     531 </span>            : 
 <a name="532"><span class="lineNum">     532 </span>            : </a>
@@ -672,7 +672,7 @@
 <span class="lineNum">     610 </span><span class="lineNoCov">          0 :         CHECKRETURN(ptr, &quot;FOLD&quot;, &quot;arg 5&quot;);</span>
 <span class="lineNum">     611 </span><span class="lineNoCov">          0 :         if (!*ptr)</span>
 <span class="lineNum">     612 </span><span class="lineNoCov">          0 :             ABORT_MPI(&quot;FOLD&quot;, &quot;Can't use Null seperator string&quot;);</span>
-<span class="lineNum">     613 </span>            :         sepin = sepinbuf;
+<span class="lineNum">     613 </span><span class="lineNoCov">          0 :         sepin = sepinbuf;</span>
 <span class="lineNum">     614 </span>            :     } else {
 <span class="lineNum">     615 </span><span class="lineNoCov">          0 :         sepin = sepinbuf;</span>
 <span class="lineNum">     616 </span><span class="lineNoCov">          0 :         strcpyn(sepin, sizeof(sepin), &quot;\r&quot;);</span>
@@ -776,7 +776,7 @@
 <span class="lineNum">     714 </span><span class="lineNoCov">          0 :         CHECKRETURN(ptr, &quot;FOREACH&quot;, &quot;arg 4&quot;);</span>
 <span class="lineNum">     715 </span><span class="lineNoCov">          0 :         if (!*ptr)</span>
 <span class="lineNum">     716 </span><span class="lineNoCov">          0 :             ABORT_MPI(&quot;FOREACH&quot;, &quot;Can't use Null seperator string&quot;);</span>
-<span class="lineNum">     717 </span>            :         sepin = ptr;
+<span class="lineNum">     717 </span><span class="lineNoCov">          0 :         sepin = ptr;</span>
 <span class="lineNum">     718 </span>            :     } else {
 <span class="lineNum">     719 </span><span class="lineNoCov">          0 :         sepin = scratch;</span>
 <span class="lineNum">     720 </span><span class="lineNoCov">          0 :         strcpyn(sepin, sizeof(scratch), &quot;\r&quot;);</span>
@@ -833,7 +833,7 @@
 <span class="lineNum">     771 </span><span class="lineNoCov">          0 :         CHECKRETURN(ptr, &quot;FILTER&quot;, &quot;arg 4&quot;);</span>
 <span class="lineNum">     772 </span><span class="lineNoCov">          0 :         if (!*ptr)</span>
 <span class="lineNum">     773 </span><span class="lineNoCov">          0 :             ABORT_MPI(&quot;FILTER&quot;, &quot;Can't use Null seperator string&quot;);</span>
-<span class="lineNum">     774 </span>            :         sepin = sepinbuf;
+<span class="lineNum">     774 </span><span class="lineNoCov">          0 :         sepin = sepinbuf;</span>
 <span class="lineNum">     775 </span>            :     } else {
 <span class="lineNum">     776 </span><span class="lineNoCov">          0 :         sepin = sepinbuf;</span>
 <span class="lineNum">     777 </span><span class="lineNoCov">          0 :         strcpyn(sepin, sizeof(sepinbuf), &quot;\r&quot;);</span>
@@ -841,7 +841,7 @@
 <span class="lineNum">     779 </span><span class="lineNoCov">          0 :     if (argc &gt; 4) {</span>
 <span class="lineNum">     780 </span><span class="lineNoCov">          0 :         ptr = MesgParse(sepbuf, sepoutbuf, sizeof(sepoutbuf));</span>
 <span class="lineNum">     781 </span><span class="lineNoCov">          0 :         CHECKRETURN(ptr, &quot;FILTER&quot;, &quot;arg 5&quot;);</span>
-<span class="lineNum">     782 </span>            :         sepbuf = sepoutbuf;
+<span class="lineNum">     782 </span><span class="lineNoCov">          0 :         sepbuf = sepoutbuf;</span>
 <span class="lineNum">     783 </span>            :     } else {
 <span class="lineNum">     784 </span><span class="lineNoCov">          0 :         sepbuf = sepoutbuf;</span>
 <span class="lineNum">     785 </span><span class="lineNoCov">          0 :         strcpyn(sepbuf, sizeof(sepoutbuf), sepin);</span>
@@ -882,12 +882,12 @@
 <span class="lineNum">     820 </span><span class="lineNoCov">          0 :         for (; *w2 &amp;&amp; *w2 != '\r'; w2++) {</span>
 <span class="lineNum">     821 </span>            :         };
 <span class="lineNum">     822 </span><span class="lineNoCov">          0 :         if (w2 - w == len &amp;&amp; !strncmp(word, w, len))</span>
-<span class="lineNum">     823 </span>            :             return 1;
+<span class="lineNum">     823 </span><span class="lineNoCov">          0 :             return 1;</span>
 <span class="lineNum">     824 </span><span class="lineNoCov">          0 :         if (*w2)</span>
 <span class="lineNum">     825 </span><span class="lineNoCov">          0 :             w = ++w2;</span>
 <span class="lineNum">     826 </span><span class="lineNoCov">          0 :     } while (*w2);</span>
 <span class="lineNum">     827 </span>            : 
-<span class="lineNum">     828 </span>            :     return 0;
+<span class="lineNum">     828 </span><span class="lineNoCov">          0 :     return 0;</span>
 <span class="lineNum">     829 </span>            : }
 <a name="830"><span class="lineNum">     830 </span>            : </a>
 <span class="lineNum">     831 </span>            : const char *
@@ -918,7 +918,7 @@
 <span class="lineNum">     856 </span><span class="lineNoCov">          0 :             (firstResult || !list_contains(ptr, len, buf))</span>
 <span class="lineNum">     857 </span>            :                 ) {
 <span class="lineNum">     858 </span><span class="lineNoCov">          0 :             if (firstResult)</span>
-<span class="lineNum">     859 </span>            :                 firstResult = 0;
+<span class="lineNum">     859 </span><span class="lineNoCov">          0 :                 firstResult = 0;</span>
 <span class="lineNum">     860 </span>            :             else
 <span class="lineNum">     861 </span><span class="lineNoCov">          0 :                 *(endbuf++) = '\r';</span>
 <span class="lineNum">     862 </span><span class="lineNoCov">          0 :             strncpy(endbuf, ptr, len);</span>
@@ -934,7 +934,7 @@
 <span class="lineNum">     872 </span><span class="lineNoCov">          0 :             ABORT_MPI(&quot;LREMOVE&quot;, &quot;Iteration limit exceeded&quot;);</span>
 <span class="lineNum">     873 </span>            :     }
 <span class="lineNum">     874 </span>            : 
-<span class="lineNum">     875 </span>            :     return buf;
+<span class="lineNum">     875 </span><span class="lineNoCov">          0 :     return buf;</span>
 <span class="lineNum">     876 </span>            : }
 <span class="lineNum">     877 </span>            : 
 <a name="878"><span class="lineNum">     878 </span>            : </a>
@@ -980,7 +980,7 @@
 <span class="lineNum">     918 </span><span class="lineNoCov">          0 :         if (!(--iter_limit))</span>
 <span class="lineNum">     919 </span><span class="lineNoCov">          0 :             ABORT_MPI(&quot;LCOMMON&quot;, &quot;Iteration limit exceeded&quot;);</span>
 <span class="lineNum">     920 </span>            :     }
-<span class="lineNum">     921 </span>            :     return buf;
+<span class="lineNum">     921 </span><span class="lineNoCov">          0 :     return buf;</span>
 <span class="lineNum">     922 </span>            : }
 <span class="lineNum">     923 </span>            : 
 <a name="924"><span class="lineNum">     924 </span>            : </a>
@@ -1013,7 +1013,7 @@
 <span class="lineNum">     951 </span><span class="lineNoCov">          0 :         if (!*p) {</span>
 <span class="lineNum">     952 </span><span class="lineNoCov">          0 :             nextlen = strlen(ptr);</span>
 <span class="lineNum">     953 </span><span class="lineNoCov">          0 :             if (outlen + nextlen &gt; BUFFER_LEN - 3)</span>
-<span class="lineNum">     954 </span>            :                 break;
+<span class="lineNum">     954 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">     955 </span><span class="lineNoCov">          0 :             if (outcount++) {</span>
 <span class="lineNum">     956 </span><span class="lineNoCov">          0 :                 strcatn(buf + outlen, BUFFER_LEN - outlen, &quot;\r&quot;);</span>
 <span class="lineNum">     957 </span><span class="lineNoCov">          0 :                 outlen++;</span>
@@ -1043,7 +1043,7 @@
 <span class="lineNum">     981 </span><span class="lineNoCov">          0 :         if (!*p) {</span>
 <span class="lineNum">     982 </span><span class="lineNoCov">          0 :             nextlen = strlen(ptr);</span>
 <span class="lineNum">     983 </span><span class="lineNoCov">          0 :             if (outlen + nextlen &gt; BUFFER_LEN - 3)</span>
-<span class="lineNum">     984 </span>            :                 break;
+<span class="lineNum">     984 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">     985 </span><span class="lineNoCov">          0 :             if (outcount++) {</span>
 <span class="lineNum">     986 </span><span class="lineNoCov">          0 :                 strcatn(buf + outlen, BUFFER_LEN - outlen, &quot;\r&quot;);</span>
 <span class="lineNum">     987 </span><span class="lineNoCov">          0 :                 outlen++;</span>
@@ -1055,7 +1055,7 @@
 <span class="lineNum">     993 </span><span class="lineNoCov">          0 :         if (!(--iter_limit))</span>
 <span class="lineNum">     994 </span><span class="lineNoCov">          0 :             ABORT_MPI(&quot;LUNION&quot;, &quot;Iteration limit exceeded&quot;);</span>
 <span class="lineNum">     995 </span>            :     }
-<span class="lineNum">     996 </span>            :     return buf;
+<span class="lineNum">     996 </span><span class="lineNoCov">          0 :     return buf;</span>
 <span class="lineNum">     997 </span>            : }
 <span class="lineNum">     998 </span>            : 
 <a name="999"><span class="lineNum">     999 </span>            : </a>
@@ -1093,7 +1093,7 @@
 <span class="lineNum">    1031 </span><span class="lineNoCov">          0 :         if (j == 2)</span>
 <span class="lineNum">    1032 </span><span class="lineNoCov">          0 :             ABORT_MPI(&quot;LSORT&quot;, &quot;Too many variables already defined.&quot;);</span>
 <span class="lineNum">    1033 </span>            :     }
-<span class="lineNum">    1034 </span>            :     count = 0;
+<span class="lineNum">    1034 </span><span class="lineNoCov">          0 :     count = 0;</span>
 <span class="lineNum">    1035 </span><span class="lineNoCov">          0 :     while (*ptr) {</span>
 <span class="lineNum">    1036 </span><span class="lineNoCov">          0 :         for (ptr2 = ptr; *ptr2 &amp;&amp; *ptr2 != '\r'; ptr2++) ;</span>
 <span class="lineNum">    1037 </span><span class="lineNoCov">          0 :         if (*ptr2 == '\r')</span>
@@ -1134,7 +1134,7 @@
 <span class="lineNum">    1072 </span><span class="lineNoCov">          0 :         free_top_mvar();</span>
 <span class="lineNum">    1073 </span><span class="lineNoCov">          0 :         free_top_mvar();</span>
 <span class="lineNum">    1074 </span>            :     }
-<span class="lineNum">    1075 </span>            :     return buf;
+<span class="lineNum">    1075 </span><span class="lineNoCov">          0 :     return buf;</span>
 <span class="lineNum">    1076 </span>            : }
 <span class="lineNum">    1077 </span>            : 
 <a name="1078"><span class="lineNum">    1078 </span>            : </a>
@@ -1177,7 +1177,7 @@
 <span class="lineNum">    1115 </span><span class="lineNoCov">          0 :         if (!(--iter_limit))</span>
 <span class="lineNum">    1116 </span><span class="lineNoCov">          0 :             ABORT_MPI(&quot;LUNIQUE&quot;, &quot;Iteration limit exceeded&quot;);</span>
 <span class="lineNum">    1117 </span>            :     }
-<span class="lineNum">    1118 </span>            :     return buf;
+<span class="lineNum">    1118 </span><span class="lineNoCov">          0 :     return buf;</span>
 <span class="lineNum">    1119 </span>            : }
 <span class="lineNum">    1120 </span>            : 
 <a name="1121"><span class="lineNum">    1121 </span>            : </a>
@@ -1213,7 +1213,7 @@
 <span class="lineNum">    1151 </span><span class="lineNoCov">          0 :         CHECKRETURN(ptr, &quot;PARSE&quot;, &quot;arg 4&quot;);</span>
 <span class="lineNum">    1152 </span><span class="lineNoCov">          0 :         if (!*ptr)</span>
 <span class="lineNum">    1153 </span><span class="lineNoCov">          0 :             ABORT_MPI(&quot;PARSE&quot;, &quot;Can't use Null seperator string&quot;);</span>
-<span class="lineNum">    1154 </span>            :         sepin = sepinbuf;
+<span class="lineNum">    1154 </span><span class="lineNoCov">          0 :         sepin = sepinbuf;</span>
 <span class="lineNum">    1155 </span>            :     } else {
 <span class="lineNum">    1156 </span><span class="lineNoCov">          0 :         sepin = sepinbuf;</span>
 <span class="lineNum">    1157 </span><span class="lineNoCov">          0 :         strcpyn(sepin, sizeof(sepinbuf), &quot;\r&quot;);</span>
@@ -1222,7 +1222,7 @@
 <span class="lineNum">    1160 </span><span class="lineNoCov">          0 :     if (argc &gt; 4) {</span>
 <span class="lineNum">    1161 </span><span class="lineNoCov">          0 :         ptr = MesgParse(sepbuf, sepoutbuf, sizeof(sepoutbuf));</span>
 <span class="lineNum">    1162 </span><span class="lineNoCov">          0 :         CHECKRETURN(ptr, &quot;PARSE&quot;, &quot;arg 5&quot;);</span>
-<span class="lineNum">    1163 </span>            :         sepbuf = sepoutbuf;
+<span class="lineNum">    1163 </span><span class="lineNoCov">          0 :         sepbuf = sepoutbuf;</span>
 <span class="lineNum">    1164 </span>            :     } else {
 <span class="lineNum">    1165 </span><span class="lineNoCov">          0 :         sepbuf = sepoutbuf;</span>
 <span class="lineNum">    1166 </span><span class="lineNoCov">          0 :         strcpyn(sepbuf, sizeof(sepoutbuf), sepin);</span>
@@ -1244,7 +1244,7 @@
 <span class="lineNum">    1182 </span><span class="lineNoCov">          0 :         CHECKRETURN(dptr, &quot;PARSE&quot;, &quot;arg 3&quot;);</span>
 <span class="lineNum">    1183 </span><span class="lineNoCov">          0 :         nextlen = strlen(buf2);</span>
 <span class="lineNum">    1184 </span><span class="lineNoCov">          0 :         if (outlen + nextlen + oseplen &gt; BUFFER_LEN - 3)</span>
-<span class="lineNum">    1185 </span>            :             break;
+<span class="lineNum">    1185 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">    1186 </span><span class="lineNoCov">          0 :         if (outcount++) {</span>
 <span class="lineNum">    1187 </span><span class="lineNoCov">          0 :             strcatn(buf + outlen, BUFFER_LEN - outlen, sepbuf);</span>
 <span class="lineNum">    1188 </span><span class="lineNoCov">          0 :             outlen += oseplen;</span>
@@ -1264,7 +1264,7 @@
 <span class="lineNum">    1202 </span><span class="lineNoCov">          0 : mfn_smatch(MFUNARGS)</span>
 <span class="lineNum">    1203 </span>            : {
 <span class="lineNum">    1204 </span><span class="lineNoCov">          0 :     if (equalstr(argv[1], argv[0])) {</span>
-<span class="lineNum">    1205 </span>            :         return &quot;1&quot;;
+<span class="lineNum">    1205 </span><span class="lineNoCov">          0 :         return &quot;1&quot;;</span>
 <span class="lineNum">    1206 </span>            :     } else {
 <span class="lineNum">    1207 </span><span class="lineNoCov">          0 :         return &quot;0&quot;;</span>
 <span class="lineNum">    1208 </span>            :     }
@@ -1293,12 +1293,12 @@
 <span class="lineNum">    1231 </span>            : 
 <span class="lineNum">    1232 </span><span class="lineNoCov">          0 :     if (obj == PERMDENIED || obj == AMBIGUOUS || obj == UNKNOWN || obj == NOTHING ||</span>
 <span class="lineNum">    1233 </span>            :         obj == HOME)
-<span class="lineNum">    1234 </span>            :         return (&quot;0&quot;);
+<span class="lineNum">    1234 </span><span class="lineNoCov">          0 :         return (&quot;0&quot;);</span>
 <span class="lineNum">    1235 </span>            : 
 <span class="lineNum">    1236 </span><span class="lineNoCov">          0 :     if (Typeof(obj) == TYPE_THING &amp;&amp; (FLAGS(obj) &amp; ZOMBIE)) {</span>
 <span class="lineNum">    1237 </span><span class="lineNoCov">          0 :         obj = OWNER(obj);</span>
 <span class="lineNum">    1238 </span><span class="lineNoCov">          0 :     } else if (Typeof(obj) != TYPE_PLAYER) {</span>
-<span class="lineNum">    1239 </span>            :         return (&quot;0&quot;);
+<span class="lineNum">    1239 </span><span class="lineNoCov">          0 :         return (&quot;0&quot;);</span>
 <span class="lineNum">    1240 </span>            :     }
 <span class="lineNum">    1241 </span>            : 
 <span class="lineNum">    1242 </span><span class="lineNoCov">          0 :     snprintf(buf, BUFFER_LEN, &quot;%d&quot;, online(obj));</span>
@@ -1312,15 +1312,15 @@
 <span class="lineNum">    1250 </span><span class="lineNoCov">          0 :     dbref obj = mesg_dbref_local(descr, player, what, perms, argv[0], mesgtyp);</span>
 <span class="lineNum">    1251 </span>            : 
 <span class="lineNum">    1252 </span><span class="lineNoCov">          0 :     if (obj == NOTHING || obj == AMBIGUOUS || obj == UNKNOWN)</span>
-<span class="lineNum">    1253 </span>            :         return (&quot;Bad&quot;);
+<span class="lineNum">    1253 </span><span class="lineNoCov">          0 :         return (&quot;Bad&quot;);</span>
 <span class="lineNum">    1254 </span><span class="lineNoCov">          0 :     if (obj == HOME)</span>
-<span class="lineNum">    1255 </span>            :         return (&quot;Room&quot;);
+<span class="lineNum">    1255 </span><span class="lineNoCov">          0 :         return (&quot;Room&quot;);</span>
 <span class="lineNum">    1256 </span><span class="lineNoCov">          0 :     if (obj == PERMDENIED)</span>
 <span class="lineNum">    1257 </span><span class="lineNoCov">          0 :         ABORT_MPI(&quot;TYPE&quot;, &quot;Permission Denied.&quot;);</span>
 <span class="lineNum">    1258 </span>            : 
 <span class="lineNum">    1259 </span><span class="lineNoCov">          0 :     switch (Typeof(obj)) {</span>
 <span class="lineNum">    1260 </span>            :     case TYPE_PLAYER:
-<span class="lineNum">    1261 </span>            :         return &quot;Player&quot;;
+<span class="lineNum">    1261 </span><span class="lineNoCov">          0 :         return &quot;Player&quot;;</span>
 <span class="lineNum">    1262 </span>            :     case TYPE_ROOM:
 <span class="lineNum">    1263 </span><span class="lineNoCov">          0 :         return &quot;Room&quot;;</span>
 <span class="lineNum">    1264 </span>            :     case TYPE_EXIT:
@@ -1345,7 +1345,7 @@
 <span class="lineNum">    1283 </span><span class="lineNoCov">          0 :         return (strcasecmp(argv[1], &quot;Bad&quot;) ? &quot;0&quot; : &quot;1&quot;);</span>
 <span class="lineNum">    1284 </span><span class="lineNoCov">          0 :     if ((strcasecmp(argv[1], &quot;Bad&quot;) == 0) &amp;&amp;</span>
 <span class="lineNum">    1285 </span><span class="lineNoCov">          0 :         (obj == NOTHING || obj == AMBIGUOUS || obj == UNKNOWN || obj == PERMDENIED))</span>
-<span class="lineNum">    1286 </span>            :         return &quot;1&quot;;
+<span class="lineNum">    1286 </span><span class="lineNoCov">          0 :         return &quot;1&quot;;</span>
 <span class="lineNum">    1287 </span><span class="lineNoCov">          0 :     if (obj == PERMDENIED)</span>
 <span class="lineNum">    1288 </span><span class="lineNoCov">          0 :         ABORT_MPI(&quot;TYPE&quot;, &quot;Permission Denied.&quot;);</span>
 <span class="lineNum">    1289 </span><span class="lineNoCov">          0 :     if (obj == HOME)</span>
@@ -1387,7 +1387,7 @@
 <span class="lineNum">    1325 </span><span class="lineNoCov">          0 :         ptr = MesgParse(argv[1], buf, buflen);</span>
 <span class="lineNum">    1326 </span>            :     }
 <span class="lineNum">    1327 </span><span class="lineNoCov">          0 :     CHECKRETURN(ptr, &quot;DEBUGIF&quot;, &quot;arg 2&quot;);</span>
-<span class="lineNum">    1328 </span>            :     return buf;
+<span class="lineNum">    1328 </span><span class="lineNoCov">          0 :     return buf;</span>
 <span class="lineNum">    1329 </span>            : }
 <span class="lineNum">    1330 </span>            : 
 <a name="1331"><span class="lineNum">    1331 </span>            : </a>
@@ -1398,7 +1398,7 @@
 <span class="lineNum">    1336 </span>            :                            buf, BUFFER_LEN, (mesgtyp | MPI_ISDEBUG));
 <span class="lineNum">    1337 </span>            : 
 <span class="lineNum">    1338 </span><span class="lineNoCov">          0 :     CHECKRETURN(ptr, &quot;DEBUG&quot;, &quot;arg 1&quot;);</span>
-<span class="lineNum">    1339 </span>            :     return buf;
+<span class="lineNum">    1339 </span><span class="lineNoCov">          0 :     return buf;</span>
 <span class="lineNum">    1340 </span>            : }
 <span class="lineNum">    1341 </span>            : 
 <a name="1342"><span class="lineNum">    1342 </span>            : </a>
@@ -1409,7 +1409,7 @@
 <span class="lineNum">    1347 </span>            :                            buf, BUFFER_LEN, (mesgtyp &amp; ~MPI_ISBLESSED));
 <span class="lineNum">    1348 </span>            : 
 <span class="lineNum">    1349 </span><span class="lineNoCov">          0 :     CHECKRETURN(ptr, &quot;REVOKE&quot;, &quot;arg 1&quot;);</span>
-<span class="lineNum">    1350 </span>            :     return buf;
+<span class="lineNum">    1350 </span><span class="lineNoCov">          0 :     return buf;</span>
 <span class="lineNum">    1351 </span>            : }
 <span class="lineNum">    1352 </span>            : 
 <a name="1353"><span class="lineNum">    1353 </span>            : </a>
@@ -1478,7 +1478,7 @@
 <span class="lineNum">    1416 </span>            :             }
 <span class="lineNum">    1417 </span><span class="lineNoCov">          0 :             i = dequeue_process(i);</span>
 <span class="lineNum">    1418 </span>            :         } else {
-<span class="lineNum">    1419 </span>            :             i = 0;
+<span class="lineNum">    1419 </span><span class="lineNoCov">          0 :             i = 0;</span>
 <span class="lineNum">    1420 </span>            :         }
 <span class="lineNum">    1421 </span><span class="lineNoCov">          0 :     } else if (i == 0) {</span>
 <span class="lineNum">    1422 </span><span class="lineNoCov">          0 :         i = dequeue_prog(perms, 0);</span>
@@ -1524,7 +1524,7 @@
 <span class="lineNum">    1462 </span><span class="lineNoCov">          0 :     mpi_muf_call_levels--;</span>
 <span class="lineNum">    1463 </span>            : 
 <span class="lineNum">    1464 </span><span class="lineNoCov">          0 :     if (!rv)</span>
-<span class="lineNum">    1465 </span>            :         return &quot;&quot;;
+<span class="lineNum">    1465 </span><span class="lineNoCov">          0 :         return &quot;&quot;;</span>
 <span class="lineNum">    1466 </span><span class="lineNoCov">          0 :     switch (rv-&gt;type) {</span>
 <span class="lineNum">    1467 </span>            :     case PROG_STRING:
 <span class="lineNum">    1468 </span><span class="lineNoCov">          0 :         if (rv-&gt;data.string) {</span>
@@ -1645,7 +1645,7 @@
 <span class="lineNum">    1583 </span><span class="lineNoCov">          0 :         pos2 = atoi(argv[2]);</span>
 <span class="lineNum">    1584 </span>            : 
 <span class="lineNum">    1585 </span><span class="lineNoCov">          0 :     if (pos1 == 0)</span>
-<span class="lineNum">    1586 </span>            :         return &quot;&quot;;
+<span class="lineNum">    1586 </span><span class="lineNoCov">          0 :         return &quot;&quot;;</span>
 <span class="lineNum">    1587 </span><span class="lineNoCov">          0 :     if (pos1 &gt; len)</span>
 <span class="lineNum">    1588 </span><span class="lineNoCov">          0 :         pos1 = len;</span>
 <span class="lineNum">    1589 </span><span class="lineNoCov">          0 :     if (pos1 &lt; 0)</span>
@@ -1654,7 +1654,7 @@
 <span class="lineNum">    1592 </span><span class="lineNoCov">          0 :         pos1 = 1;</span>
 <span class="lineNum">    1593 </span>            : 
 <span class="lineNum">    1594 </span><span class="lineNoCov">          0 :     if (pos2 == 0)</span>
-<span class="lineNum">    1595 </span>            :         return &quot;&quot;;
+<span class="lineNum">    1595 </span><span class="lineNoCov">          0 :         return &quot;&quot;;</span>
 <span class="lineNum">    1596 </span><span class="lineNoCov">          0 :     if (pos2 &gt; len)</span>
 <span class="lineNum">    1597 </span><span class="lineNoCov">          0 :         pos2 = len;</span>
 <span class="lineNum">    1598 </span><span class="lineNoCov">          0 :     if (pos2 &lt; 0)</span>
@@ -1683,7 +1683,7 @@
 <span class="lineNum">    1621 </span><span class="lineNoCov">          0 :         ABORT_MPI(&quot;INSTR&quot;, &quot;Can't search for a null string.&quot;);</span>
 <span class="lineNum">    1622 </span><span class="lineNoCov">          0 :     for (ptr = argv[0]; *ptr &amp;&amp; !string_prefix(ptr, argv[1]); ptr++) ;</span>
 <span class="lineNum">    1623 </span><span class="lineNoCov">          0 :     if (!*ptr)</span>
-<span class="lineNum">    1624 </span>            :         return &quot;0&quot;;
+<span class="lineNum">    1624 </span><span class="lineNoCov">          0 :         return &quot;0&quot;;</span>
 <span class="lineNum">    1625 </span><span class="lineNoCov">          0 :     snprintf(buf, BUFFER_LEN, &quot;%d&quot;, (int) (ptr - argv[0] + 1));</span>
 <span class="lineNum">    1626 </span><span class="lineNoCov">          0 :     return buf;</span>
 <span class="lineNum">    1627 </span>            : }
@@ -1700,7 +1700,7 @@
 <span class="lineNum">    1638 </span><span class="lineNoCov">          0 :     int len2 = strlen(argv[1]);</span>
 <span class="lineNum">    1639 </span>            : 
 <span class="lineNum">    1640 </span><span class="lineNoCov">          0 :     if (argc &lt; 3)</span>
-<span class="lineNum">    1641 </span>            :         delim = &quot;\r&quot;;
+<span class="lineNum">    1641 </span><span class="lineNoCov">          0 :         delim = &quot;\r&quot;;</span>
 <span class="lineNum">    1642 </span>            :     else
 <span class="lineNum">    1643 </span><span class="lineNoCov">          0 :         delim = argv[2];</span>
 <span class="lineNum">    1644 </span><span class="lineNoCov">          0 :     if (!*delim)</span>
@@ -1715,7 +1715,7 @@
 <span class="lineNum">    1653 </span><span class="lineNoCov">          0 :         i++;</span>
 <span class="lineNum">    1654 </span>            :     }
 <span class="lineNum">    1655 </span><span class="lineNoCov">          0 :     if (!*ptr)</span>
-<span class="lineNum">    1656 </span>            :         return &quot;0&quot;;
+<span class="lineNum">    1656 </span><span class="lineNoCov">          0 :         return &quot;0&quot;;</span>
 <span class="lineNum">    1657 </span><span class="lineNoCov">          0 :     snprintf(buf, BUFFER_LEN, &quot;%d&quot;, i);</span>
 <span class="lineNum">    1658 </span><span class="lineNoCov">          0 :     return buf;</span>
 <span class="lineNum">    1659 </span>            : }
@@ -1776,7 +1776,7 @@
 <span class="lineNum">    1714 </span><span class="lineNoCov">          0 :     CHECKRETURN(ptr, &quot;COMMAS&quot;, &quot;arg 1&quot;);</span>
 <span class="lineNum">    1715 </span><span class="lineNoCov">          0 :     count = countlitems(listbuf, &quot;\r&quot;);</span>
 <span class="lineNum">    1716 </span><span class="lineNoCov">          0 :     if (count == 0)</span>
-<span class="lineNum">    1717 </span>            :         return &quot;&quot;;
+<span class="lineNum">    1717 </span><span class="lineNoCov">          0 :         return &quot;&quot;;</span>
 <span class="lineNum">    1718 </span>            : 
 <span class="lineNum">    1719 </span><span class="lineNoCov">          0 :     if (argc &gt; 1) {</span>
 <span class="lineNum">    1720 </span><span class="lineNoCov">          0 :         ptr = MesgParse(argv[1], sepbuf, sizeof(sepbuf));</span>
@@ -1808,7 +1808,7 @@
 <span class="lineNum">    1746 </span><span class="lineNoCov">          0 :         if ((out - buf) + itemlen &gt;= BUFFER_LEN) {</span>
 <span class="lineNum">    1747 </span><span class="lineNoCov">          0 :             if (argc &gt; 2)</span>
 <span class="lineNum">    1748 </span><span class="lineNoCov">          0 :                 free_top_mvar();</span>
-<span class="lineNum">    1749 </span>            :             return buf;
+<span class="lineNum">    1749 </span><span class="lineNoCov">          0 :             return buf;</span>
 <span class="lineNum">    1750 </span>            :         }
 <span class="lineNum">    1751 </span><span class="lineNoCov">          0 :         strcatn(out, BUFFER_LEN - (out - buf), ptr);</span>
 <span class="lineNum">    1752 </span><span class="lineNoCov">          0 :         out += itemlen;</span>
@@ -1816,13 +1816,13 @@
 <span class="lineNum">    1754 </span>            :         case 0:
 <span class="lineNum">    1755 </span><span class="lineNoCov">          0 :             if (argc &gt; 2)</span>
 <span class="lineNum">    1756 </span><span class="lineNoCov">          0 :                 free_top_mvar();</span>
-<span class="lineNum">    1757 </span>            :             return buf;
+<span class="lineNum">    1757 </span><span class="lineNoCov">          0 :             return buf;</span>
 <span class="lineNum">    1758 </span>            :         case 1:
 <span class="lineNum">    1759 </span><span class="lineNoCov">          0 :             itemlen = strlen(sepbuf);</span>
 <span class="lineNum">    1760 </span><span class="lineNoCov">          0 :             if ((out - buf) + itemlen &gt;= BUFFER_LEN) {</span>
 <span class="lineNum">    1761 </span><span class="lineNoCov">          0 :                 if (argc &gt; 2)</span>
 <span class="lineNum">    1762 </span><span class="lineNoCov">          0 :                     free_top_mvar();</span>
-<span class="lineNum">    1763 </span>            :                 return buf;
+<span class="lineNum">    1763 </span><span class="lineNoCov">          0 :                 return buf;</span>
 <span class="lineNum">    1764 </span>            :             }
 <span class="lineNum">    1765 </span><span class="lineNoCov">          0 :             strcatn(out, BUFFER_LEN - (out - buf), sepbuf);</span>
 <span class="lineNum">    1766 </span><span class="lineNoCov">          0 :             out += itemlen;</span>
@@ -1831,7 +1831,7 @@
 <span class="lineNum">    1769 </span><span class="lineNoCov">          0 :             if ((out - buf) + 2 &gt;= BUFFER_LEN) {</span>
 <span class="lineNum">    1770 </span><span class="lineNoCov">          0 :                 if (argc &gt; 2)</span>
 <span class="lineNum">    1771 </span><span class="lineNoCov">          0 :                     free_top_mvar();</span>
-<span class="lineNum">    1772 </span>            :                 return buf;
+<span class="lineNum">    1772 </span><span class="lineNoCov">          0 :                 return buf;</span>
 <span class="lineNum">    1773 </span>            :             }
 <span class="lineNum">    1774 </span><span class="lineNoCov">          0 :             strcatn(out, BUFFER_LEN - (out - buf), &quot;, &quot;);</span>
 <span class="lineNum">    1775 </span><span class="lineNoCov">          0 :             out += strlen(out);</span>
@@ -1840,7 +1840,7 @@
 <span class="lineNum">    1778 </span>            :     }
 <span class="lineNum">    1779 </span><span class="lineNoCov">          0 :     if (argc &gt; 2)</span>
 <span class="lineNum">    1780 </span><span class="lineNoCov">          0 :         free_top_mvar();</span>
-<span class="lineNum">    1781 </span>            :     return buf;
+<span class="lineNum">    1781 </span><span class="lineNoCov">          0 :     return buf;</span>
 <span class="lineNum">    1782 </span>            : }
 <span class="lineNum">    1783 </span>            : 
 <a name="1784"><span class="lineNum">    1784 </span>            : </a>
@@ -1930,8 +1930,8 @@
 <span class="lineNum">    1868 </span>            :         case '\\':
 <span class="lineNum">    1869 </span>            :         case '`':
 <span class="lineNum">    1870 </span><span class="lineNoCov">          0 :             if (out - buf &gt;= BUFFER_LEN - 2) {</span>
-<span class="lineNum">    1871 </span>            :                 done = 1;
-<span class="lineNum">    1872 </span>            :                 break;
+<span class="lineNum">    1871 </span><span class="lineNoCov">          0 :                 done = 1;</span>
+<span class="lineNum">    1872 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">    1873 </span>            :             }
 <span class="lineNum">    1874 </span><span class="lineNoCov">          0 :             *out++ = '\\';</span>
 <span class="lineNum">    1875 </span><span class="lineNoCov">          0 :             *out++ = *in++;</span>
@@ -1939,8 +1939,8 @@
 <span class="lineNum">    1877 </span>            : 
 <span class="lineNum">    1878 </span>            :         default:
 <span class="lineNum">    1879 </span><span class="lineNoCov">          0 :             if (out - buf &gt;= BUFFER_LEN - 1) {</span>
-<span class="lineNum">    1880 </span>            :                 done = 1;
-<span class="lineNum">    1881 </span>            :                 break;
+<span class="lineNum">    1880 </span><span class="lineNoCov">          0 :                 done = 1;</span>
+<span class="lineNum">    1881 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">    1882 </span>            :             }
 <span class="lineNum">    1883 </span><span class="lineNoCov">          0 :             *out++ = *in++;</span>
 <span class="lineNum">    1884 </span>            :         }

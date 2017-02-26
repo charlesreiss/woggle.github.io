@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">0</td>
-            <td class="headerCovTableEntry">1674</td>
+            <td class="headerCovTableEntry">1721</td>
             <td class="headerCovTableEntryLo">0.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 00:20:31</td>
+            <td class="headerValue">2017-02-26 01:21:31</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -251,7 +251,7 @@
 <span class="lineNum">     189 </span>            :             } else {
 <span class="lineNum">     190 </span><span class="lineNoCov">          0 :                 moveto(victim, dest);</span>
 <span class="lineNum">     191 </span>            :             }
-<span class="lineNum">     192 </span>            :             break;
+<span class="lineNum">     192 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     193 </span>            :         case TYPE_EXIT:
 <span class="lineNum">     194 </span><span class="lineNoCov">          0 :             if ((mlev &lt; 3) &amp;&amp; (!permissions(ProgUID, victim)</span>
 <span class="lineNum">     195 </span><span class="lineNoCov">          0 :                                || !permissions(ProgUID, dest)))</span>
@@ -260,10 +260,10 @@
 <span class="lineNum">     198 </span><span class="lineNoCov">          0 :                  Typeof(dest) != TYPE_PLAYER) || dest == HOME)</span>
 <span class="lineNum">     199 </span><span class="lineNoCov">          0 :                 abort_interp(&quot;Bad destination object.&quot;);</span>
 <span class="lineNum">     200 </span><span class="lineNoCov">          0 :             if (!unset_source(ProgUID, victim))</span>
-<span class="lineNum">     201 </span>            :                 break;
+<span class="lineNum">     201 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">     202 </span><span class="lineNoCov">          0 :             set_source(ProgUID, victim, dest);</span>
 <span class="lineNum">     203 </span><span class="lineNoCov">          0 :             SetMLevel(victim, 0);</span>
-<span class="lineNum">     204 </span>            :             break;
+<span class="lineNum">     204 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     205 </span>            :         case TYPE_ROOM:
 <span class="lineNum">     206 </span><span class="lineNoCov">          0 :             if (!tp_thing_movement &amp;&amp; Typeof(dest) != TYPE_ROOM)</span>
 <span class="lineNum">     207 </span><span class="lineNoCov">          0 :                 abort_interp(&quot;Bad destination.&quot;);</span>
@@ -276,7 +276,7 @@
 <span class="lineNum">     214 </span><span class="lineNoCov">          0 :                 if ((mlev &lt; 3) &amp;&amp; (!permissions(ProgUID, victim)</span>
 <span class="lineNum">     215 </span><span class="lineNoCov">          0 :                                    &amp;&amp; !permissions(ProgUID, LOCATION(victim))))</span>
 <span class="lineNum">     216 </span><span class="lineNoCov">          0 :                     abort_interp(&quot;Permission denied.&quot;);</span>
-<span class="lineNum">     217 </span>            :                 dest = GLOBAL_ENVIRONMENT;
+<span class="lineNum">     217 </span><span class="lineNoCov">          0 :                 dest = GLOBAL_ENVIRONMENT;</span>
 <span class="lineNum">     218 </span>            :             } else {
 <span class="lineNum">     219 </span><span class="lineNoCov">          0 :                 if ((mlev &lt; 3) &amp;&amp; (!permissions(ProgUID, victim)</span>
 <span class="lineNum">     220 </span><span class="lineNoCov">          0 :                                    || !can_link_to(ProgUID, NOTYPE, dest)))</span>
@@ -366,7 +366,7 @@
 <span class="lineNum">     304 </span>            :         /* ts_lastuseobject(ref); */
 <span class="lineNum">     305 </span>            :     case TYPE_PLAYER:
 <span class="lineNum">     306 </span><span class="lineNoCov">          0 :         ref = EXITS(ref);</span>
-<span class="lineNum">     307 </span>            :         break;
+<span class="lineNum">     307 </span><span class="lineNoCov">          0 :         break;</span>
 <span class="lineNum">     308 </span>            :     default:
 <span class="lineNum">     309 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Invalid object.&quot;);</span>
 <span class="lineNum">     310 </span>            :     }
@@ -402,7 +402,7 @@
 <span class="lineNum">     340 </span><span class="lineNoCov">          0 :     if (mlev &lt; 2)</span>
 <span class="lineNum">     341 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Permission denied.&quot;);</span>
 <span class="lineNum">     342 </span><span class="lineNoCov">          0 :     ref = oper1-&gt;data.objref;</span>
-<span class="lineNum">     343 </span>            :     CHECKREMOTE(ref);
+<span class="lineNum">     343 </span><span class="lineNoCov">          0 :     CHECKREMOTE(ref);</span>
 <span class="lineNum">     344 </span>            : 
 <span class="lineNum">     345 </span><span class="lineNoCov">          0 :     ownr = OWNER(ref);</span>
 <span class="lineNum">     346 </span><span class="lineNoCov">          0 :     if (Typeof(ref) == TYPE_PLAYER) {</span>
@@ -1117,7 +1117,7 @@
 <span class="lineNum">    1055 </span><span class="lineNoCov">          0 :             PushObject(ref);</span>
 <span class="lineNum">    1056 </span><span class="lineNoCov">          0 :             PushInt(count);</span>
 <span class="lineNum">    1057 </span>            :         }
-<span class="lineNum">    1058 </span>            :         break;
+<span class="lineNum">    1058 </span><span class="lineNoCov">          0 :         break;</span>
 <span class="lineNum">    1059 </span>            :     default:
 <span class="lineNum">    1060 </span><span class="lineNoCov">          0 :         count = 0;</span>
 <span class="lineNum">    1061 </span><span class="lineNoCov">          0 :         PushInt(count);</span>
@@ -1129,11 +1129,11 @@
 <span class="lineNum">    1067 </span><span class="lineNoCov">          0 : prog_can_link_to(int mlev, dbref who, object_flag_type what_type, dbref where)</span>
 <span class="lineNum">    1068 </span>            : {
 <span class="lineNum">    1069 </span><span class="lineNoCov">          0 :     if (where == HOME)</span>
-<span class="lineNum">    1070 </span>            :         return 1;
+<span class="lineNum">    1070 </span><span class="lineNoCov">          0 :         return 1;</span>
 <span class="lineNum">    1071 </span><span class="lineNoCov">          0 :     if (where == NIL &amp;&amp; what_type == TYPE_EXIT)</span>
-<span class="lineNum">    1072 </span>            :         return 1;
+<span class="lineNum">    1072 </span><span class="lineNoCov">          0 :         return 1;</span>
 <span class="lineNum">    1073 </span><span class="lineNoCov">          0 :     if (!ObjExists(where))</span>
-<span class="lineNum">    1074 </span>            :         return 0;
+<span class="lineNum">    1074 </span><span class="lineNoCov">          0 :         return 0;</span>
 <span class="lineNum">    1075 </span>            : 
 <span class="lineNum">    1076 </span><span class="lineNoCov">          0 :     switch (what_type) {</span>
 <span class="lineNum">    1077 </span>            :     case TYPE_EXIT:
@@ -1152,7 +1152,7 @@
 <span class="lineNum">    1090 </span><span class="lineNoCov">          0 :         return (mlev &gt; 3 || permissions(who, where) || (test_lock(NOTHING, who, where, MESGPROP_LINKLOCK) &amp;&amp;</span>
 <span class="lineNum">    1091 </span><span class="lineNoCov">          0 :                 ((FLAGS(where) &amp; LINK_OK) || (Typeof(where) != TYPE_THING &amp;&amp; (FLAGS(where) &amp; ABODE)))));</span>
 <span class="lineNum">    1092 </span>            :     }
-<span class="lineNum">    1093 </span>            :     return 0;
+<span class="lineNum">    1093 </span><span class="lineNoCov">          0 :     return 0;</span>
 <span class="lineNum">    1094 </span>            : }
 <a name="1095"><span class="lineNum">    1095 </span>            : </a>
 <span class="lineNum">    1096 </span>            : void
@@ -1178,7 +1178,7 @@
 <span class="lineNum">    1116 </span>            :             }
 <span class="lineNum">    1117 </span><span class="lineNoCov">          0 :             if (MLevRaw(ref))</span>
 <span class="lineNum">    1118 </span><span class="lineNoCov">          0 :                 SetMLevel(ref, 0);</span>
-<span class="lineNum">    1119 </span>            :             break;
+<span class="lineNum">    1119 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">    1120 </span>            :         case TYPE_ROOM:
 <span class="lineNum">    1121 </span><span class="lineNoCov">          0 :             DBSTORE(ref, sp.room.dropto, NOTHING);</span>
 <span class="lineNum">    1122 </span><span class="lineNoCov">          0 :             break;</span>
@@ -1255,16 +1255,16 @@
 <span class="lineNum">    1193 </span>            :     case TYPE_ROOM:
 <span class="lineNum">    1194 </span><span class="lineNoCov">          0 :         if ((mlev &lt; 4) &amp;&amp; LOCATION(player) != ref)</span>
 <span class="lineNum">    1195 </span><span class="lineNoCov">          0 :             abort_interp(&quot;Permission denied: not in room. (1)&quot;);</span>
-<span class="lineNum">    1196 </span>            :         break;
+<span class="lineNum">    1196 </span><span class="lineNoCov">          0 :         break;</span>
 <span class="lineNum">    1197 </span>            :     case TYPE_THING:
 <span class="lineNum">    1198 </span><span class="lineNoCov">          0 :         if ((mlev &lt; 4) &amp;&amp; LOCATION(ref) != player)</span>
 <span class="lineNum">    1199 </span><span class="lineNoCov">          0 :             abort_interp(&quot;Permission denied: object not carried. (1)&quot;);</span>
-<span class="lineNum">    1200 </span>            :         break;
+<span class="lineNum">    1200 </span><span class="lineNoCov">          0 :         break;</span>
 <span class="lineNum">    1201 </span>            :     case TYPE_PLAYER:
 <span class="lineNum">    1202 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Permission denied: cannot set owner of player. (1)&quot;);</span>
 <span class="lineNum">    1203 </span>            :     case TYPE_EXIT:
 <span class="lineNum">    1204 </span>            :     case TYPE_PROGRAM:
-<span class="lineNum">    1205 </span>            :         break;
+<span class="lineNum">    1205 </span><span class="lineNoCov">          0 :         break;</span>
 <span class="lineNum">    1206 </span>            :     case TYPE_GARBAGE:
 <span class="lineNum">    1207 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Permission denied: who would want to own garbage? (1)&quot;);</span>
 <span class="lineNum">    1208 </span>            :     }
@@ -1433,7 +1433,7 @@
 <span class="lineNum">    1371 </span>            : 
 <span class="lineNum">    1372 </span><span class="lineNoCov">          0 :     if (Typeof(result) == TYPE_EXIT)</span>
 <span class="lineNum">    1373 </span><span class="lineNoCov">          0 :         if (!unset_source(player, result))</span>
-<span class="lineNum">    1374 </span>            :             return;
+<span class="lineNum">    1374 </span><span class="lineNoCov">          0 :             return;</span>
 <span class="lineNum">    1375 </span><span class="lineNoCov">          0 :     CLEAR(oper1);</span>
 <span class="lineNum">    1376 </span><span class="lineNoCov">          0 :     recycle(fr-&gt;descr, player, result);</span>
 <span class="lineNum">    1377 </span>            : }
@@ -1449,7 +1449,7 @@
 <span class="lineNum">    1387 </span><span class="lineNoCov">          0 :     if (*keyname != '\0') {</span>
 <span class="lineNum">    1388 </span><span class="lineNoCov">          0 :         key = parse_boolexp(descr, player, keyname, 0);</span>
 <span class="lineNum">    1389 </span><span class="lineNoCov">          0 :         if (key == TRUE_BOOLEXP) {</span>
-<span class="lineNum">    1390 </span>            :             return 0;
+<span class="lineNum">    1390 </span><span class="lineNoCov">          0 :             return 0;</span>
 <span class="lineNum">    1391 </span>            :         } else {
 <span class="lineNum">    1392 </span>            :             /* everything ok, do it */
 <span class="lineNum">    1393 </span><span class="lineNoCov">          0 :             ts_modifyobject(thing);</span>
@@ -1539,10 +1539,10 @@
 <span class="lineNum">    1477 </span><span class="lineNoCov">          0 :     if (oper2-&gt;type != PROG_STRING)</span>
 <span class="lineNum">    1478 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Password string expected. (2)&quot;);</span>
 <span class="lineNum">    1479 </span><span class="lineNoCov">          0 :     ptr = DoNullInd(oper2-&gt;data.string);</span>
-<span class="lineNum">    1480 </span>            :     if (ref != NOTHING) {
+<span class="lineNum">    1480 </span><span class="lineNoCov">          0 :     if (ref != NOTHING) {</span>
 <span class="lineNum">    1481 </span><span class="lineNoCov">          0 :         result = check_password(ref, ptr);</span>
 <span class="lineNum">    1482 </span>            :     } else {
-<span class="lineNum">    1483 </span>            :         result = 0;
+<span class="lineNum">    1483 </span><span class="lineNoCov">          0 :         result = 0;</span>
 <span class="lineNum">    1484 </span>            :     }
 <span class="lineNum">    1485 </span>            : 
 <span class="lineNum">    1486 </span><span class="lineNoCov">          0 :     CLEAR(oper1);</span>
@@ -1646,7 +1646,7 @@
 <span class="lineNum">    1584 </span>            :     }
 <span class="lineNum">    1585 </span>            : 
 <span class="lineNum">    1586 </span><span class="lineNoCov">          0 :     if (item == NOTHING) {</span>
-<span class="lineNum">    1587 </span>            :         item = 0;
+<span class="lineNum">    1587 </span><span class="lineNoCov">          0 :         item = 0;</span>
 <span class="lineNum">    1588 </span>            :     } else {
 <span class="lineNum">    1589 </span><span class="lineNoCov">          0 :         item++;</span>
 <span class="lineNum">    1590 </span>            :     }
@@ -1698,25 +1698,25 @@
 <span class="lineNum">    1636 </span>            :             case TYPE_PLAYER:
 <span class="lineNum">    1637 </span><span class="lineNoCov">          0 :                 if (PLAYER_HOME(ref) == linkref)</span>
 <span class="lineNum">    1638 </span><span class="lineNoCov">          0 :                     foundref = 1;</span>
-<span class="lineNum">    1639 </span>            :                 break;
+<span class="lineNum">    1639 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">    1640 </span>            :             case TYPE_ROOM:
 <span class="lineNum">    1641 </span><span class="lineNoCov">          0 :                 if (DBFETCH(ref)-&gt;sp.room.dropto == linkref)</span>
 <span class="lineNum">    1642 </span><span class="lineNoCov">          0 :                     foundref = 1;</span>
-<span class="lineNum">    1643 </span>            :                 break;
+<span class="lineNum">    1643 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">    1644 </span>            :             case TYPE_THING:
 <span class="lineNum">    1645 </span><span class="lineNoCov">          0 :                 if (THING_HOME(ref) == linkref)</span>
 <span class="lineNum">    1646 </span><span class="lineNoCov">          0 :                     foundref = 1;</span>
-<span class="lineNum">    1647 </span>            :                 break;
+<span class="lineNum">    1647 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">    1648 </span>            :             case TYPE_EXIT:
 <span class="lineNum">    1649 </span><span class="lineNoCov">          0 :                 count = DBFETCH(ref)-&gt;sp.exit.ndest;</span>
 <span class="lineNum">    1650 </span><span class="lineNoCov">          0 :                 for (int i = 0; i &lt; count; i++) {</span>
 <span class="lineNum">    1651 </span><span class="lineNoCov">          0 :                     if (DBFETCH(ref)-&gt;sp.exit.dest[i] == linkref)</span>
 <span class="lineNum">    1652 </span><span class="lineNoCov">          0 :                         foundref = 1;</span>
 <span class="lineNum">    1653 </span>            :                 }
-<span class="lineNum">    1654 </span>            :                 break;
+<span class="lineNum">    1654 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">    1655 </span>            :             }
 <span class="lineNum">    1656 </span><span class="lineNoCov">          0 :             if (foundref)</span>
-<span class="lineNum">    1657 </span>            :                 break;
+<span class="lineNum">    1657 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">    1658 </span>            :         }
 <span class="lineNum">    1659 </span>            :     }
 <span class="lineNum">    1660 </span><span class="lineNoCov">          0 :     if (!foundref)</span>
@@ -2153,7 +2153,7 @@
 <span class="lineNum">    2091 </span><span class="lineNoCov">          0 :             if (cpu &gt; 100.0f)</span>
 <span class="lineNum">    2092 </span><span class="lineNoCov">          0 :                 cpu = 100.0f;</span>
 <span class="lineNum">    2093 </span>            :         } else
-<span class="lineNum">    2094 </span>            :             cpu = 0.0f;
+<span class="lineNum">    2094 </span><span class="lineNoCov">          0 :             cpu = 0.0f;</span>
 <span class="lineNum">    2095 </span>            : 
 <span class="lineNum">    2096 </span><span class="lineNoCov">          0 :         array_set_strkey_intval(&amp;nu, &quot;PID&quot;, fr-&gt;pid);</span>
 <span class="lineNum">    2097 </span><span class="lineNoCov">          0 :         array_set_strkey_intval(&amp;nu, &quot;INSTCNT&quot;, fr-&gt;instcnt);</span>
@@ -2267,7 +2267,7 @@
 <span class="lineNum">    2205 </span>            :         case TYPE_EXIT:
 <span class="lineNum">    2206 </span><span class="lineNoCov">          0 :             for (count = 0; count &lt; (DBFETCH(obj)-&gt;sp.exit.ndest); count++)</span>
 <span class="lineNum">    2207 </span><span class="lineNoCov">          0 :                 array_set_intkey_refval(&amp;nw, count, (DBFETCH(obj)-&gt;sp.exit.dest)[count]);</span>
-<span class="lineNum">    2208 </span>            :             break;
+<span class="lineNum">    2208 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">    2209 </span>            :         }
 <span class="lineNum">    2210 </span>            :     }
 <span class="lineNum">    2211 </span>            : 
@@ -2311,22 +2311,22 @@
 <span class="lineNum">    2249 </span><span class="lineNoCov">          0 :                 if (DBFETCH(i)-&gt;sp.exit.dest[j] == ref)</span>
 <span class="lineNum">    2250 </span><span class="lineNoCov">          0 :                     array_set_intkey_refval(&amp;nw, count++, i);</span>
 <span class="lineNum">    2251 </span>            :             }
-<span class="lineNum">    2252 </span>            :             break;
+<span class="lineNum">    2252 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">    2253 </span>            :         case TYPE_PLAYER:
 <span class="lineNum">    2254 </span><span class="lineNoCov">          0 :             if (PLAYER_HOME(i) == ref)</span>
 <span class="lineNum">    2255 </span><span class="lineNoCov">          0 :                 array_set_intkey_refval(&amp;nw, count++, i);</span>
-<span class="lineNum">    2256 </span>            :             break;
+<span class="lineNum">    2256 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">    2257 </span>            :         case TYPE_THING:
 <span class="lineNum">    2258 </span><span class="lineNoCov">          0 :             if (THING_HOME(i) == ref)</span>
 <span class="lineNum">    2259 </span><span class="lineNoCov">          0 :                 array_set_intkey_refval(&amp;nw, count++, i);</span>
-<span class="lineNum">    2260 </span>            :             break;
+<span class="lineNum">    2260 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">    2261 </span>            :         case TYPE_ROOM:
 <span class="lineNum">    2262 </span><span class="lineNoCov">          0 :             if (DBFETCH(i)-&gt;sp.room.dropto == ref)</span>
 <span class="lineNum">    2263 </span><span class="lineNoCov">          0 :                 array_set_intkey_refval(&amp;nw, count++, i);</span>
-<span class="lineNum">    2264 </span>            :             break;
+<span class="lineNum">    2264 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">    2265 </span>            :         case TYPE_PROGRAM:
 <span class="lineNum">    2266 </span>            :         case TYPE_GARBAGE:
-<span class="lineNum">    2267 </span>            :             break;
+<span class="lineNum">    2267 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">    2268 </span>            :         }
 <span class="lineNum">    2269 </span>            :     }
 <span class="lineNum">    2270 </span>            : 
@@ -2402,7 +2402,7 @@
 <span class="lineNum">    2340 </span><span class="lineNoCov">          0 :             return;</span>
 <span class="lineNum">    2341 </span>            :         }
 <span class="lineNum">    2342 </span>            : 
-<span class="lineNum">    2343 </span>            :         segment = curr;         /* we need to keep this line */
+<span class="lineNum">    2343 </span><span class="lineNoCov">          0 :         segment = curr;         /* we need to keep this line */</span>
 <span class="lineNum">    2344 </span>            : 
 <span class="lineNum">    2345 </span>            :         /* continue our looping */
 <span class="lineNum">    2346 </span><span class="lineNoCov">          0 :         for (; curr &amp;&amp; (!end || i &lt; end); i++)</span>
@@ -2476,7 +2476,7 @@
 <span class="lineNum">    2414 </span><span class="lineNoCov">          0 :                 prev-&gt;next = ln;</span>
 <span class="lineNum">    2415 </span><span class="lineNoCov">          0 :                 ln-&gt;prev = prev;</span>
 <span class="lineNum">    2416 </span>            :             } else
-<span class="lineNum">    2417 </span>            :                 lines = ln;
+<span class="lineNum">    2417 </span><span class="lineNoCov">          0 :                 lines = ln;</span>
 <span class="lineNum">    2418 </span>            : 
 <span class="lineNum">    2419 </span><span class="lineNoCov">          0 :             prev = ln;</span>
 <span class="lineNum">    2420 </span>            :         }
@@ -2537,7 +2537,7 @@
 <span class="lineNum">    2475 </span><span class="lineNoCov">          0 :     arr = oper2-&gt;data.array;</span>
 <span class="lineNum">    2476 </span>            : 
 <span class="lineNum">    2477 </span><span class="lineNoCov">          0 :     if (array_first(arr, &amp;idx)) {</span>
-<span class="lineNum">    2478 </span>            :         int found_prp = 0;
+<span class="lineNum">    2478 </span><span class="lineNoCov">          0 :         int found_prp = 0;</span>
 <span class="lineNum">    2479 </span>            : 
 <span class="lineNum">    2480 </span>            :         do {
 <span class="lineNum">    2481 </span><span class="lineNoCov">          0 :             array_data *val = array_getitem(arr, &amp;idx);</span>
@@ -2564,31 +2564,31 @@
 <span class="lineNum">    2502 </span><span class="lineNoCov">          0 :                         abort_interp(&quot;Only one player, room, or program destination allowed.&quot;);</span>
 <span class="lineNum">    2503 </span>            :                     }
 <span class="lineNum">    2504 </span>            : 
-<span class="lineNum">    2505 </span>            :                     found_prp = 1;
-<span class="lineNum">    2506 </span>            :                     break;
+<span class="lineNum">    2505 </span><span class="lineNoCov">          0 :                     found_prp = 1;</span>
+<span class="lineNum">    2506 </span><span class="lineNoCov">          0 :                     break;</span>
 <span class="lineNum">    2507 </span>            : 
 <span class="lineNum">    2508 </span>            :                 case TYPE_THING:
-<span class="lineNum">    2509 </span>            :                     break;
+<span class="lineNum">    2509 </span><span class="lineNoCov">          0 :                     break;</span>
 <span class="lineNum">    2510 </span>            : 
 <span class="lineNum">    2511 </span>            :                 case TYPE_EXIT:
 <span class="lineNum">    2512 </span><span class="lineNoCov">          0 :                     if (exit_loop_check(what, where)) {</span>
 <span class="lineNum">    2513 </span><span class="lineNoCov">          0 :                         CLEAR(&amp;idx);</span>
 <span class="lineNum">    2514 </span><span class="lineNoCov">          0 :                         abort_interp(&quot;Destination would create loop.&quot;);</span>
 <span class="lineNum">    2515 </span>            :                     }
-<span class="lineNum">    2516 </span>            :                     break;
+<span class="lineNum">    2516 </span><span class="lineNoCov">          0 :                     break;</span>
 <span class="lineNum">    2517 </span>            : 
 <span class="lineNum">    2518 </span>            :                 default:
 <span class="lineNum">    2519 </span><span class="lineNoCov">          0 :                     CLEAR(&amp;idx);</span>
 <span class="lineNum">    2520 </span><span class="lineNoCov">          0 :                     abort_interp(&quot;Invalid object. (2)&quot;);</span>
 <span class="lineNum">    2521 </span>            :                 }
-<span class="lineNum">    2522 </span>            :                 break;
+<span class="lineNum">    2522 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">    2523 </span>            : 
 <span class="lineNum">    2524 </span>            :             case TYPE_PLAYER:
 <span class="lineNum">    2525 </span><span class="lineNoCov">          0 :                 if (where == HOME) {</span>
 <span class="lineNum">    2526 </span><span class="lineNoCov">          0 :                     CLEAR(&amp;idx);</span>
 <span class="lineNum">    2527 </span><span class="lineNoCov">          0 :                     abort_interp(&quot;Cannot link player to HOME.&quot;);</span>
 <span class="lineNum">    2528 </span>            :                 }
-<span class="lineNum">    2529 </span>            :                 break;
+<span class="lineNum">    2529 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">    2530 </span>            : 
 <span class="lineNum">    2531 </span>            :             case TYPE_THING:
 <span class="lineNum">    2532 </span><span class="lineNoCov">          0 :                 if (where == HOME) {</span>
@@ -2600,10 +2600,10 @@
 <span class="lineNum">    2538 </span><span class="lineNoCov">          0 :                     CLEAR(&amp;idx);</span>
 <span class="lineNum">    2539 </span><span class="lineNoCov">          0 :                     abort_interp(&quot;That would case a parent paradox.&quot;);</span>
 <span class="lineNum">    2540 </span>            :                 }
-<span class="lineNum">    2541 </span>            :                 break;
+<span class="lineNum">    2541 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">    2542 </span>            : 
 <span class="lineNum">    2543 </span>            :             case TYPE_ROOM:
-<span class="lineNum">    2544 </span>            :                 break;
+<span class="lineNum">    2544 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">    2545 </span>            : 
 <span class="lineNum">    2546 </span>            :             default:
 <span class="lineNum">    2547 </span><span class="lineNoCov">          0 :                 CLEAR(&amp;idx);</span>
@@ -2648,7 +2648,7 @@
 <span class="lineNum">    2586 </span>            :                 }
 <span class="lineNum">    2587 </span>            : 
 <span class="lineNum">    2588 </span><span class="lineNoCov">          0 :                 if (array_first(arr, &amp;idx)) {</span>
-<span class="lineNum">    2589 </span>            :                     int i = 0;
+<span class="lineNum">    2589 </span><span class="lineNoCov">          0 :                     int i = 0;</span>
 <span class="lineNum">    2590 </span>            : 
 <span class="lineNum">    2591 </span>            :                     do {
 <span class="lineNum">    2592 </span><span class="lineNoCov">          0 :                         if (i &lt; dest_count)</span>
@@ -2667,21 +2667,21 @@
 <span class="lineNum">    2605 </span><span class="lineNoCov">          0 :                 DBSTORE(what, sp.room.dropto, array_getitem(arr, &amp;idx)-&gt;data.objref);</span>
 <span class="lineNum">    2606 </span><span class="lineNoCov">          0 :                 CLEAR(&amp;idx);</span>
 <span class="lineNum">    2607 </span>            :             }
-<span class="lineNum">    2608 </span>            :             break;
+<span class="lineNum">    2608 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">    2609 </span>            : 
 <span class="lineNum">    2610 </span>            :         case TYPE_PLAYER:
 <span class="lineNum">    2611 </span><span class="lineNoCov">          0 :             if (array_first(arr, &amp;idx)) {</span>
 <span class="lineNum">    2612 </span><span class="lineNoCov">          0 :                 PLAYER_SET_HOME(what, array_getitem(arr, &amp;idx)-&gt;data.objref);</span>
 <span class="lineNum">    2613 </span><span class="lineNoCov">          0 :                 CLEAR(&amp;idx);</span>
 <span class="lineNum">    2614 </span>            :             }
-<span class="lineNum">    2615 </span>            :             break;
+<span class="lineNum">    2615 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">    2616 </span>            : 
 <span class="lineNum">    2617 </span>            :         case TYPE_THING:
 <span class="lineNum">    2618 </span><span class="lineNoCov">          0 :             if (array_first(arr, &amp;idx)) {</span>
 <span class="lineNum">    2619 </span><span class="lineNoCov">          0 :                 THING_SET_HOME(what, array_getitem(arr, &amp;idx)-&gt;data.objref);</span>
 <span class="lineNum">    2620 </span><span class="lineNoCov">          0 :                 CLEAR(&amp;idx);</span>
 <span class="lineNum">    2621 </span>            :             }
-<span class="lineNum">    2622 </span>            :             break;
+<span class="lineNum">    2622 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">    2623 </span>            : 
 <span class="lineNum">    2624 </span>            :         default:
 <span class="lineNum">    2625 </span><span class="lineNoCov">          0 :             abort_interp(&quot;Invalid object. (1)&quot;);</span>

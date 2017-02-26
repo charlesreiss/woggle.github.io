@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">0</td>
-            <td class="headerCovTableEntry">242</td>
+            <td class="headerCovTableEntry">246</td>
             <td class="headerCovTableEntryLo">0.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 00:20:31</td>
+            <td class="headerValue">2017-02-26 01:21:31</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -106,7 +106,7 @@
 <span class="lineNum">      44 </span><span class="lineNoCov">          0 :             if (re-&gt;pattern &amp;&amp; (--re-&gt;pattern-&gt;links == 0))</span>
 <span class="lineNum">      45 </span><span class="lineNoCov">          0 :                 free((void *) re-&gt;pattern);</span>
 <span class="lineNum">      46 </span>            :         } else
-<span class="lineNum">      47 </span>            :             return re;
+<span class="lineNum">      47 </span><span class="lineNoCov">          0 :             return re;</span>
 <span class="lineNum">      48 </span>            :     }
 <span class="lineNum">      49 </span>            : 
 <span class="lineNum">      50 </span><span class="lineNoCov">          0 :     re-&gt;re = pcre_compile(DoNullInd(pattern), flags, errmsg, &amp;erroff, NULL);</span>
@@ -128,7 +128,7 @@
 <span class="lineNum">      66 </span>            : {
 <span class="lineNum">      67 </span><span class="lineNoCov">          0 :     switch (err) {</span>
 <span class="lineNum">      68 </span>            :     case PCRE_ERROR_NOMATCH:
-<span class="lineNum">      69 </span>            :         return &quot;No matches&quot;;
+<span class="lineNum">      69 </span><span class="lineNoCov">          0 :         return &quot;No matches&quot;;</span>
 <span class="lineNum">      70 </span>            :     case PCRE_ERROR_NULL:
 <span class="lineNum">      71 </span><span class="lineNoCov">          0 :         return &quot;Internal error: NULL arg to pcre_exec()&quot;;</span>
 <span class="lineNum">      72 </span>            :     case PCRE_ERROR_BADOPTION:
@@ -341,7 +341,7 @@
 <span class="lineNum">     279 </span><span class="lineNoCov">          0 :                 write_left--;</span>
 <span class="lineNum">     280 </span>            :             }
 <span class="lineNum">     281 </span>            : 
-<span class="lineNum">     282 </span>            :             break;
+<span class="lineNum">     282 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     283 </span>            :         } else {
 <span class="lineNum">     284 </span><span class="lineNoCov">          0 :             int allstart = matches[0];</span>
 <span class="lineNum">     285 </span><span class="lineNoCov">          0 :             int allend = matches[1];</span>
@@ -407,7 +407,7 @@
 <span class="lineNum">     345 </span><span class="lineNoCov">          0 :                 write_left--;</span>
 <span class="lineNum">     346 </span>            :             }
 <span class="lineNum">     347 </span>            : 
-<span class="lineNum">     348 </span>            :             break;
+<span class="lineNum">     348 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     349 </span>            :         }
 <span class="lineNum">     350 </span>            :     }
 <span class="lineNum">     351 </span>            : 

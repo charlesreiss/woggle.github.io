@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">0</td>
-            <td class="headerCovTableEntry">676</td>
+            <td class="headerCovTableEntry">683</td>
             <td class="headerCovTableEntryLo">0.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 00:20:31</td>
+            <td class="headerValue">2017-02-26 01:21:31</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -118,7 +118,7 @@
 <span class="lineNum">      56 </span><span class="lineNoCov">          0 :         if (ptr-&gt;pkgname &amp;&amp; ptr-&gt;msgname) {</span>
 <span class="lineNum">      57 </span><span class="lineNoCov">          0 :             if (!strcasecmp(ptr-&gt;pkgname, pkgname)) {</span>
 <span class="lineNum">      58 </span><span class="lineNoCov">          0 :                 if (!strcasecmp(ptr-&gt;msgname, msgname)) {</span>
-<span class="lineNum">      59 </span>            :                     break;
+<span class="lineNum">      59 </span><span class="lineNoCov">          0 :                     break;</span>
 <span class="lineNum">      60 </span>            :                 }
 <span class="lineNum">      61 </span>            :             }
 <span class="lineNum">      62 </span>            :         }
@@ -238,9 +238,9 @@
 <span class="lineNum">     176 </span><span class="lineNoCov">          0 :         argval.type = PROG_ARRAY;</span>
 <span class="lineNum">     177 </span><span class="lineNoCov">          0 :         argval.data.array = contarr;</span>
 <span class="lineNum">     178 </span><span class="lineNoCov">          0 :         if (msgname &amp;&amp; *msgname) {</span>
-<span class="lineNum">     179 </span>            :             snprintf(buf, sizeof(buf), &quot;MCP.%.128s-%.128s&quot;, pkgname, msgname);
+<span class="lineNum">     179 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), &quot;MCP.%.128s-%.128s&quot;, pkgname, msgname);</span>
 <span class="lineNum">     180 </span>            :         } else {
-<span class="lineNum">     181 </span>            :             snprintf(buf, sizeof(buf), &quot;MCP.%.128s&quot;, pkgname);
+<span class="lineNum">     181 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), &quot;MCP.%.128s&quot;, pkgname);</span>
 <span class="lineNum">     182 </span>            :         }
 <span class="lineNum">     183 </span><span class="lineNoCov">          0 :         muf_event_add(destfr, buf, &amp;argval, 0);</span>
 <span class="lineNum">     184 </span><span class="lineNoCov">          0 :         CLEAR(&amp;argval);</span>
@@ -324,7 +324,7 @@
 <span class="lineNum">     262 </span>            :         }
 <span class="lineNum">     263 </span><span class="lineNoCov">          0 :         result = array_next(arr, &amp;argname);</span>
 <span class="lineNum">     264 </span>            :     }
-<span class="lineNum">     265 </span>            :     return 0;
+<span class="lineNum">     265 </span><span class="lineNoCov">          0 :     return 0;</span>
 <span class="lineNum">     266 </span>            : }
 <a name="267"><span class="lineNum">     267 </span>            : </a>
 <span class="lineNum">     268 </span>            : void
@@ -489,7 +489,7 @@
 <span class="lineNum">     427 </span><span class="lineNoCov">          0 :         if (ptr-&gt;pkgname &amp;&amp; ptr-&gt;msgname) {</span>
 <span class="lineNum">     428 </span><span class="lineNoCov">          0 :             if (!strcasecmp(ptr-&gt;pkgname, pkgname)) {</span>
 <span class="lineNum">     429 </span><span class="lineNoCov">          0 :                 if (!strcasecmp(ptr-&gt;msgname, msgname)) {</span>
-<span class="lineNum">     430 </span>            :                     break;
+<span class="lineNum">     430 </span><span class="lineNoCov">          0 :                     break;</span>
 <span class="lineNum">     431 </span>            :                 }
 <span class="lineNum">     432 </span>            :             }
 <span class="lineNum">     433 </span>            :         }
@@ -1060,12 +1060,12 @@
 <span class="lineNum">     998 </span>            : 
 <span class="lineNum">     999 </span><span class="lineNoCov">          0 :             temp2 = array_getitem(oper3-&gt;data.array, &amp;temp1);</span>
 <span class="lineNum">    1000 </span><span class="lineNoCov">          0 :             if (!temp2) {</span>
-<span class="lineNum">    1001 </span>            :                 break;
+<span class="lineNum">    1001 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">    1002 </span>            :             }
 <span class="lineNum">    1003 </span><span class="lineNoCov">          0 :             switch (temp2-&gt;type) {</span>
 <span class="lineNum">    1004 </span>            :             case PROG_STRING:
 <span class="lineNum">    1005 </span><span class="lineNoCov">          0 :                 value = DoNullInd(temp2-&gt;data.string);</span>
-<span class="lineNum">    1006 </span>            :                 break;
+<span class="lineNum">    1006 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">    1007 </span>            :             case PROG_INTEGER:
 <span class="lineNum">    1008 </span><span class="lineNoCov">          0 :                 snprintf(buf, sizeof(buf), &quot;%d&quot;, temp2-&gt;data.number);</span>
 <span class="lineNum">    1009 </span><span class="lineNoCov">          0 :                 value = buf;</span>

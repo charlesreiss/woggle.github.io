@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">0</td>
-            <td class="headerCovTableEntry">637</td>
+            <td class="headerCovTableEntry">666</td>
             <td class="headerCovTableEntryLo">0.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 00:20:31</td>
+            <td class="headerValue">2017-02-26 01:21:31</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -86,18 +86,18 @@
 <span class="lineNum">      24 </span><span class="lineNoCov">          0 :         svinfo = svinfo-&gt;next;</span>
 <span class="lineNum">      25 </span>            : 
 <span class="lineNum">      26 </span><span class="lineNoCov">          0 :     if (!svinfo) {</span>
-<span class="lineNum">      27 </span>            :         return -1;
+<span class="lineNum">      27 </span><span class="lineNoCov">          0 :         return -1;</span>
 <span class="lineNum">      28 </span>            :     }
 <span class="lineNum">      29 </span><span class="lineNoCov">          0 :     if (!svinfo-&gt;varnames) {</span>
-<span class="lineNum">      30 </span>            :         return -1;
+<span class="lineNum">      30 </span><span class="lineNoCov">          0 :         return -1;</span>
 <span class="lineNum">      31 </span>            :     }
 <span class="lineNum">      32 </span><span class="lineNoCov">          0 :     for (int varnum = 0; varnum &lt; svinfo-&gt;count; varnum++) {</span>
 <span class="lineNum">      33 </span>            :         assert(svinfo-&gt;varnames[varnum] != NULL);
 <span class="lineNum">      34 </span><span class="lineNoCov">          0 :         if (!strcasecmp(svinfo-&gt;varnames[varnum], varname)) {</span>
-<span class="lineNum">      35 </span>            :             return varnum;
+<span class="lineNum">      35 </span><span class="lineNoCov">          0 :             return varnum;</span>
 <span class="lineNum">      36 </span>            :         }
 <span class="lineNum">      37 </span>            :     }
-<span class="lineNum">      38 </span>            :     return -1;
+<span class="lineNum">      38 </span><span class="lineNoCov">          0 :     return -1;</span>
 <span class="lineNum">      39 </span>            : }
 <a name="40"><span class="lineNum">      40 </span>            : </a>
 <span class="lineNum">      41 </span>            : void
@@ -191,7 +191,7 @@
 <span class="lineNum">     129 </span><span class="lineNoCov">          0 :                         insttotext(NULL, 0, linestart, buf2, sizeof(buf2), 30, program, 1));</span>
 <span class="lineNum">     130 </span>            :             }
 <span class="lineNum">     131 </span>            :         } else {
-<span class="lineNum">     132 </span>            :             break;
+<span class="lineNum">     132 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     133 </span>            :         }
 <span class="lineNum">     134 </span><span class="lineNoCov">          0 :         linestart++;</span>
 <span class="lineNum">     135 </span>            :     }
@@ -212,10 +212,10 @@
 <span class="lineNum">     150 </span><span class="lineNoCov">          0 :     for (int i = 0; i &lt; siz; i++) {</span>
 <span class="lineNum">     151 </span><span class="lineNoCov">          0 :         if ((code[i].type == PROG_FUNCTION) &amp;&amp;</span>
 <span class="lineNum">     152 </span><span class="lineNoCov">          0 :             !strcasecmp(name, code[i].data.mufproc-&gt;procname)) {</span>
-<span class="lineNum">     153 </span>            :             return (code + i);
+<span class="lineNum">     153 </span><span class="lineNoCov">          0 :             return (code + i);</span>
 <span class="lineNum">     154 </span>            :         }
 <span class="lineNum">     155 </span>            :     }
-<span class="lineNum">     156 </span>            :     return (NULL);
+<span class="lineNum">     156 </span><span class="lineNoCov">          0 :     return (NULL);</span>
 <span class="lineNum">     157 </span>            : }
 <span class="lineNum">     158 </span>            : 
 <a name="159"><span class="lineNum">     159 </span>            : </a>
@@ -229,10 +229,10 @@
 <span class="lineNum">     167 </span><span class="lineNoCov">          0 :     siz = PROGRAM_SIZ(program);</span>
 <span class="lineNum">     168 </span><span class="lineNoCov">          0 :     for (int i = 0; i &lt; siz; i++) {</span>
 <span class="lineNum">     169 </span><span class="lineNoCov">          0 :         if (code[i].line == whatline) {</span>
-<span class="lineNum">     170 </span>            :             return (code + i);
+<span class="lineNum">     170 </span><span class="lineNoCov">          0 :             return (code + i);</span>
 <span class="lineNum">     171 </span>            :         }
 <span class="lineNum">     172 </span>            :     }
-<span class="lineNum">     173 </span>            :     return (NULL);
+<span class="lineNum">     173 </span><span class="lineNoCov">          0 :     return (NULL);</span>
 <span class="lineNum">     174 </span>            : }
 <span class="lineNum">     175 </span>            : 
 <a name="176"><span class="lineNum">     176 </span>            : </a>
@@ -246,13 +246,13 @@
 <span class="lineNum">     184 </span><span class="lineNoCov">          0 :     buf[0] = '\0';</span>
 <span class="lineNum">     185 </span><span class="lineNoCov">          0 :     for (ptr = pc - 1; ptr &gt;= PROGRAM_CODE(*program); ptr--) {</span>
 <span class="lineNum">     186 </span><span class="lineNoCov">          0 :         if (ptr-&gt;type == PROG_FUNCTION) {</span>
-<span class="lineNum">     187 </span>            :             break;
+<span class="lineNum">     187 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     188 </span>            :         }
 <span class="lineNum">     189 </span>            :     }
 <span class="lineNum">     190 </span><span class="lineNoCov">          0 :     if (ptr-&gt;type == PROG_FUNCTION) {</span>
 <span class="lineNum">     191 </span><span class="lineNoCov">          0 :         fname = ptr-&gt;data.mufproc-&gt;procname;</span>
 <span class="lineNum">     192 </span>            :     } else {
-<span class="lineNum">     193 </span>            :         fname = &quot;\033[1m???\033[0m&quot;;
+<span class="lineNum">     193 </span><span class="lineNoCov">          0 :         fname = &quot;\033[1m???\033[0m&quot;;</span>
 <span class="lineNum">     194 </span>            :     }
 <span class="lineNum">     195 </span><span class="lineNoCov">          0 :     snprintf(buf, sizeof(buf), &quot;line \033[1m%d\033[0m, in \033[1m%s\033[0m&quot;, pc-&gt;line, fname);</span>
 <span class="lineNum">     196 </span><span class="lineNoCov">          0 :     return buf;</span>
@@ -286,7 +286,7 @@
 <span class="lineNum">     224 </span>            :     }
 <span class="lineNum">     225 </span><span class="lineNoCov">          0 :     if (fr-&gt;brkpt.prog[brk] != NOTHING) {</span>
 <span class="lineNum">     226 </span><span class="lineNoCov">          0 :         snprintf(buf2, sizeof(buf2), &quot; in %s(#%d)&quot;, NAME(fr-&gt;brkpt.prog[brk]),</span>
-<span class="lineNum">     227 </span>            :                  fr-&gt;brkpt.prog[brk]);
+<span class="lineNum">     227 </span><span class="lineNoCov">          0 :                  fr-&gt;brkpt.prog[brk]);</span>
 <span class="lineNum">     228 </span><span class="lineNoCov">          0 :         strcatn(buf, sizeof(buf), buf2);</span>
 <span class="lineNum">     229 </span>            :     }
 <span class="lineNum">     230 </span><span class="lineNoCov">          0 :     if (fr-&gt;brkpt.level[brk] != -1) {</span>
@@ -315,7 +315,7 @@
 <span class="lineNum">     253 </span><span class="lineNoCov">          0 :     pinst = NULL;</span>
 <span class="lineNum">     254 </span><span class="lineNoCov">          0 :     j = fr-&gt;system.top + 1;</span>
 <span class="lineNum">     255 </span><span class="lineNoCov">          0 :     while (j &gt; 1 &amp;&amp; i-- &gt; 0) {</span>
-<span class="lineNum">     256 </span>            :         cnt = 0;
+<span class="lineNum">     256 </span><span class="lineNoCov">          0 :         cnt = 0;</span>
 <span class="lineNum">     257 </span>            :         do {
 <span class="lineNum">     258 </span><span class="lineNoCov">          0 :             lastinst = pinst;</span>
 <span class="lineNum">     259 </span><span class="lineNoCov">          0 :             if (--j == fr-&gt;system.top) {</span>
@@ -351,18 +351,18 @@
 <span class="lineNum">     289 </span>            :                 char *val;
 <span class="lineNum">     290 </span>            :                 const char *fmt;
 <span class="lineNum">     291 </span><span class="lineNoCov">          0 :                 if (!nam) {</span>
-<span class="lineNum">     292 </span>            :                     break;
+<span class="lineNum">     292 </span><span class="lineNoCov">          0 :                     break;</span>
 <span class="lineNum">     293 </span>            :                 }
 <span class="lineNum">     294 </span><span class="lineNoCov">          0 :                 varinst = scopedvar_get(fr, lev, k);</span>
 <span class="lineNum">     295 </span><span class="lineNoCov">          0 :                 val = insttotext(fr, lev, varinst, buf3, sizeof(buf3), 30, program, 1);</span>
 <span class="lineNum">     296 </span><span class="lineNoCov">          0 :                 if (k) {</span>
-<span class="lineNum">     297 </span>            :                     fmt = &quot;\033[1m, %s=\033[0m%s&quot;;
+<span class="lineNum">     297 </span><span class="lineNoCov">          0 :                     fmt = &quot;\033[1m, %s=\033[0m%s&quot;;</span>
 <span class="lineNum">     298 </span>            :                 } else {
 <span class="lineNum">     299 </span><span class="lineNoCov">          0 :                     fmt = &quot;\033[1m%s=\033[0m%s&quot;;</span>
 <span class="lineNum">     300 </span>            :                 }
 <span class="lineNum">     301 </span><span class="lineNoCov">          0 :                 bufend += snprintf(bufend, buf2 - bufend - 18, fmt, nam, val);</span>
 <span class="lineNum">     302 </span>            :             }
-<span class="lineNum">     303 </span>            :             ptr = buf2;
+<span class="lineNum">     303 </span><span class="lineNoCov">          0 :             ptr = buf2;</span>
 <span class="lineNum">     304 </span>            :         }
 <span class="lineNum">     305 </span><span class="lineNoCov">          0 :         if (pinst != lastinst) {</span>
 <span class="lineNum">     306 </span><span class="lineNoCov">          0 :             notifyf_nolisten(player, &quot;\033[1;33;40m%3d)\033[0m \033[1m%s(#%d)\033[0m %s:&quot;, lev,</span>
@@ -416,7 +416,7 @@
 <span class="lineNum">     354 </span>            :     }
 <span class="lineNum">     355 </span><span class="lineNoCov">          0 :     varnum = scopedvar_getnum(fr, 0, arg);</span>
 <span class="lineNum">     356 </span><span class="lineNoCov">          0 :     if (varnum != -1) {</span>
-<span class="lineNum">     357 </span>            :         sflag = 1;
+<span class="lineNum">     357 </span><span class="lineNoCov">          0 :         sflag = 1;</span>
 <span class="lineNum">     358 </span>            :     } else {
 <span class="lineNum">     359 </span><span class="lineNoCov">          0 :         if (*arg == 'L' || *arg == 'l') {</span>
 <span class="lineNum">     360 </span><span class="lineNoCov">          0 :             arg++;</span>
@@ -430,13 +430,13 @@
 <span class="lineNum">     368 </span><span class="lineNoCov">          0 :             if (*arg == 'V' || *arg == 'v') {</span>
 <span class="lineNum">     369 </span><span class="lineNoCov">          0 :                 arg++;</span>
 <span class="lineNum">     370 </span>            :             }
-<span class="lineNum">     371 </span>            :             sflag = 1;
+<span class="lineNum">     371 </span><span class="lineNoCov">          0 :             sflag = 1;</span>
 <span class="lineNum">     372 </span><span class="lineNoCov">          0 :         } else if (*arg == 'V' || *arg == 'v') {</span>
 <span class="lineNum">     373 </span><span class="lineNoCov">          0 :             arg++;</span>
 <span class="lineNum">     374 </span>            :         }
 <span class="lineNum">     375 </span>            :     }
 <span class="lineNum">     376 </span><span class="lineNoCov">          0 :     if (varnum &gt; -1) {</span>
-<span class="lineNum">     377 </span>            :         i = varnum;
+<span class="lineNum">     377 </span><span class="lineNoCov">          0 :         i = varnum;</span>
 <span class="lineNum">     378 </span><span class="lineNoCov">          0 :     } else if (number(arg)) {</span>
 <span class="lineNum">     379 </span><span class="lineNoCov">          0 :         i = atoi(arg);</span>
 <span class="lineNum">     380 </span>            :     } else {
@@ -506,10 +506,10 @@
 <span class="lineNum">     444 </span><span class="lineNoCov">          0 :         for (ptr = buf, ptr2 = arg + 1; *ptr2; ptr2++) {</span>
 <span class="lineNum">     445 </span><span class="lineNoCov">          0 :             if (*ptr2 == '\\') {</span>
 <span class="lineNum">     446 </span><span class="lineNoCov">          0 :                 if (!*(++ptr2))</span>
-<span class="lineNum">     447 </span>            :                     break;
+<span class="lineNum">     447 </span><span class="lineNoCov">          0 :                     break;</span>
 <span class="lineNum">     448 </span><span class="lineNoCov">          0 :                 *ptr++ = *ptr2;</span>
 <span class="lineNum">     449 </span><span class="lineNoCov">          0 :             } else if (*ptr2 == '&quot;') {</span>
-<span class="lineNum">     450 </span>            :                 break;
+<span class="lineNum">     450 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">     451 </span>            :             } else {
 <span class="lineNum">     452 </span><span class="lineNoCov">          0 :                 *ptr++ = *ptr2;</span>
 <span class="lineNum">     453 </span>            :             }
@@ -520,7 +520,7 @@
 <span class="lineNum">     458 </span>            :     } else {
 <span class="lineNum">     459 </span><span class="lineNoCov">          0 :         int varnum = scopedvar_getnum(fr, 0, arg);</span>
 <span class="lineNum">     460 </span><span class="lineNoCov">          0 :         if (varnum != -1) {</span>
-<span class="lineNum">     461 </span>            :             sflag = 1;
+<span class="lineNum">     461 </span><span class="lineNoCov">          0 :             sflag = 1;</span>
 <span class="lineNum">     462 </span>            :         } else {
 <span class="lineNum">     463 </span><span class="lineNoCov">          0 :             if (*arg == 'S' || *arg == 's') {</span>
 <span class="lineNum">     464 </span><span class="lineNoCov">          0 :                 arg++;</span>
@@ -534,7 +534,7 @@
 <span class="lineNum">     472 </span><span class="lineNoCov">          0 :                 if (*arg == 'V' || *arg == 'v') {</span>
 <span class="lineNum">     473 </span><span class="lineNoCov">          0 :                     arg++;</span>
 <span class="lineNum">     474 </span>            :                 }
-<span class="lineNum">     475 </span>            :                 lflag = 1;
+<span class="lineNum">     475 </span><span class="lineNoCov">          0 :                 lflag = 1;</span>
 <span class="lineNum">     476 </span><span class="lineNoCov">          0 :             } else if (*arg == 'V' || *arg == 'v') {</span>
 <span class="lineNum">     477 </span><span class="lineNoCov">          0 :                 arg++;</span>
 <span class="lineNum">     478 </span>            :             }
@@ -828,7 +828,7 @@
 <span class="lineNum">     766 </span><span class="lineNoCov">          0 :             notify_nolisten(player, &quot;No such breakpoint.&quot;, 1);</span>
 <span class="lineNum">     767 </span><span class="lineNoCov">          0 :             return 0;</span>
 <span class="lineNum">     768 </span>            :         }
-<span class="lineNum">     769 </span>            :         j = i - 1;
+<span class="lineNum">     769 </span><span class="lineNoCov">          0 :         j = i - 1;</span>
 <span class="lineNum">     770 </span><span class="lineNoCov">          0 :         for (j++; j &lt; fr-&gt;brkpt.count; j++) {</span>
 <span class="lineNum">     771 </span><span class="lineNoCov">          0 :             fr-&gt;brkpt.temp[j - 1] = fr-&gt;brkpt.temp[j];</span>
 <span class="lineNum">     772 </span><span class="lineNoCov">          0 :             fr-&gt;brkpt.level[j - 1] = fr-&gt;brkpt.level[j];</span>
@@ -862,7 +862,7 @@
 <span class="lineNum">     800 </span><span class="lineNoCov">          0 :             i = STACK_SIZE;</span>
 <span class="lineNum">     801 </span><span class="lineNoCov">          0 :         ptr = &quot;&quot;;</span>
 <span class="lineNum">     802 </span><span class="lineNoCov">          0 :         for (j = fr-&gt;argument.top; j &gt; 0 &amp;&amp; i-- &gt; 0;) {</span>
-<span class="lineNum">     803 </span>            :             cnt = 0;
+<span class="lineNum">     803 </span><span class="lineNoCov">          0 :             cnt = 0;</span>
 <span class="lineNum">     804 </span>            :             do {
 <span class="lineNum">     805 </span><span class="lineNoCov">          0 :                 strcpyn(buf, sizeof(buf), ptr);</span>
 <span class="lineNum">     806 </span><span class="lineNoCov">          0 :                 ptr = insttotext(NULL, 0, &amp;fr-&gt;argument.st[--j], buf2, sizeof(buf2), 4000,</span>
@@ -884,7 +884,7 @@
 <span class="lineNum">     822 </span><span class="lineNoCov">          0 :         if ((ptr2 = (char *) index(arg, ','))) {</span>
 <span class="lineNum">     823 </span><span class="lineNoCov">          0 :             *ptr2++ = '\0';</span>
 <span class="lineNum">     824 </span>            :         } else {
-<span class="lineNum">     825 </span>            :             ptr2 = &quot;&quot;;
+<span class="lineNum">     825 </span><span class="lineNoCov">          0 :             ptr2 = &quot;&quot;;</span>
 <span class="lineNum">     826 </span>            :         }
 <span class="lineNum">     827 </span><span class="lineNoCov">          0 :         if (!*arg) {</span>
 <span class="lineNum">     828 </span><span class="lineNoCov">          0 :             if (fr-&gt;brkpt.lastlisted) {</span>
@@ -944,7 +944,7 @@
 <span class="lineNum">     882 </span><span class="lineNoCov">          0 :                 pinst = linenum_to_pc(program, i);</span>
 <span class="lineNum">     883 </span><span class="lineNoCov">          0 :                 if (pinst) {</span>
 <span class="lineNum">     884 </span><span class="lineNoCov">          0 :                     notifyf_nolisten(player, &quot;line %d: %s&quot;, i, (i == fr-&gt;pc-&gt;line) ?</span>
-<span class="lineNum">     885 </span>            :                                      show_line_prims(program, fr-&gt;pc, STACK_SIZE, 1) :
+<span class="lineNum">     885 </span><span class="lineNoCov">          0 :                                      show_line_prims(program, fr-&gt;pc, STACK_SIZE, 1) :</span>
 <span class="lineNum">     886 </span>            :                                      show_line_prims(program, pinst, STACK_SIZE, 0));
 <span class="lineNum">     887 </span>            :                 }
 <span class="lineNum">     888 </span>            :             }
@@ -969,7 +969,7 @@
 <span class="lineNum">     907 </span><span class="lineNoCov">          0 :             notifyf_nolisten(player, &quot;Trace is currently %s.&quot;,</span>
 <span class="lineNum">     908 </span><span class="lineNoCov">          0 :                              fr-&gt;brkpt.showstack ? &quot;on&quot; : &quot;off&quot;);</span>
 <span class="lineNum">     909 </span>            :         }
-<span class="lineNum">     910 </span>            :         return 0;
+<span class="lineNum">     910 </span><span class="lineNoCov">          0 :         return 0;</span>
 <span class="lineNum">     911 </span><span class="lineNoCov">          0 :     } else if (!strcasecmp(cmd, &quot;words&quot;)) {</span>
 <span class="lineNum">     912 </span><span class="lineNoCov">          0 :         list_program_functions(player, program, arg);</span>
 <span class="lineNum">     913 </span><span class="lineNoCov">          0 :         add_muf_read_event(descr, player, program, fr);</span>
@@ -1047,7 +1047,7 @@
 <span class="lineNum">     985 </span><span class="lineNoCov">          0 :         add_muf_read_event(descr, player, program, fr);</span>
 <span class="lineNum">     986 </span><span class="lineNoCov">          0 :         return 0;</span>
 <span class="lineNum">     987 </span>            :     }
-<span class="lineNum">     988 </span>            :     return 0;
+<span class="lineNum">     988 </span><span class="lineNoCov">          0 :     return 0;</span>
 <span class="lineNum">     989 </span>            : }
 </pre>
       </td>

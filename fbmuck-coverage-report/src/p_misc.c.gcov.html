@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">0</td>
-            <td class="headerCovTableEntry">731</td>
+            <td class="headerCovTableEntry">750</td>
             <td class="headerCovTableEntryLo">0.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 00:20:31</td>
+            <td class="headerValue">2017-02-26 01:21:31</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -419,7 +419,7 @@
 <span class="lineNum">     357 </span>            :     } else {
 <span class="lineNum">     358 </span><span class="lineNoCov">          0 :         tmpfr-&gt;rndbuf = NULL;</span>
 <span class="lineNum">     359 </span>            :     }
-<span class="lineNum">     360 </span>            :     tmpfr-&gt;pc = pc;
+<span class="lineNum">     360 </span><span class="lineNoCov">          0 :     tmpfr-&gt;pc = pc;</span>
 <span class="lineNum">     361 </span><span class="lineNoCov">          0 :     tmpfr-&gt;pc++;</span>
 <span class="lineNum">     362 </span><span class="lineNoCov">          0 :     tmpfr-&gt;level = fr-&gt;level;</span>
 <span class="lineNum">     363 </span><span class="lineNoCov">          0 :     tmpfr-&gt;already_created = fr-&gt;already_created;</span>
@@ -586,7 +586,7 @@
 <span class="lineNum">     524 </span><span class="lineNoCov">          0 :     if (oper1-&gt;data.string != (struct shared_string *) NULL) {</span>
 <span class="lineNum">     525 </span><span class="lineNoCov">          0 :         lok = parse_boolexp(fr-&gt;descr, ProgUID, oper1-&gt;data.string-&gt;data, 0);</span>
 <span class="lineNum">     526 </span>            :     } else {
-<span class="lineNum">     527 </span>            :         lok = TRUE_BOOLEXP;
+<span class="lineNum">     527 </span><span class="lineNoCov">          0 :         lok = TRUE_BOOLEXP;</span>
 <span class="lineNum">     528 </span>            :     }
 <span class="lineNum">     529 </span><span class="lineNoCov">          0 :     CLEAR(oper1);</span>
 <span class="lineNum">     530 </span><span class="lineNoCov">          0 :     PushLock(lok);</span>
@@ -605,7 +605,7 @@
 <span class="lineNum">     543 </span><span class="lineNoCov">          0 :     if (oper1-&gt;data.lock != (struct boolexp *) TRUE_BOOLEXP) {</span>
 <span class="lineNum">     544 </span><span class="lineNoCov">          0 :         ptr = unparse_boolexp(ProgUID, oper1-&gt;data.lock, 0);</span>
 <span class="lineNum">     545 </span>            :     } else {
-<span class="lineNum">     546 </span>            :         ptr = NULL;
+<span class="lineNum">     546 </span><span class="lineNoCov">          0 :         ptr = NULL;</span>
 <span class="lineNum">     547 </span>            :     }
 <span class="lineNum">     548 </span><span class="lineNoCov">          0 :     CHECKOFLOW(1);</span>
 <span class="lineNum">     549 </span><span class="lineNoCov">          0 :     CLEAR(oper1);</span>
@@ -671,7 +671,7 @@
 <span class="lineNum">     609 </span><span class="lineNoCov">          0 :     if (oper1-&gt;data.string) {</span>
 <span class="lineNum">     610 </span><span class="lineNoCov">          0 :         ptr = tune_get_parmstring(oper1-&gt;data.string-&gt;data, TUNE_MLEV(player));</span>
 <span class="lineNum">     611 </span>            :     } else {
-<span class="lineNum">     612 </span>            :         ptr = &quot;&quot;;
+<span class="lineNum">     612 </span><span class="lineNoCov">          0 :         ptr = &quot;&quot;;</span>
 <span class="lineNum">     613 </span>            :     }
 <span class="lineNum">     614 </span><span class="lineNoCov">          0 :     CHECKOFLOW(1);</span>
 <span class="lineNum">     615 </span><span class="lineNoCov">          0 :     CLEAR(oper1);</span>
@@ -715,7 +715,7 @@
 <span class="lineNum">     653 </span><span class="lineNoCov">          0 :         pbs = PROGRAM_PUBS(oper1-&gt;data.objref);</span>
 <span class="lineNum">     654 </span><span class="lineNoCov">          0 :         while (pbs) {</span>
 <span class="lineNum">     655 </span><span class="lineNoCov">          0 :             if (!strcasecmp(oper2-&gt;data.string-&gt;data, pbs-&gt;subname))</span>
-<span class="lineNum">     656 </span>            :                 break;
+<span class="lineNum">     656 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">     657 </span><span class="lineNoCov">          0 :             pbs = pbs-&gt;next;</span>
 <span class="lineNum">     658 </span>            :         }
 <span class="lineNum">     659 </span><span class="lineNoCov">          0 :         if (pbs &amp;&amp; mlev &gt;= pbs-&gt;mlev)</span>
@@ -764,7 +764,7 @@
 <span class="lineNum">     702 </span><span class="lineNoCov">          0 :                    NAME(player), player, parmname, oldvalue, newvalue);</span>
 <span class="lineNum">     703 </span><span class="lineNoCov">          0 :         if (*oldvalue)</span>
 <span class="lineNum">     704 </span><span class="lineNoCov">          0 :             free(oldvalue);</span>
-<span class="lineNum">     705 </span>            :         break;
+<span class="lineNum">     705 </span><span class="lineNoCov">          0 :         break;</span>
 <span class="lineNum">     706 </span>            :     case TUNESET_SUCCESS_DEFAULT:
 <span class="lineNum">     707 </span>            :         /* No need to show the flag in output */
 <span class="lineNum">     708 </span><span class="lineNoCov">          0 :         TP_CLEAR_FLAG_DEFAULT(parmname);</span>
@@ -772,7 +772,7 @@
 <span class="lineNum">     710 </span><span class="lineNoCov">          0 :                    NAME(player), player, parmname, oldvalue);</span>
 <span class="lineNum">     711 </span><span class="lineNoCov">          0 :         if (*oldvalue)</span>
 <span class="lineNum">     712 </span><span class="lineNoCov">          0 :             free(oldvalue);</span>
-<span class="lineNum">     713 </span>            :         break;
+<span class="lineNum">     713 </span><span class="lineNoCov">          0 :         break;</span>
 <span class="lineNum">     714 </span>            :     case TUNESET_UNKNOWN:
 <span class="lineNum">     715 </span><span class="lineNoCov">          0 :         if (*oldvalue)</span>
 <span class="lineNum">     716 </span><span class="lineNoCov">          0 :             free(oldvalue);</span>
@@ -792,7 +792,7 @@
 <span class="lineNum">     730 </span>            :     default:
 <span class="lineNum">     731 </span><span class="lineNoCov">          0 :         if (*oldvalue)</span>
 <span class="lineNum">     732 </span><span class="lineNoCov">          0 :             free(oldvalue);</span>
-<span class="lineNum">     733 </span>            :         break;
+<span class="lineNum">     733 </span><span class="lineNoCov">          0 :         break;</span>
 <span class="lineNum">     734 </span>            :     }
 <span class="lineNum">     735 </span><span class="lineNoCov">          0 :     CLEAR(oper1);</span>
 <span class="lineNum">     736 </span><span class="lineNoCov">          0 :     CLEAR(oper2);</span>
@@ -895,7 +895,7 @@
 <span class="lineNum">     833 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Expected a string event id. (2)&quot;);</span>
 <span class="lineNum">     834 </span>            : 
 <span class="lineNum">     835 </span><span class="lineNoCov">          0 :     if (oper1-&gt;data.number == fr-&gt;pid)</span>
-<span class="lineNum">     836 </span>            :         destfr = fr;
+<span class="lineNum">     836 </span><span class="lineNoCov">          0 :         destfr = fr;</span>
 <span class="lineNum">     837 </span>            :     else
 <span class="lineNum">     838 </span><span class="lineNoCov">          0 :         destfr = timequeue_pid_frame(oper1-&gt;data.number);</span>
 <span class="lineNum">     839 </span>            : 
@@ -974,20 +974,20 @@
 <span class="lineNum">     912 </span><span class="lineNoCov">          0 :         for (ref = 0; buf[ref]; ref++)</span>
 <span class="lineNum">     913 </span><span class="lineNoCov">          0 :             buf[ref] = tolower(buf[ref]);</span>
 <span class="lineNum">     914 </span><span class="lineNoCov">          0 :         if (!strcmp(buf, &quot;e&quot;) || !strcmp(buf, &quot;exit&quot;)) {</span>
-<span class="lineNum">     915 </span>            :             ok1 = ok_ascii_other;
-<span class="lineNum">     916 </span>            :             ok2 = ok_name;
+<span class="lineNum">     915 </span><span class="lineNoCov">          0 :             ok1 = ok_ascii_other;</span>
+<span class="lineNum">     916 </span><span class="lineNoCov">          0 :             ok2 = ok_name;</span>
 <span class="lineNum">     917 </span><span class="lineNoCov">          0 :         } else if (!strcmp(buf, &quot;r&quot;) || !strcmp(buf, &quot;room&quot;)) {</span>
-<span class="lineNum">     918 </span>            :             ok1 = ok_ascii_other;
-<span class="lineNum">     919 </span>            :             ok2 = ok_name;
+<span class="lineNum">     918 </span><span class="lineNoCov">          0 :             ok1 = ok_ascii_other;</span>
+<span class="lineNum">     919 </span><span class="lineNoCov">          0 :             ok2 = ok_name;</span>
 <span class="lineNum">     920 </span><span class="lineNoCov">          0 :         } else if (!strcmp(buf, &quot;t&quot;) || !strcmp(buf, &quot;thing&quot;)) {</span>
-<span class="lineNum">     921 </span>            :             ok1 = ok_ascii_thing;
-<span class="lineNum">     922 </span>            :             ok2 = ok_name;
+<span class="lineNum">     921 </span><span class="lineNoCov">          0 :             ok1 = ok_ascii_thing;</span>
+<span class="lineNum">     922 </span><span class="lineNoCov">          0 :             ok2 = ok_name;</span>
 <span class="lineNum">     923 </span><span class="lineNoCov">          0 :         } else if (!strcmp(buf, &quot;p&quot;) || !strcmp(buf, &quot;player&quot;)) {</span>
-<span class="lineNum">     924 </span>            :             ok1 = ok_player_name;
+<span class="lineNum">     924 </span><span class="lineNoCov">          0 :             ok1 = ok_player_name;</span>
 <span class="lineNum">     925 </span><span class="lineNoCov">          0 :         } else if (!strcmp(buf, &quot;f&quot;) || !strcmp(buf, &quot;muf&quot;)</span>
 <span class="lineNum">     926 </span><span class="lineNoCov">          0 :                    || !strcmp(buf, &quot;program&quot;)) {</span>
-<span class="lineNum">     927 </span>            :             ok1 = ok_ascii_other;
-<span class="lineNum">     928 </span>            :             ok2 = ok_name;
+<span class="lineNum">     927 </span><span class="lineNoCov">          0 :             ok1 = ok_ascii_other;</span>
+<span class="lineNum">     928 </span><span class="lineNoCov">          0 :             ok2 = ok_name;</span>
 <span class="lineNum">     929 </span>            :         } else {
 <span class="lineNum">     930 </span><span class="lineNoCov">          0 :             abort_interp(&quot;String must be a valid object type (2).&quot;);</span>
 <span class="lineNum">     931 </span>            :         }
@@ -1094,7 +1094,7 @@
 <span class="lineNum">    1032 </span>            : 
 <span class="lineNum">    1033 </span><span class="lineNoCov">          0 :         for (cur = &amp;frame-&gt;waiters; *cur; cur = &amp;(*cur)-&gt;next) {</span>
 <span class="lineNum">    1034 </span><span class="lineNoCov">          0 :             if ((*cur)-&gt;pid == oper1-&gt;data.number) {</span>
-<span class="lineNum">    1035 </span>            :                 break;
+<span class="lineNum">    1035 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">    1036 </span>            :             }
 <span class="lineNum">    1037 </span>            :         }
 <span class="lineNum">    1038 </span>            : 

@@ -32,16 +32,16 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">5</td>
-            <td class="headerCovTableEntry">1132</td>
+            <td class="headerCovTableEntry">1175</td>
             <td class="headerCovTableEntryLo">0.4 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 00:20:31</td>
+            <td class="headerValue">2017-02-26 01:21:31</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
-            <td class="headerCovTableEntry">41</td>
+            <td class="headerCovTableEntry">42</td>
             <td class="headerCovTableEntryLo">2.4 %</td>
           </tr>
           <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
@@ -185,9 +185,9 @@
 <span class="lineNum">     123 </span><span class="lineNoCov">          0 :         nxt = ptr-&gt;next;</span>
 <span class="lineNum">     124 </span><span class="lineNoCov">          0 :         while (count-- &gt; 0)</span>
 <span class="lineNum">     125 </span><span class="lineNoCov">          0 :             CLEAR(&amp;ptr-&gt;lvars[count]);</span>
-<span class="lineNum">     126 </span>            :         ptr-&gt;next = NULL;
-<span class="lineNum">     127 </span>            :         ptr-&gt;prev = NULL;
-<span class="lineNum">     128 </span>            :         ptr-&gt;prog = NOTHING;
+<span class="lineNum">     126 </span><span class="lineNoCov">          0 :         ptr-&gt;next = NULL;</span>
+<span class="lineNum">     127 </span><span class="lineNoCov">          0 :         ptr-&gt;prev = NULL;</span>
+<span class="lineNum">     128 </span><span class="lineNoCov">          0 :         ptr-&gt;prog = NOTHING;</span>
 <span class="lineNum">     129 </span><span class="lineNoCov">          0 :         free((void *) ptr);</span>
 <span class="lineNum">     130 </span><span class="lineNoCov">          0 :         ptr = nxt;</span>
 <span class="lineNum">     131 </span>            :     }
@@ -249,7 +249,7 @@
 <span class="lineNum">     187 </span><span class="lineNoCov">          0 : scopedvar_poplevel(struct frame *fr)</span>
 <span class="lineNum">     188 </span>            : {
 <span class="lineNum">     189 </span><span class="lineNoCov">          0 :     if (!fr || !fr-&gt;svars) {</span>
-<span class="lineNum">     190 </span>            :         return 0;
+<span class="lineNum">     190 </span><span class="lineNoCov">          0 :         return 0;</span>
 <span class="lineNum">     191 </span>            :     }
 <span class="lineNum">     192 </span>            : 
 <span class="lineNum">     193 </span><span class="lineNoCov">          0 :     struct scopedvar_t *tmp = fr-&gt;svars;</span>
@@ -274,10 +274,10 @@
 <span class="lineNum">     212 </span><span class="lineNoCov">          0 :     while (svinfo &amp;&amp; level-- &gt; 0)</span>
 <span class="lineNum">     213 </span><span class="lineNoCov">          0 :         svinfo = svinfo-&gt;next;</span>
 <span class="lineNum">     214 </span><span class="lineNoCov">          0 :     if (!svinfo) {</span>
-<span class="lineNum">     215 </span>            :         return NULL;
+<span class="lineNum">     215 </span><span class="lineNoCov">          0 :         return NULL;</span>
 <span class="lineNum">     216 </span>            :     }
 <span class="lineNum">     217 </span><span class="lineNoCov">          0 :     if (varnum &lt; 0 || varnum &gt;= svinfo-&gt;count) {</span>
-<span class="lineNum">     218 </span>            :         return NULL;
+<span class="lineNum">     218 </span><span class="lineNoCov">          0 :         return NULL;</span>
 <span class="lineNum">     219 </span>            :     }
 <span class="lineNum">     220 </span><span class="lineNoCov">          0 :     return (&amp;svinfo-&gt;vars[varnum]);</span>
 <span class="lineNum">     221 </span>            : }
@@ -288,13 +288,13 @@
 <span class="lineNum">     226 </span><span class="lineNoCov">          0 :     while (pc &amp;&amp; pc-&gt;type != PROG_FUNCTION)</span>
 <span class="lineNum">     227 </span><span class="lineNoCov">          0 :         pc--;</span>
 <span class="lineNum">     228 </span><span class="lineNoCov">          0 :     if (!pc || !pc-&gt;data.mufproc) {</span>
-<span class="lineNum">     229 </span>            :         return NULL;
+<span class="lineNum">     229 </span><span class="lineNoCov">          0 :         return NULL;</span>
 <span class="lineNum">     230 </span>            :     }
 <span class="lineNum">     231 </span><span class="lineNoCov">          0 :     if (varnum &lt; 0 || varnum &gt;= pc-&gt;data.mufproc-&gt;vars) {</span>
-<span class="lineNum">     232 </span>            :         return NULL;
+<span class="lineNum">     232 </span><span class="lineNoCov">          0 :         return NULL;</span>
 <span class="lineNum">     233 </span>            :     }
 <span class="lineNum">     234 </span><span class="lineNoCov">          0 :     if (!pc-&gt;data.mufproc-&gt;varnames) {</span>
-<span class="lineNum">     235 </span>            :         return NULL;
+<span class="lineNum">     235 </span><span class="lineNoCov">          0 :         return NULL;</span>
 <span class="lineNum">     236 </span>            :     }
 <span class="lineNum">     237 </span><span class="lineNoCov">          0 :     return pc-&gt;data.mufproc-&gt;varnames[varnum];</span>
 <span class="lineNum">     238 </span>            : }
@@ -307,13 +307,13 @@
 <span class="lineNum">     245 </span><span class="lineNoCov">          0 :     while (svinfo &amp;&amp; level-- &gt; 0)</span>
 <span class="lineNum">     246 </span><span class="lineNoCov">          0 :         svinfo = svinfo-&gt;next;</span>
 <span class="lineNum">     247 </span><span class="lineNoCov">          0 :     if (!svinfo) {</span>
-<span class="lineNum">     248 </span>            :         return NULL;
+<span class="lineNum">     248 </span><span class="lineNoCov">          0 :         return NULL;</span>
 <span class="lineNum">     249 </span>            :     }
 <span class="lineNum">     250 </span><span class="lineNoCov">          0 :     if (varnum &lt; 0 || varnum &gt;= svinfo-&gt;count) {</span>
-<span class="lineNum">     251 </span>            :         return NULL;
+<span class="lineNum">     251 </span><span class="lineNoCov">          0 :         return NULL;</span>
 <span class="lineNum">     252 </span>            :     }
 <span class="lineNum">     253 </span><span class="lineNoCov">          0 :     if (!svinfo-&gt;varnames) {</span>
-<span class="lineNum">     254 </span>            :         return NULL;
+<span class="lineNum">     254 </span><span class="lineNoCov">          0 :         return NULL;</span>
 <span class="lineNum">     255 </span>            :     }
 <span class="lineNum">     256 </span><span class="lineNoCov">          0 :     return svinfo-&gt;varnames[varnum];</span>
 <span class="lineNum">     257 </span>            : }
@@ -344,7 +344,7 @@
 <span class="lineNum">     282 </span>            :     case PROG_STRING:
 <span class="lineNum">     283 </span><span class="lineNoCov">          0 :         if (oper-&gt;data.string &amp;&amp; --oper-&gt;data.string-&gt;links == 0)</span>
 <span class="lineNum">     284 </span><span class="lineNoCov">          0 :             free((void *) oper-&gt;data.string);</span>
-<span class="lineNum">     285 </span>            :         break;
+<span class="lineNum">     285 </span><span class="lineNoCov">          0 :         break;</span>
 <span class="lineNum">     286 </span>            :     case PROG_FUNCTION:
 <span class="lineNum">     287 </span><span class="lineNoCov">          0 :         if (oper-&gt;data.mufproc) {</span>
 <span class="lineNum">     288 </span><span class="lineNoCov">          0 :             free((void *) oper-&gt;data.mufproc-&gt;procname);</span>
@@ -357,14 +357,14 @@
 <span class="lineNum">     295 </span>            :             }
 <span class="lineNum">     296 </span><span class="lineNoCov">          0 :             free((void *) oper-&gt;data.mufproc);</span>
 <span class="lineNum">     297 </span>            :         }
-<span class="lineNum">     298 </span>            :         break;
+<span class="lineNum">     298 </span><span class="lineNoCov">          0 :         break;</span>
 <span class="lineNum">     299 </span>            :     case PROG_ARRAY:
 <span class="lineNum">     300 </span><span class="lineNoCov">          0 :         array_free(oper-&gt;data.array);</span>
 <span class="lineNum">     301 </span><span class="lineNoCov">          0 :         break;</span>
 <span class="lineNum">     302 </span>            :     case PROG_LOCK:
 <span class="lineNum">     303 </span><span class="lineNoCov">          0 :         if (oper-&gt;data.lock != TRUE_BOOLEXP)</span>
 <span class="lineNum">     304 </span><span class="lineNoCov">          0 :             free_boolexp(oper-&gt;data.lock);</span>
-<span class="lineNum">     305 </span>            :         break;
+<span class="lineNum">     305 </span><span class="lineNoCov">          0 :         break;</span>
 <span class="lineNum">     306 </span>            :     }
 <span class="lineNum">     307 </span><span class="lineNoCov">          0 :     oper-&gt;line = line;</span>
 <span class="lineNum">     308 </span><span class="lineNoCov">          0 :     oper-&gt;data.addr = (struct prog_addr *) file;</span>
@@ -383,18 +383,18 @@
 <span class="lineNum">     321 </span>            : static struct tryvars **last_try = &amp;try_pool;
 <a name="322"><span class="lineNum">     322 </span>            : </a>
 <span class="lineNum">     323 </span>            : void
-<span class="lineNum">     324 </span><span class="lineCov">        227 : purge_free_frames(void)</span>
+<span class="lineNum">     324 </span><span class="lineCov">        263 : purge_free_frames(void)</span>
 <span class="lineNum">     325 </span>            : {
 <span class="lineNum">     326 </span>            :     struct frame *ptr, *ptr2;
-<span class="lineNum">     327 </span><span class="lineCov">        227 :     int count = tp_free_frames_pool;</span>
+<span class="lineNum">     327 </span><span class="lineCov">        263 :     int count = tp_free_frames_pool;</span>
 <span class="lineNum">     328 </span>            : 
-<span class="lineNum">     329 </span><span class="lineCov">        227 :     for (ptr = free_frames_list; ptr &amp;&amp; --count &gt; 0; ptr = ptr-&gt;next) ;</span>
-<span class="lineNum">     330 </span><span class="lineCov">        227 :     while (ptr &amp;&amp; ptr-&gt;next) {</span>
+<span class="lineNum">     329 </span><span class="lineCov">        263 :     for (ptr = free_frames_list; ptr &amp;&amp; --count &gt; 0; ptr = ptr-&gt;next) ;</span>
+<span class="lineNum">     330 </span><span class="lineCov">        526 :     while (ptr &amp;&amp; ptr-&gt;next) {</span>
 <span class="lineNum">     331 </span><span class="lineNoCov">          0 :         ptr2 = ptr-&gt;next;</span>
 <span class="lineNum">     332 </span><span class="lineNoCov">          0 :         ptr-&gt;next = ptr-&gt;next-&gt;next;</span>
 <span class="lineNum">     333 </span><span class="lineNoCov">          0 :         free(ptr2);</span>
 <span class="lineNum">     334 </span>            :     }
-<span class="lineNum">     335 </span><span class="lineCov">        227 : }</span>
+<span class="lineNum">     335 </span><span class="lineCov">        263 : }</span>
 <span class="lineNum">     336 </span>            : 
 <span class="lineNum">     337 </span>            : #ifdef MALLOC_PROFILING
 <span class="lineNum">     338 </span>            : void
@@ -598,7 +598,7 @@
 <span class="lineNum">     536 </span><span class="lineNoCov">          0 :         nu-&gt;next = NULL;</span>
 <span class="lineNum">     537 </span>            : 
 <span class="lineNum">     538 </span><span class="lineNoCov">          0 :         if (!out) {</span>
-<span class="lineNum">     539 </span>            :             last = out = nu;
+<span class="lineNum">     539 </span><span class="lineNoCov">          0 :             last = out = nu;</span>
 <span class="lineNum">     540 </span>            :         } else {
 <span class="lineNum">     541 </span><span class="lineNoCov">          0 :             last-&gt;next = nu;</span>
 <span class="lineNum">     542 </span><span class="lineNoCov">          0 :             last = nu;</span>
@@ -631,7 +631,7 @@
 <span class="lineNum">     569 </span>            :     struct forvars *newstack;
 <span class="lineNum">     570 </span>            : 
 <span class="lineNum">     571 </span><span class="lineNoCov">          0 :     if (!forstack) {</span>
-<span class="lineNum">     572 </span>            :         return NULL;
+<span class="lineNum">     572 </span><span class="lineNoCov">          0 :         return NULL;</span>
 <span class="lineNum">     573 </span>            :     }
 <span class="lineNum">     574 </span><span class="lineNoCov">          0 :     newstack = forstack-&gt;next;</span>
 <span class="lineNum">     575 </span><span class="lineNoCov">          0 :     forstack-&gt;next = for_pool;</span>
@@ -639,7 +639,7 @@
 <span class="lineNum">     577 </span><span class="lineNoCov">          0 :     if (last_for == &amp;for_pool) {</span>
 <span class="lineNum">     578 </span><span class="lineNoCov">          0 :         last_for = &amp;(for_pool-&gt;next);</span>
 <span class="lineNum">     579 </span>            :     }
-<span class="lineNum">     580 </span>            :     return newstack;
+<span class="lineNum">     580 </span><span class="lineNoCov">          0 :     return newstack;</span>
 <span class="lineNum">     581 </span>            : }
 <a name="582"><span class="lineNum">     582 </span>            : </a>
 <span class="lineNum">     583 </span>            : struct tryvars *
@@ -667,7 +667,7 @@
 <span class="lineNum">     605 </span><span class="lineNoCov">          0 :         nu-&gt;next = NULL;</span>
 <span class="lineNum">     606 </span>            : 
 <span class="lineNum">     607 </span><span class="lineNoCov">          0 :         if (!out) {</span>
-<span class="lineNum">     608 </span>            :             last = out = nu;
+<span class="lineNum">     608 </span><span class="lineNoCov">          0 :             last = out = nu;</span>
 <span class="lineNum">     609 </span>            :         } else {
 <span class="lineNum">     610 </span><span class="lineNoCov">          0 :             last-&gt;next = nu;</span>
 <span class="lineNum">     611 </span><span class="lineNoCov">          0 :             last = nu;</span>
@@ -700,7 +700,7 @@
 <span class="lineNum">     638 </span>            :     struct tryvars *newstack;
 <span class="lineNum">     639 </span>            : 
 <span class="lineNum">     640 </span><span class="lineNoCov">          0 :     if (!trystack) {</span>
-<span class="lineNum">     641 </span>            :         return NULL;
+<span class="lineNum">     641 </span><span class="lineNoCov">          0 :         return NULL;</span>
 <span class="lineNum">     642 </span>            :     }
 <span class="lineNum">     643 </span><span class="lineNoCov">          0 :     newstack = trystack-&gt;next;</span>
 <span class="lineNum">     644 </span><span class="lineNoCov">          0 :     trystack-&gt;next = try_pool;</span>
@@ -708,7 +708,7 @@
 <span class="lineNum">     646 </span><span class="lineNoCov">          0 :     if (last_try == &amp;try_pool) {</span>
 <span class="lineNum">     647 </span><span class="lineNoCov">          0 :         last_try = &amp;(try_pool-&gt;next);</span>
 <span class="lineNum">     648 </span>            :     }
-<span class="lineNum">     649 </span>            :     return newstack;
+<span class="lineNum">     649 </span><span class="lineNoCov">          0 :     return newstack;</span>
 <span class="lineNum">     650 </span>            : }
 <span class="lineNum">     651 </span>            : 
 <a name="652"><span class="lineNum">     652 </span>            : /* clean up lists from watchpid and sends event */</a>
@@ -899,17 +899,17 @@
 <span class="lineNum">     837 </span><span class="lineNoCov">          0 :                 to-&gt;data.mufproc-&gt;varnames[j] = strdup(from-&gt;data.mufproc-&gt;varnames[j]);</span>
 <span class="lineNum">     838 </span>            :             }
 <span class="lineNum">     839 </span>            :         }
-<span class="lineNum">     840 </span>            :         break;
+<span class="lineNum">     840 </span><span class="lineNoCov">          0 :         break;</span>
 <span class="lineNum">     841 </span>            :     case PROG_STRING:
 <span class="lineNum">     842 </span><span class="lineNoCov">          0 :         if (from-&gt;data.string) {</span>
 <span class="lineNum">     843 </span><span class="lineNoCov">          0 :             from-&gt;data.string-&gt;links++;</span>
 <span class="lineNum">     844 </span>            :         }
-<span class="lineNum">     845 </span>            :         break;
+<span class="lineNum">     845 </span><span class="lineNoCov">          0 :         break;</span>
 <span class="lineNum">     846 </span>            :     case PROG_ARRAY:
 <span class="lineNum">     847 </span><span class="lineNoCov">          0 :         if (from-&gt;data.array) {</span>
 <span class="lineNum">     848 </span><span class="lineNoCov">          0 :             from-&gt;data.array-&gt;links++;</span>
 <span class="lineNum">     849 </span>            :         }
-<span class="lineNum">     850 </span>            :         break;
+<span class="lineNum">     850 </span><span class="lineNoCov">          0 :         break;</span>
 <span class="lineNum">     851 </span>            :     case PROG_ADD:
 <span class="lineNum">     852 </span><span class="lineNoCov">          0 :         from-&gt;data.addr-&gt;links++;</span>
 <span class="lineNum">     853 </span><span class="lineNoCov">          0 :         PROGRAM_INC_INSTANCES(from-&gt;data.addr-&gt;progref);</span>
@@ -918,19 +918,19 @@
 <span class="lineNum">     856 </span><span class="lineNoCov">          0 :         if (from-&gt;data.lock != TRUE_BOOLEXP) {</span>
 <span class="lineNum">     857 </span><span class="lineNoCov">          0 :             to-&gt;data.lock = copy_bool(from-&gt;data.lock);</span>
 <span class="lineNum">     858 </span>            :         }
-<span class="lineNum">     859 </span>            :         break;
+<span class="lineNum">     859 </span><span class="lineNoCov">          0 :         break;</span>
 <span class="lineNum">     860 </span>            :     }
 <span class="lineNum">     861 </span><span class="lineNoCov">          0 : }</span>
-<span class="lineNum">     862 </span>            : 
+<a name="862"><span class="lineNum">     862 </span>            : </a>
 <span class="lineNum">     863 </span>            : static void
-<span class="lineNum">     864 </span>            : copyvars(vars * from, vars * to)
+<span class="lineNum">     864 </span><span class="lineNoCov">          0 : copyvars(vars * from, vars * to)</span>
 <span class="lineNum">     865 </span>            : {
 <span class="lineNum">     866 </span>            :     assert(from &amp;&amp; to);
 <span class="lineNum">     867 </span>            : 
-<span class="lineNum">     868 </span>            :     for (int i = 0; i &lt; MAX_VAR; i++) {
-<span class="lineNum">     869 </span>            :         copyinst(&amp;(*from)[i], &amp;(*to)[i]);
+<span class="lineNum">     868 </span><span class="lineNoCov">          0 :     for (int i = 0; i &lt; MAX_VAR; i++) {</span>
+<span class="lineNum">     869 </span><span class="lineNoCov">          0 :         copyinst(&amp;(*from)[i], &amp;(*to)[i]);</span>
 <span class="lineNum">     870 </span>            :     }
-<span class="lineNum">     871 </span>            : }
+<span class="lineNum">     871 </span><span class="lineNoCov">          0 : }</span>
 <a name="872"><span class="lineNum">     872 </span>            : </a>
 <span class="lineNum">     873 </span>            : static void
 <span class="lineNum">     874 </span><span class="lineNoCov">          0 : calc_profile_timing(dbref prog, struct frame *fr)</span>
@@ -1133,7 +1133,7 @@
 <span class="lineNum">    1071 </span><span class="lineNoCov">          0 :                         abort_loop_hard(&quot;Maximum preempt instruction count exceeded&quot;, NULL,</span>
 <span class="lineNum">    1072 </span>            :                                         NULL);
 <span class="lineNum">    1073 </span>            :                 } else
-<span class="lineNum">    1074 </span>            :                     instr_count = 0;
+<span class="lineNum">    1074 </span><span class="lineNoCov">          0 :                     instr_count = 0;</span>
 <span class="lineNum">    1075 </span>            :             } else {
 <span class="lineNum">    1076 </span>            :                 /* else make sure that the program doesn't run too long */
 <span class="lineNum">    1077 </span><span class="lineNoCov">          0 :                 if (instr_count &gt;= tp_max_instr_count)</span>
@@ -1201,8 +1201,8 @@
 <span class="lineNum">    1139 </span><span class="lineNoCov">          0 :                             if (fr-&gt;brkpt.linecount[i] == -1)</span>
 <span class="lineNum">    1140 </span><span class="lineNoCov">          0 :                                 fr-&gt;brkpt.linecount[i] = 0;</span>
 <span class="lineNum">    1141 </span>            :                         } else {
-<span class="lineNum">    1142 </span>            :                             breakflag = 1;
-<span class="lineNum">    1143 </span>            :                             break;
+<span class="lineNum">    1142 </span><span class="lineNoCov">          0 :                             breakflag = 1;</span>
+<span class="lineNum">    1143 </span><span class="lineNoCov">          0 :                             break;</span>
 <span class="lineNum">    1144 </span>            :                         }
 <span class="lineNum">    1145 </span>            :                     }
 <span class="lineNum">    1146 </span>            :                 }
@@ -1546,7 +1546,7 @@
 <span class="lineNum">    1484 </span><span class="lineNoCov">          0 :                     while (pbs) {</span>
 <span class="lineNum">    1485 </span><span class="lineNoCov">          0 :                         tmpint = strcasecmp(temp2-&gt;data.string-&gt;data, pbs-&gt;subname);</span>
 <span class="lineNum">    1486 </span><span class="lineNoCov">          0 :                         if (!tmpint)</span>
-<span class="lineNum">    1487 </span>            :                             break;
+<span class="lineNum">    1487 </span><span class="lineNoCov">          0 :                             break;</span>
 <span class="lineNum">    1488 </span><span class="lineNoCov">          0 :                         pbs = pbs-&gt;next;</span>
 <span class="lineNum">    1489 </span>            :                     }
 <span class="lineNum">    1490 </span><span class="lineNoCov">          0 :                     if (!pbs)</span>
@@ -1570,7 +1570,7 @@
 <span class="lineNum">    1508 </span><span class="lineNoCov">          0 :                 CLEAR(temp1);</span>
 <span class="lineNum">    1509 </span><span class="lineNoCov">          0 :                 if (temp2)</span>
 <span class="lineNum">    1510 </span><span class="lineNoCov">          0 :                     CLEAR(temp2);</span>
-<span class="lineNum">    1511 </span>            :                 break;
+<span class="lineNum">    1511 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">    1512 </span>            : 
 <span class="lineNum">    1513 </span>            :             case IN_RET:
 <span class="lineNum">    1514 </span><span class="lineNoCov">          0 :                 if (stop &gt; 1 &amp;&amp; program != sys[stop - 1].progref) {</span>
@@ -1675,11 +1675,11 @@
 <span class="lineNum">    1613 </span><span class="lineNoCov">          0 :                     for (outcount = i = 0; i &lt; count; i++) {</span>
 <span class="lineNum">    1614 </span><span class="lineNoCov">          0 :                         char *val = array_get_intkey_strval(temp1-&gt;data.array, i);</span>
 <span class="lineNum">    1615 </span><span class="lineNoCov">          0 :                         if (val != NULL) {</span>
-<span class="lineNum">    1616 </span>            :                             int found = 0;
+<span class="lineNum">    1616 </span><span class="lineNoCov">          0 :                             int found = 0;</span>
 <span class="lineNum">    1617 </span><span class="lineNoCov">          0 :                             for (int j = 0; j &lt; outcount; j++) {</span>
 <span class="lineNum">    1618 </span><span class="lineNoCov">          0 :                                 if (!strcmp(events[j], val)) {</span>
-<span class="lineNum">    1619 </span>            :                                     found = 1;
-<span class="lineNum">    1620 </span>            :                                     break;
+<span class="lineNum">    1619 </span><span class="lineNoCov">          0 :                                     found = 1;</span>
+<span class="lineNum">    1620 </span><span class="lineNoCov">          0 :                                     break;</span>
 <span class="lineNum">    1621 </span>            :                                 }
 <span class="lineNum">    1622 </span>            :                             }
 <span class="lineNum">    1623 </span><span class="lineNoCov">          0 :                             if (!found) {</span>
@@ -1740,7 +1740,7 @@
 <span class="lineNum">    1678 </span><span class="lineNoCov">          0 :                 pc++;</span>
 <span class="lineNum">    1679 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">    1680 </span>            :             }                   /* switch */
-<span class="lineNum">    1681 </span>            :             break;
+<span class="lineNum">    1681 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">    1682 </span>            :         case PROG_CLEARED:
 <span class="lineNum">    1683 </span><span class="lineNoCov">          0 :             log_status</span>
 <span class="lineNum">    1684 </span>            :                     (&quot;WARNING: attempt to execute instruction cleared by %s:%hd in program %d&quot;,
@@ -1792,7 +1792,7 @@
 <span class="lineNum">    1730 </span><span class="lineNoCov">          0 :             rv = &amp;retval;</span>
 <span class="lineNum">    1731 </span>            :         } else {
 <span class="lineNum">    1732 </span><span class="lineNoCov">          0 :             if (!false_inst(arg + atop - 1)) {</span>
-<span class="lineNum">    1733 </span>            :                 rv = (struct inst *) 1;
+<span class="lineNum">    1733 </span><span class="lineNoCov">          0 :                 rv = (struct inst *) 1;</span>
 <span class="lineNum">    1734 </span>            :             } else {
 <span class="lineNum">    1735 </span><span class="lineNoCov">          0 :                 rv = NULL;</span>
 <span class="lineNum">    1736 </span>            :             }
@@ -1848,11 +1848,11 @@
 <span class="lineNum">    1786 </span>            : {
 <span class="lineNum">    1787 </span>            : 
 <span class="lineNum">    1788 </span><span class="lineNoCov">          0 :     if (thing == player || thing == HOME)</span>
-<span class="lineNum">    1789 </span>            :         return 1;
+<span class="lineNum">    1789 </span><span class="lineNoCov">          0 :         return 1;</span>
 <span class="lineNum">    1790 </span>            : 
 <span class="lineNum">    1791 </span><span class="lineNoCov">          0 :     switch (Typeof(thing)) {</span>
 <span class="lineNum">    1792 </span>            :     case TYPE_PLAYER:
-<span class="lineNum">    1793 </span>            :         return 0;
+<span class="lineNum">    1793 </span><span class="lineNoCov">          0 :         return 0;</span>
 <span class="lineNum">    1794 </span>            :     case TYPE_EXIT:
 <span class="lineNum">    1795 </span><span class="lineNoCov">          0 :         return (OWNER(thing) == OWNER(player) || OWNER(thing) == NOTHING);</span>
 <span class="lineNum">    1796 </span>            :     case TYPE_ROOM:
@@ -1861,7 +1861,7 @@
 <span class="lineNum">    1799 </span><span class="lineNoCov">          0 :         return (OWNER(thing) == OWNER(player));</span>
 <span class="lineNum">    1800 </span>            :     }
 <span class="lineNum">    1801 </span>            : 
-<span class="lineNum">    1802 </span>            :     return 0;
+<span class="lineNum">    1802 </span><span class="lineNoCov">          0 :     return 0;</span>
 <span class="lineNum">    1803 </span>            : }
 <a name="1804"><span class="lineNum">    1804 </span>            : </a>
 <span class="lineNum">    1805 </span>            : dbref
@@ -2017,7 +2017,7 @@
 <span class="lineNum">    1955 </span><span class="lineNoCov">          0 :             if (*ptr) {</span>
 <span class="lineNum">    1956 </span><span class="lineNoCov">          0 :                 length -= prepend_string(&amp;bend, bstart, ptr);</span>
 <span class="lineNum">    1957 </span>            :             } else {
-<span class="lineNum">    1958 </span>            :                 break;          /* done because we couldn't display all that */
+<span class="lineNum">    1958 </span><span class="lineNoCov">          0 :                 break;          /* done because we couldn't display all that */</span>
 <span class="lineNum">    1959 </span>            :             }
 <span class="lineNum">    1960 </span><span class="lineNoCov">          0 :             if (count &gt; 0 &amp;&amp; count &gt; sp - 8) {</span>
 <span class="lineNum">    1961 </span><span class="lineNoCov">          0 :                 length -= prepend_string(&amp;bend, bstart, &quot;, &quot;);</span>

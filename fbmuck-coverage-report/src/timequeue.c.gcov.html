@@ -31,13 +31,13 @@
             <td class="headerValue">coverage-total</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">40</td>
-            <td class="headerCovTableEntry">738</td>
-            <td class="headerCovTableEntryLo">5.4 %</td>
+            <td class="headerCovTableEntry">42</td>
+            <td class="headerCovTableEntry">799</td>
+            <td class="headerCovTableEntryLo">5.3 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 00:20:31</td>
+            <td class="headerValue">2017-02-26 01:21:31</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">7</td>
@@ -193,7 +193,7 @@
 <span class="lineNum">     131 </span><span class="lineNoCov">          0 :             prog_clean(ptr-&gt;fr);</span>
 <span class="lineNum">     132 </span>            :         }
 <span class="lineNum">     133 </span><span class="lineNoCov">          0 :         if (ptr-&gt;typ == TQ_MUF_TYP &amp;&amp; (ptr-&gt;subtyp == TQ_MUF_READ ||</span>
-<span class="lineNum">     134 </span>            :                                        ptr-&gt;subtyp == TQ_MUF_TREAD)) {
+<span class="lineNum">     134 </span><span class="lineNoCov">          0 :                                        ptr-&gt;subtyp == TQ_MUF_TREAD)) {</span>
 <span class="lineNum">     135 </span><span class="lineNoCov">          0 :             FLAGS(ptr-&gt;uid) &amp;= ~INTERACTIVE;</span>
 <span class="lineNum">     136 </span><span class="lineNoCov">          0 :             FLAGS(ptr-&gt;uid) &amp;= ~READMODE;</span>
 <span class="lineNum">     137 </span><span class="lineNoCov">          0 :             notify_nolisten(ptr-&gt;uid,</span>
@@ -250,9 +250,9 @@
 <span class="lineNum">     188 </span>            : 
 <span class="lineNum">     189 </span><span class="lineNoCov">          0 :     if (!controls(player, ptr-&gt;called_prog) &amp;&amp; !controls(player, ptr-&gt;trig)</span>
 <span class="lineNum">     190 </span><span class="lineNoCov">          0 :         &amp;&amp; (player != ptr-&gt;uid)) {</span>
-<span class="lineNum">     191 </span>            :         return 0;
+<span class="lineNum">     191 </span><span class="lineNoCov">          0 :         return 0;</span>
 <span class="lineNum">     192 </span>            :     }
-<span class="lineNum">     193 </span>            :     return 1;
+<span class="lineNum">     193 </span><span class="lineNoCov">          0 :     return 1;</span>
 <span class="lineNum">     194 </span>            : }
 <a name="195"><span class="lineNum">     195 </span>            : </a>
 <span class="lineNum">     196 </span>            : static int
@@ -313,10 +313,10 @@
 <span class="lineNum">     251 </span><span class="lineNoCov">          0 :         return (tqhead-&gt;eventnum);</span>
 <span class="lineNum">     252 </span>            :     }
 <span class="lineNum">     253 </span>            : 
-<span class="lineNum">     254 </span>            :     ptr = tqhead;
+<span class="lineNum">     254 </span><span class="lineNoCov">          0 :     ptr = tqhead;</span>
 <span class="lineNum">     255 </span><span class="lineNoCov">          0 :     while (ptr &amp;&amp; ptr-&gt;next &amp;&amp; rtime &gt;= ptr-&gt;next-&gt;when &amp;&amp;</span>
 <span class="lineNum">     256 </span><span class="lineNoCov">          0 :            !(ptr-&gt;next-&gt;typ == TQ_MUF_TYP &amp;&amp; ptr-&gt;next-&gt;subtyp == TQ_MUF_READ)) {</span>
-<span class="lineNum">     257 </span>            :         ptr = ptr-&gt;next;
+<span class="lineNum">     257 </span><span class="lineNoCov">          0 :         ptr = ptr-&gt;next;</span>
 <span class="lineNum">     258 </span>            :     }
 <span class="lineNum">     259 </span>            : 
 <span class="lineNum">     260 </span><span class="lineNoCov">          0 :     ptr-&gt;next = alloc_timenode(event_typ, subtyp, rtime, descr, player, loc, trig,</span>
@@ -415,7 +415,7 @@
 <span class="lineNum">     353 </span>            :     timequeue ptr;
 <span class="lineNum">     354 </span>            : 
 <span class="lineNum">     355 </span><span class="lineNoCov">          0 :     if (muf_event_read_notify(descr, player, cmd)) {</span>
-<span class="lineNum">     356 </span>            :         return 1;
+<span class="lineNum">     356 </span><span class="lineNoCov">          0 :         return 1;</span>
 <span class="lineNum">     357 </span>            :     }
 <span class="lineNum">     358 </span>            : 
 <span class="lineNum">     359 </span><span class="lineNoCov">          0 :     ptr = tqhead;</span>
@@ -428,13 +428,13 @@
 <span class="lineNum">     366 </span><span class="lineNoCov">          0 :                     temp.type = PROG_INTEGER;</span>
 <span class="lineNum">     367 </span><span class="lineNoCov">          0 :                     temp.data.number = descr;</span>
 <span class="lineNum">     368 </span><span class="lineNoCov">          0 :                     muf_event_add(ptr-&gt;fr, &quot;READ&quot;, &amp;temp, 1);</span>
-<span class="lineNum">     369 </span>            :                     return 1;
+<span class="lineNum">     369 </span><span class="lineNoCov">          0 :                     return 1;</span>
 <span class="lineNum">     370 </span>            :                 }
 <span class="lineNum">     371 </span>            :             }
 <span class="lineNum">     372 </span>            :         }
 <span class="lineNum">     373 </span><span class="lineNoCov">          0 :         ptr = ptr-&gt;next;</span>
 <span class="lineNum">     374 </span>            :     }
-<span class="lineNum">     375 </span>            :     return 0;
+<span class="lineNum">     375 </span><span class="lineNoCov">          0 :     return 0;</span>
 <span class="lineNum">     376 </span>            : }
 <a name="377"><span class="lineNum">     377 </span>            : </a>
 <span class="lineNum">     378 </span>            : void
@@ -458,7 +458,7 @@
 <span class="lineNum">     396 </span><span class="lineNoCov">          0 :     while (ptr) {</span>
 <span class="lineNum">     397 </span><span class="lineNoCov">          0 :         if (ptr-&gt;typ == TQ_MUF_TYP &amp;&amp; (ptr-&gt;subtyp == TQ_MUF_READ ||</span>
 <span class="lineNum">     398 </span><span class="lineNoCov">          0 :                                        ptr-&gt;subtyp == TQ_MUF_TREAD) &amp;&amp; ptr-&gt;uid == player) {</span>
-<span class="lineNum">     399 </span>            :             break;
+<span class="lineNum">     399 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     400 </span>            :         }
 <span class="lineNum">     401 </span><span class="lineNoCov">          0 :         lastevent = ptr;</span>
 <span class="lineNum">     402 </span><span class="lineNoCov">          0 :         ptr = ptr-&gt;next;</span>
@@ -581,7 +581,7 @@
 <span class="lineNum">     519 </span>            :          */
 <span class="lineNum">     520 </span><span class="lineNoCov">          0 :         while (ptr) {</span>
 <span class="lineNum">     521 </span><span class="lineNoCov">          0 :             if (ptr-&gt;typ == TQ_MUF_TYP &amp;&amp; (ptr-&gt;subtyp == TQ_MUF_READ ||</span>
-<span class="lineNum">     522 </span>            :                                            ptr-&gt;subtyp == TQ_MUF_TREAD)) {
+<span class="lineNum">     522 </span><span class="lineNoCov">          0 :                                            ptr-&gt;subtyp == TQ_MUF_TREAD)) {</span>
 <span class="lineNum">     523 </span><span class="lineNoCov">          0 :                 if (ptr-&gt;uid == player) {</span>
 <span class="lineNum">     524 </span><span class="lineNoCov">          0 :                     FLAGS(player) |= (INTERACTIVE | READMODE);</span>
 <span class="lineNum">     525 </span>            :                 }
@@ -592,26 +592,26 @@
 <span class="lineNum">     530 </span>            : }
 <a name="531"><span class="lineNum">     531 </span>            : </a>
 <span class="lineNum">     532 </span>            : void
-<span class="lineNum">     533 </span><span class="lineCov">        227 : next_timequeue_event(void)</span>
+<span class="lineNum">     533 </span><span class="lineCov">        263 : next_timequeue_event(void)</span>
 <span class="lineNum">     534 </span>            : {
 <span class="lineNum">     535 </span>            :     struct frame *tmpfr;
 <span class="lineNum">     536 </span>            :     int tmpbl, tmpfg;
 <span class="lineNum">     537 </span>            :     timequeue lastevent, event;
-<span class="lineNum">     538 </span><span class="lineCov">        227 :     int maxruns = 0;</span>
-<span class="lineNum">     539 </span><span class="lineCov">        227 :     int forced_pid = 0;</span>
+<span class="lineNum">     538 </span><span class="lineCov">        263 :     int maxruns = 0;</span>
+<span class="lineNum">     539 </span><span class="lineCov">        263 :     int forced_pid = 0;</span>
 <span class="lineNum">     540 </span>            :     time_t rtime;
 <span class="lineNum">     541 </span>            : 
-<span class="lineNum">     542 </span><span class="lineCov">        227 :     time(&amp;rtime);</span>
+<span class="lineNum">     542 </span><span class="lineCov">        263 :     time(&amp;rtime);</span>
 <span class="lineNum">     543 </span>            : 
-<span class="lineNum">     544 </span><span class="lineCov">        227 :     lastevent = tqhead;</span>
-<span class="lineNum">     545 </span><span class="lineCov">        454 :     while ((lastevent) &amp;&amp; (rtime &gt;= lastevent-&gt;when) &amp;&amp; (maxruns &lt; 10)) {</span>
+<span class="lineNum">     544 </span><span class="lineCov">        263 :     lastevent = tqhead;</span>
+<span class="lineNum">     545 </span><span class="lineCov">        526 :     while ((lastevent) &amp;&amp; (rtime &gt;= lastevent-&gt;when) &amp;&amp; (maxruns &lt; 10)) {</span>
 <span class="lineNum">     546 </span><span class="lineNoCov">          0 :         lastevent = lastevent-&gt;next;</span>
 <span class="lineNum">     547 </span><span class="lineNoCov">          0 :         maxruns++;</span>
 <span class="lineNum">     548 </span>            :     }
 <span class="lineNum">     549 </span>            : 
-<span class="lineNum">     550 </span><span class="lineCov">        227 :     while (tqhead &amp;&amp; (tqhead != lastevent) &amp;&amp; (maxruns--)) {</span>
+<span class="lineNum">     550 </span><span class="lineCov">        526 :     while (tqhead &amp;&amp; (tqhead != lastevent) &amp;&amp; (maxruns--)) {</span>
 <span class="lineNum">     551 </span><span class="lineNoCov">          0 :         if (tqhead-&gt;typ == TQ_MUF_TYP &amp;&amp; tqhead-&gt;subtyp == TQ_MUF_READ) {</span>
-<span class="lineNum">     552 </span>            :             break;
+<span class="lineNum">     552 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     553 </span>            :         }
 <span class="lineNum">     554 </span><span class="lineNoCov">          0 :         event = tqhead;</span>
 <span class="lineNum">     555 </span><span class="lineNoCov">          0 :         tqhead = tqhead-&gt;next;</span>
@@ -647,7 +647,7 @@
 <span class="lineNum">     585 </span>            :                     dbref plyr;
 <span class="lineNum">     586 </span>            : 
 <span class="lineNum">     587 </span><span class="lineNoCov">          0 :                     snprintf(bbuf, sizeof(bbuf), &quot;&gt;&gt; %.4000s %.*s&quot;,</span>
-<span class="lineNum">     588 </span>            :                              NAME(event-&gt;uid),
+<span class="lineNum">     588 </span><span class="lineNoCov">          0 :                              NAME(event-&gt;uid),</span>
 <span class="lineNum">     589 </span><span class="lineNoCov">          0 :                              (int) (4000 - strlen(NAME(event-&gt;uid))),</span>
 <span class="lineNum">     590 </span>            :                              pronoun_substitute(event-&gt;descr, event-&gt;uid, cbuf));
 <span class="lineNum">     591 </span><span class="lineNoCov">          0 :                     plyr = CONTENTS(event-&gt;loc);</span>
@@ -691,7 +691,7 @@
 <span class="lineNum">     629 </span><span class="lineNoCov">          0 :         event-&gt;fr = NULL;</span>
 <span class="lineNum">     630 </span><span class="lineNoCov">          0 :         free_timenode(event);</span>
 <span class="lineNum">     631 </span>            :     }
-<span class="lineNum">     632 </span><span class="lineCov">        227 : }</span>
+<span class="lineNum">     632 </span><span class="lineCov">        263 : }</span>
 <a name="633"><span class="lineNum">     633 </span>            : </a>
 <span class="lineNum">     634 </span>            : int
 <span class="lineNum">     635 </span><span class="lineNoCov">          0 : in_timequeue(int pid)</span>
@@ -699,15 +699,15 @@
 <span class="lineNum">     637 </span><span class="lineNoCov">          0 :     timequeue ptr = tqhead;</span>
 <span class="lineNum">     638 </span>            : 
 <span class="lineNum">     639 </span><span class="lineNoCov">          0 :     if (!pid)</span>
-<span class="lineNum">     640 </span>            :         return 0;
+<span class="lineNum">     640 </span><span class="lineNoCov">          0 :         return 0;</span>
 <span class="lineNum">     641 </span><span class="lineNoCov">          0 :     if (muf_event_pid_frame(pid))</span>
-<span class="lineNum">     642 </span>            :         return 1;
+<span class="lineNum">     642 </span><span class="lineNoCov">          0 :         return 1;</span>
 <span class="lineNum">     643 </span><span class="lineNoCov">          0 :     if (!tqhead)</span>
-<span class="lineNum">     644 </span>            :         return 0;
+<span class="lineNum">     644 </span><span class="lineNoCov">          0 :         return 0;</span>
 <span class="lineNum">     645 </span><span class="lineNoCov">          0 :     while ((ptr) &amp;&amp; (ptr-&gt;eventnum != pid))</span>
 <span class="lineNum">     646 </span><span class="lineNoCov">          0 :         ptr = ptr-&gt;next;</span>
 <span class="lineNum">     647 </span><span class="lineNoCov">          0 :     if (ptr)</span>
-<span class="lineNum">     648 </span>            :         return 1;
+<span class="lineNum">     648 </span><span class="lineNoCov">          0 :         return 1;</span>
 <span class="lineNum">     649 </span><span class="lineNoCov">          0 :     return 0;</span>
 <span class="lineNum">     650 </span>            : }
 <a name="651"><span class="lineNum">     651 </span>            : </a>
@@ -718,35 +718,35 @@
 <span class="lineNum">     656 </span><span class="lineNoCov">          0 :     timequeue ptr = tqhead;</span>
 <span class="lineNum">     657 </span>            : 
 <span class="lineNum">     658 </span><span class="lineNoCov">          0 :     if (!pid)</span>
-<span class="lineNum">     659 </span>            :         return NULL;
+<span class="lineNum">     659 </span><span class="lineNoCov">          0 :         return NULL;</span>
 <span class="lineNum">     660 </span><span class="lineNoCov">          0 :     out = muf_event_pid_frame(pid);</span>
 <span class="lineNum">     661 </span><span class="lineNoCov">          0 :     if (out != NULL)</span>
-<span class="lineNum">     662 </span>            :         return out;
+<span class="lineNum">     662 </span><span class="lineNoCov">          0 :         return out;</span>
 <span class="lineNum">     663 </span>            : 
 <span class="lineNum">     664 </span><span class="lineNoCov">          0 :     if (!tqhead)</span>
-<span class="lineNum">     665 </span>            :         return NULL;
+<span class="lineNum">     665 </span><span class="lineNoCov">          0 :         return NULL;</span>
 <span class="lineNum">     666 </span><span class="lineNoCov">          0 :     while ((ptr) &amp;&amp; (ptr-&gt;eventnum != pid))</span>
 <span class="lineNum">     667 </span><span class="lineNoCov">          0 :         ptr = ptr-&gt;next;</span>
 <span class="lineNum">     668 </span><span class="lineNoCov">          0 :     if (ptr)</span>
 <span class="lineNum">     669 </span><span class="lineNoCov">          0 :         return ptr-&gt;fr;</span>
-<span class="lineNum">     670 </span>            :     return NULL;
+<span class="lineNum">     670 </span><span class="lineNoCov">          0 :     return NULL;</span>
 <span class="lineNum">     671 </span>            : }
 <a name="672"><span class="lineNum">     672 </span>            : </a>
 <span class="lineNum">     673 </span>            : time_t
-<span class="lineNum">     674 </span><span class="lineCov">        454 : next_event_time(void)</span>
+<span class="lineNum">     674 </span><span class="lineCov">        526 : next_event_time(void)</span>
 <span class="lineNum">     675 </span>            : {
-<span class="lineNum">     676 </span><span class="lineCov">        454 :     time_t rtime = time((time_t *) NULL);</span>
+<span class="lineNum">     676 </span><span class="lineCov">        526 :     time_t rtime = time((time_t *) NULL);</span>
 <span class="lineNum">     677 </span>            : 
-<span class="lineNum">     678 </span><span class="lineCov">        454 :     if (tqhead) {</span>
+<span class="lineNum">     678 </span><span class="lineCov">        526 :     if (tqhead) {</span>
 <span class="lineNum">     679 </span><span class="lineNoCov">          0 :         if (tqhead-&gt;when == -1) {</span>
-<span class="lineNum">     680 </span>            :             return (-1L);
+<span class="lineNum">     680 </span><span class="lineNoCov">          0 :             return (-1L);</span>
 <span class="lineNum">     681 </span><span class="lineNoCov">          0 :         } else if (rtime &gt;= tqhead-&gt;when) {</span>
-<span class="lineNum">     682 </span>            :             return (0L);
+<span class="lineNum">     682 </span><span class="lineNoCov">          0 :             return (0L);</span>
 <span class="lineNum">     683 </span>            :         } else {
 <span class="lineNum">     684 </span><span class="lineNoCov">          0 :             return ((time_t) (tqhead-&gt;when - rtime));</span>
 <span class="lineNum">     685 </span>            :         }
 <span class="lineNum">     686 </span>            :     }
-<span class="lineNum">     687 </span>            :     return (-1L);
+<span class="lineNum">     687 </span><span class="lineCov">        526 :     return (-1L);</span>
 <span class="lineNum">     688 </span>            : }
 <span class="lineNum">     689 </span>            : 
 <span class="lineNum">     690 </span>            : /* Checks the MUF timequeue for address references on the stack or */
@@ -761,20 +761,20 @@
 <span class="lineNum">     699 </span>            : 
 <span class="lineNum">     700 </span><span class="lineNoCov">          0 :     if (ptr-&gt;typ != TQ_MUF_TYP || !(ptr-&gt;fr) ||</span>
 <span class="lineNum">     701 </span><span class="lineNoCov">          0 :         Typeof(program) != TYPE_PROGRAM || !(PROGRAM_INSTANCES(program)))</span>
-<span class="lineNum">     702 </span>            :         return 0;
+<span class="lineNum">     702 </span><span class="lineNoCov">          0 :         return 0;</span>
 <span class="lineNum">     703 </span>            : 
 <span class="lineNum">     704 </span><span class="lineNoCov">          0 :     for (int loop = 1; loop &lt; ptr-&gt;fr-&gt;caller.top; loop++) {</span>
 <span class="lineNum">     705 </span><span class="lineNoCov">          0 :         if (ptr-&gt;fr-&gt;caller.st[loop] == program)</span>
-<span class="lineNum">     706 </span>            :             return 1;
+<span class="lineNum">     706 </span><span class="lineNoCov">          0 :             return 1;</span>
 <span class="lineNum">     707 </span>            :     }
 <span class="lineNum">     708 </span>            : 
 <span class="lineNum">     709 </span><span class="lineNoCov">          0 :     for (int loop = 0; loop &lt; ptr-&gt;fr-&gt;argument.top; loop++) {</span>
 <span class="lineNum">     710 </span><span class="lineNoCov">          0 :         if (ptr-&gt;fr-&gt;argument.st[loop].type == PROG_ADD &amp;&amp;</span>
 <span class="lineNum">     711 </span><span class="lineNoCov">          0 :             ptr-&gt;fr-&gt;argument.st[loop].data.addr-&gt;progref == program)</span>
-<span class="lineNum">     712 </span>            :             return 1;
+<span class="lineNum">     712 </span><span class="lineNoCov">          0 :             return 1;</span>
 <span class="lineNum">     713 </span>            :     }
 <span class="lineNum">     714 </span>            : 
-<span class="lineNum">     715 </span>            :     return 0;
+<span class="lineNum">     715 </span><span class="lineNoCov">          0 :     return 0;</span>
 <span class="lineNum">     716 </span>            : }
 <a name="717"><span class="lineNum">     717 </span>            : </a>
 <span class="lineNum">     718 </span>            : void
@@ -803,7 +803,7 @@
 <span class="lineNum">     741 </span><span class="lineNoCov">          0 :         snprintf(pidstr, sizeof(pidstr), &quot;%d&quot;, ptr-&gt;eventnum);</span>
 <span class="lineNum">     742 </span>            :         /* next due */
 <span class="lineNum">     743 </span><span class="lineNoCov">          0 :         strcpyn(duestr, sizeof(duestr), ((ptr-&gt;when - rtime) &gt; 0) ?</span>
-<span class="lineNum">     744 </span>            :                 time_format_2((time_t) (ptr-&gt;when - rtime)) : &quot;Due&quot;);
+<span class="lineNum">     744 </span><span class="lineNoCov">          0 :                 time_format_2((time_t) (ptr-&gt;when - rtime)) : &quot;Due&quot;);</span>
 <span class="lineNum">     745 </span>            :         /* Run length */
 <span class="lineNum">     746 </span><span class="lineNoCov">          0 :         strcpyn(runstr, sizeof(runstr), ptr-&gt;fr ?</span>
 <span class="lineNum">     747 </span><span class="lineNoCov">          0 :                 time_format_2((time_t) (rtime - ptr-&gt;fr-&gt;started)) : &quot;0s&quot;);</span>
@@ -822,10 +822,10 @@
 <span class="lineNum">     760 </span><span class="lineNoCov">          0 :                     pcnt = 99.9;</span>
 <span class="lineNum">     761 </span>            :                 }
 <span class="lineNum">     762 </span>            :             } else {
-<span class="lineNum">     763 </span>            :                 pcnt = 0.0;
+<span class="lineNum">     763 </span><span class="lineNoCov">          0 :                 pcnt = 0.0;</span>
 <span class="lineNum">     764 </span>            :             }
 <span class="lineNum">     765 </span>            :         } else {
-<span class="lineNum">     766 </span>            :             pcnt = 0.0;
+<span class="lineNum">     766 </span><span class="lineNoCov">          0 :             pcnt = 0.0;</span>
 <span class="lineNum">     767 </span>            :         }
 <span class="lineNum">     768 </span><span class="lineNoCov">          0 :         snprintf(cpustr, sizeof(cpustr), &quot;%4.1f&quot;, pcnt);</span>
 <span class="lineNum">     769 </span>            :         /* Get the dbref! */
@@ -836,7 +836,7 @@
 <span class="lineNum">     774 </span><span class="lineNoCov">          0 :         } else if (ptr-&gt;typ == TQ_MPI_TYP) {</span>
 <span class="lineNum">     775 </span>            :             /* if it's MPI... */
 <span class="lineNum">     776 </span><span class="lineNoCov">          0 :             snprintf(progstr, sizeof(progstr), &quot;#%d&quot;, ptr-&gt;trig);</span>
-<span class="lineNum">     777 </span>            :             snprintf(prognamestr, sizeof(prognamestr), &quot;%s&quot;, &quot;&quot;);
+<span class="lineNum">     777 </span><span class="lineNoCov">          0 :             snprintf(prognamestr, sizeof(prognamestr), &quot;%s&quot;, &quot;&quot;);</span>
 <span class="lineNum">     778 </span>            :         } else {
 <span class="lineNum">     779 </span>            :             /* if it's anything else... */
 <span class="lineNum">     780 </span><span class="lineNoCov">          0 :             snprintf(progstr, sizeof(progstr), &quot;#%d&quot;, ptr-&gt;called_prog);</span>
@@ -928,7 +928,7 @@
 <span class="lineNum">     866 </span><span class="lineNoCov">          0 :                     pcnt = 100.0;</span>
 <span class="lineNum">     867 </span>            :                 }
 <span class="lineNum">     868 </span>            :             } else {
-<span class="lineNum">     869 </span>            :                 pcnt = 0.0;
+<span class="lineNum">     869 </span><span class="lineNoCov">          0 :                 pcnt = 0.0;</span>
 <span class="lineNum">     870 </span>            :             }
 <span class="lineNum">     871 </span>            :         }
 <span class="lineNum">     872 </span><span class="lineNoCov">          0 :         temp1.type = PROG_STRING;</span>
@@ -1044,9 +1044,9 @@
 <span class="lineNum">     982 </span>            :  *     2: kill all matching foreground MUF processes
 <a name="983"><span class="lineNum">     983 </span>            :  */</a>
 <span class="lineNum">     984 </span>            : int
-<span class="lineNum">     985 </span><span class="lineCov">         26 : dequeue_prog_real(dbref program, int killmode, const char *file, const int line)</span>
+<span class="lineNum">     985 </span><span class="lineCov">         32 : dequeue_prog_real(dbref program, int killmode, const char *file, const int line)</span>
 <span class="lineNum">     986 </span>            : {
-<span class="lineNum">     987 </span><span class="lineCov">         26 :     int count = 0, ocount;</span>
+<span class="lineNum">     987 </span><span class="lineCov">         32 :     int count = 0, ocount;</span>
 <span class="lineNum">     988 </span>            :     timequeue ptr;
 <span class="lineNum">     989 </span>            : 
 <span class="lineNum">     990 </span>            : #ifdef DEBUG
@@ -1054,22 +1054,22 @@
 <span class="lineNum">     992 </span>            :             file, line);
 <span class="lineNum">     993 </span>            : #endif                          /* DEBUG */
 <span class="lineNum">     994 </span>            :     DEBUGPRINT(&quot;dequeue_prog: tqhead = %p\n&quot;, tqhead);
-<span class="lineNum">     995 </span><span class="lineCov">         52 :     while (tqhead) {</span>
+<span class="lineNum">     995 </span><span class="lineCov">         64 :     while (tqhead) {</span>
 <span class="lineNum">     996 </span>            :         DEBUGPRINT(&quot;dequeue_prog: tqhead-&gt;called_prog = #%d, has_refs = %d &quot;,
 <span class="lineNum">     997 </span>            :                    tqhead-&gt;called_prog, has_refs(program, tqhead));
 <span class="lineNum">     998 </span>            :         DEBUGPRINT(&quot;tqhead-&gt;uid = #%d\n&quot;, tqhead-&gt;uid);
 <span class="lineNum">     999 </span><span class="lineNoCov">          0 :         if (tqhead-&gt;called_prog != program &amp;&amp; !has_refs(program, tqhead)</span>
 <span class="lineNum">    1000 </span><span class="lineNoCov">          0 :             &amp;&amp; tqhead-&gt;uid != program) {</span>
-<span class="lineNum">    1001 </span>            :             break;
+<span class="lineNum">    1001 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">    1002 </span>            :         }
 <span class="lineNum">    1003 </span><span class="lineNoCov">          0 :         if (killmode == 2) {</span>
 <span class="lineNum">    1004 </span><span class="lineNoCov">          0 :             if (tqhead-&gt;fr &amp;&amp; tqhead-&gt;fr-&gt;multitask == BACKGROUND) {</span>
-<span class="lineNum">    1005 </span>            :                 break;
+<span class="lineNum">    1005 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">    1006 </span>            :             }
 <span class="lineNum">    1007 </span><span class="lineNoCov">          0 :         } else if (killmode == 1) {</span>
 <span class="lineNum">    1008 </span><span class="lineNoCov">          0 :             if (!tqhead-&gt;fr) {</span>
 <span class="lineNum">    1009 </span>            :                 DEBUGPRINT(&quot;dequeue_prog: killmode 1, no frame\n&quot;);
-<span class="lineNum">    1010 </span>            :                 break;
+<span class="lineNum">    1010 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">    1011 </span>            :             }
 <span class="lineNum">    1012 </span>            :         }
 <span class="lineNum">    1013 </span><span class="lineNoCov">          0 :         ptr = tqhead;</span>
@@ -1079,7 +1079,7 @@
 <span class="lineNum">    1017 </span><span class="lineNoCov">          0 :         count++;</span>
 <span class="lineNum">    1018 </span>            :     }
 <span class="lineNum">    1019 </span>            : 
-<span class="lineNum">    1020 </span><span class="lineCov">         26 :     if (tqhead) {</span>
+<span class="lineNum">    1020 </span><span class="lineCov">         32 :     if (tqhead) {</span>
 <span class="lineNum">    1021 </span><span class="lineNoCov">          0 :         for (timequeue tmp = tqhead, ptr = tqhead-&gt;next; ptr; tmp = ptr, ptr = ptr-&gt;next) {</span>
 <span class="lineNum">    1022 </span>            :             DEBUGPRINT(&quot;dequeue_prog(2): ptr-&gt;called_prog=#%d, has_refs()=%d &quot;,
 <span class="lineNum">    1023 </span>            :                        ptr-&gt;called_prog, has_refs(program, ptr));
@@ -1112,7 +1112,7 @@
 <span class="lineNum">    1050 </span><span class="lineNoCov">          0 :             prog_clean(tqhead-&gt;fr);</span>
 <span class="lineNum">    1051 </span><span class="lineNoCov">          0 :         for (ptr = tqhead; ptr; ptr = ptr-&gt;next) {</span>
 <span class="lineNum">    1052 </span><span class="lineNoCov">          0 :             if (ptr-&gt;typ == TQ_MUF_TYP &amp;&amp; (ptr-&gt;subtyp == TQ_MUF_READ ||</span>
-<span class="lineNum">    1053 </span>            :                                            ptr-&gt;subtyp == TQ_MUF_TREAD)) {
+<span class="lineNum">    1053 </span><span class="lineNoCov">          0 :                                            ptr-&gt;subtyp == TQ_MUF_TREAD)) {</span>
 <span class="lineNum">    1054 </span><span class="lineNoCov">          0 :                 FLAGS(ptr-&gt;uid) |= (INTERACTIVE | READMODE);</span>
 <span class="lineNum">    1055 </span>            :             }
 <span class="lineNum">    1056 </span>            :         }
@@ -1126,7 +1126,7 @@
 <span class="lineNum">    1064 </span>            :         fprintf(stderr, &quot;[debug] dequeue_prog: %d instances of #%d\n&quot;,
 <span class="lineNum">    1065 </span>            :                 PROGRAM_INSTANCES(program), program);
 <span class="lineNum">    1066 </span>            : #endif
-<span class="lineNum">    1067 </span><span class="lineCov">         26 :     return (count);</span>
+<span class="lineNum">    1067 </span><span class="lineCov">         32 :     return (count);</span>
 <span class="lineNum">    1068 </span>            : }
 <a name="1069"><span class="lineNum">    1069 </span>            : </a>
 <span class="lineNum">    1070 </span>            : int
@@ -1136,7 +1136,7 @@
 <span class="lineNum">    1074 </span><span class="lineNoCov">          0 :     int deqflag = 0;</span>
 <span class="lineNum">    1075 </span>            : 
 <span class="lineNum">    1076 </span><span class="lineNoCov">          0 :     if (!pid)</span>
-<span class="lineNum">    1077 </span>            :         return 0;
+<span class="lineNum">    1077 </span><span class="lineNoCov">          0 :         return 0;</span>
 <span class="lineNum">    1078 </span>            : 
 <span class="lineNum">    1079 </span><span class="lineNoCov">          0 :     if (muf_event_dequeue_pid(pid)) {</span>
 <span class="lineNum">    1080 </span><span class="lineNoCov">          0 :         process_count--;</span>
@@ -1164,16 +1164,16 @@
 <span class="lineNum">    1102 </span>            :     }
 <span class="lineNum">    1103 </span>            : 
 <span class="lineNum">    1104 </span><span class="lineNoCov">          0 :     if (!deqflag) {</span>
-<span class="lineNum">    1105 </span>            :         return 0;
+<span class="lineNum">    1105 </span><span class="lineNoCov">          0 :         return 0;</span>
 <span class="lineNum">    1106 </span>            :     }
 <span class="lineNum">    1107 </span>            : 
 <span class="lineNum">    1108 </span><span class="lineNoCov">          0 :     for (ptr = tqhead; ptr; ptr = ptr-&gt;next) {</span>
 <span class="lineNum">    1109 </span><span class="lineNoCov">          0 :         if (ptr-&gt;typ == TQ_MUF_TYP &amp;&amp; (ptr-&gt;subtyp == TQ_MUF_READ ||</span>
-<span class="lineNum">    1110 </span>            :                                        ptr-&gt;subtyp == TQ_MUF_TREAD)) {
+<span class="lineNum">    1110 </span><span class="lineNoCov">          0 :                                        ptr-&gt;subtyp == TQ_MUF_TREAD)) {</span>
 <span class="lineNum">    1111 </span><span class="lineNoCov">          0 :             FLAGS(ptr-&gt;uid) |= (INTERACTIVE | READMODE);</span>
 <span class="lineNum">    1112 </span>            :         }
 <span class="lineNum">    1113 </span>            :     }
-<span class="lineNum">    1114 </span>            :     return 1;
+<span class="lineNum">    1114 </span><span class="lineNoCov">          0 :     return 1;</span>
 <span class="lineNum">    1115 </span>            : }
 <a name="1116"><span class="lineNum">    1116 </span>            : </a>
 <span class="lineNum">    1117 </span>            : int
@@ -1184,10 +1184,10 @@
 <span class="lineNum">    1122 </span><span class="lineNoCov">          0 :     int deqflag = 0;</span>
 <span class="lineNum">    1123 </span>            : 
 <span class="lineNum">    1124 </span><span class="lineNoCov">          0 :     if (!pid)</span>
-<span class="lineNum">    1125 </span>            :         return 0;
+<span class="lineNum">    1125 </span><span class="lineNoCov">          0 :         return 0;</span>
 <span class="lineNum">    1126 </span>            : 
 <span class="lineNum">    1127 </span><span class="lineNoCov">          0 :     if (id)</span>
-<span class="lineNum">    1128 </span>            :         snprintf(buf, sizeof(buf), &quot;TIMER.%.30s&quot;, id);
+<span class="lineNum">    1128 </span><span class="lineNoCov">          0 :         snprintf(buf, sizeof(buf), &quot;TIMER.%.30s&quot;, id);</span>
 <span class="lineNum">    1129 </span>            : 
 <span class="lineNum">    1130 </span><span class="lineNoCov">          0 :     tmp = ptr = tqhead;</span>
 <span class="lineNum">    1131 </span><span class="lineNoCov">          0 :     while (ptr) {</span>
@@ -1215,35 +1215,35 @@
 <span class="lineNum">    1153 </span>            :         }
 <span class="lineNum">    1154 </span>            :     }
 <span class="lineNum">    1155 </span>            : 
-<span class="lineNum">    1156 </span>            :     return deqflag;
+<span class="lineNum">    1156 </span><span class="lineNoCov">          0 :     return deqflag;</span>
 <span class="lineNum">    1157 </span>            : }
 <a name="1158"><span class="lineNum">    1158 </span>            : </a>
 <span class="lineNum">    1159 </span>            : void
-<span class="lineNum">    1160 </span><span class="lineCov">         26 : do_kill_process(int descr, dbref player, const char *arg1)</span>
+<span class="lineNum">    1160 </span><span class="lineCov">         32 : do_kill_process(int descr, dbref player, const char *arg1)</span>
 <span class="lineNum">    1161 </span>            : {
 <span class="lineNum">    1162 </span>            :     int count;
 <span class="lineNum">    1163 </span>            :     dbref match;
 <span class="lineNum">    1164 </span>            :     struct match_data md;
-<span class="lineNum">    1165 </span><span class="lineCov">         26 :     timequeue tmp, ptr = tqhead;</span>
+<span class="lineNum">    1165 </span><span class="lineCov">         32 :     timequeue tmp, ptr = tqhead;</span>
 <span class="lineNum">    1166 </span>            : 
 <span class="lineNum">    1167 </span>            : 
-<span class="lineNum">    1168 </span><span class="lineCov">         26 :     if (*arg1 == '\0') {</span>
+<span class="lineNum">    1168 </span><span class="lineCov">         32 :     if (*arg1 == '\0') {</span>
 <span class="lineNum">    1169 </span><span class="lineNoCov">          0 :         notify_nolisten(player, &quot;What event do you want to dequeue?&quot;, 1);</span>
 <span class="lineNum">    1170 </span>            :     } else {
-<span class="lineNum">    1171 </span><span class="lineCov">         26 :         if (!strcasecmp(arg1, &quot;all&quot;)) {</span>
-<span class="lineNum">    1172 </span><span class="lineCov">         26 :             if (!Wizard(OWNER(player))) {</span>
+<span class="lineNum">    1171 </span><span class="lineCov">         32 :         if (!strcasecmp(arg1, &quot;all&quot;)) {</span>
+<span class="lineNum">    1172 </span><span class="lineCov">         32 :             if (!Wizard(OWNER(player))) {</span>
 <span class="lineNum">    1173 </span><span class="lineNoCov">          0 :                 notify_nolisten(player, &quot;Permission denied&quot;, 1);</span>
 <span class="lineNum">    1174 </span><span class="lineNoCov">          0 :                 return;</span>
 <span class="lineNum">    1175 </span>            :             }
-<span class="lineNum">    1176 </span><span class="lineCov">         26 :             while (ptr) {</span>
+<span class="lineNum">    1176 </span><span class="lineCov">         64 :             while (ptr) {</span>
 <span class="lineNum">    1177 </span><span class="lineNoCov">          0 :                 tmp = ptr;</span>
 <span class="lineNum">    1178 </span><span class="lineNoCov">          0 :                 tqhead = ptr = ptr-&gt;next;</span>
 <span class="lineNum">    1179 </span><span class="lineNoCov">          0 :                 free_timenode(tmp);</span>
 <span class="lineNum">    1180 </span><span class="lineNoCov">          0 :                 process_count--;</span>
 <span class="lineNum">    1181 </span>            :             }
-<span class="lineNum">    1182 </span><span class="lineCov">         26 :             tqhead = NULL;</span>
-<span class="lineNum">    1183 </span><span class="lineCov">         26 :             muf_event_dequeue(NOTHING, 0);</span>
-<span class="lineNum">    1184 </span><span class="lineCov">         26 :             notify_nolisten(player, &quot;Time queue cleared.&quot;, 1);</span>
+<span class="lineNum">    1182 </span><span class="lineCov">         32 :             tqhead = NULL;</span>
+<span class="lineNum">    1183 </span><span class="lineCov">         32 :             muf_event_dequeue(NOTHING, 0);</span>
+<span class="lineNum">    1184 </span><span class="lineCov">         32 :             notify_nolisten(player, &quot;Time queue cleared.&quot;, 1);</span>
 <span class="lineNum">    1185 </span>            :         } else {
 <span class="lineNum">    1186 </span><span class="lineNoCov">          0 :             if (!number(arg1)) {</span>
 <span class="lineNum">    1187 </span><span class="lineNoCov">          0 :                 init_match(descr, player, arg1, NOTYPE, &amp;md);</span>
@@ -1291,7 +1291,7 @@
 <span class="lineNum">    1229 </span>            :             }
 <span class="lineNum">    1230 </span>            :         }
 <span class="lineNum">    1231 </span>            :     }
-<span class="lineNum">    1232 </span>            :     return;
+<span class="lineNum">    1232 </span><span class="lineCov">         32 :     return;</span>
 <span class="lineNum">    1233 </span>            : }
 <a name="1234"><span class="lineNum">    1234 </span>            : </a>
 <span class="lineNum">    1235 </span>            : int
@@ -1322,7 +1322,7 @@
 <span class="lineNum">    1260 </span>            : 
 <a name="1261"><span class="lineNum">    1261 </span>            : static int propq_level = 0;</a>
 <span class="lineNum">    1262 </span>            : void
-<span class="lineNum">    1263 </span><span class="lineCov">        228 : propqueue(int descr, dbref player, dbref where, dbref trigger, dbref what, dbref xclude,</span>
+<span class="lineNum">    1263 </span><span class="lineCov">        282 : propqueue(int descr, dbref player, dbref where, dbref trigger, dbref what, dbref xclude,</span>
 <span class="lineNum">    1264 </span>            :           const char *propname, const char *toparg, int mlev, int mt)
 <span class="lineNum">    1265 </span>            : {
 <span class="lineNum">    1266 </span>            :     const char *tmpchar;
@@ -1331,16 +1331,16 @@
 <span class="lineNum">    1269 </span>            :     char buf[BUFFER_LEN];
 <span class="lineNum">    1270 </span>            :     char exbuf[BUFFER_LEN];
 <span class="lineNum">    1271 </span>            : 
-<span class="lineNum">    1272 </span><span class="lineCov">        228 :     tmpchar = NULL;</span>
+<span class="lineNum">    1272 </span><span class="lineCov">        282 :     tmpchar = NULL;</span>
 <span class="lineNum">    1273 </span>            : 
 <span class="lineNum">    1274 </span>            :     /* queue up program referred to by the given property */
-<span class="lineNum">    1275 </span><span class="lineCov">        228 :     if (((the_prog = get_property_dbref(what, propname)) != NOTHING) ||</span>
+<span class="lineNum">    1275 </span><span class="lineCov">        282 :     if (((the_prog = get_property_dbref(what, propname)) != NOTHING) ||</span>
 <span class="lineNum">    1276 </span>            :         (tmpchar = get_property_class(what, propname))) {
 <span class="lineNum">    1277 </span>            : 
 <span class="lineNum">    1278 </span><span class="lineNoCov">          0 :         if ((tmpchar &amp;&amp; *tmpchar) || the_prog != NOTHING) {</span>
 <span class="lineNum">    1279 </span><span class="lineNoCov">          0 :             if (tmpchar) {</span>
 <span class="lineNum">    1280 </span><span class="lineNoCov">          0 :                 if (*tmpchar == '&amp;') {</span>
-<span class="lineNum">    1281 </span>            :                     the_prog = AMBIGUOUS;
+<span class="lineNum">    1281 </span><span class="lineNoCov">          0 :                     the_prog = AMBIGUOUS;</span>
 <span class="lineNum">    1282 </span><span class="lineNoCov">          0 :                 } else if (*tmpchar == NUMBER_TOKEN &amp;&amp; number(tmpchar + 1)) {</span>
 <span class="lineNum">    1283 </span><span class="lineNoCov">          0 :                     the_prog = (dbref) atoi(++tmpchar);</span>
 <span class="lineNum">    1284 </span><span class="lineNoCov">          0 :                 } else if (*tmpchar == REGISTERED_TOKEN) {</span>
@@ -1348,7 +1348,7 @@
 <span class="lineNum">    1286 </span><span class="lineNoCov">          0 :                 } else if (number(tmpchar)) {</span>
 <span class="lineNum">    1287 </span><span class="lineNoCov">          0 :                     the_prog = (dbref) atoi(tmpchar);</span>
 <span class="lineNum">    1288 </span>            :                 } else {
-<span class="lineNum">    1289 </span>            :                     the_prog = NOTHING;
+<span class="lineNum">    1289 </span><span class="lineNoCov">          0 :                     the_prog = NOTHING;</span>
 <span class="lineNum">    1290 </span>            :                 }
 <span class="lineNum">    1291 </span>            :             } else {
 <span class="lineNum">    1292 </span><span class="lineNoCov">          0 :                 if (the_prog == AMBIGUOUS)</span>
@@ -1356,15 +1356,15 @@
 <span class="lineNum">    1294 </span>            :             }
 <span class="lineNum">    1295 </span><span class="lineNoCov">          0 :             if (the_prog != AMBIGUOUS) {</span>
 <span class="lineNum">    1296 </span><span class="lineNoCov">          0 :                 if (!ObjExists(the_prog)) {</span>
-<span class="lineNum">    1297 </span>            :                     the_prog = NOTHING;
+<span class="lineNum">    1297 </span><span class="lineNoCov">          0 :                     the_prog = NOTHING;</span>
 <span class="lineNum">    1298 </span><span class="lineNoCov">          0 :                 } else if (Typeof(the_prog) != TYPE_PROGRAM) {</span>
-<span class="lineNum">    1299 </span>            :                     the_prog = NOTHING;
+<span class="lineNum">    1299 </span><span class="lineNoCov">          0 :                     the_prog = NOTHING;</span>
 <span class="lineNum">    1300 </span><span class="lineNoCov">          0 :                 } else if ((OWNER(the_prog) != OWNER(player)) &amp;&amp; !(FLAGS(the_prog) &amp; LINK_OK)) {</span>
-<span class="lineNum">    1301 </span>            :                     the_prog = NOTHING;
+<span class="lineNum">    1301 </span><span class="lineNoCov">          0 :                     the_prog = NOTHING;</span>
 <span class="lineNum">    1302 </span><span class="lineNoCov">          0 :                 } else if (MLevel(the_prog) &lt; mlev) {</span>
-<span class="lineNum">    1303 </span>            :                     the_prog = NOTHING;
+<span class="lineNum">    1303 </span><span class="lineNoCov">          0 :                     the_prog = NOTHING;</span>
 <span class="lineNum">    1304 </span><span class="lineNoCov">          0 :                 } else if (MLevel(OWNER(the_prog)) &lt; mlev) {</span>
-<span class="lineNum">    1305 </span>            :                     the_prog = NOTHING;
+<span class="lineNum">    1305 </span><span class="lineNoCov">          0 :                     the_prog = NOTHING;</span>
 <span class="lineNum">    1306 </span><span class="lineNoCov">          0 :                 } else if (the_prog == xclude) {</span>
 <span class="lineNum">    1307 </span><span class="lineNoCov">          0 :                     the_prog = NOTHING;</span>
 <span class="lineNum">    1308 </span>            :                 }
@@ -1416,39 +1416,39 @@
 <span class="lineNum">    1354 </span>            :             }
 <span class="lineNum">    1355 </span>            :         }
 <span class="lineNum">    1356 </span>            :     }
-<span class="lineNum">    1357 </span><span class="lineCov">        228 :     strcpyn(buf, sizeof(buf), propname);</span>
-<span class="lineNum">    1358 </span><span class="lineCov">        228 :     if (is_propdir(what, buf)) {</span>
+<span class="lineNum">    1357 </span><span class="lineCov">        282 :     strcpyn(buf, sizeof(buf), propname);</span>
+<span class="lineNum">    1358 </span><span class="lineCov">        282 :     if (is_propdir(what, buf)) {</span>
 <span class="lineNum">    1359 </span><span class="lineNoCov">          0 :         strcatn(buf, sizeof(buf), &quot;/&quot;);</span>
 <span class="lineNum">    1360 </span><span class="lineNoCov">          0 :         while ((pname = next_prop_name(what, exbuf, sizeof(exbuf), buf))) {</span>
 <span class="lineNum">    1361 </span><span class="lineNoCov">          0 :             strcpyn(buf, sizeof(buf), pname);</span>
 <span class="lineNum">    1362 </span><span class="lineNoCov">          0 :             propqueue(descr, player, where, trigger, what, xclude, buf, toparg, mlev, mt);</span>
 <span class="lineNum">    1363 </span>            :         }
 <span class="lineNum">    1364 </span>            :     }
-<span class="lineNum">    1365 </span><span class="lineCov">        228 : }</span>
+<span class="lineNum">    1365 </span><span class="lineCov">        282 : }</span>
 <a name="1366"><span class="lineNum">    1366 </span>            : </a>
 <span class="lineNum">    1367 </span>            : void
-<span class="lineNum">    1368 </span><span class="lineCov">        121 : envpropqueue(int descr, dbref player, dbref where, dbref trigger, dbref what, dbref xclude,</span>
+<span class="lineNum">    1368 </span><span class="lineCov">        151 : envpropqueue(int descr, dbref player, dbref where, dbref trigger, dbref what, dbref xclude,</span>
 <span class="lineNum">    1369 </span>            :              const char *propname, const char *toparg, int mlev, int mt)
 <span class="lineNum">    1370 </span>            : {
-<span class="lineNum">    1371 </span><span class="lineCov">        466 :     while (what != NOTHING) {</span>
-<span class="lineNum">    1372 </span><span class="lineCov">        224 :         propqueue(descr, player, where, trigger, what, xclude, propname, toparg, mlev, mt);</span>
-<span class="lineNum">    1373 </span><span class="lineCov">        224 :         what = getparent(what);</span>
+<span class="lineNum">    1371 </span><span class="lineCov">        580 :     while (what != NOTHING) {</span>
+<span class="lineNum">    1372 </span><span class="lineCov">        278 :         propqueue(descr, player, where, trigger, what, xclude, propname, toparg, mlev, mt);</span>
+<span class="lineNum">    1373 </span><span class="lineCov">        278 :         what = getparent(what);</span>
 <span class="lineNum">    1374 </span>            :     }
-<span class="lineNum">    1375 </span><span class="lineCov">        121 : }</span>
+<span class="lineNum">    1375 </span><span class="lineCov">        151 : }</span>
 <a name="1376"><span class="lineNum">    1376 </span>            : </a>
 <span class="lineNum">    1377 </span>            : void
-<span class="lineNum">    1378 </span><span class="lineCov">        825 : listenqueue(int descr, dbref player, dbref where, dbref trigger, dbref what, dbref xclude,</span>
+<span class="lineNum">    1378 </span><span class="lineCov">       1125 : listenqueue(int descr, dbref player, dbref where, dbref trigger, dbref what, dbref xclude,</span>
 <span class="lineNum">    1379 </span>            :             const char *propname, const char *toparg, int mlev, int mt, int mpi_p)
 <span class="lineNum">    1380 </span>            : {
 <span class="lineNum">    1381 </span>            :     const char *tmpchar;
 <span class="lineNum">    1382 </span>            :     const char *pname, *sep, *ptr;
-<span class="lineNum">    1383 </span><span class="lineCov">        825 :     dbref the_prog = NOTHING;</span>
+<span class="lineNum">    1383 </span><span class="lineCov">       1125 :     dbref the_prog = NOTHING;</span>
 <span class="lineNum">    1384 </span>            :     char buf[BUFFER_LEN];
 <span class="lineNum">    1385 </span>            :     char exbuf[BUFFER_LEN];
 <span class="lineNum">    1386 </span>            :     char *ptr2;
 <span class="lineNum">    1387 </span>            : 
-<span class="lineNum">    1388 </span><span class="lineCov">        825 :     if (!(FLAGS(what) &amp; LISTENER) &amp;&amp; !(FLAGS(OWNER(what)) &amp; ZOMBIE))</span>
-<span class="lineNum">    1389 </span><span class="lineCov">        825 :         return;</span>
+<span class="lineNum">    1388 </span><span class="lineCov">       1125 :     if (!(FLAGS(what) &amp; LISTENER) &amp;&amp; !(FLAGS(OWNER(what)) &amp; ZOMBIE))</span>
+<span class="lineNum">    1389 </span><span class="lineCov">       1125 :         return;</span>
 <span class="lineNum">    1390 </span>            : 
 <span class="lineNum">    1391 </span><span class="lineNoCov">          0 :     tmpchar = NULL;</span>
 <span class="lineNum">    1392 </span>            : 
@@ -1457,12 +1457,12 @@
 <span class="lineNum">    1395 </span>            :         (tmpchar = get_property_class(what, propname))) {
 <span class="lineNum">    1396 </span>            : 
 <span class="lineNum">    1397 </span><span class="lineNoCov">          0 :         if (tmpchar) {</span>
-<span class="lineNum">    1398 </span>            :             sep = tmpchar;
+<span class="lineNum">    1398 </span><span class="lineNoCov">          0 :             sep = tmpchar;</span>
 <span class="lineNum">    1399 </span><span class="lineNoCov">          0 :             while (*sep) {</span>
 <span class="lineNum">    1400 </span><span class="lineNoCov">          0 :                 if (*sep == '\\') {</span>
 <span class="lineNum">    1401 </span><span class="lineNoCov">          0 :                     sep++;</span>
 <span class="lineNum">    1402 </span><span class="lineNoCov">          0 :                 } else if (*sep == '=') {</span>
-<span class="lineNum">    1403 </span>            :                     break;
+<span class="lineNum">    1403 </span><span class="lineNoCov">          0 :                     break;</span>
 <span class="lineNum">    1404 </span>            :                 }
 <span class="lineNum">    1405 </span><span class="lineNoCov">          0 :                 if (*sep)</span>
 <span class="lineNum">    1406 </span><span class="lineNoCov">          0 :                     sep++;</span>
@@ -1472,7 +1472,7 @@
 <span class="lineNum">    1410 </span><span class="lineNoCov">          0 :                 *ptr2 = '\0';</span>
 <span class="lineNum">    1411 </span><span class="lineNoCov">          0 :                 strcpyn(exbuf, sizeof(exbuf), toparg);</span>
 <span class="lineNum">    1412 </span><span class="lineNoCov">          0 :                 if (!equalstr(buf, exbuf)) {</span>
-<span class="lineNum">    1413 </span>            :                     tmpchar = NULL;
+<span class="lineNum">    1413 </span><span class="lineNoCov">          0 :                     tmpchar = NULL;</span>
 <span class="lineNum">    1414 </span>            :                 } else {
 <span class="lineNum">    1415 </span><span class="lineNoCov">          0 :                     tmpchar = ++sep;</span>
 <span class="lineNum">    1416 </span>            :                 }
@@ -1482,7 +1482,7 @@
 <span class="lineNum">    1420 </span><span class="lineNoCov">          0 :         if ((tmpchar &amp;&amp; *tmpchar) || the_prog != NOTHING) {</span>
 <span class="lineNum">    1421 </span><span class="lineNoCov">          0 :             if (tmpchar) {</span>
 <span class="lineNum">    1422 </span><span class="lineNoCov">          0 :                 if (*tmpchar == '&amp;') {</span>
-<span class="lineNum">    1423 </span>            :                     the_prog = AMBIGUOUS;
+<span class="lineNum">    1423 </span><span class="lineNoCov">          0 :                     the_prog = AMBIGUOUS;</span>
 <span class="lineNum">    1424 </span><span class="lineNoCov">          0 :                 } else if (*tmpchar == NUMBER_TOKEN &amp;&amp; number(tmpchar + 1)) {</span>
 <span class="lineNum">    1425 </span><span class="lineNoCov">          0 :                     the_prog = (dbref) atoi(++tmpchar);</span>
 <span class="lineNum">    1426 </span><span class="lineNoCov">          0 :                 } else if (*tmpchar == REGISTERED_TOKEN) {</span>
@@ -1490,7 +1490,7 @@
 <span class="lineNum">    1428 </span><span class="lineNoCov">          0 :                 } else if (number(tmpchar)) {</span>
 <span class="lineNum">    1429 </span><span class="lineNoCov">          0 :                     the_prog = (dbref) atoi(tmpchar);</span>
 <span class="lineNum">    1430 </span>            :                 } else {
-<span class="lineNum">    1431 </span>            :                     the_prog = NOTHING;
+<span class="lineNum">    1431 </span><span class="lineNoCov">          0 :                     the_prog = NOTHING;</span>
 <span class="lineNum">    1432 </span>            :                 }
 <span class="lineNum">    1433 </span>            :             } else {
 <span class="lineNum">    1434 </span><span class="lineNoCov">          0 :                 if (the_prog == AMBIGUOUS)</span>
@@ -1498,15 +1498,15 @@
 <span class="lineNum">    1436 </span>            :             }
 <span class="lineNum">    1437 </span><span class="lineNoCov">          0 :             if (the_prog != AMBIGUOUS) {</span>
 <span class="lineNum">    1438 </span><span class="lineNoCov">          0 :                 if (!ObjExists(the_prog)) {</span>
-<span class="lineNum">    1439 </span>            :                     the_prog = NOTHING;
+<span class="lineNum">    1439 </span><span class="lineNoCov">          0 :                     the_prog = NOTHING;</span>
 <span class="lineNum">    1440 </span><span class="lineNoCov">          0 :                 } else if (Typeof(the_prog) != TYPE_PROGRAM) {</span>
-<span class="lineNum">    1441 </span>            :                     the_prog = NOTHING;
+<span class="lineNum">    1441 </span><span class="lineNoCov">          0 :                     the_prog = NOTHING;</span>
 <span class="lineNum">    1442 </span><span class="lineNoCov">          0 :                 } else if (OWNER(the_prog) != OWNER(player) &amp;&amp; !(FLAGS(the_prog) &amp; LINK_OK)) {</span>
-<span class="lineNum">    1443 </span>            :                     the_prog = NOTHING;
+<span class="lineNum">    1443 </span><span class="lineNoCov">          0 :                     the_prog = NOTHING;</span>
 <span class="lineNum">    1444 </span><span class="lineNoCov">          0 :                 } else if (MLevel(the_prog) &lt; mlev) {</span>
-<span class="lineNum">    1445 </span>            :                     the_prog = NOTHING;
+<span class="lineNum">    1445 </span><span class="lineNoCov">          0 :                     the_prog = NOTHING;</span>
 <span class="lineNum">    1446 </span><span class="lineNoCov">          0 :                 } else if (MLevel(OWNER(the_prog)) &lt; mlev) {</span>
-<span class="lineNum">    1447 </span>            :                     the_prog = NOTHING;
+<span class="lineNum">    1447 </span><span class="lineNoCov">          0 :                     the_prog = NOTHING;</span>
 <span class="lineNum">    1448 </span><span class="lineNoCov">          0 :                 } else if (the_prog == xclude) {</span>
 <span class="lineNum">    1449 </span><span class="lineNoCov">          0 :                     the_prog = NOTHING;</span>
 <span class="lineNum">    1450 </span>            :                 }

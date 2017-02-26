@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">0</td>
-            <td class="headerCovTableEntry">416</td>
+            <td class="headerCovTableEntry">446</td>
             <td class="headerCovTableEntryLo">0.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 00:20:31</td>
+            <td class="headerValue">2017-02-26 01:21:31</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -173,7 +173,7 @@
 <span class="lineNum">     111 </span>            :     struct topiclist *ptr, *top;
 <span class="lineNum">     112 </span>            : 
 <span class="lineNum">     113 </span><span class="lineNoCov">          0 :     if (!str || !*str)</span>
-<span class="lineNum">     114 </span>            :         return;
+<span class="lineNum">     114 </span><span class="lineNoCov">          0 :         return;</span>
 <span class="lineNum">     115 </span><span class="lineNoCov">          0 :     top = (struct topiclist *) malloc(sizeof(struct topiclist));</span>
 <span class="lineNum">     116 </span>            : 
 <span class="lineNum">     117 </span><span class="lineNoCov">          0 :     top-&gt;topic = NULL;</span>
@@ -200,8 +200,8 @@
 <span class="lineNum">     138 </span><span class="lineNoCov">          0 :     if (!str || !*str)</span>
 <span class="lineNum">     139 </span><span class="lineNoCov">          0 :         return;</span>
 <span class="lineNum">     140 </span>            : 
-<span class="lineNum">     141 </span>            :     p = str;
-<span class="lineNum">     142 </span>            :     s = buf;
+<span class="lineNum">     141 </span><span class="lineNoCov">          0 :     p = str;</span>
+<span class="lineNum">     142 </span><span class="lineNoCov">          0 :     s = buf;</span>
 <span class="lineNum">     143 </span>            :     do {
 <span class="lineNum">     144 </span><span class="lineNoCov">          0 :         *s++ = tolower(*p);</span>
 <span class="lineNum">     145 </span><span class="lineNoCov">          0 :     } while (*p++);</span>
@@ -224,9 +224,9 @@
 <span class="lineNum">     162 </span><span class="lineNoCov">          0 :         return;</span>
 <span class="lineNum">     163 </span>            :     }
 <span class="lineNum">     164 </span>            : 
-<span class="lineNum">     165 </span>            :     ptr = topichead;
+<span class="lineNum">     165 </span><span class="lineNoCov">          0 :     ptr = topichead;</span>
 <span class="lineNum">     166 </span><span class="lineNoCov">          0 :     while (ptr-&gt;next &amp;&amp; strcasecmp(str, ptr-&gt;next-&gt;topic) &gt; 0) {</span>
-<span class="lineNum">     167 </span>            :         ptr = ptr-&gt;next;
+<span class="lineNum">     167 </span><span class="lineNoCov">          0 :         ptr = ptr-&gt;next;</span>
 <span class="lineNum">     168 </span>            :     }
 <span class="lineNum">     169 </span><span class="lineNoCov">          0 :     top-&gt;next = ptr-&gt;next;</span>
 <span class="lineNum">     170 </span><span class="lineNoCov">          0 :     ptr-&gt;next = top;</span>
@@ -352,8 +352,8 @@
 <span class="lineNum">     290 </span>            :             }
 <span class="lineNum">     291 </span><span class="lineNoCov">          0 :             fprintf(hf, HTML_SECTIDX_END);</span>
 <span class="lineNum">     292 </span><span class="lineNoCov">          0 :             if (cnt)</span>
-<span class="lineNum">     293 </span>            :                 fprintf(f, &quot;%s\n&quot;, buf);
-<span class="lineNum">     294 </span>            :             fprintf(f, &quot;\n&quot;);
+<span class="lineNum">     293 </span><span class="lineNoCov">          0 :                 fprintf(f, &quot;%s\n&quot;, buf);</span>
+<span class="lineNum">     294 </span><span class="lineNoCov">          0 :             fprintf(f, &quot;\n&quot;);</span>
 <span class="lineNum">     295 </span>            :         }
 <span class="lineNum">     296 </span>            :     }
 <span class="lineNum">     297 </span><span class="lineNoCov">          0 : }</span>
@@ -382,15 +382,15 @@
 <span class="lineNum">     320 </span><span class="lineNoCov">          0 :     fprintf(f, &quot;                   List of Topics by Category:\n \n&quot;);</span>
 <span class="lineNum">     321 </span><span class="lineNoCov">          0 :     fprintf(f, &quot;You can get more help on the following topics:\n \n&quot;);</span>
 <span class="lineNum">     322 </span><span class="lineNoCov">          0 :     fprintf(hf, HTML_SECTLIST_HEAD);</span>
-<span class="lineNum">     323 </span>            :     if (cols &lt; 1) {
-<span class="lineNum">     324 </span>            :         cols = 1;
+<span class="lineNum">     323 </span><span class="lineNoCov">          0 :     if (cols &lt; 1) {</span>
+<span class="lineNum">     324 </span><span class="lineNoCov">          0 :         cols = 1;</span>
 <span class="lineNum">     325 </span>            :     }
 <span class="lineNum">     326 </span><span class="lineNoCov">          0 :     width = 78 / cols;</span>
 <span class="lineNum">     327 </span><span class="lineNoCov">          0 :     for (struct topiclist *sptr = secthead; sptr; sptr = sptr-&gt;next) {</span>
 <span class="lineNum">     328 </span><span class="lineNoCov">          0 :         currsect = sptr-&gt;section;</span>
 <span class="lineNum">     329 </span><span class="lineNoCov">          0 :         cnt = 0;</span>
 <span class="lineNum">     330 </span><span class="lineNoCov">          0 :         hcol = 0;</span>
-<span class="lineNum">     331 </span>            :         buf[0] = '\0';
+<span class="lineNum">     331 </span><span class="lineNoCov">          0 :         buf[0] = '\0';</span>
 <span class="lineNum">     332 </span><span class="lineNoCov">          0 :         strcpyn(sectname, sizeof(sectname), currsect);</span>
 <span class="lineNum">     333 </span><span class="lineNoCov">          0 :         sectptr = index(sectname, '|');</span>
 <span class="lineNum">     334 </span><span class="lineNoCov">          0 :         if (sectptr) {</span>
@@ -502,9 +502,9 @@
 <span class="lineNum">     440 </span>            :                 }
 <span class="lineNum">     441 </span>            :             }
 <span class="lineNum">     442 </span><span class="lineNoCov">          0 :             if (cnt) {</span>
-<span class="lineNum">     443 </span>            :                 fprintf(f, &quot;  %s\n&quot;, buf);
+<span class="lineNum">     443 </span><span class="lineNoCov">          0 :                 fprintf(f, &quot;  %s\n&quot;, buf);</span>
 <span class="lineNum">     444 </span>            :             }
-<span class="lineNum">     445 </span>            :             fprintf(hf, HTML_IDXGROUP_END);
+<span class="lineNum">     445 </span><span class="lineNoCov">          0 :             fprintf(hf, HTML_IDXGROUP_END);</span>
 <span class="lineNum">     446 </span>            :         }
 <span class="lineNum">     447 </span>            :     }
 <span class="lineNum">     448 </span><span class="lineNoCov">          0 :     fprintf(hf, &quot;%s&quot;, HTML_INDEX_END);</span>
@@ -573,8 +573,8 @@
 <span class="lineNum">     511 </span><span class="lineNoCov">          0 :                 lng = strlen(p);</span>
 <span class="lineNum">     512 </span><span class="lineNoCov">          0 :                 if (lng &gt; longest)</span>
 <span class="lineNum">     513 </span><span class="lineNoCov">          0 :                     longest = lng;</span>
-<span class="lineNum">     514 </span>            :                 p = s;
-<span class="lineNum">     515 </span>            :                 break;
+<span class="lineNum">     514 </span><span class="lineNoCov">          0 :                 p = s;</span>
+<span class="lineNum">     515 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">     516 </span>            :             }
 <span class="lineNum">     517 </span>            :         }
 <span class="lineNum">     518 </span>            :     }
@@ -611,7 +611,7 @@
 <span class="lineNum">     549 </span>            : 
 <span class="lineNum">     550 </span><span class="lineNoCov">          0 :     while (!feof(infile)) {</span>
 <span class="lineNum">     551 </span><span class="lineNoCov">          0 :         if (!fgets(buf, sizeof(buf), infile)) {</span>
-<span class="lineNum">     552 </span>            :             break;
+<span class="lineNum">     552 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     553 </span>            :         }
 <span class="lineNum">     554 </span><span class="lineNoCov">          0 :         if (buf[0] == '~') {</span>
 <span class="lineNum">     555 </span><span class="lineNoCov">          0 :             if (buf[1] == '~') {</span>
@@ -636,7 +636,7 @@
 <span class="lineNum">     574 </span><span class="lineNoCov">          0 :                     fprintf(docsfile, &quot;%*s\n&quot;, (int) (38 + strlen(buf + 10) / 2), (buf + 10));</span>
 <span class="lineNum">     575 </span><span class="lineNoCov">          0 :                     print_section_topics(outfile, htmlfile, (buf + 10));</span>
 <span class="lineNum">     576 </span><span class="lineNoCov">          0 :                     fprintf(outfile, &quot;~%s\n~\n~\n&quot;, HRULE_TEXT);</span>
-<span class="lineNum">     577 </span>            :                     fprintf(docsfile, &quot;%s\n\n\n&quot;, HRULE_TEXT);
+<span class="lineNum">     577 </span><span class="lineNoCov">          0 :                     fprintf(docsfile, &quot;%s\n\n\n&quot;, HRULE_TEXT);</span>
 <span class="lineNum">     578 </span><span class="lineNoCov">          0 :                 } else if (!strncmp(buf, &quot;~~alsosee &quot;, 10)) {</span>
 <span class="lineNum">     579 </span><span class="lineNoCov">          0 :                     buf[strlen(buf) - 1] = '\0';</span>
 <span class="lineNum">     580 </span><span class="lineNoCov">          0 :                     fprintf(htmlfile, HTML_ALSOSEE_BEGIN);</span>
@@ -655,10 +655,10 @@
 <span class="lineNum">     593 </span><span class="lineNoCov">          0 :                         if (ptr2 &gt; buf + 10) {</span>
 <span class="lineNum">     594 </span><span class="lineNoCov">          0 :                             if (!ptr || !*ptr) {</span>
 <span class="lineNum">     595 </span><span class="lineNoCov">          0 :                                 fprintf(htmlfile, &quot; and\n&quot;);</span>
-<span class="lineNum">     596 </span>            :                                 fprintf(outfile, &quot; and &quot;);
+<span class="lineNum">     596 </span><span class="lineNoCov">          0 :                                 fprintf(outfile, &quot; and &quot;);</span>
 <span class="lineNum">     597 </span>            :                             } else {
 <span class="lineNum">     598 </span><span class="lineNoCov">          0 :                                 fprintf(htmlfile, &quot;,\n&quot;);</span>
-<span class="lineNum">     599 </span>            :                                 fprintf(outfile, &quot;, &quot;);
+<span class="lineNum">     599 </span><span class="lineNoCov">          0 :                                 fprintf(outfile, &quot;, &quot;);</span>
 <span class="lineNum">     600 </span>            :                             }
 <span class="lineNum">     601 </span>            :                         }
 <span class="lineNum">     602 </span><span class="lineNoCov">          0 :                         escape_html(buf3, sizeof(buf3), ptr2);</span>
@@ -667,10 +667,10 @@
 <span class="lineNum">     605 </span><span class="lineNoCov">          0 :                             *ptr3 = tolower(*ptr3);</span>
 <span class="lineNum">     606 </span>            :                         }
 <span class="lineNum">     607 </span><span class="lineNoCov">          0 :                         fprintf(htmlfile, HTML_ALSOSEE_ENTRY, buf4, buf3);</span>
-<span class="lineNum">     608 </span>            :                         fprintf(outfile, &quot;%s&quot;, ptr2);
+<span class="lineNum">     608 </span><span class="lineNoCov">          0 :                         fprintf(outfile, &quot;%s&quot;, ptr2);</span>
 <span class="lineNum">     609 </span>            :                     }
 <span class="lineNum">     610 </span><span class="lineNoCov">          0 :                     fprintf(htmlfile, HTML_ALSOSEE_END);</span>
-<span class="lineNum">     611 </span>            :                     fprintf(outfile, &quot;\n&quot;);
+<span class="lineNum">     611 </span><span class="lineNoCov">          0 :                     fprintf(outfile, &quot;\n&quot;);</span>
 <span class="lineNum">     612 </span><span class="lineNoCov">          0 :                 } else if (!strcmp(buf, &quot;~~code\n&quot;)) {</span>
 <span class="lineNum">     613 </span><span class="lineNoCov">          0 :                     fprintf(htmlfile, HTML_CODEBEGIN);</span>
 <span class="lineNum">     614 </span><span class="lineNoCov">          0 :                     codeblock = 1;</span>
@@ -688,7 +688,7 @@
 <span class="lineNum">     626 </span><span class="lineNoCov">          0 :                 fprintf(outfile, &quot;%s&quot;, buf + 2);</span>
 <span class="lineNum">     627 </span><span class="lineNoCov">          0 :             } else if (buf[1] == '@') {</span>
 <span class="lineNum">     628 </span><span class="lineNoCov">          0 :                 escape_html(buf3, sizeof(buf3), buf + 2);</span>
-<span class="lineNum">     629 </span>            :                 fprintf(htmlfile, &quot;%s&quot;, buf3);
+<span class="lineNum">     629 </span><span class="lineNoCov">          0 :                 fprintf(htmlfile, &quot;%s&quot;, buf3);</span>
 <span class="lineNum">     630 </span><span class="lineNoCov">          0 :             } else if (buf[1] == '&lt;') {</span>
 <span class="lineNum">     631 </span><span class="lineNoCov">          0 :                 fprintf(outfile, &quot;%s&quot;, buf + 2);</span>
 <span class="lineNum">     632 </span><span class="lineNoCov">          0 :                 fprintf(docsfile, &quot;%s&quot;, buf + 2);</span>
@@ -697,13 +697,13 @@
 <span class="lineNum">     635 </span><span class="lineNoCov">          0 :                 fprintf(docsfile, &quot;%s&quot;, buf + 2);</span>
 <span class="lineNum">     636 </span>            :             } else {
 <span class="lineNum">     637 </span><span class="lineNoCov">          0 :                 if (!nukenext) {</span>
-<span class="lineNum">     638 </span>            :                     fprintf(htmlfile, HTML_TOPICEND);
+<span class="lineNum">     638 </span><span class="lineNoCov">          0 :                     fprintf(htmlfile, HTML_TOPICEND);</span>
 <span class="lineNum">     639 </span>            :                 }
 <span class="lineNum">     640 </span><span class="lineNoCov">          0 :                 nukenext = 1;</span>
 <span class="lineNum">     641 </span><span class="lineNoCov">          0 :                 fprintf(outfile, &quot;%s&quot;, buf);</span>
 <span class="lineNum">     642 </span><span class="lineNoCov">          0 :                 fprintf(docsfile, &quot;%s&quot;, buf + 1);</span>
 <span class="lineNum">     643 </span><span class="lineNoCov">          0 :                 escape_html(buf3, sizeof(buf3), buf + 1);</span>
-<span class="lineNum">     644 </span>            :                 fprintf(htmlfile, &quot;%s&quot;, buf3);
+<span class="lineNum">     644 </span><span class="lineNoCov">          0 :                 fprintf(htmlfile, &quot;%s&quot;, buf3);</span>
 <span class="lineNum">     645 </span>            :             }
 <span class="lineNum">     646 </span><span class="lineNoCov">          0 :         } else if (nukenext) {</span>
 <span class="lineNum">     647 </span><span class="lineNoCov">          0 :             nukenext = 0;</span>
@@ -714,21 +714,21 @@
 <span class="lineNum">     652 </span>            :             }
 <span class="lineNum">     653 </span><span class="lineNoCov">          0 :             *ptr = '\0';</span>
 <span class="lineNum">     654 </span><span class="lineNoCov">          0 :             escape_html(buf3, sizeof(buf3), buf);</span>
-<span class="lineNum">     655 </span>            :             fprintf(htmlfile, HTML_TOPICHEAD, buf3);
+<span class="lineNum">     655 </span><span class="lineNoCov">          0 :             fprintf(htmlfile, HTML_TOPICHEAD, buf3);</span>
 <span class="lineNum">     656 </span><span class="lineNoCov">          0 :         } else if (buf[0] == ' ') {</span>
 <span class="lineNum">     657 </span><span class="lineNoCov">          0 :             nukenext = 0;</span>
 <span class="lineNum">     658 </span><span class="lineNoCov">          0 :             if (topichead) {</span>
 <span class="lineNum">     659 </span><span class="lineNoCov">          0 :                 topichead = 0;</span>
-<span class="lineNum">     660 </span>            :                 fprintf(htmlfile, HTML_TOPICBODY);
+<span class="lineNum">     660 </span><span class="lineNoCov">          0 :                 fprintf(htmlfile, HTML_TOPICBODY);</span>
 <span class="lineNum">     661 </span><span class="lineNoCov">          0 :             } else if (!codeblock) {</span>
-<span class="lineNum">     662 </span>            :                 fprintf(htmlfile, HTML_PARAGRAPH);
+<span class="lineNum">     662 </span><span class="lineNoCov">          0 :                 fprintf(htmlfile, HTML_PARAGRAPH);</span>
 <span class="lineNum">     663 </span>            :             }
 <span class="lineNum">     664 </span><span class="lineNoCov">          0 :             fprintf(outfile, &quot;%s&quot;, buf);</span>
 <span class="lineNum">     665 </span><span class="lineNoCov">          0 :             fprintf(docsfile, &quot;%s&quot;, buf);</span>
 <span class="lineNum">     666 </span><span class="lineNoCov">          0 :             escape_html(buf3, sizeof(buf3), buf);</span>
-<span class="lineNum">     667 </span>            :             fprintf(htmlfile, &quot;%s&quot;, buf3);
+<span class="lineNum">     667 </span><span class="lineNoCov">          0 :             fprintf(htmlfile, &quot;%s&quot;, buf3);</span>
 <span class="lineNum">     668 </span>            :         } else {
-<span class="lineNum">     669 </span>            :             int found = 0;
+<span class="lineNum">     669 </span><span class="lineNoCov">          0 :             int found = 0;</span>
 <span class="lineNum">     670 </span><span class="lineNoCov">          0 :             for (replacement *temp = replacements; temp-&gt;token; temp++) {</span>
 <span class="lineNum">     671 </span><span class="lineNoCov">          0 :                 if (strstr(buf, temp-&gt;token)) {</span>
 <span class="lineNum">     672 </span><span class="lineNoCov">          0 :                     found = 1;</span>
@@ -743,11 +743,11 @@
 <span class="lineNum">     681 </span><span class="lineNoCov">          0 :                 fprintf(outfile, &quot;%s&quot;, buf);</span>
 <span class="lineNum">     682 </span><span class="lineNoCov">          0 :                 fprintf(docsfile, &quot;%s&quot;, buf);</span>
 <span class="lineNum">     683 </span><span class="lineNoCov">          0 :                 escape_html(buf3, sizeof(buf3), buf);</span>
-<span class="lineNum">     684 </span>            :                 fprintf(htmlfile, &quot;%s&quot;, buf3);
+<span class="lineNum">     684 </span><span class="lineNoCov">          0 :                 fprintf(htmlfile, &quot;%s&quot;, buf3);</span>
 <span class="lineNum">     685 </span>            :             }
 <span class="lineNum">     686 </span>            : 
 <span class="lineNum">     687 </span><span class="lineNoCov">          0 :             if (topichead) {</span>
-<span class="lineNum">     688 </span>            :                 fprintf(htmlfile, HTML_TOPICHEAD_BREAK);
+<span class="lineNum">     688 </span><span class="lineNoCov">          0 :                 fprintf(htmlfile, HTML_TOPICHEAD_BREAK);</span>
 <span class="lineNum">     689 </span>            :             }
 <span class="lineNum">     690 </span>            :         }
 <span class="lineNum">     691 </span>            :     }

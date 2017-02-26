@@ -31,18 +31,18 @@
             <td class="headerValue">coverage-total</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">165</td>
-            <td class="headerCovTableEntry">581</td>
-            <td class="headerCovTableEntryLo">28.4 %</td>
+            <td class="headerCovTableEntry">172</td>
+            <td class="headerCovTableEntry">640</td>
+            <td class="headerCovTableEntryLo">26.9 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 00:20:31</td>
+            <td class="headerValue">2017-02-26 01:21:31</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">13</td>
-            <td class="headerCovTableEntry">35</td>
-            <td class="headerCovTableEntryLo">37.1 %</td>
+            <td class="headerCovTableEntry">36</td>
+            <td class="headerCovTableEntryLo">36.1 %</td>
           </tr>
           <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
         </table>
@@ -99,7 +99,7 @@
 <span class="lineNum">      37 </span><span class="lineNoCov">          0 : macro_expansion(struct macrotable *node, const char *match)</span>
 <span class="lineNum">      38 </span>            : {
 <span class="lineNum">      39 </span><span class="lineNoCov">          0 :     if (!node)</span>
-<span class="lineNum">      40 </span>            :         return NULL;
+<span class="lineNum">      40 </span><span class="lineNoCov">          0 :         return NULL;</span>
 <span class="lineNum">      41 </span>            :     else {
 <span class="lineNum">      42 </span><span class="lineNoCov">          0 :         register int value = strcasecmp(match, node-&gt;name);</span>
 <span class="lineNum">      43 </span>            : 
@@ -136,7 +136,7 @@
 <span class="lineNum">      74 </span><span class="lineNoCov">          0 :     register int value = strcmp(newmacro-&gt;name, node-&gt;name);</span>
 <span class="lineNum">      75 </span>            : 
 <span class="lineNum">      76 </span><span class="lineNoCov">          0 :     if (!value)</span>
-<span class="lineNum">      77 </span>            :         return 0;
+<span class="lineNum">      77 </span><span class="lineNoCov">          0 :         return 0;</span>
 <span class="lineNum">      78 </span><span class="lineNoCov">          0 :     else if (value &lt; 0) {</span>
 <span class="lineNum">      79 </span><span class="lineNoCov">          0 :         if (node-&gt;left)</span>
 <span class="lineNum">      80 </span><span class="lineNoCov">          0 :             return grow_macro_tree(node-&gt;left, newmacro);</span>
@@ -173,7 +173,7 @@
 <span class="lineNum">     111 </span>            :     static char buf[BUFFER_LEN];
 <span class="lineNum">     112 </span>            : 
 <span class="lineNum">     113 </span><span class="lineNoCov">          0 :     if (!node)</span>
-<span class="lineNum">     114 </span>            :         return;
+<span class="lineNum">     114 </span><span class="lineNoCov">          0 :         return;</span>
 <span class="lineNum">     115 </span>            :     else {
 <span class="lineNum">     116 </span><span class="lineNoCov">          0 :         if (strncmp(node-&gt;name, first, strlen(first)) &gt;= 0)</span>
 <span class="lineNum">     117 </span><span class="lineNoCov">          0 :             do_list_tree(node-&gt;left, first, last, length, player);</span>
@@ -213,19 +213,19 @@
 <span class="lineNum">     151 </span><span class="lineNoCov">          0 :     notify(player, &quot;End of list.&quot;);</span>
 <span class="lineNum">     152 </span><span class="lineNoCov">          0 :     return;</span>
 <span class="lineNum">     153 </span>            : }
-<span class="lineNum">     154 </span>            : 
+<a name="154"><span class="lineNum">     154 </span>            : </a>
 <span class="lineNum">     155 </span>            : static void
-<span class="lineNum">     156 </span>            : purge_macro_tree(struct macrotable *node)
+<span class="lineNum">     156 </span><span class="lineNoCov">          0 : purge_macro_tree(struct macrotable *node)</span>
 <span class="lineNum">     157 </span>            : {
-<span class="lineNum">     158 </span>            :     if (!node)
-<span class="lineNum">     159 </span>            :         return;
-<span class="lineNum">     160 </span>            :     purge_macro_tree(node-&gt;left);
-<span class="lineNum">     161 </span>            :     purge_macro_tree(node-&gt;right);
-<span class="lineNum">     162 </span>            :     if (node-&gt;name)
-<span class="lineNum">     163 </span>            :         free(node-&gt;name);
-<span class="lineNum">     164 </span>            :     if (node-&gt;definition)
-<span class="lineNum">     165 </span>            :         free(node-&gt;definition);
-<span class="lineNum">     166 </span>            :     free(node);
+<span class="lineNum">     158 </span><span class="lineNoCov">          0 :     if (!node)</span>
+<span class="lineNum">     159 </span><span class="lineNoCov">          0 :         return;</span>
+<span class="lineNum">     160 </span><span class="lineNoCov">          0 :     purge_macro_tree(node-&gt;left);</span>
+<span class="lineNum">     161 </span><span class="lineNoCov">          0 :     purge_macro_tree(node-&gt;right);</span>
+<span class="lineNum">     162 </span><span class="lineNoCov">          0 :     if (node-&gt;name)</span>
+<span class="lineNum">     163 </span><span class="lineNoCov">          0 :         free(node-&gt;name);</span>
+<span class="lineNum">     164 </span><span class="lineNoCov">          0 :     if (node-&gt;definition)</span>
+<span class="lineNum">     165 </span><span class="lineNoCov">          0 :         free(node-&gt;definition);</span>
+<span class="lineNum">     166 </span><span class="lineNoCov">          0 :     free(node);</span>
 <span class="lineNum">     167 </span>            : }
 <a name="168"><span class="lineNum">     168 </span>            : </a>
 <span class="lineNum">     169 </span>            : static int
@@ -233,7 +233,7 @@
 <span class="lineNum">     171 </span>            :            const char *killname, struct macrotable *mtop)
 <span class="lineNum">     172 </span>            : {
 <span class="lineNum">     173 </span><span class="lineNoCov">          0 :     if (!node)</span>
-<span class="lineNum">     174 </span>            :         return 0;
+<span class="lineNum">     174 </span><span class="lineNoCov">          0 :         return 0;</span>
 <span class="lineNum">     175 </span><span class="lineNoCov">          0 :     else if (strcmp(killname, node-&gt;name) &lt; 0)</span>
 <span class="lineNum">     176 </span><span class="lineNoCov">          0 :         return erase_node(node, node-&gt;left, killname, mtop);</span>
 <span class="lineNum">     177 </span><span class="lineNoCov">          0 :     else if (strcmp(killname, node-&gt;name))</span>
@@ -267,7 +267,7 @@
 <span class="lineNum">     205 </span><span class="lineNoCov">          0 : kill_macro(const char *macroname, dbref player, struct macrotable **mtop)</span>
 <span class="lineNum">     206 </span>            : {
 <span class="lineNum">     207 </span><span class="lineNoCov">          0 :     if (!(*mtop) || player == NOTHING) {</span>
-<span class="lineNum">     208 </span>            :         return (0);
+<span class="lineNum">     208 </span><span class="lineNoCov">          0 :         return (0);</span>
 <span class="lineNum">     209 </span><span class="lineNoCov">          0 :     } else if (!strcasecmp(macroname, (*mtop)-&gt;name)) {</span>
 <span class="lineNum">     210 </span><span class="lineNoCov">          0 :         struct macrotable *macrotemp = (*mtop);</span>
 <span class="lineNum">     211 </span><span class="lineNoCov">          0 :         int whichway = ((*mtop)-&gt;left) ? 1 : 0;</span>
@@ -282,7 +282,7 @@
 <span class="lineNum">     220 </span><span class="lineNoCov">          0 :         free((void *) macrotemp);</span>
 <span class="lineNum">     221 </span><span class="lineNoCov">          0 :         return (1);</span>
 <span class="lineNum">     222 </span><span class="lineNoCov">          0 :     } else if (erase_node((*mtop), (*mtop), macroname, (*mtop)))</span>
-<span class="lineNum">     223 </span>            :         return (1);
+<span class="lineNum">     223 </span><span class="lineNoCov">          0 :         return (1);</span>
 <span class="lineNum">     224 </span>            :     else
 <span class="lineNum">     225 </span><span class="lineNoCov">          0 :         return (0);</span>
 <span class="lineNum">     226 </span>            : }
@@ -299,7 +299,7 @@
 <span class="lineNum">     237 </span><span class="lineNoCov">          0 : chown_macros_rec(struct macrotable *node, dbref from, dbref to)</span>
 <span class="lineNum">     238 </span>            : {
 <span class="lineNum">     239 </span><span class="lineNoCov">          0 :     if (!node)</span>
-<span class="lineNum">     240 </span>            :         return;
+<span class="lineNum">     240 </span><span class="lineNoCov">          0 :         return;</span>
 <span class="lineNum">     241 </span>            : 
 <span class="lineNum">     242 </span><span class="lineNoCov">          0 :     chown_macros_rec(node-&gt;left, from, to);</span>
 <span class="lineNum">     243 </span>            : 
@@ -336,103 +336,103 @@
 <span class="lineNum">     274 </span>            :             else
 <span class="lineNum">     275 </span><span class="lineNoCov">          0 :                 snprintf(buf, sizeof(buf), &quot;%d: (line %d) PRIMITIVE: %d&quot;, i, curr-&gt;line,</span>
 <span class="lineNum">     276 </span>            :                          curr-&gt;data.number);
-<span class="lineNum">     277 </span>            :             break;
+<span class="lineNum">     277 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     278 </span>            :         case PROG_MARK:
 <span class="lineNum">     279 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), &quot;%d: (line %d) MARK&quot;, i, curr-&gt;line);</span>
-<span class="lineNum">     280 </span>            :             break;
+<span class="lineNum">     280 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     281 </span>            :         case PROG_STRING:
 <span class="lineNum">     282 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), &quot;%d: (line %d) STRING: \&quot;%s\&quot;&quot;, i, curr-&gt;line,</span>
 <span class="lineNum">     283 </span><span class="lineNoCov">          0 :                      DoNullInd(curr-&gt;data.string));</span>
-<span class="lineNum">     284 </span>            :             break;
+<span class="lineNum">     284 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     285 </span>            :         case PROG_ARRAY:
 <span class="lineNum">     286 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), &quot;%d: (line %d) ARRAY: %d items&quot;, i, curr-&gt;line,</span>
 <span class="lineNum">     287 </span><span class="lineNoCov">          0 :                      curr-&gt;data.array ? curr-&gt;data.array-&gt;items : 0);</span>
-<span class="lineNum">     288 </span>            :             break;
+<span class="lineNum">     288 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     289 </span>            :         case PROG_FUNCTION:
 <span class="lineNum">     290 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), &quot;%d: (line %d) FUNCTION: %s, VARS: %d, ARGS: %d&quot;, i,</span>
 <span class="lineNum">     291 </span><span class="lineNoCov">          0 :                      curr-&gt;line, DoNull(curr-&gt;data.mufproc-&gt;procname),</span>
 <span class="lineNum">     292 </span><span class="lineNoCov">          0 :                      curr-&gt;data.mufproc-&gt;vars, curr-&gt;data.mufproc-&gt;args);</span>
-<span class="lineNum">     293 </span>            :             break;
+<span class="lineNum">     293 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     294 </span>            :         case PROG_LOCK:
 <span class="lineNum">     295 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), &quot;%d: (line %d) LOCK: [%s]&quot;, i, curr-&gt;line,</span>
 <span class="lineNum">     296 </span><span class="lineNoCov">          0 :                      curr-&gt;data.lock == TRUE_BOOLEXP ? &quot;TRUE_BOOLEXP&quot; :</span>
-<span class="lineNum">     297 </span>            :                      unparse_boolexp(0, curr-&gt;data.lock, 0));
-<span class="lineNum">     298 </span>            :             break;
+<span class="lineNum">     297 </span><span class="lineNoCov">          0 :                      unparse_boolexp(0, curr-&gt;data.lock, 0));</span>
+<span class="lineNum">     298 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     299 </span>            :         case PROG_INTEGER:
 <span class="lineNum">     300 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), &quot;%d: (line %d) INTEGER: %d&quot;, i, curr-&gt;line,</span>
 <span class="lineNum">     301 </span>            :                      curr-&gt;data.number);
-<span class="lineNum">     302 </span>            :             break;
+<span class="lineNum">     302 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     303 </span>            :         case PROG_FLOAT:
 <span class="lineNum">     304 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), &quot;%d: (line %d) FLOAT: %.17g&quot;, i, curr-&gt;line,</span>
 <span class="lineNum">     305 </span>            :                      curr-&gt;data.fnumber);
-<span class="lineNum">     306 </span>            :             break;
+<span class="lineNum">     306 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     307 </span>            :         case PROG_ADD:
 <span class="lineNum">     308 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), &quot;%d: (line %d) ADDRESS: %d&quot;, i,</span>
 <span class="lineNum">     309 </span><span class="lineNoCov">          0 :                      curr-&gt;line, (int) (curr-&gt;data.addr-&gt;data - codestart));</span>
-<span class="lineNum">     310 </span>            :             break;
+<span class="lineNum">     310 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     311 </span>            :         case PROG_TRY:
 <span class="lineNum">     312 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), &quot;%d: (line %d) TRY: %d&quot;, i, curr-&gt;line,</span>
 <span class="lineNum">     313 </span><span class="lineNoCov">          0 :                      (int) (curr-&gt;data.call - codestart));</span>
-<span class="lineNum">     314 </span>            :             break;
+<span class="lineNum">     314 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     315 </span>            :         case PROG_IF:
 <span class="lineNum">     316 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), &quot;%d: (line %d) IF: %d&quot;, i, curr-&gt;line,</span>
 <span class="lineNum">     317 </span><span class="lineNoCov">          0 :                      (int) (curr-&gt;data.call - codestart));</span>
-<span class="lineNum">     318 </span>            :             break;
+<span class="lineNum">     318 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     319 </span>            :         case PROG_JMP:
 <span class="lineNum">     320 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), &quot;%d: (line %d) JMP: %d&quot;, i, curr-&gt;line,</span>
 <span class="lineNum">     321 </span><span class="lineNoCov">          0 :                      (int) (curr-&gt;data.call - codestart));</span>
-<span class="lineNum">     322 </span>            :             break;
+<span class="lineNum">     322 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     323 </span>            :         case PROG_EXEC:
 <span class="lineNum">     324 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), &quot;%d: (line %d) EXEC: %d&quot;, i, curr-&gt;line,</span>
 <span class="lineNum">     325 </span><span class="lineNoCov">          0 :                      (int) (curr-&gt;data.call - codestart));</span>
-<span class="lineNum">     326 </span>            :             break;
+<span class="lineNum">     326 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     327 </span>            :         case PROG_OBJECT:
 <span class="lineNum">     328 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), &quot;%d: (line %d) OBJECT REF: %d&quot;, i, curr-&gt;line,</span>
 <span class="lineNum">     329 </span>            :                      curr-&gt;data.number);
-<span class="lineNum">     330 </span>            :             break;
+<span class="lineNum">     330 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     331 </span>            :         case PROG_VAR:
 <span class="lineNum">     332 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), &quot;%d: (line %d) VARIABLE: %d&quot;, i, curr-&gt;line,</span>
 <span class="lineNum">     333 </span>            :                      curr-&gt;data.number);
-<span class="lineNum">     334 </span>            :             break;
+<span class="lineNum">     334 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     335 </span>            :         case PROG_SVAR:
 <span class="lineNum">     336 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), &quot;%d: (line %d) SCOPEDVAR: %d (%s)&quot;, i, curr-&gt;line,</span>
 <span class="lineNum">     337 </span>            :                      curr-&gt;data.number, scopedvar_getname_byinst(curr, curr-&gt;data.number));
-<span class="lineNum">     338 </span>            :             break;
+<span class="lineNum">     338 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     339 </span>            :         case PROG_SVAR_AT:
 <span class="lineNum">     340 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), &quot;%d: (line %d) FETCH SCOPEDVAR: %d (%s)&quot;, i, curr-&gt;line,</span>
 <span class="lineNum">     341 </span>            :                      curr-&gt;data.number, scopedvar_getname_byinst(curr, curr-&gt;data.number));
-<span class="lineNum">     342 </span>            :             break;
+<span class="lineNum">     342 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     343 </span>            :         case PROG_SVAR_AT_CLEAR:
 <span class="lineNum">     344 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), &quot;%d: (line %d) FETCH SCOPEDVAR (clear optim): %d (%s)&quot;,</span>
 <span class="lineNum">     345 </span><span class="lineNoCov">          0 :                      i, curr-&gt;line, curr-&gt;data.number, scopedvar_getname_byinst(curr,</span>
 <span class="lineNum">     346 </span>            :                                                                                 curr-&gt;data.
 <span class="lineNum">     347 </span>            :                                                                                 number));
-<span class="lineNum">     348 </span>            :             break;
+<span class="lineNum">     348 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     349 </span>            :         case PROG_SVAR_BANG:
 <span class="lineNum">     350 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), &quot;%d: (line %d) SET SCOPEDVAR: %d (%s)&quot;, i, curr-&gt;line,</span>
 <span class="lineNum">     351 </span>            :                      curr-&gt;data.number, scopedvar_getname_byinst(curr, curr-&gt;data.number));
-<span class="lineNum">     352 </span>            :             break;
+<span class="lineNum">     352 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     353 </span>            :         case PROG_LVAR:
 <span class="lineNum">     354 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), &quot;%d: (line %d) LOCALVAR: %d&quot;, i, curr-&gt;line,</span>
 <span class="lineNum">     355 </span>            :                      curr-&gt;data.number);
-<span class="lineNum">     356 </span>            :             break;
+<span class="lineNum">     356 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     357 </span>            :         case PROG_LVAR_AT:
 <span class="lineNum">     358 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), &quot;%d: (line %d) FETCH LOCALVAR: %d&quot;, i, curr-&gt;line,</span>
 <span class="lineNum">     359 </span>            :                      curr-&gt;data.number);
-<span class="lineNum">     360 </span>            :             break;
+<span class="lineNum">     360 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     361 </span>            :         case PROG_LVAR_AT_CLEAR:
 <span class="lineNum">     362 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), &quot;%d: (line %d) FETCH LOCALVAR (clear optim): %d&quot;, i,</span>
 <span class="lineNum">     363 </span><span class="lineNoCov">          0 :                      curr-&gt;line, curr-&gt;data.number);</span>
-<span class="lineNum">     364 </span>            :             break;
+<span class="lineNum">     364 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     365 </span>            :         case PROG_LVAR_BANG:
 <span class="lineNum">     366 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), &quot;%d: (line %d) SET LOCALVAR: %d&quot;, i, curr-&gt;line,</span>
 <span class="lineNum">     367 </span>            :                      curr-&gt;data.number);
-<span class="lineNum">     368 </span>            :             break;
+<span class="lineNum">     368 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     369 </span>            :         case PROG_CLEARED:
 <span class="lineNum">     370 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), &quot;%d: (line ?) CLEARED INST AT %s:%d&quot;, i,</span>
 <span class="lineNum">     371 </span><span class="lineNoCov">          0 :                      (char *) curr-&gt;data.addr, curr-&gt;line);</span>
 <span class="lineNum">     372 </span>            :         default:
-<span class="lineNum">     373 </span>            :             snprintf(buf, sizeof(buf), &quot;%d: (line ?) UNKNOWN INST&quot;, i);
+<span class="lineNum">     373 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), &quot;%d: (line ?) UNKNOWN INST&quot;, i);</span>
 <span class="lineNum">     374 </span>            :         }
 <span class="lineNum">     375 </span><span class="lineNoCov">          0 :         notify(player, buf);</span>
 <span class="lineNum">     376 </span>            :     }
@@ -494,7 +494,7 @@
 <span class="lineNum">     432 </span><span class="lineNoCov">          0 :             notifyf(player, &quot;%d line%s deleted&quot;, n, n != 1 ? &quot;s&quot; : &quot;&quot;);</span>
 <span class="lineNum">     433 </span>            :         } else
 <span class="lineNum">     434 </span><span class="lineNoCov">          0 :             notify(player, &quot;No line to delete!&quot;);</span>
-<span class="lineNum">     435 </span>            :         break;
+<span class="lineNum">     435 </span><span class="lineNoCov">          0 :         break;</span>
 <span class="lineNum">     436 </span>            :     default:
 <span class="lineNum">     437 </span><span class="lineNoCov">          0 :         notify(player, &quot;Too many arguments!&quot;);</span>
 <span class="lineNum">     438 </span><span class="lineNoCov">          0 :         break;</span>
@@ -580,7 +580,7 @@
 <span class="lineNum">     518 </span>            :             }
 <span class="lineNum">     519 </span>            :         } else
 <span class="lineNum">     520 </span><span class="lineNoCov">          0 :             notify_nolisten(player, &quot;Line not available for display.&quot;, 1);</span>
-<span class="lineNum">     521 </span>            :         break;
+<span class="lineNum">     521 </span><span class="lineCov">        129 :         break;</span>
 <span class="lineNum">     522 </span>            :     default:
 <span class="lineNum">     523 </span><span class="lineNoCov">          0 :         notify_nolisten(player, &quot;Too many arguments!&quot;, 1);</span>
 <span class="lineNum">     524 </span><span class="lineNoCov">          0 :         break;</span>
@@ -725,8 +725,8 @@
 <span class="lineNum">     663 </span><span class="lineCov">          9 :         return;</span>
 <span class="lineNum">     664 </span>            :     }
 <span class="lineNum">     665 </span><span class="lineCov">      40872 :     if (!curr) {                /* insert at the end */</span>
-<span class="lineNum">     666 </span>            :         i = 1;
-<span class="lineNum">     667 </span><span class="lineCov">  200222542 :         for (curr = PROGRAM_FIRST(program); curr-&gt;next; curr = curr-&gt;next)</span>
+<span class="lineNum">     666 </span><span class="lineCov">      40872 :         i = 1;</span>
+<span class="lineNum">     667 </span><span class="lineCov">  200263414 :         for (curr = PROGRAM_FIRST(program); curr-&gt;next; curr = curr-&gt;next)</span>
 <span class="lineNum">     668 </span><span class="lineCov">  200222542 :             i++;                /* count lines */</span>
 <span class="lineNum">     669 </span><span class="lineCov">      40872 :         PROGRAM_SET_CURR_LINE(program, i + 2);</span>
 <span class="lineNum">     670 </span><span class="lineCov">      40872 :         new_line-&gt;prev = curr;</span>
@@ -774,11 +774,11 @@
 <span class="lineNum">     712 </span><span class="lineCov">      40890 :         return;</span>
 <span class="lineNum">     713 </span>            :     }
 <span class="lineNum">     714 </span>            :     /* parse the commands */
-<span class="lineNum">     715 </span><span class="lineCov">         22 :     for (i = 0; i &lt;= MAX_ARG &amp;&amp; *command; i++) {</span>
-<span class="lineNum">     716 </span><span class="lineCov">         22 :         while (*command &amp;&amp; isspace(*command))</span>
+<span class="lineNum">     715 </span><span class="lineCov">         49 :     for (i = 0; i &lt;= MAX_ARG &amp;&amp; *command; i++) {</span>
+<span class="lineNum">     716 </span><span class="lineCov">         44 :         while (*command &amp;&amp; isspace(*command))</span>
 <span class="lineNum">     717 </span><span class="lineNoCov">          0 :             command++;</span>
-<span class="lineNum">     718 </span>            :         j = 0;
-<span class="lineNum">     719 </span><span class="lineCov">         44 :         while (*command &amp;&amp; !isspace(*command)) {</span>
+<span class="lineNum">     718 </span><span class="lineCov">         22 :         j = 0;</span>
+<span class="lineNum">     719 </span><span class="lineCov">         66 :         while (*command &amp;&amp; !isspace(*command)) {</span>
 <span class="lineNum">     720 </span><span class="lineCov">         22 :             buf[j] = *command;</span>
 <span class="lineNum">     721 </span><span class="lineCov">         22 :             command++, j++;</span>
 <span class="lineNum">     722 </span>            :         }
@@ -806,7 +806,7 @@
 <span class="lineNum">     744 </span><span class="lineNoCov">          0 :                 if (word[i])</span>
 <span class="lineNum">     745 </span><span class="lineNoCov">          0 :                     free((void *) word[i]);</span>
 <span class="lineNum">     746 </span>            :             }
-<span class="lineNum">     747 </span>            :             return;
+<span class="lineNum">     747 </span><span class="lineNoCov">          0 :             return;</span>
 <span class="lineNum">     748 </span>            :         }
 <span class="lineNum">     749 </span><span class="lineCov">         22 :         arg[i] = atoi(buf);</span>
 <span class="lineNum">     750 </span><span class="lineCov">         22 :         if (arg[i] &lt; 0) {</span>
@@ -815,14 +815,14 @@
 <span class="lineNum">     753 </span><span class="lineNoCov">          0 :                 if (word[i])</span>
 <span class="lineNum">     754 </span><span class="lineNoCov">          0 :                     free((void *) word[i]);</span>
 <span class="lineNum">     755 </span>            :             }
-<span class="lineNum">     756 </span>            :             return;
+<span class="lineNum">     756 </span><span class="lineNoCov">          0 :             return;</span>
 <span class="lineNum">     757 </span>            :         }
 <span class="lineNum">     758 </span>            :     }
 <span class="lineNum">     759 </span><span class="lineCov">         27 :     i--;</span>
 <span class="lineNum">     760 </span><span class="lineCov">         54 :     while ((i &gt;= 0) &amp;&amp; !word[i])</span>
 <span class="lineNum">     761 </span><span class="lineNoCov">          0 :         i--;</span>
 <span class="lineNum">     762 </span><span class="lineCov">         27 :     if (i &lt; 0) {</span>
-<span class="lineNum">     763 </span>            :         return;
+<span class="lineNum">     763 </span><span class="lineCov">          5 :         return;</span>
 <span class="lineNum">     764 </span>            :     } else {
 <span class="lineNum">     765 </span><span class="lineCov">         22 :         switch (word[i][0]) {</span>
 <span class="lineNum">     766 </span>            :         case KILL_COMMAND:
@@ -834,7 +834,7 @@
 <span class="lineNum">     772 </span>            :                 else
 <span class="lineNum">     773 </span><span class="lineNoCov">          0 :                     notify(player, &quot;Macro to delete not found.&quot;);</span>
 <span class="lineNum">     774 </span>            :             }
-<span class="lineNum">     775 </span>            :             break;
+<span class="lineNum">     775 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     776 </span>            :         case SHOW_COMMAND:
 <span class="lineNum">     777 </span><span class="lineNoCov">          0 :             list_macros(word, i, player, 1);</span>
 <span class="lineNum">     778 </span><span class="lineNoCov">          0 :             break;</span>
@@ -884,7 +884,7 @@
 <span class="lineNum">     822 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     823 </span>            :         }
 <span class="lineNum">     824 </span>            :     }
-<span class="lineNum">     825 </span><span class="lineCov">         22 :     for (; i &gt;= 0; i--) {</span>
+<span class="lineNum">     825 </span><span class="lineCov">         44 :     for (; i &gt;= 0; i--) {</span>
 <span class="lineNum">     826 </span><span class="lineCov">         22 :         if (word[i])</span>
 <span class="lineNum">     827 </span><span class="lineCov">         22 :             free((void *) word[i]);</span>
 <span class="lineNum">     828 </span>            :     }
@@ -921,9 +921,9 @@
 <span class="lineNum">     859 </span><span class="lineCov">        129 :     snprintf(buf, sizeof(buf), &quot;muf/%d.m&quot;, (int) i);</span>
 <span class="lineNum">     860 </span><span class="lineCov">        129 :     f = fopen(buf, &quot;rb&quot;);</span>
 <span class="lineNum">     861 </span><span class="lineCov">        129 :     if (!f)</span>
-<span class="lineNum">     862 </span>            :         return 0;
+<span class="lineNum">     862 </span><span class="lineNoCov">          0 :         return 0;</span>
 <span class="lineNum">     863 </span>            : 
-<span class="lineNum">     864 </span><span class="lineCov">    1201886 :     while (fgets(buf, BUFFER_LEN, f)) {</span>
+<span class="lineNum">     864 </span><span class="lineCov">    1202015 :     while (fgets(buf, BUFFER_LEN, f)) {</span>
 <span class="lineNum">     865 </span><span class="lineCov">    1201757 :         nu = get_new_line();</span>
 <span class="lineNum">     866 </span><span class="lineCov">    1201757 :         len = strlen(buf);</span>
 <span class="lineNum">     867 </span><span class="lineCov">    1201757 :         if (len &gt; 0 &amp;&amp; buf[len - 1] == '\n') {</span>
@@ -938,8 +938,8 @@
 <span class="lineNum">     876 </span><span class="lineNoCov">          0 :             strcpyn(buf, sizeof(buf), &quot; &quot;);</span>
 <span class="lineNum">     877 </span><span class="lineCov">    1201757 :         nu-&gt;this_line = alloc_string(buf);</span>
 <span class="lineNum">     878 </span><span class="lineCov">    1201757 :         if (!first) {</span>
-<span class="lineNum">     879 </span>            :             prev = nu;
-<span class="lineNum">     880 </span>            :             first = nu;
+<span class="lineNum">     879 </span><span class="lineCov">        129 :             prev = nu;</span>
+<span class="lineNum">     880 </span><span class="lineCov">        129 :             first = nu;</span>
 <span class="lineNum">     881 </span>            :         } else {
 <span class="lineNum">     882 </span><span class="lineCov">    1201628 :             prev-&gt;next = nu;</span>
 <span class="lineNum">     883 </span><span class="lineCov">    1201628 :             nu-&gt;prev = prev;</span>
@@ -963,7 +963,7 @@
 <span class="lineNum">     901 </span><span class="lineNoCov">          0 :         log_status(&quot;Couldn't open file %s!&quot;, fname);</span>
 <span class="lineNum">     902 </span><span class="lineNoCov">          0 :         return;</span>
 <span class="lineNum">     903 </span>            :     }
-<span class="lineNum">     904 </span><span class="lineCov">      40890 :     while (first) {</span>
+<span class="lineNum">     904 </span><span class="lineCov">      40899 :     while (first) {</span>
 <span class="lineNum">     905 </span><span class="lineCov">      40881 :         if (!first-&gt;this_line)</span>
 <span class="lineNum">     906 </span><span class="lineNoCov">          0 :             continue;</span>
 <span class="lineNum">     907 </span><span class="lineCov">      40881 :         if (fputs(first-&gt;this_line, f) == EOF) {</span>
@@ -994,7 +994,7 @@
 <span class="lineNum">     932 </span><span class="lineCov">        129 :     match_registered(&amp;md);</span>
 <span class="lineNum">     933 </span><span class="lineCov">        129 :     match_absolute(&amp;md);</span>
 <span class="lineNum">     934 </span><span class="lineCov">        129 :     if ((thing = noisy_match_result(&amp;md)) == NOTHING)</span>
-<span class="lineNum">     935 </span>            :         return;
+<span class="lineNum">     935 </span><span class="lineNoCov">          0 :         return;</span>
 <span class="lineNum">     936 </span><span class="lineCov">        129 :     if (Typeof(thing) != TYPE_PROGRAM) {</span>
 <span class="lineNum">     937 </span><span class="lineNoCov">          0 :         notify(player, &quot;You can't list anything but a program.&quot;);</span>
 <span class="lineNum">     938 </span><span class="lineNoCov">          0 :         return;</span>
@@ -1009,7 +1009,7 @@
 <span class="lineNum">     947 </span><span class="lineCov">        129 :         range[1] = -1;</span>
 <span class="lineNum">     948 </span><span class="lineCov">        129 :         argc = 2;</span>
 <span class="lineNum">     949 </span>            :     } else {
-<span class="lineNum">     950 </span>            :         q = p = linespec;
+<span class="lineNum">     950 </span><span class="lineNoCov">          0 :         q = p = linespec;</span>
 <span class="lineNum">     951 </span><span class="lineNoCov">          0 :         while (*p) {</span>
 <span class="lineNum">     952 </span><span class="lineNoCov">          0 :             while (*p &amp;&amp; !isspace(*p))</span>
 <span class="lineNum">     953 </span><span class="lineNoCov">          0 :                 *q++ = *p++;</span>
@@ -1026,7 +1026,7 @@
 <span class="lineNum">     964 </span><span class="lineNoCov">          0 :             range[0] = 1;</span>
 <span class="lineNum">     965 </span>            :         }
 <span class="lineNum">     966 </span><span class="lineNoCov">          0 :         if (*linespec) {</span>
-<span class="lineNum">     967 </span>            :             argc = 2;
+<span class="lineNum">     967 </span><span class="lineNoCov">          0 :             argc = 2;</span>
 <span class="lineNum">     968 </span><span class="lineNoCov">          0 :             while (*linespec &amp;&amp; !isdigit(*linespec))</span>
 <span class="lineNum">     969 </span><span class="lineNoCov">          0 :                 linespec++;</span>
 <span class="lineNum">     970 </span><span class="lineNoCov">          0 :             if (*linespec)</span>
@@ -1065,10 +1065,10 @@
 <span class="lineNum">    1003 </span><span class="lineCov">      40917 : }</span>
 <a name="1004"><span class="lineNum">    1004 </span>            : </a>
 <span class="lineNum">    1005 </span>            : void
-<span class="lineNum">    1006 </span><span class="lineCov">         26 : macrodump(struct macrotable *node, FILE * f)</span>
+<span class="lineNum">    1006 </span><span class="lineCov">         32 : macrodump(struct macrotable *node, FILE * f)</span>
 <span class="lineNum">    1007 </span>            : {
-<span class="lineNum">    1008 </span><span class="lineCov">         26 :     if (!node)</span>
-<span class="lineNum">    1009 </span>            :         return;
+<span class="lineNum">    1008 </span><span class="lineCov">         32 :     if (!node)</span>
+<span class="lineNum">    1009 </span><span class="lineCov">         32 :         return;</span>
 <span class="lineNum">    1010 </span><span class="lineNoCov">          0 :     macrodump(node-&gt;left, f);</span>
 <span class="lineNum">    1011 </span><span class="lineNoCov">          0 :     putstring(f, node-&gt;name);</span>
 <span class="lineNum">    1012 </span><span class="lineNoCov">          0 :     putstring(f, node-&gt;definition);</span>
@@ -1083,7 +1083,7 @@
 <span class="lineNum">    1021 </span>            :     int len;
 <span class="lineNum">    1022 </span>            : 
 <span class="lineNum">    1023 </span><span class="lineNoCov">          0 :     if (!fgets(buf, BUFFER_LEN, f))</span>
-<span class="lineNum">    1024 </span>            :         return NULL;
+<span class="lineNum">    1024 </span><span class="lineNoCov">          0 :         return NULL;</span>
 <span class="lineNum">    1025 </span><span class="lineNoCov">          0 :     len = strlen(buf);</span>
 <span class="lineNum">    1026 </span><span class="lineNoCov">          0 :     if (buf[len - 1] == '\n') {</span>
 <span class="lineNum">    1027 </span><span class="lineNoCov">          0 :         buf[--len] = '\0';</span>
@@ -1126,7 +1126,7 @@
 <span class="lineNum">    1064 </span>            :     struct macrotable *newmacro;
 <span class="lineNum">    1065 </span>            : 
 <span class="lineNum">    1066 </span><span class="lineNoCov">          0 :     if (!(line = file_line(f)))</span>
-<span class="lineNum">    1067 </span>            :         return 0;
+<span class="lineNum">    1067 </span><span class="lineNoCov">          0 :         return 0;</span>
 <span class="lineNum">    1068 </span><span class="lineNoCov">          0 :     line2 = file_line(f);</span>
 <span class="lineNum">    1069 </span>            : 
 <span class="lineNum">    1070 </span><span class="lineNoCov">          0 :     newmacro = (struct macrotable *) new_macro(line, line2, getref(f));</span>

@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">0</td>
-            <td class="headerCovTableEntry">533</td>
+            <td class="headerCovTableEntry">537</td>
             <td class="headerCovTableEntryLo">0.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 00:20:31</td>
+            <td class="headerValue">2017-02-26 01:21:31</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -84,7 +84,7 @@
 <span class="lineNum">      22 </span><span class="lineNoCov">          0 :     if (tp_muf_string_math &amp;&amp; oper1-&gt;type == PROG_STRING &amp;&amp; oper2-&gt;type == PROG_STRING) {</span>
 <span class="lineNum">      23 </span>            :         struct shared_string *string;
 <span class="lineNum">      24 </span><span class="lineNoCov">          0 :         if (!oper1-&gt;data.string &amp;&amp; !oper2-&gt;data.string)</span>
-<span class="lineNum">      25 </span>            :             string = NULL;
+<span class="lineNum">      25 </span><span class="lineNoCov">          0 :             string = NULL;</span>
 <span class="lineNum">      26 </span><span class="lineNoCov">          0 :         else if (!oper2-&gt;data.string) {</span>
 <span class="lineNum">      27 </span><span class="lineNoCov">          0 :             oper1-&gt;data.string-&gt;links++;</span>
 <span class="lineNum">      28 </span><span class="lineNoCov">          0 :             string = oper1-&gt;data.string;</span>
@@ -471,7 +471,7 @@
 <span class="lineNum">     409 </span>            :         } else {
 <span class="lineNum">     410 </span><span class="lineNoCov">          0 :             result = (((oper2-&gt;type == PROG_INTEGER) ? oper2-&gt;data.number : oper2-&gt;data.objref)</span>
 <span class="lineNum">     411 </span><span class="lineNoCov">          0 :                       ==</span>
-<span class="lineNum">     412 </span>            :                       ((oper1-&gt;type ==
+<span class="lineNum">     412 </span><span class="lineNoCov">          0 :                       ((oper1-&gt;type ==</span>
 <span class="lineNum">     413 </span><span class="lineNoCov">          0 :                         PROG_INTEGER) ? oper1-&gt;data.number : oper1-&gt;data.objref));</span>
 <span class="lineNum">     414 </span>            :         }
 <span class="lineNum">     415 </span>            :     }
@@ -610,7 +610,7 @@
 <span class="lineNum">     548 </span><span class="lineNoCov">          0 :     CHECKOP(1);</span>
 <span class="lineNum">     549 </span><span class="lineNoCov">          0 :     oper1 = POP();</span>
 <span class="lineNum">     550 </span><span class="lineNoCov">          0 :     if (!(oper1-&gt;type == PROG_OBJECT || oper1-&gt;type == PROG_VAR ||</span>
-<span class="lineNum">     551 </span>            :           oper1-&gt;type == PROG_LVAR || oper1-&gt;type == PROG_FLOAT))
+<span class="lineNum">     551 </span><span class="lineNoCov">          0 :           oper1-&gt;type == PROG_LVAR || oper1-&gt;type == PROG_FLOAT))</span>
 <span class="lineNum">     552 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Invalid argument type.&quot;);</span>
 <span class="lineNum">     553 </span><span class="lineNoCov">          0 :     if ((!(oper1-&gt;type == PROG_FLOAT)) ||</span>
 <span class="lineNum">     554 </span><span class="lineNoCov">          0 :         (oper1-&gt;type == PROG_FLOAT &amp;&amp; arith_good((double) oper1-&gt;data.fnumber))) {</span>
@@ -862,7 +862,7 @@
 <span class="lineNum">     800 </span>            :         } else {
 <span class="lineNum">     801 </span><span class="lineNoCov">          0 :             result = (((oper2-&gt;type == PROG_INTEGER) ? oper2-&gt;data.number : oper2-&gt;data.objref)</span>
 <span class="lineNum">     802 </span><span class="lineNoCov">          0 :                       !=</span>
-<span class="lineNum">     803 </span>            :                       ((oper1-&gt;type ==
+<span class="lineNum">     803 </span><span class="lineNoCov">          0 :                       ((oper1-&gt;type ==</span>
 <span class="lineNum">     804 </span><span class="lineNoCov">          0 :                         PROG_INTEGER) ? oper1-&gt;data.number : oper1-&gt;data.objref));</span>
 <span class="lineNum">     805 </span>            :         }
 <span class="lineNum">     806 </span>            :     }

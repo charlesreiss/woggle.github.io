@@ -31,13 +31,13 @@
             <td class="headerValue">coverage-total</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">8</td>
-            <td class="headerCovTableEntry">507</td>
+            <td class="headerCovTableEntry">9</td>
+            <td class="headerCovTableEntry">560</td>
             <td class="headerCovTableEntryLo">1.6 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 00:20:31</td>
+            <td class="headerValue">2017-02-26 01:21:31</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -83,7 +83,7 @@
 <span class="lineNum">      21 </span>            : 
 <span class="lineNum">      22 </span><span class="lineNoCov">          0 :     ptr = dialog_last_accessed;</span>
 <span class="lineNum">      23 </span><span class="lineNoCov">          0 :     if (ptr &amp;&amp; !strcmp(ptr-&gt;id, dlogid)) {</span>
-<span class="lineNum">      24 </span>            :         return ptr;
+<span class="lineNum">      24 </span><span class="lineNoCov">          0 :         return ptr;</span>
 <span class="lineNum">      25 </span>            :     }
 <span class="lineNum">      26 </span><span class="lineNoCov">          0 :     ptr = dialog_list;</span>
 <span class="lineNum">      27 </span><span class="lineNoCov">          0 :     while (ptr) {</span>
@@ -93,7 +93,7 @@
 <span class="lineNum">      31 </span>            :         }
 <span class="lineNum">      32 </span><span class="lineNoCov">          0 :         ptr = ptr-&gt;next;</span>
 <span class="lineNum">      33 </span>            :     }
-<span class="lineNum">      34 </span>            :     return NULL;
+<span class="lineNum">      34 </span><span class="lineNoCov">          0 :     return NULL;</span>
 <span class="lineNum">      35 </span>            : }
 <a name="36"><span class="lineNum">      36 </span>            : </a>
 <span class="lineNum">      37 </span>            : static void
@@ -143,7 +143,7 @@
 <span class="lineNum">      81 </span>            :         }
 <span class="lineNum">      82 </span><span class="lineNoCov">          0 :         if (NULL != dismissed) {</span>
 <span class="lineNum">      83 </span><span class="lineNoCov">          0 :             if (!strcasecmp(dismissed, &quot;false&quot;)) {</span>
-<span class="lineNum">      84 </span>            :                 did_dismiss = 0;
+<span class="lineNum">      84 </span><span class="lineNoCov">          0 :                 did_dismiss = 0;</span>
 <span class="lineNum">      85 </span><span class="lineNoCov">          0 :             } else if (!strcasecmp(dismissed, &quot;0&quot;)) {</span>
 <span class="lineNum">      86 </span><span class="lineNoCov">          0 :                 did_dismiss = 0;</span>
 <span class="lineNum">      87 </span>            :             }
@@ -172,13 +172,13 @@
 <span class="lineNum">     110 </span>            : }
 <a name="111"><span class="lineNum">     111 </span>            : </a>
 <span class="lineNum">     112 </span>            : void
-<span class="lineNum">     113 </span><span class="lineCov">         26 : gui_initialize(void)</span>
+<span class="lineNum">     113 </span><span class="lineCov">         32 : gui_initialize(void)</span>
 <span class="lineNum">     114 </span>            : {
-<span class="lineNum">     115 </span><span class="lineCov">         26 :     McpVer minver = { 1, 0 };   /* { major, minor } */</span>
-<span class="lineNum">     116 </span><span class="lineCov">         26 :     McpVer maxver = { 1, 3 };   /* { major, minor } */</span>
+<span class="lineNum">     115 </span><span class="lineCov">         32 :     McpVer minver = { 1, 0 };   /* { major, minor } */</span>
+<span class="lineNum">     116 </span><span class="lineCov">         32 :     McpVer maxver = { 1, 3 };   /* { major, minor } */</span>
 <span class="lineNum">     117 </span>            : 
-<span class="lineNum">     118 </span><span class="lineCov">         26 :     mcp_package_register(GUI_PACKAGE, minver, maxver, gui_pkg_callback, NULL, NULL);</span>
-<span class="lineNum">     119 </span><span class="lineCov">         26 : }</span>
+<span class="lineNum">     118 </span><span class="lineCov">         32 :     mcp_package_register(GUI_PACKAGE, minver, maxver, gui_pkg_callback, NULL, NULL);</span>
+<span class="lineNum">     119 </span><span class="lineCov">         32 : }</span>
 <a name="120"><span class="lineNum">     120 </span>            : </a>
 <span class="lineNum">     121 </span>            : void *
 <span class="lineNum">     122 </span><span class="lineNoCov">          0 : gui_dlog_get_context(const char *dlogid)</span>
@@ -188,7 +188,7 @@
 <span class="lineNum">     126 </span><span class="lineNoCov">          0 :     if (ptr) {</span>
 <span class="lineNum">     127 </span><span class="lineNoCov">          0 :         return ptr-&gt;context;</span>
 <span class="lineNum">     128 </span>            :     } else {
-<span class="lineNum">     129 </span>            :         return NULL;
+<span class="lineNum">     129 </span><span class="lineNoCov">          0 :         return NULL;</span>
 <span class="lineNum">     130 </span>            :     }
 <span class="lineNum">     131 </span>            : }
 <a name="132"><span class="lineNum">     132 </span>            : </a>
@@ -200,7 +200,7 @@
 <span class="lineNum">     138 </span><span class="lineNoCov">          0 :     if (ptr) {</span>
 <span class="lineNum">     139 </span><span class="lineNoCov">          0 :         return ptr-&gt;descr;</span>
 <span class="lineNum">     140 </span>            :     } else {
-<span class="lineNum">     141 </span>            :         return EGUINODLOG;
+<span class="lineNum">     141 </span><span class="lineNoCov">          0 :         return EGUINODLOG;</span>
 <span class="lineNum">     142 </span>            :     }
 <span class="lineNum">     143 </span>            : }
 <a name="144"><span class="lineNum">     144 </span>            : </a>
@@ -212,7 +212,7 @@
 <span class="lineNum">     150 </span><span class="lineNoCov">          0 :     if (ptr) {</span>
 <span class="lineNum">     151 </span><span class="lineNoCov">          0 :         return ptr-&gt;dismissed;</span>
 <span class="lineNum">     152 </span>            :     } else {
-<span class="lineNum">     153 </span>            :         return EGUINODLOG;
+<span class="lineNum">     153 </span><span class="lineNoCov">          0 :         return EGUINODLOG;</span>
 <span class="lineNum">     154 </span>            :     }
 <span class="lineNum">     155 </span>            : }
 <a name="156"><span class="lineNum">     156 </span>            : </a>
@@ -223,14 +223,14 @@
 <span class="lineNum">     161 </span><span class="lineNoCov">          0 :     DlogData *ddata = gui_dlog_find(dlogid);</span>
 <span class="lineNum">     162 </span>            : 
 <span class="lineNum">     163 </span><span class="lineNoCov">          0 :     if (!ddata) {</span>
-<span class="lineNum">     164 </span>            :         return EGUINODLOG;
+<span class="lineNum">     164 </span><span class="lineNoCov">          0 :         return EGUINODLOG;</span>
 <span class="lineNum">     165 </span>            :     }
 <span class="lineNum">     166 </span><span class="lineNoCov">          0 :     ptr = ddata-&gt;values;</span>
 <span class="lineNum">     167 </span><span class="lineNoCov">          0 :     while (ptr &amp;&amp; strcmp(ptr-&gt;name, id)) {</span>
 <span class="lineNum">     168 </span><span class="lineNoCov">          0 :         ptr = ptr-&gt;next;</span>
 <span class="lineNum">     169 </span>            :     }
 <span class="lineNum">     170 </span><span class="lineNoCov">          0 :     if (!ptr) {</span>
-<span class="lineNum">     171 </span>            :         return 0;
+<span class="lineNum">     171 </span><span class="lineNoCov">          0 :         return 0;</span>
 <span class="lineNum">     172 </span>            :     }
 <span class="lineNum">     173 </span><span class="lineNoCov">          0 :     return ptr-&gt;lines;</span>
 <span class="lineNum">     174 </span>            : }
@@ -241,7 +241,7 @@
 <span class="lineNum">     179 </span><span class="lineNoCov">          0 :     DlogData *ddata = gui_dlog_find(dlogid);</span>
 <span class="lineNum">     180 </span>            : 
 <span class="lineNum">     181 </span><span class="lineNoCov">          0 :     if (!ddata || !ddata-&gt;values) {</span>
-<span class="lineNum">     182 </span>            :         return NULL;
+<span class="lineNum">     182 </span><span class="lineNoCov">          0 :         return NULL;</span>
 <span class="lineNum">     183 </span>            :     }
 <span class="lineNum">     184 </span><span class="lineNoCov">          0 :     return ddata-&gt;values-&gt;name;</span>
 <span class="lineNum">     185 </span>            : }
@@ -253,14 +253,14 @@
 <span class="lineNum">     191 </span><span class="lineNoCov">          0 :     DlogData *ddata = gui_dlog_find(dlogid);</span>
 <span class="lineNum">     192 </span>            : 
 <span class="lineNum">     193 </span><span class="lineNoCov">          0 :     if (!ddata) {</span>
-<span class="lineNum">     194 </span>            :         return NULL;
+<span class="lineNum">     194 </span><span class="lineNoCov">          0 :         return NULL;</span>
 <span class="lineNum">     195 </span>            :     }
 <span class="lineNum">     196 </span><span class="lineNoCov">          0 :     ptr = ddata-&gt;values;</span>
 <span class="lineNum">     197 </span><span class="lineNoCov">          0 :     while (ptr &amp;&amp; strcmp(ptr-&gt;name, id)) {</span>
 <span class="lineNum">     198 </span><span class="lineNoCov">          0 :         ptr = ptr-&gt;next;</span>
 <span class="lineNum">     199 </span>            :     }
 <span class="lineNum">     200 </span><span class="lineNoCov">          0 :     if (!ptr || !ptr-&gt;next) {</span>
-<span class="lineNum">     201 </span>            :         return NULL;
+<span class="lineNum">     201 </span><span class="lineNoCov">          0 :         return NULL;</span>
 <span class="lineNum">     202 </span>            :     }
 <span class="lineNum">     203 </span><span class="lineNoCov">          0 :     return ptr-&gt;next-&gt;name;</span>
 <span class="lineNum">     204 </span>            : }
@@ -272,14 +272,14 @@
 <span class="lineNum">     210 </span><span class="lineNoCov">          0 :     DlogData *ddata = gui_dlog_find(dlogid);</span>
 <span class="lineNum">     211 </span>            : 
 <span class="lineNum">     212 </span><span class="lineNoCov">          0 :     if (!ddata) {</span>
-<span class="lineNum">     213 </span>            :         return NULL;
+<span class="lineNum">     213 </span><span class="lineNoCov">          0 :         return NULL;</span>
 <span class="lineNum">     214 </span>            :     }
 <span class="lineNum">     215 </span><span class="lineNoCov">          0 :     ptr = ddata-&gt;values;</span>
 <span class="lineNum">     216 </span><span class="lineNoCov">          0 :     while (ptr &amp;&amp; strcmp(ptr-&gt;name, id)) {</span>
 <span class="lineNum">     217 </span><span class="lineNoCov">          0 :         ptr = ptr-&gt;next;</span>
 <span class="lineNum">     218 </span>            :     }
 <span class="lineNum">     219 </span><span class="lineNoCov">          0 :     if (!ptr || line &lt; 0 || line &gt;= ptr-&gt;lines) {</span>
-<span class="lineNum">     220 </span>            :         return NULL;
+<span class="lineNum">     220 </span><span class="lineNoCov">          0 :         return NULL;</span>
 <span class="lineNum">     221 </span>            :     }
 <span class="lineNum">     222 </span><span class="lineNoCov">          0 :     return ptr-&gt;value[line];</span>
 <span class="lineNum">     223 </span>            : }
@@ -292,13 +292,13 @@
 <span class="lineNum">     230 </span><span class="lineNoCov">          0 :     int limit = 256;</span>
 <span class="lineNum">     231 </span>            : 
 <span class="lineNum">     232 </span><span class="lineNoCov">          0 :     if (!ddata) {</span>
-<span class="lineNum">     233 </span>            :         return;
+<span class="lineNum">     233 </span><span class="lineNoCov">          0 :         return;</span>
 <span class="lineNum">     234 </span>            :     }
 <span class="lineNum">     235 </span><span class="lineNoCov">          0 :     ptr = ddata-&gt;values;</span>
 <span class="lineNum">     236 </span><span class="lineNoCov">          0 :     while (ptr &amp;&amp; strcmp(ptr-&gt;name, id)) {</span>
 <span class="lineNum">     237 </span><span class="lineNoCov">          0 :         ptr = ptr-&gt;next;</span>
 <span class="lineNum">     238 </span><span class="lineNoCov">          0 :         if (!limit--) {</span>
-<span class="lineNum">     239 </span>            :             return;
+<span class="lineNum">     239 </span><span class="lineNoCov">          0 :             return;</span>
 <span class="lineNum">     240 </span>            :         }
 <span class="lineNum">     241 </span>            :     }
 <span class="lineNum">     242 </span><span class="lineNoCov">          0 :     if (ptr) {</span>
@@ -344,7 +344,7 @@
 <span class="lineNum">     282 </span>            :     while (1) {
 <span class="lineNum">     283 </span><span class="lineNoCov">          0 :         snprintf(tmpid, sizeof(tmpid), &quot;%08lX&quot;, (unsigned long) RANDOM());</span>
 <span class="lineNum">     284 </span><span class="lineNoCov">          0 :         if (!gui_dlog_find(tmpid)) {</span>
-<span class="lineNum">     285 </span>            :             break;
+<span class="lineNum">     285 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     286 </span>            :         }
 <span class="lineNum">     287 </span>            :     }
 <span class="lineNum">     288 </span><span class="lineNoCov">          0 :     ptr = (DlogData *) malloc(sizeof(DlogData));</span>
@@ -376,7 +376,7 @@
 <span class="lineNum">     314 </span>            : 
 <span class="lineNum">     315 </span><span class="lineNoCov">          0 :     ptr = gui_dlog_find(id);</span>
 <span class="lineNum">     316 </span><span class="lineNoCov">          0 :     if (!ptr) {</span>
-<span class="lineNum">     317 </span>            :         return EGUINODLOG;
+<span class="lineNum">     317 </span><span class="lineNoCov">          0 :         return EGUINODLOG;</span>
 <span class="lineNum">     318 </span>            :     }
 <span class="lineNum">     319 </span><span class="lineNoCov">          0 :     *ptr-&gt;prev = ptr-&gt;next;</span>
 <span class="lineNum">     320 </span><span class="lineNoCov">          0 :     if (ptr-&gt;next)</span>
@@ -402,21 +402,21 @@
 <span class="lineNum">     340 </span>            : }
 <a name="341"><span class="lineNum">     341 </span>            : </a>
 <span class="lineNum">     342 </span>            : int
-<span class="lineNum">     343 </span><span class="lineCov">         22 : gui_dlog_closeall_descr(int descr)</span>
+<span class="lineNum">     343 </span><span class="lineCov">         28 : gui_dlog_closeall_descr(int descr)</span>
 <span class="lineNum">     344 </span>            : {
 <span class="lineNum">     345 </span>            :     DlogData *ptr;
 <span class="lineNum">     346 </span>            :     McpMesg msg;
 <span class="lineNum">     347 </span>            : 
-<span class="lineNum">     348 </span><span class="lineCov">         22 :     ptr = dialog_list;</span>
-<span class="lineNum">     349 </span><span class="lineCov">         44 :     while (ptr) {</span>
+<span class="lineNum">     348 </span><span class="lineCov">         28 :     ptr = dialog_list;</span>
+<span class="lineNum">     349 </span><span class="lineCov">         56 :     while (ptr) {</span>
 <span class="lineNum">     350 </span><span class="lineNoCov">          0 :         while (ptr) {</span>
 <span class="lineNum">     351 </span><span class="lineNoCov">          0 :             if (ptr-&gt;descr == descr) {</span>
-<span class="lineNum">     352 </span>            :                 break;
+<span class="lineNum">     352 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">     353 </span>            :             }
 <span class="lineNum">     354 </span><span class="lineNoCov">          0 :             ptr = ptr-&gt;next;</span>
 <span class="lineNum">     355 </span>            :         }
 <span class="lineNum">     356 </span><span class="lineNoCov">          0 :         if (!ptr) {</span>
-<span class="lineNum">     357 </span>            :             return 0;
+<span class="lineNum">     357 </span><span class="lineNoCov">          0 :             return 0;</span>
 <span class="lineNum">     358 </span>            :         }
 <span class="lineNum">     359 </span><span class="lineNoCov">          0 :         if (ptr-&gt;callback) {</span>
 <span class="lineNum">     360 </span><span class="lineNoCov">          0 :             mcp_mesg_init(&amp;msg, GUI_PACKAGE, &quot;ctrl-event&quot;);</span>
@@ -430,7 +430,7 @@
 <span class="lineNum">     368 </span>            :         }
 <span class="lineNum">     369 </span><span class="lineNoCov">          0 :         ptr = ptr-&gt;next;</span>
 <span class="lineNum">     370 </span>            :     }
-<span class="lineNum">     371 </span>            :     return 0;
+<span class="lineNum">     371 </span><span class="lineCov">         28 :     return 0;</span>
 <span class="lineNum">     372 </span>            : }
 <a name="373"><span class="lineNum">     373 </span>            : </a>
 <span class="lineNum">     374 </span>            : int
@@ -444,12 +444,12 @@
 <span class="lineNum">     382 </span><span class="lineNoCov">          0 :     while (ptr) {</span>
 <span class="lineNum">     383 </span><span class="lineNoCov">          0 :         while (ptr) {</span>
 <span class="lineNum">     384 </span><span class="lineNoCov">          0 :             if (ptr-&gt;descr == descr) {</span>
-<span class="lineNum">     385 </span>            :                 break;
+<span class="lineNum">     385 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">     386 </span>            :             }
 <span class="lineNum">     387 </span><span class="lineNoCov">          0 :             ptr = ptr-&gt;next;</span>
 <span class="lineNum">     388 </span>            :         }
 <span class="lineNum">     389 </span><span class="lineNoCov">          0 :         if (!ptr) {</span>
-<span class="lineNum">     390 </span>            :             return 0;
+<span class="lineNum">     390 </span><span class="lineNoCov">          0 :             return 0;</span>
 <span class="lineNum">     391 </span>            :         }
 <span class="lineNum">     392 </span><span class="lineNoCov">          0 :         next = ptr-&gt;next;</span>
 <span class="lineNum">     393 </span><span class="lineNoCov">          0 :         *ptr-&gt;prev = next;</span>
@@ -469,12 +469,12 @@
 <span class="lineNum">     407 </span><span class="lineNoCov">          0 :             gui_value_free(valptr);</span>
 <span class="lineNum">     408 </span><span class="lineNoCov">          0 :             valptr = ptr-&gt;values;</span>
 <span class="lineNum">     409 </span>            :         }
-<span class="lineNum">     410 </span>            :         ptr-&gt;values = NULL;
-<span class="lineNum">     411 </span>            :         ptr-&gt;descr = 0;
+<span class="lineNum">     410 </span><span class="lineNoCov">          0 :         ptr-&gt;values = NULL;</span>
+<span class="lineNum">     411 </span><span class="lineNoCov">          0 :         ptr-&gt;descr = 0;</span>
 <span class="lineNum">     412 </span><span class="lineNoCov">          0 :         free(ptr);</span>
 <span class="lineNum">     413 </span><span class="lineNoCov">          0 :         ptr = next;</span>
 <span class="lineNum">     414 </span>            :     }
-<span class="lineNum">     415 </span>            :     return 0;
+<span class="lineNum">     415 </span><span class="lineNoCov">          0 :     return 0;</span>
 <span class="lineNum">     416 </span>            : }
 <a name="417"><span class="lineNum">     417 </span>            : </a>
 <span class="lineNum">     418 </span>            : McpVer
@@ -500,10 +500,10 @@
 <span class="lineNum">     438 </span><span class="lineNoCov">          0 :     if (mfr) {</span>
 <span class="lineNum">     439 </span><span class="lineNoCov">          0 :         supp = mcp_frame_package_supported(mfr, GUI_PACKAGE);</span>
 <span class="lineNum">     440 </span><span class="lineNoCov">          0 :         if (supp.verminor != 0 || supp.vermajor != 0) {</span>
-<span class="lineNum">     441 </span>            :             return 1;
+<span class="lineNum">     441 </span><span class="lineNoCov">          0 :             return 1;</span>
 <span class="lineNum">     442 </span>            :         }
 <span class="lineNum">     443 </span>            :     }
-<span class="lineNum">     444 </span>            :     return 0;
+<span class="lineNum">     444 </span><span class="lineNoCov">          0 :     return 0;</span>
 <span class="lineNum">     445 </span>            : }
 <a name="446"><span class="lineNum">     446 </span>            : </a>
 <span class="lineNum">     447 </span>            : const char *
@@ -514,7 +514,7 @@
 <span class="lineNum">     452 </span>            :     const char *id;
 <span class="lineNum">     453 </span>            : 
 <span class="lineNum">     454 </span><span class="lineNoCov">          0 :     if (!mfr) {</span>
-<span class="lineNum">     455 </span>            :         return NULL;
+<span class="lineNum">     455 </span><span class="lineNoCov">          0 :         return NULL;</span>
 <span class="lineNum">     456 </span>            :     }
 <span class="lineNum">     457 </span><span class="lineNoCov">          0 :     if (GuiSupported(descr)) {</span>
 <span class="lineNum">     458 </span><span class="lineNoCov">          0 :         id = gui_dlog_alloc(descr, callback, error_cb, context);</span>
@@ -526,7 +526,7 @@
 <span class="lineNum">     464 </span><span class="lineNoCov">          0 :         mcp_mesg_clear(&amp;msg);</span>
 <span class="lineNum">     465 </span><span class="lineNoCov">          0 :         return id;</span>
 <span class="lineNum">     466 </span>            :     } else {
-<span class="lineNum">     467 </span>            :         return NULL;
+<span class="lineNum">     467 </span><span class="lineNoCov">          0 :         return NULL;</span>
 <span class="lineNum">     468 </span>            :     }
 <span class="lineNum">     469 </span>            : }
 <a name="470"><span class="lineNum">     470 </span>            : </a>
@@ -541,7 +541,7 @@
 <span class="lineNum">     479 </span>            :     const char *id;
 <span class="lineNum">     480 </span>            : 
 <span class="lineNum">     481 </span><span class="lineNoCov">          0 :     if (!mfr) {</span>
-<span class="lineNum">     482 </span>            :         return NULL;
+<span class="lineNum">     482 </span><span class="lineNoCov">          0 :         return NULL;</span>
 <span class="lineNum">     483 </span>            :     }
 <span class="lineNum">     484 </span><span class="lineNoCov">          0 :     if (GuiSupported(descr)) {</span>
 <span class="lineNum">     485 </span><span class="lineNoCov">          0 :         id = gui_dlog_alloc(descr, callback, error_cb, context);</span>
@@ -557,7 +557,7 @@
 <span class="lineNum">     495 </span><span class="lineNoCov">          0 :         mcp_mesg_clear(&amp;msg);</span>
 <span class="lineNum">     496 </span><span class="lineNoCov">          0 :         return id;</span>
 <span class="lineNum">     497 </span>            :     } else {
-<span class="lineNum">     498 </span>            :         return NULL;
+<span class="lineNum">     498 </span><span class="lineNoCov">          0 :         return NULL;</span>
 <span class="lineNum">     499 </span>            :     }
 <span class="lineNum">     500 </span>            : }
 <a name="501"><span class="lineNum">     501 </span>            : </a>
@@ -572,7 +572,7 @@
 <span class="lineNum">     510 </span>            :     const char *id;
 <span class="lineNum">     511 </span>            : 
 <span class="lineNum">     512 </span><span class="lineNoCov">          0 :     if (!mfr) {</span>
-<span class="lineNum">     513 </span>            :         return NULL;
+<span class="lineNum">     513 </span><span class="lineNoCov">          0 :         return NULL;</span>
 <span class="lineNum">     514 </span>            :     }
 <span class="lineNum">     515 </span><span class="lineNoCov">          0 :     if (GuiSupported(descr)) {</span>
 <span class="lineNum">     516 </span><span class="lineNoCov">          0 :         id = gui_dlog_alloc(descr, callback, error_cb, context);</span>
@@ -588,7 +588,7 @@
 <span class="lineNum">     526 </span><span class="lineNoCov">          0 :         mcp_mesg_clear(&amp;msg);</span>
 <span class="lineNum">     527 </span><span class="lineNoCov">          0 :         return id;</span>
 <span class="lineNum">     528 </span>            :     } else {
-<span class="lineNum">     529 </span>            :         return NULL;
+<span class="lineNum">     529 </span><span class="lineNoCov">          0 :         return NULL;</span>
 <span class="lineNum">     530 </span>            :     }
 <span class="lineNum">     531 </span>            : }
 <a name="532"><span class="lineNum">     532 </span>            : </a>
@@ -601,7 +601,7 @@
 <span class="lineNum">     539 </span>            : 
 <span class="lineNum">     540 </span><span class="lineNoCov">          0 :     mfr = descr_mcpframe(descr);</span>
 <span class="lineNum">     541 </span><span class="lineNoCov">          0 :     if (!mfr) {</span>
-<span class="lineNum">     542 </span>            :         return EGUINODLOG;
+<span class="lineNum">     542 </span><span class="lineNoCov">          0 :         return EGUINODLOG;</span>
 <span class="lineNum">     543 </span>            :     }
 <span class="lineNum">     544 </span><span class="lineNoCov">          0 :     if (GuiSupported(descr)) {</span>
 <span class="lineNum">     545 </span><span class="lineNoCov">          0 :         if (!GuiClosed(id)) {</span>
@@ -610,9 +610,9 @@
 <span class="lineNum">     548 </span><span class="lineNoCov">          0 :             mcp_frame_output_mesg(mfr, &amp;msg);</span>
 <span class="lineNum">     549 </span><span class="lineNoCov">          0 :             mcp_mesg_clear(&amp;msg);</span>
 <span class="lineNum">     550 </span>            :         }
-<span class="lineNum">     551 </span>            :         return 0;
+<span class="lineNum">     551 </span><span class="lineNoCov">          0 :         return 0;</span>
 <span class="lineNum">     552 </span>            :     }
-<span class="lineNum">     553 </span>            :     return EGUINOSUPPORT;
+<span class="lineNum">     553 </span><span class="lineNoCov">          0 :     return EGUINOSUPPORT;</span>
 <span class="lineNum">     554 </span>            : }
 <span class="lineNum">     555 </span>            : 
 <a name="556"><span class="lineNum">     556 </span>            : </a>
@@ -625,7 +625,7 @@
 <span class="lineNum">     563 </span>            : 
 <span class="lineNum">     564 </span><span class="lineNoCov">          0 :     mfr = descr_mcpframe(descr);</span>
 <span class="lineNum">     565 </span><span class="lineNoCov">          0 :     if (!mfr) {</span>
-<span class="lineNum">     566 </span>            :         return EGUINODLOG;
+<span class="lineNum">     566 </span><span class="lineNoCov">          0 :         return EGUINODLOG;</span>
 <span class="lineNum">     567 </span>            :     }
 <span class="lineNum">     568 </span><span class="lineNoCov">          0 :     if (GuiSupported(descr)) {</span>
 <span class="lineNum">     569 </span><span class="lineNoCov">          0 :         if (!GuiClosed(id)) {</span>
@@ -634,9 +634,9 @@
 <span class="lineNum">     572 </span><span class="lineNoCov">          0 :             mcp_frame_output_mesg(mfr, &amp;msg);</span>
 <span class="lineNum">     573 </span><span class="lineNoCov">          0 :             mcp_mesg_clear(&amp;msg);</span>
 <span class="lineNum">     574 </span>            :         }
-<span class="lineNum">     575 </span>            :         return 0;
+<span class="lineNum">     575 </span><span class="lineNoCov">          0 :         return 0;</span>
 <span class="lineNum">     576 </span>            :     }
-<span class="lineNum">     577 </span>            :     return EGUINOSUPPORT;
+<span class="lineNum">     577 </span><span class="lineNoCov">          0 :     return EGUINOSUPPORT;</span>
 <span class="lineNum">     578 </span>            : }
 <a name="579"><span class="lineNum">     579 </span>            : </a>
 <span class="lineNum">     580 </span>            : int
@@ -648,7 +648,7 @@
 <span class="lineNum">     586 </span>            : 
 <span class="lineNum">     587 </span><span class="lineNoCov">          0 :     mfr = descr_mcpframe(descr);</span>
 <span class="lineNum">     588 </span><span class="lineNoCov">          0 :     if (!mfr) {</span>
-<span class="lineNum">     589 </span>            :         return EGUINODLOG;
+<span class="lineNum">     589 </span><span class="lineNoCov">          0 :         return EGUINODLOG;</span>
 <span class="lineNum">     590 </span>            :     }
 <span class="lineNum">     591 </span><span class="lineNoCov">          0 :     if (GuiSupported(descr)) {</span>
 <span class="lineNum">     592 </span><span class="lineNoCov">          0 :         mcp_mesg_init(&amp;msg, GUI_PACKAGE, &quot;ctrl-value&quot;);</span>
@@ -662,7 +662,7 @@
 <span class="lineNum">     600 </span><span class="lineNoCov">          0 :         gui_value_set_local(dlogid, id, lines, value);</span>
 <span class="lineNum">     601 </span><span class="lineNoCov">          0 :         return 0;</span>
 <span class="lineNum">     602 </span>            :     }
-<span class="lineNum">     603 </span>            :     return EGUINOSUPPORT;
+<span class="lineNum">     603 </span><span class="lineNoCov">          0 :     return EGUINOSUPPORT;</span>
 <span class="lineNum">     604 </span>            : }
 <a name="605"><span class="lineNum">     605 </span>            : </a>
 <span class="lineNum">     606 </span>            : int
@@ -675,7 +675,7 @@
 <span class="lineNum">     613 </span>            : 
 <span class="lineNum">     614 </span><span class="lineNoCov">          0 :     mfr = descr_mcpframe(descr);</span>
 <span class="lineNum">     615 </span><span class="lineNoCov">          0 :     if (!mfr) {</span>
-<span class="lineNum">     616 </span>            :         return EGUINODLOG;
+<span class="lineNum">     616 </span><span class="lineNoCov">          0 :         return EGUINODLOG;</span>
 <span class="lineNum">     617 </span>            :     }
 <span class="lineNum">     618 </span><span class="lineNoCov">          0 :     if (GuiSupported(descr)) {</span>
 <span class="lineNum">     619 </span><span class="lineNoCov">          0 :         mcp_mesg_init(&amp;msg, GUI_PACKAGE, &quot;list-insert&quot;);</span>
@@ -692,7 +692,7 @@
 <span class="lineNum">     630 </span><span class="lineNoCov">          0 :         mcp_mesg_clear(&amp;msg);</span>
 <span class="lineNum">     631 </span><span class="lineNoCov">          0 :         return 0;</span>
 <span class="lineNum">     632 </span>            :     }
-<span class="lineNum">     633 </span>            :     return EGUINOSUPPORT;
+<span class="lineNum">     633 </span><span class="lineNoCov">          0 :     return EGUINOSUPPORT;</span>
 <span class="lineNum">     634 </span>            : }
 <a name="635"><span class="lineNum">     635 </span>            : </a>
 <span class="lineNum">     636 </span>            : int
@@ -705,7 +705,7 @@
 <span class="lineNum">     643 </span>            : 
 <span class="lineNum">     644 </span><span class="lineNoCov">          0 :     mfr = descr_mcpframe(descr);</span>
 <span class="lineNum">     645 </span><span class="lineNoCov">          0 :     if (!mfr) {</span>
-<span class="lineNum">     646 </span>            :         return EGUINODLOG;
+<span class="lineNum">     646 </span><span class="lineNoCov">          0 :         return EGUINODLOG;</span>
 <span class="lineNum">     647 </span>            :     }
 <span class="lineNum">     648 </span><span class="lineNoCov">          0 :     if (GuiSupported(descr)) {</span>
 <span class="lineNum">     649 </span><span class="lineNoCov">          0 :         mcp_mesg_init(&amp;msg, GUI_PACKAGE, &quot;list-delete&quot;);</span>
@@ -727,7 +727,7 @@
 <span class="lineNum">     665 </span><span class="lineNoCov">          0 :         mcp_mesg_clear(&amp;msg);</span>
 <span class="lineNum">     666 </span><span class="lineNoCov">          0 :         return 0;</span>
 <span class="lineNum">     667 </span>            :     }
-<span class="lineNum">     668 </span>            :     return EGUINOSUPPORT;
+<span class="lineNum">     668 </span><span class="lineNoCov">          0 :     return EGUINOSUPPORT;</span>
 <span class="lineNum">     669 </span>            : }
 <a name="670"><span class="lineNum">     670 </span>            : </a>
 <span class="lineNum">     671 </span>            : int
@@ -741,7 +741,7 @@
 <span class="lineNum">     679 </span>            : 
 <span class="lineNum">     680 </span><span class="lineNoCov">          0 :     mfr = descr_mcpframe(descr);</span>
 <span class="lineNum">     681 </span><span class="lineNoCov">          0 :     if (!mfr) {</span>
-<span class="lineNum">     682 </span>            :         return EGUINODLOG;
+<span class="lineNum">     682 </span><span class="lineNoCov">          0 :         return EGUINODLOG;</span>
 <span class="lineNum">     683 </span>            :     }
 <span class="lineNum">     684 </span><span class="lineNoCov">          0 :     if (GuiSupported(descr)) {</span>
 <span class="lineNum">     685 </span><span class="lineNoCov">          0 :         mcp_mesg_init(&amp;msg, GUI_PACKAGE, &quot;menu-item&quot;);</span>
@@ -761,7 +761,7 @@
 <span class="lineNum">     699 </span><span class="lineNoCov">          0 :         mcp_mesg_clear(&amp;msg);</span>
 <span class="lineNum">     700 </span><span class="lineNoCov">          0 :         return 0;</span>
 <span class="lineNum">     701 </span>            :     }
-<span class="lineNum">     702 </span>            :     return EGUINOSUPPORT;
+<span class="lineNum">     702 </span><span class="lineNoCov">          0 :     return EGUINOSUPPORT;</span>
 <span class="lineNum">     703 </span>            : }
 <a name="704"><span class="lineNum">     704 </span>            : </a>
 <span class="lineNum">     705 </span>            : int
@@ -852,7 +852,7 @@
 <span class="lineNum">     790 </span><span class="lineNoCov">          0 :     descr = gui_dlog_get_descr(dlogid);</span>
 <span class="lineNum">     791 </span><span class="lineNoCov">          0 :     mfr = descr_mcpframe(descr);</span>
 <span class="lineNum">     792 </span><span class="lineNoCov">          0 :     if (!mfr) {</span>
-<span class="lineNum">     793 </span>            :         return EGUINODLOG;
+<span class="lineNum">     793 </span><span class="lineNoCov">          0 :         return EGUINODLOG;</span>
 <span class="lineNum">     794 </span>            :     }
 <span class="lineNum">     795 </span><span class="lineNoCov">          0 :     if (GuiSupported(descr)) {</span>
 <span class="lineNum">     796 </span>            :         char cmdname[64];
@@ -872,7 +872,7 @@
 <span class="lineNum">     810 </span>            :         }
 <span class="lineNum">     811 </span><span class="lineNoCov">          0 :         if (pane)</span>
 <span class="lineNum">     812 </span><span class="lineNoCov">          0 :             mcp_mesg_arg_append(&amp;msg, &quot;pane&quot;, pane);</span>
-<span class="lineNum">     813 </span>            :         i = 0;
+<span class="lineNum">     813 </span><span class="lineNoCov">          0 :         i = 0;</span>
 <span class="lineNum">     814 </span><span class="lineNoCov">          0 :         while (args &amp;&amp; args[i]) {</span>
 <span class="lineNum">     815 </span><span class="lineNoCov">          0 :             const char *arg = args[i];</span>
 <span class="lineNum">     816 </span><span class="lineNoCov">          0 :             const char *val = args[i + 1];</span>
@@ -885,9 +885,9 @@
 <span class="lineNum">     823 </span>            :         }
 <span class="lineNum">     824 </span><span class="lineNoCov">          0 :         mcp_frame_output_mesg(mfr, &amp;msg);</span>
 <span class="lineNum">     825 </span><span class="lineNoCov">          0 :         mcp_mesg_clear(&amp;msg);</span>
-<span class="lineNum">     826 </span>            :         return 0;
+<span class="lineNum">     826 </span><span class="lineNoCov">          0 :         return 0;</span>
 <span class="lineNum">     827 </span>            :     }
-<span class="lineNum">     828 </span>            :     return EGUINOSUPPORT;
+<span class="lineNum">     828 </span><span class="lineNoCov">          0 :     return EGUINOSUPPORT;</span>
 <span class="lineNum">     829 </span>            : }
 <a name="830"><span class="lineNum">     830 </span>            : </a>
 <span class="lineNum">     831 </span>            : int
@@ -932,7 +932,7 @@
 <span class="lineNum">     870 </span><span class="lineNoCov">          0 :             arg = va_arg(ap, const char *);</span>
 <span class="lineNum">     871 </span>            : 
 <span class="lineNum">     872 </span><span class="lineNoCov">          0 :             if (!arg)</span>
-<span class="lineNum">     873 </span>            :                 break;
+<span class="lineNum">     873 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">     874 </span><span class="lineNoCov">          0 :             val = va_arg(ap, const char *);</span>
 <span class="lineNum">     875 </span>            : 
 <span class="lineNum">     876 </span><span class="lineNoCov">          0 :             mcp_mesg_arg_append(&amp;msg, arg, val);</span>
@@ -940,7 +940,7 @@
 <span class="lineNum">     878 </span><span class="lineNoCov">          0 :         mcp_frame_output_mesg(mfr, &amp;msg);</span>
 <span class="lineNum">     879 </span><span class="lineNoCov">          0 :         mcp_mesg_clear(&amp;msg);</span>
 <span class="lineNum">     880 </span><span class="lineNoCov">          0 :         va_end(ap);</span>
-<span class="lineNum">     881 </span>            :         return 0;
+<span class="lineNum">     881 </span><span class="lineNoCov">          0 :         return 0;</span>
 <span class="lineNum">     882 </span>            :     }
 <span class="lineNum">     883 </span><span class="lineNoCov">          0 :     va_end(ap);</span>
 <span class="lineNum">     884 </span><span class="lineNoCov">          0 :     return EGUINOSUPPORT;</span>

@@ -31,13 +31,13 @@
             <td class="headerValue">coverage-total</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">39</td>
-            <td class="headerCovTableEntry">204</td>
-            <td class="headerCovTableEntryLo">19.1 %</td>
+            <td class="headerCovTableEntry">41</td>
+            <td class="headerCovTableEntry">229</td>
+            <td class="headerCovTableEntryLo">17.9 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 00:20:31</td>
+            <td class="headerValue">2017-02-26 01:21:31</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">5</td>
@@ -420,7 +420,7 @@
 <span class="lineNum">     358 </span><span class="lineNoCov">          0 :             return (ptr-&gt;name);</span>
 <span class="lineNum">     359 </span>            :         }
 <span class="lineNum">     360 </span>            :     }
-<span class="lineNum">     361 </span>            :     return NULL;
+<span class="lineNum">     361 </span><span class="lineNoCov">          0 :     return NULL;</span>
 <a name="362"><span class="lineNum">     362 </span>            : }</a>
 <span class="lineNum">     363 </span>            : 
 <span class="lineNum">     364 </span><span class="lineNoCov">          0 : void hostadd(long ip, const char *name) {</span>
@@ -465,21 +465,21 @@
 <span class="lineNum">     403 </span>            :  * Calls sigaction() to set a signal, if we are posix.
 <a name="404"><span class="lineNum">     404 </span>            :  */</a>
 <span class="lineNum">     405 </span>            : #ifdef _POSIX_VERSION
-<span class="lineNum">     406 </span><span class="lineCov">         52 : void our_signal(int signo, void (*sighandler) (int)) {</span>
+<span class="lineNum">     406 </span><span class="lineCov">         64 : void our_signal(int signo, void (*sighandler) (int)) {</span>
 <span class="lineNum">     407 </span>            :     struct sigaction act, oact;
 <span class="lineNum">     408 </span>            : 
-<span class="lineNum">     409 </span><span class="lineCov">         52 :     act.sa_handler = sighandler;</span>
-<span class="lineNum">     410 </span><span class="lineCov">         52 :     sigemptyset(&amp;act.sa_mask);</span>
-<span class="lineNum">     411 </span>            :     act.sa_flags = 0;
+<span class="lineNum">     409 </span><span class="lineCov">         64 :     act.sa_handler = sighandler;</span>
+<span class="lineNum">     410 </span><span class="lineCov">         64 :     sigemptyset(&amp;act.sa_mask);</span>
+<span class="lineNum">     411 </span><span class="lineCov">         64 :     act.sa_flags = 0;</span>
 <span class="lineNum">     412 </span>            : 
 <span class="lineNum">     413 </span>            :     /* Restart long system calls if a signal is caught. */
 <span class="lineNum">     414 </span>            : #ifdef SA_RESTART
-<span class="lineNum">     415 </span><span class="lineCov">         52 :     act.sa_flags |= SA_RESTART;</span>
+<span class="lineNum">     415 </span><span class="lineCov">         64 :     act.sa_flags |= SA_RESTART;</span>
 <span class="lineNum">     416 </span>            : #endif
 <span class="lineNum">     417 </span>            : 
 <span class="lineNum">     418 </span>            :     /* Make it so */
-<span class="lineNum">     419 </span><span class="lineCov">         52 :     sigaction(signo, &amp;act, &amp;oact);</span>
-<span class="lineNum">     420 </span><span class="lineCov">         52 : }</span>
+<span class="lineNum">     419 </span><span class="lineCov">         64 :     sigaction(signo, &amp;act, &amp;oact);</span>
+<span class="lineNum">     420 </span><span class="lineCov">         64 : }</span>
 <span class="lineNum">     421 </span>            : #endif /* _POSIX_VERSION */
 <span class="lineNum">     422 </span>            : 
 <span class="lineNum">     423 </span>            : /*
@@ -494,13 +494,13 @@
 <span class="lineNum">     432 </span>            :  * Called from main() and bailout()
 <a name="433"><span class="lineNum">     433 </span>            :  */</a>
 <span class="lineNum">     434 </span>            : 
-<span class="lineNum">     435 </span><span class="lineCov">         26 : void set_signals(void) {</span>
+<span class="lineNum">     435 </span><span class="lineCov">         32 : void set_signals(void) {</span>
 <span class="lineNum">     436 </span>            :     /* we don't care about SIGPIPE, we notice it in select() and write() */
-<span class="lineNum">     437 </span><span class="lineCov">         26 :     our_signal(SIGPIPE, SIG_IGN);</span>
+<span class="lineNum">     437 </span><span class="lineCov">         32 :     our_signal(SIGPIPE, SIG_IGN);</span>
 <span class="lineNum">     438 </span>            : 
 <span class="lineNum">     439 </span>            :     /* didn't manage to lose that control tty, did we? Ignore it anyway. */
-<span class="lineNum">     440 </span><span class="lineCov">         26 :     our_signal(SIGHUP, SIG_IGN);</span>
-<a name="441"><span class="lineNum">     441 </span><span class="lineCov">         26 : }</span></a>
+<span class="lineNum">     440 </span><span class="lineCov">         32 :     our_signal(SIGHUP, SIG_IGN);</span>
+<a name="441"><span class="lineNum">     441 </span><span class="lineCov">         32 : }</span></a>
 <span class="lineNum">     442 </span>            : 
 <span class="lineNum">     443 </span><span class="lineNoCov">          0 : const char * get_username(long a, int prt, int myprt) {</span>
 <span class="lineNum">     444 </span>            :     int fd, len, result;
@@ -528,54 +528,54 @@
 <span class="lineNum">     466 </span><span class="lineNoCov">          0 :         lasterr = errno;</span>
 <span class="lineNum">     467 </span><span class="lineNoCov">          0 :         if (result &lt; 0) {</span>
 <span class="lineNum">     468 </span><span class="lineNoCov">          0 :             if (!timeout--)</span>
-<span class="lineNum">     469 </span>            :                 break;
+<span class="lineNum">     469 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">     470 </span><span class="lineNoCov">          0 :             sleep(1);</span>
 <span class="lineNum">     471 </span>            :         }
 <span class="lineNum">     472 </span><span class="lineNoCov">          0 :     } while (result &lt; 0 &amp;&amp; lasterr == EINPROGRESS);</span>
 <span class="lineNum">     473 </span><span class="lineNoCov">          0 :     if (result &lt; 0 &amp;&amp; lasterr != EISCONN) {</span>
-<span class="lineNum">     474 </span>            :         goto bad;
+<span class="lineNum">     474 </span><span class="lineNoCov">          0 :         goto bad;</span>
 <span class="lineNum">     475 </span>            :     }
 <span class="lineNum">     476 </span>            : 
-<span class="lineNum">     477 </span>            :     snprintf(buf, sizeof(buf), &quot;%d,%d\n&quot;, prt, myprt);
+<span class="lineNum">     477 </span><span class="lineNoCov">          0 :     snprintf(buf, sizeof(buf), &quot;%d,%d\n&quot;, prt, myprt);</span>
 <span class="lineNum">     478 </span>            :     do {
 <span class="lineNum">     479 </span><span class="lineNoCov">          0 :         result = write(fd, buf, strlen(buf));</span>
 <span class="lineNum">     480 </span><span class="lineNoCov">          0 :         lasterr = errno;</span>
 <span class="lineNum">     481 </span><span class="lineNoCov">          0 :         if (result &lt; 0) {</span>
 <span class="lineNum">     482 </span><span class="lineNoCov">          0 :             if (!timeout--)</span>
-<span class="lineNum">     483 </span>            :                 break;
+<span class="lineNum">     483 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">     484 </span><span class="lineNoCov">          0 :             sleep(1);</span>
 <span class="lineNum">     485 </span>            :         }
 <span class="lineNum">     486 </span><span class="lineNoCov">          0 :     } while (result &lt; 0 &amp;&amp; lasterr == EAGAIN);</span>
 <span class="lineNum">     487 </span><span class="lineNoCov">          0 :     if (result &lt; 0)</span>
-<span class="lineNum">     488 </span>            :         goto bad2;
+<span class="lineNum">     488 </span><span class="lineNoCov">          0 :         goto bad2;</span>
 <span class="lineNum">     489 </span>            : 
 <span class="lineNum">     490 </span>            :     do {
 <span class="lineNum">     491 </span><span class="lineNoCov">          0 :         result = read(fd, buf, sizeof(buf));</span>
 <span class="lineNum">     492 </span><span class="lineNoCov">          0 :         lasterr = errno;</span>
 <span class="lineNum">     493 </span><span class="lineNoCov">          0 :         if (result &lt; 0) {</span>
 <span class="lineNum">     494 </span><span class="lineNoCov">          0 :             if (!timeout--)</span>
-<span class="lineNum">     495 </span>            :                 break;
+<span class="lineNum">     495 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">     496 </span><span class="lineNoCov">          0 :             sleep(1);</span>
 <span class="lineNum">     497 </span>            :         }
 <span class="lineNum">     498 </span><span class="lineNoCov">          0 :     } while (result &lt; 0 &amp;&amp; lasterr == EAGAIN);</span>
 <span class="lineNum">     499 </span><span class="lineNoCov">          0 :     if (result &lt; 0)</span>
-<span class="lineNum">     500 </span>            :         goto bad2;
+<span class="lineNum">     500 </span><span class="lineNoCov">          0 :         goto bad2;</span>
 <span class="lineNum">     501 </span>            : 
 <span class="lineNum">     502 </span><span class="lineNoCov">          0 :     ptr = index(buf, ':');</span>
 <span class="lineNum">     503 </span><span class="lineNoCov">          0 :     if (!ptr)</span>
-<span class="lineNum">     504 </span>            :         goto bad2;
+<span class="lineNum">     504 </span><span class="lineNoCov">          0 :         goto bad2;</span>
 <span class="lineNum">     505 </span><span class="lineNoCov">          0 :     ptr++;</span>
 <span class="lineNum">     506 </span><span class="lineNoCov">          0 :     if (*ptr)</span>
 <span class="lineNum">     507 </span><span class="lineNoCov">          0 :         ptr++;</span>
 <span class="lineNum">     508 </span><span class="lineNoCov">          0 :     if (strncmp(ptr, &quot;USERID&quot;, 6))</span>
-<span class="lineNum">     509 </span>            :         goto bad2;
+<span class="lineNum">     509 </span><span class="lineNoCov">          0 :         goto bad2;</span>
 <span class="lineNum">     510 </span>            : 
 <span class="lineNum">     511 </span><span class="lineNoCov">          0 :     ptr = index(ptr, ':');</span>
 <span class="lineNum">     512 </span><span class="lineNoCov">          0 :     if (!ptr)</span>
-<span class="lineNum">     513 </span>            :         goto bad2;
+<span class="lineNum">     513 </span><span class="lineNoCov">          0 :         goto bad2;</span>
 <span class="lineNum">     514 </span><span class="lineNoCov">          0 :     ptr = index(ptr + 1, ':');</span>
 <span class="lineNum">     515 </span><span class="lineNoCov">          0 :     if (!ptr)</span>
-<span class="lineNum">     516 </span>            :         goto bad2;
+<span class="lineNum">     516 </span><span class="lineNoCov">          0 :         goto bad2;</span>
 <span class="lineNum">     517 </span><span class="lineNoCov">          0 :     ptr++;</span>
 <span class="lineNum">     518 </span>            :     /* if (*ptr) ptr++; */
 <span class="lineNum">     519 </span>            : 
@@ -584,7 +584,7 @@
 <span class="lineNum">     522 </span><span class="lineNoCov">          0 :     if ((ptr2 = index(ptr, '\r')))</span>
 <span class="lineNum">     523 </span><span class="lineNoCov">          0 :         *ptr2 = '\0';</span>
 <span class="lineNum">     524 </span><span class="lineNoCov">          0 :     if (!*ptr)</span>
-<span class="lineNum">     525 </span>            :         return (0);
+<span class="lineNum">     525 </span><span class="lineNoCov">          0 :         return (0);</span>
 <span class="lineNum">     526 </span><span class="lineNoCov">          0 :     return ptr;</span>
 <span class="lineNum">     527 </span>            : 
 <span class="lineNum">     528 </span>            :   bad2:
@@ -610,11 +610,11 @@
 <span class="lineNum">     548 </span><span class="lineNoCov">          0 :     if (ptr) {</span>
 <span class="lineNum">     549 </span><span class="lineNoCov">          0 :         ptr2 = get_username(a, prt, myprt);</span>
 <span class="lineNum">     550 </span><span class="lineNoCov">          0 :         if (ptr2) {</span>
-<span class="lineNum">     551 </span>            :             snprintf(buf, sizeof(buf), &quot;%s(%s)&quot;, ptr, ptr2);
+<span class="lineNum">     551 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), &quot;%s(%s)&quot;, ptr, ptr2);</span>
 <span class="lineNum">     552 </span>            :         } else {
 <span class="lineNum">     553 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), &quot;%s(%d)&quot;, ptr, prt);</span>
 <span class="lineNum">     554 </span>            :         }
-<span class="lineNum">     555 </span>            :         return buf;
+<span class="lineNum">     555 </span><span class="lineNoCov">          0 :         return buf;</span>
 <span class="lineNum">     556 </span>            :     }
 <span class="lineNum">     557 </span><span class="lineNoCov">          0 :     he = gethostbyaddr(((char *) &amp;addr), sizeof(addr), AF_INET);</span>
 <span class="lineNum">     558 </span>            : 
@@ -623,11 +623,11 @@
 <span class="lineNum">     561 </span><span class="lineNoCov">          0 :         hostadd(ntohl(a), tmpbuf);</span>
 <span class="lineNum">     562 </span><span class="lineNoCov">          0 :         ptr = get_username(a, prt, myprt);</span>
 <span class="lineNum">     563 </span><span class="lineNoCov">          0 :         if (ptr) {</span>
-<span class="lineNum">     564 </span>            :             snprintf(buf, sizeof(buf), &quot;%s(%s)&quot;, tmpbuf, ptr);
+<span class="lineNum">     564 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), &quot;%s(%s)&quot;, tmpbuf, ptr);</span>
 <span class="lineNum">     565 </span>            :         } else {
 <span class="lineNum">     566 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), &quot;%s(%d)&quot;, tmpbuf, prt);</span>
 <span class="lineNum">     567 </span>            :         }
-<span class="lineNum">     568 </span>            :         return buf;
+<span class="lineNum">     568 </span><span class="lineNoCov">          0 :         return buf;</span>
 <span class="lineNum">     569 </span>            :     }
 <span class="lineNum">     570 </span>            : 
 <span class="lineNum">     571 </span><span class="lineNoCov">          0 :     a = ntohl(a);</span>
@@ -637,18 +637,18 @@
 <span class="lineNum">     575 </span><span class="lineNoCov">          0 :     ptr = get_username(htonl(a), prt, myprt);</span>
 <span class="lineNum">     576 </span>            : 
 <span class="lineNum">     577 </span><span class="lineNoCov">          0 :     if (ptr) {</span>
-<span class="lineNum">     578 </span>            :         snprintf(buf, sizeof(buf), &quot;%s(%s)&quot;, tmpbuf, ptr);
+<span class="lineNum">     578 </span><span class="lineNoCov">          0 :         snprintf(buf, sizeof(buf), &quot;%s(%s)&quot;, tmpbuf, ptr);</span>
 <span class="lineNum">     579 </span>            :     } else {
 <span class="lineNum">     580 </span><span class="lineNoCov">          0 :         snprintf(buf, sizeof(buf), &quot;%s(%d)&quot;, tmpbuf, prt);</span>
 <span class="lineNum">     581 </span>            :     }
-<span class="lineNum">     582 </span>            :     return buf;
+<span class="lineNum">     582 </span><span class="lineNoCov">          0 :     return buf;</span>
 <span class="lineNum">     583 </span>            : }
 <span class="lineNum">     584 </span>            : 
 <span class="lineNum">     585 </span>            : static volatile short shutdown_was_requested = 0;
 <span class="lineNum">     586 </span>            : static pthread_mutex_t input_mutex = PTHREAD_MUTEX_INITIALIZER;
 <a name="587"><span class="lineNum">     587 </span>            : static pthread_mutex_t output_mutex = PTHREAD_MUTEX_INITIALIZER;</a>
 <span class="lineNum">     588 </span>            : 
-<span class="lineNum">     589 </span><span class="lineCov">        129 : int do_resolve(void) {</span>
+<span class="lineNum">     589 </span><span class="lineCov">        160 : int do_resolve(void) {</span>
 <span class="lineNum">     590 </span>            :     int ip1, ip2, ip3, ip4;
 <span class="lineNum">     591 </span>            :     int prt, myprt;
 <span class="lineNum">     592 </span>            :     int doagain;
@@ -656,7 +656,7 @@
 <span class="lineNum">     594 </span>            :     const char *ptr;
 <span class="lineNum">     595 </span>            :     char buf[1024];
 <span class="lineNum">     596 </span>            :     char outbuf[1024];
-<span class="lineNum">     597 </span><span class="lineCov">        129 :     char *bufptr = NULL;</span>
+<span class="lineNum">     597 </span><span class="lineCov">        160 :     char *bufptr = NULL;</span>
 <span class="lineNum">     598 </span>            :     long fullip;
 <span class="lineNum">     599 </span>            : 
 <span class="lineNum">     600 </span>            : #ifdef USE_IPV6
@@ -665,44 +665,44 @@
 <span class="lineNum">     603 </span>            : #endif
 <span class="lineNum">     604 </span>            : 
 <span class="lineNum">     605 </span>            :     for (;;) {
-<span class="lineNum">     606 </span><span class="lineCov">        129 :         ip1 = ip2 = ip3 = ip4 = prt = myprt = -1;</span>
+<span class="lineNum">     606 </span><span class="lineCov">        160 :         ip1 = ip2 = ip3 = ip4 = prt = myprt = -1;</span>
 <span class="lineNum">     607 </span>            :         do {
-<span class="lineNum">     608 </span><span class="lineCov">        129 :             doagain = 0;</span>
-<span class="lineNum">     609 </span><span class="lineCov">        129 :             *buf = '\0';</span>
+<span class="lineNum">     608 </span><span class="lineCov">        160 :             doagain = 0;</span>
+<span class="lineNum">     609 </span><span class="lineCov">        160 :             *buf = '\0';</span>
 <span class="lineNum">     610 </span>            : 
 <span class="lineNum">     611 </span>            :             /* lock input here. */
-<span class="lineNum">     612 </span><span class="lineCov">        129 :             if (pthread_mutex_lock(&amp;input_mutex)) {</span>
-<span class="lineNum">     613 </span>            :                 return 0;
+<span class="lineNum">     612 </span><span class="lineCov">        160 :             if (pthread_mutex_lock(&amp;input_mutex)) {</span>
+<span class="lineNum">     613 </span><span class="lineNoCov">          0 :                 return 0;</span>
 <span class="lineNum">     614 </span>            :             }
-<span class="lineNum">     615 </span><span class="lineCov">        130 :             if (shutdown_was_requested) {</span>
+<span class="lineNum">     615 </span><span class="lineCov">        160 :             if (shutdown_was_requested) {</span>
 <span class="lineNum">     616 </span>            :                 /* unlock input here. */
-<span class="lineNum">     617 </span><span class="lineCov">        104 :                 pthread_mutex_unlock(&amp;input_mutex);</span>
-<span class="lineNum">     618 </span><span class="lineCov">        104 :                 return 0;</span>
+<span class="lineNum">     617 </span><span class="lineCov">        128 :                 pthread_mutex_unlock(&amp;input_mutex);</span>
+<span class="lineNum">     618 </span><span class="lineCov">        128 :                 return 0;</span>
 <span class="lineNum">     619 </span>            :             }
 <span class="lineNum">     620 </span>            : 
-<span class="lineNum">     621 </span><span class="lineCov">         52 :             result = fgets(buf, sizeof(buf), stdin);</span>
+<span class="lineNum">     621 </span><span class="lineCov">         32 :             result = fgets(buf, sizeof(buf), stdin);</span>
 <span class="lineNum">     622 </span>            : 
 <span class="lineNum">     623 </span>            :             /* detect if QUIT was requested before letting
 <span class="lineNum">     624 </span>            :                another thread start reading */
-<span class="lineNum">     625 </span><span class="lineCov">         26 :             if (!result) {</span>
+<span class="lineNum">     625 </span><span class="lineCov">         32 :             if (!result) {</span>
 <span class="lineNum">     626 </span><span class="lineNoCov">          0 :                 if (errno == EAGAIN) {</span>
-<span class="lineNum">     627 </span>            :                     doagain = 1;
+<span class="lineNum">     627 </span><span class="lineNoCov">          0 :                     doagain = 1;</span>
 <span class="lineNum">     628 </span>            :                 } else {
 <span class="lineNum">     629 </span><span class="lineNoCov">          0 :                     if (!feof(stdin)) {</span>
 <span class="lineNum">     630 </span><span class="lineNoCov">          0 :                         perror(&quot;fgets&quot;);</span>
 <span class="lineNum">     631 </span>            :                     }
 <span class="lineNum">     632 </span><span class="lineNoCov">          0 :                     shutdown_was_requested = 1;</span>
 <span class="lineNum">     633 </span>            :                 }
-<span class="lineNum">     634 </span><span class="lineCov">         26 :             } else if (!strncmp(&quot;QUIT&quot;, buf, 4)) {</span>
-<span class="lineNum">     635 </span><span class="lineCov">         26 :                 shutdown_was_requested = 1;</span>
-<span class="lineNum">     636 </span><span class="lineCov">         26 :                 fclose(stdin);</span>
+<span class="lineNum">     634 </span><span class="lineCov">         32 :             } else if (!strncmp(&quot;QUIT&quot;, buf, 4)) {</span>
+<span class="lineNum">     635 </span><span class="lineCov">         32 :                 shutdown_was_requested = 1;</span>
+<span class="lineNum">     636 </span><span class="lineCov">         32 :                 fclose(stdin);</span>
 <span class="lineNum">     637 </span>            :             }
 <span class="lineNum">     638 </span>            : 
 <span class="lineNum">     639 </span>            :             /* unlock input here. */
-<span class="lineNum">     640 </span><span class="lineCov">         26 :             pthread_mutex_unlock(&amp;input_mutex);</span>
+<span class="lineNum">     640 </span><span class="lineCov">         32 :             pthread_mutex_unlock(&amp;input_mutex);</span>
 <span class="lineNum">     641 </span>            : 
-<span class="lineNum">     642 </span><span class="lineCov">         26 :             if (shutdown_was_requested) {</span>
-<span class="lineNum">     643 </span>            :                 return 0;
+<span class="lineNum">     642 </span><span class="lineCov">         32 :             if (shutdown_was_requested) {</span>
+<span class="lineNum">     643 </span><span class="lineCov">         32 :                 return 0;</span>
 <span class="lineNum">     644 </span><span class="lineNoCov">          0 :             } else if (doagain) {</span>
 <span class="lineNum">     645 </span><span class="lineNoCov">          0 :                 sleep(1);</span>
 <span class="lineNum">     646 </span>            :             }
@@ -729,7 +729,7 @@
 <span class="lineNum">     667 </span>            :             snprintf(outbuf, sizeof(outbuf), &quot;%s(%d)|%s&quot;, buf, prt, ptr);
 <span class="lineNum">     668 </span>            :         }
 <span class="lineNum">     669 </span>            : #endif
-<span class="lineNum">     670 </span>            :         if (!bufptr) {
+<span class="lineNum">     670 </span><span class="lineNoCov">          0 :         if (!bufptr) {</span>
 <span class="lineNum">     671 </span>            :             /* Is an IPv4 addr. */
 <span class="lineNum">     672 </span><span class="lineNoCov">          0 :             sscanf(buf, &quot;%d.%d.%d.%d(%d)%d&quot;, &amp;ip1, &amp;ip2, &amp;ip3, &amp;ip4, &amp;prt, &amp;myprt);</span>
 <span class="lineNum">     673 </span><span class="lineNoCov">          0 :             if (ip1 &lt; 0 || ip2 &lt; 0 || ip3 &lt; 0 || ip4 &lt; 0 || prt &lt; 0) {</span>
@@ -752,7 +752,7 @@
 <span class="lineNum">     690 </span>            : 
 <span class="lineNum">     691 </span>            :         /* lock output here. */
 <span class="lineNum">     692 </span><span class="lineNoCov">          0 :         if (pthread_mutex_lock(&amp;output_mutex)) {</span>
-<span class="lineNum">     693 </span>            :             return 0;
+<span class="lineNum">     693 </span><span class="lineNoCov">          0 :             return 0;</span>
 <span class="lineNum">     694 </span>            :         }
 <span class="lineNum">     695 </span>            : 
 <span class="lineNum">     696 </span><span class="lineNoCov">          0 :         fprintf(stdout, &quot;%s\n&quot;, outbuf);</span>
@@ -763,38 +763,38 @@
 <span class="lineNum">     701 </span>            :     }
 <a name="702"><span class="lineNum">     702 </span>            : }</a>
 <span class="lineNum">     703 </span>            : 
-<span class="lineNum">     704 </span><span class="lineCov">        129 : void * resolver_thread_root(void *threadid) {</span>
-<span class="lineNum">     705 </span><span class="lineCov">        129 :     do_resolve();</span>
-<span class="lineNum">     706 </span><span class="lineCov">        130 :     pthread_exit(NULL);</span>
+<span class="lineNum">     704 </span><span class="lineCov">        160 : void * resolver_thread_root(void *threadid) {</span>
+<span class="lineNum">     705 </span><span class="lineCov">        160 :     do_resolve();</span>
+<span class="lineNum">     706 </span><span class="lineCov">        160 :     pthread_exit(NULL);</span>
 <a name="707"><span class="lineNum">     707 </span>            : }</a>
 <span class="lineNum">     708 </span>            : 
-<span class="lineNum">     709 </span><span class="lineCov">         26 : int main(int argc, char **argv) {</span>
+<span class="lineNum">     709 </span><span class="lineCov">         32 : int main(int argc, char **argv) {</span>
 <span class="lineNum">     710 </span>            :     pthread_t threads[NUM_THREADS];
 <span class="lineNum">     711 </span>            : 
-<span class="lineNum">     712 </span><span class="lineCov">         26 :     if (argc &gt; 1) {</span>
+<span class="lineNum">     712 </span><span class="lineCov">         32 :     if (argc &gt; 1) {</span>
 <span class="lineNum">     713 </span><span class="lineNoCov">          0 :         fprintf(stderr, &quot;Usage: %s\n&quot;, *argv);</span>
 <span class="lineNum">     714 </span><span class="lineNoCov">          0 :         exit(1);</span>
 <span class="lineNum">     715 </span>            :     }
 <span class="lineNum">     716 </span>            : 
 <span class="lineNum">     717 </span>            :     /* remember to ignore certain signals */
-<span class="lineNum">     718 </span><span class="lineCov">         26 :     set_signals();</span>
+<span class="lineNum">     718 </span><span class="lineCov">         32 :     set_signals();</span>
 <span class="lineNum">     719 </span>            : 
 <span class="lineNum">     720 </span>            :     /* go do it */
-<span class="lineNum">     721 </span><span class="lineCov">        156 :     for (long i = 0; i &lt; NUM_THREADS; i++) {</span>
-<span class="lineNum">     722 </span><span class="lineCov">        130 :         int rc = pthread_create(&amp;threads[i], NULL, resolver_thread_root, (void *) i);</span>
-<span class="lineNum">     723 </span><span class="lineCov">        130 :         if (rc) {</span>
+<span class="lineNum">     721 </span><span class="lineCov">        192 :     for (long i = 0; i &lt; NUM_THREADS; i++) {</span>
+<span class="lineNum">     722 </span><span class="lineCov">        160 :         int rc = pthread_create(&amp;threads[i], NULL, resolver_thread_root, (void *) i);</span>
+<span class="lineNum">     723 </span><span class="lineCov">        160 :         if (rc) {</span>
 <span class="lineNum">     724 </span><span class="lineNoCov">          0 :             printf(&quot;ERROR; return code from pthread_create() is %d\n&quot;, rc);</span>
 <span class="lineNum">     725 </span><span class="lineNoCov">          0 :             exit(-1);</span>
 <span class="lineNum">     726 </span>            :         }
 <span class="lineNum">     727 </span>            :     }
-<span class="lineNum">     728 </span><span class="lineCov">        130 :     for (long i = 0; i &lt; NUM_THREADS; i++) {</span>
+<span class="lineNum">     728 </span><span class="lineCov">        192 :     for (long i = 0; i &lt; NUM_THREADS; i++) {</span>
 <span class="lineNum">     729 </span>            :         void *retval;
-<span class="lineNum">     730 </span><span class="lineCov">        130 :         pthread_join(threads[i], &amp;retval);</span>
+<span class="lineNum">     730 </span><span class="lineCov">        160 :         pthread_join(threads[i], &amp;retval);</span>
 <span class="lineNum">     731 </span>            :     }
 <span class="lineNum">     732 </span>            : 
-<span class="lineNum">     733 </span><span class="lineCov">         52 :     fprintf(stderr, &quot;Resolver exited.\n&quot;);</span>
+<span class="lineNum">     733 </span><span class="lineCov">         32 :     fprintf(stderr, &quot;Resolver exited.\n&quot;);</span>
 <span class="lineNum">     734 </span>            : 
-<span class="lineNum">     735 </span><span class="lineCov">         26 :     exit(0);</span>
+<span class="lineNum">     735 </span><span class="lineCov">         32 :     exit(0);</span>
 <span class="lineNum">     736 </span>            : }
 </pre>
       </td>
