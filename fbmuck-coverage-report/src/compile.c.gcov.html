@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 13:46:11</td>
+            <td class="headerValue">2017-02-26 13:57:15</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">43</td>
@@ -3837,14 +3837,14 @@
 <span class="lineNum">    3775 </span>            : 
 <a name="3776"><span class="lineNum">    3776 </span>            : /* return primitive instruction */</a>
 <span class="lineNum">    3777 </span>            : int
-<span class="lineNum">    3778 </span><span class="lineCov">      40416 : get_primitive(const char *token)</span>
+<span class="lineNum">    3778 </span><span class="lineCov">      40476 : get_primitive(const char *token)</span>
 <span class="lineNum">    3779 </span>            : {
 <span class="lineNum">    3780 </span>            :     hash_data *hd;
 <span class="lineNum">    3781 </span>            : 
-<span class="lineNum">    3782 </span><span class="lineCov">      40416 :     if ((hd = find_hash(token, primitive_list, COMP_HASH_SIZE)) == NULL)</span>
+<span class="lineNum">    3782 </span><span class="lineCov">      40476 :     if ((hd = find_hash(token, primitive_list, COMP_HASH_SIZE)) == NULL)</span>
 <span class="lineNum">    3783 </span><span class="lineCov">      40000 :         return 0;</span>
 <span class="lineNum">    3784 </span>            :     else {
-<span class="lineNum">    3785 </span><span class="lineCov">        416 :         return (hd-&gt;ival);</span>
+<span class="lineNum">    3785 </span><span class="lineCov">        476 :         return (hd-&gt;ival);</span>
 <span class="lineNum">    3786 </span>            :     }
 <span class="lineNum">    3787 </span>            : }
 <a name="3788"><span class="lineNum">    3788 </span>            : </a>
@@ -3926,22 +3926,22 @@
 <span class="lineNum">    3864 </span>            : }
 <a name="3865"><span class="lineNum">    3865 </span>            : </a>
 <span class="lineNum">    3866 </span>            : static void
-<span class="lineNum">    3867 </span><span class="lineCov">      25984 : add_primitive(int val)</span>
+<span class="lineNum">    3867 </span><span class="lineCov">      30856 : add_primitive(int val)</span>
 <span class="lineNum">    3868 </span>            : {
 <span class="lineNum">    3869 </span>            :     hash_data hd;
 <span class="lineNum">    3870 </span>            : 
-<span class="lineNum">    3871 </span><span class="lineCov">      25984 :     hd.ival = val;</span>
-<span class="lineNum">    3872 </span><span class="lineCov">      25984 :     if (add_hash(base_inst[val - 1], hd, primitive_list, COMP_HASH_SIZE) == NULL)</span>
+<span class="lineNum">    3871 </span><span class="lineCov">      30856 :     hd.ival = val;</span>
+<span class="lineNum">    3872 </span><span class="lineCov">      30856 :     if (add_hash(base_inst[val - 1], hd, primitive_list, COMP_HASH_SIZE) == NULL)</span>
 <span class="lineNum">    3873 </span><span class="lineNoCov">          0 :         panic(&quot;Out of memory&quot;);</span>
 <span class="lineNum">    3874 </span>            :     else
-<span class="lineNum">    3875 </span><span class="lineCov">      25984 :         return;</span>
+<span class="lineNum">    3875 </span><span class="lineCov">      30856 :         return;</span>
 <span class="lineNum">    3876 </span>            : }
 <a name="3877"><span class="lineNum">    3877 </span>            : </a>
 <span class="lineNum">    3878 </span>            : void
-<span class="lineNum">    3879 </span><span class="lineCov">        128 : clear_primitives(void)</span>
+<span class="lineNum">    3879 </span><span class="lineCov">        152 : clear_primitives(void)</span>
 <span class="lineNum">    3880 </span>            : {
-<span class="lineNum">    3881 </span><span class="lineCov">        128 :     kill_hash(primitive_list, COMP_HASH_SIZE, 0);</span>
-<span class="lineNum">    3882 </span><span class="lineCov">        128 :     return;</span>
+<span class="lineNum">    3881 </span><span class="lineCov">        152 :     kill_hash(primitive_list, COMP_HASH_SIZE, 0);</span>
+<span class="lineNum">    3882 </span><span class="lineCov">        152 :     return;</span>
 <span class="lineNum">    3883 </span>            : }
 <span class="lineNum">    3884 </span>            : 
 <span class="lineNum">    3885 </span>            : const char *base_inst[] = {
@@ -3955,21 +3955,21 @@
 <span class="lineNum">    3893 </span>            : };
 <a name="3894"><span class="lineNum">    3894 </span>            : </a>
 <span class="lineNum">    3895 </span>            : void
-<span class="lineNum">    3896 </span><span class="lineCov">         64 : init_primitives(void)</span>
+<span class="lineNum">    3896 </span><span class="lineCov">         76 : init_primitives(void)</span>
 <span class="lineNum">    3897 </span>            : {
-<span class="lineNum">    3898 </span><span class="lineCov">         64 :     clear_primitives();</span>
+<span class="lineNum">    3898 </span><span class="lineCov">         76 :     clear_primitives();</span>
 <span class="lineNum">    3899 </span>            : 
-<span class="lineNum">    3900 </span><span class="lineCov">         64 :     prim_count = ARRAYSIZE(base_inst);</span>
-<span class="lineNum">    3901 </span><span class="lineCov">      26048 :     for (int i = 1; i &lt;= prim_count; i++) {</span>
-<span class="lineNum">    3902 </span><span class="lineCov">      25984 :         add_primitive(i);</span>
+<span class="lineNum">    3900 </span><span class="lineCov">         76 :     prim_count = ARRAYSIZE(base_inst);</span>
+<span class="lineNum">    3901 </span><span class="lineCov">      30932 :     for (int i = 1; i &lt;= prim_count; i++) {</span>
+<span class="lineNum">    3902 </span><span class="lineCov">      30856 :         add_primitive(i);</span>
 <span class="lineNum">    3903 </span>            :     }
-<span class="lineNum">    3904 </span><span class="lineCov">         64 :     IN_FORPOP = get_primitive(&quot; FORPOP&quot;);</span>
-<span class="lineNum">    3905 </span><span class="lineCov">         64 :     IN_FORITER = get_primitive(&quot; FORITER&quot;);</span>
-<span class="lineNum">    3906 </span><span class="lineCov">         64 :     IN_FOR = get_primitive(&quot; FOR&quot;);</span>
-<span class="lineNum">    3907 </span><span class="lineCov">         64 :     IN_FOREACH = get_primitive(&quot; FOREACH&quot;);</span>
-<span class="lineNum">    3908 </span><span class="lineCov">         64 :     IN_TRYPOP = get_primitive(&quot; TRYPOP&quot;);</span>
-<span class="lineNum">    3909 </span><span class="lineCov">         64 :     log_status(&quot;MUF: %d primitives exist.&quot;, prim_count);</span>
-<span class="lineNum">    3910 </span><span class="lineCov">         64 : }</span>
+<span class="lineNum">    3904 </span><span class="lineCov">         76 :     IN_FORPOP = get_primitive(&quot; FORPOP&quot;);</span>
+<span class="lineNum">    3905 </span><span class="lineCov">         76 :     IN_FORITER = get_primitive(&quot; FORITER&quot;);</span>
+<span class="lineNum">    3906 </span><span class="lineCov">         76 :     IN_FOR = get_primitive(&quot; FOR&quot;);</span>
+<span class="lineNum">    3907 </span><span class="lineCov">         76 :     IN_FOREACH = get_primitive(&quot; FOREACH&quot;);</span>
+<span class="lineNum">    3908 </span><span class="lineCov">         76 :     IN_TRYPOP = get_primitive(&quot; TRYPOP&quot;);</span>
+<span class="lineNum">    3909 </span><span class="lineCov">         76 :     log_status(&quot;MUF: %d primitives exist.&quot;, prim_count);</span>
+<span class="lineNum">    3910 </span><span class="lineCov">         76 : }</span>
 </pre>
       </td>
     </tr>

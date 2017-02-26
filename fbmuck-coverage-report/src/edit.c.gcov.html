@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 13:46:11</td>
+            <td class="headerValue">2017-02-26 13:57:15</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">17</td>
@@ -1065,10 +1065,10 @@
 <span class="lineNum">    1003 </span><span class="lineCov">      40933 : }</span>
 <a name="1004"><span class="lineNum">    1004 </span>            : </a>
 <span class="lineNum">    1005 </span>            : void
-<span class="lineNum">    1006 </span><span class="lineCov">         64 : macrodump(struct macrotable *node, FILE * f)</span>
+<span class="lineNum">    1006 </span><span class="lineCov">         76 : macrodump(struct macrotable *node, FILE * f)</span>
 <span class="lineNum">    1007 </span>            : {
-<span class="lineNum">    1008 </span><span class="lineCov">         64 :     if (!node)</span>
-<span class="lineNum">    1009 </span><span class="lineCov">         64 :         return;</span>
+<span class="lineNum">    1008 </span><span class="lineCov">         76 :     if (!node)</span>
+<span class="lineNum">    1009 </span><span class="lineCov">         76 :         return;</span>
 <span class="lineNum">    1010 </span><span class="lineNoCov">          0 :     macrodump(node-&gt;left, f);</span>
 <span class="lineNum">    1011 </span><span class="lineNoCov">          0 :     putstring(f, node-&gt;name);</span>
 <span class="lineNum">    1012 </span><span class="lineNoCov">          0 :     putstring(f, node-&gt;definition);</span>

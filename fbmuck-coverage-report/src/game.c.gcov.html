@@ -31,13 +31,13 @@
             <td class="headerValue">coverage-total</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">356</td>
+            <td class="headerCovTableEntry">364</td>
             <td class="headerCovTableEntry">761</td>
-            <td class="headerCovTableEntryLo">46.8 %</td>
+            <td class="headerCovTableEntryLo">47.8 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 13:46:11</td>
+            <td class="headerValue">2017-02-26 13:57:15</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">4</td>
@@ -198,19 +198,19 @@
 <span class="lineNum">     136 </span><span class="lineNoCov">          0 : }</span>
 <a name="137"><span class="lineNum">     137 </span>            : </a>
 <span class="lineNum">     138 </span>            : static void
-<span class="lineNum">     139 </span><span class="lineCov">         64 : dump_database_internal(void)</span>
+<span class="lineNum">     139 </span><span class="lineCov">         76 : dump_database_internal(void)</span>
 <span class="lineNum">     140 </span>            : {
 <span class="lineNum">     141 </span>            :     char tmpfile[2048];
 <span class="lineNum">     142 </span>            :     FILE *f;
 <span class="lineNum">     143 </span>            : 
-<span class="lineNum">     144 </span><span class="lineCov">         64 :     snprintf(tmpfile, sizeof(tmpfile), &quot;%s.#%d#&quot;, dumpfile, epoch - 1);</span>
-<span class="lineNum">     145 </span><span class="lineCov">         64 :     (void) unlink(tmpfile);     /* nuke our predecessor */</span>
+<span class="lineNum">     144 </span><span class="lineCov">         76 :     snprintf(tmpfile, sizeof(tmpfile), &quot;%s.#%d#&quot;, dumpfile, epoch - 1);</span>
+<span class="lineNum">     145 </span><span class="lineCov">         76 :     (void) unlink(tmpfile);     /* nuke our predecessor */</span>
 <span class="lineNum">     146 </span>            : 
-<span class="lineNum">     147 </span><span class="lineCov">         64 :     snprintf(tmpfile, sizeof(tmpfile), &quot;%s.#%d#&quot;, dumpfile, epoch);</span>
+<span class="lineNum">     147 </span><span class="lineCov">         76 :     snprintf(tmpfile, sizeof(tmpfile), &quot;%s.#%d#&quot;, dumpfile, epoch);</span>
 <span class="lineNum">     148 </span>            : 
-<span class="lineNum">     149 </span><span class="lineCov">         64 :     if ((f = fopen(tmpfile, &quot;wb&quot;)) != NULL) {</span>
-<span class="lineNum">     150 </span><span class="lineCov">         64 :         db_write(f);</span>
-<span class="lineNum">     151 </span><span class="lineCov">         64 :         fclose(f);</span>
+<span class="lineNum">     149 </span><span class="lineCov">         76 :     if ((f = fopen(tmpfile, &quot;wb&quot;)) != NULL) {</span>
+<span class="lineNum">     150 </span><span class="lineCov">         76 :         db_write(f);</span>
+<span class="lineNum">     151 </span><span class="lineCov">         76 :         fclose(f);</span>
 <span class="lineNum">     152 </span>            : 
 <span class="lineNum">     153 </span>            : #ifdef DISKBASE
 <span class="lineNum">     154 </span>            :         fclose(input_file);
@@ -220,7 +220,7 @@
 <span class="lineNum">     158 </span>            :         (void) unlink(dumpfile);        /* Delete old file before rename */
 <span class="lineNum">     159 </span>            : #endif
 <span class="lineNum">     160 </span>            : 
-<span class="lineNum">     161 </span><span class="lineCov">         64 :         if (rename(tmpfile, dumpfile) &lt; 0)</span>
+<span class="lineNum">     161 </span><span class="lineCov">         76 :         if (rename(tmpfile, dumpfile) &lt; 0)</span>
 <span class="lineNum">     162 </span><span class="lineNoCov">          0 :             perror(tmpfile);</span>
 <span class="lineNum">     163 </span>            : 
 <span class="lineNum">     164 </span>            : #ifdef DISKBASE
@@ -235,23 +235,23 @@
 <span class="lineNum">     173 </span>            : 
 <span class="lineNum">     174 </span>            :     /* Write out the macros */
 <span class="lineNum">     175 </span>            : 
-<span class="lineNum">     176 </span><span class="lineCov">         64 :     snprintf(tmpfile, sizeof(tmpfile), &quot;%s.#%d#&quot;, MACRO_FILE, epoch - 1);</span>
-<span class="lineNum">     177 </span><span class="lineCov">         64 :     (void) unlink(tmpfile);</span>
+<span class="lineNum">     176 </span><span class="lineCov">         76 :     snprintf(tmpfile, sizeof(tmpfile), &quot;%s.#%d#&quot;, MACRO_FILE, epoch - 1);</span>
+<span class="lineNum">     177 </span><span class="lineCov">         76 :     (void) unlink(tmpfile);</span>
 <span class="lineNum">     178 </span>            : 
-<span class="lineNum">     179 </span><span class="lineCov">         64 :     snprintf(tmpfile, sizeof(tmpfile), &quot;%s.#%d#&quot;, MACRO_FILE, epoch);</span>
+<span class="lineNum">     179 </span><span class="lineCov">         76 :     snprintf(tmpfile, sizeof(tmpfile), &quot;%s.#%d#&quot;, MACRO_FILE, epoch);</span>
 <span class="lineNum">     180 </span>            : 
-<span class="lineNum">     181 </span><span class="lineCov">         64 :     if ((f = fopen(tmpfile, &quot;wb&quot;)) != NULL) {</span>
-<span class="lineNum">     182 </span><span class="lineCov">         64 :         macrodump(macrotop, f);</span>
-<span class="lineNum">     183 </span><span class="lineCov">         64 :         fclose(f);</span>
+<span class="lineNum">     181 </span><span class="lineCov">         76 :     if ((f = fopen(tmpfile, &quot;wb&quot;)) != NULL) {</span>
+<span class="lineNum">     182 </span><span class="lineCov">         76 :         macrodump(macrotop, f);</span>
+<span class="lineNum">     183 </span><span class="lineCov">         76 :         fclose(f);</span>
 <span class="lineNum">     184 </span>            : #ifdef WIN32
 <span class="lineNum">     185 </span>            :         unlink(MACRO_FILE);
 <span class="lineNum">     186 </span>            : #endif
-<span class="lineNum">     187 </span><span class="lineCov">         64 :         if (rename(tmpfile, MACRO_FILE) &lt; 0)</span>
+<span class="lineNum">     187 </span><span class="lineCov">         76 :         if (rename(tmpfile, MACRO_FILE) &lt; 0)</span>
 <span class="lineNum">     188 </span><span class="lineNoCov">          0 :             perror(tmpfile);</span>
 <span class="lineNum">     189 </span>            :     } else {
 <span class="lineNum">     190 </span><span class="lineNoCov">          0 :         perror(tmpfile);</span>
 <span class="lineNum">     191 </span>            :     }
-<span class="lineNum">     192 </span><span class="lineCov">         64 :     sync();</span>
+<span class="lineNum">     192 </span><span class="lineCov">         76 :     sync();</span>
 <span class="lineNum">     193 </span>            : 
 <span class="lineNum">     194 </span>            : #ifdef DISKBASE
 <span class="lineNum">     195 </span>            :     /* Only show dumpdone mesg if not doing background saves. */
@@ -261,7 +261,7 @@
 <span class="lineNum">     199 </span>            :     propcache_hits = 0L;
 <span class="lineNum">     200 </span>            :     propcache_misses = 1L;
 <span class="lineNum">     201 </span>            : #endif
-<span class="lineNum">     202 </span><span class="lineCov">         64 : }</span>
+<span class="lineNum">     202 </span><span class="lineCov">         76 : }</span>
 <a name="203"><span class="lineNum">     203 </span>            : </a>
 <span class="lineNum">     204 </span>            : void
 <span class="lineNum">     205 </span><span class="lineNoCov">          0 : panic(const char *message)</span>
@@ -334,14 +334,14 @@
 <span class="lineNum">     272 </span>            : }
 <a name="273"><span class="lineNum">     273 </span>            : </a>
 <span class="lineNum">     274 </span>            : void
-<span class="lineNum">     275 </span><span class="lineCov">         64 : dump_database(void)</span>
+<span class="lineNum">     275 </span><span class="lineCov">         76 : dump_database(void)</span>
 <span class="lineNum">     276 </span>            : {
-<span class="lineNum">     277 </span><span class="lineCov">         64 :     epoch++;</span>
+<span class="lineNum">     277 </span><span class="lineCov">         76 :     epoch++;</span>
 <span class="lineNum">     278 </span>            : 
-<span class="lineNum">     279 </span><span class="lineCov">         64 :     log_status(&quot;DUMPING: %s.#%d#&quot;, dumpfile, epoch);</span>
-<span class="lineNum">     280 </span><span class="lineCov">         64 :     dump_database_internal();</span>
-<span class="lineNum">     281 </span><span class="lineCov">         64 :     log_status(&quot;DUMPING: %s.#%d# (done)&quot;, dumpfile, epoch);</span>
-<span class="lineNum">     282 </span><span class="lineCov">         64 : }</span>
+<span class="lineNum">     279 </span><span class="lineCov">         76 :     log_status(&quot;DUMPING: %s.#%d#&quot;, dumpfile, epoch);</span>
+<span class="lineNum">     280 </span><span class="lineCov">         76 :     dump_database_internal();</span>
+<span class="lineNum">     281 </span><span class="lineCov">         76 :     log_status(&quot;DUMPING: %s.#%d# (done)&quot;, dumpfile, epoch);</span>
+<span class="lineNum">     282 </span><span class="lineCov">         76 : }</span>
 <span class="lineNum">     283 </span>            : 
 <span class="lineNum">     284 </span>            : #ifdef WIN32
 <span class="lineNum">     285 </span>            : /* TODO: This is not thread safe - disabled for now... */
@@ -407,47 +407,47 @@
 <span class="lineNum">     345 </span>            : }
 <a name="346"><span class="lineNum">     346 </span>            : </a>
 <span class="lineNum">     347 </span>            : int
-<span class="lineNum">     348 </span><span class="lineCov">         64 : init_game(const char *infile, const char *outfile)</span>
+<span class="lineNum">     348 </span><span class="lineCov">         76 : init_game(const char *infile, const char *outfile)</span>
 <span class="lineNum">     349 </span>            : {
 <span class="lineNum">     350 </span>            :     FILE *f;
 <span class="lineNum">     351 </span>            : 
-<span class="lineNum">     352 </span><span class="lineCov">         64 :     if ((f = fopen(MACRO_FILE, &quot;rb&quot;)) == NULL)</span>
-<span class="lineNum">     353 </span><span class="lineCov">         64 :         log_status(&quot;INIT: Macro storage file %s is tweaked.&quot;, MACRO_FILE);</span>
+<span class="lineNum">     352 </span><span class="lineCov">         76 :     if ((f = fopen(MACRO_FILE, &quot;rb&quot;)) == NULL)</span>
+<span class="lineNum">     353 </span><span class="lineCov">         76 :         log_status(&quot;INIT: Macro storage file %s is tweaked.&quot;, MACRO_FILE);</span>
 <span class="lineNum">     354 </span>            :     else {
 <span class="lineNum">     355 </span><span class="lineNoCov">          0 :         macroload(f);</span>
 <span class="lineNum">     356 </span><span class="lineNoCov">          0 :         fclose(f);</span>
 <span class="lineNum">     357 </span>            :     }
 <span class="lineNum">     358 </span>            : 
-<span class="lineNum">     359 </span><span class="lineCov">         64 :     in_filename = (char *) strdup(infile);</span>
-<span class="lineNum">     360 </span><span class="lineCov">         64 :     if ((input_file = fopen(infile, &quot;rb&quot;)) == NULL)</span>
+<span class="lineNum">     359 </span><span class="lineCov">         76 :     in_filename = (char *) strdup(infile);</span>
+<span class="lineNum">     360 </span><span class="lineCov">         76 :     if ((input_file = fopen(infile, &quot;rb&quot;)) == NULL)</span>
 <span class="lineNum">     361 </span><span class="lineNoCov">          0 :         return -1;</span>
 <span class="lineNum">     362 </span>            : 
-<span class="lineNum">     363 </span><span class="lineCov">         64 :     db_free();</span>
-<span class="lineNum">     364 </span><span class="lineCov">         64 :     init_primitives();          /* init muf compiler */</span>
-<span class="lineNum">     365 </span><span class="lineCov">         64 :     mesg_init();                /* init mpi interpreter */</span>
-<span class="lineNum">     366 </span><span class="lineCov">         64 :     SRANDOM(getpid());          /* init random number generator */</span>
+<span class="lineNum">     363 </span><span class="lineCov">         76 :     db_free();</span>
+<span class="lineNum">     364 </span><span class="lineCov">         76 :     init_primitives();          /* init muf compiler */</span>
+<span class="lineNum">     365 </span><span class="lineCov">         76 :     mesg_init();                /* init mpi interpreter */</span>
+<span class="lineNum">     366 </span><span class="lineCov">         76 :     SRANDOM(getpid());          /* init random number generator */</span>
 <span class="lineNum">     367 </span>            : 
 <span class="lineNum">     368 </span>            :     /* ok, read the db in */
-<span class="lineNum">     369 </span><span class="lineCov">         64 :     log_status(&quot;LOADING: %s&quot;, infile);</span>
-<span class="lineNum">     370 </span><span class="lineCov">         64 :     fprintf(stderr, &quot;LOADING: %s\n&quot;, infile);</span>
-<span class="lineNum">     371 </span><span class="lineCov">         64 :     if (db_read(input_file) &lt; 0)</span>
+<span class="lineNum">     369 </span><span class="lineCov">         76 :     log_status(&quot;LOADING: %s&quot;, infile);</span>
+<span class="lineNum">     370 </span><span class="lineCov">         76 :     fprintf(stderr, &quot;LOADING: %s\n&quot;, infile);</span>
+<span class="lineNum">     371 </span><span class="lineCov">         76 :     if (db_read(input_file) &lt; 0)</span>
 <span class="lineNum">     372 </span><span class="lineNoCov">          0 :         return -1;</span>
-<span class="lineNum">     373 </span><span class="lineCov">         64 :     log_status(&quot;LOADING: %s (done)&quot;, infile);</span>
-<span class="lineNum">     374 </span><span class="lineCov">         64 :     fprintf(stderr, &quot;LOADING: %s (done)\n&quot;, infile);</span>
+<span class="lineNum">     373 </span><span class="lineCov">         76 :     log_status(&quot;LOADING: %s (done)&quot;, infile);</span>
+<span class="lineNum">     374 </span><span class="lineCov">         76 :     fprintf(stderr, &quot;LOADING: %s (done)\n&quot;, infile);</span>
 <span class="lineNum">     375 </span>            : 
 <span class="lineNum">     376 </span>            :     /* set up dumper */
-<span class="lineNum">     377 </span><span class="lineCov">         64 :     if (dumpfile)</span>
+<span class="lineNum">     377 </span><span class="lineCov">         76 :     if (dumpfile)</span>
 <span class="lineNum">     378 </span><span class="lineNoCov">          0 :         free((void *) dumpfile);</span>
-<span class="lineNum">     379 </span><span class="lineCov">         64 :     dumpfile = alloc_string(outfile);</span>
+<span class="lineNum">     379 </span><span class="lineCov">         76 :     dumpfile = alloc_string(outfile);</span>
 <span class="lineNum">     380 </span>            : 
-<span class="lineNum">     381 </span><span class="lineCov">         64 :     if (!db_conversion_flag) {</span>
-<span class="lineNum">     382 </span><span class="lineCov">         64 :         add_property((dbref) 0, SYS_STARTUPTIME_PROP, NULL, (int) time((time_t *) NULL));</span>
-<span class="lineNum">     383 </span><span class="lineCov">         64 :         add_property((dbref) 0, SYS_MAXPENNIES_PROP, NULL, tp_max_pennies);</span>
-<span class="lineNum">     384 </span><span class="lineCov">         64 :         add_property((dbref) 0, SYS_DUMPINTERVAL_PROP, NULL, tp_dump_interval);</span>
-<span class="lineNum">     385 </span><span class="lineCov">         64 :         add_property((dbref) 0, SYS_MAX_CONNECTS_PROP, NULL, 0);</span>
+<span class="lineNum">     381 </span><span class="lineCov">         76 :     if (!db_conversion_flag) {</span>
+<span class="lineNum">     382 </span><span class="lineCov">         76 :         add_property((dbref) 0, SYS_STARTUPTIME_PROP, NULL, (int) time((time_t *) NULL));</span>
+<span class="lineNum">     383 </span><span class="lineCov">         76 :         add_property((dbref) 0, SYS_MAXPENNIES_PROP, NULL, tp_max_pennies);</span>
+<span class="lineNum">     384 </span><span class="lineCov">         76 :         add_property((dbref) 0, SYS_DUMPINTERVAL_PROP, NULL, tp_dump_interval);</span>
+<span class="lineNum">     385 </span><span class="lineCov">         76 :         add_property((dbref) 0, SYS_MAX_CONNECTS_PROP, NULL, 0);</span>
 <span class="lineNum">     386 </span>            :     }
 <span class="lineNum">     387 </span>            : 
-<span class="lineNum">     388 </span><span class="lineCov">         64 :     return 0;</span>
+<span class="lineNum">     388 </span><span class="lineCov">         76 :     return 0;</span>
 <span class="lineNum">     389 </span>            : }
 <span class="lineNum">     390 </span>            : 
 <span class="lineNum">     391 </span>            : #ifdef MALLOC_PROFILING
@@ -476,7 +476,7 @@
 <span class="lineNum">     414 </span><span class="lineNoCov">          0 : }</span>
 <a name="415"><span class="lineNum">     415 </span>            : </a>
 <span class="lineNum">     416 </span>            : void
-<span class="lineNum">     417 </span><span class="lineCov">      41401 : process_command(int descr, dbref player, char *command)</span>
+<span class="lineNum">     417 </span><span class="lineCov">      41464 : process_command(int descr, dbref player, char *command)</span>
 <span class="lineNum">     418 </span>            : {
 <span class="lineNum">     419 </span>            :     char *arg1;
 <span class="lineNum">     420 </span>            :     char *arg2;
@@ -488,71 +488,71 @@
 <span class="lineNum">     426 </span>            :     struct timeval endtime;
 <span class="lineNum">     427 </span>            :     double totaltime;
 <span class="lineNum">     428 </span>            : 
-<span class="lineNum">     429 </span><span class="lineCov">      41401 :     if (command == 0)</span>
+<span class="lineNum">     429 </span><span class="lineCov">      41464 :     if (command == 0)</span>
 <span class="lineNum">     430 </span><span class="lineNoCov">          0 :         abort();</span>
 <span class="lineNum">     431 </span>            : 
 <span class="lineNum">     432 </span>            :     /* robustify player */
-<span class="lineNum">     433 </span><span class="lineCov">      41401 :     if (!ObjExists(player) ||</span>
-<span class="lineNum">     434 </span><span class="lineCov">      41401 :         (Typeof(player) != TYPE_PLAYER &amp;&amp; Typeof(player) != TYPE_THING)) {</span>
+<span class="lineNum">     433 </span><span class="lineCov">      41464 :     if (!ObjExists(player) ||</span>
+<span class="lineNum">     434 </span><span class="lineCov">      41464 :         (Typeof(player) != TYPE_PLAYER &amp;&amp; Typeof(player) != TYPE_THING)) {</span>
 <span class="lineNum">     435 </span><span class="lineNoCov">          0 :         log_status(&quot;process_command: bad player %d&quot;, player);</span>
 <span class="lineNum">     436 </span><span class="lineNoCov">          0 :         return;</span>
 <span class="lineNum">     437 </span>            :     }
 <span class="lineNum">     438 </span>            : 
-<span class="lineNum">     439 </span><span class="lineCov">      41401 :     if ((tp_log_commands || Wizard(OWNER(player)))) {</span>
-<span class="lineNum">     440 </span><span class="lineCov">      41401 :         char *log_name = whowhere(player);</span>
-<span class="lineNum">     441 </span><span class="lineCov">      41401 :         if (!(FLAGS(player) &amp; (INTERACTIVE | READMODE))) {</span>
-<span class="lineNum">     442 </span><span class="lineCov">        468 :             if (!*command) {</span>
-<span class="lineNum">     443 </span><span class="lineCov">         48 :                 free(log_name);</span>
-<span class="lineNum">     444 </span><span class="lineCov">         48 :                 return;</span>
+<span class="lineNum">     439 </span><span class="lineCov">      41464 :     if ((tp_log_commands || Wizard(OWNER(player)))) {</span>
+<span class="lineNum">     440 </span><span class="lineCov">      41464 :         char *log_name = whowhere(player);</span>
+<span class="lineNum">     441 </span><span class="lineCov">      41464 :         if (!(FLAGS(player) &amp; (INTERACTIVE | READMODE))) {</span>
+<span class="lineNum">     442 </span><span class="lineCov">        531 :             if (!*command) {</span>
+<span class="lineNum">     443 </span><span class="lineCov">         60 :                 free(log_name);</span>
+<span class="lineNum">     444 </span><span class="lineCov">         60 :                 return;</span>
 <span class="lineNum">     445 </span>            :             }
-<span class="lineNum">     446 </span><span class="lineCov">        420 :             log_command(&quot;%s: %s&quot;, log_name, command);</span>
+<span class="lineNum">     446 </span><span class="lineCov">        471 :             log_command(&quot;%s: %s&quot;, log_name, command);</span>
 <span class="lineNum">     447 </span>            :         } else {
 <span class="lineNum">     448 </span><span class="lineCov">      40933 :             if (tp_log_interactive) {</span>
 <span class="lineNum">     449 </span><span class="lineCov">      40933 :                 log_command(&quot;%s: %s%s&quot;, log_name,</span>
 <span class="lineNum">     450 </span><span class="lineCov">      40933 :                             (FLAGS(player) &amp; (READMODE)) ? &quot;[READ] &quot; : &quot;[INTERP] &quot;, command);</span>
 <span class="lineNum">     451 </span>            :             }
 <span class="lineNum">     452 </span>            :         }
-<span class="lineNum">     453 </span><span class="lineCov">      41353 :         free(log_name);</span>
+<span class="lineNum">     453 </span><span class="lineCov">      41404 :         free(log_name);</span>
 <span class="lineNum">     454 </span>            :     }
 <span class="lineNum">     455 </span>            : 
-<span class="lineNum">     456 </span><span class="lineCov">      41353 :     if (FLAGS(player) &amp; INTERACTIVE) {</span>
+<span class="lineNum">     456 </span><span class="lineCov">      41404 :     if (FLAGS(player) &amp; INTERACTIVE) {</span>
 <span class="lineNum">     457 </span><span class="lineCov">      40933 :         interactive(descr, player, command);</span>
 <span class="lineNum">     458 </span><span class="lineCov">      40933 :         return;</span>
 <span class="lineNum">     459 </span>            :     }
 <span class="lineNum">     460 </span>            :     /* eat leading whitespace */
-<span class="lineNum">     461 </span><span class="lineCov">        852 :     while (*command &amp;&amp; isspace(*command))</span>
+<span class="lineNum">     461 </span><span class="lineCov">        954 :     while (*command &amp;&amp; isspace(*command))</span>
 <span class="lineNum">     462 </span><span class="lineCov">         12 :         command++;</span>
 <span class="lineNum">     463 </span>            : 
 <span class="lineNum">     464 </span>            :     /* Disable null command once past READ line */
-<span class="lineNum">     465 </span><span class="lineCov">        420 :     if (!*command)</span>
+<span class="lineNum">     465 </span><span class="lineCov">        471 :     if (!*command)</span>
 <span class="lineNum">     466 </span><span class="lineNoCov">          0 :         return;</span>
 <span class="lineNum">     467 </span>            : 
 <span class="lineNum">     468 </span>            :     /* check for single-character commands */
-<span class="lineNum">     469 </span><span class="lineCov">        420 :     if (!tp_enable_prefix) {</span>
-<span class="lineNum">     470 </span><span class="lineCov">        420 :         if (*command == SAY_TOKEN) {</span>
+<span class="lineNum">     469 </span><span class="lineCov">        471 :     if (!tp_enable_prefix) {</span>
+<span class="lineNum">     470 </span><span class="lineCov">        471 :         if (*command == SAY_TOKEN) {</span>
 <span class="lineNum">     471 </span><span class="lineCov">          3 :             snprintf(pbuf, sizeof(pbuf), &quot;say %s&quot;, command + 1);</span>
 <span class="lineNum">     472 </span><span class="lineCov">          3 :             command = &amp;pbuf[0];</span>
-<span class="lineNum">     473 </span><span class="lineCov">        417 :         } else if (*command == POSE_TOKEN) {</span>
+<span class="lineNum">     473 </span><span class="lineCov">        468 :         } else if (*command == POSE_TOKEN) {</span>
 <span class="lineNum">     474 </span><span class="lineCov">          3 :             snprintf(pbuf, sizeof(pbuf), &quot;pose %s&quot;, command + 1);</span>
 <span class="lineNum">     475 </span><span class="lineCov">          3 :             command = &amp;pbuf[0];</span>
-<span class="lineNum">     476 </span><span class="lineCov">        414 :         } else if (*command == EXIT_DELIMITER) {</span>
+<span class="lineNum">     476 </span><span class="lineCov">        465 :         } else if (*command == EXIT_DELIMITER) {</span>
 <span class="lineNum">     477 </span><span class="lineCov">          1 :             snprintf(pbuf, sizeof(pbuf), &quot;delimiter %s&quot;, command + 1);</span>
 <span class="lineNum">     478 </span><span class="lineCov">          1 :             command = &amp;pbuf[0];</span>
 <span class="lineNum">     479 </span>            :         }
 <span class="lineNum">     480 </span>            :     }
 <span class="lineNum">     481 </span>            : 
 <span class="lineNum">     482 </span>            :     /* profile how long command takes. */
-<span class="lineNum">     483 </span><span class="lineCov">        420 :     gettimeofday(&amp;starttime, NULL);</span>
+<span class="lineNum">     483 </span><span class="lineCov">        471 :     gettimeofday(&amp;starttime, NULL);</span>
 <span class="lineNum">     484 </span>            : 
 <span class="lineNum">     485 </span>            :     /* if player is a wizard, and uses override token to start line... */
 <span class="lineNum">     486 </span>            :     /* ... then do NOT run actions, but run the command they specify. */
-<span class="lineNum">     487 </span><span class="lineCov">        420 :     if (!(TrueWizard(OWNER(player)) &amp;&amp; (*command == OVERRIDE_TOKEN))) {</span>
-<span class="lineNum">     488 </span><span class="lineCov">        424 :         if (can_move(descr, player, command, 0)) {</span>
+<span class="lineNum">     487 </span><span class="lineCov">        471 :     if (!(TrueWizard(OWNER(player)) &amp;&amp; (*command == OVERRIDE_TOKEN))) {</span>
+<span class="lineNum">     488 </span><span class="lineCov">        475 :         if (can_move(descr, player, command, 0)) {</span>
 <span class="lineNum">     489 </span><span class="lineCov">         11 :             do_move(descr, player, command, 0); /* command is exact match for exit */</span>
 <span class="lineNum">     490 </span><span class="lineCov">         11 :             *match_args = 0;</span>
 <span class="lineNum">     491 </span><span class="lineCov">         11 :             *match_cmdname = 0;</span>
 <span class="lineNum">     492 </span>            :         } else {
-<span class="lineNum">     493 </span><span class="lineCov">        402 :             if (tp_enable_prefix) {</span>
+<span class="lineNum">     493 </span><span class="lineCov">        453 :             if (tp_enable_prefix) {</span>
 <span class="lineNum">     494 </span><span class="lineNoCov">          0 :                 if (*command == SAY_TOKEN) {</span>
 <span class="lineNum">     495 </span><span class="lineNoCov">          0 :                     snprintf(pbuf, sizeof(pbuf), &quot;say %s&quot;, command + 1);</span>
 <span class="lineNum">     496 </span><span class="lineNoCov">          0 :                     command = &amp;pbuf[0];</span>
@@ -573,49 +573,49 @@
 <span class="lineNum">     511 </span><span class="lineNoCov">          0 :                     goto bad_pre_command;</span>
 <span class="lineNum">     512 </span>            :                 }
 <span class="lineNum">     513 </span>            :             } else {
-<span class="lineNum">     514 </span><span class="lineCov">        402 :                 goto bad_pre_command;</span>
+<span class="lineNum">     514 </span><span class="lineCov">        453 :                 goto bad_pre_command;</span>
 <span class="lineNum">     515 </span>            :             }
 <span class="lineNum">     516 </span>            :         }
 <span class="lineNum">     517 </span>            :     } else {
 <span class="lineNum">     518 </span>            :       bad_pre_command:
-<span class="lineNum">     519 </span><span class="lineCov">        409 :         if (TrueWizard(OWNER(player)) &amp;&amp; (*command == OVERRIDE_TOKEN))</span>
+<span class="lineNum">     519 </span><span class="lineCov">        460 :         if (TrueWizard(OWNER(player)) &amp;&amp; (*command == OVERRIDE_TOKEN))</span>
 <span class="lineNum">     520 </span><span class="lineCov">          7 :             command++;</span>
-<span class="lineNum">     521 </span><span class="lineCov">        409 :         full_command = strcpyn(xbuf, sizeof(xbuf), command);</span>
-<span class="lineNum">     522 </span><span class="lineCov">        409 :         for (; *full_command &amp;&amp; !isspace(*full_command); full_command++) ;</span>
-<span class="lineNum">     523 </span><span class="lineCov">        409 :         if (*full_command)</span>
-<span class="lineNum">     524 </span><span class="lineCov">        408 :             full_command++;</span>
+<span class="lineNum">     521 </span><span class="lineCov">        460 :         full_command = strcpyn(xbuf, sizeof(xbuf), command);</span>
+<span class="lineNum">     522 </span><span class="lineCov">        460 :         for (; *full_command &amp;&amp; !isspace(*full_command); full_command++) ;</span>
+<span class="lineNum">     523 </span><span class="lineCov">        460 :         if (*full_command)</span>
+<span class="lineNum">     524 </span><span class="lineCov">        459 :             full_command++;</span>
 <span class="lineNum">     525 </span>            : 
 <span class="lineNum">     526 </span>            :         /* find arg1 -- move over command word */
-<span class="lineNum">     527 </span><span class="lineCov">        409 :         command = strcpyn(ybuf, sizeof(ybuf), command);</span>
-<span class="lineNum">     528 </span><span class="lineCov">        409 :         for (arg1 = command; *arg1 &amp;&amp; !isspace(*arg1); arg1++) ;</span>
+<span class="lineNum">     527 </span><span class="lineCov">        460 :         command = strcpyn(ybuf, sizeof(ybuf), command);</span>
+<span class="lineNum">     528 </span><span class="lineCov">        460 :         for (arg1 = command; *arg1 &amp;&amp; !isspace(*arg1); arg1++) ;</span>
 <span class="lineNum">     529 </span>            :         /* truncate command */
-<span class="lineNum">     530 </span><span class="lineCov">        409 :         if (*arg1)</span>
-<span class="lineNum">     531 </span><span class="lineCov">        408 :             *arg1++ = '\0';</span>
+<span class="lineNum">     530 </span><span class="lineCov">        460 :         if (*arg1)</span>
+<span class="lineNum">     531 </span><span class="lineCov">        459 :             *arg1++ = '\0';</span>
 <span class="lineNum">     532 </span>            : 
 <span class="lineNum">     533 </span>            :         /* remember command for programs */
-<span class="lineNum">     534 </span><span class="lineCov">        409 :         strcpyn(match_args, sizeof(match_args), full_command);</span>
-<span class="lineNum">     535 </span><span class="lineCov">        409 :         strcpyn(match_cmdname, sizeof(match_cmdname), command);</span>
+<span class="lineNum">     534 </span><span class="lineCov">        460 :         strcpyn(match_args, sizeof(match_args), full_command);</span>
+<span class="lineNum">     535 </span><span class="lineCov">        460 :         strcpyn(match_cmdname, sizeof(match_cmdname), command);</span>
 <span class="lineNum">     536 </span>            : 
 <span class="lineNum">     537 </span>            :         /* move over spaces */
-<span class="lineNum">     538 </span><span class="lineCov">        818 :         while (*arg1 &amp;&amp; isspace(*arg1))</span>
+<span class="lineNum">     538 </span><span class="lineCov">        920 :         while (*arg1 &amp;&amp; isspace(*arg1))</span>
 <span class="lineNum">     539 </span><span class="lineNoCov">          0 :             arg1++;</span>
 <span class="lineNum">     540 </span>            : 
 <span class="lineNum">     541 </span>            :         /* find end of arg1, start of arg2 */
-<span class="lineNum">     542 </span><span class="lineCov">        409 :         for (arg2 = arg1; *arg2 &amp;&amp; *arg2 != ARG_DELIMITER; arg2++) ;</span>
+<span class="lineNum">     542 </span><span class="lineCov">        460 :         for (arg2 = arg1; *arg2 &amp;&amp; *arg2 != ARG_DELIMITER; arg2++) ;</span>
 <span class="lineNum">     543 </span>            : 
 <span class="lineNum">     544 </span>            :         /* truncate arg1 */
-<span class="lineNum">     545 </span><span class="lineCov">        409 :         for (char *p = arg2 - 1; p &gt;= arg1 &amp;&amp; isspace(*p); p--)</span>
+<span class="lineNum">     545 </span><span class="lineCov">        460 :         for (char *p = arg2 - 1; p &gt;= arg1 &amp;&amp; isspace(*p); p--)</span>
 <span class="lineNum">     546 </span><span class="lineNoCov">          0 :             *p = '\0';</span>
 <span class="lineNum">     547 </span>            : 
 <span class="lineNum">     548 </span>            :         /* go past delimiter if present */
-<span class="lineNum">     549 </span><span class="lineCov">        409 :         if (*arg2)</span>
-<span class="lineNum">     550 </span><span class="lineCov">        178 :             *arg2++ = '\0';</span>
-<span class="lineNum">     551 </span><span class="lineCov">        818 :         while (*arg2 &amp;&amp; isspace(*arg2))</span>
+<span class="lineNum">     549 </span><span class="lineCov">        460 :         if (*arg2)</span>
+<span class="lineNum">     550 </span><span class="lineCov">        218 :             *arg2++ = '\0';</span>
+<span class="lineNum">     551 </span><span class="lineCov">        920 :         while (*arg2 &amp;&amp; isspace(*arg2))</span>
 <span class="lineNum">     552 </span><span class="lineNoCov">          0 :             arg2++;</span>
 <span class="lineNum">     553 </span>            : 
-<span class="lineNum">     554 </span><span class="lineCov">        409 :         switch (command[0]) {</span>
+<span class="lineNum">     554 </span><span class="lineCov">        460 :         switch (command[0]) {</span>
 <span class="lineNum">     555 </span>            :         case '@':
-<span class="lineNum">     556 </span><span class="lineCov">        363 :             switch (command[1]) {</span>
+<span class="lineNum">     556 </span><span class="lineCov">        401 :             switch (command[1]) {</span>
 <span class="lineNum">     557 </span>            :             case 'a':
 <span class="lineNum">     558 </span>            :             case 'A':
 <span class="lineNum">     559 </span>            :                 /* @action, @armageddon, @attach */
@@ -747,7 +747,7 @@
 <span class="lineNum">     685 </span>            :             case 'D':
 <span class="lineNum">     686 </span>            :                 /* @debug, @describe, @dig, @doing,
 <span class="lineNum">     687 </span>            :                    @drop, @dump */
-<span class="lineNum">     688 </span><span class="lineCov">         33 :                 switch (command[2]) {</span>
+<span class="lineNum">     688 </span><span class="lineCov">         39 :                 switch (command[2]) {</span>
 <span class="lineNum">     689 </span>            :                 case 'e':
 <span class="lineNum">     690 </span>            :                 case 'E':
 <span class="lineNum">     691 </span><span class="lineCov">          6 :                     if (strcasecmp(command, &quot;@debug&quot;)) {</span>
@@ -764,11 +764,11 @@
 <span class="lineNum">     702 </span>            :                     }
 <span class="lineNum">     703 </span>            :                 case 'i':
 <span class="lineNum">     704 </span>            :                 case 'I':
-<span class="lineNum">     705 </span><span class="lineCov">         24 :                     Matched(&quot;@dig&quot;);</span>
-<span class="lineNum">     706 </span><span class="lineCov">         24 :                     NOGUEST(&quot;@dig&quot;, player);</span>
-<span class="lineNum">     707 </span><span class="lineCov">         24 :                     BUILDERONLY(&quot;@dig&quot;, player);</span>
-<span class="lineNum">     708 </span><span class="lineCov">         24 :                     do_dig(descr, player, arg1, arg2);</span>
-<span class="lineNum">     709 </span><span class="lineCov">         24 :                     break;</span>
+<span class="lineNum">     705 </span><span class="lineCov">         30 :                     Matched(&quot;@dig&quot;);</span>
+<span class="lineNum">     706 </span><span class="lineCov">         30 :                     NOGUEST(&quot;@dig&quot;, player);</span>
+<span class="lineNum">     707 </span><span class="lineCov">         30 :                     BUILDERONLY(&quot;@dig&quot;, player);</span>
+<span class="lineNum">     708 </span><span class="lineCov">         30 :                     do_dig(descr, player, arg1, arg2);</span>
+<span class="lineNum">     709 </span><span class="lineCov">         30 :                     break;</span>
 <span class="lineNum">     710 </span>            :                 case 'o':
 <span class="lineNum">     711 </span>            :                 case 'O':
 <span class="lineNum">     712 </span><span class="lineNoCov">          0 :                     Matched(&quot;@doing&quot;);</span>
@@ -794,7 +794,7 @@
 <span class="lineNum">     732 </span>            :                 default:
 <span class="lineNum">     733 </span><span class="lineNoCov">          0 :                     goto bad;</span>
 <span class="lineNum">     734 </span>            :                 }
-<span class="lineNum">     735 </span><span class="lineCov">         33 :                 break;</span>
+<span class="lineNum">     735 </span><span class="lineCov">         39 :                 break;</span>
 <span class="lineNum">     736 </span>            :             case 'e':
 <span class="lineNum">     737 </span>            :             case 'E':
 <span class="lineNum">     738 </span>            :                 /* @edit, @entrances, @examine */
@@ -995,7 +995,7 @@
 <span class="lineNum">     933 </span>            :             case 'O':
 <span class="lineNum">     934 </span>            :                 /* @odrop, @oecho, @ofail, @open, @osuccess,
 <span class="lineNum">     935 </span>            :                    @owned, @ownlock */
-<span class="lineNum">     936 </span><span class="lineCov">         16 :                 switch (command[2]) {</span>
+<span class="lineNum">     936 </span><span class="lineCov">         21 :                 switch (command[2]) {</span>
 <span class="lineNum">     937 </span>            :                 case 'd':
 <span class="lineNum">     938 </span>            :                 case 'D':
 <span class="lineNum">     939 </span><span class="lineCov">          3 :                     Matched(&quot;@odrop&quot;);</span>
@@ -1019,11 +1019,11 @@
 <span class="lineNum">     957 </span><span class="lineCov">          1 :                     break;</span>
 <span class="lineNum">     958 </span>            :                 case 'p':
 <span class="lineNum">     959 </span>            :                 case 'P':
-<span class="lineNum">     960 </span><span class="lineCov">          8 :                     Matched(&quot;@open&quot;);</span>
-<span class="lineNum">     961 </span><span class="lineCov">          8 :                     NOGUEST(&quot;@open&quot;, player);</span>
-<span class="lineNum">     962 </span><span class="lineCov">          8 :                     BUILDERONLY(&quot;@open&quot;, player);</span>
-<span class="lineNum">     963 </span><span class="lineCov">          8 :                     do_open(descr, player, arg1, arg2);</span>
-<span class="lineNum">     964 </span><span class="lineCov">          8 :                     break;</span>
+<span class="lineNum">     960 </span><span class="lineCov">         13 :                     Matched(&quot;@open&quot;);</span>
+<span class="lineNum">     961 </span><span class="lineCov">         13 :                     NOGUEST(&quot;@open&quot;, player);</span>
+<span class="lineNum">     962 </span><span class="lineCov">         13 :                     BUILDERONLY(&quot;@open&quot;, player);</span>
+<span class="lineNum">     963 </span><span class="lineCov">         13 :                     do_open(descr, player, arg1, arg2);</span>
+<span class="lineNum">     964 </span><span class="lineCov">         13 :                     break;</span>
 <span class="lineNum">     965 </span>            :                 case 's':
 <span class="lineNum">     966 </span>            :                 case 'S':
 <span class="lineNum">     967 </span><span class="lineCov">          1 :                     Matched(&quot;@osuccess&quot;);</span>
@@ -1047,12 +1047,12 @@
 <span class="lineNum">     985 </span>            :                 default:
 <span class="lineNum">     986 </span><span class="lineNoCov">          0 :                     goto bad;</span>
 <span class="lineNum">     987 </span>            :                 }
-<span class="lineNum">     988 </span><span class="lineCov">         16 :                 break;</span>
+<span class="lineNum">     988 </span><span class="lineCov">         21 :                 break;</span>
 <span class="lineNum">     989 </span>            :             case 'p':
 <span class="lineNum">     990 </span>            :             case 'P':
 <span class="lineNum">     991 </span>            :                 /* @password, @pcreate, @pecho, @program, 
 <span class="lineNum">     992 </span>            :                    @propset, @ps */
-<span class="lineNum">     993 </span><span class="lineCov">         38 :                 switch (command[2]) {</span>
+<span class="lineNum">     993 </span><span class="lineCov">         47 :                 switch (command[2]) {</span>
 <span class="lineNum">     994 </span>            :                 case 'a':
 <span class="lineNum">     995 </span>            :                 case 'A':
 <span class="lineNum">     996 </span><span class="lineNoCov">          0 :                     Matched(&quot;@password&quot;);</span>
@@ -1076,7 +1076,7 @@
 <span class="lineNum">    1014 </span><span class="lineCov">          3 :                     break;</span>
 <span class="lineNum">    1015 </span>            :                 case 'r':
 <span class="lineNum">    1016 </span>            :                 case 'R':
-<span class="lineNum">    1017 </span><span class="lineCov">         26 :                     if (string_prefix(&quot;@program&quot;, command)) {</span>
+<span class="lineNum">    1017 </span><span class="lineCov">         35 :                     if (string_prefix(&quot;@program&quot;, command)) {</span>
 <span class="lineNum">    1018 </span><span class="lineCov">         12 :                         Matched(&quot;@program&quot;);</span>
 <span class="lineNum">    1019 </span><span class="lineCov">         12 :                         NOGUEST(&quot;@program&quot;, player);</span>
 <span class="lineNum">    1020 </span><span class="lineCov">         12 :                         PLAYERONLY(&quot;@program&quot;, player);</span>
@@ -1084,10 +1084,10 @@
 <span class="lineNum">    1022 </span><span class="lineCov">         12 :                         do_prog(descr, player, arg1);</span>
 <span class="lineNum">    1023 </span><span class="lineCov">         12 :                         break;</span>
 <span class="lineNum">    1024 </span>            :                     } else {
-<span class="lineNum">    1025 </span><span class="lineCov">         14 :                         Matched(&quot;@propset&quot;);</span>
-<span class="lineNum">    1026 </span><span class="lineCov">         14 :                         NOGUEST(&quot;@propset&quot;, player);</span>
-<span class="lineNum">    1027 </span><span class="lineCov">         14 :                         do_propset(descr, player, arg1, arg2);</span>
-<span class="lineNum">    1028 </span><span class="lineCov">         14 :                         break;</span>
+<span class="lineNum">    1025 </span><span class="lineCov">         23 :                         Matched(&quot;@propset&quot;);</span>
+<span class="lineNum">    1026 </span><span class="lineCov">         23 :                         NOGUEST(&quot;@propset&quot;, player);</span>
+<span class="lineNum">    1027 </span><span class="lineCov">         23 :                         do_propset(descr, player, arg1, arg2);</span>
+<span class="lineNum">    1028 </span><span class="lineCov">         23 :                         break;</span>
 <span class="lineNum">    1029 </span>            :                     }
 <span class="lineNum">    1030 </span>            :                 case 's':
 <span class="lineNum">    1031 </span>            :                 case 'S':
@@ -1097,11 +1097,11 @@
 <span class="lineNum">    1035 </span>            :                 default:
 <span class="lineNum">    1036 </span><span class="lineNoCov">          0 :                     goto bad;</span>
 <span class="lineNum">    1037 </span>            :                 }
-<span class="lineNum">    1038 </span><span class="lineCov">         38 :                 break;</span>
+<span class="lineNum">    1038 </span><span class="lineCov">         47 :                 break;</span>
 <span class="lineNum">    1039 </span>            :             case 'r':
 <span class="lineNum">    1040 </span>            :             case 'R':
 <span class="lineNum">    1041 </span>            :                 /* @readlock, @recycle, @reconfiguressl, @relink, @restart, @restrict */
-<span class="lineNum">    1042 </span><span class="lineCov">          9 :                 switch (command[3]) {</span>
+<span class="lineNum">    1042 </span><span class="lineCov">         10 :                 switch (command[3]) {</span>
 <span class="lineNum">    1043 </span>            :                 case 'a':
 <span class="lineNum">    1044 </span>            :                 case 'A':
 <span class="lineNum">    1045 </span><span class="lineCov">          3 :                     Matched(&quot;@readlock&quot;);</span>
@@ -1125,10 +1125,10 @@
 <span class="lineNum">    1063 </span><span class="lineNoCov">          0 :                     break;</span>
 <span class="lineNum">    1064 </span>            :                 case 'l':
 <span class="lineNum">    1065 </span>            :                 case 'L':
-<span class="lineNum">    1066 </span><span class="lineCov">          6 :                     Matched(&quot;@relink&quot;);</span>
-<span class="lineNum">    1067 </span><span class="lineCov">          6 :                     NOGUEST(&quot;@relink&quot;, player);</span>
-<span class="lineNum">    1068 </span><span class="lineCov">          6 :                     do_relink(descr, player, arg1, arg2);</span>
-<span class="lineNum">    1069 </span><span class="lineCov">          6 :                     break;</span>
+<span class="lineNum">    1066 </span><span class="lineCov">          7 :                     Matched(&quot;@relink&quot;);</span>
+<span class="lineNum">    1067 </span><span class="lineCov">          7 :                     NOGUEST(&quot;@relink&quot;, player);</span>
+<span class="lineNum">    1068 </span><span class="lineCov">          7 :                     do_relink(descr, player, arg1, arg2);</span>
+<span class="lineNum">    1069 </span><span class="lineCov">          7 :                     break;</span>
 <span class="lineNum">    1070 </span>            :                 case 's':
 <span class="lineNum">    1071 </span>            :                 case 'S':
 <span class="lineNum">    1072 </span><span class="lineNoCov">          0 :                     if (!strcmp(command, &quot;@restart&quot;)) {</span>
@@ -1148,12 +1148,12 @@
 <span class="lineNum">    1086 </span>            :                 default:
 <span class="lineNum">    1087 </span><span class="lineNoCov">          0 :                     goto bad;</span>
 <span class="lineNum">    1088 </span>            :                 }
-<span class="lineNum">    1089 </span><span class="lineCov">          9 :                 break;</span>
+<span class="lineNum">    1089 </span><span class="lineCov">         10 :                 break;</span>
 <span class="lineNum">    1090 </span>            :             case 's':
 <span class="lineNum">    1091 </span>            :             case 'S':
 <span class="lineNum">    1092 </span>            :                 /* @sanity, @sanchange, @sanfix, @set,
 <span class="lineNum">    1093 </span>            :                    @shutdown, @stats, @success, @sweep */
-<span class="lineNum">    1094 </span><span class="lineCov">         32 :                 switch (command[2]) {</span>
+<span class="lineNum">    1094 </span><span class="lineCov">         47 :                 switch (command[2]) {</span>
 <span class="lineNum">    1095 </span>            :                 case 'a':
 <span class="lineNum">    1096 </span>            :                 case 'A':
 <span class="lineNum">    1097 </span><span class="lineNoCov">          0 :                     if (!strcmp(command, &quot;@sanity&quot;)) {</span>
@@ -1171,10 +1171,10 @@
 <span class="lineNum">    1109 </span><span class="lineNoCov">          0 :                     break;</span>
 <span class="lineNum">    1110 </span>            :                 case 'e':
 <span class="lineNum">    1111 </span>            :                 case 'E':
-<span class="lineNum">    1112 </span><span class="lineCov">         27 :                     Matched(&quot;@set&quot;);</span>
-<span class="lineNum">    1113 </span><span class="lineCov">         27 :                     NOGUEST(&quot;@set&quot;, player);</span>
-<span class="lineNum">    1114 </span><span class="lineCov">         27 :                     do_set(descr, player, arg1, arg2);</span>
-<span class="lineNum">    1115 </span><span class="lineCov">         27 :                     break;</span>
+<span class="lineNum">    1112 </span><span class="lineCov">         42 :                     Matched(&quot;@set&quot;);</span>
+<span class="lineNum">    1113 </span><span class="lineCov">         42 :                     NOGUEST(&quot;@set&quot;, player);</span>
+<span class="lineNum">    1114 </span><span class="lineCov">         42 :                     do_set(descr, player, arg1, arg2);</span>
+<span class="lineNum">    1115 </span><span class="lineCov">         42 :                     break;</span>
 <span class="lineNum">    1116 </span>            :                 case 'h':
 <span class="lineNum">    1117 </span>            :                 case 'H':
 <span class="lineNum">    1118 </span><span class="lineNoCov">          0 :                     if (strcmp(command, &quot;@shutdown&quot;))</span>
@@ -1205,7 +1205,7 @@
 <span class="lineNum">    1143 </span>            :                 default:
 <span class="lineNum">    1144 </span><span class="lineNoCov">          0 :                     goto bad;</span>
 <span class="lineNum">    1145 </span>            :                 }
-<span class="lineNum">    1146 </span><span class="lineCov">         32 :                 break;</span>
+<span class="lineNum">    1146 </span><span class="lineCov">         47 :                 break;</span>
 <span class="lineNum">    1147 </span>            :             case 't':
 <span class="lineNum">    1148 </span>            :             case 'T':
 <span class="lineNum">    1149 </span>            :                 /* @teleport, @toad, @trace, @tune */
@@ -1248,19 +1248,19 @@
 <span class="lineNum">    1186 </span>            :             case 'U':
 <span class="lineNum">    1187 </span>            :                 /* @unbless, @unlink, @unlock, @uncompile,
 <span class="lineNum">    1188 </span>            :                    @usage */
-<span class="lineNum">    1189 </span><span class="lineNoCov">          0 :                 switch (command[2]) {</span>
+<span class="lineNum">    1189 </span><span class="lineCov">          2 :                 switch (command[2]) {</span>
 <span class="lineNum">    1190 </span>            :                 case 'N':
 <span class="lineNum">    1191 </span>            :                 case 'n':
-<span class="lineNum">    1192 </span><span class="lineNoCov">          0 :                     if (string_prefix(command, &quot;@unb&quot;)) {</span>
+<span class="lineNum">    1192 </span><span class="lineCov">          2 :                     if (string_prefix(command, &quot;@unb&quot;)) {</span>
 <span class="lineNum">    1193 </span><span class="lineNoCov">          0 :                         Matched(&quot;@unbless&quot;);</span>
 <span class="lineNum">    1194 </span><span class="lineNoCov">          0 :                         WIZARDONLY(&quot;@unbless&quot;, player);</span>
 <span class="lineNum">    1195 </span><span class="lineNoCov">          0 :                         PLAYERONLY(&quot;@unbless&quot;, player);</span>
 <span class="lineNum">    1196 </span><span class="lineNoCov">          0 :                         NOFORCE(&quot;@unbless&quot;, player);</span>
 <span class="lineNum">    1197 </span><span class="lineNoCov">          0 :                         do_unbless(descr, player, arg1, arg2);</span>
-<span class="lineNum">    1198 </span><span class="lineNoCov">          0 :                     } else if (string_prefix(command, &quot;@unli&quot;)) {</span>
-<span class="lineNum">    1199 </span><span class="lineNoCov">          0 :                         Matched(&quot;@unlink&quot;);</span>
-<span class="lineNum">    1200 </span><span class="lineNoCov">          0 :                         NOGUEST(&quot;@unlink&quot;, player);</span>
-<span class="lineNum">    1201 </span><span class="lineNoCov">          0 :                         do_unlink(descr, player, arg1);</span>
+<span class="lineNum">    1198 </span><span class="lineCov">          2 :                     } else if (string_prefix(command, &quot;@unli&quot;)) {</span>
+<span class="lineNum">    1199 </span><span class="lineCov">          2 :                         Matched(&quot;@unlink&quot;);</span>
+<span class="lineNum">    1200 </span><span class="lineCov">          2 :                         NOGUEST(&quot;@unlink&quot;, player);</span>
+<span class="lineNum">    1201 </span><span class="lineCov">          2 :                         do_unlink(descr, player, arg1);</span>
 <span class="lineNum">    1202 </span><span class="lineNoCov">          0 :                     } else if (string_prefix(command, &quot;@unlo&quot;)) {</span>
 <span class="lineNum">    1203 </span><span class="lineNoCov">          0 :                         Matched(&quot;@unlock&quot;);</span>
 <span class="lineNum">    1204 </span><span class="lineNoCov">          0 :                         NOGUEST(&quot;@unlock&quot;, player);</span>
@@ -1273,7 +1273,7 @@
 <span class="lineNum">    1211 </span>            :                     } else {
 <span class="lineNum">    1212 </span><span class="lineNoCov">          0 :                         goto bad;</span>
 <span class="lineNum">    1213 </span>            :                     }
-<span class="lineNum">    1214 </span><span class="lineNoCov">          0 :                     break;</span>
+<span class="lineNum">    1214 </span><span class="lineCov">          2 :                     break;</span>
 <span class="lineNum">    1215 </span>            : #ifndef NO_USAGE_COMMAND
 <span class="lineNum">    1216 </span>            :                 case 'S':
 <span class="lineNum">    1217 </span>            :                 case 's':
@@ -1285,7 +1285,7 @@
 <span class="lineNum">    1223 </span>            :                 default:
 <span class="lineNum">    1224 </span><span class="lineNoCov">          0 :                     goto bad;</span>
 <span class="lineNum">    1225 </span>            :                 }
-<span class="lineNum">    1226 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">    1226 </span><span class="lineCov">          2 :                 break;</span>
 <span class="lineNum">    1227 </span>            :             case 'v':
 <span class="lineNum">    1228 </span>            :             case 'V':
 <span class="lineNum">    1229 </span>            :                 /* @version */
@@ -1304,7 +1304,7 @@
 <span class="lineNum">    1242 </span>            :             default:
 <span class="lineNum">    1243 </span><span class="lineNoCov">          0 :                 goto bad;</span>
 <span class="lineNum">    1244 </span>            :             }
-<span class="lineNum">    1245 </span><span class="lineCov">        363 :             break;</span>
+<span class="lineNum">    1245 </span><span class="lineCov">        401 :             break;</span>
 <span class="lineNum">    1246 </span>            :         case 'd':
 <span class="lineNum">    1247 </span>            :         case 'D':
 <span class="lineNum">    1248 </span>            :             /* disembark, drop */
@@ -1326,9 +1326,9 @@
 <span class="lineNum">    1264 </span>            :         case 'e':
 <span class="lineNum">    1265 </span>            :         case 'E':
 <span class="lineNum">    1266 </span>            :             /* examine */
-<span class="lineNum">    1267 </span><span class="lineCov">         24 :             Matched(&quot;examine&quot;);</span>
-<span class="lineNum">    1268 </span><span class="lineCov">         24 :             do_examine(descr, player, arg1, arg2);</span>
-<span class="lineNum">    1269 </span><span class="lineCov">         24 :             break;</span>
+<span class="lineNum">    1267 </span><span class="lineCov">         37 :             Matched(&quot;examine&quot;);</span>
+<span class="lineNum">    1268 </span><span class="lineCov">         37 :             do_examine(descr, player, arg1, arg2);</span>
+<span class="lineNum">    1269 </span><span class="lineCov">         37 :             break;</span>
 <span class="lineNum">    1270 </span>            :         case 'g':
 <span class="lineNum">    1271 </span>            :         case 'G':
 <span class="lineNum">    1272 </span>            :             /* get, give, goto, gripe */
@@ -1524,16 +1524,16 @@
 <span class="lineNum">    1462 </span>            :     }
 <span class="lineNum">    1463 </span>            : 
 <span class="lineNum">    1464 </span>            :     /* calculate time command took. */
-<span class="lineNum">    1465 </span><span class="lineCov">        420 :     gettimeofday(&amp;endtime, NULL);</span>
-<span class="lineNum">    1466 </span><span class="lineCov">        420 :     if (starttime.tv_usec &gt; endtime.tv_usec) {</span>
+<span class="lineNum">    1465 </span><span class="lineCov">        471 :     gettimeofday(&amp;endtime, NULL);</span>
+<span class="lineNum">    1466 </span><span class="lineCov">        471 :     if (starttime.tv_usec &gt; endtime.tv_usec) {</span>
 <span class="lineNum">    1467 </span><span class="lineCov">          3 :         endtime.tv_usec += 1000000;</span>
 <span class="lineNum">    1468 </span><span class="lineCov">          3 :         endtime.tv_sec -= 1;</span>
 <span class="lineNum">    1469 </span>            :     }
-<span class="lineNum">    1470 </span><span class="lineCov">        420 :     endtime.tv_usec -= starttime.tv_usec;</span>
-<span class="lineNum">    1471 </span><span class="lineCov">        420 :     endtime.tv_sec -= starttime.tv_sec;</span>
+<span class="lineNum">    1470 </span><span class="lineCov">        471 :     endtime.tv_usec -= starttime.tv_usec;</span>
+<span class="lineNum">    1471 </span><span class="lineCov">        471 :     endtime.tv_sec -= starttime.tv_sec;</span>
 <span class="lineNum">    1472 </span>            : 
-<span class="lineNum">    1473 </span><span class="lineCov">        420 :     totaltime = endtime.tv_sec + (endtime.tv_usec * 1.0e-6);</span>
-<span class="lineNum">    1474 </span><span class="lineCov">        420 :     if (totaltime &gt; (tp_cmd_log_threshold_msec / 1000.0)) {</span>
+<span class="lineNum">    1473 </span><span class="lineCov">        471 :     totaltime = endtime.tv_sec + (endtime.tv_usec * 1.0e-6);</span>
+<span class="lineNum">    1474 </span><span class="lineCov">        471 :     if (totaltime &gt; (tp_cmd_log_threshold_msec / 1000.0)) {</span>
 <span class="lineNum">    1475 </span>            :         char tbuf[24];
 <span class="lineNum">    1476 </span><span class="lineNoCov">          0 :         time_t st = (time_t)starttime.tv_sec;</span>
 <span class="lineNum">    1477 </span><span class="lineNoCov">          0 :         format_time(tbuf, sizeof(tbuf), &quot;%Y-%m-%dT%H:%M:%S&quot;, MUCK_LOCALTIME(st));</span>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 13:46:11</td>
+            <td class="headerValue">2017-02-26 13:57:15</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">8</td>
@@ -100,20 +100,20 @@
 <span class="lineNum">      38 </span><span class="lineNoCov">          0 : }</span>
 <a name="39"><span class="lineNum">      39 </span>            : </a>
 <span class="lineNum">      40 </span>            : static void
-<span class="lineNum">      41 </span><span class="lineCov">        192 : SanPrint(dbref player, const char *format, ...)</span>
+<span class="lineNum">      41 </span><span class="lineCov">        228 : SanPrint(dbref player, const char *format, ...)</span>
 <span class="lineNum">      42 </span>            : {
 <span class="lineNum">      43 </span>            :     va_list args;
 <span class="lineNum">      44 </span>            :     char buf[16384];
 <span class="lineNum">      45 </span>            :     static int san_linesprinted = 0;
 <span class="lineNum">      46 </span>            : 
-<span class="lineNum">      47 </span><span class="lineCov">        192 :     va_start(args, format);</span>
+<span class="lineNum">      47 </span><span class="lineCov">        228 :     va_start(args, format);</span>
 <span class="lineNum">      48 </span>            : 
-<span class="lineNum">      49 </span><span class="lineCov">        192 :     vsnprintf(buf, sizeof(buf), format, args);</span>
-<span class="lineNum">      50 </span><span class="lineCov">        192 :     if (player == NOTHING) {</span>
+<span class="lineNum">      49 </span><span class="lineCov">        228 :     vsnprintf(buf, sizeof(buf), format, args);</span>
+<span class="lineNum">      50 </span><span class="lineCov">        228 :     if (player == NOTHING) {</span>
 <span class="lineNum">      51 </span><span class="lineNoCov">          0 :         fprintf(stdout, &quot;%s\n&quot;, buf);</span>
 <span class="lineNum">      52 </span><span class="lineNoCov">          0 :         fflush(stdout);</span>
-<span class="lineNum">      53 </span><span class="lineCov">        192 :     } else if (player == AMBIGUOUS) {</span>
-<span class="lineNum">      54 </span><span class="lineCov">        192 :         fprintf(stderr, &quot;%s\n&quot;, buf);</span>
+<span class="lineNum">      53 </span><span class="lineCov">        228 :     } else if (player == AMBIGUOUS) {</span>
+<span class="lineNum">      54 </span><span class="lineCov">        228 :         fprintf(stderr, &quot;%s\n&quot;, buf);</span>
 <span class="lineNum">      55 </span>            :     } else {
 <span class="lineNum">      56 </span><span class="lineNoCov">          0 :         notify_nolisten(player, buf, 1);</span>
 <span class="lineNum">      57 </span><span class="lineNoCov">          0 :         if (san_linesprinted++ &gt; 100) {</span>
@@ -122,8 +122,8 @@
 <span class="lineNum">      60 </span>            :         }
 <span class="lineNum">      61 </span>            :     }
 <span class="lineNum">      62 </span>            : 
-<span class="lineNum">      63 </span><span class="lineCov">        192 :     va_end(args);</span>
-<span class="lineNum">      64 </span><span class="lineCov">        192 : }</span>
+<span class="lineNum">      63 </span><span class="lineCov">        228 :     va_end(args);</span>
+<span class="lineNum">      64 </span><span class="lineCov">        228 : }</span>
 <a name="65"><span class="lineNum">      65 </span>            : </a>
 <span class="lineNum">      66 </span>            : static void
 <span class="lineNum">      67 </span><span class="lineNoCov">          0 : SanPrintObject(dbref player, const char *prefix, dbref ref)</span>
@@ -242,21 +242,21 @@
 <span class="lineNum">     180 </span>            : }
 <a name="181"><span class="lineNum">     181 </span>            : </a>
 <span class="lineNum">     182 </span>            : static void
-<span class="lineNum">     183 </span><span class="lineCov">         64 : find_orphan_objects(dbref player)</span>
+<span class="lineNum">     183 </span><span class="lineCov">         76 : find_orphan_objects(dbref player)</span>
 <span class="lineNum">     184 </span>            : {
-<span class="lineNum">     185 </span><span class="lineCov">         64 :     SanPrint(player, &quot;Searching for orphan objects...&quot;);</span>
+<span class="lineNum">     185 </span><span class="lineCov">         76 :     SanPrint(player, &quot;Searching for orphan objects...&quot;);</span>
 <span class="lineNum">     186 </span>            : 
-<span class="lineNum">     187 </span><span class="lineCov">        192 :     for (dbref i = 0; i &lt; db_top; i++) {</span>
-<span class="lineNum">     188 </span><span class="lineCov">        128 :         FLAGS(i) &amp;= ~SANEBIT;</span>
+<span class="lineNum">     187 </span><span class="lineCov">        228 :     for (dbref i = 0; i &lt; db_top; i++) {</span>
+<span class="lineNum">     188 </span><span class="lineCov">        152 :         FLAGS(i) &amp;= ~SANEBIT;</span>
 <span class="lineNum">     189 </span>            :     }
 <span class="lineNum">     190 </span>            : 
-<span class="lineNum">     191 </span><span class="lineCov">         64 :     if (recyclable != NOTHING) {</span>
+<span class="lineNum">     191 </span><span class="lineCov">         76 :     if (recyclable != NOTHING) {</span>
 <span class="lineNum">     192 </span><span class="lineNoCov">          0 :         FLAGS(recyclable) |= SANEBIT;</span>
 <span class="lineNum">     193 </span>            :     }
-<span class="lineNum">     194 </span><span class="lineCov">         64 :     FLAGS(GLOBAL_ENVIRONMENT) |= SANEBIT;</span>
+<span class="lineNum">     194 </span><span class="lineCov">         76 :     FLAGS(GLOBAL_ENVIRONMENT) |= SANEBIT;</span>
 <span class="lineNum">     195 </span>            : 
-<span class="lineNum">     196 </span><span class="lineCov">        192 :     for (dbref i = 0; i &lt; db_top; i++) {</span>
-<span class="lineNum">     197 </span><span class="lineCov">        128 :         if (EXITS(i) != NOTHING) {</span>
+<span class="lineNum">     196 </span><span class="lineCov">        228 :     for (dbref i = 0; i &lt; db_top; i++) {</span>
+<span class="lineNum">     197 </span><span class="lineCov">        152 :         if (EXITS(i) != NOTHING) {</span>
 <span class="lineNum">     198 </span><span class="lineNoCov">          0 :             if (FLAGS(EXITS(i)) &amp; SANEBIT) {</span>
 <span class="lineNum">     199 </span><span class="lineNoCov">          0 :                 violate(player, EXITS(i),</span>
 <span class="lineNum">     200 </span>            :                         &quot;is referred to by more than one object's Next, Contents, or Exits field&quot;);
@@ -264,15 +264,15 @@
 <span class="lineNum">     202 </span><span class="lineNoCov">          0 :                 FLAGS(EXITS(i)) |= SANEBIT;</span>
 <span class="lineNum">     203 </span>            :             }
 <span class="lineNum">     204 </span>            :         }
-<span class="lineNum">     205 </span><span class="lineCov">        128 :         if (CONTENTS(i) != NOTHING) {</span>
-<span class="lineNum">     206 </span><span class="lineCov">         64 :             if (FLAGS(CONTENTS(i)) &amp; SANEBIT) {</span>
+<span class="lineNum">     205 </span><span class="lineCov">        152 :         if (CONTENTS(i) != NOTHING) {</span>
+<span class="lineNum">     206 </span><span class="lineCov">         76 :             if (FLAGS(CONTENTS(i)) &amp; SANEBIT) {</span>
 <span class="lineNum">     207 </span><span class="lineNoCov">          0 :                 violate(player, CONTENTS(i),</span>
 <span class="lineNum">     208 </span>            :                         &quot;is referred to by more than one object's Next, Contents, or Exits field&quot;);
 <span class="lineNum">     209 </span>            :             } else {
-<span class="lineNum">     210 </span><span class="lineCov">         64 :                 FLAGS(CONTENTS(i)) |= SANEBIT;</span>
+<span class="lineNum">     210 </span><span class="lineCov">         76 :                 FLAGS(CONTENTS(i)) |= SANEBIT;</span>
 <span class="lineNum">     211 </span>            :             }
 <span class="lineNum">     212 </span>            :         }
-<span class="lineNum">     213 </span><span class="lineCov">        128 :         if (NEXTOBJ(i) != NOTHING) {</span>
+<span class="lineNum">     213 </span><span class="lineCov">        152 :         if (NEXTOBJ(i) != NOTHING) {</span>
 <span class="lineNum">     214 </span><span class="lineNoCov">          0 :             if (FLAGS(NEXTOBJ(i)) &amp; SANEBIT) {</span>
 <span class="lineNum">     215 </span><span class="lineNoCov">          0 :                 violate(player, NEXTOBJ(i),</span>
 <span class="lineNum">     216 </span>            :                         &quot;is referred to by more than one object's Next, Contents, or Exits field&quot;);
@@ -282,31 +282,31 @@
 <span class="lineNum">     220 </span>            :         }
 <span class="lineNum">     221 </span>            :     }
 <span class="lineNum">     222 </span>            : 
-<span class="lineNum">     223 </span><span class="lineCov">        192 :     for (dbref i = 0; i &lt; db_top; i++) {</span>
-<span class="lineNum">     224 </span><span class="lineCov">        128 :         if (!(FLAGS(i) &amp; SANEBIT)) {</span>
+<span class="lineNum">     223 </span><span class="lineCov">        228 :     for (dbref i = 0; i &lt; db_top; i++) {</span>
+<span class="lineNum">     224 </span><span class="lineCov">        152 :         if (!(FLAGS(i) &amp; SANEBIT)) {</span>
 <span class="lineNum">     225 </span><span class="lineNoCov">          0 :             violate(player, i,</span>
 <span class="lineNum">     226 </span>            :                     &quot;appears to be an orphan object, that is not referred to by any other object&quot;);
 <span class="lineNum">     227 </span>            :         }
 <span class="lineNum">     228 </span>            :     }
 <span class="lineNum">     229 </span>            : 
-<span class="lineNum">     230 </span><span class="lineCov">        192 :     for (dbref i = 0; i &lt; db_top; i++) {</span>
-<span class="lineNum">     231 </span><span class="lineCov">        128 :         FLAGS(i) &amp;= ~SANEBIT;</span>
+<span class="lineNum">     230 </span><span class="lineCov">        228 :     for (dbref i = 0; i &lt; db_top; i++) {</span>
+<span class="lineNum">     231 </span><span class="lineCov">        152 :         FLAGS(i) &amp;= ~SANEBIT;</span>
 <span class="lineNum">     232 </span>            :     }
-<span class="lineNum">     233 </span><span class="lineCov">         64 : }</span>
+<span class="lineNum">     233 </span><span class="lineCov">         76 : }</span>
 <a name="234"><span class="lineNum">     234 </span>            : </a>
 <span class="lineNum">     235 </span>            : static void
-<span class="lineNum">     236 </span><span class="lineCov">         64 : check_room(dbref player, dbref obj)</span>
+<span class="lineNum">     236 </span><span class="lineCov">         76 : check_room(dbref player, dbref obj)</span>
 <span class="lineNum">     237 </span>            : {
 <span class="lineNum">     238 </span>            :     dbref i;
 <span class="lineNum">     239 </span>            : 
-<span class="lineNum">     240 </span><span class="lineCov">         64 :     i = DBFETCH(obj)-&gt;sp.room.dropto;</span>
+<span class="lineNum">     240 </span><span class="lineCov">         76 :     i = DBFETCH(obj)-&gt;sp.room.dropto;</span>
 <span class="lineNum">     241 </span>            : 
-<span class="lineNum">     242 </span><span class="lineCov">         64 :     if (!OkRef(i) &amp;&amp; i != HOME) {</span>
+<span class="lineNum">     242 </span><span class="lineCov">         76 :     if (!OkRef(i) &amp;&amp; i != HOME) {</span>
 <span class="lineNum">     243 </span><span class="lineNoCov">          0 :         violate(player, obj, &quot;has its dropto set to an invalid object&quot;);</span>
-<span class="lineNum">     244 </span><span class="lineCov">         64 :     } else if (i &gt;= 0 &amp;&amp; Typeof(i) != TYPE_THING &amp;&amp; Typeof(i) != TYPE_ROOM) {</span>
+<span class="lineNum">     244 </span><span class="lineCov">         76 :     } else if (i &gt;= 0 &amp;&amp; Typeof(i) != TYPE_THING &amp;&amp; Typeof(i) != TYPE_ROOM) {</span>
 <span class="lineNum">     245 </span><span class="lineNoCov">          0 :         violate(player, obj, &quot;has its dropto set to a non-room, non-thing object&quot;);</span>
 <span class="lineNum">     246 </span>            :     }
-<span class="lineNum">     247 </span><span class="lineCov">         64 : }</span>
+<span class="lineNum">     247 </span><span class="lineCov">         76 : }</span>
 <a name="248"><span class="lineNum">     248 </span>            : </a>
 <span class="lineNum">     249 </span>            : static void
 <span class="lineNum">     250 </span><span class="lineNoCov">          0 : check_thing(dbref player, dbref obj)</span>
@@ -338,18 +338,18 @@
 <span class="lineNum">     276 </span><span class="lineNoCov">          0 : }</span>
 <a name="277"><span class="lineNum">     277 </span>            : </a>
 <span class="lineNum">     278 </span>            : static void
-<span class="lineNum">     279 </span><span class="lineCov">         64 : check_player(dbref player, dbref obj)</span>
+<span class="lineNum">     279 </span><span class="lineCov">         76 : check_player(dbref player, dbref obj)</span>
 <span class="lineNum">     280 </span>            : {
 <span class="lineNum">     281 </span>            :     dbref i;
 <span class="lineNum">     282 </span>            : 
-<span class="lineNum">     283 </span><span class="lineCov">         64 :     i = PLAYER_HOME(obj);</span>
+<span class="lineNum">     283 </span><span class="lineCov">         76 :     i = PLAYER_HOME(obj);</span>
 <span class="lineNum">     284 </span>            : 
-<span class="lineNum">     285 </span><span class="lineCov">         64 :     if (!OkObj(i)) {</span>
+<span class="lineNum">     285 </span><span class="lineCov">         76 :     if (!OkObj(i)) {</span>
 <span class="lineNum">     286 </span><span class="lineNoCov">          0 :         violate(player, obj, &quot;has its home set to an invalid object&quot;);</span>
-<span class="lineNum">     287 </span><span class="lineCov">         64 :     } else if (i &gt;= 0 &amp;&amp; Typeof(i) != TYPE_ROOM) {</span>
+<span class="lineNum">     287 </span><span class="lineCov">         76 :     } else if (i &gt;= 0 &amp;&amp; Typeof(i) != TYPE_ROOM) {</span>
 <span class="lineNum">     288 </span><span class="lineNoCov">          0 :         violate(player, obj, &quot;has its home set to a non-room object&quot;);</span>
 <span class="lineNum">     289 </span>            :     }
-<span class="lineNum">     290 </span><span class="lineCov">         64 : }</span>
+<span class="lineNum">     290 </span><span class="lineCov">         76 : }</span>
 <a name="291"><span class="lineNum">     291 </span>            : </a>
 <span class="lineNum">     292 </span>            : static void
 <span class="lineNum">     293 </span><span class="lineNoCov">          0 : check_garbage(dbref player, dbref obj)</span>
@@ -361,16 +361,16 @@
 <span class="lineNum">     299 </span><span class="lineNoCov">          0 : }</span>
 <a name="300"><span class="lineNum">     300 </span>            : </a>
 <span class="lineNum">     301 </span>            : static void
-<span class="lineNum">     302 </span><span class="lineCov">        128 : check_contents_list(dbref player, dbref obj)</span>
+<span class="lineNum">     302 </span><span class="lineCov">        152 : check_contents_list(dbref player, dbref obj)</span>
 <span class="lineNum">     303 </span>            : {
 <span class="lineNum">     304 </span>            :     dbref i;
 <span class="lineNum">     305 </span>            :     int limit;
 <span class="lineNum">     306 </span>            : 
-<span class="lineNum">     307 </span><span class="lineCov">        128 :     if (Typeof(obj) != TYPE_PROGRAM &amp;&amp; Typeof(obj) != TYPE_EXIT &amp;&amp; Typeof(obj) != TYPE_GARBAGE) {</span>
-<span class="lineNum">     308 </span><span class="lineCov">        320 :         for (i = CONTENTS(obj), limit = db_top;</span>
-<span class="lineNum">     309 </span><span class="lineCov">         64 :              OkObj(i) &amp;&amp;</span>
-<span class="lineNum">     310 </span><span class="lineCov">        128 :              --limit &amp;&amp; LOCATION(i) == obj &amp;&amp; Typeof(i) != TYPE_EXIT; i = NEXTOBJ(i)) ;</span>
-<span class="lineNum">     311 </span><span class="lineCov">        256 :         if (i != NOTHING) {</span>
+<span class="lineNum">     307 </span><span class="lineCov">        152 :     if (Typeof(obj) != TYPE_PROGRAM &amp;&amp; Typeof(obj) != TYPE_EXIT &amp;&amp; Typeof(obj) != TYPE_GARBAGE) {</span>
+<span class="lineNum">     308 </span><span class="lineCov">        380 :         for (i = CONTENTS(obj), limit = db_top;</span>
+<span class="lineNum">     309 </span><span class="lineCov">         76 :              OkObj(i) &amp;&amp;</span>
+<span class="lineNum">     310 </span><span class="lineCov">        152 :              --limit &amp;&amp; LOCATION(i) == obj &amp;&amp; Typeof(i) != TYPE_EXIT; i = NEXTOBJ(i)) ;</span>
+<span class="lineNum">     311 </span><span class="lineCov">        304 :         if (i != NOTHING) {</span>
 <span class="lineNum">     312 </span><span class="lineNoCov">          0 :             if (!limit) {</span>
 <span class="lineNum">     313 </span><span class="lineNoCov">          0 :                 check_next_chain(player, CONTENTS(obj));</span>
 <span class="lineNum">     314 </span><span class="lineNoCov">          0 :                 violate(player, obj,</span>
@@ -401,19 +401,19 @@
 <span class="lineNum">     339 </span>            :             }
 <span class="lineNum">     340 </span>            :         }
 <span class="lineNum">     341 </span>            :     }
-<span class="lineNum">     342 </span><span class="lineCov">        128 : }</span>
+<span class="lineNum">     342 </span><span class="lineCov">        152 : }</span>
 <a name="343"><span class="lineNum">     343 </span>            : </a>
 <span class="lineNum">     344 </span>            : static void
-<span class="lineNum">     345 </span><span class="lineCov">        128 : check_exits_list(dbref player, dbref obj)</span>
+<span class="lineNum">     345 </span><span class="lineCov">        152 : check_exits_list(dbref player, dbref obj)</span>
 <span class="lineNum">     346 </span>            : {
 <span class="lineNum">     347 </span>            :     dbref i;
 <span class="lineNum">     348 </span>            :     int limit;
 <span class="lineNum">     349 </span>            : 
-<span class="lineNum">     350 </span><span class="lineCov">        128 :     if (Typeof(obj) != TYPE_PROGRAM &amp;&amp; Typeof(obj) != TYPE_EXIT &amp;&amp; Typeof(obj) != TYPE_GARBAGE) {</span>
-<span class="lineNum">     351 </span><span class="lineCov">        256 :         for (i = EXITS(obj), limit = db_top;</span>
+<span class="lineNum">     350 </span><span class="lineCov">        152 :     if (Typeof(obj) != TYPE_PROGRAM &amp;&amp; Typeof(obj) != TYPE_EXIT &amp;&amp; Typeof(obj) != TYPE_GARBAGE) {</span>
+<span class="lineNum">     351 </span><span class="lineCov">        304 :         for (i = EXITS(obj), limit = db_top;</span>
 <span class="lineNum">     352 </span><span class="lineNoCov">          0 :              OkObj(i) &amp;&amp;</span>
 <span class="lineNum">     353 </span><span class="lineNoCov">          0 :              --limit &amp;&amp; LOCATION(i) == obj &amp;&amp; Typeof(i) == TYPE_EXIT; i = NEXTOBJ(i)) ;</span>
-<span class="lineNum">     354 </span><span class="lineCov">        256 :         if (i != NOTHING) {</span>
+<span class="lineNum">     354 </span><span class="lineCov">        304 :         if (i != NOTHING) {</span>
 <span class="lineNum">     355 </span><span class="lineNoCov">          0 :             if (!limit) {</span>
 <span class="lineNum">     356 </span><span class="lineNoCov">          0 :                 check_next_chain(player, CONTENTS(obj));</span>
 <span class="lineNum">     357 </span><span class="lineNoCov">          0 :                 violate(player, obj,</span>
@@ -441,56 +441,56 @@
 <span class="lineNum">     379 </span>            :             }
 <span class="lineNum">     380 </span>            :         }
 <span class="lineNum">     381 </span>            :     }
-<span class="lineNum">     382 </span><span class="lineCov">        128 : }</span>
+<span class="lineNum">     382 </span><span class="lineCov">        152 : }</span>
 <a name="383"><span class="lineNum">     383 </span>            : </a>
 <span class="lineNum">     384 </span>            : static void
-<span class="lineNum">     385 </span><span class="lineCov">        128 : check_object(dbref player, dbref obj)</span>
+<span class="lineNum">     385 </span><span class="lineCov">        152 : check_object(dbref player, dbref obj)</span>
 <span class="lineNum">     386 </span>            : {
 <span class="lineNum">     387 </span>            :     /*
 <span class="lineNum">     388 </span>            :      * Do we have a name?
 <span class="lineNum">     389 </span>            :      */
-<span class="lineNum">     390 </span><span class="lineCov">        128 :     if (!NAME(obj))</span>
+<span class="lineNum">     390 </span><span class="lineCov">        152 :     if (!NAME(obj))</span>
 <span class="lineNum">     391 </span><span class="lineNoCov">          0 :         violate(player, obj, &quot;doesn't have a name&quot;);</span>
 <span class="lineNum">     392 </span>            : 
 <span class="lineNum">     393 </span>            :     /*
 <span class="lineNum">     394 </span>            :      * Check the ownership
 <span class="lineNum">     395 </span>            :      */
-<span class="lineNum">     396 </span><span class="lineCov">        128 :     if (Typeof(obj) != TYPE_GARBAGE) {</span>
-<span class="lineNum">     397 </span><span class="lineCov">        128 :         if (!OkObj(OWNER(obj))) {</span>
+<span class="lineNum">     396 </span><span class="lineCov">        152 :     if (Typeof(obj) != TYPE_GARBAGE) {</span>
+<span class="lineNum">     397 </span><span class="lineCov">        152 :         if (!OkObj(OWNER(obj))) {</span>
 <span class="lineNum">     398 </span><span class="lineNoCov">          0 :             violate(player, obj, &quot;has an invalid object as its owner.&quot;);</span>
-<span class="lineNum">     399 </span><span class="lineCov">        128 :         } else if (Typeof(OWNER(obj)) != TYPE_PLAYER) {</span>
+<span class="lineNum">     399 </span><span class="lineCov">        152 :         } else if (Typeof(OWNER(obj)) != TYPE_PLAYER) {</span>
 <span class="lineNum">     400 </span><span class="lineNoCov">          0 :             violate(player, obj, &quot;has a non-player object as its owner.&quot;);</span>
 <span class="lineNum">     401 </span>            :         }
 <span class="lineNum">     402 </span>            : 
 <span class="lineNum">     403 </span>            :         /* 
 <span class="lineNum">     404 </span>            :          * check location 
 <span class="lineNum">     405 </span>            :          */
-<span class="lineNum">     406 </span><span class="lineCov">        128 :         if (!OkObj(LOCATION(obj)) &amp;&amp; !(obj == GLOBAL_ENVIRONMENT &amp;&amp; LOCATION(obj) == NOTHING)) {</span>
+<span class="lineNum">     406 </span><span class="lineCov">        152 :         if (!OkObj(LOCATION(obj)) &amp;&amp; !(obj == GLOBAL_ENVIRONMENT &amp;&amp; LOCATION(obj) == NOTHING)) {</span>
 <span class="lineNum">     407 </span><span class="lineNoCov">          0 :             violate(player, obj, &quot;has an invalid object as it's location&quot;);</span>
 <span class="lineNum">     408 </span>            :         }
 <span class="lineNum">     409 </span>            :     }
 <span class="lineNum">     410 </span>            : 
-<span class="lineNum">     411 </span><span class="lineCov">        192 :     if (LOCATION(obj) != NOTHING &amp;&amp;</span>
-<span class="lineNum">     412 </span><span class="lineCov">        192 :         (Typeof(LOCATION(obj)) == TYPE_GARBAGE ||</span>
-<span class="lineNum">     413 </span><span class="lineCov">        128 :          Typeof(LOCATION(obj)) == TYPE_EXIT || Typeof(LOCATION(obj)) == TYPE_PROGRAM))</span>
+<span class="lineNum">     411 </span><span class="lineCov">        228 :     if (LOCATION(obj) != NOTHING &amp;&amp;</span>
+<span class="lineNum">     412 </span><span class="lineCov">        228 :         (Typeof(LOCATION(obj)) == TYPE_GARBAGE ||</span>
+<span class="lineNum">     413 </span><span class="lineCov">        152 :          Typeof(LOCATION(obj)) == TYPE_EXIT || Typeof(LOCATION(obj)) == TYPE_PROGRAM))</span>
 <span class="lineNum">     414 </span><span class="lineNoCov">          0 :         violate(player, obj, &quot;thinks it is located in a non-container object&quot;);</span>
 <span class="lineNum">     415 </span>            : 
-<span class="lineNum">     416 </span><span class="lineCov">        128 :     if ((Typeof(obj) == TYPE_GARBAGE) &amp;&amp; (LOCATION(obj) != NOTHING))</span>
+<span class="lineNum">     416 </span><span class="lineCov">        152 :     if ((Typeof(obj) == TYPE_GARBAGE) &amp;&amp; (LOCATION(obj) != NOTHING))</span>
 <span class="lineNum">     417 </span><span class="lineNoCov">          0 :         violate(player, obj, &quot;is a garbage object with a location that isn't #-1&quot;);</span>
 <span class="lineNum">     418 </span>            : 
-<span class="lineNum">     419 </span><span class="lineCov">        128 :     check_contents_list(player, obj);</span>
-<span class="lineNum">     420 </span><span class="lineCov">        128 :     check_exits_list(player, obj);</span>
+<span class="lineNum">     419 </span><span class="lineCov">        152 :     check_contents_list(player, obj);</span>
+<span class="lineNum">     420 </span><span class="lineCov">        152 :     check_exits_list(player, obj);</span>
 <span class="lineNum">     421 </span>            : 
-<span class="lineNum">     422 </span><span class="lineCov">        128 :     switch (Typeof(obj)) {</span>
+<span class="lineNum">     422 </span><span class="lineCov">        152 :     switch (Typeof(obj)) {</span>
 <span class="lineNum">     423 </span>            :     case TYPE_ROOM:
-<span class="lineNum">     424 </span><span class="lineCov">         64 :         check_room(player, obj);</span>
-<span class="lineNum">     425 </span><span class="lineCov">         64 :         break;</span>
+<span class="lineNum">     424 </span><span class="lineCov">         76 :         check_room(player, obj);</span>
+<span class="lineNum">     425 </span><span class="lineCov">         76 :         break;</span>
 <span class="lineNum">     426 </span>            :     case TYPE_THING:
 <span class="lineNum">     427 </span><span class="lineNoCov">          0 :         check_thing(player, obj);</span>
 <span class="lineNum">     428 </span><span class="lineNoCov">          0 :         break;</span>
 <span class="lineNum">     429 </span>            :     case TYPE_PLAYER:
-<span class="lineNum">     430 </span><span class="lineCov">         64 :         check_player(player, obj);</span>
-<span class="lineNum">     431 </span><span class="lineCov">         64 :         break;</span>
+<span class="lineNum">     430 </span><span class="lineCov">         76 :         check_player(player, obj);</span>
+<span class="lineNum">     431 </span><span class="lineCov">         76 :         break;</span>
 <span class="lineNum">     432 </span>            :     case TYPE_EXIT:
 <span class="lineNum">     433 </span><span class="lineNoCov">          0 :         check_exit(player, obj);</span>
 <span class="lineNum">     434 </span><span class="lineNoCov">          0 :         break;</span>
@@ -503,32 +503,32 @@
 <span class="lineNum">     441 </span><span class="lineNoCov">          0 :         violate(player, obj, &quot;has an unknown object type, and its flags may also be corrupt&quot;);</span>
 <span class="lineNum">     442 </span><span class="lineNoCov">          0 :         break;</span>
 <span class="lineNum">     443 </span>            :     }
-<span class="lineNum">     444 </span><span class="lineCov">        128 : }</span>
+<span class="lineNum">     444 </span><span class="lineCov">        152 : }</span>
 <a name="445"><span class="lineNum">     445 </span>            : </a>
 <span class="lineNum">     446 </span>            : void
-<span class="lineNum">     447 </span><span class="lineCov">         64 : do_sanity(dbref player)</span>
+<span class="lineNum">     447 </span><span class="lineCov">         76 : do_sanity(dbref player)</span>
 <span class="lineNum">     448 </span>            : {
-<span class="lineNum">     449 </span><span class="lineCov">         64 :     const int increp = 10000;</span>
+<span class="lineNum">     449 </span><span class="lineCov">         76 :     const int increp = 10000;</span>
 <span class="lineNum">     450 </span>            :     int j;
 <span class="lineNum">     451 </span>            : 
-<span class="lineNum">     452 </span><span class="lineCov">         64 :     sanity_violated = 0;</span>
+<span class="lineNum">     452 </span><span class="lineCov">         76 :     sanity_violated = 0;</span>
 <span class="lineNum">     453 </span>            : 
-<span class="lineNum">     454 </span><span class="lineCov">        192 :     for (dbref i = 0; i &lt; db_top; i++) {</span>
-<span class="lineNum">     455 </span><span class="lineCov">        128 :         if (!(i % increp)) {</span>
-<span class="lineNum">     456 </span><span class="lineCov">         64 :             j = i + increp - 1;</span>
-<span class="lineNum">     457 </span><span class="lineCov">         64 :             j = (j &gt;= db_top) ? (db_top - 1) : j;</span>
-<span class="lineNum">     458 </span><span class="lineCov">         64 :             SanPrint(player, &quot;Checking objects %d to %d...&quot;, i, j);</span>
-<span class="lineNum">     459 </span><span class="lineCov">         64 :             if (player &gt;= 0) {</span>
+<span class="lineNum">     454 </span><span class="lineCov">        228 :     for (dbref i = 0; i &lt; db_top; i++) {</span>
+<span class="lineNum">     455 </span><span class="lineCov">        152 :         if (!(i % increp)) {</span>
+<span class="lineNum">     456 </span><span class="lineCov">         76 :             j = i + increp - 1;</span>
+<span class="lineNum">     457 </span><span class="lineCov">         76 :             j = (j &gt;= db_top) ? (db_top - 1) : j;</span>
+<span class="lineNum">     458 </span><span class="lineCov">         76 :             SanPrint(player, &quot;Checking objects %d to %d...&quot;, i, j);</span>
+<span class="lineNum">     459 </span><span class="lineCov">         76 :             if (player &gt;= 0) {</span>
 <span class="lineNum">     460 </span><span class="lineNoCov">          0 :                 flush_user_output(player);</span>
 <span class="lineNum">     461 </span>            :             }
 <span class="lineNum">     462 </span>            :         }
-<span class="lineNum">     463 </span><span class="lineCov">        128 :         check_object(player, i);</span>
+<span class="lineNum">     463 </span><span class="lineCov">        152 :         check_object(player, i);</span>
 <span class="lineNum">     464 </span>            :     }
 <span class="lineNum">     465 </span>            : 
-<span class="lineNum">     466 </span><span class="lineCov">         64 :     find_orphan_objects(player);</span>
+<span class="lineNum">     466 </span><span class="lineCov">         76 :     find_orphan_objects(player);</span>
 <span class="lineNum">     467 </span>            : 
-<span class="lineNum">     468 </span><span class="lineCov">         64 :     SanPrint(player, &quot;Done.&quot;);</span>
-<span class="lineNum">     469 </span><span class="lineCov">         64 : }</span>
+<span class="lineNum">     468 </span><span class="lineCov">         76 :     SanPrint(player, &quot;Done.&quot;);</span>
+<span class="lineNum">     469 </span><span class="lineCov">         76 : }</span>
 <a name="470"><span class="lineNum">     470 </span>            : </a>
 <span class="lineNum">     471 </span>            : static void
 <span class="lineNum">     472 </span><span class="lineNoCov">          0 : san_fixed_log(char *format, int unparse, dbref ref1, dbref ref2)</span>
