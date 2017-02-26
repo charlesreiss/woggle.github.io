@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 13:13:27</td>
+            <td class="headerValue">2017-02-26 13:44:21</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -77,8 +77,8 @@
 <span class="lineNum">      15 </span>            : #include &quot;game.h&quot;
 <span class="lineNum">      16 </span>            : #include &quot;interface.h&quot;
 <span class="lineNum">      17 </span>            : 
-<span class="lineNum">      18 </span>            : #define generation &quot;2&quot;
-<span class="lineNum">      19 </span>            : #define creation &quot;Sun Feb 26 2017 at 12:18:15 EST&quot;
+<span class="lineNum">      18 </span>            : #define generation &quot;4&quot;
+<span class="lineNum">      19 </span>            : #define creation &quot;Sun Feb 26 2017 at 13:41:14 EST&quot;
 <span class="lineNum">      20 </span>            : #define GIT_AVAILABLE
 <span class="lineNum">      21 </span>            : 
 <span class="lineNum">      22 </span>            : typedef struct hash_file_entry {
@@ -101,7 +101,7 @@
 <span class="lineNum">      39 </span>            :     { &quot;create.c&quot;, &quot;7cab187c8312f2ee4401547923daace5c9019871&quot;, &quot;f93f3fa9e47c2b675f821a0f55651317c80bcb22&quot; },
 <span class="lineNum">      40 </span>            :     { &quot;crt_malloc.c&quot;, &quot;c051a35412e37079b1c433b7a31d7eb727fe9ebe&quot;, &quot;6b8cb1855ddb83801e3618ae47fe299413fdc966&quot; },
 <span class="lineNum">      41 </span>            :     { &quot;crt_malloc.h&quot;, &quot;b0f9f570665e7891b6be2598356c7baa03fea00a&quot;, &quot;3040634002814e15cfcc8243918bdabd00bb1958&quot; },
-<span class="lineNum">      42 </span>            :     { &quot;db.c&quot;, &quot;d05024330ca31b3f28884953bb18605b6223e63f&quot;, &quot;90391e7847a5c7f493941efe26881fe29ad4243b&quot; },
+<span class="lineNum">      42 </span>            :     { &quot;db.c&quot;, &quot;7ac2f10c858a7f0b45f4b1daf53ddd4bfe5f4035&quot;, &quot;d209917d27758f8dc071d6cc759fc547ba329506&quot; },
 <span class="lineNum">      43 </span>            :     { &quot;db.h&quot;, &quot;50282100be6ffc965dc11aa5e6415355148c294d&quot;, &quot;4544213f21cb3191b52c8d6b7663714941584117&quot; },
 <span class="lineNum">      44 </span>            :     { &quot;dbsearch.h&quot;, &quot;e49461aac653e4e5e8aa8deec5f19b2a450aca72&quot;, &quot;3ec92573d26ad1065d441493d58b83d1beddceeb&quot; },
 <span class="lineNum">      45 </span>            :     { &quot;debugger.c&quot;, &quot;278a802a7a4ed3c38090e39410198ee1b1341d46&quot;, &quot;27f38a32ad6eca9073ab00fbad3411f9bc8c63c8&quot; },
@@ -214,13 +214,13 @@
 <span class="lineNum">     152 </span><span class="lineNoCov">          0 : }</span>
 <a name="153"><span class="lineNum">     153 </span>            : </a>
 <span class="lineNum">     154 </span>            : void
-<span class="lineNum">     155 </span><span class="lineCov">         11 : do_hashes(dbref player, char *args)</span>
+<span class="lineNum">     155 </span><span class="lineCov">          1 : do_hashes(dbref player, char *args)</span>
 <span class="lineNum">     156 </span>            : {
 <span class="lineNum">     157 </span>            :     hash_file_entry *entry;
-<span class="lineNum">     158 </span><span class="lineCov">         11 :     int b_git = 0, b_sha1 = 0;</span>
+<span class="lineNum">     158 </span><span class="lineCov">          1 :     int b_git = 0, b_sha1 = 0;</span>
 <span class="lineNum">     159 </span>            :     const char *filename;
 <span class="lineNum">     160 </span>            : 
-<span class="lineNum">     161 </span><span class="lineCov">         11 :     if (!args || !*args) {</span>
+<span class="lineNum">     161 </span><span class="lineCov">          1 :     if (!args || !*args) {</span>
 <span class="lineNum">     162 </span>            : #ifdef GIT_AVAILABLE
 <span class="lineNum">     163 </span><span class="lineNoCov">          0 :         notify(player, &quot;usage: @hashes [all|git|sha1]&quot;);</span>
 <span class="lineNum">     164 </span>            : #else
@@ -237,34 +237,34 @@
 <span class="lineNum">     175 </span>            :     }
 <span class="lineNum">     176 </span>            : 
 <span class="lineNum">     177 </span>            :     /* What hashes to display? */
-<span class="lineNum">     178 </span><span class="lineCov">         11 :     if (!strcasecmp(args, &quot;git&quot;)) {</span>
+<span class="lineNum">     178 </span><span class="lineCov">          1 :     if (!strcasecmp(args, &quot;git&quot;)) {</span>
 <span class="lineNum">     179 </span><span class="lineNoCov">          0 :         b_git = 1;</span>
-<span class="lineNum">     180 </span><span class="lineCov">         11 :     } else if (!strcasecmp(args, &quot;sha1&quot;)) {</span>
+<span class="lineNum">     180 </span><span class="lineCov">          1 :     } else if (!strcasecmp(args, &quot;sha1&quot;)) {</span>
 <span class="lineNum">     181 </span><span class="lineNoCov">          0 :         b_sha1 = 1;</span>
 <span class="lineNum">     182 </span>            :     } else {
-<span class="lineNum">     183 </span><span class="lineCov">         11 :         b_sha1 = 1;</span>
+<span class="lineNum">     183 </span><span class="lineCov">          1 :         b_sha1 = 1;</span>
 <span class="lineNum">     184 </span>            : #ifdef GIT_AVAILABLE
-<span class="lineNum">     185 </span><span class="lineCov">         11 :         b_git = 1;</span>
+<span class="lineNum">     185 </span><span class="lineCov">          1 :         b_git = 1;</span>
 <span class="lineNum">     186 </span>            : #endif
 <span class="lineNum">     187 </span>            :     }
 <span class="lineNum">     188 </span>            : 
 <span class="lineNum">     189 </span>            :     /* Header */
-<span class="lineNum">     190 </span><span class="lineCov">         11 :     notify(player, &quot;File            Hash&quot;);</span>
+<span class="lineNum">     190 </span><span class="lineCov">          1 :     notify(player, &quot;File            Hash&quot;);</span>
 <span class="lineNum">     191 </span>            : 
-<span class="lineNum">     192 </span><span class="lineCov">         11 :     entry = hash_file_array;</span>
-<span class="lineNum">     193 </span><span class="lineCov">       1287 :     while (entry &amp;&amp; entry-&gt;filename) {</span>
-<span class="lineNum">     194 </span><span class="lineCov">       1265 :         filename = entry-&gt;filename;</span>
+<span class="lineNum">     192 </span><span class="lineCov">          1 :     entry = hash_file_array;</span>
+<span class="lineNum">     193 </span><span class="lineCov">        117 :     while (entry &amp;&amp; entry-&gt;filename) {</span>
+<span class="lineNum">     194 </span><span class="lineCov">        115 :         filename = entry-&gt;filename;</span>
 <span class="lineNum">     195 </span>            : 
-<span class="lineNum">     196 </span><span class="lineCov">       1265 :         if (b_sha1 &amp;&amp; entry-&gt;sha1hash) {</span>
-<span class="lineNum">     197 </span><span class="lineCov">       1265 :             notifyf(player, &quot;%-15s %s (sha1)&quot;, filename, entry-&gt;sha1hash);</span>
-<span class="lineNum">     198 </span><span class="lineCov">       1265 :             filename = &quot;&quot;;</span>
+<span class="lineNum">     196 </span><span class="lineCov">        115 :         if (b_sha1 &amp;&amp; entry-&gt;sha1hash) {</span>
+<span class="lineNum">     197 </span><span class="lineCov">        115 :             notifyf(player, &quot;%-15s %s (sha1)&quot;, filename, entry-&gt;sha1hash);</span>
+<span class="lineNum">     198 </span><span class="lineCov">        115 :             filename = &quot;&quot;;</span>
 <span class="lineNum">     199 </span>            :         }
 <span class="lineNum">     200 </span>            : 
-<span class="lineNum">     201 </span><span class="lineCov">       1265 :         if (b_git &amp;&amp; entry-&gt;githash) {</span>
-<span class="lineNum">     202 </span><span class="lineCov">       1265 :             notifyf(player, &quot;%-15s %s (git)&quot;, filename, entry-&gt;githash);</span>
+<span class="lineNum">     201 </span><span class="lineCov">        115 :         if (b_git &amp;&amp; entry-&gt;githash) {</span>
+<span class="lineNum">     202 </span><span class="lineCov">        115 :             notifyf(player, &quot;%-15s %s (git)&quot;, filename, entry-&gt;githash);</span>
 <span class="lineNum">     203 </span>            :         }
 <span class="lineNum">     204 </span>            : 
-<span class="lineNum">     205 </span><span class="lineCov">       1265 :         entry++;</span>
+<span class="lineNum">     205 </span><span class="lineCov">        115 :         entry++;</span>
 <span class="lineNum">     206 </span>            :     }
 <span class="lineNum">     207 </span>            : }
 </pre>
