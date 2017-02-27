@@ -31,18 +31,18 @@
             <td class="headerValue">coverage-total</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">250</td>
+            <td class="headerCovTableEntry">479</td>
             <td class="headerCovTableEntry">1491</td>
-            <td class="headerCovTableEntryLo">16.8 %</td>
+            <td class="headerCovTableEntryLo">32.1 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 19:01:38</td>
+            <td class="headerValue">2017-02-26 20:18:35</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">17</td>
+            <td class="headerCovTableEntry">27</td>
             <td class="headerCovTableEntry">52</td>
-            <td class="headerCovTableEntryLo">32.7 %</td>
+            <td class="headerCovTableEntryLo">51.9 %</td>
           </tr>
           <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
         </table>
@@ -85,35 +85,35 @@
 <span class="lineNum">      23 </span>            : static char buf[BUFFER_LEN];
 <a name="24"><span class="lineNum">      24 </span>            : </a>
 <span class="lineNum">      25 </span>            : void
-<span class="lineNum">      26 </span><span class="lineCov">         46 : prim_array_make(PRIM_PROTOTYPE)</span>
+<span class="lineNum">      26 </span><span class="lineCov">        222 : prim_array_make(PRIM_PROTOTYPE)</span>
 <span class="lineNum">      27 </span>            : {
 <span class="lineNum">      28 </span>            :     stk_array *nu;
 <span class="lineNum">      29 </span>            : 
-<span class="lineNum">      30 </span><span class="lineCov">         46 :     CHECKOP(1);</span>
-<span class="lineNum">      31 </span><span class="lineCov">         46 :     oper1 = POP();</span>
-<span class="lineNum">      32 </span><span class="lineCov">         46 :     if (oper1-&gt;type != PROG_INTEGER)</span>
+<span class="lineNum">      30 </span><span class="lineCov">        222 :     CHECKOP(1);</span>
+<span class="lineNum">      31 </span><span class="lineCov">        222 :     oper1 = POP();</span>
+<span class="lineNum">      32 </span><span class="lineCov">        222 :     if (oper1-&gt;type != PROG_INTEGER)</span>
 <span class="lineNum">      33 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Invalid item count.&quot;);</span>
-<span class="lineNum">      34 </span><span class="lineCov">         46 :     result = oper1-&gt;data.number;</span>
-<span class="lineNum">      35 </span><span class="lineCov">         46 :     if (result &lt; 0)</span>
+<span class="lineNum">      34 </span><span class="lineCov">        222 :     result = oper1-&gt;data.number;</span>
+<span class="lineNum">      35 </span><span class="lineCov">        222 :     if (result &lt; 0)</span>
 <span class="lineNum">      36 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Item count must be non-negative.&quot;);</span>
-<span class="lineNum">      37 </span><span class="lineCov">         46 :     CLEAR(oper1);</span>
-<span class="lineNum">      38 </span><span class="lineCov">         46 :     nargs = 0;</span>
+<span class="lineNum">      37 </span><span class="lineCov">        222 :     CLEAR(oper1);</span>
+<span class="lineNum">      38 </span><span class="lineCov">        222 :     nargs = 0;</span>
 <span class="lineNum">      39 </span>            : 
-<span class="lineNum">      40 </span><span class="lineCov">         46 :     if (*top &lt; result)</span>
+<span class="lineNum">      40 </span><span class="lineCov">        222 :     if (*top &lt; result)</span>
 <span class="lineNum">      41 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Stack underflow.&quot;);</span>
 <span class="lineNum">      42 </span>            : 
-<span class="lineNum">      43 </span><span class="lineCov">         46 :     temp1.type = PROG_INTEGER;</span>
-<span class="lineNum">      44 </span><span class="lineCov">         46 :     temp1.line = 0;</span>
-<span class="lineNum">      45 </span><span class="lineCov">         46 :     nu = new_array_packed(result);</span>
-<span class="lineNum">      46 </span><span class="lineCov">        480 :     for (int i = result; i-- &gt; 0;) {</span>
-<span class="lineNum">      47 </span><span class="lineCov">        388 :         temp1.data.number = i;</span>
-<span class="lineNum">      48 </span><span class="lineCov">        388 :         CHECKOP(1);</span>
-<span class="lineNum">      49 </span><span class="lineCov">        388 :         oper1 = POP();</span>
-<span class="lineNum">      50 </span><span class="lineCov">        388 :         array_setitem(&amp;nu, &amp;temp1, oper1);</span>
-<span class="lineNum">      51 </span><span class="lineCov">        388 :         CLEAR(oper1);</span>
+<span class="lineNum">      43 </span><span class="lineCov">        222 :     temp1.type = PROG_INTEGER;</span>
+<span class="lineNum">      44 </span><span class="lineCov">        222 :     temp1.line = 0;</span>
+<span class="lineNum">      45 </span><span class="lineCov">        222 :     nu = new_array_packed(result);</span>
+<span class="lineNum">      46 </span><span class="lineCov">       1847 :     for (int i = result; i-- &gt; 0;) {</span>
+<span class="lineNum">      47 </span><span class="lineCov">       1403 :         temp1.data.number = i;</span>
+<span class="lineNum">      48 </span><span class="lineCov">       1403 :         CHECKOP(1);</span>
+<span class="lineNum">      49 </span><span class="lineCov">       1403 :         oper1 = POP();</span>
+<span class="lineNum">      50 </span><span class="lineCov">       1403 :         array_setitem(&amp;nu, &amp;temp1, oper1);</span>
+<span class="lineNum">      51 </span><span class="lineCov">       1403 :         CLEAR(oper1);</span>
 <span class="lineNum">      52 </span>            :     }
 <span class="lineNum">      53 </span>            : 
-<span class="lineNum">      54 </span><span class="lineCov">         46 :     PushArrayRaw(nu);</span>
+<span class="lineNum">      54 </span><span class="lineCov">        222 :     PushArrayRaw(nu);</span>
 <span class="lineNum">      55 </span>            : }
 <a name="56"><span class="lineNum">      56 </span>            : </a>
 <span class="lineNum">      57 </span>            : void
@@ -152,505 +152,505 @@
 <span class="lineNum">      90 </span>            : }
 <a name="91"><span class="lineNum">      91 </span>            : </a>
 <span class="lineNum">      92 </span>            : void
-<span class="lineNum">      93 </span><span class="lineCov">          4 : prim_array_explode(PRIM_PROTOTYPE)</span>
+<span class="lineNum">      93 </span><span class="lineCov">         10 : prim_array_explode(PRIM_PROTOTYPE)</span>
 <span class="lineNum">      94 </span>            : {
 <span class="lineNum">      95 </span>            :     stk_array *arr;
 <span class="lineNum">      96 </span>            : 
-<span class="lineNum">      97 </span><span class="lineCov">          4 :     CHECKOP(1);</span>
-<span class="lineNum">      98 </span><span class="lineCov">          4 :     oper1 = POP();</span>
-<span class="lineNum">      99 </span><span class="lineCov">          4 :     if (oper1-&gt;type != PROG_ARRAY)</span>
+<span class="lineNum">      97 </span><span class="lineCov">         10 :     CHECKOP(1);</span>
+<span class="lineNum">      98 </span><span class="lineCov">         10 :     oper1 = POP();</span>
+<span class="lineNum">      99 </span><span class="lineCov">         10 :     if (oper1-&gt;type != PROG_ARRAY)</span>
 <span class="lineNum">     100 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an array.&quot;);</span>
 <span class="lineNum">     101 </span>            : 
-<span class="lineNum">     102 </span><span class="lineCov">          4 :     result = array_count(oper1-&gt;data.array);</span>
-<span class="lineNum">     103 </span><span class="lineCov">          4 :     CHECKOFLOW(((2 * result) + 1));</span>
+<span class="lineNum">     102 </span><span class="lineCov">         10 :     result = array_count(oper1-&gt;data.array);</span>
+<span class="lineNum">     103 </span><span class="lineCov">         10 :     CHECKOFLOW(((2 * result) + 1));</span>
 <span class="lineNum">     104 </span>            : 
-<span class="lineNum">     105 </span><span class="lineCov">          4 :     copyinst(oper1, &amp;temp2);</span>
-<span class="lineNum">     106 </span><span class="lineCov">          4 :     arr = temp2.data.array;</span>
-<span class="lineNum">     107 </span><span class="lineCov">          4 :     CLEAR(oper1);</span>
+<span class="lineNum">     105 </span><span class="lineCov">         10 :     copyinst(oper1, &amp;temp2);</span>
+<span class="lineNum">     106 </span><span class="lineCov">         10 :     arr = temp2.data.array;</span>
+<span class="lineNum">     107 </span><span class="lineCov">         10 :     CLEAR(oper1);</span>
 <span class="lineNum">     108 </span>            : 
-<span class="lineNum">     109 </span><span class="lineCov">          4 :     if (array_first(arr, &amp;temp1)) {</span>
+<span class="lineNum">     109 </span><span class="lineCov">         10 :     if (array_first(arr, &amp;temp1)) {</span>
 <span class="lineNum">     110 </span>            :         do {
-<span class="lineNum">     111 </span><span class="lineCov">         24 :             copyinst(&amp;temp1, &amp;arg[((*top)++)]);</span>
-<span class="lineNum">     112 </span><span class="lineCov">         24 :             oper2 = array_getitem(arr, &amp;temp1);</span>
-<span class="lineNum">     113 </span><span class="lineCov">         24 :             copyinst(oper2, &amp;arg[((*top)++)]);</span>
-<span class="lineNum">     114 </span><span class="lineCov">         24 :             oper2 = NULL;</span>
-<span class="lineNum">     115 </span><span class="lineCov">         24 :         } while (array_next(arr, &amp;temp1));</span>
+<span class="lineNum">     111 </span><span class="lineCov">         60 :             copyinst(&amp;temp1, &amp;arg[((*top)++)]);</span>
+<span class="lineNum">     112 </span><span class="lineCov">         60 :             oper2 = array_getitem(arr, &amp;temp1);</span>
+<span class="lineNum">     113 </span><span class="lineCov">         60 :             copyinst(oper2, &amp;arg[((*top)++)]);</span>
+<span class="lineNum">     114 </span><span class="lineCov">         60 :             oper2 = NULL;</span>
+<span class="lineNum">     115 </span><span class="lineCov">         60 :         } while (array_next(arr, &amp;temp1));</span>
 <span class="lineNum">     116 </span>            :     }
 <span class="lineNum">     117 </span>            : 
-<span class="lineNum">     118 </span><span class="lineCov">          4 :     CLEAR(&amp;temp2);</span>
-<span class="lineNum">     119 </span><span class="lineCov">          4 :     PushInt(result);</span>
+<span class="lineNum">     118 </span><span class="lineCov">         10 :     CLEAR(&amp;temp2);</span>
+<span class="lineNum">     119 </span><span class="lineCov">         10 :     PushInt(result);</span>
 <span class="lineNum">     120 </span>            : }
 <a name="121"><span class="lineNum">     121 </span>            : </a>
 <span class="lineNum">     122 </span>            : void
-<span class="lineNum">     123 </span><span class="lineCov">          7 : prim_array_vals(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     123 </span><span class="lineCov">         19 : prim_array_vals(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     124 </span>            : {
 <span class="lineNum">     125 </span>            :     stk_array *arr;
 <span class="lineNum">     126 </span>            : 
-<span class="lineNum">     127 </span><span class="lineCov">          7 :     CHECKOP(1);</span>
-<span class="lineNum">     128 </span><span class="lineCov">          7 :     oper1 = POP();</span>
-<span class="lineNum">     129 </span><span class="lineCov">          7 :     if (oper1-&gt;type != PROG_ARRAY)</span>
+<span class="lineNum">     127 </span><span class="lineCov">         19 :     CHECKOP(1);</span>
+<span class="lineNum">     128 </span><span class="lineCov">         19 :     oper1 = POP();</span>
+<span class="lineNum">     129 </span><span class="lineCov">         19 :     if (oper1-&gt;type != PROG_ARRAY)</span>
 <span class="lineNum">     130 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an array.&quot;);</span>
-<span class="lineNum">     131 </span><span class="lineCov">          7 :     copyinst(oper1, &amp;temp2);</span>
-<span class="lineNum">     132 </span><span class="lineCov">          7 :     arr = temp2.data.array;</span>
-<span class="lineNum">     133 </span><span class="lineCov">          7 :     result = array_count(arr);</span>
-<span class="lineNum">     134 </span><span class="lineCov">          7 :     CHECKOFLOW((result + 1));</span>
-<span class="lineNum">     135 </span><span class="lineCov">          7 :     CLEAR(oper1);</span>
+<span class="lineNum">     131 </span><span class="lineCov">         19 :     copyinst(oper1, &amp;temp2);</span>
+<span class="lineNum">     132 </span><span class="lineCov">         19 :     arr = temp2.data.array;</span>
+<span class="lineNum">     133 </span><span class="lineCov">         19 :     result = array_count(arr);</span>
+<span class="lineNum">     134 </span><span class="lineCov">         19 :     CHECKOFLOW((result + 1));</span>
+<span class="lineNum">     135 </span><span class="lineCov">         19 :     CLEAR(oper1);</span>
 <span class="lineNum">     136 </span>            : 
-<span class="lineNum">     137 </span><span class="lineCov">          7 :     if (array_first(arr, &amp;temp1)) {</span>
+<span class="lineNum">     137 </span><span class="lineCov">         19 :     if (array_first(arr, &amp;temp1)) {</span>
 <span class="lineNum">     138 </span>            :         do {
-<span class="lineNum">     139 </span><span class="lineCov">         40 :             oper2 = array_getitem(arr, &amp;temp1);</span>
-<span class="lineNum">     140 </span><span class="lineCov">         40 :             copyinst(oper2, &amp;arg[((*top)++)]);</span>
-<span class="lineNum">     141 </span><span class="lineCov">         40 :             oper2 = NULL;</span>
-<span class="lineNum">     142 </span><span class="lineCov">         40 :         } while (array_next(arr, &amp;temp1));</span>
+<span class="lineNum">     139 </span><span class="lineCov">        106 :             oper2 = array_getitem(arr, &amp;temp1);</span>
+<span class="lineNum">     140 </span><span class="lineCov">        106 :             copyinst(oper2, &amp;arg[((*top)++)]);</span>
+<span class="lineNum">     141 </span><span class="lineCov">        106 :             oper2 = NULL;</span>
+<span class="lineNum">     142 </span><span class="lineCov">        106 :         } while (array_next(arr, &amp;temp1));</span>
 <span class="lineNum">     143 </span>            :     }
 <span class="lineNum">     144 </span>            : 
-<span class="lineNum">     145 </span><span class="lineCov">          7 :     CLEAR(&amp;temp2);</span>
-<span class="lineNum">     146 </span><span class="lineCov">          7 :     PushInt(result);</span>
+<span class="lineNum">     145 </span><span class="lineCov">         19 :     CLEAR(&amp;temp2);</span>
+<span class="lineNum">     146 </span><span class="lineCov">         19 :     PushInt(result);</span>
 <span class="lineNum">     147 </span>            : }
 <a name="148"><span class="lineNum">     148 </span>            : </a>
 <span class="lineNum">     149 </span>            : void
-<span class="lineNum">     150 </span><span class="lineCov">          2 : prim_array_keys(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     150 </span><span class="lineCov">          8 : prim_array_keys(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     151 </span>            : {
 <span class="lineNum">     152 </span>            :     stk_array *arr;
 <span class="lineNum">     153 </span>            : 
-<span class="lineNum">     154 </span><span class="lineCov">          2 :     CHECKOP(1);</span>
-<span class="lineNum">     155 </span><span class="lineCov">          2 :     oper1 = POP();</span>
-<span class="lineNum">     156 </span><span class="lineCov">          2 :     if (oper1-&gt;type != PROG_ARRAY)</span>
+<span class="lineNum">     154 </span><span class="lineCov">          8 :     CHECKOP(1);</span>
+<span class="lineNum">     155 </span><span class="lineCov">          8 :     oper1 = POP();</span>
+<span class="lineNum">     156 </span><span class="lineCov">          8 :     if (oper1-&gt;type != PROG_ARRAY)</span>
 <span class="lineNum">     157 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an array.&quot;);</span>
-<span class="lineNum">     158 </span><span class="lineCov">          2 :     copyinst(oper1, &amp;temp2);</span>
-<span class="lineNum">     159 </span><span class="lineCov">          2 :     arr = temp2.data.array;</span>
-<span class="lineNum">     160 </span><span class="lineCov">          2 :     result = array_count(arr);</span>
-<span class="lineNum">     161 </span><span class="lineCov">          2 :     CHECKOFLOW((result + 1));</span>
-<span class="lineNum">     162 </span><span class="lineCov">          2 :     CLEAR(oper1);</span>
+<span class="lineNum">     158 </span><span class="lineCov">          8 :     copyinst(oper1, &amp;temp2);</span>
+<span class="lineNum">     159 </span><span class="lineCov">          8 :     arr = temp2.data.array;</span>
+<span class="lineNum">     160 </span><span class="lineCov">          8 :     result = array_count(arr);</span>
+<span class="lineNum">     161 </span><span class="lineCov">          8 :     CHECKOFLOW((result + 1));</span>
+<span class="lineNum">     162 </span><span class="lineCov">          8 :     CLEAR(oper1);</span>
 <span class="lineNum">     163 </span>            : 
-<span class="lineNum">     164 </span><span class="lineCov">          2 :     if (array_first(arr, &amp;temp1)) {</span>
+<span class="lineNum">     164 </span><span class="lineCov">          8 :     if (array_first(arr, &amp;temp1)) {</span>
 <span class="lineNum">     165 </span>            :         do {
-<span class="lineNum">     166 </span><span class="lineCov">         12 :             copyinst(&amp;temp1, &amp;arg[((*top)++)]);</span>
-<span class="lineNum">     167 </span><span class="lineCov">         12 :         } while (array_next(arr, &amp;temp1));</span>
+<span class="lineNum">     166 </span><span class="lineCov">         48 :             copyinst(&amp;temp1, &amp;arg[((*top)++)]);</span>
+<span class="lineNum">     167 </span><span class="lineCov">         48 :         } while (array_next(arr, &amp;temp1));</span>
 <span class="lineNum">     168 </span>            :     }
 <span class="lineNum">     169 </span>            : 
-<span class="lineNum">     170 </span><span class="lineCov">          2 :     CLEAR(&amp;temp2);</span>
-<span class="lineNum">     171 </span><span class="lineCov">          2 :     PushInt(result);</span>
+<span class="lineNum">     170 </span><span class="lineCov">          8 :     CLEAR(&amp;temp2);</span>
+<span class="lineNum">     171 </span><span class="lineCov">          8 :     PushInt(result);</span>
 <span class="lineNum">     172 </span>            : }
 <a name="173"><span class="lineNum">     173 </span>            : </a>
 <span class="lineNum">     174 </span>            : void
-<span class="lineNum">     175 </span><span class="lineCov">         13 : prim_array_count(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     175 </span><span class="lineCov">         28 : prim_array_count(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     176 </span>            : {
-<span class="lineNum">     177 </span><span class="lineCov">         13 :     CHECKOP(1);</span>
-<span class="lineNum">     178 </span><span class="lineCov">         13 :     oper1 = POP();</span>
-<span class="lineNum">     179 </span><span class="lineCov">         13 :     if (oper1-&gt;type != PROG_ARRAY)</span>
+<span class="lineNum">     177 </span><span class="lineCov">         28 :     CHECKOP(1);</span>
+<span class="lineNum">     178 </span><span class="lineCov">         28 :     oper1 = POP();</span>
+<span class="lineNum">     179 </span><span class="lineCov">         28 :     if (oper1-&gt;type != PROG_ARRAY)</span>
 <span class="lineNum">     180 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an array.&quot;);</span>
-<span class="lineNum">     181 </span><span class="lineCov">         13 :     result = array_count(oper1-&gt;data.array);</span>
+<span class="lineNum">     181 </span><span class="lineCov">         28 :     result = array_count(oper1-&gt;data.array);</span>
 <span class="lineNum">     182 </span>            : 
-<span class="lineNum">     183 </span><span class="lineCov">         13 :     CLEAR(oper1);</span>
-<span class="lineNum">     184 </span><span class="lineCov">         13 :     PushInt(result);</span>
+<span class="lineNum">     183 </span><span class="lineCov">         28 :     CLEAR(oper1);</span>
+<span class="lineNum">     184 </span><span class="lineCov">         28 :     PushInt(result);</span>
 <span class="lineNum">     185 </span>            : }
 <a name="186"><span class="lineNum">     186 </span>            : </a>
 <span class="lineNum">     187 </span>            : void
-<span class="lineNum">     188 </span><span class="lineCov">          7 : prim_array_first(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     188 </span><span class="lineCov">         16 : prim_array_first(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     189 </span>            : {
-<span class="lineNum">     190 </span><span class="lineCov">          7 :     CHECKOP(1);</span>
-<span class="lineNum">     191 </span><span class="lineCov">          7 :     oper1 = POP();              /* arr  Array */</span>
-<span class="lineNum">     192 </span><span class="lineCov">          7 :     if (oper1-&gt;type != PROG_ARRAY)</span>
+<span class="lineNum">     190 </span><span class="lineCov">         16 :     CHECKOP(1);</span>
+<span class="lineNum">     191 </span><span class="lineCov">         16 :     oper1 = POP();              /* arr  Array */</span>
+<span class="lineNum">     192 </span><span class="lineCov">         16 :     if (oper1-&gt;type != PROG_ARRAY)</span>
 <span class="lineNum">     193 </span><span class="lineCov">          2 :         abort_interp(&quot;Argument not an array.&quot;);</span>
 <span class="lineNum">     194 </span>            : 
-<span class="lineNum">     195 </span><span class="lineCov">          5 :     temp1.type = PROG_INTEGER;</span>
-<span class="lineNum">     196 </span><span class="lineCov">          5 :     temp1.data.number = 0;</span>
-<span class="lineNum">     197 </span><span class="lineCov">          5 :     result = array_first(oper1-&gt;data.array, &amp;temp1);</span>
+<span class="lineNum">     195 </span><span class="lineCov">         14 :     temp1.type = PROG_INTEGER;</span>
+<span class="lineNum">     196 </span><span class="lineCov">         14 :     temp1.data.number = 0;</span>
+<span class="lineNum">     197 </span><span class="lineCov">         14 :     result = array_first(oper1-&gt;data.array, &amp;temp1);</span>
 <span class="lineNum">     198 </span>            : 
-<span class="lineNum">     199 </span><span class="lineCov">          5 :     CLEAR(oper1);</span>
-<span class="lineNum">     200 </span><span class="lineCov">          5 :     if (result) {</span>
-<span class="lineNum">     201 </span><span class="lineCov">          5 :         copyinst(&amp;temp1, &amp;arg[((*top)++)]);</span>
+<span class="lineNum">     199 </span><span class="lineCov">         14 :     CLEAR(oper1);</span>
+<span class="lineNum">     200 </span><span class="lineCov">         14 :     if (result) {</span>
+<span class="lineNum">     201 </span><span class="lineCov">         14 :         copyinst(&amp;temp1, &amp;arg[((*top)++)]);</span>
 <span class="lineNum">     202 </span>            :     } else {
 <span class="lineNum">     203 </span><span class="lineNoCov">          0 :         result = 0;</span>
 <span class="lineNum">     204 </span><span class="lineNoCov">          0 :         PushInt(result);</span>
 <span class="lineNum">     205 </span>            :     }
-<span class="lineNum">     206 </span><span class="lineCov">          5 :     PushInt(result);</span>
+<span class="lineNum">     206 </span><span class="lineCov">         14 :     PushInt(result);</span>
 <span class="lineNum">     207 </span>            : }
 <a name="208"><span class="lineNum">     208 </span>            : </a>
 <span class="lineNum">     209 </span>            : void
-<span class="lineNum">     210 </span><span class="lineCov">         13 : prim_array_last(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     210 </span><span class="lineCov">         28 : prim_array_last(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     211 </span>            : {
-<span class="lineNum">     212 </span><span class="lineCov">         13 :     CHECKOP(1);</span>
-<span class="lineNum">     213 </span><span class="lineCov">         13 :     oper1 = POP();              /* arr  Array */</span>
-<span class="lineNum">     214 </span><span class="lineCov">         13 :     if (oper1-&gt;type != PROG_ARRAY)</span>
+<span class="lineNum">     212 </span><span class="lineCov">         28 :     CHECKOP(1);</span>
+<span class="lineNum">     213 </span><span class="lineCov">         28 :     oper1 = POP();              /* arr  Array */</span>
+<span class="lineNum">     214 </span><span class="lineCov">         28 :     if (oper1-&gt;type != PROG_ARRAY)</span>
 <span class="lineNum">     215 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an array.&quot;);</span>
 <span class="lineNum">     216 </span>            : 
-<span class="lineNum">     217 </span><span class="lineCov">         13 :     temp1.type = PROG_INTEGER;</span>
-<span class="lineNum">     218 </span><span class="lineCov">         13 :     temp1.data.number = 0;</span>
-<span class="lineNum">     219 </span><span class="lineCov">         13 :     result = array_last(oper1-&gt;data.array, &amp;temp1);</span>
+<span class="lineNum">     217 </span><span class="lineCov">         28 :     temp1.type = PROG_INTEGER;</span>
+<span class="lineNum">     218 </span><span class="lineCov">         28 :     temp1.data.number = 0;</span>
+<span class="lineNum">     219 </span><span class="lineCov">         28 :     result = array_last(oper1-&gt;data.array, &amp;temp1);</span>
 <span class="lineNum">     220 </span>            : 
-<span class="lineNum">     221 </span><span class="lineCov">         13 :     CLEAR(oper1);</span>
-<span class="lineNum">     222 </span><span class="lineCov">         13 :     if (result) {</span>
-<span class="lineNum">     223 </span><span class="lineCov">         13 :         copyinst(&amp;temp1, &amp;arg[((*top)++)]);</span>
+<span class="lineNum">     221 </span><span class="lineCov">         28 :     CLEAR(oper1);</span>
+<span class="lineNum">     222 </span><span class="lineCov">         28 :     if (result) {</span>
+<span class="lineNum">     223 </span><span class="lineCov">         28 :         copyinst(&amp;temp1, &amp;arg[((*top)++)]);</span>
 <span class="lineNum">     224 </span>            :     } else {
 <span class="lineNum">     225 </span><span class="lineNoCov">          0 :         result = 0;</span>
 <span class="lineNum">     226 </span><span class="lineNoCov">          0 :         PushInt(result);</span>
 <span class="lineNum">     227 </span>            :     }
-<span class="lineNum">     228 </span><span class="lineCov">         13 :     PushInt(result);</span>
+<span class="lineNum">     228 </span><span class="lineCov">         28 :     PushInt(result);</span>
 <span class="lineNum">     229 </span>            : }
 <a name="230"><span class="lineNum">     230 </span>            : </a>
 <span class="lineNum">     231 </span>            : void
-<span class="lineNum">     232 </span><span class="lineNoCov">          0 : prim_array_prev(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     232 </span><span class="lineCov">          9 : prim_array_prev(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     233 </span>            : {
-<span class="lineNum">     234 </span><span class="lineNoCov">          0 :     CHECKOP(2);</span>
-<span class="lineNum">     235 </span><span class="lineNoCov">          0 :     oper1 = POP();              /* ???  previous index */</span>
-<span class="lineNum">     236 </span><span class="lineNoCov">          0 :     oper2 = POP();              /* arr  Array */</span>
-<span class="lineNum">     237 </span><span class="lineNoCov">          0 :     if (oper1-&gt;type != PROG_INTEGER &amp;&amp; oper1-&gt;type != PROG_STRING)</span>
+<span class="lineNum">     234 </span><span class="lineCov">          9 :     CHECKOP(2);</span>
+<span class="lineNum">     235 </span><span class="lineCov">          9 :     oper1 = POP();              /* ???  previous index */</span>
+<span class="lineNum">     236 </span><span class="lineCov">          9 :     oper2 = POP();              /* arr  Array */</span>
+<span class="lineNum">     237 </span><span class="lineCov">          9 :     if (oper1-&gt;type != PROG_INTEGER &amp;&amp; oper1-&gt;type != PROG_STRING)</span>
 <span class="lineNum">     238 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an integer or string. (2)&quot;);</span>
-<span class="lineNum">     239 </span><span class="lineNoCov">          0 :     if (oper2-&gt;type != PROG_ARRAY)</span>
-<span class="lineNum">     240 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an array.(1)&quot;);</span>
+<span class="lineNum">     239 </span><span class="lineCov">          9 :     if (oper2-&gt;type != PROG_ARRAY)</span>
+<span class="lineNum">     240 </span><span class="lineCov">          1 :         abort_interp(&quot;Argument not an array.(1)&quot;);</span>
 <span class="lineNum">     241 </span>            : 
-<span class="lineNum">     242 </span><span class="lineNoCov">          0 :     copyinst(oper1, &amp;temp1);</span>
-<span class="lineNum">     243 </span><span class="lineNoCov">          0 :     result = array_prev(oper2-&gt;data.array, &amp;temp1);</span>
+<span class="lineNum">     242 </span><span class="lineCov">          8 :     copyinst(oper1, &amp;temp1);</span>
+<span class="lineNum">     243 </span><span class="lineCov">          8 :     result = array_prev(oper2-&gt;data.array, &amp;temp1);</span>
 <span class="lineNum">     244 </span>            : 
-<span class="lineNum">     245 </span><span class="lineNoCov">          0 :     CLEAR(oper1);</span>
-<span class="lineNum">     246 </span><span class="lineNoCov">          0 :     CLEAR(oper2);</span>
+<span class="lineNum">     245 </span><span class="lineCov">          8 :     CLEAR(oper1);</span>
+<span class="lineNum">     246 </span><span class="lineCov">          8 :     CLEAR(oper2);</span>
 <span class="lineNum">     247 </span>            : 
-<span class="lineNum">     248 </span><span class="lineNoCov">          0 :     if (result) {</span>
-<span class="lineNum">     249 </span><span class="lineNoCov">          0 :         copyinst(&amp;temp1, &amp;arg[((*top)++)]);</span>
-<span class="lineNum">     250 </span><span class="lineNoCov">          0 :         CLEAR(&amp;temp1);</span>
+<span class="lineNum">     248 </span><span class="lineCov">          8 :     if (result) {</span>
+<span class="lineNum">     249 </span><span class="lineCov">          8 :         copyinst(&amp;temp1, &amp;arg[((*top)++)]);</span>
+<span class="lineNum">     250 </span><span class="lineCov">          8 :         CLEAR(&amp;temp1);</span>
 <span class="lineNum">     251 </span>            :     } else {
 <span class="lineNum">     252 </span><span class="lineNoCov">          0 :         result = 0;</span>
 <span class="lineNum">     253 </span><span class="lineNoCov">          0 :         PushInt(result);</span>
 <span class="lineNum">     254 </span>            :     }
-<span class="lineNum">     255 </span><span class="lineNoCov">          0 :     PushInt(result);</span>
+<span class="lineNum">     255 </span><span class="lineCov">          8 :     PushInt(result);</span>
 <span class="lineNum">     256 </span>            : }
 <a name="257"><span class="lineNum">     257 </span>            : </a>
 <span class="lineNum">     258 </span>            : void
-<span class="lineNum">     259 </span><span class="lineNoCov">          0 : prim_array_next(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     259 </span><span class="lineCov">          9 : prim_array_next(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     260 </span>            : {
 <span class="lineNum">     261 </span>            : 
-<span class="lineNum">     262 </span><span class="lineNoCov">          0 :     CHECKOP(2);</span>
-<span class="lineNum">     263 </span><span class="lineNoCov">          0 :     oper1 = POP();              /* ???  previous index */</span>
-<span class="lineNum">     264 </span><span class="lineNoCov">          0 :     oper2 = POP();              /* arr  Array */</span>
-<span class="lineNum">     265 </span><span class="lineNoCov">          0 :     if (oper1-&gt;type != PROG_INTEGER &amp;&amp; oper1-&gt;type != PROG_STRING)</span>
+<span class="lineNum">     262 </span><span class="lineCov">          9 :     CHECKOP(2);</span>
+<span class="lineNum">     263 </span><span class="lineCov">          9 :     oper1 = POP();              /* ???  previous index */</span>
+<span class="lineNum">     264 </span><span class="lineCov">          9 :     oper2 = POP();              /* arr  Array */</span>
+<span class="lineNum">     265 </span><span class="lineCov">          9 :     if (oper1-&gt;type != PROG_INTEGER &amp;&amp; oper1-&gt;type != PROG_STRING)</span>
 <span class="lineNum">     266 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an integer or string. (2)&quot;);</span>
-<span class="lineNum">     267 </span><span class="lineNoCov">          0 :     if (oper2-&gt;type != PROG_ARRAY)</span>
+<span class="lineNum">     267 </span><span class="lineCov">          9 :     if (oper2-&gt;type != PROG_ARRAY)</span>
 <span class="lineNum">     268 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an array.(1)&quot;);</span>
 <span class="lineNum">     269 </span>            : 
-<span class="lineNum">     270 </span><span class="lineNoCov">          0 :     copyinst(oper1, &amp;temp1);</span>
-<span class="lineNum">     271 </span><span class="lineNoCov">          0 :     result = array_next(oper2-&gt;data.array, &amp;temp1);</span>
+<span class="lineNum">     270 </span><span class="lineCov">          9 :     copyinst(oper1, &amp;temp1);</span>
+<span class="lineNum">     271 </span><span class="lineCov">          9 :     result = array_next(oper2-&gt;data.array, &amp;temp1);</span>
 <span class="lineNum">     272 </span>            : 
-<span class="lineNum">     273 </span><span class="lineNoCov">          0 :     CLEAR(oper1);</span>
-<span class="lineNum">     274 </span><span class="lineNoCov">          0 :     CLEAR(oper2);</span>
+<span class="lineNum">     273 </span><span class="lineCov">          9 :     CLEAR(oper1);</span>
+<span class="lineNum">     274 </span><span class="lineCov">          9 :     CLEAR(oper2);</span>
 <span class="lineNum">     275 </span>            : 
-<span class="lineNum">     276 </span><span class="lineNoCov">          0 :     if (result) {</span>
-<span class="lineNum">     277 </span><span class="lineNoCov">          0 :         copyinst(&amp;temp1, &amp;arg[((*top)++)]);</span>
-<span class="lineNum">     278 </span><span class="lineNoCov">          0 :         CLEAR(&amp;temp1);</span>
+<span class="lineNum">     276 </span><span class="lineCov">          9 :     if (result) {</span>
+<span class="lineNum">     277 </span><span class="lineCov">          9 :         copyinst(&amp;temp1, &amp;arg[((*top)++)]);</span>
+<span class="lineNum">     278 </span><span class="lineCov">          9 :         CLEAR(&amp;temp1);</span>
 <span class="lineNum">     279 </span>            :     } else {
 <span class="lineNum">     280 </span><span class="lineNoCov">          0 :         result = 0;</span>
 <span class="lineNum">     281 </span><span class="lineNoCov">          0 :         PushInt(result);</span>
 <span class="lineNum">     282 </span>            :     }
-<span class="lineNum">     283 </span><span class="lineNoCov">          0 :     PushInt(result);</span>
+<span class="lineNum">     283 </span><span class="lineCov">          9 :     PushInt(result);</span>
 <span class="lineNum">     284 </span>            : }
 <a name="285"><span class="lineNum">     285 </span>            : </a>
 <span class="lineNum">     286 </span>            : void
-<span class="lineNum">     287 </span><span class="lineCov">         90 : prim_array_getitem(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     287 </span><span class="lineCov">        171 : prim_array_getitem(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     288 </span>            : {
 <span class="lineNum">     289 </span>            :     struct inst *in;
 <span class="lineNum">     290 </span>            :     struct inst temp;
 <span class="lineNum">     291 </span>            : 
-<span class="lineNum">     292 </span><span class="lineCov">         92 :     CHECKOP(2);</span>
-<span class="lineNum">     293 </span><span class="lineCov">         90 :     oper1 = POP();              /* ???  index */</span>
-<span class="lineNum">     294 </span><span class="lineCov">         90 :     oper2 = POP();              /* arr  Array */</span>
-<span class="lineNum">     295 </span><span class="lineCov">         90 :     if (oper1-&gt;type != PROG_INTEGER &amp;&amp; oper1-&gt;type != PROG_STRING)</span>
+<span class="lineNum">     292 </span><span class="lineCov">        173 :     CHECKOP(2);</span>
+<span class="lineNum">     293 </span><span class="lineCov">        171 :     oper1 = POP();              /* ???  index */</span>
+<span class="lineNum">     294 </span><span class="lineCov">        171 :     oper2 = POP();              /* arr  Array */</span>
+<span class="lineNum">     295 </span><span class="lineCov">        171 :     if (oper1-&gt;type != PROG_INTEGER &amp;&amp; oper1-&gt;type != PROG_STRING)</span>
 <span class="lineNum">     296 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an integer or string. (2)&quot;);</span>
-<span class="lineNum">     297 </span><span class="lineCov">         90 :     if (oper2-&gt;type != PROG_ARRAY)</span>
+<span class="lineNum">     297 </span><span class="lineCov">        171 :     if (oper2-&gt;type != PROG_ARRAY)</span>
 <span class="lineNum">     298 </span><span class="lineCov">          2 :         abort_interp(&quot;Argument not an array. (1)&quot;);</span>
-<span class="lineNum">     299 </span><span class="lineCov">         88 :     in = array_getitem(oper2-&gt;data.array, oper1);</span>
+<span class="lineNum">     299 </span><span class="lineCov">        169 :     in = array_getitem(oper2-&gt;data.array, oper1);</span>
 <span class="lineNum">     300 </span>            : 
 <span class="lineNum">     301 </span>            :     /* copy data to a temp inst before clearing the containing array */
-<span class="lineNum">     302 </span><span class="lineCov">         88 :     if (in) {</span>
-<span class="lineNum">     303 </span><span class="lineCov">         87 :         copyinst(in, &amp;temp);</span>
+<span class="lineNum">     302 </span><span class="lineCov">        169 :     if (in) {</span>
+<span class="lineNum">     303 </span><span class="lineCov">        168 :         copyinst(in, &amp;temp);</span>
 <span class="lineNum">     304 </span>            :     } else {
 <span class="lineNum">     305 </span><span class="lineCov">          1 :         temp.type = PROG_INTEGER;</span>
 <span class="lineNum">     306 </span><span class="lineCov">          1 :         temp.data.number = 0;</span>
 <span class="lineNum">     307 </span>            :     }
 <span class="lineNum">     308 </span>            : 
-<span class="lineNum">     309 </span><span class="lineCov">         88 :     CLEAR(oper1);</span>
-<span class="lineNum">     310 </span><span class="lineCov">         88 :     CLEAR(oper2);</span>
+<span class="lineNum">     309 </span><span class="lineCov">        169 :     CLEAR(oper1);</span>
+<span class="lineNum">     310 </span><span class="lineCov">        169 :     CLEAR(oper2);</span>
 <span class="lineNum">     311 </span>            : 
 <span class="lineNum">     312 </span>            :     /* copy data to stack, then clear temp inst */
-<span class="lineNum">     313 </span><span class="lineCov">         88 :     copyinst(&amp;temp, &amp;arg[(*top)++]);</span>
-<span class="lineNum">     314 </span><span class="lineCov">         88 :     CLEAR(&amp;temp);</span>
+<span class="lineNum">     313 </span><span class="lineCov">        169 :     copyinst(&amp;temp, &amp;arg[(*top)++]);</span>
+<span class="lineNum">     314 </span><span class="lineCov">        169 :     CLEAR(&amp;temp);</span>
 <span class="lineNum">     315 </span>            : }
 <a name="316"><span class="lineNum">     316 </span>            : </a>
 <span class="lineNum">     317 </span>            : void
-<span class="lineNum">     318 </span><span class="lineCov">         13 : prim_array_setitem(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     318 </span><span class="lineCov">         19 : prim_array_setitem(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     319 </span>            : {
 <span class="lineNum">     320 </span>            :     stk_array *nu;
 <span class="lineNum">     321 </span>            : 
-<span class="lineNum">     322 </span><span class="lineCov">         13 :     CHECKOP(3);</span>
-<span class="lineNum">     323 </span><span class="lineCov">         13 :     oper1 = POP();              /* ???  index to store at */</span>
-<span class="lineNum">     324 </span><span class="lineCov">         13 :     oper2 = POP();              /* arr  Array to store in */</span>
-<span class="lineNum">     325 </span><span class="lineCov">         13 :     oper3 = POP();              /* ???  item to store     */</span>
+<span class="lineNum">     322 </span><span class="lineCov">         19 :     CHECKOP(3);</span>
+<span class="lineNum">     323 </span><span class="lineCov">         19 :     oper1 = POP();              /* ???  index to store at */</span>
+<span class="lineNum">     324 </span><span class="lineCov">         19 :     oper2 = POP();              /* arr  Array to store in */</span>
+<span class="lineNum">     325 </span><span class="lineCov">         19 :     oper3 = POP();              /* ???  item to store     */</span>
 <span class="lineNum">     326 </span>            : 
-<span class="lineNum">     327 </span><span class="lineCov">         13 :     if (oper1-&gt;type != PROG_INTEGER &amp;&amp; oper1-&gt;type != PROG_STRING)</span>
+<span class="lineNum">     327 </span><span class="lineCov">         19 :     if (oper1-&gt;type != PROG_INTEGER &amp;&amp; oper1-&gt;type != PROG_STRING)</span>
 <span class="lineNum">     328 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an integer or string. (3)&quot;);</span>
-<span class="lineNum">     329 </span><span class="lineCov">         13 :     if (oper2-&gt;type != PROG_ARRAY)</span>
+<span class="lineNum">     329 </span><span class="lineCov">         19 :     if (oper2-&gt;type != PROG_ARRAY)</span>
 <span class="lineNum">     330 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an array. (2)&quot;);</span>
 <span class="lineNum">     331 </span>            : 
-<span class="lineNum">     332 </span><span class="lineCov">         13 :     result = array_setitem(&amp;oper2-&gt;data.array, oper1, oper3);</span>
-<span class="lineNum">     333 </span><span class="lineCov">         13 :     if (result &lt; 0)</span>
+<span class="lineNum">     332 </span><span class="lineCov">         19 :     result = array_setitem(&amp;oper2-&gt;data.array, oper1, oper3);</span>
+<span class="lineNum">     333 </span><span class="lineCov">         19 :     if (result &lt; 0)</span>
 <span class="lineNum">     334 </span><span class="lineCov">          1 :         abort_interp(&quot;Index out of array bounds. (3)&quot;);</span>
 <span class="lineNum">     335 </span>            : 
-<span class="lineNum">     336 </span><span class="lineCov">         12 :     nu = oper2-&gt;data.array;</span>
-<span class="lineNum">     337 </span><span class="lineCov">         12 :     oper2-&gt;data.array = NULL;</span>
+<span class="lineNum">     336 </span><span class="lineCov">         18 :     nu = oper2-&gt;data.array;</span>
+<span class="lineNum">     337 </span><span class="lineCov">         18 :     oper2-&gt;data.array = NULL;</span>
 <span class="lineNum">     338 </span>            : 
-<span class="lineNum">     339 </span><span class="lineCov">         12 :     CLEAR(oper1);</span>
-<span class="lineNum">     340 </span><span class="lineCov">         12 :     CLEAR(oper2);</span>
-<span class="lineNum">     341 </span><span class="lineCov">         12 :     CLEAR(oper3);</span>
+<span class="lineNum">     339 </span><span class="lineCov">         18 :     CLEAR(oper1);</span>
+<span class="lineNum">     340 </span><span class="lineCov">         18 :     CLEAR(oper2);</span>
+<span class="lineNum">     341 </span><span class="lineCov">         18 :     CLEAR(oper3);</span>
 <span class="lineNum">     342 </span>            : 
-<span class="lineNum">     343 </span><span class="lineCov">         12 :     PushArrayRaw(nu);</span>
+<span class="lineNum">     343 </span><span class="lineCov">         18 :     PushArrayRaw(nu);</span>
 <span class="lineNum">     344 </span>            : }
 <a name="345"><span class="lineNum">     345 </span>            : </a>
 <span class="lineNum">     346 </span>            : void
-<span class="lineNum">     347 </span><span class="lineCov">         11 : prim_array_appenditem(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     347 </span><span class="lineCov">         17 : prim_array_appenditem(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     348 </span>            : {
 <span class="lineNum">     349 </span>            :     stk_array *nu;
 <span class="lineNum">     350 </span>            : 
-<span class="lineNum">     351 </span><span class="lineCov">         11 :     CHECKOP(2);</span>
-<span class="lineNum">     352 </span><span class="lineCov">         11 :     oper2 = POP();              /* arr  Array to store in */</span>
-<span class="lineNum">     353 </span><span class="lineCov">         11 :     oper1 = POP();              /* ???  item to store     */</span>
+<span class="lineNum">     351 </span><span class="lineCov">         17 :     CHECKOP(2);</span>
+<span class="lineNum">     352 </span><span class="lineCov">         17 :     oper2 = POP();              /* arr  Array to store in */</span>
+<span class="lineNum">     353 </span><span class="lineCov">         17 :     oper1 = POP();              /* ???  item to store     */</span>
 <span class="lineNum">     354 </span>            : 
-<span class="lineNum">     355 </span><span class="lineCov">         11 :     if (oper2-&gt;type != PROG_ARRAY)</span>
+<span class="lineNum">     355 </span><span class="lineCov">         17 :     if (oper2-&gt;type != PROG_ARRAY)</span>
 <span class="lineNum">     356 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an array. (2)&quot;);</span>
-<span class="lineNum">     357 </span><span class="lineCov">         11 :     if (oper2-&gt;data.array &amp;&amp; oper2-&gt;data.array-&gt;type != ARRAY_PACKED)</span>
+<span class="lineNum">     357 </span><span class="lineCov">         17 :     if (oper2-&gt;data.array &amp;&amp; oper2-&gt;data.array-&gt;type != ARRAY_PACKED)</span>
 <span class="lineNum">     358 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument must be a list type array. (2)&quot;);</span>
 <span class="lineNum">     359 </span>            : 
-<span class="lineNum">     360 </span><span class="lineCov">         11 :     result = array_appenditem(&amp;oper2-&gt;data.array, oper1);</span>
-<span class="lineNum">     361 </span><span class="lineCov">         11 :     if (result == -1)</span>
+<span class="lineNum">     360 </span><span class="lineCov">         17 :     result = array_appenditem(&amp;oper2-&gt;data.array, oper1);</span>
+<span class="lineNum">     361 </span><span class="lineCov">         17 :     if (result == -1)</span>
 <span class="lineNum">     362 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Internal Error!&quot;);</span>
 <span class="lineNum">     363 </span>            : 
-<span class="lineNum">     364 </span><span class="lineCov">         11 :     nu = oper2-&gt;data.array;</span>
-<span class="lineNum">     365 </span><span class="lineCov">         11 :     oper2-&gt;data.array = NULL;</span>
+<span class="lineNum">     364 </span><span class="lineCov">         17 :     nu = oper2-&gt;data.array;</span>
+<span class="lineNum">     365 </span><span class="lineCov">         17 :     oper2-&gt;data.array = NULL;</span>
 <span class="lineNum">     366 </span>            : 
-<span class="lineNum">     367 </span><span class="lineCov">         11 :     CLEAR(oper1);</span>
-<span class="lineNum">     368 </span><span class="lineCov">         11 :     CLEAR(oper2);</span>
+<span class="lineNum">     367 </span><span class="lineCov">         17 :     CLEAR(oper1);</span>
+<span class="lineNum">     368 </span><span class="lineCov">         17 :     CLEAR(oper2);</span>
 <span class="lineNum">     369 </span>            : 
-<span class="lineNum">     370 </span><span class="lineCov">         11 :     PushArrayRaw(nu);</span>
+<span class="lineNum">     370 </span><span class="lineCov">         17 :     PushArrayRaw(nu);</span>
 <span class="lineNum">     371 </span>            : }
 <a name="372"><span class="lineNum">     372 </span>            : </a>
 <span class="lineNum">     373 </span>            : void
-<span class="lineNum">     374 </span><span class="lineCov">          2 : prim_array_insertitem(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     374 </span><span class="lineCov">          8 : prim_array_insertitem(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     375 </span>            : {
 <span class="lineNum">     376 </span>            :     stk_array *nu;
 <span class="lineNum">     377 </span>            : 
-<span class="lineNum">     378 </span><span class="lineCov">          2 :     CHECKOP(3);</span>
-<span class="lineNum">     379 </span><span class="lineCov">          2 :     oper1 = POP();              /* ???  index to store at */</span>
-<span class="lineNum">     380 </span><span class="lineCov">          2 :     oper2 = POP();              /* arr  Array to store in */</span>
-<span class="lineNum">     381 </span><span class="lineCov">          2 :     oper3 = POP();              /* ???  item to store     */</span>
-<span class="lineNum">     382 </span><span class="lineCov">          2 :     if (oper1-&gt;type != PROG_INTEGER &amp;&amp; oper1-&gt;type != PROG_STRING)</span>
+<span class="lineNum">     378 </span><span class="lineCov">          8 :     CHECKOP(3);</span>
+<span class="lineNum">     379 </span><span class="lineCov">          8 :     oper1 = POP();              /* ???  index to store at */</span>
+<span class="lineNum">     380 </span><span class="lineCov">          8 :     oper2 = POP();              /* arr  Array to store in */</span>
+<span class="lineNum">     381 </span><span class="lineCov">          8 :     oper3 = POP();              /* ???  item to store     */</span>
+<span class="lineNum">     382 </span><span class="lineCov">          8 :     if (oper1-&gt;type != PROG_INTEGER &amp;&amp; oper1-&gt;type != PROG_STRING)</span>
 <span class="lineNum">     383 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an integer or string. (3)&quot;);</span>
-<span class="lineNum">     384 </span><span class="lineCov">          2 :     if (oper2-&gt;type != PROG_ARRAY)</span>
+<span class="lineNum">     384 </span><span class="lineCov">          8 :     if (oper2-&gt;type != PROG_ARRAY)</span>
 <span class="lineNum">     385 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an array. (2)&quot;);</span>
 <span class="lineNum">     386 </span>            : 
-<span class="lineNum">     387 </span><span class="lineCov">          2 :     result = array_insertitem(&amp;oper2-&gt;data.array, oper1, oper3);</span>
-<span class="lineNum">     388 </span><span class="lineCov">          2 :     if (result &lt; 0)</span>
+<span class="lineNum">     387 </span><span class="lineCov">          8 :     result = array_insertitem(&amp;oper2-&gt;data.array, oper1, oper3);</span>
+<span class="lineNum">     388 </span><span class="lineCov">          8 :     if (result &lt; 0)</span>
 <span class="lineNum">     389 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Index out of array bounds. (3)&quot;);</span>
 <span class="lineNum">     390 </span>            : 
-<span class="lineNum">     391 </span><span class="lineCov">          2 :     nu = oper2-&gt;data.array;</span>
-<span class="lineNum">     392 </span><span class="lineCov">          2 :     oper2-&gt;data.array = NULL;</span>
+<span class="lineNum">     391 </span><span class="lineCov">          8 :     nu = oper2-&gt;data.array;</span>
+<span class="lineNum">     392 </span><span class="lineCov">          8 :     oper2-&gt;data.array = NULL;</span>
 <span class="lineNum">     393 </span>            : 
-<span class="lineNum">     394 </span><span class="lineCov">          2 :     CLEAR(oper1);</span>
-<span class="lineNum">     395 </span><span class="lineCov">          2 :     CLEAR(oper2);</span>
-<span class="lineNum">     396 </span><span class="lineCov">          2 :     CLEAR(oper3);</span>
+<span class="lineNum">     394 </span><span class="lineCov">          8 :     CLEAR(oper1);</span>
+<span class="lineNum">     395 </span><span class="lineCov">          8 :     CLEAR(oper2);</span>
+<span class="lineNum">     396 </span><span class="lineCov">          8 :     CLEAR(oper3);</span>
 <span class="lineNum">     397 </span>            : 
-<span class="lineNum">     398 </span><span class="lineCov">          2 :     PushArrayRaw(nu);</span>
+<span class="lineNum">     398 </span><span class="lineCov">          8 :     PushArrayRaw(nu);</span>
 <span class="lineNum">     399 </span>            : }
 <a name="400"><span class="lineNum">     400 </span>            : </a>
 <span class="lineNum">     401 </span>            : void
-<span class="lineNum">     402 </span><span class="lineNoCov">          0 : prim_array_getrange(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     402 </span><span class="lineCov">          4 : prim_array_getrange(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     403 </span>            : {
 <span class="lineNum">     404 </span>            :     stk_array *nu;
 <span class="lineNum">     405 </span>            : 
-<span class="lineNum">     406 </span><span class="lineNoCov">          0 :     CHECKOP(3);</span>
-<span class="lineNum">     407 </span><span class="lineNoCov">          0 :     oper1 = POP();              /* int  range end item */</span>
-<span class="lineNum">     408 </span><span class="lineNoCov">          0 :     oper2 = POP();              /* int  range start item */</span>
-<span class="lineNum">     409 </span><span class="lineNoCov">          0 :     oper3 = POP();              /* arr  Array   */</span>
-<span class="lineNum">     410 </span><span class="lineNoCov">          0 :     if (oper1-&gt;type != PROG_INTEGER &amp;&amp; oper1-&gt;type != PROG_STRING)</span>
+<span class="lineNum">     406 </span><span class="lineCov">          4 :     CHECKOP(3);</span>
+<span class="lineNum">     407 </span><span class="lineCov">          4 :     oper1 = POP();              /* int  range end item */</span>
+<span class="lineNum">     408 </span><span class="lineCov">          4 :     oper2 = POP();              /* int  range start item */</span>
+<span class="lineNum">     409 </span><span class="lineCov">          4 :     oper3 = POP();              /* arr  Array   */</span>
+<span class="lineNum">     410 </span><span class="lineCov">          4 :     if (oper1-&gt;type != PROG_INTEGER &amp;&amp; oper1-&gt;type != PROG_STRING)</span>
 <span class="lineNum">     411 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an integer or string. (3)&quot;);</span>
-<span class="lineNum">     412 </span><span class="lineNoCov">          0 :     if (oper2-&gt;type != PROG_INTEGER &amp;&amp; oper2-&gt;type != PROG_STRING)</span>
+<span class="lineNum">     412 </span><span class="lineCov">          4 :     if (oper2-&gt;type != PROG_INTEGER &amp;&amp; oper2-&gt;type != PROG_STRING)</span>
 <span class="lineNum">     413 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an integer or string. (2)&quot;);</span>
-<span class="lineNum">     414 </span><span class="lineNoCov">          0 :     if (oper3-&gt;type != PROG_ARRAY)</span>
+<span class="lineNum">     414 </span><span class="lineCov">          4 :     if (oper3-&gt;type != PROG_ARRAY)</span>
 <span class="lineNum">     415 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an array. (1)&quot;);</span>
 <span class="lineNum">     416 </span>            : 
-<span class="lineNum">     417 </span><span class="lineNoCov">          0 :     nu = array_getrange(oper3-&gt;data.array, oper2, oper1);</span>
-<span class="lineNum">     418 </span><span class="lineNoCov">          0 :     if (!nu)</span>
+<span class="lineNum">     417 </span><span class="lineCov">          4 :     nu = array_getrange(oper3-&gt;data.array, oper2, oper1);</span>
+<span class="lineNum">     418 </span><span class="lineCov">          4 :     if (!nu)</span>
 <span class="lineNum">     419 </span><span class="lineNoCov">          0 :         nu = new_array_packed(0);</span>
 <span class="lineNum">     420 </span>            : 
-<span class="lineNum">     421 </span><span class="lineNoCov">          0 :     CLEAR(oper1);</span>
-<span class="lineNum">     422 </span><span class="lineNoCov">          0 :     CLEAR(oper2);</span>
-<span class="lineNum">     423 </span><span class="lineNoCov">          0 :     CLEAR(oper3);</span>
+<span class="lineNum">     421 </span><span class="lineCov">          4 :     CLEAR(oper1);</span>
+<span class="lineNum">     422 </span><span class="lineCov">          4 :     CLEAR(oper2);</span>
+<span class="lineNum">     423 </span><span class="lineCov">          4 :     CLEAR(oper3);</span>
 <span class="lineNum">     424 </span>            : 
-<span class="lineNum">     425 </span><span class="lineNoCov">          0 :     PushArrayRaw(nu);</span>
+<span class="lineNum">     425 </span><span class="lineCov">          4 :     PushArrayRaw(nu);</span>
 <span class="lineNum">     426 </span>            : }
 <a name="427"><span class="lineNum">     427 </span>            : </a>
 <span class="lineNum">     428 </span>            : void
-<span class="lineNum">     429 </span><span class="lineNoCov">          0 : prim_array_setrange(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     429 </span><span class="lineCov">         11 : prim_array_setrange(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     430 </span>            : {
 <span class="lineNum">     431 </span>            :     stk_array *nu;
 <span class="lineNum">     432 </span>            : 
-<span class="lineNum">     433 </span><span class="lineNoCov">          0 :     CHECKOP(3);</span>
-<span class="lineNum">     434 </span><span class="lineNoCov">          0 :     oper1 = POP();              /* arr  array to insert */</span>
-<span class="lineNum">     435 </span><span class="lineNoCov">          0 :     oper2 = POP();              /* ???  starting pos for lists */</span>
-<span class="lineNum">     436 </span><span class="lineNoCov">          0 :     oper3 = POP();              /* arr  Array   */</span>
-<span class="lineNum">     437 </span><span class="lineNoCov">          0 :     if (oper1-&gt;type != PROG_ARRAY)</span>
-<span class="lineNum">     438 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an array. (3)&quot;);</span>
-<span class="lineNum">     439 </span><span class="lineNoCov">          0 :     if (oper2-&gt;type != PROG_INTEGER &amp;&amp; oper2-&gt;type != PROG_STRING)</span>
+<span class="lineNum">     433 </span><span class="lineCov">         11 :     CHECKOP(3);</span>
+<span class="lineNum">     434 </span><span class="lineCov">         11 :     oper1 = POP();              /* arr  array to insert */</span>
+<span class="lineNum">     435 </span><span class="lineCov">         11 :     oper2 = POP();              /* ???  starting pos for lists */</span>
+<span class="lineNum">     436 </span><span class="lineCov">         11 :     oper3 = POP();              /* arr  Array   */</span>
+<span class="lineNum">     437 </span><span class="lineCov">         11 :     if (oper1-&gt;type != PROG_ARRAY)</span>
+<span class="lineNum">     438 </span><span class="lineCov">          3 :         abort_interp(&quot;Argument not an array. (3)&quot;);</span>
+<span class="lineNum">     439 </span><span class="lineCov">          8 :     if (oper2-&gt;type != PROG_INTEGER &amp;&amp; oper2-&gt;type != PROG_STRING)</span>
 <span class="lineNum">     440 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an integer or string. (2)&quot;);</span>
-<span class="lineNum">     441 </span><span class="lineNoCov">          0 :     if (oper3-&gt;type != PROG_ARRAY)</span>
+<span class="lineNum">     441 </span><span class="lineCov">          8 :     if (oper3-&gt;type != PROG_ARRAY)</span>
 <span class="lineNum">     442 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an array. (1)&quot;);</span>
 <span class="lineNum">     443 </span>            : 
-<span class="lineNum">     444 </span><span class="lineNoCov">          0 :     result = array_setrange(&amp;oper3-&gt;data.array, oper2, oper1-&gt;data.array);</span>
-<span class="lineNum">     445 </span><span class="lineNoCov">          0 :     if (result &lt; 0)</span>
+<span class="lineNum">     444 </span><span class="lineCov">          8 :     result = array_setrange(&amp;oper3-&gt;data.array, oper2, oper1-&gt;data.array);</span>
+<span class="lineNum">     445 </span><span class="lineCov">          8 :     if (result &lt; 0)</span>
 <span class="lineNum">     446 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Index out of array bounds. (2)&quot;);</span>
 <span class="lineNum">     447 </span>            : 
-<span class="lineNum">     448 </span><span class="lineNoCov">          0 :     nu = oper3-&gt;data.array;</span>
-<span class="lineNum">     449 </span><span class="lineNoCov">          0 :     oper3-&gt;data.array = NULL;</span>
+<span class="lineNum">     448 </span><span class="lineCov">          8 :     nu = oper3-&gt;data.array;</span>
+<span class="lineNum">     449 </span><span class="lineCov">          8 :     oper3-&gt;data.array = NULL;</span>
 <span class="lineNum">     450 </span>            : 
-<span class="lineNum">     451 </span><span class="lineNoCov">          0 :     CLEAR(oper1);</span>
-<span class="lineNum">     452 </span><span class="lineNoCov">          0 :     CLEAR(oper2);</span>
-<span class="lineNum">     453 </span><span class="lineNoCov">          0 :     CLEAR(oper3);</span>
+<span class="lineNum">     451 </span><span class="lineCov">          8 :     CLEAR(oper1);</span>
+<span class="lineNum">     452 </span><span class="lineCov">          8 :     CLEAR(oper2);</span>
+<span class="lineNum">     453 </span><span class="lineCov">          8 :     CLEAR(oper3);</span>
 <span class="lineNum">     454 </span>            : 
-<span class="lineNum">     455 </span><span class="lineNoCov">          0 :     PushArrayRaw(nu);</span>
+<span class="lineNum">     455 </span><span class="lineCov">          8 :     PushArrayRaw(nu);</span>
 <span class="lineNum">     456 </span>            : }
 <a name="457"><span class="lineNum">     457 </span>            : </a>
 <span class="lineNum">     458 </span>            : void
-<span class="lineNum">     459 </span><span class="lineNoCov">          0 : prim_array_insertrange(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     459 </span><span class="lineCov">          6 : prim_array_insertrange(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     460 </span>            : {
 <span class="lineNum">     461 </span>            :     stk_array *nu;
 <span class="lineNum">     462 </span>            : 
-<span class="lineNum">     463 </span><span class="lineNoCov">          0 :     CHECKOP(3);</span>
-<span class="lineNum">     464 </span><span class="lineNoCov">          0 :     oper1 = POP();              /* arr  array to insert */</span>
-<span class="lineNum">     465 </span><span class="lineNoCov">          0 :     oper2 = POP();              /* ???  starting pos for lists */</span>
-<span class="lineNum">     466 </span><span class="lineNoCov">          0 :     oper3 = POP();              /* arr  Array   */</span>
-<span class="lineNum">     467 </span><span class="lineNoCov">          0 :     if (oper1-&gt;type != PROG_ARRAY)</span>
+<span class="lineNum">     463 </span><span class="lineCov">          6 :     CHECKOP(3);</span>
+<span class="lineNum">     464 </span><span class="lineCov">          6 :     oper1 = POP();              /* arr  array to insert */</span>
+<span class="lineNum">     465 </span><span class="lineCov">          6 :     oper2 = POP();              /* ???  starting pos for lists */</span>
+<span class="lineNum">     466 </span><span class="lineCov">          6 :     oper3 = POP();              /* arr  Array   */</span>
+<span class="lineNum">     467 </span><span class="lineCov">          6 :     if (oper1-&gt;type != PROG_ARRAY)</span>
 <span class="lineNum">     468 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an array. (3)&quot;);</span>
-<span class="lineNum">     469 </span><span class="lineNoCov">          0 :     if (oper2-&gt;type != PROG_INTEGER &amp;&amp; oper2-&gt;type != PROG_STRING)</span>
+<span class="lineNum">     469 </span><span class="lineCov">          6 :     if (oper2-&gt;type != PROG_INTEGER &amp;&amp; oper2-&gt;type != PROG_STRING)</span>
 <span class="lineNum">     470 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an integer or string. (2)&quot;);</span>
-<span class="lineNum">     471 </span><span class="lineNoCov">          0 :     if (oper3-&gt;type != PROG_ARRAY)</span>
+<span class="lineNum">     471 </span><span class="lineCov">          6 :     if (oper3-&gt;type != PROG_ARRAY)</span>
 <span class="lineNum">     472 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an array. (1)&quot;);</span>
 <span class="lineNum">     473 </span>            : 
-<span class="lineNum">     474 </span><span class="lineNoCov">          0 :     result = array_insertrange(&amp;oper3-&gt;data.array, oper2, oper1-&gt;data.array);</span>
-<span class="lineNum">     475 </span><span class="lineNoCov">          0 :     if (result &lt; 0)</span>
+<span class="lineNum">     474 </span><span class="lineCov">          6 :     result = array_insertrange(&amp;oper3-&gt;data.array, oper2, oper1-&gt;data.array);</span>
+<span class="lineNum">     475 </span><span class="lineCov">          6 :     if (result &lt; 0)</span>
 <span class="lineNum">     476 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Index out of array bounds. (2)&quot;);</span>
 <span class="lineNum">     477 </span>            : 
-<span class="lineNum">     478 </span><span class="lineNoCov">          0 :     nu = oper3-&gt;data.array;</span>
-<span class="lineNum">     479 </span><span class="lineNoCov">          0 :     oper3-&gt;data.array = NULL;</span>
+<span class="lineNum">     478 </span><span class="lineCov">          6 :     nu = oper3-&gt;data.array;</span>
+<span class="lineNum">     479 </span><span class="lineCov">          6 :     oper3-&gt;data.array = NULL;</span>
 <span class="lineNum">     480 </span>            : 
-<span class="lineNum">     481 </span><span class="lineNoCov">          0 :     CLEAR(oper1);</span>
-<span class="lineNum">     482 </span><span class="lineNoCov">          0 :     CLEAR(oper2);</span>
-<span class="lineNum">     483 </span><span class="lineNoCov">          0 :     CLEAR(oper3);</span>
+<span class="lineNum">     481 </span><span class="lineCov">          6 :     CLEAR(oper1);</span>
+<span class="lineNum">     482 </span><span class="lineCov">          6 :     CLEAR(oper2);</span>
+<span class="lineNum">     483 </span><span class="lineCov">          6 :     CLEAR(oper3);</span>
 <span class="lineNum">     484 </span>            : 
-<span class="lineNum">     485 </span><span class="lineNoCov">          0 :     PushArrayRaw(nu);</span>
+<span class="lineNum">     485 </span><span class="lineCov">          6 :     PushArrayRaw(nu);</span>
 <span class="lineNum">     486 </span>            : }
 <a name="487"><span class="lineNum">     487 </span>            : </a>
 <span class="lineNum">     488 </span>            : void
-<span class="lineNum">     489 </span><span class="lineCov">          7 : prim_array_delitem(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     489 </span><span class="lineCov">         13 : prim_array_delitem(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     490 </span>            : {
 <span class="lineNum">     491 </span>            :     stk_array *nu;
 <span class="lineNum">     492 </span>            : 
-<span class="lineNum">     493 </span><span class="lineCov">          7 :     CHECKOP(2);</span>
-<span class="lineNum">     494 </span><span class="lineCov">          7 :     oper1 = POP();              /* int  item to delete */</span>
-<span class="lineNum">     495 </span><span class="lineCov">          7 :     oper2 = POP();              /* arr  Array   */</span>
-<span class="lineNum">     496 </span><span class="lineCov">          7 :     if (oper1-&gt;type != PROG_INTEGER &amp;&amp; oper1-&gt;type != PROG_STRING)</span>
+<span class="lineNum">     493 </span><span class="lineCov">         13 :     CHECKOP(2);</span>
+<span class="lineNum">     494 </span><span class="lineCov">         13 :     oper1 = POP();              /* int  item to delete */</span>
+<span class="lineNum">     495 </span><span class="lineCov">         13 :     oper2 = POP();              /* arr  Array   */</span>
+<span class="lineNum">     496 </span><span class="lineCov">         13 :     if (oper1-&gt;type != PROG_INTEGER &amp;&amp; oper1-&gt;type != PROG_STRING)</span>
 <span class="lineNum">     497 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an integer or string. (2)&quot;);</span>
-<span class="lineNum">     498 </span><span class="lineCov">          7 :     if (oper2-&gt;type != PROG_ARRAY)</span>
+<span class="lineNum">     498 </span><span class="lineCov">         13 :     if (oper2-&gt;type != PROG_ARRAY)</span>
 <span class="lineNum">     499 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an array. (1)&quot;);</span>
 <span class="lineNum">     500 </span>            : 
-<span class="lineNum">     501 </span><span class="lineCov">          7 :     result = array_delitem(&amp;oper2-&gt;data.array, oper1);</span>
-<span class="lineNum">     502 </span><span class="lineCov">          7 :     if (result &lt; 0)</span>
+<span class="lineNum">     501 </span><span class="lineCov">         13 :     result = array_delitem(&amp;oper2-&gt;data.array, oper1);</span>
+<span class="lineNum">     502 </span><span class="lineCov">         13 :     if (result &lt; 0)</span>
 <span class="lineNum">     503 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Bad array index specified.&quot;);</span>
 <span class="lineNum">     504 </span>            : 
-<span class="lineNum">     505 </span><span class="lineCov">          7 :     nu = oper2-&gt;data.array;</span>
-<span class="lineNum">     506 </span><span class="lineCov">          7 :     oper2-&gt;data.array = NULL;</span>
+<span class="lineNum">     505 </span><span class="lineCov">         13 :     nu = oper2-&gt;data.array;</span>
+<span class="lineNum">     506 </span><span class="lineCov">         13 :     oper2-&gt;data.array = NULL;</span>
 <span class="lineNum">     507 </span>            : 
-<span class="lineNum">     508 </span><span class="lineCov">          7 :     CLEAR(oper1);</span>
-<span class="lineNum">     509 </span><span class="lineCov">          7 :     CLEAR(oper2);</span>
+<span class="lineNum">     508 </span><span class="lineCov">         13 :     CLEAR(oper1);</span>
+<span class="lineNum">     509 </span><span class="lineCov">         13 :     CLEAR(oper2);</span>
 <span class="lineNum">     510 </span>            : 
-<span class="lineNum">     511 </span><span class="lineCov">          7 :     PushArrayRaw(nu);</span>
+<span class="lineNum">     511 </span><span class="lineCov">         13 :     PushArrayRaw(nu);</span>
 <span class="lineNum">     512 </span>            : }
 <a name="513"><span class="lineNum">     513 </span>            : </a>
 <span class="lineNum">     514 </span>            : void
-<span class="lineNum">     515 </span><span class="lineNoCov">          0 : prim_array_delrange(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     515 </span><span class="lineCov">          6 : prim_array_delrange(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     516 </span>            : {
 <span class="lineNum">     517 </span>            :     stk_array *nu;
 <span class="lineNum">     518 </span>            : 
-<span class="lineNum">     519 </span><span class="lineNoCov">          0 :     CHECKOP(3);</span>
-<span class="lineNum">     520 </span><span class="lineNoCov">          0 :     oper1 = POP();              /* int  range end item */</span>
-<span class="lineNum">     521 </span><span class="lineNoCov">          0 :     oper2 = POP();              /* int  range start item */</span>
-<span class="lineNum">     522 </span><span class="lineNoCov">          0 :     oper3 = POP();              /* arr  Array   */</span>
-<span class="lineNum">     523 </span><span class="lineNoCov">          0 :     if (oper1-&gt;type != PROG_INTEGER &amp;&amp; oper1-&gt;type != PROG_STRING)</span>
+<span class="lineNum">     519 </span><span class="lineCov">          6 :     CHECKOP(3);</span>
+<span class="lineNum">     520 </span><span class="lineCov">          6 :     oper1 = POP();              /* int  range end item */</span>
+<span class="lineNum">     521 </span><span class="lineCov">          6 :     oper2 = POP();              /* int  range start item */</span>
+<span class="lineNum">     522 </span><span class="lineCov">          6 :     oper3 = POP();              /* arr  Array   */</span>
+<span class="lineNum">     523 </span><span class="lineCov">          6 :     if (oper1-&gt;type != PROG_INTEGER &amp;&amp; oper1-&gt;type != PROG_STRING)</span>
 <span class="lineNum">     524 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an integer or string. (3)&quot;);</span>
-<span class="lineNum">     525 </span><span class="lineNoCov">          0 :     if (oper2-&gt;type != PROG_INTEGER &amp;&amp; oper2-&gt;type != PROG_STRING)</span>
+<span class="lineNum">     525 </span><span class="lineCov">          6 :     if (oper2-&gt;type != PROG_INTEGER &amp;&amp; oper2-&gt;type != PROG_STRING)</span>
 <span class="lineNum">     526 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an integer or string. (2)&quot;);</span>
-<span class="lineNum">     527 </span><span class="lineNoCov">          0 :     if (oper3-&gt;type != PROG_ARRAY)</span>
+<span class="lineNum">     527 </span><span class="lineCov">          6 :     if (oper3-&gt;type != PROG_ARRAY)</span>
 <span class="lineNum">     528 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an array. (1)&quot;);</span>
 <span class="lineNum">     529 </span>            : 
-<span class="lineNum">     530 </span><span class="lineNoCov">          0 :     result = array_delrange(&amp;oper3-&gt;data.array, oper2, oper1);</span>
-<span class="lineNum">     531 </span><span class="lineNoCov">          0 :     if (result &lt; 0)</span>
+<span class="lineNum">     530 </span><span class="lineCov">          6 :     result = array_delrange(&amp;oper3-&gt;data.array, oper2, oper1);</span>
+<span class="lineNum">     531 </span><span class="lineCov">          6 :     if (result &lt; 0)</span>
 <span class="lineNum">     532 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Bad array range specified.&quot;);</span>
 <span class="lineNum">     533 </span>            : 
-<span class="lineNum">     534 </span><span class="lineNoCov">          0 :     nu = oper3-&gt;data.array;</span>
-<span class="lineNum">     535 </span><span class="lineNoCov">          0 :     oper3-&gt;data.array = NULL;</span>
+<span class="lineNum">     534 </span><span class="lineCov">          6 :     nu = oper3-&gt;data.array;</span>
+<span class="lineNum">     535 </span><span class="lineCov">          6 :     oper3-&gt;data.array = NULL;</span>
 <span class="lineNum">     536 </span>            : 
-<span class="lineNum">     537 </span><span class="lineNoCov">          0 :     CLEAR(oper1);</span>
-<span class="lineNum">     538 </span><span class="lineNoCov">          0 :     CLEAR(oper2);</span>
-<span class="lineNum">     539 </span><span class="lineNoCov">          0 :     CLEAR(oper3);</span>
+<span class="lineNum">     537 </span><span class="lineCov">          6 :     CLEAR(oper1);</span>
+<span class="lineNum">     538 </span><span class="lineCov">          6 :     CLEAR(oper2);</span>
+<span class="lineNum">     539 </span><span class="lineCov">          6 :     CLEAR(oper3);</span>
 <span class="lineNum">     540 </span>            : 
-<span class="lineNum">     541 </span><span class="lineNoCov">          0 :     PushArrayRaw(nu);</span>
+<span class="lineNum">     541 </span><span class="lineCov">          6 :     PushArrayRaw(nu);</span>
 <span class="lineNum">     542 </span>            : }
 <a name="543"><span class="lineNum">     543 </span>            : </a>
 <span class="lineNum">     544 </span>            : void
-<span class="lineNum">     545 </span><span class="lineNoCov">          0 : prim_array_cut(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     545 </span><span class="lineCov">          7 : prim_array_cut(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     546 </span>            : {
-<span class="lineNum">     547 </span><span class="lineNoCov">          0 :     stk_array *nu1 = NULL;</span>
-<span class="lineNum">     548 </span><span class="lineNoCov">          0 :     stk_array *nu2 = NULL;</span>
+<span class="lineNum">     547 </span><span class="lineCov">          7 :     stk_array *nu1 = NULL;</span>
+<span class="lineNum">     548 </span><span class="lineCov">          7 :     stk_array *nu2 = NULL;</span>
 <span class="lineNum">     549 </span>            :     struct inst temps;
 <span class="lineNum">     550 </span>            :     struct inst tempc;
 <span class="lineNum">     551 </span>            :     struct inst tempe;
 <span class="lineNum">     552 </span>            : 
-<span class="lineNum">     553 </span><span class="lineNoCov">          0 :     CHECKOP(2);</span>
-<span class="lineNum">     554 </span><span class="lineNoCov">          0 :     oper2 = POP();              /* int  position */</span>
-<span class="lineNum">     555 </span><span class="lineNoCov">          0 :     oper1 = POP();              /* arr  Array   */</span>
-<span class="lineNum">     556 </span><span class="lineNoCov">          0 :     if (oper2-&gt;type != PROG_INTEGER &amp;&amp; oper2-&gt;type != PROG_STRING)</span>
+<span class="lineNum">     553 </span><span class="lineCov">          7 :     CHECKOP(2);</span>
+<span class="lineNum">     554 </span><span class="lineCov">          7 :     oper2 = POP();              /* int  position */</span>
+<span class="lineNum">     555 </span><span class="lineCov">          7 :     oper1 = POP();              /* arr  Array   */</span>
+<span class="lineNum">     556 </span><span class="lineCov">          7 :     if (oper2-&gt;type != PROG_INTEGER &amp;&amp; oper2-&gt;type != PROG_STRING)</span>
 <span class="lineNum">     557 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an integer or string. (2)&quot;);</span>
-<span class="lineNum">     558 </span><span class="lineNoCov">          0 :     if (oper1-&gt;type != PROG_ARRAY)</span>
+<span class="lineNum">     558 </span><span class="lineCov">          7 :     if (oper1-&gt;type != PROG_ARRAY)</span>
 <span class="lineNum">     559 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an array. (1)&quot;);</span>
 <span class="lineNum">     560 </span>            : 
-<span class="lineNum">     561 </span><span class="lineNoCov">          0 :     temps.type = PROG_INTEGER;</span>
-<span class="lineNum">     562 </span><span class="lineNoCov">          0 :     temps.data.number = 0;</span>
-<span class="lineNum">     563 </span><span class="lineNoCov">          0 :     result = array_first(oper1-&gt;data.array, &amp;temps);</span>
+<span class="lineNum">     561 </span><span class="lineCov">          7 :     temps.type = PROG_INTEGER;</span>
+<span class="lineNum">     562 </span><span class="lineCov">          7 :     temps.data.number = 0;</span>
+<span class="lineNum">     563 </span><span class="lineCov">          7 :     result = array_first(oper1-&gt;data.array, &amp;temps);</span>
 <span class="lineNum">     564 </span>            : 
-<span class="lineNum">     565 </span><span class="lineNoCov">          0 :     if (result) {</span>
-<span class="lineNum">     566 </span><span class="lineNoCov">          0 :         copyinst(oper2, &amp;tempc);</span>
-<span class="lineNum">     567 </span><span class="lineNoCov">          0 :         result = array_prev(oper1-&gt;data.array, &amp;tempc);</span>
-<span class="lineNum">     568 </span><span class="lineNoCov">          0 :         if (result) {</span>
-<span class="lineNum">     569 </span><span class="lineNoCov">          0 :             nu1 = array_getrange(oper1-&gt;data.array, &amp;temps, &amp;tempc);</span>
-<span class="lineNum">     570 </span><span class="lineNoCov">          0 :             CLEAR(&amp;tempc);</span>
+<span class="lineNum">     565 </span><span class="lineCov">          7 :     if (result) {</span>
+<span class="lineNum">     566 </span><span class="lineCov">          7 :         copyinst(oper2, &amp;tempc);</span>
+<span class="lineNum">     567 </span><span class="lineCov">          7 :         result = array_prev(oper1-&gt;data.array, &amp;tempc);</span>
+<span class="lineNum">     568 </span><span class="lineCov">          7 :         if (result) {</span>
+<span class="lineNum">     569 </span><span class="lineCov">          7 :             nu1 = array_getrange(oper1-&gt;data.array, &amp;temps, &amp;tempc);</span>
+<span class="lineNum">     570 </span><span class="lineCov">          7 :             CLEAR(&amp;tempc);</span>
 <span class="lineNum">     571 </span>            :         }
 <span class="lineNum">     572 </span>            : 
-<span class="lineNum">     573 </span><span class="lineNoCov">          0 :         result = array_last(oper1-&gt;data.array, &amp;tempe);</span>
-<span class="lineNum">     574 </span><span class="lineNoCov">          0 :         if (result) {</span>
-<span class="lineNum">     575 </span><span class="lineNoCov">          0 :             nu2 = array_getrange(oper1-&gt;data.array, oper2, &amp;tempe);</span>
-<span class="lineNum">     576 </span><span class="lineNoCov">          0 :             CLEAR(&amp;tempe);</span>
+<span class="lineNum">     573 </span><span class="lineCov">          7 :         result = array_last(oper1-&gt;data.array, &amp;tempe);</span>
+<span class="lineNum">     574 </span><span class="lineCov">          7 :         if (result) {</span>
+<span class="lineNum">     575 </span><span class="lineCov">          7 :             nu2 = array_getrange(oper1-&gt;data.array, oper2, &amp;tempe);</span>
+<span class="lineNum">     576 </span><span class="lineCov">          7 :             CLEAR(&amp;tempe);</span>
 <span class="lineNum">     577 </span>            :         }
 <span class="lineNum">     578 </span>            : 
-<span class="lineNum">     579 </span><span class="lineNoCov">          0 :         CLEAR(&amp;temps);</span>
+<span class="lineNum">     579 </span><span class="lineCov">          7 :         CLEAR(&amp;temps);</span>
 <span class="lineNum">     580 </span>            :     }
 <span class="lineNum">     581 </span>            : 
-<span class="lineNum">     582 </span><span class="lineNoCov">          0 :     if (!nu1)</span>
+<span class="lineNum">     582 </span><span class="lineCov">          7 :     if (!nu1)</span>
 <span class="lineNum">     583 </span><span class="lineNoCov">          0 :         nu1 = new_array_packed(0);</span>
-<span class="lineNum">     584 </span><span class="lineNoCov">          0 :     if (!nu2)</span>
+<span class="lineNum">     584 </span><span class="lineCov">          7 :     if (!nu2)</span>
 <span class="lineNum">     585 </span><span class="lineNoCov">          0 :         nu2 = new_array_packed(0);</span>
 <span class="lineNum">     586 </span>            : 
-<span class="lineNum">     587 </span><span class="lineNoCov">          0 :     CLEAR(oper1);</span>
-<span class="lineNum">     588 </span><span class="lineNoCov">          0 :     CLEAR(oper2);</span>
+<span class="lineNum">     587 </span><span class="lineCov">          7 :     CLEAR(oper1);</span>
+<span class="lineNum">     588 </span><span class="lineCov">          7 :     CLEAR(oper2);</span>
 <span class="lineNum">     589 </span>            : 
-<span class="lineNum">     590 </span><span class="lineNoCov">          0 :     PushArrayRaw(nu1);</span>
-<span class="lineNum">     591 </span><span class="lineNoCov">          0 :     PushArrayRaw(nu2);</span>
+<span class="lineNum">     590 </span><span class="lineCov">          7 :     PushArrayRaw(nu1);</span>
+<span class="lineNum">     591 </span><span class="lineCov">          7 :     PushArrayRaw(nu2);</span>
 <span class="lineNum">     592 </span>            : }
 <a name="593"><span class="lineNum">     593 </span>            : </a>
 <span class="lineNum">     594 </span>            : void
@@ -789,83 +789,83 @@
 <span class="lineNum">     727 </span>            : }
 <a name="728"><span class="lineNum">     728 </span>            : </a>
 <span class="lineNum">     729 </span>            : void
-<span class="lineNum">     730 </span><span class="lineNoCov">          0 : prim_array_notify(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     730 </span><span class="lineCov">          9 : prim_array_notify(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     731 </span>            : {
 <span class="lineNum">     732 </span>            :     stk_array *strarr;
 <span class="lineNum">     733 </span>            :     stk_array *refarr;
-<span class="lineNum">     734 </span><span class="lineNoCov">          0 :     struct inst *oper1 = NULL, *oper2 = NULL, *oper3 = NULL, *oper4 = NULL;</span>
+<span class="lineNum">     734 </span><span class="lineCov">          9 :     struct inst *oper1 = NULL, *oper2 = NULL, *oper3 = NULL, *oper4 = NULL;</span>
 <span class="lineNum">     735 </span>            :     struct inst temp1, temp2;
 <span class="lineNum">     736 </span>            : 
-<span class="lineNum">     737 </span><span class="lineNoCov">          0 :     CHECKOP(2);</span>
-<span class="lineNum">     738 </span><span class="lineNoCov">          0 :     oper2 = POP();</span>
-<span class="lineNum">     739 </span><span class="lineNoCov">          0 :     oper1 = POP();</span>
-<span class="lineNum">     740 </span><span class="lineNoCov">          0 :     if (oper1-&gt;type != PROG_ARRAY)</span>
-<span class="lineNum">     741 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an array of strings. (1)&quot;);</span>
-<span class="lineNum">     742 </span><span class="lineNoCov">          0 :     if (!array_is_homogenous(oper1-&gt;data.array, PROG_STRING))</span>
+<span class="lineNum">     737 </span><span class="lineCov">         12 :     CHECKOP(2);</span>
+<span class="lineNum">     738 </span><span class="lineCov">          9 :     oper2 = POP();</span>
+<span class="lineNum">     739 </span><span class="lineCov">          9 :     oper1 = POP();</span>
+<span class="lineNum">     740 </span><span class="lineCov">          9 :     if (oper1-&gt;type != PROG_ARRAY)</span>
+<span class="lineNum">     741 </span><span class="lineCov">          2 :         abort_interp(&quot;Argument not an array of strings. (1)&quot;);</span>
+<span class="lineNum">     742 </span><span class="lineCov">          7 :     if (!array_is_homogenous(oper1-&gt;data.array, PROG_STRING))</span>
 <span class="lineNum">     743 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an array of strings. (1)&quot;);</span>
-<span class="lineNum">     744 </span><span class="lineNoCov">          0 :     if (oper2-&gt;type != PROG_ARRAY)</span>
-<span class="lineNum">     745 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an array of dbrefs. (2)&quot;);</span>
-<span class="lineNum">     746 </span><span class="lineNoCov">          0 :     if (!array_is_homogenous(oper2-&gt;data.array, PROG_OBJECT))</span>
+<span class="lineNum">     744 </span><span class="lineCov">          7 :     if (oper2-&gt;type != PROG_ARRAY)</span>
+<span class="lineNum">     745 </span><span class="lineCov">          1 :         abort_interp(&quot;Argument not an array of dbrefs. (2)&quot;);</span>
+<span class="lineNum">     746 </span><span class="lineCov">          6 :     if (!array_is_homogenous(oper2-&gt;data.array, PROG_OBJECT))</span>
 <span class="lineNum">     747 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an array of dbrefs. (2)&quot;);</span>
-<span class="lineNum">     748 </span><span class="lineNoCov">          0 :     strarr = oper1-&gt;data.array;</span>
-<span class="lineNum">     749 </span><span class="lineNoCov">          0 :     refarr = oper2-&gt;data.array;</span>
+<span class="lineNum">     748 </span><span class="lineCov">          6 :     strarr = oper1-&gt;data.array;</span>
+<span class="lineNum">     749 </span><span class="lineCov">          6 :     refarr = oper2-&gt;data.array;</span>
 <span class="lineNum">     750 </span>            : 
-<span class="lineNum">     751 </span><span class="lineNoCov">          0 :     if (array_first(strarr, &amp;temp2)) {</span>
+<span class="lineNum">     751 </span><span class="lineCov">          6 :     if (array_first(strarr, &amp;temp2)) {</span>
 <span class="lineNum">     752 </span>            :         do {
-<span class="lineNum">     753 </span><span class="lineNoCov">          0 :             oper4 = array_getitem(strarr, &amp;temp2);</span>
-<span class="lineNum">     754 </span><span class="lineNoCov">          0 :             if (tp_force_mlev1_name_notify &amp;&amp; mlev &lt; 2) {</span>
+<span class="lineNum">     753 </span><span class="lineCov">         12 :             oper4 = array_getitem(strarr, &amp;temp2);</span>
+<span class="lineNum">     754 </span><span class="lineCov">         12 :             if (tp_force_mlev1_name_notify &amp;&amp; mlev &lt; 2) {</span>
 <span class="lineNum">     755 </span><span class="lineNoCov">          0 :                 prefix_message(buf, DoNullInd(oper4-&gt;data.string), NAME(player), BUFFER_LEN,</span>
 <span class="lineNum">     756 </span>            :                                1);
 <span class="lineNum">     757 </span>            :             } else {
 <span class="lineNum">     758 </span>            :                 /* TODO: Is there really a reason to make a copy? */
-<span class="lineNum">     759 </span><span class="lineNoCov">          0 :                 strcpyn(buf, sizeof(buf), DoNullInd(oper4-&gt;data.string));</span>
+<span class="lineNum">     759 </span><span class="lineCov">         12 :                 strcpyn(buf, sizeof(buf), DoNullInd(oper4-&gt;data.string));</span>
 <span class="lineNum">     760 </span>            :             }
 <span class="lineNum">     761 </span>            : 
-<span class="lineNum">     762 </span><span class="lineNoCov">          0 :             if (array_first(refarr, &amp;temp1)) {</span>
+<span class="lineNum">     762 </span><span class="lineCov">         12 :             if (array_first(refarr, &amp;temp1)) {</span>
 <span class="lineNum">     763 </span>            :                 do {
-<span class="lineNum">     764 </span><span class="lineNoCov">          0 :                     oper3 = array_getitem(refarr, &amp;temp1);</span>
+<span class="lineNum">     764 </span><span class="lineCov">         12 :                     oper3 = array_getitem(refarr, &amp;temp1);</span>
 <span class="lineNum">     765 </span>            : 
-<span class="lineNum">     766 </span><span class="lineNoCov">          0 :                     notify_listeners(player, program, oper3-&gt;data.objref,</span>
-<span class="lineNum">     767 </span><span class="lineNoCov">          0 :                                      LOCATION(oper3-&gt;data.objref), buf, 1);</span>
+<span class="lineNum">     766 </span><span class="lineCov">         12 :                     notify_listeners(player, program, oper3-&gt;data.objref,</span>
+<span class="lineNum">     767 </span><span class="lineCov">         12 :                                      LOCATION(oper3-&gt;data.objref), buf, 1);</span>
 <span class="lineNum">     768 </span>            : 
-<span class="lineNum">     769 </span><span class="lineNoCov">          0 :                     oper3 = NULL;</span>
-<span class="lineNum">     770 </span><span class="lineNoCov">          0 :                 } while (array_next(refarr, &amp;temp1));</span>
+<span class="lineNum">     769 </span><span class="lineCov">         12 :                     oper3 = NULL;</span>
+<span class="lineNum">     770 </span><span class="lineCov">         12 :                 } while (array_next(refarr, &amp;temp1));</span>
 <span class="lineNum">     771 </span>            :             }
-<span class="lineNum">     772 </span><span class="lineNoCov">          0 :             oper4 = NULL;</span>
-<span class="lineNum">     773 </span><span class="lineNoCov">          0 :         } while (array_next(strarr, &amp;temp2));</span>
+<span class="lineNum">     772 </span><span class="lineCov">         12 :             oper4 = NULL;</span>
+<span class="lineNum">     773 </span><span class="lineCov">         12 :         } while (array_next(strarr, &amp;temp2));</span>
 <span class="lineNum">     774 </span>            :     }
 <span class="lineNum">     775 </span>            : 
-<span class="lineNum">     776 </span><span class="lineNoCov">          0 :     CLEAR(oper1);</span>
-<span class="lineNum">     777 </span><span class="lineNoCov">          0 :     CLEAR(oper2);</span>
+<span class="lineNum">     776 </span><span class="lineCov">          6 :     CLEAR(oper1);</span>
+<span class="lineNum">     777 </span><span class="lineCov">          6 :     CLEAR(oper2);</span>
 <span class="lineNum">     778 </span>            : }
 <a name="779"><span class="lineNum">     779 </span>            : </a>
 <span class="lineNum">     780 </span>            : void
-<span class="lineNum">     781 </span><span class="lineCov">          2 : prim_array_reverse(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     781 </span><span class="lineCov">          8 : prim_array_reverse(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     782 </span>            : {
 <span class="lineNum">     783 </span>            :     stk_array *arr;
 <span class="lineNum">     784 </span>            :     stk_array *nu;
 <span class="lineNum">     785 </span>            : 
-<span class="lineNum">     786 </span><span class="lineCov">          2 :     CHECKOP(1);</span>
-<span class="lineNum">     787 </span><span class="lineCov">          2 :     oper1 = POP();              /* arr  Array   */</span>
-<span class="lineNum">     788 </span><span class="lineCov">          2 :     if (oper1-&gt;type != PROG_ARRAY)</span>
+<span class="lineNum">     786 </span><span class="lineCov">          8 :     CHECKOP(1);</span>
+<span class="lineNum">     787 </span><span class="lineCov">          8 :     oper1 = POP();              /* arr  Array   */</span>
+<span class="lineNum">     788 </span><span class="lineCov">          8 :     if (oper1-&gt;type != PROG_ARRAY)</span>
 <span class="lineNum">     789 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an array.&quot;);</span>
-<span class="lineNum">     790 </span><span class="lineCov">          2 :     arr = oper1-&gt;data.array;</span>
-<span class="lineNum">     791 </span><span class="lineCov">          2 :     if (arr-&gt;type != ARRAY_PACKED)</span>
+<span class="lineNum">     790 </span><span class="lineCov">          8 :     arr = oper1-&gt;data.array;</span>
+<span class="lineNum">     791 </span><span class="lineCov">          8 :     if (arr-&gt;type != ARRAY_PACKED)</span>
 <span class="lineNum">     792 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument must be a list type array.&quot;);</span>
 <span class="lineNum">     793 </span>            : 
-<span class="lineNum">     794 </span><span class="lineCov">          2 :     result = array_count(arr);</span>
-<span class="lineNum">     795 </span><span class="lineCov">          2 :     nu = new_array_packed(result);</span>
+<span class="lineNum">     794 </span><span class="lineCov">          8 :     result = array_count(arr);</span>
+<span class="lineNum">     795 </span><span class="lineCov">          8 :     nu = new_array_packed(result);</span>
 <span class="lineNum">     796 </span>            : 
-<span class="lineNum">     797 </span><span class="lineCov">          2 :     temp1.type = PROG_INTEGER;</span>
-<span class="lineNum">     798 </span><span class="lineCov">          2 :     temp2.type = PROG_INTEGER;</span>
-<span class="lineNum">     799 </span><span class="lineCov">         14 :     for (int i = 0; i &lt; result; i++) {</span>
-<span class="lineNum">     800 </span><span class="lineCov">         12 :         temp1.data.number = i;</span>
-<span class="lineNum">     801 </span><span class="lineCov">         12 :         temp2.data.number = (result - i) - 1;</span>
-<span class="lineNum">     802 </span><span class="lineCov">         12 :         array_setitem(&amp;nu, &amp;temp1, array_getitem(arr, &amp;temp2));</span>
+<span class="lineNum">     797 </span><span class="lineCov">          8 :     temp1.type = PROG_INTEGER;</span>
+<span class="lineNum">     798 </span><span class="lineCov">          8 :     temp2.type = PROG_INTEGER;</span>
+<span class="lineNum">     799 </span><span class="lineCov">         56 :     for (int i = 0; i &lt; result; i++) {</span>
+<span class="lineNum">     800 </span><span class="lineCov">         48 :         temp1.data.number = i;</span>
+<span class="lineNum">     801 </span><span class="lineCov">         48 :         temp2.data.number = (result - i) - 1;</span>
+<span class="lineNum">     802 </span><span class="lineCov">         48 :         array_setitem(&amp;nu, &amp;temp1, array_getitem(arr, &amp;temp2));</span>
 <span class="lineNum">     803 </span>            :     }
 <span class="lineNum">     804 </span>            : 
-<span class="lineNum">     805 </span><span class="lineCov">          2 :     CLEAR(oper1);</span>
-<span class="lineNum">     806 </span><span class="lineCov">          2 :     PushArrayRaw(nu);</span>
+<span class="lineNum">     805 </span><span class="lineCov">          8 :     CLEAR(oper1);</span>
+<span class="lineNum">     806 </span><span class="lineCov">          8 :     PushArrayRaw(nu);</span>
 <span class="lineNum">     807 </span>            : }
 <span class="lineNum">     808 </span>            : 
 <span class="lineNum">     809 </span>            : static int sortflag_caseinsens = 0;
@@ -873,19 +873,19 @@
 <span class="lineNum">     811 </span>            : static struct inst *sortflag_index = NULL;
 <a name="812"><span class="lineNum">     812 </span>            : </a>
 <span class="lineNum">     813 </span>            : static int
-<span class="lineNum">     814 </span><span class="lineCov">        249 : sortcomp_generic(const void *x, const void *y)</span>
+<span class="lineNum">     814 </span><span class="lineCov">       1121 : sortcomp_generic(const void *x, const void *y)</span>
 <span class="lineNum">     815 </span>            : {
 <span class="lineNum">     816 </span>            :     struct inst *a;
 <span class="lineNum">     817 </span>            :     struct inst *b;
 <span class="lineNum">     818 </span>            : 
-<span class="lineNum">     819 </span><span class="lineCov">        249 :     if (!sortflag_descending) {</span>
-<span class="lineNum">     820 </span><span class="lineCov">        249 :         a = *(struct inst **) x;</span>
-<span class="lineNum">     821 </span><span class="lineCov">        249 :         b = *(struct inst **) y;</span>
+<span class="lineNum">     819 </span><span class="lineCov">       1121 :     if (!sortflag_descending) {</span>
+<span class="lineNum">     820 </span><span class="lineCov">       1121 :         a = *(struct inst **) x;</span>
+<span class="lineNum">     821 </span><span class="lineCov">       1121 :         b = *(struct inst **) y;</span>
 <span class="lineNum">     822 </span>            :     } else {
 <span class="lineNum">     823 </span><span class="lineNoCov">          0 :         a = *(struct inst **) y;</span>
 <span class="lineNum">     824 </span><span class="lineNoCov">          0 :         b = *(struct inst **) x;</span>
 <span class="lineNum">     825 </span>            :     }
-<span class="lineNum">     826 </span><span class="lineCov">        249 :     if (sortflag_index) {</span>
+<span class="lineNum">     826 </span><span class="lineCov">       1121 :     if (sortflag_index) {</span>
 <span class="lineNum">     827 </span>            :         /* This should only be set if comparators are all arrays. */
 <span class="lineNum">     828 </span><span class="lineNoCov">          0 :         a = array_getitem(a-&gt;data.array, sortflag_index);</span>
 <span class="lineNum">     829 </span><span class="lineNoCov">          0 :         b = array_getitem(b-&gt;data.array, sortflag_index);</span>
@@ -897,71 +897,71 @@
 <span class="lineNum">     835 </span><span class="lineNoCov">          0 :             return 1;</span>
 <span class="lineNum">     836 </span>            :         }
 <span class="lineNum">     837 </span>            :     }
-<span class="lineNum">     838 </span><span class="lineCov">        249 :     return (array_idxcmp_case(a, b, (sortflag_caseinsens ? 0 : 1)));</span>
+<span class="lineNum">     838 </span><span class="lineCov">       1121 :     return (array_idxcmp_case(a, b, (sortflag_caseinsens ? 0 : 1)));</span>
 <span class="lineNum">     839 </span>            : }
 <a name="840"><span class="lineNum">     840 </span>            : </a>
 <span class="lineNum">     841 </span>            : static int
-<span class="lineNum">     842 </span><span class="lineCov">        476 : sortcomp_shuffle(const void *x, const void *y)</span>
+<span class="lineNum">     842 </span><span class="lineCov">       1235 : sortcomp_shuffle(const void *x, const void *y)</span>
 <span class="lineNum">     843 </span>            : {
-<span class="lineNum">     844 </span><span class="lineCov">        476 :     return (((RANDOM() &gt;&gt; 8) % 5) - 2);</span>
+<span class="lineNum">     844 </span><span class="lineCov">       1235 :     return (((RANDOM() &gt;&gt; 8) % 5) - 2);</span>
 <span class="lineNum">     845 </span>            : }
 <a name="846"><span class="lineNum">     846 </span>            : </a>
 <span class="lineNum">     847 </span>            : void
-<span class="lineNum">     848 </span><span class="lineCov">          9 : prim_array_sort(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     848 </span><span class="lineCov">         29 : prim_array_sort(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     849 </span>            : {
 <span class="lineNum">     850 </span>            :     stk_array *arr;
 <span class="lineNum">     851 </span>            :     stk_array *nu;
 <span class="lineNum">     852 </span>            :     int count;
 <span class="lineNum">     853 </span>            :     int (*comparator) (const void *, const void *);
-<span class="lineNum">     854 </span><span class="lineCov">          9 :     struct inst **tmparr = NULL;</span>
+<span class="lineNum">     854 </span><span class="lineCov">         29 :     struct inst **tmparr = NULL;</span>
 <span class="lineNum">     855 </span>            : 
-<span class="lineNum">     856 </span><span class="lineCov">          9 :     CHECKOP(2);</span>
-<span class="lineNum">     857 </span><span class="lineCov">          9 :     oper2 = POP();              /* int  sort_type   */</span>
-<span class="lineNum">     858 </span><span class="lineCov">          9 :     oper1 = POP();              /* arr  Array   */</span>
-<span class="lineNum">     859 </span><span class="lineCov">          9 :     if (oper1-&gt;type != PROG_ARRAY)</span>
+<span class="lineNum">     856 </span><span class="lineCov">         29 :     CHECKOP(2);</span>
+<span class="lineNum">     857 </span><span class="lineCov">         29 :     oper2 = POP();              /* int  sort_type   */</span>
+<span class="lineNum">     858 </span><span class="lineCov">         29 :     oper1 = POP();              /* arr  Array   */</span>
+<span class="lineNum">     859 </span><span class="lineCov">         29 :     if (oper1-&gt;type != PROG_ARRAY)</span>
 <span class="lineNum">     860 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an array. (1)&quot;);</span>
-<span class="lineNum">     861 </span><span class="lineCov">          9 :     arr = oper1-&gt;data.array;</span>
-<span class="lineNum">     862 </span><span class="lineCov">          9 :     if (arr-&gt;type != ARRAY_PACKED)</span>
+<span class="lineNum">     861 </span><span class="lineCov">         29 :     arr = oper1-&gt;data.array;</span>
+<span class="lineNum">     862 </span><span class="lineCov">         29 :     if (arr-&gt;type != ARRAY_PACKED)</span>
 <span class="lineNum">     863 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument must be a list type array. (1)&quot;);</span>
 <span class="lineNum">     864 </span>            : 
-<span class="lineNum">     865 </span><span class="lineCov">          9 :     if (oper2-&gt;type != PROG_INTEGER)</span>
+<span class="lineNum">     865 </span><span class="lineCov">         29 :     if (oper2-&gt;type != PROG_INTEGER)</span>
 <span class="lineNum">     866 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Expected integer argument to specify sort type. (2)&quot;);</span>
 <span class="lineNum">     867 </span>            : 
-<span class="lineNum">     868 </span><span class="lineCov">          9 :     temp1.type = PROG_INTEGER;</span>
-<span class="lineNum">     869 </span><span class="lineCov">          9 :     count = array_count(arr);</span>
-<span class="lineNum">     870 </span><span class="lineCov">          9 :     nu = new_array_packed(count);</span>
-<span class="lineNum">     871 </span><span class="lineCov">          9 :     tmparr = (struct inst **) malloc(count * sizeof(struct inst *));</span>
+<span class="lineNum">     868 </span><span class="lineCov">         29 :     temp1.type = PROG_INTEGER;</span>
+<span class="lineNum">     869 </span><span class="lineCov">         29 :     count = array_count(arr);</span>
+<span class="lineNum">     870 </span><span class="lineCov">         29 :     nu = new_array_packed(count);</span>
+<span class="lineNum">     871 </span><span class="lineCov">         29 :     tmparr = (struct inst **) malloc(count * sizeof(struct inst *));</span>
 <span class="lineNum">     872 </span>            : 
-<span class="lineNum">     873 </span><span class="lineCov">        227 :     for (int i = 0; i &lt; count; i++) {</span>
-<span class="lineNum">     874 </span><span class="lineCov">        218 :         temp1.data.number = i;</span>
-<span class="lineNum">     875 </span><span class="lineCov">        218 :         tmparr[i] = array_getitem(arr, &amp;temp1);</span>
+<span class="lineNum">     873 </span><span class="lineCov">        725 :     for (int i = 0; i &lt; count; i++) {</span>
+<span class="lineNum">     874 </span><span class="lineCov">        696 :         temp1.data.number = i;</span>
+<span class="lineNum">     875 </span><span class="lineCov">        696 :         tmparr[i] = array_getitem(arr, &amp;temp1);</span>
 <span class="lineNum">     876 </span>            :     }
 <span class="lineNum">     877 </span>            : 
 <span class="lineNum">     878 </span>            :     /* WORK: if we go multithreaded, we'll need to lock a mutex here. */
 <span class="lineNum">     879 </span>            :     /*       Share this mutex with ARRAY_SORT_INDEXED. */
-<span class="lineNum">     880 </span><span class="lineCov">          9 :     sortflag_caseinsens = (oper2-&gt;data.number &amp; SORTTYPE_CASEINSENS) ? 1 : 0;</span>
-<span class="lineNum">     881 </span><span class="lineCov">          9 :     sortflag_descending = (oper2-&gt;data.number &amp; SORTTYPE_DESCENDING) ? 1 : 0;</span>
-<span class="lineNum">     882 </span><span class="lineCov">          9 :     sortflag_index = NULL;</span>
+<span class="lineNum">     880 </span><span class="lineCov">         29 :     sortflag_caseinsens = (oper2-&gt;data.number &amp; SORTTYPE_CASEINSENS) ? 1 : 0;</span>
+<span class="lineNum">     881 </span><span class="lineCov">         29 :     sortflag_descending = (oper2-&gt;data.number &amp; SORTTYPE_DESCENDING) ? 1 : 0;</span>
+<span class="lineNum">     882 </span><span class="lineCov">         29 :     sortflag_index = NULL;</span>
 <span class="lineNum">     883 </span>            : 
-<span class="lineNum">     884 </span><span class="lineCov">          9 :     if ((oper2-&gt;data.number &amp; SORTTYPE_SHUFFLE)) {</span>
-<span class="lineNum">     885 </span><span class="lineCov">          5 :         comparator = sortcomp_shuffle;</span>
+<span class="lineNum">     884 </span><span class="lineCov">         29 :     if ((oper2-&gt;data.number &amp; SORTTYPE_SHUFFLE)) {</span>
+<span class="lineNum">     885 </span><span class="lineCov">         12 :         comparator = sortcomp_shuffle;</span>
 <span class="lineNum">     886 </span>            :     } else {
-<span class="lineNum">     887 </span><span class="lineCov">          4 :         comparator = sortcomp_generic;</span>
+<span class="lineNum">     887 </span><span class="lineCov">         17 :         comparator = sortcomp_generic;</span>
 <span class="lineNum">     888 </span>            :     }
 <span class="lineNum">     889 </span>            : 
-<span class="lineNum">     890 </span><span class="lineCov">          9 :     qsort(tmparr, count, sizeof(struct inst *), comparator);</span>
+<span class="lineNum">     890 </span><span class="lineCov">         29 :     qsort(tmparr, count, sizeof(struct inst *), comparator);</span>
 <span class="lineNum">     891 </span>            :     /* WORK: if we go multithreaded, the mutex should be released here. */
 <span class="lineNum">     892 </span>            :     /*       Share this mutex with ARRAY_SORT_INDEXED. */
 <span class="lineNum">     893 </span>            : 
-<span class="lineNum">     894 </span><span class="lineCov">        227 :     for (int i = 0; i &lt; count; i++) {</span>
-<span class="lineNum">     895 </span><span class="lineCov">        218 :         temp1.data.number = i;</span>
-<span class="lineNum">     896 </span><span class="lineCov">        218 :         array_setitem(&amp;nu, &amp;temp1, tmparr[i]);</span>
+<span class="lineNum">     894 </span><span class="lineCov">        725 :     for (int i = 0; i &lt; count; i++) {</span>
+<span class="lineNum">     895 </span><span class="lineCov">        696 :         temp1.data.number = i;</span>
+<span class="lineNum">     896 </span><span class="lineCov">        696 :         array_setitem(&amp;nu, &amp;temp1, tmparr[i]);</span>
 <span class="lineNum">     897 </span>            :     }
-<span class="lineNum">     898 </span><span class="lineCov">          9 :     free(tmparr);</span>
+<span class="lineNum">     898 </span><span class="lineCov">         29 :     free(tmparr);</span>
 <span class="lineNum">     899 </span>            : 
-<span class="lineNum">     900 </span><span class="lineCov">          9 :     CLEAR(oper1);</span>
-<span class="lineNum">     901 </span><span class="lineCov">          9 :     CLEAR(oper2);</span>
-<span class="lineNum">     902 </span><span class="lineCov">          9 :     PushArrayRaw(nu);</span>
+<span class="lineNum">     900 </span><span class="lineCov">         29 :     CLEAR(oper1);</span>
+<span class="lineNum">     901 </span><span class="lineCov">         29 :     CLEAR(oper2);</span>
+<span class="lineNum">     902 </span><span class="lineCov">         29 :     PushArrayRaw(nu);</span>
 <span class="lineNum">     903 </span>            : }
 <a name="904"><span class="lineNum">     904 </span>            : </a>
 <span class="lineNum">     905 </span>            : void
@@ -1697,7 +1697,7 @@
 <span class="lineNum">    1635 </span>            : }
 <a name="1636"><span class="lineNum">    1636 </span>            : </a>
 <span class="lineNum">    1637 </span>            : void
-<span class="lineNum">    1638 </span><span class="lineCov">          2 : prim_array_compare(PRIM_PROTOTYPE)</span>
+<span class="lineNum">    1638 </span><span class="lineCov">         47 : prim_array_compare(PRIM_PROTOTYPE)</span>
 <span class="lineNum">    1639 </span>            : {
 <span class="lineNum">    1640 </span>            :     struct inst *val1;
 <span class="lineNum">    1641 </span>            :     struct inst *val2;
@@ -1705,54 +1705,54 @@
 <span class="lineNum">    1643 </span>            :     stk_array *arr2;
 <span class="lineNum">    1644 </span>            :     int res1, res2;
 <span class="lineNum">    1645 </span>            : 
-<span class="lineNum">    1646 </span><span class="lineCov">          2 :     CHECKOP(2);</span>
-<span class="lineNum">    1647 </span><span class="lineCov">          2 :     oper2 = POP();              /* arr  Array */</span>
-<span class="lineNum">    1648 </span><span class="lineCov">          2 :     oper1 = POP();              /* arr  Array */</span>
-<span class="lineNum">    1649 </span><span class="lineCov">          2 :     if (oper1-&gt;type != PROG_ARRAY)</span>
+<span class="lineNum">    1646 </span><span class="lineCov">         47 :     CHECKOP(2);</span>
+<span class="lineNum">    1647 </span><span class="lineCov">         47 :     oper2 = POP();              /* arr  Array */</span>
+<span class="lineNum">    1648 </span><span class="lineCov">         47 :     oper1 = POP();              /* arr  Array */</span>
+<span class="lineNum">    1649 </span><span class="lineCov">         47 :     if (oper1-&gt;type != PROG_ARRAY)</span>
 <span class="lineNum">    1650 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an array. (1)&quot;);</span>
-<span class="lineNum">    1651 </span><span class="lineCov">          2 :     if (oper2-&gt;type != PROG_ARRAY)</span>
+<span class="lineNum">    1651 </span><span class="lineCov">         47 :     if (oper2-&gt;type != PROG_ARRAY)</span>
 <span class="lineNum">    1652 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an array. (2)&quot;);</span>
 <span class="lineNum">    1653 </span>            : 
-<span class="lineNum">    1654 </span><span class="lineCov">          2 :     arr1 = oper1-&gt;data.array;</span>
-<span class="lineNum">    1655 </span><span class="lineCov">          2 :     arr2 = oper2-&gt;data.array;</span>
-<span class="lineNum">    1656 </span><span class="lineCov">          2 :     res1 = array_first(arr1, &amp;temp1);</span>
-<span class="lineNum">    1657 </span><span class="lineCov">          2 :     res2 = array_first(arr2, &amp;temp2);</span>
+<span class="lineNum">    1654 </span><span class="lineCov">         47 :     arr1 = oper1-&gt;data.array;</span>
+<span class="lineNum">    1655 </span><span class="lineCov">         47 :     arr2 = oper2-&gt;data.array;</span>
+<span class="lineNum">    1656 </span><span class="lineCov">         47 :     res1 = array_first(arr1, &amp;temp1);</span>
+<span class="lineNum">    1657 </span><span class="lineCov">         47 :     res2 = array_first(arr2, &amp;temp2);</span>
 <span class="lineNum">    1658 </span>            : 
-<span class="lineNum">    1659 </span><span class="lineCov">          2 :     if (!res1 &amp;&amp; !res2) {</span>
+<span class="lineNum">    1659 </span><span class="lineCov">         47 :     if (!res1 &amp;&amp; !res2) {</span>
 <span class="lineNum">    1660 </span><span class="lineNoCov">          0 :         result = 0;</span>
-<span class="lineNum">    1661 </span><span class="lineCov">          2 :     } else if (!res1) {</span>
+<span class="lineNum">    1661 </span><span class="lineCov">         47 :     } else if (!res1) {</span>
 <span class="lineNum">    1662 </span><span class="lineNoCov">          0 :         result = -1;</span>
-<span class="lineNum">    1663 </span><span class="lineCov">          2 :     } else if (!res2) {</span>
+<span class="lineNum">    1663 </span><span class="lineCov">         47 :     } else if (!res2) {</span>
 <span class="lineNum">    1664 </span><span class="lineNoCov">          0 :         result = 1;</span>
 <span class="lineNum">    1665 </span>            :     } else {
 <span class="lineNum">    1666 </span>            :         do {
-<span class="lineNum">    1667 </span><span class="lineCov">         64 :             result = array_idxcmp_case(&amp;temp1, &amp;temp2, 0);</span>
-<span class="lineNum">    1668 </span><span class="lineCov">         64 :             if (result)</span>
+<span class="lineNum">    1667 </span><span class="lineCov">        429 :             result = array_idxcmp_case(&amp;temp1, &amp;temp2, 0);</span>
+<span class="lineNum">    1668 </span><span class="lineCov">        429 :             if (result)</span>
 <span class="lineNum">    1669 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">    1670 </span>            : 
-<span class="lineNum">    1671 </span><span class="lineCov">         64 :             val1 = array_getitem(arr1, &amp;temp1);</span>
-<span class="lineNum">    1672 </span><span class="lineCov">         64 :             val2 = array_getitem(arr2, &amp;temp2);</span>
-<span class="lineNum">    1673 </span><span class="lineCov">         64 :             result = array_idxcmp_case(val1, val2, 0);</span>
-<span class="lineNum">    1674 </span><span class="lineCov">         64 :             if (result)</span>
-<span class="lineNum">    1675 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">    1671 </span><span class="lineCov">        429 :             val1 = array_getitem(arr1, &amp;temp1);</span>
+<span class="lineNum">    1672 </span><span class="lineCov">        429 :             val2 = array_getitem(arr2, &amp;temp2);</span>
+<span class="lineNum">    1673 </span><span class="lineCov">        429 :             result = array_idxcmp_case(val1, val2, 0);</span>
+<span class="lineNum">    1674 </span><span class="lineCov">        429 :             if (result)</span>
+<span class="lineNum">    1675 </span><span class="lineCov">          7 :                 break;</span>
 <span class="lineNum">    1676 </span>            : 
-<span class="lineNum">    1677 </span><span class="lineCov">         64 :             res1 = array_next(arr1, &amp;temp1);</span>
-<span class="lineNum">    1678 </span><span class="lineCov">         64 :             res2 = array_next(arr2, &amp;temp2);</span>
-<span class="lineNum">    1679 </span><span class="lineCov">         64 :         } while (res1 &amp;&amp; res2);</span>
+<span class="lineNum">    1677 </span><span class="lineCov">        422 :             res1 = array_next(arr1, &amp;temp1);</span>
+<span class="lineNum">    1678 </span><span class="lineCov">        422 :             res2 = array_next(arr2, &amp;temp2);</span>
+<span class="lineNum">    1679 </span><span class="lineCov">        422 :         } while (res1 &amp;&amp; res2);</span>
 <span class="lineNum">    1680 </span>            : 
-<span class="lineNum">    1681 </span><span class="lineCov">          2 :         if (!res1 &amp;&amp; !res2) {</span>
-<span class="lineNum">    1682 </span><span class="lineCov">          2 :             result = 0;</span>
-<span class="lineNum">    1683 </span><span class="lineNoCov">          0 :         } else if (!res1) {</span>
+<span class="lineNum">    1681 </span><span class="lineCov">         47 :         if (!res1 &amp;&amp; !res2) {</span>
+<span class="lineNum">    1682 </span><span class="lineCov">         40 :             result = 0;</span>
+<span class="lineNum">    1683 </span><span class="lineCov">          7 :         } else if (!res1) {</span>
 <span class="lineNum">    1684 </span><span class="lineNoCov">          0 :             result = -1;</span>
-<span class="lineNum">    1685 </span><span class="lineNoCov">          0 :         } else if (!res2) {</span>
+<span class="lineNum">    1685 </span><span class="lineCov">          7 :         } else if (!res2) {</span>
 <span class="lineNum">    1686 </span><span class="lineNoCov">          0 :             result = 1;</span>
 <span class="lineNum">    1687 </span>            :         }
 <span class="lineNum">    1688 </span>            :     }
 <span class="lineNum">    1689 </span>            : 
-<span class="lineNum">    1690 </span><span class="lineCov">          2 :     CLEAR(oper2);</span>
-<span class="lineNum">    1691 </span><span class="lineCov">          2 :     CLEAR(oper1);</span>
+<span class="lineNum">    1690 </span><span class="lineCov">         47 :     CLEAR(oper2);</span>
+<span class="lineNum">    1691 </span><span class="lineCov">         47 :     CLEAR(oper1);</span>
 <span class="lineNum">    1692 </span>            : 
-<span class="lineNum">    1693 </span><span class="lineCov">          2 :     PushInt(result);</span>
+<span class="lineNum">    1693 </span><span class="lineCov">         47 :     PushInt(result);</span>
 <span class="lineNum">    1694 </span>            : }
 <a name="1695"><span class="lineNum">    1695 </span>            : </a>
 <span class="lineNum">    1696 </span>            : void
@@ -1892,7 +1892,7 @@
 <span class="lineNum">    1830 </span>            : }
 <a name="1831"><span class="lineNum">    1831 </span>            : </a>
 <span class="lineNum">    1832 </span>            : void
-<span class="lineNum">    1833 </span><span class="lineNoCov">          0 : prim_array_join(PRIM_PROTOTYPE)</span>
+<span class="lineNum">    1833 </span><span class="lineCov">          9 : prim_array_join(PRIM_PROTOTYPE)</span>
 <span class="lineNum">    1834 </span>            : {
 <span class="lineNum">    1835 </span>            :     struct inst *in;
 <span class="lineNum">    1836 </span>            :     stk_array *arr;
@@ -1904,41 +1904,41 @@
 <span class="lineNum">    1842 </span>            :     int done;
 <span class="lineNum">    1843 </span>            :     int first_item;
 <span class="lineNum">    1844 </span>            : 
-<span class="lineNum">    1845 </span><span class="lineNoCov">          0 :     CHECKOP(2);</span>
-<span class="lineNum">    1846 </span><span class="lineNoCov">          0 :     oper2 = POP();              /* str  joinstr */</span>
-<span class="lineNum">    1847 </span><span class="lineNoCov">          0 :     oper1 = POP();              /* arr  Array */</span>
-<span class="lineNum">    1848 </span><span class="lineNoCov">          0 :     if (oper1-&gt;type != PROG_ARRAY)</span>
+<span class="lineNum">    1845 </span><span class="lineCov">          9 :     CHECKOP(2);</span>
+<span class="lineNum">    1846 </span><span class="lineCov">          9 :     oper2 = POP();              /* str  joinstr */</span>
+<span class="lineNum">    1847 </span><span class="lineCov">          9 :     oper1 = POP();              /* arr  Array */</span>
+<span class="lineNum">    1848 </span><span class="lineCov">          9 :     if (oper1-&gt;type != PROG_ARRAY)</span>
 <span class="lineNum">    1849 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an array. (1)&quot;);</span>
-<span class="lineNum">    1850 </span><span class="lineNoCov">          0 :     if (oper2-&gt;type != PROG_STRING)</span>
+<span class="lineNum">    1850 </span><span class="lineCov">          9 :     if (oper2-&gt;type != PROG_STRING)</span>
 <span class="lineNum">    1851 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not a string pattern. (2)&quot;);</span>
 <span class="lineNum">    1852 </span>            : 
-<span class="lineNum">    1853 </span><span class="lineNoCov">          0 :     arr = oper1-&gt;data.array;</span>
-<span class="lineNum">    1854 </span><span class="lineNoCov">          0 :     delim = DoNullInd(oper2-&gt;data.string);</span>
-<span class="lineNum">    1855 </span><span class="lineNoCov">          0 :     ptr = outbuf;</span>
-<span class="lineNum">    1856 </span><span class="lineNoCov">          0 :     *outbuf = '\0';</span>
-<span class="lineNum">    1857 </span><span class="lineNoCov">          0 :     first_item = 1;</span>
-<span class="lineNum">    1858 </span><span class="lineNoCov">          0 :     done = !array_first(arr, &amp;temp1);</span>
-<span class="lineNum">    1859 </span><span class="lineNoCov">          0 :     while (!done) {</span>
-<span class="lineNum">    1860 </span><span class="lineNoCov">          0 :         in = array_getitem(arr, &amp;temp1);</span>
-<span class="lineNum">    1861 </span><span class="lineNoCov">          0 :         switch (in-&gt;type) {</span>
+<span class="lineNum">    1853 </span><span class="lineCov">          9 :     arr = oper1-&gt;data.array;</span>
+<span class="lineNum">    1854 </span><span class="lineCov">          9 :     delim = DoNullInd(oper2-&gt;data.string);</span>
+<span class="lineNum">    1855 </span><span class="lineCov">          9 :     ptr = outbuf;</span>
+<span class="lineNum">    1856 </span><span class="lineCov">          9 :     *outbuf = '\0';</span>
+<span class="lineNum">    1857 </span><span class="lineCov">          9 :     first_item = 1;</span>
+<span class="lineNum">    1858 </span><span class="lineCov">          9 :     done = !array_first(arr, &amp;temp1);</span>
+<span class="lineNum">    1859 </span><span class="lineCov">         54 :     while (!done) {</span>
+<span class="lineNum">    1860 </span><span class="lineCov">         36 :         in = array_getitem(arr, &amp;temp1);</span>
+<span class="lineNum">    1861 </span><span class="lineCov">         36 :         switch (in-&gt;type) {</span>
 <span class="lineNum">    1862 </span>            :         case PROG_STRING:
-<span class="lineNum">    1863 </span><span class="lineNoCov">          0 :             text = DoNullInd(in-&gt;data.string);</span>
-<span class="lineNum">    1864 </span><span class="lineNoCov">          0 :             break;</span>
+<span class="lineNum">    1863 </span><span class="lineCov">          9 :             text = DoNullInd(in-&gt;data.string);</span>
+<span class="lineNum">    1864 </span><span class="lineCov">          9 :             break;</span>
 <span class="lineNum">    1865 </span>            :         case PROG_INTEGER:
-<span class="lineNum">    1866 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), &quot;%d&quot;, in-&gt;data.number);</span>
-<span class="lineNum">    1867 </span><span class="lineNoCov">          0 :             text = buf;</span>
-<span class="lineNum">    1868 </span><span class="lineNoCov">          0 :             break;</span>
+<span class="lineNum">    1866 </span><span class="lineCov">          9 :             snprintf(buf, sizeof(buf), &quot;%d&quot;, in-&gt;data.number);</span>
+<span class="lineNum">    1867 </span><span class="lineCov">          9 :             text = buf;</span>
+<span class="lineNum">    1868 </span><span class="lineCov">          9 :             break;</span>
 <span class="lineNum">    1869 </span>            :         case PROG_OBJECT:
-<span class="lineNum">    1870 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), &quot;#%d&quot;, in-&gt;data.number);</span>
-<span class="lineNum">    1871 </span><span class="lineNoCov">          0 :             text = buf;</span>
-<span class="lineNum">    1872 </span><span class="lineNoCov">          0 :             break;</span>
+<span class="lineNum">    1870 </span><span class="lineCov">          9 :             snprintf(buf, sizeof(buf), &quot;#%d&quot;, in-&gt;data.number);</span>
+<span class="lineNum">    1871 </span><span class="lineCov">          9 :             text = buf;</span>
+<span class="lineNum">    1872 </span><span class="lineCov">          9 :             break;</span>
 <span class="lineNum">    1873 </span>            :         case PROG_FLOAT:
-<span class="lineNum">    1874 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), &quot;%.15g&quot;, in-&gt;data.fnumber);</span>
-<span class="lineNum">    1875 </span><span class="lineNoCov">          0 :             if (!strchr(buf, '.') &amp;&amp; !strchr(buf, 'n') &amp;&amp; !strchr(buf, 'e')) {</span>
-<span class="lineNum">    1876 </span><span class="lineNoCov">          0 :                 strcatn(buf, sizeof(buf), &quot;.0&quot;);</span>
+<span class="lineNum">    1874 </span><span class="lineCov">          9 :             snprintf(buf, sizeof(buf), &quot;%.15g&quot;, in-&gt;data.fnumber);</span>
+<span class="lineNum">    1875 </span><span class="lineCov">          9 :             if (!strchr(buf, '.') &amp;&amp; !strchr(buf, 'n') &amp;&amp; !strchr(buf, 'e')) {</span>
+<span class="lineNum">    1876 </span><span class="lineCov">          9 :                 strcatn(buf, sizeof(buf), &quot;.0&quot;);</span>
 <span class="lineNum">    1877 </span>            :             }
-<span class="lineNum">    1878 </span><span class="lineNoCov">          0 :             text = buf;</span>
-<span class="lineNum">    1879 </span><span class="lineNoCov">          0 :             break;</span>
+<span class="lineNum">    1878 </span><span class="lineCov">          9 :             text = buf;</span>
+<span class="lineNum">    1879 </span><span class="lineCov">          9 :             break;</span>
 <span class="lineNum">    1880 </span>            :         case PROG_LOCK:
 <span class="lineNum">    1881 </span><span class="lineNoCov">          0 :             text = unparse_boolexp(ProgUID, in-&gt;data.lock, 1);</span>
 <span class="lineNum">    1882 </span><span class="lineNoCov">          0 :             break;</span>
@@ -1946,31 +1946,31 @@
 <span class="lineNum">    1884 </span><span class="lineNoCov">          0 :             text = &quot;&lt;UNSUPPORTED&gt;&quot;;</span>
 <span class="lineNum">    1885 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">    1886 </span>            :         }
-<span class="lineNum">    1887 </span><span class="lineNoCov">          0 :         if (first_item) {</span>
-<span class="lineNum">    1888 </span><span class="lineNoCov">          0 :             first_item = 0;</span>
+<span class="lineNum">    1887 </span><span class="lineCov">         36 :         if (first_item) {</span>
+<span class="lineNum">    1888 </span><span class="lineCov">          9 :             first_item = 0;</span>
 <span class="lineNum">    1889 </span>            :         } else {
-<span class="lineNum">    1890 </span><span class="lineNoCov">          0 :             tmplen = strlen(delim);</span>
-<span class="lineNum">    1891 </span><span class="lineNoCov">          0 :             if (tmplen &gt; BUFFER_LEN - (ptr - outbuf) - 1)</span>
+<span class="lineNum">    1890 </span><span class="lineCov">         27 :             tmplen = strlen(delim);</span>
+<span class="lineNum">    1891 </span><span class="lineCov">         27 :             if (tmplen &gt; BUFFER_LEN - (ptr - outbuf) - 1)</span>
 <span class="lineNum">    1892 </span><span class="lineNoCov">          0 :                 abort_interp(&quot;Operation would result in overflow.&quot;);</span>
-<span class="lineNum">    1893 </span><span class="lineNoCov">          0 :             strcpyn(ptr, sizeof(outbuf) - (outbuf - ptr), delim);</span>
-<span class="lineNum">    1894 </span><span class="lineNoCov">          0 :             ptr += tmplen;</span>
+<span class="lineNum">    1893 </span><span class="lineCov">         27 :             strcpyn(ptr, sizeof(outbuf) - (outbuf - ptr), delim);</span>
+<span class="lineNum">    1894 </span><span class="lineCov">         27 :             ptr += tmplen;</span>
 <span class="lineNum">    1895 </span>            :         }
-<span class="lineNum">    1896 </span><span class="lineNoCov">          0 :         tmplen = strlen(text);</span>
-<span class="lineNum">    1897 </span><span class="lineNoCov">          0 :         if (tmplen &gt; BUFFER_LEN - (ptr - outbuf) - 1)</span>
+<span class="lineNum">    1896 </span><span class="lineCov">         36 :         tmplen = strlen(text);</span>
+<span class="lineNum">    1897 </span><span class="lineCov">         36 :         if (tmplen &gt; BUFFER_LEN - (ptr - outbuf) - 1)</span>
 <span class="lineNum">    1898 </span><span class="lineNoCov">          0 :             abort_interp(&quot;Operation would result in overflow.&quot;);</span>
-<span class="lineNum">    1899 </span><span class="lineNoCov">          0 :         strcpyn(ptr, sizeof(outbuf) - (outbuf - ptr), text);</span>
-<span class="lineNum">    1900 </span><span class="lineNoCov">          0 :         ptr += tmplen;</span>
-<span class="lineNum">    1901 </span><span class="lineNoCov">          0 :         done = !array_next(arr, &amp;temp1);</span>
+<span class="lineNum">    1899 </span><span class="lineCov">         36 :         strcpyn(ptr, sizeof(outbuf) - (outbuf - ptr), text);</span>
+<span class="lineNum">    1900 </span><span class="lineCov">         36 :         ptr += tmplen;</span>
+<span class="lineNum">    1901 </span><span class="lineCov">         36 :         done = !array_next(arr, &amp;temp1);</span>
 <span class="lineNum">    1902 </span>            :     }
 <span class="lineNum">    1903 </span>            : 
-<span class="lineNum">    1904 </span><span class="lineNoCov">          0 :     CLEAR(oper2);</span>
-<span class="lineNum">    1905 </span><span class="lineNoCov">          0 :     CLEAR(oper1);</span>
+<span class="lineNum">    1904 </span><span class="lineCov">          9 :     CLEAR(oper2);</span>
+<span class="lineNum">    1905 </span><span class="lineCov">          9 :     CLEAR(oper1);</span>
 <span class="lineNum">    1906 </span>            : 
-<span class="lineNum">    1907 </span><span class="lineNoCov">          0 :     PushString(outbuf);</span>
+<span class="lineNum">    1907 </span><span class="lineCov">          9 :     PushString(outbuf);</span>
 <span class="lineNum">    1908 </span>            : }
 <a name="1909"><span class="lineNum">    1909 </span>            : </a>
 <span class="lineNum">    1910 </span>            : void
-<span class="lineNum">    1911 </span><span class="lineNoCov">          0 : prim_array_interpret(PRIM_PROTOTYPE)</span>
+<span class="lineNum">    1911 </span><span class="lineCov">          8 : prim_array_interpret(PRIM_PROTOTYPE)</span>
 <span class="lineNum">    1912 </span>            : {
 <span class="lineNum">    1913 </span>            :     struct inst *in;
 <span class="lineNum">    1914 </span>            :     stk_array *arr;
@@ -1982,60 +1982,60 @@
 <span class="lineNum">    1920 </span>            :     int tmplen;
 <span class="lineNum">    1921 </span>            :     int done;
 <span class="lineNum">    1922 </span>            : 
-<span class="lineNum">    1923 </span><span class="lineNoCov">          0 :     CHECKOP(1);</span>
-<span class="lineNum">    1924 </span><span class="lineNoCov">          0 :     oper1 = POP();              /* arr  Array */</span>
-<span class="lineNum">    1925 </span><span class="lineNoCov">          0 :     if (oper1-&gt;type != PROG_ARRAY)</span>
+<span class="lineNum">    1923 </span><span class="lineCov">          8 :     CHECKOP(1);</span>
+<span class="lineNum">    1924 </span><span class="lineCov">          8 :     oper1 = POP();              /* arr  Array */</span>
+<span class="lineNum">    1925 </span><span class="lineCov">          8 :     if (oper1-&gt;type != PROG_ARRAY)</span>
 <span class="lineNum">    1926 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an array. (1)&quot;);</span>
 <span class="lineNum">    1927 </span>            : 
-<span class="lineNum">    1928 </span><span class="lineNoCov">          0 :     arr = oper1-&gt;data.array;</span>
-<span class="lineNum">    1929 </span><span class="lineNoCov">          0 :     ptr = outbuf;</span>
-<span class="lineNum">    1930 </span><span class="lineNoCov">          0 :     *outbuf = '\0';</span>
-<span class="lineNum">    1931 </span><span class="lineNoCov">          0 :     done = !array_first(arr, &amp;temp1);</span>
-<span class="lineNum">    1932 </span><span class="lineNoCov">          0 :     while (!done) {</span>
-<span class="lineNum">    1933 </span><span class="lineNoCov">          0 :         in = array_getitem(arr, &amp;temp1);</span>
-<span class="lineNum">    1934 </span><span class="lineNoCov">          0 :         switch (in-&gt;type) {</span>
+<span class="lineNum">    1928 </span><span class="lineCov">          8 :     arr = oper1-&gt;data.array;</span>
+<span class="lineNum">    1929 </span><span class="lineCov">          8 :     ptr = outbuf;</span>
+<span class="lineNum">    1930 </span><span class="lineCov">          8 :     *outbuf = '\0';</span>
+<span class="lineNum">    1931 </span><span class="lineCov">          8 :     done = !array_first(arr, &amp;temp1);</span>
+<span class="lineNum">    1932 </span><span class="lineCov">         48 :     while (!done) {</span>
+<span class="lineNum">    1933 </span><span class="lineCov">         32 :         in = array_getitem(arr, &amp;temp1);</span>
+<span class="lineNum">    1934 </span><span class="lineCov">         32 :         switch (in-&gt;type) {</span>
 <span class="lineNum">    1935 </span>            :         case PROG_STRING:
-<span class="lineNum">    1936 </span><span class="lineNoCov">          0 :             text = DoNullInd(in-&gt;data.string);</span>
-<span class="lineNum">    1937 </span><span class="lineNoCov">          0 :             break;</span>
+<span class="lineNum">    1936 </span><span class="lineCov">          8 :             text = DoNullInd(in-&gt;data.string);</span>
+<span class="lineNum">    1937 </span><span class="lineCov">          8 :             break;</span>
 <span class="lineNum">    1938 </span>            :         case PROG_INTEGER:
-<span class="lineNum">    1939 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), &quot;%d&quot;, in-&gt;data.number);</span>
-<span class="lineNum">    1940 </span><span class="lineNoCov">          0 :             text = buf;</span>
-<span class="lineNum">    1941 </span><span class="lineNoCov">          0 :             break;</span>
+<span class="lineNum">    1939 </span><span class="lineCov">          8 :             snprintf(buf, sizeof(buf), &quot;%d&quot;, in-&gt;data.number);</span>
+<span class="lineNum">    1940 </span><span class="lineCov">          8 :             text = buf;</span>
+<span class="lineNum">    1941 </span><span class="lineCov">          8 :             break;</span>
 <span class="lineNum">    1942 </span>            :         case PROG_OBJECT:
-<span class="lineNum">    1943 </span><span class="lineNoCov">          0 :             if (in-&gt;data.objref == NOTHING) {</span>
+<span class="lineNum">    1943 </span><span class="lineCov">          8 :             if (in-&gt;data.objref == NOTHING) {</span>
 <span class="lineNum">    1944 </span><span class="lineNoCov">          0 :                 text = &quot;*NOTHING*&quot;;</span>
 <span class="lineNum">    1945 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">    1946 </span>            :             }
-<span class="lineNum">    1947 </span><span class="lineNoCov">          0 :             if (in-&gt;data.objref == AMBIGUOUS) {</span>
+<span class="lineNum">    1947 </span><span class="lineCov">          8 :             if (in-&gt;data.objref == AMBIGUOUS) {</span>
 <span class="lineNum">    1948 </span><span class="lineNoCov">          0 :                 text = &quot;*AMBIGUOUS*&quot;;</span>
 <span class="lineNum">    1949 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">    1950 </span>            :             }
-<span class="lineNum">    1951 </span><span class="lineNoCov">          0 :             if (in-&gt;data.objref == HOME) {</span>
+<span class="lineNum">    1951 </span><span class="lineCov">          8 :             if (in-&gt;data.objref == HOME) {</span>
 <span class="lineNum">    1952 </span><span class="lineNoCov">          0 :                 text = &quot;*HOME*&quot;;</span>
 <span class="lineNum">    1953 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">    1954 </span>            :             }
-<span class="lineNum">    1955 </span><span class="lineNoCov">          0 :             if (in-&gt;data.objref == NIL) {</span>
+<span class="lineNum">    1955 </span><span class="lineCov">          8 :             if (in-&gt;data.objref == NIL) {</span>
 <span class="lineNum">    1956 </span><span class="lineNoCov">          0 :                 text = &quot;*NIL*&quot;;</span>
 <span class="lineNum">    1957 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">    1958 </span>            :             }
-<span class="lineNum">    1959 </span><span class="lineNoCov">          0 :             if (in-&gt;data.number &lt; NIL) {</span>
+<span class="lineNum">    1959 </span><span class="lineCov">          8 :             if (in-&gt;data.number &lt; NIL) {</span>
 <span class="lineNum">    1960 </span><span class="lineNoCov">          0 :                 text = &quot;*INVALID*&quot;;</span>
 <span class="lineNum">    1961 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">    1962 </span>            :             }
-<span class="lineNum">    1963 </span><span class="lineNoCov">          0 :             if (in-&gt;data.number &gt;= db_top) {</span>
+<span class="lineNum">    1963 </span><span class="lineCov">          8 :             if (in-&gt;data.number &gt;= db_top) {</span>
 <span class="lineNum">    1964 </span><span class="lineNoCov">          0 :                 text = &quot;*INVALID*&quot;;</span>
 <span class="lineNum">    1965 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">    1966 </span>            :             }
-<span class="lineNum">    1967 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), &quot;%s&quot;, NAME(in-&gt;data.number));</span>
-<span class="lineNum">    1968 </span><span class="lineNoCov">          0 :             text = buf;</span>
-<span class="lineNum">    1969 </span><span class="lineNoCov">          0 :             break;</span>
+<span class="lineNum">    1967 </span><span class="lineCov">          8 :             snprintf(buf, sizeof(buf), &quot;%s&quot;, NAME(in-&gt;data.number));</span>
+<span class="lineNum">    1968 </span><span class="lineCov">          8 :             text = buf;</span>
+<span class="lineNum">    1969 </span><span class="lineCov">          8 :             break;</span>
 <span class="lineNum">    1970 </span>            :         case PROG_FLOAT:
-<span class="lineNum">    1971 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), &quot;%.15g&quot;, in-&gt;data.fnumber);</span>
-<span class="lineNum">    1972 </span><span class="lineNoCov">          0 :             if (!strchr(buf, '.') &amp;&amp; !strchr(buf, 'n') &amp;&amp; !strchr(buf, 'e')) {</span>
-<span class="lineNum">    1973 </span><span class="lineNoCov">          0 :                 strcatn(buf, sizeof(buf), &quot;.0&quot;);</span>
+<span class="lineNum">    1971 </span><span class="lineCov">          8 :             snprintf(buf, sizeof(buf), &quot;%.15g&quot;, in-&gt;data.fnumber);</span>
+<span class="lineNum">    1972 </span><span class="lineCov">          8 :             if (!strchr(buf, '.') &amp;&amp; !strchr(buf, 'n') &amp;&amp; !strchr(buf, 'e')) {</span>
+<span class="lineNum">    1973 </span><span class="lineCov">          8 :                 strcatn(buf, sizeof(buf), &quot;.0&quot;);</span>
 <span class="lineNum">    1974 </span>            :             }
-<span class="lineNum">    1975 </span><span class="lineNoCov">          0 :             text = buf;</span>
-<span class="lineNum">    1976 </span><span class="lineNoCov">          0 :             break;</span>
+<span class="lineNum">    1975 </span><span class="lineCov">          8 :             text = buf;</span>
+<span class="lineNum">    1976 </span><span class="lineCov">          8 :             break;</span>
 <span class="lineNum">    1977 </span>            :         case PROG_LOCK:
 <span class="lineNum">    1978 </span><span class="lineNoCov">          0 :             text = unparse_boolexp(ProgUID, in-&gt;data.lock, 1);</span>
 <span class="lineNum">    1979 </span><span class="lineNoCov">          0 :             break;</span>
@@ -2043,20 +2043,20 @@
 <span class="lineNum">    1981 </span><span class="lineNoCov">          0 :             text = &quot;&lt;UNSUPPORTED&gt;&quot;;</span>
 <span class="lineNum">    1982 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">    1983 </span>            :         }
-<span class="lineNum">    1984 </span><span class="lineNoCov">          0 :         tmplen = strlen(text);</span>
-<span class="lineNum">    1985 </span><span class="lineNoCov">          0 :         if (tmplen &gt; BUFFER_LEN - (ptr - outbuf) - 1) {</span>
+<span class="lineNum">    1984 </span><span class="lineCov">         32 :         tmplen = strlen(text);</span>
+<span class="lineNum">    1985 </span><span class="lineCov">         32 :         if (tmplen &gt; BUFFER_LEN - (ptr - outbuf) - 1) {</span>
 <span class="lineNum">    1986 </span><span class="lineNoCov">          0 :             strncpy(ptr, text, BUFFER_LEN - (ptr - outbuf) - 1);</span>
 <span class="lineNum">    1987 </span><span class="lineNoCov">          0 :             outbuf[BUFFER_LEN - 1] = '\0';</span>
 <span class="lineNum">    1988 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">    1989 </span>            :         } else {
-<span class="lineNum">    1990 </span><span class="lineNoCov">          0 :             strcpyn(ptr, sizeof(outbuf) - (outbuf - ptr), text);</span>
-<span class="lineNum">    1991 </span><span class="lineNoCov">          0 :             ptr += tmplen;</span>
+<span class="lineNum">    1990 </span><span class="lineCov">         32 :             strcpyn(ptr, sizeof(outbuf) - (outbuf - ptr), text);</span>
+<span class="lineNum">    1991 </span><span class="lineCov">         32 :             ptr += tmplen;</span>
 <span class="lineNum">    1992 </span>            :         }
-<span class="lineNum">    1993 </span><span class="lineNoCov">          0 :         done = !array_next(arr, &amp;temp1);</span>
+<span class="lineNum">    1993 </span><span class="lineCov">         32 :         done = !array_next(arr, &amp;temp1);</span>
 <span class="lineNum">    1994 </span>            :     }
 <span class="lineNum">    1995 </span>            : 
-<span class="lineNum">    1996 </span><span class="lineNoCov">          0 :     CLEAR(oper1);</span>
-<span class="lineNum">    1997 </span><span class="lineNoCov">          0 :     PushString(outbuf);</span>
+<span class="lineNum">    1996 </span><span class="lineCov">          8 :     CLEAR(oper1);</span>
+<span class="lineNum">    1997 </span><span class="lineCov">          8 :     PushString(outbuf);</span>
 <span class="lineNum">    1998 </span>            : }
 <a name="1999"><span class="lineNum">    1999 </span>            : </a>
 <span class="lineNum">    2000 </span>            : void

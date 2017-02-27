@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 19:01:38</td>
+            <td class="headerValue">2017-02-26 20:18:35</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">9</td>
@@ -445,9 +445,9 @@
 <span class="lineNum">     383 </span>            : }
 <a name="384"><span class="lineNum">     384 </span>            : </a>
 <span class="lineNum">     385 </span>            : static int
-<span class="lineNum">     386 </span><span class="lineCov">         97 : restricted(dbref player, dbref thing, object_flag_type flag)</span>
+<span class="lineNum">     386 </span><span class="lineCov">        219 : restricted(dbref player, dbref thing, object_flag_type flag)</span>
 <span class="lineNum">     387 </span>            : {
-<span class="lineNum">     388 </span><span class="lineCov">         97 :     switch (flag) {</span>
+<span class="lineNum">     388 </span><span class="lineCov">        219 :     switch (flag) {</span>
 <span class="lineNum">     389 </span>            :     case ABODE:
 <span class="lineNum">     390 </span>            :         /* Trying to set a program AUTOSTART requires TrueWizard */
 <span class="lineNum">     391 </span><span class="lineNoCov">          0 :         return (!TrueWizard(OWNER(player)) &amp;&amp; (Typeof(thing) == TYPE_PROGRAM));</span>
@@ -487,7 +487,7 @@
 <span class="lineNum">     425 </span><span class="lineCov">          8 :         return (0);</span>
 <span class="lineNum">     426 </span>            :     case DARK:
 <span class="lineNum">     427 </span>            :         /* Dark can be set on a Program or Room by anyone. */
-<span class="lineNum">     428 </span><span class="lineCov">         45 :         if (!Wizard(OWNER(player))) {</span>
+<span class="lineNum">     428 </span><span class="lineCov">        167 :         if (!Wizard(OWNER(player))) {</span>
 <span class="lineNum">     429 </span>            :             /* Setting a player dark requires a wizard. */
 <span class="lineNum">     430 </span><span class="lineNoCov">          0 :             if (Typeof(thing) == TYPE_PLAYER)</span>
 <span class="lineNum">     431 </span><span class="lineNoCov">          0 :                 return (1);</span>
@@ -498,7 +498,7 @@
 <span class="lineNum">     436 </span><span class="lineNoCov">          0 :             if (!tp_thing_darking &amp;&amp; Typeof(thing) == TYPE_THING)</span>
 <span class="lineNum">     437 </span><span class="lineNoCov">          0 :                 return (1);</span>
 <span class="lineNum">     438 </span>            :         }
-<span class="lineNum">     439 </span><span class="lineCov">         45 :         return (0);</span>
+<span class="lineNum">     439 </span><span class="lineCov">        167 :         return (0);</span>
 <span class="lineNum">     440 </span>            :     case QUELL:
 <span class="lineNum">     441 </span>            : #ifdef GOD_PRIV
 <span class="lineNum">     442 </span>            :         /* Only God (or God's stuff) can quell or unquell another wizard. */
@@ -541,29 +541,29 @@
 <span class="lineNum">     479 </span>            : }
 <a name="480"><span class="lineNum">     480 </span>            : </a>
 <span class="lineNum">     481 </span>            : void
-<span class="lineNum">     482 </span><span class="lineCov">        229 : do_set(int descr, dbref player, const char *name, const char *flag)</span>
+<span class="lineNum">     482 </span><span class="lineCov">        351 : do_set(int descr, dbref player, const char *name, const char *flag)</span>
 <span class="lineNum">     483 </span>            : {
 <span class="lineNum">     484 </span>            :     dbref thing;
 <span class="lineNum">     485 </span>            :     const char *p;
 <span class="lineNum">     486 </span>            :     object_flag_type f;
 <span class="lineNum">     487 </span>            : 
 <span class="lineNum">     488 </span>            :     /* find thing */
-<span class="lineNum">     489 </span><span class="lineCov">        229 :     if ((thing = match_controlled(descr, player, name)) == NOTHING)</span>
+<span class="lineNum">     489 </span><span class="lineCov">        351 :     if ((thing = match_controlled(descr, player, name)) == NOTHING)</span>
 <span class="lineNum">     490 </span><span class="lineNoCov">          0 :         return;</span>
 <span class="lineNum">     491 </span>            : #ifdef GOD_PRIV
 <span class="lineNum">     492 </span>            :     /* Only God can set anything on any of his stuff */
-<span class="lineNum">     493 </span><span class="lineCov">        229 :     if (tp_strict_god_priv &amp;&amp; !God(player) &amp;&amp; God(OWNER(thing))) {</span>
+<span class="lineNum">     493 </span><span class="lineCov">        351 :     if (tp_strict_god_priv &amp;&amp; !God(player) &amp;&amp; God(OWNER(thing))) {</span>
 <span class="lineNum">     494 </span><span class="lineNoCov">          0 :         notify(player, &quot;Only God may touch God's property.&quot;);</span>
 <span class="lineNum">     495 </span><span class="lineNoCov">          0 :         return;</span>
 <span class="lineNum">     496 </span>            :     }
 <span class="lineNum">     497 </span>            : #endif
 <span class="lineNum">     498 </span>            : 
 <span class="lineNum">     499 </span>            :     /* move p past NOT_TOKEN if present */
-<span class="lineNum">     500 </span><span class="lineCov">        229 :     for (p = flag; *p &amp;&amp; (*p == NOT_TOKEN || isspace(*p)); p++) ;</span>
+<span class="lineNum">     500 </span><span class="lineCov">        351 :     for (p = flag; *p &amp;&amp; (*p == NOT_TOKEN || isspace(*p)); p++) ;</span>
 <span class="lineNum">     501 </span>            : 
 <span class="lineNum">     502 </span>            :     /* Now we check to see if it's a property reference */
 <span class="lineNum">     503 </span>            :     /* if this gets changed, please also modify boolexp.c */
-<span class="lineNum">     504 </span><span class="lineCov">        229 :     if (index(flag, PROP_DELIMITER)) {</span>
+<span class="lineNum">     504 </span><span class="lineCov">        351 :     if (index(flag, PROP_DELIMITER)) {</span>
 <span class="lineNum">     505 </span>            :         /* copy the string so we can muck with it */
 <span class="lineNum">     506 </span><span class="lineCov">        132 :         char *type = alloc_string(flag);        /* type */</span>
 <span class="lineNum">     507 </span><span class="lineCov">        132 :         char *pname = (char *) index(type, PROP_DELIMITER);     /* propname */</span>
@@ -623,11 +623,11 @@
 <span class="lineNum">     561 </span><span class="lineCov">        128 :         return;</span>
 <span class="lineNum">     562 </span>            :     }
 <span class="lineNum">     563 </span>            :     /* identify flag */
-<span class="lineNum">     564 </span><span class="lineCov">         97 :     if (*p == '\0') {</span>
+<span class="lineNum">     564 </span><span class="lineCov">        219 :     if (*p == '\0') {</span>
 <span class="lineNum">     565 </span><span class="lineNoCov">          0 :         notify(player, &quot;You must specify a flag to set.&quot;);</span>
 <span class="lineNum">     566 </span><span class="lineNoCov">          0 :         return;</span>
-<span class="lineNum">     567 </span><span class="lineCov">        194 :     } else if ((!strcasecmp(&quot;0&quot;, p) || !strcasecmp(&quot;M0&quot;, p)) ||</span>
-<span class="lineNum">     568 </span><span class="lineCov">         97 :                ((string_prefix(&quot;MUCKER&quot;, p)) &amp;&amp; (*flag == NOT_TOKEN))) {</span>
+<span class="lineNum">     567 </span><span class="lineCov">        438 :     } else if ((!strcasecmp(&quot;0&quot;, p) || !strcasecmp(&quot;M0&quot;, p)) ||</span>
+<span class="lineNum">     568 </span><span class="lineCov">        219 :                ((string_prefix(&quot;MUCKER&quot;, p)) &amp;&amp; (*flag == NOT_TOKEN))) {</span>
 <span class="lineNum">     569 </span><span class="lineNoCov">          0 :         if (!Wizard(OWNER(player))) {</span>
 <span class="lineNum">     570 </span><span class="lineNoCov">          0 :             if ((OWNER(player) != OWNER(thing)) || (Typeof(thing) != TYPE_PROGRAM)) {</span>
 <span class="lineNum">     571 </span><span class="lineNoCov">          0 :                 notify(player, &quot;Permission denied. (You can't clear that mucker flag)&quot;);</span>
@@ -641,7 +641,7 @@
 <span class="lineNum">     579 </span><span class="lineNoCov">          0 :         SetMLevel(thing, 0);</span>
 <span class="lineNum">     580 </span><span class="lineNoCov">          0 :         notify(player, &quot;Mucker level set.&quot;);</span>
 <span class="lineNum">     581 </span><span class="lineNoCov">          0 :         return;</span>
-<span class="lineNum">     582 </span><span class="lineCov">         97 :     } else if (!strcasecmp(&quot;1&quot;, p) || !strcasecmp(&quot;M1&quot;, p)) {</span>
+<span class="lineNum">     582 </span><span class="lineCov">        219 :     } else if (!strcasecmp(&quot;1&quot;, p) || !strcasecmp(&quot;M1&quot;, p)) {</span>
 <span class="lineNum">     583 </span><span class="lineNoCov">          0 :         if (!Wizard(OWNER(player))) {</span>
 <span class="lineNum">     584 </span><span class="lineNoCov">          0 :             if ((OWNER(player) != OWNER(thing)) || (Typeof(thing) != TYPE_PROGRAM)</span>
 <span class="lineNum">     585 </span><span class="lineNoCov">          0 :                 || (MLevRaw(player) &lt; 1)) {</span>
@@ -656,8 +656,8 @@
 <span class="lineNum">     594 </span><span class="lineNoCov">          0 :         SetMLevel(thing, 1);</span>
 <span class="lineNum">     595 </span><span class="lineNoCov">          0 :         notify(player, &quot;Mucker level set.&quot;);</span>
 <span class="lineNum">     596 </span><span class="lineNoCov">          0 :         return;</span>
-<span class="lineNum">     597 </span><span class="lineCov">        194 :     } else if ((!strcasecmp(&quot;2&quot;, p) || !strcasecmp(&quot;M2&quot;, p)) ||</span>
-<span class="lineNum">     598 </span><span class="lineCov">         97 :                ((string_prefix(&quot;MUCKER&quot;, p)) &amp;&amp; (*flag != NOT_TOKEN))) {</span>
+<span class="lineNum">     597 </span><span class="lineCov">        438 :     } else if ((!strcasecmp(&quot;2&quot;, p) || !strcasecmp(&quot;M2&quot;, p)) ||</span>
+<span class="lineNum">     598 </span><span class="lineCov">        219 :                ((string_prefix(&quot;MUCKER&quot;, p)) &amp;&amp; (*flag != NOT_TOKEN))) {</span>
 <span class="lineNum">     599 </span><span class="lineNoCov">          0 :         if (!Wizard(OWNER(player))) {</span>
 <span class="lineNum">     600 </span><span class="lineNoCov">          0 :             if ((OWNER(player) != OWNER(thing)) || (Typeof(thing) != TYPE_PROGRAM)</span>
 <span class="lineNum">     601 </span><span class="lineNoCov">          0 :                 || (MLevRaw(player) &lt; 2)) {</span>
@@ -672,7 +672,7 @@
 <span class="lineNum">     610 </span><span class="lineNoCov">          0 :         SetMLevel(thing, 2);</span>
 <span class="lineNum">     611 </span><span class="lineNoCov">          0 :         notify(player, &quot;Mucker level set.&quot;);</span>
 <span class="lineNum">     612 </span><span class="lineNoCov">          0 :         return;</span>
-<span class="lineNum">     613 </span><span class="lineCov">         97 :     } else if (!strcasecmp(&quot;3&quot;, p) || !strcasecmp(&quot;M3&quot;, p)) {</span>
+<span class="lineNum">     613 </span><span class="lineCov">        219 :     } else if (!strcasecmp(&quot;3&quot;, p) || !strcasecmp(&quot;M3&quot;, p)) {</span>
 <span class="lineNum">     614 </span><span class="lineNoCov">          0 :         if (!Wizard(OWNER(player))) {</span>
 <span class="lineNum">     615 </span><span class="lineNoCov">          0 :             if ((OWNER(player) != OWNER(thing)) || (Typeof(thing) != TYPE_PROGRAM)</span>
 <span class="lineNum">     616 </span><span class="lineNoCov">          0 :                 || (MLevRaw(player) &lt; 3)) {</span>
@@ -687,19 +687,19 @@
 <span class="lineNum">     625 </span><span class="lineNoCov">          0 :         SetMLevel(thing, 3);</span>
 <span class="lineNum">     626 </span><span class="lineNoCov">          0 :         notify(player, &quot;Mucker level set.&quot;);</span>
 <span class="lineNum">     627 </span><span class="lineNoCov">          0 :         return;</span>
-<span class="lineNum">     628 </span><span class="lineCov">         97 :     } else if (!strcasecmp(&quot;4&quot;, p) || !strcasecmp(&quot;M4&quot;, p)) {</span>
+<span class="lineNum">     628 </span><span class="lineCov">        219 :     } else if (!strcasecmp(&quot;4&quot;, p) || !strcasecmp(&quot;M4&quot;, p)) {</span>
 <span class="lineNum">     629 </span><span class="lineNoCov">          0 :         notify(player, &quot;To set Mucker Level 4, set the Wizard bit and another Mucker bit.&quot;);</span>
 <span class="lineNum">     630 </span><span class="lineNoCov">          0 :         return;</span>
-<span class="lineNum">     631 </span><span class="lineCov">         97 :     } else if (string_prefix(&quot;WIZARD&quot;, p)) {</span>
+<span class="lineNum">     631 </span><span class="lineCov">        219 :     } else if (string_prefix(&quot;WIZARD&quot;, p)) {</span>
 <span class="lineNum">     632 </span><span class="lineCov">          3 :         if (force_level) {</span>
 <span class="lineNum">     633 </span><span class="lineNoCov">          0 :             notify(player, &quot;Can't set this flag from an @force or {force}.&quot;);</span>
 <span class="lineNum">     634 </span><span class="lineNoCov">          0 :             return;</span>
 <span class="lineNum">     635 </span>            :         }
 <span class="lineNum">     636 </span><span class="lineCov">          3 :         f = WIZARD;</span>
-<span class="lineNum">     637 </span><span class="lineCov">         94 :     } else if (string_prefix(&quot;ZOMBIE&quot;, p)) {</span>
+<span class="lineNum">     637 </span><span class="lineCov">        216 :     } else if (string_prefix(&quot;ZOMBIE&quot;, p)) {</span>
 <span class="lineNum">     638 </span><span class="lineCov">         13 :         f = ZOMBIE;</span>
-<span class="lineNum">     639 </span><span class="lineCov">         81 :     } else if (string_prefix(&quot;VEHICLE&quot;, p)</span>
-<span class="lineNum">     640 </span><span class="lineCov">         73 :                || string_prefix(&quot;VIEWABLE&quot;, p)) {</span>
+<span class="lineNum">     639 </span><span class="lineCov">        203 :     } else if (string_prefix(&quot;VEHICLE&quot;, p)</span>
+<span class="lineNum">     640 </span><span class="lineCov">        195 :                || string_prefix(&quot;VIEWABLE&quot;, p)) {</span>
 <span class="lineNum">     641 </span><span class="lineCov">          8 :         if (*flag == NOT_TOKEN &amp;&amp; Typeof(thing) == TYPE_THING) {</span>
 <span class="lineNum">     642 </span><span class="lineNoCov">          0 :             dbref obj = CONTENTS(thing);</span>
 <span class="lineNum">     643 </span>            : 
@@ -711,10 +711,10 @@
 <span class="lineNum">     649 </span>            :             }
 <span class="lineNum">     650 </span>            :         }
 <span class="lineNum">     651 </span><span class="lineCov">          8 :         f = VEHICLE;</span>
-<span class="lineNum">     652 </span><span class="lineCov">         73 :     } else if (string_prefix(&quot;LINK_OK&quot;, p)) {</span>
+<span class="lineNum">     652 </span><span class="lineCov">        195 :     } else if (string_prefix(&quot;LINK_OK&quot;, p)) {</span>
 <span class="lineNum">     653 </span><span class="lineNoCov">          0 :         f = LINK_OK;</span>
 <span class="lineNum">     654 </span>            : 
-<span class="lineNum">     655 </span><span class="lineCov">         73 :     } else if (string_prefix(&quot;XFORCIBLE&quot;, p) || string_prefix(&quot;XPRESS&quot;, p)) {</span>
+<span class="lineNum">     655 </span><span class="lineCov">        195 :     } else if (string_prefix(&quot;XFORCIBLE&quot;, p) || string_prefix(&quot;XPRESS&quot;, p)) {</span>
 <span class="lineNum">     656 </span><span class="lineCov">          3 :         if (force_level) {</span>
 <span class="lineNum">     657 </span><span class="lineNoCov">          0 :             notify(player, &quot;Can't set this flag from an @force or {force}.&quot;);</span>
 <span class="lineNum">     658 </span><span class="lineNoCov">          0 :             return;</span>
@@ -728,10 +728,10 @@
 <span class="lineNum">     666 </span>            :         }
 <span class="lineNum">     667 </span><span class="lineCov">          3 :         f = XFORCIBLE;</span>
 <span class="lineNum">     668 </span>            : 
-<span class="lineNum">     669 </span><span class="lineCov">         70 :     } else if (string_prefix(&quot;KILL_OK&quot;, p)) {</span>
+<span class="lineNum">     669 </span><span class="lineCov">        192 :     } else if (string_prefix(&quot;KILL_OK&quot;, p)) {</span>
 <span class="lineNum">     670 </span><span class="lineNoCov">          0 :         f = KILL_OK;</span>
-<span class="lineNum">     671 </span><span class="lineCov">         70 :     } else if ((string_prefix(&quot;DARK&quot;, p)) || (string_prefix(&quot;DEBUG&quot;, p))) {</span>
-<span class="lineNum">     672 </span><span class="lineCov">         45 :         f = DARK;</span>
+<span class="lineNum">     671 </span><span class="lineCov">        192 :     } else if ((string_prefix(&quot;DARK&quot;, p)) || (string_prefix(&quot;DEBUG&quot;, p))) {</span>
+<span class="lineNum">     672 </span><span class="lineCov">        167 :         f = DARK;</span>
 <span class="lineNum">     673 </span><span class="lineCov">         50 :     } else if ((string_prefix(&quot;STICKY&quot;, p)) || (string_prefix(&quot;SETUID&quot;, p)) ||</span>
 <span class="lineNum">     674 </span><span class="lineCov">         25 :                (string_prefix(&quot;SILENT&quot;, p))) {</span>
 <span class="lineNum">     675 </span><span class="lineNoCov">          0 :         f = STICKY;</span>
@@ -762,17 +762,17 @@
 <span class="lineNum">     700 </span>            :     }
 <span class="lineNum">     701 </span>            : 
 <span class="lineNum">     702 </span>            :     /* check for restricted flag */
-<span class="lineNum">     703 </span><span class="lineCov">         97 :     if (restricted(player, thing, f)) {</span>
+<span class="lineNum">     703 </span><span class="lineCov">        219 :     if (restricted(player, thing, f)) {</span>
 <span class="lineNum">     704 </span><span class="lineNoCov">          0 :         notify(player, &quot;Permission denied. (restricted flag)&quot;);</span>
 <span class="lineNum">     705 </span><span class="lineNoCov">          0 :         return;</span>
 <span class="lineNum">     706 </span>            :     }
 <span class="lineNum">     707 </span>            :     /* check for stupid wizard */
-<span class="lineNum">     708 </span><span class="lineCov">         97 :     if (f == WIZARD &amp;&amp; *flag == NOT_TOKEN &amp;&amp; thing == player) {</span>
+<span class="lineNum">     708 </span><span class="lineCov">        219 :     if (f == WIZARD &amp;&amp; *flag == NOT_TOKEN &amp;&amp; thing == player) {</span>
 <span class="lineNum">     709 </span><span class="lineNoCov">          0 :         notify(player, &quot;You cannot make yourself mortal.&quot;);</span>
 <span class="lineNum">     710 </span><span class="lineNoCov">          0 :         return;</span>
 <span class="lineNum">     711 </span>            :     }
 <span class="lineNum">     712 </span>            :     /* else everything is ok, do the set */
-<span class="lineNum">     713 </span><span class="lineCov">         97 :     if (*flag == NOT_TOKEN) {</span>
+<span class="lineNum">     713 </span><span class="lineCov">        219 :     if (*flag == NOT_TOKEN) {</span>
 <span class="lineNum">     714 </span>            :         /* reset the flag */
 <span class="lineNum">     715 </span><span class="lineNoCov">          0 :         ts_modifyobject(thing);</span>
 <span class="lineNum">     716 </span><span class="lineNoCov">          0 :         FLAGS(thing) &amp;= ~f;</span>
@@ -783,16 +783,16 @@
 <span class="lineNum">     721 </span><span class="lineNoCov">          0 :         notify(player, &quot;Flag reset.&quot;);</span>
 <span class="lineNum">     722 </span>            :     } else {
 <span class="lineNum">     723 </span>            :         /* set the flag */
-<span class="lineNum">     724 </span><span class="lineCov">         97 :         ts_modifyobject(thing);</span>
-<span class="lineNum">     725 </span><span class="lineCov">         97 :         FLAGS(thing) |= f;</span>
-<span class="lineNum">     726 </span><span class="lineCov">         97 :         DBDIRTY(thing);</span>
-<span class="lineNum">     727 </span><span class="lineCov">         97 :         if (f == GUEST &amp;&amp; Typeof(thing) == TYPE_PLAYER) {</span>
+<span class="lineNum">     724 </span><span class="lineCov">        219 :         ts_modifyobject(thing);</span>
+<span class="lineNum">     725 </span><span class="lineCov">        219 :         FLAGS(thing) |= f;</span>
+<span class="lineNum">     726 </span><span class="lineCov">        219 :         DBDIRTY(thing);</span>
+<span class="lineNum">     727 </span><span class="lineCov">        219 :         if (f == GUEST &amp;&amp; Typeof(thing) == TYPE_PLAYER) {</span>
 <span class="lineNum">     728 </span>            :             PData property;
 <span class="lineNum">     729 </span><span class="lineNoCov">          0 :             property.flags = PROP_STRTYP;</span>
 <span class="lineNum">     730 </span><span class="lineNoCov">          0 :             property.data.str = &quot;yes&quot;;</span>
 <span class="lineNum">     731 </span><span class="lineNoCov">          0 :             set_property(thing, LEGACY_GUEST_PROP, &amp;property, 0);</span>
 <span class="lineNum">     732 </span>            :         }
-<span class="lineNum">     733 </span><span class="lineCov">         97 :         notify(player, &quot;Flag set.&quot;);</span>
+<span class="lineNum">     733 </span><span class="lineCov">        219 :         notify(player, &quot;Flag set.&quot;);</span>
 <span class="lineNum">     734 </span>            :     }
 <span class="lineNum">     735 </span>            : }
 <a name="736"><span class="lineNum">     736 </span>            : </a>

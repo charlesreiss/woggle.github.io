@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 19:01:38</td>
+            <td class="headerValue">2017-02-26 20:18:35</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">16</td>
@@ -501,15 +501,15 @@
 <span class="lineNum">     439 </span>            : }
 <a name="440"><span class="lineNum">     440 </span>            : </a>
 <span class="lineNum">     441 </span>            : int
-<span class="lineNum">     442 </span><span class="lineCov">       2424 : new_mvar(const char *varname, char *buf)</span>
+<span class="lineNum">     442 </span><span class="lineCov">       3156 : new_mvar(const char *varname, char *buf)</span>
 <span class="lineNum">     443 </span>            : {
-<span class="lineNum">     444 </span><span class="lineCov">       2424 :     if (strlen(varname) &gt; MAX_MFUN_NAME_LEN)</span>
+<span class="lineNum">     444 </span><span class="lineCov">       3156 :     if (strlen(varname) &gt; MAX_MFUN_NAME_LEN)</span>
 <span class="lineNum">     445 </span><span class="lineNoCov">          0 :         return 1;</span>
-<span class="lineNum">     446 </span><span class="lineCov">       2424 :     if (varc &gt;= MPI_MAX_VARIABLES)</span>
+<span class="lineNum">     446 </span><span class="lineCov">       3156 :     if (varc &gt;= MPI_MAX_VARIABLES)</span>
 <span class="lineNum">     447 </span><span class="lineNoCov">          0 :         return 2;</span>
-<span class="lineNum">     448 </span><span class="lineCov">       2424 :     strcpyn(varv[varc].name, sizeof(varv[varc].name), varname);</span>
-<span class="lineNum">     449 </span><span class="lineCov">       2424 :     varv[varc++].buf = buf;</span>
-<span class="lineNum">     450 </span><span class="lineCov">       2424 :     return 0;</span>
+<span class="lineNum">     448 </span><span class="lineCov">       3156 :     strcpyn(varv[varc].name, sizeof(varv[varc].name), varname);</span>
+<span class="lineNum">     449 </span><span class="lineCov">       3156 :     varv[varc++].buf = buf;</span>
+<span class="lineNum">     450 </span><span class="lineCov">       3156 :     return 0;</span>
 <span class="lineNum">     451 </span>            : }
 <a name="452"><span class="lineNum">     452 </span>            : </a>
 <span class="lineNum">     453 </span>            : char *
@@ -561,10 +561,10 @@
 <span class="lineNum">     499 </span>            : }
 <a name="500"><span class="lineNum">     500 </span>            : </a>
 <span class="lineNum">     501 </span>            : static int
-<span class="lineNum">     502 </span><span class="lineCov">        808 : free_mfuncs(int downto)</span>
+<span class="lineNum">     502 </span><span class="lineCov">       1052 : free_mfuncs(int downto)</span>
 <span class="lineNum">     503 </span>            : {
-<span class="lineNum">     504 </span><span class="lineCov">        808 :     if (funcc &lt; 1)</span>
-<span class="lineNum">     505 </span><span class="lineCov">        808 :         return 1;</span>
+<span class="lineNum">     504 </span><span class="lineCov">       1052 :     if (funcc &lt; 1)</span>
+<span class="lineNum">     505 </span><span class="lineCov">       1052 :         return 1;</span>
 <span class="lineNum">     506 </span><span class="lineNoCov">          0 :     if (downto &lt; 0)</span>
 <span class="lineNum">     507 </span><span class="lineNoCov">          0 :         return 1;</span>
 <span class="lineNum">     508 </span><span class="lineNoCov">          0 :     while (funcc &gt; downto)</span>
@@ -678,14 +678,14 @@
 <span class="lineNum">     616 </span>            : }
 <a name="617"><span class="lineNum">     617 </span>            : </a>
 <span class="lineNum">     618 </span>            : static void
-<span class="lineNum">     619 </span><span class="lineCov">      54526 : insert_mfn(const char *name, int i)</span>
+<span class="lineNum">     619 </span><span class="lineCov">      71240 : insert_mfn(const char *name, int i)</span>
 <span class="lineNum">     620 </span>            : {
 <span class="lineNum">     621 </span>            :     hash_data hd;
 <span class="lineNum">     622 </span>            : 
-<span class="lineNum">     623 </span><span class="lineCov">      54526 :     (void) free_hash(name, msghash, MSGHASHSIZE);</span>
-<span class="lineNum">     624 </span><span class="lineCov">      54526 :     hd.ival = i;</span>
-<span class="lineNum">     625 </span><span class="lineCov">      54526 :     (void) add_hash(name, hd, msghash, MSGHASHSIZE);</span>
-<span class="lineNum">     626 </span><span class="lineCov">      54526 : }</span>
+<span class="lineNum">     623 </span><span class="lineCov">      71240 :     (void) free_hash(name, msghash, MSGHASHSIZE);</span>
+<span class="lineNum">     624 </span><span class="lineCov">      71240 :     hd.ival = i;</span>
+<span class="lineNum">     625 </span><span class="lineCov">      71240 :     (void) add_hash(name, hd, msghash, MSGHASHSIZE);</span>
+<span class="lineNum">     626 </span><span class="lineCov">      71240 : }</span>
 <a name="627"><span class="lineNum">     627 </span>            : </a>
 <span class="lineNum">     628 </span>            : void
 <span class="lineNum">     629 </span><span class="lineNoCov">          0 : purge_mfns(void)</span>
@@ -694,12 +694,12 @@
 <span class="lineNum">     632 </span><span class="lineNoCov">          0 : }</span>
 <a name="633"><span class="lineNum">     633 </span>            : </a>
 <span class="lineNum">     634 </span>            : void
-<span class="lineNum">     635 </span><span class="lineCov">        398 : mesg_init(void)</span>
+<span class="lineNum">     635 </span><span class="lineCov">        520 : mesg_init(void)</span>
 <span class="lineNum">     636 </span>            : {
-<span class="lineNum">     637 </span><span class="lineCov">      54924 :     for (int i = 0; mfun_list[i].name; i++)</span>
-<span class="lineNum">     638 </span><span class="lineCov">      54526 :         insert_mfn(mfun_list[i].name, i + 1);</span>
-<span class="lineNum">     639 </span><span class="lineCov">        398 :     mpi_prof_start_time = time(NULL);</span>
-<span class="lineNum">     640 </span><span class="lineCov">        398 : }</span>
+<span class="lineNum">     637 </span><span class="lineCov">      71760 :     for (int i = 0; mfun_list[i].name; i++)</span>
+<span class="lineNum">     638 </span><span class="lineCov">      71240 :         insert_mfn(mfun_list[i].name, i + 1);</span>
+<span class="lineNum">     639 </span><span class="lineCov">        520 :     mpi_prof_start_time = time(NULL);</span>
+<span class="lineNum">     640 </span><span class="lineCov">        520 : }</span>
 <a name="641"><span class="lineNum">     641 </span>            : </a>
 <span class="lineNum">     642 </span>            : static int
 <span class="lineNum">     643 </span><span class="lineCov">        111 : mesg_args(char *wbuf, int maxlen, char **argv, char ulv, char sep, char dlv, char quot,</span>
@@ -760,7 +760,7 @@
 <span class="lineNum">     698 </span>            : static int mesg_instr_cnt = 0;
 <a name="699"><span class="lineNum">     699 </span>            : </a>
 <span class="lineNum">     700 </span>            : char *
-<span class="lineNum">     701 </span><span class="lineCov">       1012 : mesg_parse(int descr, dbref player, dbref what, dbref perms,</span>
+<span class="lineNum">     701 </span><span class="lineCov">       1256 : mesg_parse(int descr, dbref player, dbref what, dbref perms,</span>
 <span class="lineNum">     702 </span>            :            const char *inbuf, char *outbuf, int maxchars, int mesgtyp)
 <span class="lineNum">     703 </span>            : {
 <span class="lineNum">     704 </span>            :     char wbuf[BUFFER_LEN];
@@ -771,35 +771,35 @@
 <span class="lineNum">     709 </span>            :     char cmdbuf[MAX_MFUN_NAME_LEN + 1];
 <span class="lineNum">     710 </span>            :     const char *ptr;
 <span class="lineNum">     711 </span>            :     char *dptr;
-<span class="lineNum">     712 </span><span class="lineCov">       1012 :     int q = 0, s;</span>
+<span class="lineNum">     712 </span><span class="lineCov">       1256 :     int q = 0, s;</span>
 <span class="lineNum">     713 </span>            :     int i;
-<span class="lineNum">     714 </span><span class="lineCov">       1012 :     char *argv[10] = { NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL };</span>
-<span class="lineNum">     715 </span><span class="lineCov">       1012 :     int argc = 0;</span>
-<span class="lineNum">     716 </span><span class="lineCov">       1012 :     int showtextflag = 0;</span>
-<span class="lineNum">     717 </span><span class="lineCov">       1012 :     int literalflag = 0;</span>
+<span class="lineNum">     714 </span><span class="lineCov">       1256 :     char *argv[10] = { NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL };</span>
+<span class="lineNum">     715 </span><span class="lineCov">       1256 :     int argc = 0;</span>
+<span class="lineNum">     716 </span><span class="lineCov">       1256 :     int showtextflag = 0;</span>
+<span class="lineNum">     717 </span><span class="lineCov">       1256 :     int literalflag = 0;</span>
 <span class="lineNum">     718 </span>            : 
-<span class="lineNum">     719 </span><span class="lineCov">       1012 :     mesg_rec_cnt++;</span>
-<span class="lineNum">     720 </span><span class="lineCov">       1012 :     if (mesg_rec_cnt &gt; 26) {</span>
+<span class="lineNum">     719 </span><span class="lineCov">       1256 :     mesg_rec_cnt++;</span>
+<span class="lineNum">     720 </span><span class="lineCov">       1256 :     if (mesg_rec_cnt &gt; 26) {</span>
 <span class="lineNum">     721 </span><span class="lineCov">          3 :         char *zptr = get_mvar(&quot;how&quot;);</span>
 <span class="lineNum">     722 </span><span class="lineCov">          3 :         notifyf_nolisten(player, &quot;%s Recursion limit exceeded.&quot;, zptr);</span>
 <span class="lineNum">     723 </span><span class="lineCov">          3 :         mesg_rec_cnt--;</span>
 <span class="lineNum">     724 </span><span class="lineCov">          3 :         outbuf[0] = '\0';</span>
 <span class="lineNum">     725 </span><span class="lineCov">          3 :         return NULL;</span>
 <span class="lineNum">     726 </span>            :     }
-<span class="lineNum">     727 </span><span class="lineCov">       1009 :     if (Typeof(player) == TYPE_GARBAGE) {</span>
+<span class="lineNum">     727 </span><span class="lineCov">       1253 :     if (Typeof(player) == TYPE_GARBAGE) {</span>
 <span class="lineNum">     728 </span><span class="lineNoCov">          0 :         mesg_rec_cnt--;</span>
 <span class="lineNum">     729 </span><span class="lineNoCov">          0 :         outbuf[0] = '\0';</span>
 <span class="lineNum">     730 </span><span class="lineNoCov">          0 :         return NULL;</span>
 <span class="lineNum">     731 </span>            :     }
-<span class="lineNum">     732 </span><span class="lineCov">       1009 :     if (Typeof(what) == TYPE_GARBAGE) {</span>
+<span class="lineNum">     732 </span><span class="lineCov">       1253 :     if (Typeof(what) == TYPE_GARBAGE) {</span>
 <span class="lineNum">     733 </span><span class="lineNoCov">          0 :         notify_nolisten(player, &quot;MPI Error: Garbage trigger.&quot;, 1);</span>
 <span class="lineNum">     734 </span><span class="lineNoCov">          0 :         mesg_rec_cnt--;</span>
 <span class="lineNum">     735 </span><span class="lineNoCov">          0 :         outbuf[0] = '\0';</span>
 <span class="lineNum">     736 </span><span class="lineNoCov">          0 :         return NULL;</span>
 <span class="lineNum">     737 </span>            :     }
-<span class="lineNum">     738 </span><span class="lineCov">       1009 :     strcpyn(wbuf, sizeof(wbuf), inbuf);</span>
-<span class="lineNum">     739 </span><span class="lineCov">      31562 :     for (int p = 0; wbuf[p] &amp;&amp; (p &lt; maxchars - 1) &amp;&amp; q &lt; (maxchars - 1); p++) {</span>
-<span class="lineNum">     740 </span><span class="lineCov">      30634 :         if (wbuf[p] == '\\') {</span>
+<span class="lineNum">     738 </span><span class="lineCov">       1253 :     strcpyn(wbuf, sizeof(wbuf), inbuf);</span>
+<span class="lineNum">     739 </span><span class="lineCov">      41444 :     for (int p = 0; wbuf[p] &amp;&amp; (p &lt; maxchars - 1) &amp;&amp; q &lt; (maxchars - 1); p++) {</span>
+<span class="lineNum">     740 </span><span class="lineCov">      40272 :         if (wbuf[p] == '\\') {</span>
 <span class="lineNum">     741 </span><span class="lineNoCov">          0 :             p++;</span>
 <span class="lineNum">     742 </span><span class="lineNoCov">          0 :             showtextflag = 1;</span>
 <span class="lineNum">     743 </span><span class="lineNoCov">          0 :             if (wbuf[p] == 'r') {</span>
@@ -809,9 +809,9 @@
 <span class="lineNum">     747 </span>            :             } else {
 <span class="lineNum">     748 </span><span class="lineNoCov">          0 :                 outbuf[q++] = wbuf[p];</span>
 <span class="lineNum">     749 </span>            :             }
-<span class="lineNum">     750 </span><span class="lineCov">      30634 :         } else if (wbuf[p] == MFUN_LITCHAR) {</span>
+<span class="lineNum">     750 </span><span class="lineCov">      40272 :         } else if (wbuf[p] == MFUN_LITCHAR) {</span>
 <span class="lineNum">     751 </span><span class="lineNoCov">          0 :             literalflag = (!literalflag);</span>
-<span class="lineNum">     752 </span><span class="lineCov">      30634 :         } else if (!literalflag &amp;&amp; wbuf[p] == MFUN_LEADCHAR) {</span>
+<span class="lineNum">     752 </span><span class="lineCov">      40272 :         } else if (!literalflag &amp;&amp; wbuf[p] == MFUN_LEADCHAR) {</span>
 <span class="lineNum">     753 </span><span class="lineCov">        201 :             if (wbuf[p + 1] == MFUN_LEADCHAR) {</span>
 <span class="lineNum">     754 </span><span class="lineNoCov">          0 :                 showtextflag = 1;</span>
 <span class="lineNum">     755 </span><span class="lineNoCov">          0 :                 outbuf[q++] = wbuf[p++];</span>
@@ -1112,27 +1112,27 @@
 <span class="lineNum">    1050 </span>            :                 }
 <span class="lineNum">    1051 </span>            :             }
 <span class="lineNum">    1052 </span>            :         } else {
-<span class="lineNum">    1053 </span><span class="lineCov">      30493 :             outbuf[q++] = wbuf[p];</span>
-<span class="lineNum">    1054 </span><span class="lineCov">      30493 :             showtextflag = 1;</span>
+<span class="lineNum">    1053 </span><span class="lineCov">      40131 :             outbuf[q++] = wbuf[p];</span>
+<span class="lineNum">    1054 </span><span class="lineCov">      40131 :             showtextflag = 1;</span>
 <span class="lineNum">    1055 </span>            :         }
 <span class="lineNum">    1056 </span>            :     }
-<span class="lineNum">    1057 </span><span class="lineCov">        928 :     outbuf[q] = '\0';</span>
-<span class="lineNum">    1058 </span><span class="lineCov">        928 :     if ((mesgtyp &amp; MPI_ISDEBUG) &amp;&amp; showtextflag) {</span>
+<span class="lineNum">    1057 </span><span class="lineCov">       1172 :     outbuf[q] = '\0';</span>
+<span class="lineNum">    1058 </span><span class="lineCov">       1172 :     if ((mesgtyp &amp; MPI_ISDEBUG) &amp;&amp; showtextflag) {</span>
 <span class="lineNum">    1059 </span><span class="lineNoCov">          0 :         char *zptr = get_mvar(&quot;how&quot;);</span>
 <span class="lineNum">    1060 </span>            : 
 <span class="lineNum">    1061 </span><span class="lineNoCov">          0 :         notifyf_nolisten(player, &quot;%s %*s`%.512s`&quot;, zptr,</span>
 <span class="lineNum">    1062 </span><span class="lineNoCov">          0 :                  (mesg_rec_cnt * 2 - 4), &quot;&quot;, cr2slash(buf2, sizeof(buf2), outbuf));</span>
 <span class="lineNum">    1063 </span>            :     }
-<span class="lineNum">    1064 </span><span class="lineCov">        994 :     for (i = 0; i &lt; argc; i++) {</span>
+<span class="lineNum">    1064 </span><span class="lineCov">       1238 :     for (i = 0; i &lt; argc; i++) {</span>
 <span class="lineNum">    1065 </span><span class="lineCov">         66 :         free(argv[i]);</span>
 <span class="lineNum">    1066 </span>            :     }
-<span class="lineNum">    1067 </span><span class="lineCov">        928 :     mesg_rec_cnt--;</span>
-<span class="lineNum">    1068 </span><span class="lineCov">        928 :     outbuf[maxchars - 1] = '\0';</span>
-<span class="lineNum">    1069 </span><span class="lineCov">        928 :     return (outbuf);</span>
+<span class="lineNum">    1067 </span><span class="lineCov">       1172 :     mesg_rec_cnt--;</span>
+<span class="lineNum">    1068 </span><span class="lineCov">       1172 :     outbuf[maxchars - 1] = '\0';</span>
+<span class="lineNum">    1069 </span><span class="lineCov">       1172 :     return (outbuf);</span>
 <span class="lineNum">    1070 </span>            : }
 <a name="1071"><span class="lineNum">    1071 </span>            : </a>
 <span class="lineNum">    1072 </span>            : static char *
-<span class="lineNum">    1073 </span><span class="lineCov">        808 : do_parse_mesg_2(int descr, dbref player, dbref what, dbref perms,</span>
+<span class="lineNum">    1073 </span><span class="lineCov">       1052 : do_parse_mesg_2(int descr, dbref player, dbref what, dbref perms,</span>
 <span class="lineNum">    1074 </span>            :                 const char *inbuf, const char *abuf, char *outbuf, int outbuflen, int mesgtyp)
 <span class="lineNum">    1075 </span>            : {
 <span class="lineNum">    1076 </span>            : 
@@ -1142,70 +1142,70 @@
 <span class="lineNum">    1080 </span>            :     char tmparg[BUFFER_LEN];
 <span class="lineNum">    1081 </span>            :     char tmpcmd[BUFFER_LEN];
 <span class="lineNum">    1082 </span>            :     char *dptr;
-<span class="lineNum">    1083 </span><span class="lineCov">        808 :     int mvarcnt = varc;</span>
-<span class="lineNum">    1084 </span><span class="lineCov">        808 :     int mfunccnt = funcc;</span>
-<span class="lineNum">    1085 </span><span class="lineCov">        808 :     int tmprec_cnt = mesg_rec_cnt;</span>
-<span class="lineNum">    1086 </span><span class="lineCov">        808 :     int tmpinst_cnt = mesg_instr_cnt;</span>
+<span class="lineNum">    1083 </span><span class="lineCov">       1052 :     int mvarcnt = varc;</span>
+<span class="lineNum">    1084 </span><span class="lineCov">       1052 :     int mfunccnt = funcc;</span>
+<span class="lineNum">    1085 </span><span class="lineCov">       1052 :     int tmprec_cnt = mesg_rec_cnt;</span>
+<span class="lineNum">    1086 </span><span class="lineCov">       1052 :     int tmpinst_cnt = mesg_instr_cnt;</span>
 <span class="lineNum">    1087 </span>            : 
-<span class="lineNum">    1088 </span><span class="lineCov">        808 :     *outbuf = '\0';</span>
+<span class="lineNum">    1088 </span><span class="lineCov">       1052 :     *outbuf = '\0';</span>
 <span class="lineNum">    1089 </span>            : 
-<span class="lineNum">    1090 </span><span class="lineCov">        808 :     if ((mesgtyp &amp; MPI_NOHOW) == 0) {</span>
-<span class="lineNum">    1091 </span><span class="lineCov">        808 :         if (new_mvar(&quot;how&quot;, howvar)) {</span>
+<span class="lineNum">    1090 </span><span class="lineCov">       1052 :     if ((mesgtyp &amp; MPI_NOHOW) == 0) {</span>
+<span class="lineNum">    1091 </span><span class="lineCov">       1052 :         if (new_mvar(&quot;how&quot;, howvar)) {</span>
 <span class="lineNum">    1092 </span><span class="lineNoCov">          0 :             notifyf_nolisten(player, &quot;%s Out of MPI variables.&quot;, abuf);</span>
 <span class="lineNum">    1093 </span><span class="lineNoCov">          0 :             varc = mvarcnt;</span>
 <span class="lineNum">    1094 </span><span class="lineNoCov">          0 :             return outbuf;</span>
 <span class="lineNum">    1095 </span>            :         }
-<span class="lineNum">    1096 </span><span class="lineCov">        808 :         strcpyn(howvar, sizeof(howvar), abuf);</span>
+<span class="lineNum">    1096 </span><span class="lineCov">       1052 :         strcpyn(howvar, sizeof(howvar), abuf);</span>
 <span class="lineNum">    1097 </span>            :     }
 <span class="lineNum">    1098 </span>            : 
-<span class="lineNum">    1099 </span><span class="lineCov">        808 :     if (new_mvar(&quot;cmd&quot;, cmdvar)) {</span>
+<span class="lineNum">    1099 </span><span class="lineCov">       1052 :     if (new_mvar(&quot;cmd&quot;, cmdvar)) {</span>
 <span class="lineNum">    1100 </span><span class="lineNoCov">          0 :         notifyf_nolisten(player, &quot;%s Out of MPI variables.&quot;, abuf);</span>
 <span class="lineNum">    1101 </span><span class="lineNoCov">          0 :         varc = mvarcnt;</span>
 <span class="lineNum">    1102 </span><span class="lineNoCov">          0 :         return outbuf;</span>
 <span class="lineNum">    1103 </span>            :     }
-<span class="lineNum">    1104 </span><span class="lineCov">        808 :     strcpyn(cmdvar, sizeof(cmdvar), match_cmdname);</span>
-<span class="lineNum">    1105 </span><span class="lineCov">        808 :     strcpyn(tmpcmd, sizeof(tmpcmd), match_cmdname);</span>
+<span class="lineNum">    1104 </span><span class="lineCov">       1052 :     strcpyn(cmdvar, sizeof(cmdvar), match_cmdname);</span>
+<span class="lineNum">    1105 </span><span class="lineCov">       1052 :     strcpyn(tmpcmd, sizeof(tmpcmd), match_cmdname);</span>
 <span class="lineNum">    1106 </span>            : 
-<span class="lineNum">    1107 </span><span class="lineCov">        808 :     if (new_mvar(&quot;arg&quot;, argvar)) {</span>
+<span class="lineNum">    1107 </span><span class="lineCov">       1052 :     if (new_mvar(&quot;arg&quot;, argvar)) {</span>
 <span class="lineNum">    1108 </span><span class="lineNoCov">          0 :         notifyf_nolisten(player, &quot;%s Out of MPI variables.&quot;, abuf);</span>
 <span class="lineNum">    1109 </span><span class="lineNoCov">          0 :         varc = mvarcnt;</span>
 <span class="lineNum">    1110 </span><span class="lineNoCov">          0 :         return outbuf;</span>
 <span class="lineNum">    1111 </span>            :     }
-<span class="lineNum">    1112 </span><span class="lineCov">        808 :     strcpyn(argvar, sizeof(argvar), match_args);</span>
-<span class="lineNum">    1113 </span><span class="lineCov">        808 :     strcpyn(tmparg, sizeof(tmparg), match_args);</span>
+<span class="lineNum">    1112 </span><span class="lineCov">       1052 :     strcpyn(argvar, sizeof(argvar), match_args);</span>
+<span class="lineNum">    1113 </span><span class="lineCov">       1052 :     strcpyn(tmparg, sizeof(tmparg), match_args);</span>
 <span class="lineNum">    1114 </span>            : 
-<span class="lineNum">    1115 </span><span class="lineCov">        808 :     dptr = MesgParse(inbuf, outbuf, outbuflen);</span>
-<span class="lineNum">    1116 </span><span class="lineCov">        808 :     if (!dptr) {</span>
+<span class="lineNum">    1115 </span><span class="lineCov">       1052 :     dptr = MesgParse(inbuf, outbuf, outbuflen);</span>
+<span class="lineNum">    1116 </span><span class="lineCov">       1052 :     if (!dptr) {</span>
 <span class="lineNum">    1117 </span><span class="lineCov">          6 :         *outbuf = '\0';</span>
 <span class="lineNum">    1118 </span>            :     }
 <span class="lineNum">    1119 </span>            : 
-<span class="lineNum">    1120 </span><span class="lineCov">        808 :     varc = mvarcnt;</span>
-<span class="lineNum">    1121 </span><span class="lineCov">        808 :     free_mfuncs(mfunccnt);</span>
-<span class="lineNum">    1122 </span><span class="lineCov">        808 :     mesg_rec_cnt = tmprec_cnt;</span>
-<span class="lineNum">    1123 </span><span class="lineCov">        808 :     mesg_instr_cnt = tmpinst_cnt;</span>
+<span class="lineNum">    1120 </span><span class="lineCov">       1052 :     varc = mvarcnt;</span>
+<span class="lineNum">    1121 </span><span class="lineCov">       1052 :     free_mfuncs(mfunccnt);</span>
+<span class="lineNum">    1122 </span><span class="lineCov">       1052 :     mesg_rec_cnt = tmprec_cnt;</span>
+<span class="lineNum">    1123 </span><span class="lineCov">       1052 :     mesg_instr_cnt = tmpinst_cnt;</span>
 <span class="lineNum">    1124 </span>            : 
-<span class="lineNum">    1125 </span><span class="lineCov">        808 :     strcpyn(match_cmdname, sizeof(match_cmdname), tmpcmd);</span>
-<span class="lineNum">    1126 </span><span class="lineCov">        808 :     strcpyn(match_args, sizeof(match_args), tmparg);</span>
+<span class="lineNum">    1125 </span><span class="lineCov">       1052 :     strcpyn(match_cmdname, sizeof(match_cmdname), tmpcmd);</span>
+<span class="lineNum">    1126 </span><span class="lineCov">       1052 :     strcpyn(match_args, sizeof(match_args), tmparg);</span>
 <span class="lineNum">    1127 </span>            : 
 <span class="lineNum">    1128 </span>            : 
-<span class="lineNum">    1129 </span><span class="lineCov">        808 :     return outbuf;</span>
+<span class="lineNum">    1129 </span><span class="lineCov">       1052 :     return outbuf;</span>
 <span class="lineNum">    1130 </span>            : }
 <span class="lineNum">    1131 </span>            : 
 <a name="1132"><span class="lineNum">    1132 </span>            : </a>
 <span class="lineNum">    1133 </span>            : char *
-<span class="lineNum">    1134 </span><span class="lineCov">        808 : do_parse_mesg(int descr, dbref player, dbref what, const char *inbuf, const char *abuf,</span>
+<span class="lineNum">    1134 </span><span class="lineCov">       1052 : do_parse_mesg(int descr, dbref player, dbref what, const char *inbuf, const char *abuf,</span>
 <span class="lineNum">    1135 </span>            :               char *outbuf, int outbuflen, int mesgtyp)
 <span class="lineNum">    1136 </span>            : {
-<span class="lineNum">    1137 </span><span class="lineCov">        808 :     if (tp_do_mpi_parsing) {</span>
-<span class="lineNum">    1138 </span><span class="lineCov">        808 :         char *tmp = NULL;</span>
+<span class="lineNum">    1137 </span><span class="lineCov">       1052 :     if (tp_do_mpi_parsing) {</span>
+<span class="lineNum">    1138 </span><span class="lineCov">       1052 :         char *tmp = NULL;</span>
 <span class="lineNum">    1139 </span>            :         struct timeval st, et;
 <span class="lineNum">    1140 </span>            : 
 <span class="lineNum">    1141 </span>            :         /* Quickie additions to do rough per-object MPI profiling */
-<span class="lineNum">    1142 </span><span class="lineCov">        808 :         gettimeofday(&amp;st, NULL);</span>
-<span class="lineNum">    1143 </span><span class="lineCov">        808 :         tmp = do_parse_mesg_2(descr, player, what, what, inbuf, abuf, outbuf, outbuflen,</span>
+<span class="lineNum">    1142 </span><span class="lineCov">       1052 :         gettimeofday(&amp;st, NULL);</span>
+<span class="lineNum">    1143 </span><span class="lineCov">       1052 :         tmp = do_parse_mesg_2(descr, player, what, what, inbuf, abuf, outbuf, outbuflen,</span>
 <span class="lineNum">    1144 </span>            :                               mesgtyp);
-<span class="lineNum">    1145 </span><span class="lineCov">        808 :         gettimeofday(&amp;et, NULL);</span>
-<span class="lineNum">    1146 </span><span class="lineCov">        808 :         if (strcmp(tmp, inbuf)) {</span>
+<span class="lineNum">    1145 </span><span class="lineCov">       1052 :         gettimeofday(&amp;et, NULL);</span>
+<span class="lineNum">    1146 </span><span class="lineCov">       1052 :         if (strcmp(tmp, inbuf)) {</span>
 <span class="lineNum">    1147 </span><span class="lineCov">         45 :             if (st.tv_usec &gt; et.tv_usec) {</span>
 <span class="lineNum">    1148 </span><span class="lineNoCov">          0 :                 et.tv_usec += 1000000;</span>
 <span class="lineNum">    1149 </span><span class="lineNoCov">          0 :                 et.tv_sec -= 1;</span>
@@ -1220,7 +1220,7 @@
 <span class="lineNum">    1158 </span>            :             }
 <span class="lineNum">    1159 </span><span class="lineCov">         45 :             DBFETCH(what)-&gt;mpi_prof_use++;</span>
 <span class="lineNum">    1160 </span>            :         }
-<span class="lineNum">    1161 </span><span class="lineCov">        808 :         return (tmp);</span>
+<span class="lineNum">    1161 </span><span class="lineCov">       1052 :         return (tmp);</span>
 <span class="lineNum">    1162 </span>            :     } else {
 <span class="lineNum">    1163 </span><span class="lineNoCov">          0 :         strcpyn(outbuf, outbuflen, inbuf);</span>
 <span class="lineNum">    1164 </span>            :     }
