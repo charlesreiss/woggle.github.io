@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 20:18:35</td>
+            <td class="headerValue">2017-02-26 20:43:00</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">24</td>
@@ -72,77 +72,77 @@
 <span class="lineNum">      10 </span>            : #include &quot;props.h&quot;
 <a name="11"><span class="lineNum">      11 </span>            : </a>
 <span class="lineNum">      12 </span>            : static PropPtr
-<span class="lineNum">      13 </span><span class="lineCov">      27616 : find(char *key, PropPtr avl)</span>
+<span class="lineNum">      13 </span><span class="lineCov">      31832 : find(char *key, PropPtr avl)</span>
 <span class="lineNum">      14 </span>            : {
 <span class="lineNum">      15 </span>            :     int cmpval;
 <span class="lineNum">      16 </span>            : 
-<span class="lineNum">      17 </span><span class="lineCov">      86765 :     while (avl) {</span>
-<span class="lineNum">      18 </span><span class="lineCov">      41745 :         cmpval = strcasecmp(key, PropName(avl));</span>
-<span class="lineNum">      19 </span><span class="lineCov">      41745 :         if (cmpval &gt; 0) {</span>
-<span class="lineNum">      20 </span><span class="lineCov">      21523 :             avl = avl-&gt;right;</span>
-<span class="lineNum">      21 </span><span class="lineCov">      20222 :         } else if (cmpval &lt; 0) {</span>
-<span class="lineNum">      22 </span><span class="lineCov">      10010 :             avl = avl-&gt;left;</span>
+<span class="lineNum">      17 </span><span class="lineCov">     100187 :     while (avl) {</span>
+<span class="lineNum">      18 </span><span class="lineCov">      48111 :         cmpval = strcasecmp(key, PropName(avl));</span>
+<span class="lineNum">      19 </span><span class="lineCov">      48111 :         if (cmpval &gt; 0) {</span>
+<span class="lineNum">      20 </span><span class="lineCov">      24963 :             avl = avl-&gt;right;</span>
+<span class="lineNum">      21 </span><span class="lineCov">      23148 :         } else if (cmpval &lt; 0) {</span>
+<span class="lineNum">      22 </span><span class="lineCov">      11560 :             avl = avl-&gt;left;</span>
 <span class="lineNum">      23 </span>            :         } else {
-<span class="lineNum">      24 </span><span class="lineCov">      10212 :             break;</span>
+<span class="lineNum">      24 </span><span class="lineCov">      11588 :             break;</span>
 <span class="lineNum">      25 </span>            :         }
 <span class="lineNum">      26 </span>            :     }
-<span class="lineNum">      27 </span><span class="lineCov">      27616 :     return avl;</span>
+<span class="lineNum">      27 </span><span class="lineCov">      31832 :     return avl;</span>
 <span class="lineNum">      28 </span>            : }
 <a name="29"><span class="lineNum">      29 </span>            : </a>
 <span class="lineNum">      30 </span>            : static int
-<span class="lineNum">      31 </span><span class="lineCov">      53396 : height_of(PropPtr node)</span>
+<span class="lineNum">      31 </span><span class="lineCov">      61212 : height_of(PropPtr node)</span>
 <span class="lineNum">      32 </span>            : {
-<span class="lineNum">      33 </span><span class="lineCov">      53396 :     if (node)</span>
-<span class="lineNum">      34 </span><span class="lineCov">      37899 :         return node-&gt;height;</span>
+<span class="lineNum">      33 </span><span class="lineCov">      61212 :     if (node)</span>
+<span class="lineNum">      34 </span><span class="lineCov">      43447 :         return node-&gt;height;</span>
 <span class="lineNum">      35 </span>            :     else
-<span class="lineNum">      36 </span><span class="lineCov">      15497 :         return 0;</span>
+<span class="lineNum">      36 </span><span class="lineCov">      17765 :         return 0;</span>
 <span class="lineNum">      37 </span>            : }
 <a name="38"><span class="lineNum">      38 </span>            : </a>
 <span class="lineNum">      39 </span>            : static int
-<span class="lineNum">      40 </span><span class="lineCov">      11175 : height_diff(PropPtr node)</span>
+<span class="lineNum">      40 </span><span class="lineCov">      12823 : height_diff(PropPtr node)</span>
 <span class="lineNum">      41 </span>            : {
-<span class="lineNum">      42 </span><span class="lineCov">      11175 :     if (node)</span>
-<span class="lineNum">      43 </span><span class="lineCov">      10633 :         return (height_of(node-&gt;right) - height_of(node-&gt;left));</span>
+<span class="lineNum">      42 </span><span class="lineCov">      12823 :     if (node)</span>
+<span class="lineNum">      43 </span><span class="lineCov">      12195 :         return (height_of(node-&gt;right) - height_of(node-&gt;left));</span>
 <span class="lineNum">      44 </span>            :     else
-<span class="lineNum">      45 </span><span class="lineCov">        542 :         return 0;</span>
+<span class="lineNum">      45 </span><span class="lineCov">        628 :         return 0;</span>
 <span class="lineNum">      46 </span>            : }
 <a name="47"><span class="lineNum">      47 </span>            : </a>
 <span class="lineNum">      48 </span>            : static void
-<span class="lineNum">      49 </span><span class="lineCov">      11252 : fixup_height(PropPtr node)</span>
+<span class="lineNum">      49 </span><span class="lineCov">      12902 : fixup_height(PropPtr node)</span>
 <span class="lineNum">      50 </span>            : {
-<span class="lineNum">      51 </span><span class="lineCov">      11252 :     if (node)</span>
-<span class="lineNum">      52 </span><span class="lineCov">      10710 :         node-&gt;height = 1 + MAX(height_of(node-&gt;left), height_of(node-&gt;right));</span>
-<span class="lineNum">      53 </span><span class="lineCov">      11252 : }</span>
+<span class="lineNum">      51 </span><span class="lineCov">      12902 :     if (node)</span>
+<span class="lineNum">      52 </span><span class="lineCov">      12274 :         node-&gt;height = 1 + MAX(height_of(node-&gt;left), height_of(node-&gt;right));</span>
+<span class="lineNum">      53 </span><span class="lineCov">      12902 : }</span>
 <a name="54"><span class="lineNum">      54 </span>            : </a>
 <span class="lineNum">      55 </span>            : static PropPtr
-<span class="lineNum">      56 </span><span class="lineCov">       1627 : rotate_left_single(PropPtr a)</span>
+<span class="lineNum">      56 </span><span class="lineCov">       1885 : rotate_left_single(PropPtr a)</span>
 <span class="lineNum">      57 </span>            : {
-<span class="lineNum">      58 </span><span class="lineCov">       1627 :     PropPtr b = a-&gt;right;</span>
+<span class="lineNum">      58 </span><span class="lineCov">       1885 :     PropPtr b = a-&gt;right;</span>
 <span class="lineNum">      59 </span>            : 
-<span class="lineNum">      60 </span><span class="lineCov">       1627 :     a-&gt;right = b-&gt;left;</span>
-<span class="lineNum">      61 </span><span class="lineCov">       1627 :     b-&gt;left = a;</span>
+<span class="lineNum">      60 </span><span class="lineCov">       1885 :     a-&gt;right = b-&gt;left;</span>
+<span class="lineNum">      61 </span><span class="lineCov">       1885 :     b-&gt;left = a;</span>
 <span class="lineNum">      62 </span>            : 
-<span class="lineNum">      63 </span><span class="lineCov">       1627 :     fixup_height(a);</span>
-<span class="lineNum">      64 </span><span class="lineCov">       1627 :     fixup_height(b);</span>
+<span class="lineNum">      63 </span><span class="lineCov">       1885 :     fixup_height(a);</span>
+<span class="lineNum">      64 </span><span class="lineCov">       1885 :     fixup_height(b);</span>
 <span class="lineNum">      65 </span>            : 
-<span class="lineNum">      66 </span><span class="lineCov">       1627 :     return b;</span>
+<span class="lineNum">      66 </span><span class="lineCov">       1885 :     return b;</span>
 <span class="lineNum">      67 </span>            : }
 <a name="68"><span class="lineNum">      68 </span>            : </a>
 <span class="lineNum">      69 </span>            : static PropPtr
-<span class="lineNum">      70 </span><span class="lineCov">         65 : rotate_left_double(PropPtr a)</span>
+<span class="lineNum">      70 </span><span class="lineCov">         67 : rotate_left_double(PropPtr a)</span>
 <span class="lineNum">      71 </span>            : {
-<span class="lineNum">      72 </span><span class="lineCov">         65 :     PropPtr b = a-&gt;right, c = b-&gt;left;</span>
+<span class="lineNum">      72 </span><span class="lineCov">         67 :     PropPtr b = a-&gt;right, c = b-&gt;left;</span>
 <span class="lineNum">      73 </span>            : 
-<span class="lineNum">      74 </span><span class="lineCov">         65 :     a-&gt;right = c-&gt;left;</span>
-<span class="lineNum">      75 </span><span class="lineCov">         65 :     b-&gt;left = c-&gt;right;</span>
-<span class="lineNum">      76 </span><span class="lineCov">         65 :     c-&gt;left = a;</span>
-<span class="lineNum">      77 </span><span class="lineCov">         65 :     c-&gt;right = b;</span>
+<span class="lineNum">      74 </span><span class="lineCov">         67 :     a-&gt;right = c-&gt;left;</span>
+<span class="lineNum">      75 </span><span class="lineCov">         67 :     b-&gt;left = c-&gt;right;</span>
+<span class="lineNum">      76 </span><span class="lineCov">         67 :     c-&gt;left = a;</span>
+<span class="lineNum">      77 </span><span class="lineCov">         67 :     c-&gt;right = b;</span>
 <span class="lineNum">      78 </span>            : 
-<span class="lineNum">      79 </span><span class="lineCov">         65 :     fixup_height(a);</span>
-<span class="lineNum">      80 </span><span class="lineCov">         65 :     fixup_height(b);</span>
-<span class="lineNum">      81 </span><span class="lineCov">         65 :     fixup_height(c);</span>
+<span class="lineNum">      79 </span><span class="lineCov">         67 :     fixup_height(a);</span>
+<span class="lineNum">      80 </span><span class="lineCov">         67 :     fixup_height(b);</span>
+<span class="lineNum">      81 </span><span class="lineCov">         67 :     fixup_height(c);</span>
 <span class="lineNum">      82 </span>            : 
-<span class="lineNum">      83 </span><span class="lineCov">         65 :     return c;</span>
+<span class="lineNum">      83 </span><span class="lineCov">         67 :     return c;</span>
 <span class="lineNum">      84 </span>            : }
 <a name="85"><span class="lineNum">      85 </span>            : </a>
 <span class="lineNum">      86 </span>            : static PropPtr
@@ -177,104 +177,104 @@
 <span class="lineNum">     115 </span>            : }
 <a name="116"><span class="lineNum">     116 </span>            : </a>
 <span class="lineNum">     117 </span>            : static PropPtr
-<span class="lineNum">     118 </span><span class="lineCov">       9444 : balance_node(PropPtr a)</span>
+<span class="lineNum">     118 </span><span class="lineCov">      10832 : balance_node(PropPtr a)</span>
 <span class="lineNum">     119 </span>            : {
-<span class="lineNum">     120 </span><span class="lineCov">       9444 :     int dh = height_diff(a);</span>
+<span class="lineNum">     120 </span><span class="lineCov">      10832 :     int dh = height_diff(a);</span>
 <span class="lineNum">     121 </span>            : 
-<span class="lineNum">     122 </span><span class="lineCov">       9444 :     if (abs(dh) &lt; 2) {</span>
-<span class="lineNum">     123 </span><span class="lineCov">       7713 :         fixup_height(a);</span>
+<span class="lineNum">     122 </span><span class="lineCov">      10832 :     if (abs(dh) &lt; 2) {</span>
+<span class="lineNum">     123 </span><span class="lineCov">       8841 :         fixup_height(a);</span>
 <span class="lineNum">     124 </span>            :     } else {
-<span class="lineNum">     125 </span><span class="lineCov">       1731 :         if (dh == 2)</span>
-<span class="lineNum">     126 </span><span class="lineCov">       1692 :             if (height_diff(a-&gt;right) &gt;= 0)</span>
-<span class="lineNum">     127 </span><span class="lineCov">       1627 :                 a = rotate_left_single(a);</span>
+<span class="lineNum">     125 </span><span class="lineCov">       1991 :         if (dh == 2)</span>
+<span class="lineNum">     126 </span><span class="lineCov">       1952 :             if (height_diff(a-&gt;right) &gt;= 0)</span>
+<span class="lineNum">     127 </span><span class="lineCov">       1885 :                 a = rotate_left_single(a);</span>
 <span class="lineNum">     128 </span>            :             else
-<span class="lineNum">     129 </span><span class="lineCov">         65 :                 a = rotate_left_double(a);</span>
+<span class="lineNum">     129 </span><span class="lineCov">         67 :                 a = rotate_left_double(a);</span>
 <span class="lineNum">     130 </span><span class="lineCov">         39 :         else if (height_diff(a-&gt;left) &lt;= 0)</span>
 <span class="lineNum">     131 </span><span class="lineCov">         27 :             a = rotate_right_single(a);</span>
 <span class="lineNum">     132 </span>            :         else
 <span class="lineNum">     133 </span><span class="lineCov">         12 :             a = rotate_right_double(a);</span>
 <span class="lineNum">     134 </span>            :     }
-<span class="lineNum">     135 </span><span class="lineCov">       9444 :     return a;</span>
+<span class="lineNum">     135 </span><span class="lineCov">      10832 :     return a;</span>
 <span class="lineNum">     136 </span>            : }
 <a name="137"><span class="lineNum">     137 </span>            : </a>
 <span class="lineNum">     138 </span>            : PropPtr
-<span class="lineNum">     139 </span><span class="lineCov">       8047 : alloc_propnode(const char *name)</span>
+<span class="lineNum">     139 </span><span class="lineCov">       9261 : alloc_propnode(const char *name)</span>
 <span class="lineNum">     140 </span>            : {
 <span class="lineNum">     141 </span>            :     PropPtr new_node;
-<span class="lineNum">     142 </span><span class="lineCov">       8047 :     int nlen = strlen(name);</span>
+<span class="lineNum">     142 </span><span class="lineCov">       9261 :     int nlen = strlen(name);</span>
 <span class="lineNum">     143 </span>            : 
-<span class="lineNum">     144 </span><span class="lineCov">       8047 :     new_node = (PropPtr) malloc(sizeof(struct plist) + nlen);</span>
+<span class="lineNum">     144 </span><span class="lineCov">       9261 :     new_node = (PropPtr) malloc(sizeof(struct plist) + nlen);</span>
 <span class="lineNum">     145 </span>            : 
-<span class="lineNum">     146 </span><span class="lineCov">       8047 :     if (!new_node) {</span>
+<span class="lineNum">     146 </span><span class="lineCov">       9261 :     if (!new_node) {</span>
 <span class="lineNum">     147 </span><span class="lineNoCov">          0 :         fprintf(stderr, &quot;alloc_propnode(): Out of Memory!\n&quot;);</span>
 <span class="lineNum">     148 </span><span class="lineNoCov">          0 :         abort();</span>
 <span class="lineNum">     149 </span>            :     }
 <span class="lineNum">     150 </span>            : 
-<span class="lineNum">     151 </span><span class="lineCov">       8047 :     new_node-&gt;left = NULL;</span>
-<span class="lineNum">     152 </span><span class="lineCov">       8047 :     new_node-&gt;right = NULL;</span>
-<span class="lineNum">     153 </span><span class="lineCov">       8047 :     new_node-&gt;height = 1;</span>
+<span class="lineNum">     151 </span><span class="lineCov">       9261 :     new_node-&gt;left = NULL;</span>
+<span class="lineNum">     152 </span><span class="lineCov">       9261 :     new_node-&gt;right = NULL;</span>
+<span class="lineNum">     153 </span><span class="lineCov">       9261 :     new_node-&gt;height = 1;</span>
 <span class="lineNum">     154 </span>            : 
-<span class="lineNum">     155 </span><span class="lineCov">       8047 :     strcpyn(PropName(new_node), nlen + 1, name);</span>
-<span class="lineNum">     156 </span><span class="lineCov">       8047 :     SetPFlagsRaw(new_node, PROP_DIRTYP);</span>
-<span class="lineNum">     157 </span><span class="lineCov">       8047 :     SetPDataVal(new_node, 0);</span>
-<span class="lineNum">     158 </span><span class="lineCov">       8047 :     SetPDir(new_node, NULL);</span>
-<span class="lineNum">     159 </span><span class="lineCov">       8047 :     return new_node;</span>
+<span class="lineNum">     155 </span><span class="lineCov">       9261 :     strcpyn(PropName(new_node), nlen + 1, name);</span>
+<span class="lineNum">     156 </span><span class="lineCov">       9261 :     SetPFlagsRaw(new_node, PROP_DIRTYP);</span>
+<span class="lineNum">     157 </span><span class="lineCov">       9261 :     SetPDataVal(new_node, 0);</span>
+<span class="lineNum">     158 </span><span class="lineCov">       9261 :     SetPDir(new_node, NULL);</span>
+<span class="lineNum">     159 </span><span class="lineCov">       9261 :     return new_node;</span>
 <span class="lineNum">     160 </span>            : }
 <a name="161"><span class="lineNum">     161 </span>            : </a>
 <span class="lineNum">     162 </span>            : void
-<span class="lineNum">     163 </span><span class="lineCov">        575 : free_propnode(PropPtr p)</span>
+<span class="lineNum">     163 </span><span class="lineCov">        661 : free_propnode(PropPtr p)</span>
 <span class="lineNum">     164 </span>            : {
-<span class="lineNum">     165 </span><span class="lineCov">        575 :     if (!(PropFlags(p) &amp; PROP_ISUNLOADED)) {</span>
-<span class="lineNum">     166 </span><span class="lineCov">        575 :         if (PropType(p) == PROP_STRTYP)</span>
+<span class="lineNum">     165 </span><span class="lineCov">        661 :     if (!(PropFlags(p) &amp; PROP_ISUNLOADED)) {</span>
+<span class="lineNum">     166 </span><span class="lineCov">        661 :         if (PropType(p) == PROP_STRTYP)</span>
 <span class="lineNum">     167 </span><span class="lineCov">         27 :             free((void *) PropDataStr(p));</span>
-<span class="lineNum">     168 </span><span class="lineCov">        575 :         if (PropType(p) == PROP_LOKTYP)</span>
+<span class="lineNum">     168 </span><span class="lineCov">        661 :         if (PropType(p) == PROP_LOKTYP)</span>
 <span class="lineNum">     169 </span><span class="lineNoCov">          0 :             free_boolexp(PropDataLok(p));</span>
 <span class="lineNum">     170 </span>            :     }
-<span class="lineNum">     171 </span><span class="lineCov">        575 :     free(p);</span>
-<span class="lineNum">     172 </span><span class="lineCov">        575 : }</span>
+<span class="lineNum">     171 </span><span class="lineCov">        661 :     free(p);</span>
+<span class="lineNum">     172 </span><span class="lineCov">        661 : }</span>
 <a name="173"><span class="lineNum">     173 </span>            : </a>
 <span class="lineNum">     174 </span>            : void
-<span class="lineNum">     175 </span><span class="lineCov">       9058 : clear_propnode(PropPtr p)</span>
+<span class="lineNum">     175 </span><span class="lineCov">      10442 : clear_propnode(PropPtr p)</span>
 <span class="lineNum">     176 </span>            : {
-<span class="lineNum">     177 </span><span class="lineCov">       9058 :     if (!(PropFlags(p) &amp; PROP_ISUNLOADED)) {</span>
-<span class="lineNum">     178 </span><span class="lineCov">       9058 :         if (PropType(p) == PROP_STRTYP) {</span>
+<span class="lineNum">     177 </span><span class="lineCov">      10442 :     if (!(PropFlags(p) &amp; PROP_ISUNLOADED)) {</span>
+<span class="lineNum">     178 </span><span class="lineCov">      10442 :         if (PropType(p) == PROP_STRTYP) {</span>
 <span class="lineNum">     179 </span><span class="lineCov">          6 :             free((void *) PropDataStr(p));</span>
 <span class="lineNum">     180 </span><span class="lineCov">          6 :             PropDataStr(p) = NULL;</span>
 <span class="lineNum">     181 </span>            :         }
-<span class="lineNum">     182 </span><span class="lineCov">       9058 :         if (PropType(p) == PROP_LOKTYP)</span>
+<span class="lineNum">     182 </span><span class="lineCov">      10442 :         if (PropType(p) == PROP_LOKTYP)</span>
 <span class="lineNum">     183 </span><span class="lineNoCov">          0 :             free_boolexp(PropDataLok(p));</span>
 <span class="lineNum">     184 </span>            :     }
-<span class="lineNum">     185 </span><span class="lineCov">       9058 :     SetPDataVal(p, 0);</span>
-<span class="lineNum">     186 </span><span class="lineCov">       9058 :     SetPFlags(p, (PropFlags(p) &amp; ~PROP_ISUNLOADED));</span>
-<span class="lineNum">     187 </span><span class="lineCov">       9058 :     SetPType(p, PROP_DIRTYP);</span>
-<span class="lineNum">     188 </span><span class="lineCov">       9058 : }</span>
+<span class="lineNum">     185 </span><span class="lineCov">      10442 :     SetPDataVal(p, 0);</span>
+<span class="lineNum">     186 </span><span class="lineCov">      10442 :     SetPFlags(p, (PropFlags(p) &amp; ~PROP_ISUNLOADED));</span>
+<span class="lineNum">     187 </span><span class="lineCov">      10442 :     SetPType(p, PROP_DIRTYP);</span>
+<span class="lineNum">     188 </span><span class="lineCov">      10442 : }</span>
 <a name="189"><span class="lineNum">     189 </span>            : </a>
 <span class="lineNum">     190 </span>            : static PropPtr
-<span class="lineNum">     191 </span><span class="lineCov">      36031 : insert(char *key, PropPtr * avl)</span>
+<span class="lineNum">     191 </span><span class="lineCov">      41569 : insert(char *key, PropPtr * avl)</span>
 <span class="lineNum">     192 </span>            : {
 <span class="lineNum">     193 </span>            :     PropPtr ret;
-<span class="lineNum">     194 </span><span class="lineCov">      36031 :     register PropPtr p = *avl;</span>
+<span class="lineNum">     194 </span><span class="lineCov">      41569 :     register PropPtr p = *avl;</span>
 <span class="lineNum">     195 </span>            :     register int cmp;
 <span class="lineNum">     196 </span>            :     static short balancep;
 <span class="lineNum">     197 </span>            : 
-<span class="lineNum">     198 </span><span class="lineCov">      36031 :     if (p) {</span>
-<span class="lineNum">     199 </span><span class="lineCov">      28089 :         cmp = strcasecmp(key, PropName(p));</span>
-<span class="lineNum">     200 </span><span class="lineCov">      28089 :         if (cmp &gt; 0) {</span>
-<span class="lineNum">     201 </span><span class="lineCov">      15431 :             ret = insert(key, &amp;(p-&gt;right));</span>
-<span class="lineNum">     202 </span><span class="lineCov">      12658 :         } else if (cmp &lt; 0) {</span>
-<span class="lineNum">     203 </span><span class="lineCov">       2616 :             ret = insert(key, &amp;(p-&gt;left));</span>
+<span class="lineNum">     198 </span><span class="lineCov">      41569 :     if (p) {</span>
+<span class="lineNum">     199 </span><span class="lineCov">      32413 :         cmp = strcasecmp(key, PropName(p));</span>
+<span class="lineNum">     200 </span><span class="lineCov">      32413 :         if (cmp &gt; 0) {</span>
+<span class="lineNum">     201 </span><span class="lineCov">      17845 :             ret = insert(key, &amp;(p-&gt;right));</span>
+<span class="lineNum">     202 </span><span class="lineCov">      14568 :         } else if (cmp &lt; 0) {</span>
+<span class="lineNum">     203 </span><span class="lineCov">       2972 :             ret = insert(key, &amp;(p-&gt;left));</span>
 <span class="lineNum">     204 </span>            :         } else {
-<span class="lineNum">     205 </span><span class="lineCov">      10042 :             balancep = 0;</span>
-<span class="lineNum">     206 </span><span class="lineCov">      10042 :             return (p);</span>
+<span class="lineNum">     205 </span><span class="lineCov">      11596 :             balancep = 0;</span>
+<span class="lineNum">     206 </span><span class="lineCov">      11596 :             return (p);</span>
 <span class="lineNum">     207 </span>            :         }
-<span class="lineNum">     208 </span><span class="lineCov">      18047 :         if (balancep) {</span>
-<span class="lineNum">     209 </span><span class="lineCov">       7837 :             *avl = balance_node(p);</span>
+<span class="lineNum">     208 </span><span class="lineCov">      20817 :         if (balancep) {</span>
+<span class="lineNum">     209 </span><span class="lineCov">       8967 :             *avl = balance_node(p);</span>
 <span class="lineNum">     210 </span>            :         }
-<span class="lineNum">     211 </span><span class="lineCov">      18047 :         return ret;</span>
+<span class="lineNum">     211 </span><span class="lineCov">      20817 :         return ret;</span>
 <span class="lineNum">     212 </span>            :     } else {
-<span class="lineNum">     213 </span><span class="lineCov">       7942 :         p = *avl = alloc_propnode(key);</span>
-<span class="lineNum">     214 </span><span class="lineCov">       7942 :         balancep = 1;</span>
-<span class="lineNum">     215 </span><span class="lineCov">       7942 :         return (p);</span>
+<span class="lineNum">     213 </span><span class="lineCov">       9156 :         p = *avl = alloc_propnode(key);</span>
+<span class="lineNum">     214 </span><span class="lineCov">       9156 :         balancep = 1;</span>
+<span class="lineNum">     215 </span><span class="lineCov">       9156 :         return (p);</span>
 <span class="lineNum">     216 </span>            :     }
 <span class="lineNum">     217 </span>            : }
 <a name="218"><span class="lineNum">     218 </span>            : </a>
@@ -287,22 +287,22 @@
 <span class="lineNum">     225 </span>            : }
 <a name="226"><span class="lineNum">     226 </span>            : </a>
 <span class="lineNum">     227 </span>            : static PropPtr
-<span class="lineNum">     228 </span><span class="lineCov">       1607 : remove_propnode(char *key, PropPtr * root)</span>
+<span class="lineNum">     228 </span><span class="lineCov">       1865 : remove_propnode(char *key, PropPtr * root)</span>
 <span class="lineNum">     229 </span>            : {
 <span class="lineNum">     230 </span>            :     PropPtr save;
 <span class="lineNum">     231 </span>            :     PropPtr tmp;
-<span class="lineNum">     232 </span><span class="lineCov">       1607 :     PropPtr avl = *root;</span>
+<span class="lineNum">     232 </span><span class="lineCov">       1865 :     PropPtr avl = *root;</span>
 <span class="lineNum">     233 </span>            :     int cmpval;
 <span class="lineNum">     234 </span>            : 
-<span class="lineNum">     235 </span><span class="lineCov">       1607 :     save = avl;</span>
-<span class="lineNum">     236 </span><span class="lineCov">       1607 :     if (avl) {</span>
-<span class="lineNum">     237 </span><span class="lineCov">       1607 :         cmpval = strcasecmp(key, PropName(avl));</span>
-<span class="lineNum">     238 </span><span class="lineCov">       1607 :         if (cmpval &lt; 0) {</span>
-<span class="lineNum">     239 </span><span class="lineCov">        520 :             save = remove_propnode(key, &amp;(avl-&gt;left));</span>
-<span class="lineNum">     240 </span><span class="lineCov">       1087 :         } else if (cmpval &gt; 0) {</span>
-<span class="lineNum">     241 </span><span class="lineCov">        542 :             save = remove_propnode(key, &amp;(avl-&gt;right));</span>
-<span class="lineNum">     242 </span><span class="lineCov">        545 :         } else if (!(avl-&gt;left)) {</span>
-<span class="lineNum">     243 </span><span class="lineCov">        544 :             avl = avl-&gt;right;</span>
+<span class="lineNum">     235 </span><span class="lineCov">       1865 :     save = avl;</span>
+<span class="lineNum">     236 </span><span class="lineCov">       1865 :     if (avl) {</span>
+<span class="lineNum">     237 </span><span class="lineCov">       1865 :         cmpval = strcasecmp(key, PropName(avl));</span>
+<span class="lineNum">     238 </span><span class="lineCov">       1865 :         if (cmpval &lt; 0) {</span>
+<span class="lineNum">     239 </span><span class="lineCov">        606 :             save = remove_propnode(key, &amp;(avl-&gt;left));</span>
+<span class="lineNum">     240 </span><span class="lineCov">       1259 :         } else if (cmpval &gt; 0) {</span>
+<span class="lineNum">     241 </span><span class="lineCov">        628 :             save = remove_propnode(key, &amp;(avl-&gt;right));</span>
+<span class="lineNum">     242 </span><span class="lineCov">        631 :         } else if (!(avl-&gt;left)) {</span>
+<span class="lineNum">     243 </span><span class="lineCov">        630 :             avl = avl-&gt;right;</span>
 <span class="lineNum">     244 </span><span class="lineCov">          1 :         } else if (!(avl-&gt;right)) {</span>
 <span class="lineNum">     245 </span><span class="lineNoCov">          0 :             avl = avl-&gt;left;</span>
 <span class="lineNum">     246 </span>            :         } else {
@@ -314,24 +314,24 @@
 <span class="lineNum">     252 </span><span class="lineCov">          1 :             tmp-&gt;right = avl-&gt;right;</span>
 <span class="lineNum">     253 </span><span class="lineCov">          1 :             avl = tmp;</span>
 <span class="lineNum">     254 </span>            :         }
-<span class="lineNum">     255 </span><span class="lineCov">       1607 :         if (save) {</span>
-<span class="lineNum">     256 </span><span class="lineCov">       1607 :             save-&gt;left = NULL;</span>
-<span class="lineNum">     257 </span><span class="lineCov">       1607 :             save-&gt;right = NULL;</span>
+<span class="lineNum">     255 </span><span class="lineCov">       1865 :         if (save) {</span>
+<span class="lineNum">     256 </span><span class="lineCov">       1865 :             save-&gt;left = NULL;</span>
+<span class="lineNum">     257 </span><span class="lineCov">       1865 :             save-&gt;right = NULL;</span>
 <span class="lineNum">     258 </span>            :         }
-<span class="lineNum">     259 </span><span class="lineCov">       1607 :         *root = balance_node(avl);</span>
+<span class="lineNum">     259 </span><span class="lineCov">       1865 :         *root = balance_node(avl);</span>
 <span class="lineNum">     260 </span>            :     }
-<span class="lineNum">     261 </span><span class="lineCov">       1607 :     return save;</span>
+<span class="lineNum">     261 </span><span class="lineCov">       1865 :     return save;</span>
 <span class="lineNum">     262 </span>            : }
 <a name="263"><span class="lineNum">     263 </span>            : </a>
 <span class="lineNum">     264 </span>            : static PropPtr
-<span class="lineNum">     265 </span><span class="lineCov">        544 : delnode(char *key, PropPtr avl)</span>
+<span class="lineNum">     265 </span><span class="lineCov">        630 : delnode(char *key, PropPtr avl)</span>
 <span class="lineNum">     266 </span>            : {
 <span class="lineNum">     267 </span>            :     PropPtr save;
 <span class="lineNum">     268 </span>            : 
-<span class="lineNum">     269 </span><span class="lineCov">        544 :     save = remove_propnode(key, &amp;avl);</span>
-<span class="lineNum">     270 </span><span class="lineCov">        544 :     if (save)</span>
-<span class="lineNum">     271 </span><span class="lineCov">        544 :         free_propnode(save);</span>
-<span class="lineNum">     272 </span><span class="lineCov">        544 :     return avl;</span>
+<span class="lineNum">     269 </span><span class="lineCov">        630 :     save = remove_propnode(key, &amp;avl);</span>
+<span class="lineNum">     270 </span><span class="lineCov">        630 :     if (save)</span>
+<span class="lineNum">     271 </span><span class="lineCov">        630 :         free_propnode(save);</span>
+<span class="lineNum">     272 </span><span class="lineCov">        630 :     return avl;</span>
 <span class="lineNum">     273 </span>            : }
 <span class="lineNum">     274 </span>            : 
 <a name="275"><span class="lineNum">     275 </span>            : </a>
@@ -347,22 +347,22 @@
 <span class="lineNum">     285 </span>            : }
 <a name="286"><span class="lineNum">     286 </span>            : </a>
 <span class="lineNum">     287 </span>            : PropPtr
-<span class="lineNum">     288 </span><span class="lineCov">      27616 : locate_prop(PropPtr list, char *name)</span>
+<span class="lineNum">     288 </span><span class="lineCov">      31832 : locate_prop(PropPtr list, char *name)</span>
 <span class="lineNum">     289 </span>            : {
-<span class="lineNum">     290 </span><span class="lineCov">      27616 :     return find(name, list);</span>
+<span class="lineNum">     290 </span><span class="lineCov">      31832 :     return find(name, list);</span>
 <span class="lineNum">     291 </span>            : }
 <a name="292"><span class="lineNum">     292 </span>            : </a>
 <span class="lineNum">     293 </span>            : PropPtr
-<span class="lineNum">     294 </span><span class="lineCov">      17984 : new_prop(PropPtr * list, char *name)</span>
+<span class="lineNum">     294 </span><span class="lineCov">      20752 : new_prop(PropPtr * list, char *name)</span>
 <span class="lineNum">     295 </span>            : {
-<span class="lineNum">     296 </span><span class="lineCov">      17984 :     return insert(name, list);</span>
+<span class="lineNum">     296 </span><span class="lineCov">      20752 :     return insert(name, list);</span>
 <span class="lineNum">     297 </span>            : }
 <a name="298"><span class="lineNum">     298 </span>            : </a>
 <span class="lineNum">     299 </span>            : PropPtr
-<span class="lineNum">     300 </span><span class="lineCov">        544 : delete_prop(PropPtr * list, char *name)</span>
+<span class="lineNum">     300 </span><span class="lineCov">        630 : delete_prop(PropPtr * list, char *name)</span>
 <span class="lineNum">     301 </span>            : {
-<span class="lineNum">     302 </span><span class="lineCov">        544 :     *list = delnode(name, *list);</span>
-<span class="lineNum">     303 </span><span class="lineCov">        544 :     return (*list);</span>
+<span class="lineNum">     302 </span><span class="lineCov">        630 :     *list = delnode(name, *list);</span>
+<span class="lineNum">     303 </span><span class="lineCov">        630 :     return (*list);</span>
 <span class="lineNum">     304 </span>            : }
 <a name="305"><span class="lineNum">     305 </span>            : </a>
 <span class="lineNum">     306 </span>            : PropPtr

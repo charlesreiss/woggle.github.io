@@ -31,13 +31,13 @@
             <td class="headerValue">coverage-total</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">29</td>
+            <td class="headerCovTableEntry">30</td>
             <td class="headerCovTableEntry">1780</td>
-            <td class="headerCovTableEntryLo">1.6 %</td>
+            <td class="headerCovTableEntryLo">1.7 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 20:18:35</td>
+            <td class="headerValue">2017-02-26 20:43:00</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -1301,22 +1301,22 @@
 <span class="lineNum">    1239 </span>            : }
 <a name="1240"><span class="lineNum">    1240 </span>            : </a>
 <span class="lineNum">    1241 </span>            : void
-<span class="lineNum">    1242 </span><span class="lineCov">        109 : prim_strcmp(PRIM_PROTOTYPE)</span>
+<span class="lineNum">    1242 </span><span class="lineCov">        404 : prim_strcmp(PRIM_PROTOTYPE)</span>
 <span class="lineNum">    1243 </span>            : {
-<span class="lineNum">    1244 </span><span class="lineCov">        109 :     CHECKOP(2);</span>
-<span class="lineNum">    1245 </span><span class="lineCov">        109 :     oper1 = POP();</span>
-<span class="lineNum">    1246 </span><span class="lineCov">        109 :     oper2 = POP();</span>
-<span class="lineNum">    1247 </span><span class="lineCov">        109 :     if (oper1-&gt;type != PROG_STRING || oper2-&gt;type != PROG_STRING)</span>
+<span class="lineNum">    1244 </span><span class="lineCov">        404 :     CHECKOP(2);</span>
+<span class="lineNum">    1245 </span><span class="lineCov">        404 :     oper1 = POP();</span>
+<span class="lineNum">    1246 </span><span class="lineCov">        404 :     oper2 = POP();</span>
+<span class="lineNum">    1247 </span><span class="lineCov">        404 :     if (oper1-&gt;type != PROG_STRING || oper2-&gt;type != PROG_STRING)</span>
 <span class="lineNum">    1248 </span><span class="lineCov">          6 :         abort_interp(&quot;Non-string argument.&quot;);</span>
-<span class="lineNum">    1249 </span><span class="lineCov">        103 :     if (oper1-&gt;data.string == oper2-&gt;data.string)</span>
+<span class="lineNum">    1249 </span><span class="lineCov">        398 :     if (oper1-&gt;data.string == oper2-&gt;data.string)</span>
 <span class="lineNum">    1250 </span><span class="lineNoCov">          0 :         result = 0;</span>
-<span class="lineNum">    1251 </span><span class="lineCov">        103 :     else if (!(oper2-&gt;data.string &amp;&amp; oper1-&gt;data.string))</span>
-<span class="lineNum">    1252 </span><span class="lineNoCov">          0 :         result = oper1-&gt;data.string ? -1 : 1;</span>
+<span class="lineNum">    1251 </span><span class="lineCov">        398 :     else if (!(oper2-&gt;data.string &amp;&amp; oper1-&gt;data.string))</span>
+<span class="lineNum">    1252 </span><span class="lineCov">         12 :         result = oper1-&gt;data.string ? -1 : 1;</span>
 <span class="lineNum">    1253 </span>            :     else
-<span class="lineNum">    1254 </span><span class="lineCov">        103 :         result = strcmp(oper2-&gt;data.string-&gt;data, oper1-&gt;data.string-&gt;data);</span>
-<span class="lineNum">    1255 </span><span class="lineCov">        103 :     CLEAR(oper1);</span>
-<span class="lineNum">    1256 </span><span class="lineCov">        103 :     CLEAR(oper2);</span>
-<span class="lineNum">    1257 </span><span class="lineCov">        103 :     PushInt(result);</span>
+<span class="lineNum">    1254 </span><span class="lineCov">        386 :         result = strcmp(oper2-&gt;data.string-&gt;data, oper1-&gt;data.string-&gt;data);</span>
+<span class="lineNum">    1255 </span><span class="lineCov">        398 :     CLEAR(oper1);</span>
+<span class="lineNum">    1256 </span><span class="lineCov">        398 :     CLEAR(oper2);</span>
+<span class="lineNum">    1257 </span><span class="lineCov">        398 :     PushInt(result);</span>
 <span class="lineNum">    1258 </span>            : }
 <a name="1259"><span class="lineNum">    1259 </span>            : </a>
 <span class="lineNum">    1260 </span>            : void
@@ -1438,33 +1438,33 @@
 <span class="lineNum">    1376 </span>            : }
 <a name="1377"><span class="lineNum">    1377 </span>            : </a>
 <span class="lineNum">    1378 </span>            : void
-<span class="lineNum">    1379 </span><span class="lineCov">        150 : prim_notify(PRIM_PROTOTYPE)</span>
+<span class="lineNum">    1379 </span><span class="lineCov">        234 : prim_notify(PRIM_PROTOTYPE)</span>
 <span class="lineNum">    1380 </span>            : {
-<span class="lineNum">    1381 </span><span class="lineCov">        150 :     struct inst *oper1 = NULL;  /* prevents re-entrancy issues! */</span>
-<span class="lineNum">    1382 </span><span class="lineCov">        150 :     struct inst *oper2 = NULL;  /* prevents re-entrancy issues! */</span>
+<span class="lineNum">    1381 </span><span class="lineCov">        234 :     struct inst *oper1 = NULL;  /* prevents re-entrancy issues! */</span>
+<span class="lineNum">    1382 </span><span class="lineCov">        234 :     struct inst *oper2 = NULL;  /* prevents re-entrancy issues! */</span>
 <span class="lineNum">    1383 </span>            : 
-<span class="lineNum">    1384 </span><span class="lineCov">        150 :     CHECKOP(2);</span>
-<span class="lineNum">    1385 </span><span class="lineCov">        150 :     oper1 = POP();</span>
-<span class="lineNum">    1386 </span><span class="lineCov">        150 :     oper2 = POP();</span>
-<span class="lineNum">    1387 </span><span class="lineCov">        150 :     if (oper1-&gt;type != PROG_STRING)</span>
+<span class="lineNum">    1384 </span><span class="lineCov">        234 :     CHECKOP(2);</span>
+<span class="lineNum">    1385 </span><span class="lineCov">        234 :     oper1 = POP();</span>
+<span class="lineNum">    1386 </span><span class="lineCov">        234 :     oper2 = POP();</span>
+<span class="lineNum">    1387 </span><span class="lineCov">        234 :     if (oper1-&gt;type != PROG_STRING)</span>
 <span class="lineNum">    1388 </span><span class="lineCov">          5 :         abort_interp(&quot;Non-string argument (2)&quot;);</span>
-<span class="lineNum">    1389 </span><span class="lineCov">        145 :     if (!valid_object(oper2))</span>
+<span class="lineNum">    1389 </span><span class="lineCov">        229 :     if (!valid_object(oper2))</span>
 <span class="lineNum">    1390 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Invalid object argument (1)&quot;);</span>
-<span class="lineNum">    1391 </span><span class="lineCov">        145 :     CHECKREMOTE(oper2-&gt;data.objref);</span>
+<span class="lineNum">    1391 </span><span class="lineCov">        229 :     CHECKREMOTE(oper2-&gt;data.objref);</span>
 <span class="lineNum">    1392 </span>            : 
-<span class="lineNum">    1393 </span><span class="lineCov">        145 :     if (oper1-&gt;data.string) {</span>
-<span class="lineNum">    1394 </span><span class="lineCov">        145 :         if (tp_force_mlev1_name_notify &amp;&amp; mlev &lt; 2 &amp;&amp; player != oper2-&gt;data.objref) {</span>
+<span class="lineNum">    1393 </span><span class="lineCov">        229 :     if (oper1-&gt;data.string) {</span>
+<span class="lineNum">    1394 </span><span class="lineCov">        229 :         if (tp_force_mlev1_name_notify &amp;&amp; mlev &lt; 2 &amp;&amp; player != oper2-&gt;data.objref) {</span>
 <span class="lineNum">    1395 </span><span class="lineNoCov">          0 :             prefix_message(buf, oper1-&gt;data.string-&gt;data, NAME(player), BUFFER_LEN, 1);</span>
 <span class="lineNum">    1396 </span>            :         } else {
 <span class="lineNum">    1397 </span>            :             /* TODO: The original code made this copy, is it really necessary? */
-<span class="lineNum">    1398 </span><span class="lineCov">        145 :             strcpyn(buf, sizeof(buf), oper1-&gt;data.string-&gt;data);</span>
+<span class="lineNum">    1398 </span><span class="lineCov">        229 :             strcpyn(buf, sizeof(buf), oper1-&gt;data.string-&gt;data);</span>
 <span class="lineNum">    1399 </span>            :         }
 <span class="lineNum">    1400 </span>            : 
-<span class="lineNum">    1401 </span><span class="lineCov">        145 :         notify_listeners(player, program, oper2-&gt;data.objref,</span>
-<span class="lineNum">    1402 </span><span class="lineCov">        145 :                          LOCATION(oper2-&gt;data.objref), buf, 1);</span>
+<span class="lineNum">    1401 </span><span class="lineCov">        229 :         notify_listeners(player, program, oper2-&gt;data.objref,</span>
+<span class="lineNum">    1402 </span><span class="lineCov">        229 :                          LOCATION(oper2-&gt;data.objref), buf, 1);</span>
 <span class="lineNum">    1403 </span>            :     }
-<span class="lineNum">    1404 </span><span class="lineCov">        145 :     CLEAR(oper1);</span>
-<span class="lineNum">    1405 </span><span class="lineCov">        145 :     CLEAR(oper2);</span>
+<span class="lineNum">    1404 </span><span class="lineCov">        229 :     CLEAR(oper1);</span>
+<span class="lineNum">    1405 </span><span class="lineCov">        229 :     CLEAR(oper2);</span>
 <span class="lineNum">    1406 </span>            : }
 <a name="1407"><span class="lineNum">    1407 </span>            : </a>
 <span class="lineNum">    1408 </span>            : void
