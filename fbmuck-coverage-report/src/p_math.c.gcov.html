@@ -31,18 +31,18 @@
             <td class="headerValue">coverage-total</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">69</td>
+            <td class="headerCovTableEntry">44</td>
             <td class="headerCovTableEntry">537</td>
-            <td class="headerCovTableEntryLo">12.8 %</td>
+            <td class="headerCovTableEntryLo">8.2 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 21:49:59</td>
+            <td class="headerValue">2017-02-26 22:21:49</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntry">4</td>
             <td class="headerCovTableEntry">28</td>
-            <td class="headerCovTableEntryLo">21.4 %</td>
+            <td class="headerCovTableEntryLo">14.3 %</td>
           </tr>
           <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
         </table>
@@ -226,14 +226,14 @@
 <span class="lineNum">     164 </span>            : }
 <a name="165"><span class="lineNum">     165 </span>            : </a>
 <span class="lineNum">     166 </span>            : void
-<span class="lineNum">     167 </span><span class="lineCov">          5 : prim_divide(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     167 </span><span class="lineCov">          2 : prim_divide(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     168 </span>            : {
-<span class="lineNum">     169 </span><span class="lineCov">          5 :     CHECKOP(2);</span>
-<span class="lineNum">     170 </span><span class="lineCov">          5 :     oper1 = POP();</span>
-<span class="lineNum">     171 </span><span class="lineCov">          5 :     oper2 = POP();</span>
-<span class="lineNum">     172 </span><span class="lineCov">          5 :     if (!arith_type(oper2-&gt;type, oper1-&gt;type))</span>
+<span class="lineNum">     169 </span><span class="lineCov">          2 :     CHECKOP(2);</span>
+<span class="lineNum">     170 </span><span class="lineCov">          2 :     oper1 = POP();</span>
+<span class="lineNum">     171 </span><span class="lineCov">          2 :     oper2 = POP();</span>
+<span class="lineNum">     172 </span><span class="lineCov">          2 :     if (!arith_type(oper2-&gt;type, oper1-&gt;type))</span>
 <span class="lineNum">     173 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Invalid argument type.&quot;);</span>
-<span class="lineNum">     174 </span><span class="lineCov">          5 :     if ((oper1-&gt;type == PROG_FLOAT) || (oper2-&gt;type == PROG_FLOAT)) {</span>
+<span class="lineNum">     174 </span><span class="lineCov">          2 :     if ((oper1-&gt;type == PROG_FLOAT) || (oper2-&gt;type == PROG_FLOAT)) {</span>
 <span class="lineNum">     175 </span><span class="lineNoCov">          0 :         if ((oper1-&gt;type == PROG_INTEGER &amp;&amp; !oper1-&gt;data.number) ||</span>
 <span class="lineNum">     176 </span><span class="lineNoCov">          0 :             (oper1-&gt;type == PROG_FLOAT &amp;&amp; fabs(oper1-&gt;data.fnumber) &lt; DBL_EPSILON)) {</span>
 <span class="lineNum">     177 </span>            :             /* FIXME: This should be NaN.  */
@@ -250,20 +250,20 @@
 <span class="lineNum">     188 </span>            :             }
 <span class="lineNum">     189 </span>            :         }
 <span class="lineNum">     190 </span>            :     } else {
-<span class="lineNum">     191 </span><span class="lineCov">          5 :         if (oper1-&gt;data.number) {</span>
-<span class="lineNum">     192 </span><span class="lineCov">          5 :             result = oper2-&gt;data.number / oper1-&gt;data.number;</span>
+<span class="lineNum">     191 </span><span class="lineCov">          2 :         if (oper1-&gt;data.number) {</span>
+<span class="lineNum">     192 </span><span class="lineCov">          2 :             result = oper2-&gt;data.number / oper1-&gt;data.number;</span>
 <span class="lineNum">     193 </span>            :         } else {
 <span class="lineNum">     194 </span><span class="lineNoCov">          0 :             result = 0;</span>
 <span class="lineNum">     195 </span><span class="lineNoCov">          0 :             fr-&gt;error.error_flags.div_zero = 1;</span>
 <span class="lineNum">     196 </span>            :         }
 <span class="lineNum">     197 </span>            :     }
-<span class="lineNum">     198 </span><span class="lineCov">          5 :     tmp = (oper2-&gt;type == PROG_FLOAT || oper1-&gt;type == PROG_FLOAT) ? PROG_FLOAT : oper2-&gt;type;</span>
-<span class="lineNum">     199 </span><span class="lineCov">          5 :     CLEAR(oper1);</span>
-<span class="lineNum">     200 </span><span class="lineCov">          5 :     CLEAR(oper2);</span>
-<span class="lineNum">     201 </span><span class="lineCov">          5 :     if (tmp == PROG_FLOAT)</span>
+<span class="lineNum">     198 </span><span class="lineCov">          2 :     tmp = (oper2-&gt;type == PROG_FLOAT || oper1-&gt;type == PROG_FLOAT) ? PROG_FLOAT : oper2-&gt;type;</span>
+<span class="lineNum">     199 </span><span class="lineCov">          2 :     CLEAR(oper1);</span>
+<span class="lineNum">     200 </span><span class="lineCov">          2 :     CLEAR(oper2);</span>
+<span class="lineNum">     201 </span><span class="lineCov">          2 :     if (tmp == PROG_FLOAT)</span>
 <span class="lineNum">     202 </span><span class="lineNoCov">          0 :         push(arg, top, tmp, MIPSCAST &amp; fresult);</span>
 <span class="lineNum">     203 </span>            :     else
-<span class="lineNum">     204 </span><span class="lineCov">          5 :         push(arg, top, tmp, MIPSCAST &amp; result);</span>
+<span class="lineNum">     204 </span><span class="lineCov">          2 :         push(arg, top, tmp, MIPSCAST &amp; result);</span>
 <span class="lineNum">     205 </span>            : }
 <a name="206"><span class="lineNum">     206 </span>            : </a>
 <span class="lineNum">     207 </span>            : void
@@ -351,15 +351,15 @@
 <span class="lineNum">     289 </span>            : }
 <a name="290"><span class="lineNum">     290 </span>            : </a>
 <span class="lineNum">     291 </span>            : void
-<span class="lineNum">     292 </span><span class="lineCov">        914 : prim_and(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     292 </span><span class="lineCov">        212 : prim_and(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     293 </span>            : {
-<span class="lineNum">     294 </span><span class="lineCov">        914 :     CHECKOP(2);</span>
-<span class="lineNum">     295 </span><span class="lineCov">        914 :     oper1 = POP();</span>
-<span class="lineNum">     296 </span><span class="lineCov">        914 :     oper2 = POP();</span>
-<span class="lineNum">     297 </span><span class="lineCov">        914 :     result = !false_inst(oper1) &amp;&amp; !false_inst(oper2);</span>
-<span class="lineNum">     298 </span><span class="lineCov">        914 :     CLEAR(oper1);</span>
-<span class="lineNum">     299 </span><span class="lineCov">        914 :     CLEAR(oper2);</span>
-<span class="lineNum">     300 </span><span class="lineCov">        914 :     PushInt(result);</span>
+<span class="lineNum">     294 </span><span class="lineCov">        212 :     CHECKOP(2);</span>
+<span class="lineNum">     295 </span><span class="lineCov">        212 :     oper1 = POP();</span>
+<span class="lineNum">     296 </span><span class="lineCov">        212 :     oper2 = POP();</span>
+<span class="lineNum">     297 </span><span class="lineCov">        212 :     result = !false_inst(oper1) &amp;&amp; !false_inst(oper2);</span>
+<span class="lineNum">     298 </span><span class="lineCov">        212 :     CLEAR(oper1);</span>
+<span class="lineNum">     299 </span><span class="lineCov">        212 :     CLEAR(oper2);</span>
+<span class="lineNum">     300 </span><span class="lineCov">        212 :     PushInt(result);</span>
 <span class="lineNum">     301 </span>            : }
 <a name="302"><span class="lineNum">     302 </span>            : </a>
 <span class="lineNum">     303 </span>            : void
@@ -391,68 +391,68 @@
 <span class="lineNum">     329 </span>            : }
 <a name="330"><span class="lineNum">     330 </span>            : </a>
 <span class="lineNum">     331 </span>            : void
-<span class="lineNum">     332 </span><span class="lineCov">        502 : prim_not(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     332 </span><span class="lineCov">        141 : prim_not(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     333 </span>            : {
-<span class="lineNum">     334 </span><span class="lineCov">        502 :     CHECKOP(1);</span>
-<span class="lineNum">     335 </span><span class="lineCov">        502 :     oper1 = POP();</span>
-<span class="lineNum">     336 </span><span class="lineCov">        502 :     result = false_inst(oper1);</span>
-<span class="lineNum">     337 </span><span class="lineCov">        502 :     CLEAR(oper1);</span>
-<span class="lineNum">     338 </span><span class="lineCov">        502 :     PushInt(result);</span>
+<span class="lineNum">     334 </span><span class="lineCov">        141 :     CHECKOP(1);</span>
+<span class="lineNum">     335 </span><span class="lineCov">        141 :     oper1 = POP();</span>
+<span class="lineNum">     336 </span><span class="lineCov">        141 :     result = false_inst(oper1);</span>
+<span class="lineNum">     337 </span><span class="lineCov">        141 :     CLEAR(oper1);</span>
+<span class="lineNum">     338 </span><span class="lineCov">        141 :     PushInt(result);</span>
 <span class="lineNum">     339 </span>            : }
 <a name="340"><span class="lineNum">     340 </span>            : </a>
 <span class="lineNum">     341 </span>            : void
-<span class="lineNum">     342 </span><span class="lineCov">          3 : prim_lessthan(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     342 </span><span class="lineNoCov">          0 : prim_lessthan(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     343 </span>            : {
-<span class="lineNum">     344 </span><span class="lineCov">          3 :     CHECKOP(2);</span>
-<span class="lineNum">     345 </span><span class="lineCov">          3 :     oper1 = POP();</span>
-<span class="lineNum">     346 </span><span class="lineCov">          3 :     oper2 = POP();</span>
-<span class="lineNum">     347 </span><span class="lineCov">          3 :     if (!comp_t(oper1-&gt;type) || !comp_t(oper2-&gt;type))</span>
+<span class="lineNum">     344 </span><span class="lineNoCov">          0 :     CHECKOP(2);</span>
+<span class="lineNum">     345 </span><span class="lineNoCov">          0 :     oper1 = POP();</span>
+<span class="lineNum">     346 </span><span class="lineNoCov">          0 :     oper2 = POP();</span>
+<span class="lineNum">     347 </span><span class="lineNoCov">          0 :     if (!comp_t(oper1-&gt;type) || !comp_t(oper2-&gt;type))</span>
 <span class="lineNum">     348 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Invalid argument type.&quot;);</span>
-<span class="lineNum">     349 </span><span class="lineCov">          3 :     if (oper1-&gt;type == PROG_FLOAT || oper2-&gt;type == PROG_FLOAT) {</span>
+<span class="lineNum">     349 </span><span class="lineNoCov">          0 :     if (oper1-&gt;type == PROG_FLOAT || oper2-&gt;type == PROG_FLOAT) {</span>
 <span class="lineNum">     350 </span><span class="lineNoCov">          0 :         tf1 = (oper2-&gt;type == PROG_FLOAT) ? oper2-&gt;data.fnumber :</span>
 <span class="lineNum">     351 </span><span class="lineNoCov">          0 :                 (oper2-&gt;type == PROG_INTEGER) ? oper2-&gt;data.number : oper2-&gt;data.objref;</span>
 <span class="lineNum">     352 </span><span class="lineNoCov">          0 :         tf2 = (oper1-&gt;type == PROG_FLOAT) ? oper1-&gt;data.fnumber :</span>
 <span class="lineNum">     353 </span><span class="lineNoCov">          0 :                 (oper1-&gt;type == PROG_INTEGER) ? oper1-&gt;data.number : oper1-&gt;data.objref;</span>
 <span class="lineNum">     354 </span><span class="lineNoCov">          0 :         result = tf1 &lt; tf2;</span>
 <span class="lineNum">     355 </span>            :     } else {
-<span class="lineNum">     356 </span><span class="lineCov">          6 :         result = (((oper2-&gt;type == PROG_INTEGER) ? oper2-&gt;data.number : oper2-&gt;data.objref)</span>
-<span class="lineNum">     357 </span><span class="lineCov">          3 :                   &lt; ((oper1-&gt;type == PROG_INTEGER) ? oper1-&gt;data.number : oper1-&gt;data.objref));</span>
+<span class="lineNum">     356 </span><span class="lineNoCov">          0 :         result = (((oper2-&gt;type == PROG_INTEGER) ? oper2-&gt;data.number : oper2-&gt;data.objref)</span>
+<span class="lineNum">     357 </span><span class="lineNoCov">          0 :                   &lt; ((oper1-&gt;type == PROG_INTEGER) ? oper1-&gt;data.number : oper1-&gt;data.objref));</span>
 <span class="lineNum">     358 </span>            :     }
-<span class="lineNum">     359 </span><span class="lineCov">          3 :     CLEAR(oper1);</span>
-<span class="lineNum">     360 </span><span class="lineCov">          3 :     CLEAR(oper2);</span>
-<span class="lineNum">     361 </span><span class="lineCov">          3 :     PushInt(result);</span>
+<span class="lineNum">     359 </span><span class="lineNoCov">          0 :     CLEAR(oper1);</span>
+<span class="lineNum">     360 </span><span class="lineNoCov">          0 :     CLEAR(oper2);</span>
+<span class="lineNum">     361 </span><span class="lineNoCov">          0 :     PushInt(result);</span>
 <span class="lineNum">     362 </span>            : }
 <a name="363"><span class="lineNum">     363 </span>            : </a>
 <span class="lineNum">     364 </span>            : void
-<span class="lineNum">     365 </span><span class="lineCov">          3 : prim_greathan(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     365 </span><span class="lineNoCov">          0 : prim_greathan(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     366 </span>            : {
-<span class="lineNum">     367 </span><span class="lineCov">          3 :     CHECKOP(2);</span>
-<span class="lineNum">     368 </span><span class="lineCov">          3 :     oper1 = POP();</span>
-<span class="lineNum">     369 </span><span class="lineCov">          3 :     oper2 = POP();</span>
-<span class="lineNum">     370 </span><span class="lineCov">          3 :     if (!comp_t(oper1-&gt;type) || !comp_t(oper2-&gt;type))</span>
+<span class="lineNum">     367 </span><span class="lineNoCov">          0 :     CHECKOP(2);</span>
+<span class="lineNum">     368 </span><span class="lineNoCov">          0 :     oper1 = POP();</span>
+<span class="lineNum">     369 </span><span class="lineNoCov">          0 :     oper2 = POP();</span>
+<span class="lineNum">     370 </span><span class="lineNoCov">          0 :     if (!comp_t(oper1-&gt;type) || !comp_t(oper2-&gt;type))</span>
 <span class="lineNum">     371 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Invalid argument type.&quot;);</span>
-<span class="lineNum">     372 </span><span class="lineCov">          3 :     if (oper1-&gt;type == PROG_FLOAT || oper2-&gt;type == PROG_FLOAT) {</span>
+<span class="lineNum">     372 </span><span class="lineNoCov">          0 :     if (oper1-&gt;type == PROG_FLOAT || oper2-&gt;type == PROG_FLOAT) {</span>
 <span class="lineNum">     373 </span><span class="lineNoCov">          0 :         tf1 = (oper2-&gt;type == PROG_FLOAT) ? oper2-&gt;data.fnumber :</span>
 <span class="lineNum">     374 </span><span class="lineNoCov">          0 :                 (oper2-&gt;type == PROG_INTEGER) ? oper2-&gt;data.number : oper2-&gt;data.objref;</span>
 <span class="lineNum">     375 </span><span class="lineNoCov">          0 :         tf2 = (oper1-&gt;type == PROG_FLOAT) ? oper1-&gt;data.fnumber :</span>
 <span class="lineNum">     376 </span><span class="lineNoCov">          0 :                 (oper1-&gt;type == PROG_INTEGER) ? oper1-&gt;data.number : oper1-&gt;data.objref;</span>
 <span class="lineNum">     377 </span><span class="lineNoCov">          0 :         result = tf1 &gt; tf2;</span>
 <span class="lineNum">     378 </span>            :     } else {
-<span class="lineNum">     379 </span><span class="lineCov">          6 :         result = (((oper2-&gt;type == PROG_INTEGER) ? oper2-&gt;data.number : oper2-&gt;data.objref)</span>
-<span class="lineNum">     380 </span><span class="lineCov">          3 :                   &gt; ((oper1-&gt;type == PROG_INTEGER) ? oper1-&gt;data.number : oper1-&gt;data.objref));</span>
+<span class="lineNum">     379 </span><span class="lineNoCov">          0 :         result = (((oper2-&gt;type == PROG_INTEGER) ? oper2-&gt;data.number : oper2-&gt;data.objref)</span>
+<span class="lineNum">     380 </span><span class="lineNoCov">          0 :                   &gt; ((oper1-&gt;type == PROG_INTEGER) ? oper1-&gt;data.number : oper1-&gt;data.objref));</span>
 <span class="lineNum">     381 </span>            :     }
-<span class="lineNum">     382 </span><span class="lineCov">          3 :     CLEAR(oper1);</span>
-<span class="lineNum">     383 </span><span class="lineCov">          3 :     CLEAR(oper2);</span>
-<span class="lineNum">     384 </span><span class="lineCov">          3 :     PushInt(result);</span>
+<span class="lineNum">     382 </span><span class="lineNoCov">          0 :     CLEAR(oper1);</span>
+<span class="lineNum">     383 </span><span class="lineNoCov">          0 :     CLEAR(oper2);</span>
+<span class="lineNum">     384 </span><span class="lineNoCov">          0 :     PushInt(result);</span>
 <span class="lineNum">     385 </span>            : }
 <a name="386"><span class="lineNum">     386 </span>            : </a>
 <span class="lineNum">     387 </span>            : void
-<span class="lineNum">     388 </span><span class="lineCov">        536 : prim_equal(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     388 </span><span class="lineCov">        107 : prim_equal(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     389 </span>            : {
-<span class="lineNum">     390 </span><span class="lineCov">        536 :     CHECKOP(2);</span>
-<span class="lineNum">     391 </span><span class="lineCov">        536 :     oper1 = POP();</span>
-<span class="lineNum">     392 </span><span class="lineCov">        536 :     oper2 = POP();</span>
-<span class="lineNum">     393 </span><span class="lineCov">        536 :     if (tp_muf_string_math &amp;&amp; oper1-&gt;type == PROG_STRING &amp;&amp; oper2-&gt;type == PROG_STRING) {</span>
+<span class="lineNum">     390 </span><span class="lineCov">        107 :     CHECKOP(2);</span>
+<span class="lineNum">     391 </span><span class="lineCov">        107 :     oper1 = POP();</span>
+<span class="lineNum">     392 </span><span class="lineCov">        107 :     oper2 = POP();</span>
+<span class="lineNum">     393 </span><span class="lineCov">        107 :     if (tp_muf_string_math &amp;&amp; oper1-&gt;type == PROG_STRING &amp;&amp; oper2-&gt;type == PROG_STRING) {</span>
 <span class="lineNum">     394 </span><span class="lineNoCov">          0 :         if (oper1-&gt;data.string == oper2-&gt;data.string) {</span>
 <span class="lineNum">     395 </span><span class="lineNoCov">          0 :             result = 1;</span>
 <span class="lineNum">     396 </span>            :         } else {
@@ -460,24 +460,24 @@
 <span class="lineNum">     398 </span><span class="lineNoCov">          0 :             result = result ? 0 : 1;</span>
 <span class="lineNum">     399 </span>            :         }
 <span class="lineNum">     400 </span>            :     } else {
-<span class="lineNum">     401 </span><span class="lineCov">        536 :         if (!comp_t(oper1-&gt;type) || !comp_t(oper2-&gt;type))</span>
-<span class="lineNum">     402 </span><span class="lineCov">         10 :             abort_interp(&quot;Invalid argument type.&quot;);</span>
-<span class="lineNum">     403 </span><span class="lineCov">        526 :         if (oper1-&gt;type == PROG_FLOAT || oper2-&gt;type == PROG_FLOAT) {</span>
-<span class="lineNum">     404 </span><span class="lineCov">         63 :             tf1 = (oper2-&gt;type == PROG_FLOAT) ? oper2-&gt;data.fnumber :</span>
-<span class="lineNum">     405 </span><span class="lineCov">          4 :                     (oper2-&gt;type == PROG_INTEGER) ? oper2-&gt;data.number : oper2-&gt;data.objref;</span>
-<span class="lineNum">     406 </span><span class="lineCov">         69 :             tf2 = (oper1-&gt;type == PROG_FLOAT) ? oper1-&gt;data.fnumber :</span>
-<span class="lineNum">     407 </span><span class="lineCov">         10 :                     (oper1-&gt;type == PROG_INTEGER) ? oper1-&gt;data.number : oper1-&gt;data.objref;</span>
-<span class="lineNum">     408 </span><span class="lineCov">         59 :             result = tf1 == tf2;</span>
+<span class="lineNum">     401 </span><span class="lineCov">        107 :         if (!comp_t(oper1-&gt;type) || !comp_t(oper2-&gt;type))</span>
+<span class="lineNum">     402 </span><span class="lineNoCov">          0 :             abort_interp(&quot;Invalid argument type.&quot;);</span>
+<span class="lineNum">     403 </span><span class="lineCov">        107 :         if (oper1-&gt;type == PROG_FLOAT || oper2-&gt;type == PROG_FLOAT) {</span>
+<span class="lineNum">     404 </span><span class="lineCov">          9 :             tf1 = (oper2-&gt;type == PROG_FLOAT) ? oper2-&gt;data.fnumber :</span>
+<span class="lineNum">     405 </span><span class="lineNoCov">          0 :                     (oper2-&gt;type == PROG_INTEGER) ? oper2-&gt;data.number : oper2-&gt;data.objref;</span>
+<span class="lineNum">     406 </span><span class="lineCov">          9 :             tf2 = (oper1-&gt;type == PROG_FLOAT) ? oper1-&gt;data.fnumber :</span>
+<span class="lineNum">     407 </span><span class="lineNoCov">          0 :                     (oper1-&gt;type == PROG_INTEGER) ? oper1-&gt;data.number : oper1-&gt;data.objref;</span>
+<span class="lineNum">     408 </span><span class="lineCov">          9 :             result = tf1 == tf2;</span>
 <span class="lineNum">     409 </span>            :         } else {
-<span class="lineNum">     410 </span><span class="lineCov">        934 :             result = (((oper2-&gt;type == PROG_INTEGER) ? oper2-&gt;data.number : oper2-&gt;data.objref)</span>
-<span class="lineNum">     411 </span><span class="lineCov">        467 :                       ==</span>
-<span class="lineNum">     412 </span><span class="lineCov">        467 :                       ((oper1-&gt;type ==</span>
-<span class="lineNum">     413 </span><span class="lineCov">        467 :                         PROG_INTEGER) ? oper1-&gt;data.number : oper1-&gt;data.objref));</span>
+<span class="lineNum">     410 </span><span class="lineCov">        196 :             result = (((oper2-&gt;type == PROG_INTEGER) ? oper2-&gt;data.number : oper2-&gt;data.objref)</span>
+<span class="lineNum">     411 </span><span class="lineCov">         98 :                       ==</span>
+<span class="lineNum">     412 </span><span class="lineCov">         98 :                       ((oper1-&gt;type ==</span>
+<span class="lineNum">     413 </span><span class="lineCov">         98 :                         PROG_INTEGER) ? oper1-&gt;data.number : oper1-&gt;data.objref));</span>
 <span class="lineNum">     414 </span>            :         }
 <span class="lineNum">     415 </span>            :     }
-<span class="lineNum">     416 </span><span class="lineCov">        526 :     CLEAR(oper1);</span>
-<span class="lineNum">     417 </span><span class="lineCov">        526 :     CLEAR(oper2);</span>
-<span class="lineNum">     418 </span><span class="lineCov">        526 :     PushInt(result);</span>
+<span class="lineNum">     416 </span><span class="lineCov">        107 :     CLEAR(oper1);</span>
+<span class="lineNum">     417 </span><span class="lineCov">        107 :     CLEAR(oper2);</span>
+<span class="lineNum">     418 </span><span class="lineCov">        107 :     PushInt(result);</span>
 <span class="lineNum">     419 </span>            : }
 <a name="420"><span class="lineNum">     420 </span>            : </a>
 <span class="lineNum">     421 </span>            : void

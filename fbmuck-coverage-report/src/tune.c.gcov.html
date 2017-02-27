@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 21:49:59</td>
+            <td class="headerValue">2017-02-26 22:21:49</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">9</td>
@@ -87,39 +87,39 @@
 <span class="lineNum">      25 </span>            : #define TP_SAVE_CMD &quot;save&quot;
 <a name="26"><span class="lineNum">      26 </span>            : </a>
 <span class="lineNum">      27 </span>            : int
-<span class="lineNum">      28 </span><span class="lineCov">        624 : tune_count_parms(void)</span>
+<span class="lineNum">      28 </span><span class="lineCov">        239 : tune_count_parms(void)</span>
 <span class="lineNum">      29 </span>            : {
-<span class="lineNum">      30 </span><span class="lineCov">        624 :     return ARRAYSIZE(tune_str_list) + ARRAYSIZE(tune_time_list) + ARRAYSIZE(tune_val_list)</span>
+<span class="lineNum">      30 </span><span class="lineCov">        239 :     return ARRAYSIZE(tune_str_list) + ARRAYSIZE(tune_time_list) + ARRAYSIZE(tune_val_list)</span>
 <span class="lineNum">      31 </span>            :          + ARRAYSIZE(tune_ref_list) + ARRAYSIZE(tune_bool_list) - 5;
 <span class="lineNum">      32 </span>            : }
 <a name="33"><span class="lineNum">      33 </span>            : </a>
 <span class="lineNum">      34 </span>            : static void
-<span class="lineNum">      35 </span><span class="lineCov">          6 : tune_display_parms(dbref player, char *name, int mlev, int show_extended)</span>
+<span class="lineNum">      35 </span><span class="lineCov">          4 : tune_display_parms(dbref player, char *name, int mlev, int show_extended)</span>
 <span class="lineNum">      36 </span>            : {
 <span class="lineNum">      37 </span>            :     char buf[BUFFER_LEN + 50];
-<span class="lineNum">      38 </span><span class="lineCov">          6 :     struct tune_str_entry *tstr = tune_str_list;</span>
-<span class="lineNum">      39 </span><span class="lineCov">          6 :     struct tune_time_entry *ttim = tune_time_list;</span>
-<span class="lineNum">      40 </span><span class="lineCov">          6 :     struct tune_val_entry *tval = tune_val_list;</span>
-<span class="lineNum">      41 </span><span class="lineCov">          6 :     struct tune_ref_entry *tref = tune_ref_list;</span>
-<span class="lineNum">      42 </span><span class="lineCov">          6 :     struct tune_bool_entry *tbool = tune_bool_list;</span>
+<span class="lineNum">      38 </span><span class="lineCov">          4 :     struct tune_str_entry *tstr = tune_str_list;</span>
+<span class="lineNum">      39 </span><span class="lineCov">          4 :     struct tune_time_entry *ttim = tune_time_list;</span>
+<span class="lineNum">      40 </span><span class="lineCov">          4 :     struct tune_val_entry *tval = tune_val_list;</span>
+<span class="lineNum">      41 </span><span class="lineCov">          4 :     struct tune_ref_entry *tref = tune_ref_list;</span>
+<span class="lineNum">      42 </span><span class="lineCov">          4 :     struct tune_bool_entry *tbool = tune_bool_list;</span>
 <span class="lineNum">      43 </span>            : 
 <span class="lineNum">      44 </span>            :     /* Show a helpful message at the end if nothing was found */
-<span class="lineNum">      45 </span><span class="lineCov">          6 :     int parms_found = 0;</span>
+<span class="lineNum">      45 </span><span class="lineCov">          4 :     int parms_found = 0;</span>
 <span class="lineNum">      46 </span>            : 
-<span class="lineNum">      47 </span><span class="lineCov">          6 :     if (name == NULL) {</span>
+<span class="lineNum">      47 </span><span class="lineCov">          4 :     if (name == NULL) {</span>
 <span class="lineNum">      48 </span><span class="lineNoCov">          0 :         return;</span>
 <span class="lineNum">      49 </span>            :     }
 <span class="lineNum">      50 </span>            : 
 <span class="lineNum">      51 </span>            :     /* Treat default parameters as normal */
-<span class="lineNum">      52 </span><span class="lineCov">          6 :     TP_CLEAR_FLAG_DEFAULT(name);</span>
+<span class="lineNum">      52 </span><span class="lineCov">          4 :     TP_CLEAR_FLAG_DEFAULT(name);</span>
 <span class="lineNum">      53 </span>            : 
-<span class="lineNum">      54 </span><span class="lineCov">        312 :     while (tstr-&gt;name) {</span>
-<span class="lineNum">      55 </span><span class="lineCov">        300 :         if (tstr-&gt;readmlev &gt; mlev) {</span>
+<span class="lineNum">      54 </span><span class="lineCov">        208 :     while (tstr-&gt;name) {</span>
+<span class="lineNum">      55 </span><span class="lineCov">        200 :         if (tstr-&gt;readmlev &gt; mlev) {</span>
 <span class="lineNum">      56 </span><span class="lineNoCov">          0 :             tstr++;</span>
 <span class="lineNum">      57 </span><span class="lineNoCov">          0 :             continue;</span>
 <span class="lineNum">      58 </span>            :         }
-<span class="lineNum">      59 </span><span class="lineCov">        300 :         strcpyn(buf, sizeof(buf), tstr-&gt;name);</span>
-<span class="lineNum">      60 </span><span class="lineCov">        300 :         if (!*name || equalstr(name, buf)) {</span>
+<span class="lineNum">      59 </span><span class="lineCov">        200 :         strcpyn(buf, sizeof(buf), tstr-&gt;name);</span>
+<span class="lineNum">      60 </span><span class="lineCov">        200 :         if (!*name || equalstr(name, buf)) {</span>
 <span class="lineNum">      61 </span><span class="lineNoCov">          0 :             notifyf(player, &quot;(str)  %-20s = %.4096s%s%s&quot;,</span>
 <span class="lineNum">      62 </span><span class="lineNoCov">          0 :                     tstr-&gt;name, *tstr-&gt;str, MOD_ENABLED(tstr-&gt;module) ? &quot;&quot; : &quot; [inactive]&quot;,</span>
 <span class="lineNum">      63 </span><span class="lineNoCov">          0 :                     (tstr-&gt;isdefault) ? &quot; [default]&quot; : &quot;&quot;);</span>
@@ -128,16 +128,16 @@
 <span class="lineNum">      66 </span><span class="lineNoCov">          0 :             if (!parms_found)</span>
 <span class="lineNum">      67 </span><span class="lineNoCov">          0 :                 parms_found = 1;</span>
 <span class="lineNum">      68 </span>            :         }
-<span class="lineNum">      69 </span><span class="lineCov">        300 :         tstr++;</span>
+<span class="lineNum">      69 </span><span class="lineCov">        200 :         tstr++;</span>
 <span class="lineNum">      70 </span>            :     }
 <span class="lineNum">      71 </span>            : 
-<span class="lineNum">      72 </span><span class="lineCov">         48 :     while (ttim-&gt;name) {</span>
-<span class="lineNum">      73 </span><span class="lineCov">         36 :         if (ttim-&gt;readmlev &gt; mlev) {</span>
+<span class="lineNum">      72 </span><span class="lineCov">         32 :     while (ttim-&gt;name) {</span>
+<span class="lineNum">      73 </span><span class="lineCov">         24 :         if (ttim-&gt;readmlev &gt; mlev) {</span>
 <span class="lineNum">      74 </span><span class="lineNoCov">          0 :             ttim++;</span>
 <span class="lineNum">      75 </span><span class="lineNoCov">          0 :             continue;</span>
 <span class="lineNum">      76 </span>            :         }
-<span class="lineNum">      77 </span><span class="lineCov">         36 :         strcpyn(buf, sizeof(buf), ttim-&gt;name);</span>
-<span class="lineNum">      78 </span><span class="lineCov">         36 :         if (!*name || equalstr(name, buf)) {</span>
+<span class="lineNum">      77 </span><span class="lineCov">         24 :         strcpyn(buf, sizeof(buf), ttim-&gt;name);</span>
+<span class="lineNum">      78 </span><span class="lineCov">         24 :         if (!*name || equalstr(name, buf)) {</span>
 <span class="lineNum">      79 </span><span class="lineNoCov">          0 :             notifyf(player, &quot;(time) %-20s = %s%s%s&quot;,</span>
 <span class="lineNum">      80 </span><span class="lineNoCov">          0 :                     ttim-&gt;name, timestr_full(*ttim-&gt;tim),</span>
 <span class="lineNum">      81 </span><span class="lineNoCov">          0 :                     MOD_ENABLED(ttim-&gt;module) ? &quot;&quot; : &quot; [inactive]&quot;,</span>
@@ -147,55 +147,55 @@
 <span class="lineNum">      85 </span><span class="lineNoCov">          0 :             if (!parms_found)</span>
 <span class="lineNum">      86 </span><span class="lineNoCov">          0 :                 parms_found = 1;</span>
 <span class="lineNum">      87 </span>            :         }
-<span class="lineNum">      88 </span><span class="lineCov">         36 :         ttim++;</span>
+<span class="lineNum">      88 </span><span class="lineCov">         24 :         ttim++;</span>
 <span class="lineNum">      89 </span>            :     }
 <span class="lineNum">      90 </span>            : 
-<span class="lineNum">      91 </span><span class="lineCov">        228 :     while (tval-&gt;name) {</span>
-<span class="lineNum">      92 </span><span class="lineCov">        216 :         if (tval-&gt;readmlev &gt; mlev) {</span>
+<span class="lineNum">      91 </span><span class="lineCov">        152 :     while (tval-&gt;name) {</span>
+<span class="lineNum">      92 </span><span class="lineCov">        144 :         if (tval-&gt;readmlev &gt; mlev) {</span>
 <span class="lineNum">      93 </span><span class="lineNoCov">          0 :             tval++;</span>
 <span class="lineNum">      94 </span><span class="lineNoCov">          0 :             continue;</span>
 <span class="lineNum">      95 </span>            :         }
-<span class="lineNum">      96 </span><span class="lineCov">        216 :         strcpyn(buf, sizeof(buf), tval-&gt;name);</span>
-<span class="lineNum">      97 </span><span class="lineCov">        216 :         if (!*name || equalstr(name, buf)) {</span>
-<span class="lineNum">      98 </span><span class="lineCov">         12 :             notifyf(player, &quot;(int)  %-20s = %d%s%s&quot;,</span>
-<span class="lineNum">      99 </span><span class="lineCov">          6 :                     tval-&gt;name, *tval-&gt;val, MOD_ENABLED(tval-&gt;module) ? &quot;&quot; : &quot; [inactive]&quot;,</span>
-<span class="lineNum">     100 </span><span class="lineCov">          3 :                     (tval-&gt;isdefault) ? &quot; [default]&quot; : &quot;&quot;);</span>
-<span class="lineNum">     101 </span><span class="lineCov">          3 :             if (show_extended)</span>
+<span class="lineNum">      96 </span><span class="lineCov">        144 :         strcpyn(buf, sizeof(buf), tval-&gt;name);</span>
+<span class="lineNum">      97 </span><span class="lineCov">        144 :         if (!*name || equalstr(name, buf)) {</span>
+<span class="lineNum">      98 </span><span class="lineCov">          8 :             notifyf(player, &quot;(int)  %-20s = %d%s%s&quot;,</span>
+<span class="lineNum">      99 </span><span class="lineCov">          4 :                     tval-&gt;name, *tval-&gt;val, MOD_ENABLED(tval-&gt;module) ? &quot;&quot; : &quot; [inactive]&quot;,</span>
+<span class="lineNum">     100 </span><span class="lineCov">          2 :                     (tval-&gt;isdefault) ? &quot; [default]&quot; : &quot;&quot;);</span>
+<span class="lineNum">     101 </span><span class="lineCov">          2 :             if (show_extended)</span>
 <span class="lineNum">     102 </span><span class="lineNoCov">          0 :                 TP_SEND_ENTRY_INFO(tval);</span>
-<span class="lineNum">     103 </span><span class="lineCov">          3 :             if (!parms_found)</span>
-<span class="lineNum">     104 </span><span class="lineCov">          3 :                 parms_found = 1;</span>
+<span class="lineNum">     103 </span><span class="lineCov">          2 :             if (!parms_found)</span>
+<span class="lineNum">     104 </span><span class="lineCov">          2 :                 parms_found = 1;</span>
 <span class="lineNum">     105 </span>            :         }
-<span class="lineNum">     106 </span><span class="lineCov">        216 :         tval++;</span>
+<span class="lineNum">     106 </span><span class="lineCov">        144 :         tval++;</span>
 <span class="lineNum">     107 </span>            :     }
 <span class="lineNum">     108 </span>            : 
-<span class="lineNum">     109 </span><span class="lineCov">         36 :     while (tref-&gt;name) {</span>
-<span class="lineNum">     110 </span><span class="lineCov">         24 :         if (tref-&gt;readmlev &gt; mlev) {</span>
+<span class="lineNum">     109 </span><span class="lineCov">         24 :     while (tref-&gt;name) {</span>
+<span class="lineNum">     110 </span><span class="lineCov">         16 :         if (tref-&gt;readmlev &gt; mlev) {</span>
 <span class="lineNum">     111 </span><span class="lineNoCov">          0 :             tref++;</span>
 <span class="lineNum">     112 </span><span class="lineNoCov">          0 :             continue;</span>
 <span class="lineNum">     113 </span>            :         }
-<span class="lineNum">     114 </span><span class="lineCov">         24 :         strcpyn(buf, sizeof(buf), tref-&gt;name);</span>
-<span class="lineNum">     115 </span><span class="lineCov">         24 :         if (!*name || equalstr(name, buf)) {</span>
+<span class="lineNum">     114 </span><span class="lineCov">         16 :         strcpyn(buf, sizeof(buf), tref-&gt;name);</span>
+<span class="lineNum">     115 </span><span class="lineCov">         16 :         if (!*name || equalstr(name, buf)) {</span>
 <span class="lineNum">     116 </span>            :             char unparse_buf[BUFFER_LEN];
-<span class="lineNum">     117 </span><span class="lineCov">          3 :             unparse_object(player, *tref-&gt;ref, unparse_buf, sizeof(unparse_buf));</span>
-<span class="lineNum">     118 </span><span class="lineCov">          9 :             notifyf(player, &quot;(ref)  %-20s = %s%s%s&quot;,</span>
+<span class="lineNum">     117 </span><span class="lineCov">          2 :             unparse_object(player, *tref-&gt;ref, unparse_buf, sizeof(unparse_buf));</span>
+<span class="lineNum">     118 </span><span class="lineCov">          6 :             notifyf(player, &quot;(ref)  %-20s = %s%s%s&quot;,</span>
 <span class="lineNum">     119 </span>            :                     tref-&gt;name, unparse_buf,
-<span class="lineNum">     120 </span><span class="lineCov">          3 :                     MOD_ENABLED(tref-&gt;module) ? &quot;&quot; : &quot; [inactive]&quot;,</span>
-<span class="lineNum">     121 </span><span class="lineCov">          3 :                     (tref-&gt;isdefault) ? &quot; [default]&quot; : &quot;&quot;);</span>
-<span class="lineNum">     122 </span><span class="lineCov">          3 :             if (show_extended)</span>
+<span class="lineNum">     120 </span><span class="lineCov">          2 :                     MOD_ENABLED(tref-&gt;module) ? &quot;&quot; : &quot; [inactive]&quot;,</span>
+<span class="lineNum">     121 </span><span class="lineCov">          2 :                     (tref-&gt;isdefault) ? &quot; [default]&quot; : &quot;&quot;);</span>
+<span class="lineNum">     122 </span><span class="lineCov">          2 :             if (show_extended)</span>
 <span class="lineNum">     123 </span><span class="lineNoCov">          0 :                 TP_SEND_ENTRY_INFO(tref);</span>
-<span class="lineNum">     124 </span><span class="lineCov">          3 :             if (!parms_found)</span>
-<span class="lineNum">     125 </span><span class="lineCov">          3 :                 parms_found = 1;</span>
+<span class="lineNum">     124 </span><span class="lineCov">          2 :             if (!parms_found)</span>
+<span class="lineNum">     125 </span><span class="lineCov">          2 :                 parms_found = 1;</span>
 <span class="lineNum">     126 </span>            :         }
-<span class="lineNum">     127 </span><span class="lineCov">         24 :         tref++;</span>
+<span class="lineNum">     127 </span><span class="lineCov">         16 :         tref++;</span>
 <span class="lineNum">     128 </span>            :     }
 <span class="lineNum">     129 </span>            : 
-<span class="lineNum">     130 </span><span class="lineCov">        348 :     while (tbool-&gt;name) {</span>
-<span class="lineNum">     131 </span><span class="lineCov">        336 :         if (tbool-&gt;readmlev &gt; mlev) {</span>
+<span class="lineNum">     130 </span><span class="lineCov">        232 :     while (tbool-&gt;name) {</span>
+<span class="lineNum">     131 </span><span class="lineCov">        224 :         if (tbool-&gt;readmlev &gt; mlev) {</span>
 <span class="lineNum">     132 </span><span class="lineNoCov">          0 :             tbool++;</span>
 <span class="lineNum">     133 </span><span class="lineNoCov">          0 :             continue;</span>
 <span class="lineNum">     134 </span>            :         }
-<span class="lineNum">     135 </span><span class="lineCov">        336 :         strcpyn(buf, sizeof(buf), tbool-&gt;name);</span>
-<span class="lineNum">     136 </span><span class="lineCov">        336 :         if (!*name || equalstr(name, buf)) {</span>
+<span class="lineNum">     135 </span><span class="lineCov">        224 :         strcpyn(buf, sizeof(buf), tbool-&gt;name);</span>
+<span class="lineNum">     136 </span><span class="lineCov">        224 :         if (!*name || equalstr(name, buf)) {</span>
 <span class="lineNum">     137 </span><span class="lineNoCov">          0 :             notifyf(player, &quot;(bool) %-20s = %s%s%s&quot;,</span>
 <span class="lineNum">     138 </span><span class="lineNoCov">          0 :                     tbool-&gt;name, ((*tbool-&gt;boolval) ? &quot;yes&quot; : &quot;no&quot;),</span>
 <span class="lineNum">     139 </span><span class="lineNoCov">          0 :                     MOD_ENABLED(tbool-&gt;module) ? &quot;&quot; : &quot; [inactive]&quot;,</span>
@@ -205,22 +205,22 @@
 <span class="lineNum">     143 </span><span class="lineNoCov">          0 :             if (!parms_found)</span>
 <span class="lineNum">     144 </span><span class="lineNoCov">          0 :                 parms_found = 1;</span>
 <span class="lineNum">     145 </span>            :         }
-<span class="lineNum">     146 </span><span class="lineCov">        336 :         tbool++;</span>
+<span class="lineNum">     146 </span><span class="lineCov">        224 :         tbool++;</span>
 <span class="lineNum">     147 </span>            :     }
 <span class="lineNum">     148 </span>            : 
-<span class="lineNum">     149 </span><span class="lineCov">          6 :     if (!parms_found)</span>
+<span class="lineNum">     149 </span><span class="lineCov">          4 :     if (!parms_found)</span>
 <span class="lineNum">     150 </span><span class="lineNoCov">          0 :         notify(player, &quot;No matching parameters.&quot;);</span>
-<span class="lineNum">     151 </span><span class="lineCov">          6 :     notify(player, &quot;*done*&quot;);</span>
+<span class="lineNum">     151 </span><span class="lineCov">          4 :     notify(player, &quot;*done*&quot;);</span>
 <span class="lineNum">     152 </span>            : }
 <a name="153"><span class="lineNum">     153 </span>            : </a>
 <span class="lineNum">     154 </span>            : void
-<span class="lineNum">     155 </span><span class="lineCov">        624 : tune_save_parms_to_file(FILE * f)</span>
+<span class="lineNum">     155 </span><span class="lineCov">        239 : tune_save_parms_to_file(FILE * f)</span>
 <span class="lineNum">     156 </span>            : {
-<span class="lineNum">     157 </span><span class="lineCov">        624 :     struct tune_str_entry *tstr = tune_str_list;</span>
-<span class="lineNum">     158 </span><span class="lineCov">        624 :     struct tune_time_entry *ttim = tune_time_list;</span>
-<span class="lineNum">     159 </span><span class="lineCov">        624 :     struct tune_val_entry *tval = tune_val_list;</span>
-<span class="lineNum">     160 </span><span class="lineCov">        624 :     struct tune_ref_entry *tref = tune_ref_list;</span>
-<span class="lineNum">     161 </span><span class="lineCov">        624 :     struct tune_bool_entry *tbool = tune_bool_list;</span>
+<span class="lineNum">     157 </span><span class="lineCov">        239 :     struct tune_str_entry *tstr = tune_str_list;</span>
+<span class="lineNum">     158 </span><span class="lineCov">        239 :     struct tune_time_entry *ttim = tune_time_list;</span>
+<span class="lineNum">     159 </span><span class="lineCov">        239 :     struct tune_val_entry *tval = tune_val_list;</span>
+<span class="lineNum">     160 </span><span class="lineCov">        239 :     struct tune_ref_entry *tref = tune_ref_list;</span>
+<span class="lineNum">     161 </span><span class="lineCov">        239 :     struct tune_bool_entry *tbool = tune_bool_list;</span>
 <span class="lineNum">     162 </span>            : 
 <span class="lineNum">     163 </span>            :     /* Notes on parameter saving
 <span class="lineNum">     164 </span>            : 
@@ -237,52 +237,52 @@
 <span class="lineNum">     175 </span>            :        &gt; Default
 <span class="lineNum">     176 </span>            :        %ssl_min_protocol_version=None */
 <span class="lineNum">     177 </span>            : 
-<span class="lineNum">     178 </span><span class="lineCov">      32448 :     while (tstr-&gt;name) {</span>
-<span class="lineNum">     179 </span><span class="lineCov">      31200 :         if (tstr-&gt;isdefault) {</span>
-<span class="lineNum">     180 </span><span class="lineCov">      16221 :             fprintf(f, &quot;%c%s=%.4096s\n&quot;, TP_FLAG_DEFAULT, tstr-&gt;name, *tstr-&gt;str);</span>
+<span class="lineNum">     178 </span><span class="lineCov">      12428 :     while (tstr-&gt;name) {</span>
+<span class="lineNum">     179 </span><span class="lineCov">      11950 :         if (tstr-&gt;isdefault) {</span>
+<span class="lineNum">     180 </span><span class="lineCov">       6212 :             fprintf(f, &quot;%c%s=%.4096s\n&quot;, TP_FLAG_DEFAULT, tstr-&gt;name, *tstr-&gt;str);</span>
 <span class="lineNum">     181 </span>            :         } else {
-<span class="lineNum">     182 </span><span class="lineCov">      14979 :             fprintf(f, &quot;%s=%.4096s\n&quot;, tstr-&gt;name, *tstr-&gt;str);</span>
+<span class="lineNum">     182 </span><span class="lineCov">       5738 :             fprintf(f, &quot;%s=%.4096s\n&quot;, tstr-&gt;name, *tstr-&gt;str);</span>
 <span class="lineNum">     183 </span>            :         }
-<span class="lineNum">     184 </span><span class="lineCov">      31200 :         tstr++;</span>
+<span class="lineNum">     184 </span><span class="lineCov">      11950 :         tstr++;</span>
 <span class="lineNum">     185 </span>            :     }
 <span class="lineNum">     186 </span>            : 
-<span class="lineNum">     187 </span><span class="lineCov">       4992 :     while (ttim-&gt;name) {</span>
-<span class="lineNum">     188 </span><span class="lineCov">       3744 :         if (ttim-&gt;isdefault) {</span>
+<span class="lineNum">     187 </span><span class="lineCov">       1912 :     while (ttim-&gt;name) {</span>
+<span class="lineNum">     188 </span><span class="lineCov">       1434 :         if (ttim-&gt;isdefault) {</span>
 <span class="lineNum">     189 </span><span class="lineNoCov">          0 :             fprintf(f, &quot;%c%s=%s\n&quot;, TP_FLAG_DEFAULT, ttim-&gt;name, timestr_full(*ttim-&gt;tim));</span>
 <span class="lineNum">     190 </span>            :         } else {
-<span class="lineNum">     191 </span><span class="lineCov">       3744 :             fprintf(f, &quot;%s=%s\n&quot;, ttim-&gt;name, timestr_full(*ttim-&gt;tim));</span>
+<span class="lineNum">     191 </span><span class="lineCov">       1434 :             fprintf(f, &quot;%s=%s\n&quot;, ttim-&gt;name, timestr_full(*ttim-&gt;tim));</span>
 <span class="lineNum">     192 </span>            :         }
-<span class="lineNum">     193 </span><span class="lineCov">       3744 :         ttim++;</span>
+<span class="lineNum">     193 </span><span class="lineCov">       1434 :         ttim++;</span>
 <span class="lineNum">     194 </span>            :     }
 <span class="lineNum">     195 </span>            : 
-<span class="lineNum">     196 </span><span class="lineCov">      23712 :     while (tval-&gt;name) {</span>
-<span class="lineNum">     197 </span><span class="lineCov">      22464 :         if (tval-&gt;isdefault) {</span>
-<span class="lineNum">     198 </span><span class="lineCov">        624 :             fprintf(f, &quot;%c%s=%d\n&quot;, TP_FLAG_DEFAULT, tval-&gt;name, *tval-&gt;val);</span>
+<span class="lineNum">     196 </span><span class="lineCov">       9082 :     while (tval-&gt;name) {</span>
+<span class="lineNum">     197 </span><span class="lineCov">       8604 :         if (tval-&gt;isdefault) {</span>
+<span class="lineNum">     198 </span><span class="lineCov">        239 :             fprintf(f, &quot;%c%s=%d\n&quot;, TP_FLAG_DEFAULT, tval-&gt;name, *tval-&gt;val);</span>
 <span class="lineNum">     199 </span>            :         } else {
-<span class="lineNum">     200 </span><span class="lineCov">      21840 :             fprintf(f, &quot;%s=%d\n&quot;, tval-&gt;name, *tval-&gt;val);</span>
+<span class="lineNum">     200 </span><span class="lineCov">       8365 :             fprintf(f, &quot;%s=%d\n&quot;, tval-&gt;name, *tval-&gt;val);</span>
 <span class="lineNum">     201 </span>            :         }
-<span class="lineNum">     202 </span><span class="lineCov">      22464 :         tval++;</span>
+<span class="lineNum">     202 </span><span class="lineCov">       8604 :         tval++;</span>
 <span class="lineNum">     203 </span>            :     }
 <span class="lineNum">     204 </span>            : 
-<span class="lineNum">     205 </span><span class="lineCov">       3744 :     while (tref-&gt;name) {</span>
-<span class="lineNum">     206 </span><span class="lineCov">       2496 :         if (tref-&gt;isdefault) {</span>
+<span class="lineNum">     205 </span><span class="lineCov">       1434 :     while (tref-&gt;name) {</span>
+<span class="lineNum">     206 </span><span class="lineCov">        956 :         if (tref-&gt;isdefault) {</span>
 <span class="lineNum">     207 </span><span class="lineNoCov">          0 :             fprintf(f, &quot;%c%s=#%d\n&quot;, TP_FLAG_DEFAULT, tref-&gt;name, *tref-&gt;ref);</span>
 <span class="lineNum">     208 </span>            :         } else {
-<span class="lineNum">     209 </span><span class="lineCov">       2496 :             fprintf(f, &quot;%s=#%d\n&quot;, tref-&gt;name, *tref-&gt;ref);</span>
+<span class="lineNum">     209 </span><span class="lineCov">        956 :             fprintf(f, &quot;%s=#%d\n&quot;, tref-&gt;name, *tref-&gt;ref);</span>
 <span class="lineNum">     210 </span>            :         }
-<span class="lineNum">     211 </span><span class="lineCov">       2496 :         tref++;</span>
+<span class="lineNum">     211 </span><span class="lineCov">        956 :         tref++;</span>
 <span class="lineNum">     212 </span>            :     }
 <span class="lineNum">     213 </span>            : 
-<span class="lineNum">     214 </span><span class="lineCov">      36192 :     while (tbool-&gt;name) {</span>
-<span class="lineNum">     215 </span><span class="lineCov">      34944 :         if (tbool-&gt;isdefault) {</span>
-<span class="lineNum">     216 </span><span class="lineCov">       4362 :             fprintf(f, &quot;%c%s=%s\n&quot;, TP_FLAG_DEFAULT, tbool-&gt;name,</span>
-<span class="lineNum">     217 </span><span class="lineCov">       4362 :                     (*tbool-&gt;boolval) ? &quot;yes&quot; : &quot;no&quot;);</span>
+<span class="lineNum">     214 </span><span class="lineCov">      13862 :     while (tbool-&gt;name) {</span>
+<span class="lineNum">     215 </span><span class="lineCov">      13384 :         if (tbool-&gt;isdefault) {</span>
+<span class="lineNum">     216 </span><span class="lineCov">       1669 :             fprintf(f, &quot;%c%s=%s\n&quot;, TP_FLAG_DEFAULT, tbool-&gt;name,</span>
+<span class="lineNum">     217 </span><span class="lineCov">       1669 :                     (*tbool-&gt;boolval) ? &quot;yes&quot; : &quot;no&quot;);</span>
 <span class="lineNum">     218 </span>            :         } else {
-<span class="lineNum">     219 </span><span class="lineCov">      30582 :             fprintf(f, &quot;%s=%s\n&quot;, tbool-&gt;name, (*tbool-&gt;boolval) ? &quot;yes&quot; : &quot;no&quot;);</span>
+<span class="lineNum">     219 </span><span class="lineCov">      11715 :             fprintf(f, &quot;%s=%s\n&quot;, tbool-&gt;name, (*tbool-&gt;boolval) ? &quot;yes&quot; : &quot;no&quot;);</span>
 <span class="lineNum">     220 </span>            :         }
-<span class="lineNum">     221 </span><span class="lineCov">      34944 :         tbool++;</span>
+<span class="lineNum">     221 </span><span class="lineCov">      13384 :         tbool++;</span>
 <span class="lineNum">     222 </span>            :     }
-<span class="lineNum">     223 </span><span class="lineCov">        624 : }</span>
+<span class="lineNum">     223 </span><span class="lineCov">        239 : }</span>
 <a name="224"><span class="lineNum">     224 </span>            : </a>
 <span class="lineNum">     225 </span>            : stk_array *
 <span class="lineNum">     226 </span><span class="lineNoCov">          0 : tune_parms_array(const char *pattern, int mlev)</span>
@@ -472,60 +472,60 @@
 <span class="lineNum">     410 </span>            : }
 <a name="411"><span class="lineNum">     411 </span>            : </a>
 <span class="lineNum">     412 </span>            : const char *
-<span class="lineNum">     413 </span><span class="lineCov">          3 : tune_get_parmstring(const char *name, int mlev)</span>
+<span class="lineNum">     413 </span><span class="lineCov">          2 : tune_get_parmstring(const char *name, int mlev)</span>
 <span class="lineNum">     414 </span>            : {
 <span class="lineNum">     415 </span>            :     static char buf[BUFFER_LEN + 50];
-<span class="lineNum">     416 </span><span class="lineCov">          3 :     struct tune_str_entry *tstr = tune_str_list;</span>
-<span class="lineNum">     417 </span><span class="lineCov">          3 :     struct tune_time_entry *ttim = tune_time_list;</span>
-<span class="lineNum">     418 </span><span class="lineCov">          3 :     struct tune_val_entry *tval = tune_val_list;</span>
-<span class="lineNum">     419 </span><span class="lineCov">          3 :     struct tune_ref_entry *tref = tune_ref_list;</span>
-<span class="lineNum">     420 </span><span class="lineCov">          3 :     struct tune_bool_entry *tbool = tune_bool_list;</span>
+<span class="lineNum">     416 </span><span class="lineCov">          2 :     struct tune_str_entry *tstr = tune_str_list;</span>
+<span class="lineNum">     417 </span><span class="lineCov">          2 :     struct tune_time_entry *ttim = tune_time_list;</span>
+<span class="lineNum">     418 </span><span class="lineCov">          2 :     struct tune_val_entry *tval = tune_val_list;</span>
+<span class="lineNum">     419 </span><span class="lineCov">          2 :     struct tune_ref_entry *tref = tune_ref_list;</span>
+<span class="lineNum">     420 </span><span class="lineCov">          2 :     struct tune_bool_entry *tbool = tune_bool_list;</span>
 <span class="lineNum">     421 </span>            : 
 <span class="lineNum">     422 </span>            :     /* Treat default parameters as normal */
-<span class="lineNum">     423 </span><span class="lineCov">          3 :     TP_CLEAR_FLAG_DEFAULT(name);</span>
+<span class="lineNum">     423 </span><span class="lineCov">          2 :     TP_CLEAR_FLAG_DEFAULT(name);</span>
 <span class="lineNum">     424 </span>            : 
-<span class="lineNum">     425 </span><span class="lineCov">          3 :     if (!name) {</span>
+<span class="lineNum">     425 </span><span class="lineCov">          2 :     if (!name) {</span>
 <span class="lineNum">     426 </span><span class="lineNoCov">          0 :         strcpyn(buf, sizeof(buf), &quot;&quot;);</span>
 <span class="lineNum">     427 </span><span class="lineNoCov">          0 :         return (buf);</span>
 <span class="lineNum">     428 </span>            :     }
 <span class="lineNum">     429 </span>            : 
-<span class="lineNum">     430 </span><span class="lineCov">        156 :     while (tstr-&gt;name) {</span>
-<span class="lineNum">     431 </span><span class="lineCov">        150 :         if (!strcasecmp(name, tstr-&gt;name)) {</span>
+<span class="lineNum">     430 </span><span class="lineCov">        104 :     while (tstr-&gt;name) {</span>
+<span class="lineNum">     431 </span><span class="lineCov">        100 :         if (!strcasecmp(name, tstr-&gt;name)) {</span>
 <span class="lineNum">     432 </span><span class="lineNoCov">          0 :             if (tstr-&gt;readmlev &gt; mlev)</span>
 <span class="lineNum">     433 </span><span class="lineNoCov">          0 :                 return &quot;&quot;;</span>
 <span class="lineNum">     434 </span><span class="lineNoCov">          0 :             return (*tstr-&gt;str);</span>
 <span class="lineNum">     435 </span>            :         }
-<span class="lineNum">     436 </span><span class="lineCov">        150 :         tstr++;</span>
+<span class="lineNum">     436 </span><span class="lineCov">        100 :         tstr++;</span>
 <span class="lineNum">     437 </span>            :     }
 <span class="lineNum">     438 </span>            : 
-<span class="lineNum">     439 </span><span class="lineCov">         24 :     while (ttim-&gt;name) {</span>
-<span class="lineNum">     440 </span><span class="lineCov">         18 :         if (!strcasecmp(name, ttim-&gt;name)) {</span>
+<span class="lineNum">     439 </span><span class="lineCov">         16 :     while (ttim-&gt;name) {</span>
+<span class="lineNum">     440 </span><span class="lineCov">         12 :         if (!strcasecmp(name, ttim-&gt;name)) {</span>
 <span class="lineNum">     441 </span><span class="lineNoCov">          0 :             if (ttim-&gt;readmlev &gt; mlev)</span>
 <span class="lineNum">     442 </span><span class="lineNoCov">          0 :                 return &quot;&quot;;</span>
 <span class="lineNum">     443 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), &quot;%d&quot;, *ttim-&gt;tim);</span>
 <span class="lineNum">     444 </span><span class="lineNoCov">          0 :             return (buf);</span>
 <span class="lineNum">     445 </span>            :         }
-<span class="lineNum">     446 </span><span class="lineCov">         18 :         ttim++;</span>
+<span class="lineNum">     446 </span><span class="lineCov">         12 :         ttim++;</span>
 <span class="lineNum">     447 </span>            :     }
 <span class="lineNum">     448 </span>            : 
-<span class="lineNum">     449 </span><span class="lineCov">        114 :     while (tval-&gt;name) {</span>
-<span class="lineNum">     450 </span><span class="lineCov">        108 :         if (!strcasecmp(name, tval-&gt;name)) {</span>
+<span class="lineNum">     449 </span><span class="lineCov">         76 :     while (tval-&gt;name) {</span>
+<span class="lineNum">     450 </span><span class="lineCov">         72 :         if (!strcasecmp(name, tval-&gt;name)) {</span>
 <span class="lineNum">     451 </span><span class="lineNoCov">          0 :             if (tval-&gt;readmlev &gt; mlev)</span>
 <span class="lineNum">     452 </span><span class="lineNoCov">          0 :                 return &quot;&quot;;</span>
 <span class="lineNum">     453 </span><span class="lineNoCov">          0 :             snprintf(buf, sizeof(buf), &quot;%d&quot;, *tval-&gt;val);</span>
 <span class="lineNum">     454 </span><span class="lineNoCov">          0 :             return (buf);</span>
 <span class="lineNum">     455 </span>            :         }
-<span class="lineNum">     456 </span><span class="lineCov">        108 :         tval++;</span>
+<span class="lineNum">     456 </span><span class="lineCov">         72 :         tval++;</span>
 <span class="lineNum">     457 </span>            :     }
 <span class="lineNum">     458 </span>            : 
-<span class="lineNum">     459 </span><span class="lineCov">         12 :     while (tref-&gt;name) {</span>
-<span class="lineNum">     460 </span><span class="lineCov">          9 :         if (!strcasecmp(name, tref-&gt;name)) {</span>
-<span class="lineNum">     461 </span><span class="lineCov">          3 :             if (tref-&gt;readmlev &gt; mlev)</span>
+<span class="lineNum">     459 </span><span class="lineCov">          8 :     while (tref-&gt;name) {</span>
+<span class="lineNum">     460 </span><span class="lineCov">          6 :         if (!strcasecmp(name, tref-&gt;name)) {</span>
+<span class="lineNum">     461 </span><span class="lineCov">          2 :             if (tref-&gt;readmlev &gt; mlev)</span>
 <span class="lineNum">     462 </span><span class="lineNoCov">          0 :                 return &quot;&quot;;</span>
-<span class="lineNum">     463 </span><span class="lineCov">          3 :             snprintf(buf, sizeof(buf), &quot;#%d&quot;, *tref-&gt;ref);</span>
-<span class="lineNum">     464 </span><span class="lineCov">          3 :             return (buf);</span>
+<span class="lineNum">     463 </span><span class="lineCov">          2 :             snprintf(buf, sizeof(buf), &quot;#%d&quot;, *tref-&gt;ref);</span>
+<span class="lineNum">     464 </span><span class="lineCov">          2 :             return (buf);</span>
 <span class="lineNum">     465 </span>            :         }
-<span class="lineNum">     466 </span><span class="lineCov">          6 :         tref++;</span>
+<span class="lineNum">     466 </span><span class="lineCov">          4 :         tref++;</span>
 <span class="lineNum">     467 </span>            :     }
 <span class="lineNum">     468 </span>            : 
 <span class="lineNum">     469 </span><span class="lineNoCov">          0 :     while (tbool-&gt;name) {</span>
@@ -558,61 +558,61 @@
 <span class="lineNum">     496 </span>            : #endif
 <a name="497"><span class="lineNum">     497 </span>            : </a>
 <span class="lineNum">     498 </span>            : int
-<span class="lineNum">     499 </span><span class="lineCov">     154971 : tune_setparm(const char *parmname, const char *val, int mlev)</span>
+<span class="lineNum">     499 </span><span class="lineCov">      59663 : tune_setparm(const char *parmname, const char *val, int mlev)</span>
 <span class="lineNum">     500 </span>            : {
-<span class="lineNum">     501 </span><span class="lineCov">     154971 :     struct tune_str_entry *tstr = tune_str_list;</span>
-<span class="lineNum">     502 </span><span class="lineCov">     154971 :     struct tune_time_entry *ttim = tune_time_list;</span>
-<span class="lineNum">     503 </span><span class="lineCov">     154971 :     struct tune_val_entry *tval = tune_val_list;</span>
-<span class="lineNum">     504 </span><span class="lineCov">     154971 :     struct tune_ref_entry *tref = tune_ref_list;</span>
-<span class="lineNum">     505 </span><span class="lineCov">     154971 :     struct tune_bool_entry *tbool = tune_bool_list;</span>
+<span class="lineNum">     501 </span><span class="lineCov">      59663 :     struct tune_str_entry *tstr = tune_str_list;</span>
+<span class="lineNum">     502 </span><span class="lineCov">      59663 :     struct tune_time_entry *ttim = tune_time_list;</span>
+<span class="lineNum">     503 </span><span class="lineCov">      59663 :     struct tune_val_entry *tval = tune_val_list;</span>
+<span class="lineNum">     504 </span><span class="lineCov">      59663 :     struct tune_ref_entry *tref = tune_ref_list;</span>
+<span class="lineNum">     505 </span><span class="lineCov">      59663 :     struct tune_bool_entry *tbool = tune_bool_list;</span>
 <span class="lineNum">     506 </span>            : 
 <span class="lineNum">     507 </span>            :     char buf[BUFFER_LEN];
 <span class="lineNum">     508 </span>            :     char *parmval;
-<span class="lineNum">     509 </span><span class="lineCov">     154971 :     strcpyn(buf, sizeof(buf), val);</span>
-<span class="lineNum">     510 </span><span class="lineCov">     154971 :     parmval = buf;</span>
+<span class="lineNum">     509 </span><span class="lineCov">      59663 :     strcpyn(buf, sizeof(buf), val);</span>
+<span class="lineNum">     510 </span><span class="lineCov">      59663 :     parmval = buf;</span>
 <span class="lineNum">     511 </span>            : 
-<span class="lineNum">     512 </span><span class="lineCov">     154971 :     int reset_default = 0;</span>
-<span class="lineNum">     513 </span><span class="lineCov">     154971 :     if (TP_HAS_FLAG_DEFAULT(parmname)) {</span>
+<span class="lineNum">     512 </span><span class="lineCov">      59663 :     int reset_default = 0;</span>
+<span class="lineNum">     513 </span><span class="lineCov">      59663 :     if (TP_HAS_FLAG_DEFAULT(parmname)) {</span>
 <span class="lineNum">     514 </span>            :         /* Parameter name starts with the 'reset to default' flag.  Remove the flag and mark
 <span class="lineNum">     515 </span>            :            the parameter for resetting to default. */
-<span class="lineNum">     516 </span><span class="lineCov">       4992 :         TP_CLEAR_FLAG_DEFAULT(parmname);</span>
-<span class="lineNum">     517 </span><span class="lineCov">       4992 :         reset_default = 1;</span>
+<span class="lineNum">     516 </span><span class="lineCov">       1920 :         TP_CLEAR_FLAG_DEFAULT(parmname);</span>
+<span class="lineNum">     517 </span><span class="lineCov">       1920 :         reset_default = 1;</span>
 <span class="lineNum">     518 </span>            :     }
 <span class="lineNum">     519 </span>            : 
-<span class="lineNum">     520 </span><span class="lineCov">     154971 :     if (!parmname) return TUNESET_UNKNOWN;</span>
+<span class="lineNum">     520 </span><span class="lineCov">      59663 :     if (!parmname) return TUNESET_UNKNOWN;</span>
 <span class="lineNum">     521 </span>            : 
-<span class="lineNum">     522 </span><span class="lineCov">    7388410 :     while (tstr-&gt;name) {</span>
-<span class="lineNum">     523 </span><span class="lineCov">    7110967 :         if (!strcasecmp(parmname, tstr-&gt;name)) {</span>
-<span class="lineNum">     524 </span><span class="lineCov">      32499 :             if (tstr-&gt;writemlev &gt; mlev)</span>
+<span class="lineNum">     522 </span><span class="lineCov">    2843928 :     while (tstr-&gt;name) {</span>
+<span class="lineNum">     523 </span><span class="lineCov">    2737130 :         if (!strcasecmp(parmname, tstr-&gt;name)) {</span>
+<span class="lineNum">     524 </span><span class="lineCov">      12528 :             if (tstr-&gt;writemlev &gt; mlev)</span>
 <span class="lineNum">     525 </span><span class="lineNoCov">          0 :                 return TUNESET_DENIED;</span>
 <span class="lineNum">     526 </span>            : 
-<span class="lineNum">     527 </span><span class="lineCov">      32499 :             if (reset_default) {</span>
+<span class="lineNum">     527 </span><span class="lineCov">      12528 :             if (reset_default) {</span>
 <span class="lineNum">     528 </span>            :                 /* Reset to default value */
-<span class="lineNum">     529 </span><span class="lineCov">       2496 :                 if (!tstr-&gt;isdefault)</span>
+<span class="lineNum">     529 </span><span class="lineCov">        960 :                 if (!tstr-&gt;isdefault)</span>
 <span class="lineNum">     530 </span><span class="lineNoCov">          0 :                     free((char *) *tstr-&gt;str);</span>
-<span class="lineNum">     531 </span><span class="lineCov">       2496 :                 tstr-&gt;isdefault = 1;</span>
-<span class="lineNum">     532 </span><span class="lineCov">       2496 :                 *tstr-&gt;str = tstr-&gt;defaultstr;</span>
-<span class="lineNum">     533 </span><span class="lineCov">       2496 :                 return TUNESET_SUCCESS_DEFAULT;</span>
+<span class="lineNum">     531 </span><span class="lineCov">        960 :                 tstr-&gt;isdefault = 1;</span>
+<span class="lineNum">     532 </span><span class="lineCov">        960 :                 *tstr-&gt;str = tstr-&gt;defaultstr;</span>
+<span class="lineNum">     533 </span><span class="lineCov">        960 :                 return TUNESET_SUCCESS_DEFAULT;</span>
 <span class="lineNum">     534 </span>            :             } else {
 <span class="lineNum">     535 </span>            :                 /* Specify a new value */
-<span class="lineNum">     536 </span><span class="lineCov">      30003 :                 if (!tstr-&gt;isnullable &amp;&amp; !*parmval)</span>
+<span class="lineNum">     536 </span><span class="lineCov">      11568 :                 if (!tstr-&gt;isnullable &amp;&amp; !*parmval)</span>
 <span class="lineNum">     537 </span><span class="lineNoCov">          0 :                     return TUNESET_BADVAL;</span>
-<span class="lineNum">     538 </span><span class="lineCov">      30003 :                 if (!tstr-&gt;isdefault)</span>
-<span class="lineNum">     539 </span><span class="lineCov">      15024 :                     free((char *) *tstr-&gt;str);</span>
-<span class="lineNum">     540 </span><span class="lineCov">      30003 :                 tstr-&gt;isdefault = 0;</span>
-<span class="lineNum">     541 </span><span class="lineCov">      30003 :                 *tstr-&gt;str = strdup(parmval);</span>
-<span class="lineNum">     542 </span><span class="lineCov">      30003 :                 return TUNESET_SUCCESS;</span>
+<span class="lineNum">     538 </span><span class="lineCov">      11568 :                 if (!tstr-&gt;isdefault)</span>
+<span class="lineNum">     539 </span><span class="lineCov">       5806 :                     free((char *) *tstr-&gt;str);</span>
+<span class="lineNum">     540 </span><span class="lineCov">      11568 :                 tstr-&gt;isdefault = 0;</span>
+<span class="lineNum">     541 </span><span class="lineCov">      11568 :                 *tstr-&gt;str = strdup(parmval);</span>
+<span class="lineNum">     542 </span><span class="lineCov">      11568 :                 return TUNESET_SUCCESS;</span>
 <span class="lineNum">     543 </span>            :             }
 <span class="lineNum">     544 </span>            :         }
-<span class="lineNum">     545 </span><span class="lineCov">    7078468 :         tstr++;</span>
+<span class="lineNum">     545 </span><span class="lineCov">    2724602 :         tstr++;</span>
 <span class="lineNum">     546 </span>            :     }
 <span class="lineNum">     547 </span>            : 
-<span class="lineNum">     548 </span><span class="lineCov">     953568 :     while (ttim-&gt;name) {</span>
-<span class="lineNum">     549 </span><span class="lineCov">     716112 :         if (!strcasecmp(parmname, ttim-&gt;name)) {</span>
-<span class="lineNum">     550 </span><span class="lineCov">       7488 :             if (ttim-&gt;writemlev &gt; mlev)</span>
+<span class="lineNum">     548 </span><span class="lineCov">     367000 :     while (ttim-&gt;name) {</span>
+<span class="lineNum">     549 </span><span class="lineCov">     275610 :         if (!strcasecmp(parmname, ttim-&gt;name)) {</span>
+<span class="lineNum">     550 </span><span class="lineCov">       2880 :             if (ttim-&gt;writemlev &gt; mlev)</span>
 <span class="lineNum">     551 </span><span class="lineNoCov">          0 :                 return TUNESET_DENIED;</span>
 <span class="lineNum">     552 </span>            : 
-<span class="lineNum">     553 </span><span class="lineCov">       7488 :             if (reset_default) {</span>
+<span class="lineNum">     553 </span><span class="lineCov">       2880 :             if (reset_default) {</span>
 <span class="lineNum">     554 </span>            :                 /* Reset to default value */
 <span class="lineNum">     555 </span><span class="lineNoCov">          0 :                 ttim-&gt;isdefault = 1;</span>
 <span class="lineNum">     556 </span><span class="lineNoCov">          0 :                 *ttim-&gt;tim = ttim-&gt;defaulttim;</span>
@@ -621,9 +621,9 @@
 <span class="lineNum">     559 </span>            :                 /* Specify a new value */
 <span class="lineNum">     560 </span>            :                 int days, hrs, mins, secs, result;
 <span class="lineNum">     561 </span>            :                 char *end;
-<span class="lineNum">     562 </span><span class="lineCov">       7488 :                 days = hrs = mins = secs = 0;</span>
-<span class="lineNum">     563 </span><span class="lineCov">       7488 :                 end = parmval + strlen(parmval) - 1;</span>
-<span class="lineNum">     564 </span><span class="lineCov">       7488 :                 switch (*end) {</span>
+<span class="lineNum">     562 </span><span class="lineCov">       2880 :                 days = hrs = mins = secs = 0;</span>
+<span class="lineNum">     563 </span><span class="lineCov">       2880 :                 end = parmval + strlen(parmval) - 1;</span>
+<span class="lineNum">     564 </span><span class="lineCov">       2880 :                 switch (*end) {</span>
 <span class="lineNum">     565 </span>            :                 case 's':
 <span class="lineNum">     566 </span>            :                 case 'S':
 <span class="lineNum">     567 </span><span class="lineNoCov">          0 :                     *end = '\0';</span>
@@ -653,50 +653,50 @@
 <span class="lineNum">     591 </span><span class="lineNoCov">          0 :                     days = atoi(parmval);</span>
 <span class="lineNum">     592 </span><span class="lineNoCov">          0 :                     break;</span>
 <span class="lineNum">     593 </span>            :                 default:
-<span class="lineNum">     594 </span><span class="lineCov">       7488 :                     result = sscanf(parmval, &quot;%dd %2d:%2d:%2d&quot;, &amp;days, &amp;hrs, &amp;mins, &amp;secs);</span>
-<span class="lineNum">     595 </span><span class="lineCov">       7488 :                     if (result != 4)</span>
+<span class="lineNum">     594 </span><span class="lineCov">       2880 :                     result = sscanf(parmval, &quot;%dd %2d:%2d:%2d&quot;, &amp;days, &amp;hrs, &amp;mins, &amp;secs);</span>
+<span class="lineNum">     595 </span><span class="lineCov">       2880 :                     if (result != 4)</span>
 <span class="lineNum">     596 </span><span class="lineNoCov">          0 :                         return TUNESET_SYNTAX;</span>
-<span class="lineNum">     597 </span><span class="lineCov">       7488 :                     break;</span>
+<span class="lineNum">     597 </span><span class="lineCov">       2880 :                     break;</span>
 <span class="lineNum">     598 </span>            :                 }
 <span class="lineNum">     599 </span>            :                 /* New value success, clear default flag */
-<span class="lineNum">     600 </span><span class="lineCov">       7488 :                 ttim-&gt;isdefault = 0;</span>
-<span class="lineNum">     601 </span><span class="lineCov">       7488 :                 *ttim-&gt;tim = (days * 86400) + (3600 * hrs) + (60 * mins) + secs;</span>
-<span class="lineNum">     602 </span><span class="lineCov">       7488 :                 return TUNESET_SUCCESS;</span>
+<span class="lineNum">     600 </span><span class="lineCov">       2880 :                 ttim-&gt;isdefault = 0;</span>
+<span class="lineNum">     601 </span><span class="lineCov">       2880 :                 *ttim-&gt;tim = (days * 86400) + (3600 * hrs) + (60 * mins) + secs;</span>
+<span class="lineNum">     602 </span><span class="lineCov">       2880 :                 return TUNESET_SUCCESS;</span>
 <span class="lineNum">     603 </span>            :             }
 <span class="lineNum">     604 </span>            :         }
-<span class="lineNum">     605 </span><span class="lineCov">     708624 :         ttim++;</span>
+<span class="lineNum">     605 </span><span class="lineCov">     272730 :         ttim++;</span>
 <span class="lineNum">     606 </span>            :     }
 <span class="lineNum">     607 </span>            : 
-<span class="lineNum">     608 </span><span class="lineCov">    3581442 :     while (tval-&gt;name) {</span>
-<span class="lineNum">     609 </span><span class="lineCov">    3395292 :         if (!strcasecmp(parmname, tval-&gt;name)) {</span>
-<span class="lineNum">     610 </span><span class="lineCov">      43818 :             if (tval-&gt;writemlev &gt; mlev)</span>
+<span class="lineNum">     608 </span><span class="lineCov">    1378166 :     while (tval-&gt;name) {</span>
+<span class="lineNum">     609 </span><span class="lineCov">    1306529 :         if (!strcasecmp(parmname, tval-&gt;name)) {</span>
+<span class="lineNum">     610 </span><span class="lineCov">      16873 :             if (tval-&gt;writemlev &gt; mlev)</span>
 <span class="lineNum">     611 </span><span class="lineNoCov">          0 :                 return TUNESET_DENIED;</span>
 <span class="lineNum">     612 </span>            : 
-<span class="lineNum">     613 </span><span class="lineCov">      43818 :             if (reset_default) {</span>
+<span class="lineNum">     613 </span><span class="lineCov">      16873 :             if (reset_default) {</span>
 <span class="lineNum">     614 </span>            :                 /* Reset to default value */
 <span class="lineNum">     615 </span><span class="lineNoCov">          0 :                 tval-&gt;isdefault = 1;</span>
 <span class="lineNum">     616 </span><span class="lineNoCov">          0 :                 *tval-&gt;val = tval-&gt;defaultval;</span>
 <span class="lineNum">     617 </span><span class="lineNoCov">          0 :                 return TUNESET_SUCCESS_DEFAULT;</span>
 <span class="lineNum">     618 </span>            :             } else {
 <span class="lineNum">     619 </span>            :                 /* Specify a new value */
-<span class="lineNum">     620 </span><span class="lineCov">      43818 :                 if (!number(parmval))</span>
+<span class="lineNum">     620 </span><span class="lineCov">      16873 :                 if (!number(parmval))</span>
 <span class="lineNum">     621 </span><span class="lineNoCov">          0 :                     return TUNESET_SYNTAX;</span>
 <span class="lineNum">     622 </span>            : 
 <span class="lineNum">     623 </span>            :                 /* New value success, clear default flag */
-<span class="lineNum">     624 </span><span class="lineCov">      43818 :                 tval-&gt;isdefault = 0;</span>
-<span class="lineNum">     625 </span><span class="lineCov">      43818 :                 *tval-&gt;val = atoi(parmval);</span>
-<span class="lineNum">     626 </span><span class="lineCov">      43818 :                 return TUNESET_SUCCESS;</span>
+<span class="lineNum">     624 </span><span class="lineCov">      16873 :                 tval-&gt;isdefault = 0;</span>
+<span class="lineNum">     625 </span><span class="lineCov">      16873 :                 *tval-&gt;val = atoi(parmval);</span>
+<span class="lineNum">     626 </span><span class="lineCov">      16873 :                 return TUNESET_SUCCESS;</span>
 <span class="lineNum">     627 </span>            :             }
 <span class="lineNum">     628 </span>            :         }
-<span class="lineNum">     629 </span><span class="lineCov">    3351474 :         tval++;</span>
+<span class="lineNum">     629 </span><span class="lineCov">    1289656 :         tval++;</span>
 <span class="lineNum">     630 </span>            :     }
 <span class="lineNum">     631 </span>            : 
-<span class="lineNum">     632 </span><span class="lineCov">     414510 :     while (tref-&gt;name) {</span>
-<span class="lineNum">     633 </span><span class="lineCov">     277173 :         if (!strcasecmp(parmname, tref-&gt;name)) {</span>
-<span class="lineNum">     634 </span><span class="lineCov">       4995 :             if (tref-&gt;writemlev &gt; mlev)</span>
+<span class="lineNum">     632 </span><span class="lineCov">     159488 :     while (tref-&gt;name) {</span>
+<span class="lineNum">     633 </span><span class="lineCov">     106646 :         if (!strcasecmp(parmname, tref-&gt;name)) {</span>
+<span class="lineNum">     634 </span><span class="lineCov">       1922 :             if (tref-&gt;writemlev &gt; mlev)</span>
 <span class="lineNum">     635 </span><span class="lineNoCov">          0 :                 return TUNESET_DENIED;</span>
 <span class="lineNum">     636 </span>            : 
-<span class="lineNum">     637 </span><span class="lineCov">       4995 :             if (reset_default) {</span>
+<span class="lineNum">     637 </span><span class="lineCov">       1922 :             if (reset_default) {</span>
 <span class="lineNum">     638 </span>            :                 /* Reset to default value */
 <span class="lineNum">     639 </span><span class="lineNoCov">          0 :                 tref-&gt;isdefault = 1;</span>
 <span class="lineNum">     640 </span><span class="lineNoCov">          0 :                 *tref-&gt;ref = tref-&gt;defaultref;</span>
@@ -705,119 +705,119 @@
 <span class="lineNum">     643 </span>            :                 /* Specify a new value */
 <span class="lineNum">     644 </span>            :                 dbref obj;
 <span class="lineNum">     645 </span>            : 
-<span class="lineNum">     646 </span><span class="lineCov">       4995 :                 if (*parmval != NUMBER_TOKEN)</span>
+<span class="lineNum">     646 </span><span class="lineCov">       1922 :                 if (*parmval != NUMBER_TOKEN)</span>
 <span class="lineNum">     647 </span><span class="lineNoCov">          0 :                     return TUNESET_SYNTAX;</span>
-<span class="lineNum">     648 </span><span class="lineCov">       4995 :                 if (!number(parmval + 1))</span>
+<span class="lineNum">     648 </span><span class="lineCov">       1922 :                 if (!number(parmval + 1))</span>
 <span class="lineNum">     649 </span><span class="lineNoCov">          0 :                     return TUNESET_SYNTAX;</span>
-<span class="lineNum">     650 </span><span class="lineCov">       4995 :                 obj = (dbref) atoi(parmval + 1);</span>
-<span class="lineNum">     651 </span><span class="lineCov">       4995 :                 if (!ObjExists(obj))</span>
-<span class="lineNum">     652 </span><span class="lineCov">       2496 :                     return TUNESET_SYNTAX;</span>
-<span class="lineNum">     653 </span><span class="lineCov">       2499 :                 if (tref-&gt;typ != NOTYPE &amp;&amp; Typeof(obj) != tref-&gt;typ)</span>
+<span class="lineNum">     650 </span><span class="lineCov">       1922 :                 obj = (dbref) atoi(parmval + 1);</span>
+<span class="lineNum">     651 </span><span class="lineCov">       1922 :                 if (!ObjExists(obj))</span>
+<span class="lineNum">     652 </span><span class="lineCov">        960 :                     return TUNESET_SYNTAX;</span>
+<span class="lineNum">     653 </span><span class="lineCov">        962 :                 if (tref-&gt;typ != NOTYPE &amp;&amp; Typeof(obj) != tref-&gt;typ)</span>
 <span class="lineNum">     654 </span><span class="lineNoCov">          0 :                     return TUNESET_BADVAL;</span>
 <span class="lineNum">     655 </span>            : 
 <span class="lineNum">     656 </span>            :                 /* New value success, clear default flag */
-<span class="lineNum">     657 </span><span class="lineCov">       2499 :                 tref-&gt;isdefault = 0;</span>
-<span class="lineNum">     658 </span><span class="lineCov">       2499 :                 *tref-&gt;ref = obj;</span>
-<span class="lineNum">     659 </span><span class="lineCov">       2499 :                 return TUNESET_SUCCESS;</span>
+<span class="lineNum">     657 </span><span class="lineCov">        962 :                 tref-&gt;isdefault = 0;</span>
+<span class="lineNum">     658 </span><span class="lineCov">        962 :                 *tref-&gt;ref = obj;</span>
+<span class="lineNum">     659 </span><span class="lineCov">        962 :                 return TUNESET_SUCCESS;</span>
 <span class="lineNum">     660 </span>            :             }
 <span class="lineNum">     661 </span>            :         }
-<span class="lineNum">     662 </span><span class="lineCov">     272178 :         tref++;</span>
+<span class="lineNum">     662 </span><span class="lineCov">     104724 :         tref++;</span>
 <span class="lineNum">     663 </span>            :     }
 <span class="lineNum">     664 </span>            : 
-<span class="lineNum">     665 </span><span class="lineCov">    2005443 :     while (tbool-&gt;name) {</span>
-<span class="lineNum">     666 </span><span class="lineCov">    1936767 :         if (!strcasecmp(parmname, tbool-&gt;name)) {</span>
-<span class="lineNum">     667 </span><span class="lineCov">      63666 :             if (tbool-&gt;writemlev &gt; mlev)</span>
+<span class="lineNum">     665 </span><span class="lineCov">     771766 :     while (tbool-&gt;name) {</span>
+<span class="lineNum">     666 </span><span class="lineCov">     745338 :         if (!strcasecmp(parmname, tbool-&gt;name)) {</span>
+<span class="lineNum">     667 </span><span class="lineCov">      24492 :             if (tbool-&gt;writemlev &gt; mlev)</span>
 <span class="lineNum">     668 </span><span class="lineNoCov">          0 :                 return TUNESET_DENIED;</span>
 <span class="lineNum">     669 </span>            : 
-<span class="lineNum">     670 </span><span class="lineCov">      63666 :             if (reset_default) {</span>
+<span class="lineNum">     670 </span><span class="lineCov">      24492 :             if (reset_default) {</span>
 <span class="lineNum">     671 </span>            :                 /* Reset to default value */
-<span class="lineNum">     672 </span><span class="lineCov">       2496 :                 tbool-&gt;isdefault = 1;</span>
-<span class="lineNum">     673 </span><span class="lineCov">       2496 :                 *tbool-&gt;boolval = tbool-&gt;defaultbool;</span>
-<span class="lineNum">     674 </span><span class="lineCov">       2496 :                 return TUNESET_SUCCESS_DEFAULT;</span>
+<span class="lineNum">     672 </span><span class="lineCov">        960 :                 tbool-&gt;isdefault = 1;</span>
+<span class="lineNum">     673 </span><span class="lineCov">        960 :                 *tbool-&gt;boolval = tbool-&gt;defaultbool;</span>
+<span class="lineNum">     674 </span><span class="lineCov">        960 :                 return TUNESET_SUCCESS_DEFAULT;</span>
 <span class="lineNum">     675 </span>            :             } else {
 <span class="lineNum">     676 </span>            :                 /* Specify a new value */
-<span class="lineNum">     677 </span><span class="lineCov">      61170 :                 if (*parmval == 'y' || *parmval == 'Y') {</span>
-<span class="lineNum">     678 </span><span class="lineCov">      38691 :                     tbool-&gt;isdefault = 0;</span>
-<span class="lineNum">     679 </span><span class="lineCov">      38691 :                     *tbool-&gt;boolval = 1;</span>
-<span class="lineNum">     680 </span><span class="lineCov">      22479 :                 } else if (*parmval == 'n' || *parmval == 'N') {</span>
-<span class="lineNum">     681 </span><span class="lineCov">      22476 :                     tbool-&gt;isdefault = 0;</span>
-<span class="lineNum">     682 </span><span class="lineCov">      22476 :                     *tbool-&gt;boolval = 0;</span>
+<span class="lineNum">     677 </span><span class="lineCov">      23532 :                 if (*parmval == 'y' || *parmval == 'Y') {</span>
+<span class="lineNum">     678 </span><span class="lineCov">      14882 :                     tbool-&gt;isdefault = 0;</span>
+<span class="lineNum">     679 </span><span class="lineCov">      14882 :                     *tbool-&gt;boolval = 1;</span>
+<span class="lineNum">     680 </span><span class="lineCov">       8650 :                 } else if (*parmval == 'n' || *parmval == 'N') {</span>
+<span class="lineNum">     681 </span><span class="lineCov">       8648 :                     tbool-&gt;isdefault = 0;</span>
+<span class="lineNum">     682 </span><span class="lineCov">       8648 :                     *tbool-&gt;boolval = 0;</span>
 <span class="lineNum">     683 </span>            :                 } else {
-<span class="lineNum">     684 </span><span class="lineCov">          3 :                     return TUNESET_SYNTAX;</span>
+<span class="lineNum">     684 </span><span class="lineCov">          2 :                     return TUNESET_SYNTAX;</span>
 <span class="lineNum">     685 </span>            :                 }
-<span class="lineNum">     686 </span><span class="lineCov">      61167 :                 return TUNESET_SUCCESS;</span>
+<span class="lineNum">     686 </span><span class="lineCov">      23530 :                 return TUNESET_SUCCESS;</span>
 <span class="lineNum">     687 </span>            :             }
 <span class="lineNum">     688 </span>            :         }
-<span class="lineNum">     689 </span><span class="lineCov">    1873101 :         tbool++;</span>
+<span class="lineNum">     689 </span><span class="lineCov">     720846 :         tbool++;</span>
 <span class="lineNum">     690 </span>            :     }
 <span class="lineNum">     691 </span>            : 
-<span class="lineNum">     692 </span><span class="lineCov">       2505 :     return TUNESET_UNKNOWN;</span>
+<span class="lineNum">     692 </span><span class="lineCov">        968 :     return TUNESET_UNKNOWN;</span>
 <span class="lineNum">     693 </span>            : }
 <a name="694"><span class="lineNum">     694 </span>            : </a>
 <span class="lineNum">     695 </span>            : void
-<span class="lineNum">     696 </span><span class="lineCov">        624 : tune_load_parms_defaults()</span>
+<span class="lineNum">     696 </span><span class="lineCov">        240 : tune_load_parms_defaults()</span>
 <span class="lineNum">     697 </span>            : {
-<span class="lineNum">     698 </span><span class="lineCov">      31824 :     for (struct tune_str_entry *tstr = tune_str_list; tstr-&gt;name; tstr++) {</span>
-<span class="lineNum">     699 </span><span class="lineCov">      31200 :         if (!tstr-&gt;isdefault) {</span>
+<span class="lineNum">     698 </span><span class="lineCov">      12240 :     for (struct tune_str_entry *tstr = tune_str_list; tstr-&gt;name; tstr++) {</span>
+<span class="lineNum">     699 </span><span class="lineCov">      12000 :         if (!tstr-&gt;isdefault) {</span>
 <span class="lineNum">     700 </span><span class="lineNoCov">          0 :             free((char *)*tstr-&gt;str);</span>
 <span class="lineNum">     701 </span>            :         }
-<span class="lineNum">     702 </span><span class="lineCov">      31200 :         tstr-&gt;isdefault = 1;</span>
-<span class="lineNum">     703 </span><span class="lineCov">      31200 :         *tstr-&gt;str = tstr-&gt;defaultstr;</span>
+<span class="lineNum">     702 </span><span class="lineCov">      12000 :         tstr-&gt;isdefault = 1;</span>
+<span class="lineNum">     703 </span><span class="lineCov">      12000 :         *tstr-&gt;str = tstr-&gt;defaultstr;</span>
 <span class="lineNum">     704 </span>            :     }
-<span class="lineNum">     705 </span><span class="lineCov">       4368 :     for (struct tune_time_entry *ttim = tune_time_list; ttim-&gt;name; ttim++) {</span>
-<span class="lineNum">     706 </span><span class="lineCov">       3744 :         ttim-&gt;isdefault = 1;</span>
-<span class="lineNum">     707 </span><span class="lineCov">       3744 :         *ttim-&gt;tim = ttim-&gt;defaulttim;</span>
+<span class="lineNum">     705 </span><span class="lineCov">       1680 :     for (struct tune_time_entry *ttim = tune_time_list; ttim-&gt;name; ttim++) {</span>
+<span class="lineNum">     706 </span><span class="lineCov">       1440 :         ttim-&gt;isdefault = 1;</span>
+<span class="lineNum">     707 </span><span class="lineCov">       1440 :         *ttim-&gt;tim = ttim-&gt;defaulttim;</span>
 <span class="lineNum">     708 </span>            :     }
-<span class="lineNum">     709 </span><span class="lineCov">      23088 :     for (struct tune_val_entry *tval = tune_val_list; tval-&gt;name; tval++) {</span>
-<span class="lineNum">     710 </span><span class="lineCov">      22464 :         tval-&gt;isdefault = 1;</span>
-<span class="lineNum">     711 </span><span class="lineCov">      22464 :         *tval-&gt;val = tval-&gt;defaultval;</span>
+<span class="lineNum">     709 </span><span class="lineCov">       8880 :     for (struct tune_val_entry *tval = tune_val_list; tval-&gt;name; tval++) {</span>
+<span class="lineNum">     710 </span><span class="lineCov">       8640 :         tval-&gt;isdefault = 1;</span>
+<span class="lineNum">     711 </span><span class="lineCov">       8640 :         *tval-&gt;val = tval-&gt;defaultval;</span>
 <span class="lineNum">     712 </span>            :     }
-<span class="lineNum">     713 </span><span class="lineCov">       3120 :     for (struct tune_ref_entry *tref = tune_ref_list; tref-&gt;name; tref++) {</span>
-<span class="lineNum">     714 </span><span class="lineCov">       2496 :         tref-&gt;isdefault = 1;</span>
-<span class="lineNum">     715 </span><span class="lineCov">       2496 :         *tref-&gt;ref = tref-&gt;defaultref;</span>
+<span class="lineNum">     713 </span><span class="lineCov">       1200 :     for (struct tune_ref_entry *tref = tune_ref_list; tref-&gt;name; tref++) {</span>
+<span class="lineNum">     714 </span><span class="lineCov">        960 :         tref-&gt;isdefault = 1;</span>
+<span class="lineNum">     715 </span><span class="lineCov">        960 :         *tref-&gt;ref = tref-&gt;defaultref;</span>
 <span class="lineNum">     716 </span>            :     }
-<span class="lineNum">     717 </span><span class="lineCov">      35568 :     for (struct tune_bool_entry *tbool = tune_bool_list; tbool-&gt;name; tbool++) {</span>
-<span class="lineNum">     718 </span><span class="lineCov">      34944 :         tbool-&gt;isdefault = 1;</span>
-<span class="lineNum">     719 </span><span class="lineCov">      34944 :         *tbool-&gt;boolval = tbool-&gt;defaultbool;</span>
+<span class="lineNum">     717 </span><span class="lineCov">      13680 :     for (struct tune_bool_entry *tbool = tune_bool_list; tbool-&gt;name; tbool++) {</span>
+<span class="lineNum">     718 </span><span class="lineCov">      13440 :         tbool-&gt;isdefault = 1;</span>
+<span class="lineNum">     719 </span><span class="lineCov">      13440 :         *tbool-&gt;boolval = tbool-&gt;defaultbool;</span>
 <span class="lineNum">     720 </span>            :     }
-<span class="lineNum">     721 </span><span class="lineCov">        624 : }</span>
+<span class="lineNum">     721 </span><span class="lineCov">        240 : }</span>
 <a name="722"><span class="lineNum">     722 </span>            : </a>
 <span class="lineNum">     723 </span>            : void
-<span class="lineNum">     724 </span><span class="lineCov">       1872 : tune_load_parms_from_file(FILE * f, dbref player, int cnt)</span>
+<span class="lineNum">     724 </span><span class="lineCov">        720 : tune_load_parms_from_file(FILE * f, dbref player, int cnt)</span>
 <span class="lineNum">     725 </span>            : {
 <span class="lineNum">     726 </span>            :     char buf[BUFFER_LEN];
 <span class="lineNum">     727 </span>            :     char *c, *p;
-<span class="lineNum">     728 </span><span class="lineCov">       1872 :     int result = 0;</span>
+<span class="lineNum">     728 </span><span class="lineCov">        720 :     int result = 0;</span>
 <span class="lineNum">     729 </span>            : 
-<span class="lineNum">     730 </span><span class="lineCov">     159336 :     while (!feof(f) &amp;&amp; (cnt &lt; 0 || cnt--)) {</span>
-<span class="lineNum">     731 </span><span class="lineCov">     155592 :         fgets(buf, sizeof(buf), f);</span>
-<span class="lineNum">     732 </span><span class="lineCov">     155592 :         if (*buf != '#') {</span>
-<span class="lineNum">     733 </span><span class="lineCov">     155592 :             p = c = index(buf, ARG_DELIMITER);</span>
-<span class="lineNum">     734 </span><span class="lineCov">     155592 :             if (c) {</span>
-<span class="lineNum">     735 </span><span class="lineCov">     154968 :                 *c++ = '\0';</span>
-<span class="lineNum">     736 </span><span class="lineCov">     309936 :                 while (p &gt; buf &amp;&amp; isspace(*(--p)))</span>
+<span class="lineNum">     730 </span><span class="lineCov">      61341 :     while (!feof(f) &amp;&amp; (cnt &lt; 0 || cnt--)) {</span>
+<span class="lineNum">     731 </span><span class="lineCov">      59901 :         fgets(buf, sizeof(buf), f);</span>
+<span class="lineNum">     732 </span><span class="lineCov">      59901 :         if (*buf != '#') {</span>
+<span class="lineNum">     733 </span><span class="lineCov">      59901 :             p = c = index(buf, ARG_DELIMITER);</span>
+<span class="lineNum">     734 </span><span class="lineCov">      59901 :             if (c) {</span>
+<span class="lineNum">     735 </span><span class="lineCov">      59661 :                 *c++ = '\0';</span>
+<span class="lineNum">     736 </span><span class="lineCov">     119322 :                 while (p &gt; buf &amp;&amp; isspace(*(--p)))</span>
 <span class="lineNum">     737 </span><span class="lineNoCov">          0 :                     *p = '\0';</span>
-<span class="lineNum">     738 </span><span class="lineCov">     327408 :                 while (isspace(*c))</span>
-<span class="lineNum">     739 </span><span class="lineCov">      17472 :                     c++;</span>
-<span class="lineNum">     740 </span><span class="lineCov">     154968 :                 for (p = c; *p &amp;&amp; *p != '\n' &amp;&amp; *p != '\r'; p++) ;</span>
-<span class="lineNum">     741 </span><span class="lineCov">     154968 :                 *p = '\0';</span>
-<span class="lineNum">     742 </span><span class="lineCov">     154968 :                 for (p = buf; isspace(*p); p++) ;</span>
-<span class="lineNum">     743 </span><span class="lineCov">     154968 :                 if (*p) {</span>
-<span class="lineNum">     744 </span><span class="lineCov">     154968 :                     result = tune_setparm(p, c, MLEV_GOD);</span>
+<span class="lineNum">     738 </span><span class="lineCov">     126042 :                 while (isspace(*c))</span>
+<span class="lineNum">     739 </span><span class="lineCov">       6720 :                     c++;</span>
+<span class="lineNum">     740 </span><span class="lineCov">      59661 :                 for (p = c; *p &amp;&amp; *p != '\n' &amp;&amp; *p != '\r'; p++) ;</span>
+<span class="lineNum">     741 </span><span class="lineCov">      59661 :                 *p = '\0';</span>
+<span class="lineNum">     742 </span><span class="lineCov">      59661 :                 for (p = buf; isspace(*p); p++) ;</span>
+<span class="lineNum">     743 </span><span class="lineCov">      59661 :                 if (*p) {</span>
+<span class="lineNum">     744 </span><span class="lineCov">      59661 :                     result = tune_setparm(p, c, MLEV_GOD);</span>
 <span class="lineNum">     745 </span>            :                 }
-<span class="lineNum">     746 </span><span class="lineCov">     154968 :                 switch (result) {</span>
+<span class="lineNum">     746 </span><span class="lineCov">      59661 :                 switch (result) {</span>
 <span class="lineNum">     747 </span>            :                 case TUNESET_SUCCESS:
-<span class="lineNum">     748 </span><span class="lineCov">     144972 :                     strcatn(buf, sizeof(buf), &quot;: Parameter set.&quot;);</span>
-<span class="lineNum">     749 </span><span class="lineCov">     144972 :                     break;</span>
+<span class="lineNum">     748 </span><span class="lineCov">      55811 :                     strcatn(buf, sizeof(buf), &quot;: Parameter set.&quot;);</span>
+<span class="lineNum">     749 </span><span class="lineCov">      55811 :                     break;</span>
 <span class="lineNum">     750 </span>            :                 case TUNESET_SUCCESS_DEFAULT:
-<span class="lineNum">     751 </span><span class="lineCov">       4992 :                     strcatn(buf, sizeof(buf), &quot;: Parameter reset to default.&quot;);</span>
-<span class="lineNum">     752 </span><span class="lineCov">       4992 :                     break;</span>
+<span class="lineNum">     751 </span><span class="lineCov">       1920 :                     strcatn(buf, sizeof(buf), &quot;: Parameter reset to default.&quot;);</span>
+<span class="lineNum">     752 </span><span class="lineCov">       1920 :                     break;</span>
 <span class="lineNum">     753 </span>            :                 case TUNESET_UNKNOWN:
-<span class="lineNum">     754 </span><span class="lineCov">       2505 :                     strcatn(buf, sizeof(buf), &quot;: Unknown parameter.&quot;);</span>
-<span class="lineNum">     755 </span><span class="lineCov">       2505 :                     break;</span>
+<span class="lineNum">     754 </span><span class="lineCov">        968 :                     strcatn(buf, sizeof(buf), &quot;: Unknown parameter.&quot;);</span>
+<span class="lineNum">     755 </span><span class="lineCov">        968 :                     break;</span>
 <span class="lineNum">     756 </span>            :                 case TUNESET_SYNTAX:
-<span class="lineNum">     757 </span><span class="lineCov">       2499 :                     strcatn(buf, sizeof(buf), &quot;: Bad parameter syntax.&quot;);</span>
-<span class="lineNum">     758 </span><span class="lineCov">       2499 :                     break;</span>
+<span class="lineNum">     757 </span><span class="lineCov">        962 :                     strcatn(buf, sizeof(buf), &quot;: Bad parameter syntax.&quot;);</span>
+<span class="lineNum">     758 </span><span class="lineCov">        962 :                     break;</span>
 <span class="lineNum">     759 </span>            :                 case TUNESET_BADVAL:
 <span class="lineNum">     760 </span><span class="lineNoCov">          0 :                     strcatn(buf, sizeof(buf), &quot;: Bad parameter value.&quot;);</span>
 <span class="lineNum">     761 </span><span class="lineNoCov">          0 :                     break;</span>
@@ -825,12 +825,12 @@
 <span class="lineNum">     763 </span><span class="lineNoCov">          0 :                     strcatn(buf, sizeof(buf), &quot;: Permission denied.&quot;);</span>
 <span class="lineNum">     764 </span><span class="lineNoCov">          0 :                     break;</span>
 <span class="lineNum">     765 </span>            :                 }
-<span class="lineNum">     766 </span><span class="lineCov">     154968 :                 if (result &amp;&amp; player != NOTHING)</span>
+<span class="lineNum">     766 </span><span class="lineCov">      59661 :                 if (result &amp;&amp; player != NOTHING)</span>
 <span class="lineNum">     767 </span><span class="lineNoCov">          0 :                     notify(player, p);</span>
 <span class="lineNum">     768 </span>            :             }
 <span class="lineNum">     769 </span>            :         }
 <span class="lineNum">     770 </span>            :     }
-<span class="lineNum">     771 </span><span class="lineCov">       1872 : }</span>
+<span class="lineNum">     771 </span><span class="lineCov">        720 : }</span>
 <a name="772"><span class="lineNum">     772 </span>            : </a>
 <span class="lineNum">     773 </span>            : static int
 <span class="lineNum">     774 </span><span class="lineNoCov">          0 : tune_load_parmsfile(dbref player)</span>
@@ -850,39 +850,39 @@
 <span class="lineNum">     788 </span>            : }
 <a name="789"><span class="lineNum">     789 </span>            : </a>
 <span class="lineNum">     790 </span>            : void
-<span class="lineNum">     791 </span><span class="lineCov">          6 : do_tune(dbref player, char *parmname, char *parmval, int full_command_has_delimiter)</span>
+<span class="lineNum">     791 </span><span class="lineCov">          4 : do_tune(dbref player, char *parmname, char *parmval, int full_command_has_delimiter)</span>
 <span class="lineNum">     792 </span>            : {
 <span class="lineNum">     793 </span>            :     char *oldvalue;
 <span class="lineNum">     794 </span>            :     int result;
-<span class="lineNum">     795 </span><span class="lineCov">          6 :     int security = TUNE_MLEV(player);</span>
+<span class="lineNum">     795 </span><span class="lineCov">          4 :     int security = TUNE_MLEV(player);</span>
 <span class="lineNum">     796 </span>            : 
 <span class="lineNum">     797 </span>            :     /* If parmname exists, and either has parmvalue or the reset to default flag, try to set the
 <span class="lineNum">     798 </span>            :        value.  Otherwise, fall back to displaying it. */
-<span class="lineNum">     799 </span><span class="lineCov">          6 :     if (*parmname &amp;&amp; (full_command_has_delimiter || TP_HAS_FLAG_DEFAULT(parmname))) {</span>
-<span class="lineNum">     800 </span><span class="lineCov">          3 :         if (force_level) {</span>
+<span class="lineNum">     799 </span><span class="lineCov">          4 :     if (*parmname &amp;&amp; (full_command_has_delimiter || TP_HAS_FLAG_DEFAULT(parmname))) {</span>
+<span class="lineNum">     800 </span><span class="lineCov">          2 :         if (force_level) {</span>
 <span class="lineNum">     801 </span><span class="lineNoCov">          0 :             notify(player, &quot;You cannot force setting a @tune.&quot;);</span>
 <span class="lineNum">     802 </span><span class="lineNoCov">          0 :             return;</span>
 <span class="lineNum">     803 </span>            :         }
 <span class="lineNum">     804 </span>            : 
 <span class="lineNum">     805 </span>            :         /* Duplicate the string, otherwise the oldvalue pointer will be overridden to the new value
 <span class="lineNum">     806 </span>            :            when tune_setparm() is called. */
-<span class="lineNum">     807 </span><span class="lineCov">          3 :         oldvalue = strdup(tune_get_parmstring(parmname, security));</span>
-<span class="lineNum">     808 </span><span class="lineCov">          3 :         result = tune_setparm(parmname, parmval, security);</span>
-<span class="lineNum">     809 </span><span class="lineCov">          3 :         switch (result) {</span>
+<span class="lineNum">     807 </span><span class="lineCov">          2 :         oldvalue = strdup(tune_get_parmstring(parmname, security));</span>
+<span class="lineNum">     808 </span><span class="lineCov">          2 :         result = tune_setparm(parmname, parmval, security);</span>
+<span class="lineNum">     809 </span><span class="lineCov">          2 :         switch (result) {</span>
 <span class="lineNum">     810 </span>            :         case TUNESET_SUCCESS:
 <span class="lineNum">     811 </span>            :         case TUNESET_SUCCESS_DEFAULT:
-<span class="lineNum">     812 </span><span class="lineCov">          3 :             if (result == TUNESET_SUCCESS_DEFAULT) {</span>
+<span class="lineNum">     812 </span><span class="lineCov">          2 :             if (result == TUNESET_SUCCESS_DEFAULT) {</span>
 <span class="lineNum">     813 </span><span class="lineNoCov">          0 :                 TP_CLEAR_FLAG_DEFAULT(parmname);</span>
 <span class="lineNum">     814 </span><span class="lineNoCov">          0 :                 log_status(&quot;TUNED: %s(%d) tuned %s from '%s' to default&quot;,</span>
 <span class="lineNum">     815 </span><span class="lineNoCov">          0 :                            NAME(player), player, parmname, oldvalue);</span>
 <span class="lineNum">     816 </span><span class="lineNoCov">          0 :                 notify(player, &quot;Parameter reset to default.&quot;);</span>
 <span class="lineNum">     817 </span>            :             } else {
-<span class="lineNum">     818 </span><span class="lineCov">          6 :                 log_status(&quot;TUNED: %s(%d) tuned %s from '%s' to '%s'&quot;,</span>
-<span class="lineNum">     819 </span><span class="lineCov">          3 :                            NAME(player), player, parmname, oldvalue, DoNull(parmval));</span>
-<span class="lineNum">     820 </span><span class="lineCov">          3 :                 notify(player, &quot;Parameter set.&quot;);</span>
+<span class="lineNum">     818 </span><span class="lineCov">          4 :                 log_status(&quot;TUNED: %s(%d) tuned %s from '%s' to '%s'&quot;,</span>
+<span class="lineNum">     819 </span><span class="lineCov">          2 :                            NAME(player), player, parmname, oldvalue, DoNull(parmval));</span>
+<span class="lineNum">     820 </span><span class="lineCov">          2 :                 notify(player, &quot;Parameter set.&quot;);</span>
 <span class="lineNum">     821 </span>            :             }
-<span class="lineNum">     822 </span><span class="lineCov">          3 :             tune_display_parms(player, parmname, security, 0);</span>
-<span class="lineNum">     823 </span><span class="lineCov">          3 :             break;</span>
+<span class="lineNum">     822 </span><span class="lineCov">          2 :             tune_display_parms(player, parmname, security, 0);</span>
+<span class="lineNum">     823 </span><span class="lineCov">          2 :             break;</span>
 <span class="lineNum">     824 </span>            :         case TUNESET_UNKNOWN:
 <span class="lineNum">     825 </span><span class="lineNoCov">          0 :             notify(player, &quot;Unknown parameter.&quot;);</span>
 <span class="lineNum">     826 </span><span class="lineNoCov">          0 :             break;</span>
@@ -899,9 +899,9 @@
 <span class="lineNum">     837 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     838 </span>            :         }
 <span class="lineNum">     839 </span>            :         /* Don't let the oldvalue hang around */
-<span class="lineNum">     840 </span><span class="lineCov">          6 :         if (*oldvalue)</span>
-<span class="lineNum">     841 </span><span class="lineCov">          3 :             free(oldvalue);</span>
-<span class="lineNum">     842 </span><span class="lineCov">          3 :     } else if (*parmname &amp;&amp; string_prefix(parmname, TP_INFO_CMD)) {</span>
+<span class="lineNum">     840 </span><span class="lineCov">          4 :         if (*oldvalue)</span>
+<span class="lineNum">     841 </span><span class="lineCov">          2 :             free(oldvalue);</span>
+<span class="lineNum">     842 </span><span class="lineCov">          2 :     } else if (*parmname &amp;&amp; string_prefix(parmname, TP_INFO_CMD)) {</span>
 <span class="lineNum">     843 </span>            :         /* Space-separated parameters are all in parmname.  Trim out the 'info' command and
 <span class="lineNum">     844 </span>            :            any extra spaces */
 <span class="lineNum">     845 </span><span class="lineNoCov">          0 :         char *p_trim = index(parmname, ' ');</span>
@@ -917,53 +917,53 @@
 <span class="lineNum">     855 </span>            :             /* Show expanded information on all parameters */
 <span class="lineNum">     856 </span><span class="lineNoCov">          0 :             tune_display_parms(player, &quot;&quot;, security, 1);</span>
 <span class="lineNum">     857 </span>            :         }
-<span class="lineNum">     858 </span><span class="lineCov">          3 :     } else if (*parmname &amp;&amp; !strcasecmp(parmname, TP_SAVE_CMD)) {</span>
+<span class="lineNum">     858 </span><span class="lineCov">          2 :     } else if (*parmname &amp;&amp; !strcasecmp(parmname, TP_SAVE_CMD)) {</span>
 <span class="lineNum">     859 </span><span class="lineNoCov">          0 :         if (tune_save_parmsfile()) {</span>
 <span class="lineNum">     860 </span><span class="lineNoCov">          0 :             notify(player, &quot;Saved parameters to configuration file.&quot;);</span>
 <span class="lineNum">     861 </span>            :         } else {
 <span class="lineNum">     862 </span><span class="lineNoCov">          0 :             notify(player, &quot;Unable to save to configuration file.&quot;);</span>
 <span class="lineNum">     863 </span>            :         }
-<span class="lineNum">     864 </span><span class="lineCov">          3 :     } else if (*parmname &amp;&amp; !strcasecmp(parmname, TP_LOAD_CMD)) {</span>
+<span class="lineNum">     864 </span><span class="lineCov">          2 :     } else if (*parmname &amp;&amp; !strcasecmp(parmname, TP_LOAD_CMD)) {</span>
 <span class="lineNum">     865 </span><span class="lineNoCov">          0 :         if (tune_load_parmsfile(player)) {</span>
 <span class="lineNum">     866 </span><span class="lineNoCov">          0 :             notify(player, &quot;Restored parameters from configuration file.&quot;);</span>
 <span class="lineNum">     867 </span>            :         } else {
 <span class="lineNum">     868 </span><span class="lineNoCov">          0 :             notify(player, &quot;Unable to load from configuration file.&quot;);</span>
 <span class="lineNum">     869 </span>            :         }
 <span class="lineNum">     870 </span>            :     } else {
-<span class="lineNum">     871 </span><span class="lineCov">          3 :         tune_display_parms(player, parmname, security, 0);</span>
+<span class="lineNum">     871 </span><span class="lineCov">          2 :         tune_display_parms(player, parmname, security, 0);</span>
 <span class="lineNum">     872 </span>            :     }
 <span class="lineNum">     873 </span>            : }
 <a name="874"><span class="lineNum">     874 </span>            : </a>
 <span class="lineNum">     875 </span>            : void
-<span class="lineNum">     876 </span><span class="lineCov">         47 : set_flags_from_tunestr(dbref obj, const char *tunestr)</span>
+<span class="lineNum">     876 </span><span class="lineCov">         32 : set_flags_from_tunestr(dbref obj, const char *tunestr)</span>
 <span class="lineNum">     877 </span>            : {
-<span class="lineNum">     878 </span><span class="lineCov">         47 :     const char *p = tunestr;</span>
-<span class="lineNum">     879 </span><span class="lineCov">         47 :     object_flag_type f = 0;</span>
+<span class="lineNum">     878 </span><span class="lineCov">         32 :     const char *p = tunestr;</span>
+<span class="lineNum">     879 </span><span class="lineCov">         32 :     object_flag_type f = 0;</span>
 <span class="lineNum">     880 </span>            : 
-<span class="lineNum">     881 </span><span class="lineCov">         59 :     for (;;) {</span>
-<span class="lineNum">     882 </span><span class="lineCov">        106 :         char pcc = toupper(*p);</span>
-<span class="lineNum">     883 </span><span class="lineCov">        106 :         if (pcc == '\0' || pcc == '\n' || pcc == '\r') {</span>
+<span class="lineNum">     881 </span><span class="lineCov">         42 :     for (;;) {</span>
+<span class="lineNum">     882 </span><span class="lineCov">         74 :         char pcc = toupper(*p);</span>
+<span class="lineNum">     883 </span><span class="lineCov">         74 :         if (pcc == '\0' || pcc == '\n' || pcc == '\r') {</span>
 <span class="lineNum">     884 </span>            :             break;
-<span class="lineNum">     885 </span><span class="lineCov">         59 :         } else if (pcc == '0') {</span>
+<span class="lineNum">     885 </span><span class="lineCov">         42 :         } else if (pcc == '0') {</span>
 <span class="lineNum">     886 </span><span class="lineNoCov">          0 :             SetMLevel(obj, 0);</span>
-<span class="lineNum">     887 </span><span class="lineCov">         59 :         } else if (pcc == '1') {</span>
+<span class="lineNum">     887 </span><span class="lineCov">         42 :         } else if (pcc == '1') {</span>
 <span class="lineNum">     888 </span><span class="lineNoCov">          0 :             SetMLevel(obj, 1);</span>
-<span class="lineNum">     889 </span><span class="lineCov">         59 :         } else if (pcc == '2') {</span>
+<span class="lineNum">     889 </span><span class="lineCov">         42 :         } else if (pcc == '2') {</span>
 <span class="lineNum">     890 </span><span class="lineNoCov">          0 :             SetMLevel(obj, 2);</span>
-<span class="lineNum">     891 </span><span class="lineCov">         59 :         } else if (pcc == '3') {</span>
+<span class="lineNum">     891 </span><span class="lineCov">         42 :         } else if (pcc == '3') {</span>
 <span class="lineNum">     892 </span><span class="lineNoCov">          0 :             SetMLevel(obj, 3);</span>
-<span class="lineNum">     893 </span><span class="lineCov">         59 :         } else if (pcc == 'A') {</span>
+<span class="lineNum">     893 </span><span class="lineCov">         42 :         } else if (pcc == 'A') {</span>
 <span class="lineNum">     894 </span><span class="lineNoCov">          0 :             f = ABODE;</span>
-<span class="lineNum">     895 </span><span class="lineCov">         59 :         } else if (pcc == 'B') {</span>
-<span class="lineNum">     896 </span><span class="lineCov">         47 :             f = BUILDER;</span>
-<span class="lineNum">     897 </span><span class="lineCov">         12 :         } else if (pcc == 'C') {</span>
+<span class="lineNum">     895 </span><span class="lineCov">         42 :         } else if (pcc == 'B') {</span>
+<span class="lineNum">     896 </span><span class="lineCov">         32 :             f = BUILDER;</span>
+<span class="lineNum">     897 </span><span class="lineCov">         10 :         } else if (pcc == 'C') {</span>
 <span class="lineNum">     898 </span><span class="lineNoCov">          0 :             f = CHOWN_OK;</span>
-<span class="lineNum">     899 </span><span class="lineCov">         12 :         } else if (pcc == 'D') {</span>
+<span class="lineNum">     899 </span><span class="lineCov">         10 :         } else if (pcc == 'D') {</span>
 <span class="lineNum">     900 </span><span class="lineNoCov">          0 :             f = DARK;</span>
-<span class="lineNum">     901 </span><span class="lineCov">         12 :         } else if (pcc == 'G') {</span>
+<span class="lineNum">     901 </span><span class="lineCov">         10 :         } else if (pcc == 'G') {</span>
 <span class="lineNum">     902 </span><span class="lineNoCov">          0 :             f = GUEST;</span>
-<span class="lineNum">     903 </span><span class="lineCov">         12 :         } else if (pcc == 'H') {</span>
-<span class="lineNum">     904 </span><span class="lineCov">         12 :             f = HAVEN;</span>
+<span class="lineNum">     903 </span><span class="lineCov">         10 :         } else if (pcc == 'H') {</span>
+<span class="lineNum">     904 </span><span class="lineCov">         10 :             f = HAVEN;</span>
 <span class="lineNum">     905 </span><span class="lineNoCov">          0 :         } else if (pcc == 'J') {</span>
 <span class="lineNum">     906 </span><span class="lineNoCov">          0 :             f = JUMP_OK;</span>
 <span class="lineNum">     907 </span><span class="lineNoCov">          0 :         } else if (pcc == 'K') {</span>
@@ -989,12 +989,12 @@
 <span class="lineNum">     927 </span><span class="lineNoCov">          0 :         } else if (pcc == 'Z') {</span>
 <span class="lineNum">     928 </span><span class="lineNoCov">          0 :             f = ZOMBIE;</span>
 <span class="lineNum">     929 </span>            :         }
-<span class="lineNum">     930 </span><span class="lineCov">         59 :         FLAGS(obj) |= f;</span>
-<span class="lineNum">     931 </span><span class="lineCov">         59 :         p++;</span>
+<span class="lineNum">     930 </span><span class="lineCov">         42 :         FLAGS(obj) |= f;</span>
+<span class="lineNum">     931 </span><span class="lineCov">         42 :         p++;</span>
 <span class="lineNum">     932 </span>            :     }
-<span class="lineNum">     933 </span><span class="lineCov">         47 :     ts_modifyobject(obj);</span>
-<span class="lineNum">     934 </span><span class="lineCov">         47 :     DBDIRTY(obj);</span>
-<span class="lineNum">     935 </span><span class="lineCov">         47 : }</span>
+<span class="lineNum">     933 </span><span class="lineCov">         32 :     ts_modifyobject(obj);</span>
+<span class="lineNum">     934 </span><span class="lineCov">         32 :     DBDIRTY(obj);</span>
+<span class="lineNum">     935 </span><span class="lineCov">         32 : }</span>
 </pre>
       </td>
     </tr>

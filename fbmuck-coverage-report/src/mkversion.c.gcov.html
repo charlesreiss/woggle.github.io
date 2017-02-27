@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 21:49:59</td>
+            <td class="headerValue">2017-02-26 22:21:49</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">9</td>
@@ -469,8 +469,8 @@
 <span class="lineNum">     407 </span>            : 
 <span class="lineNum">     408 </span>            :     sha1nfo info;
 <span class="lineNum">     409 </span><span class="lineCov">        115 :     sha1_init(&amp;info);</span>
-<span class="lineNum">     410 </span><span class="lineCov">    1735475 :     while ((c = fgetc(f)) != EOF) {</span>
-<span class="lineNum">     411 </span><span class="lineCov">    1735245 :         sha1_writebyte(&amp;info, (uint8_t) c);</span>
+<span class="lineNum">     410 </span><span class="lineCov">    1735417 :     while ((c = fgetc(f)) != EOF) {</span>
+<span class="lineNum">     411 </span><span class="lineCov">    1735187 :         sha1_writebyte(&amp;info, (uint8_t) c);</span>
 <span class="lineNum">     412 </span>            :     }
 <span class="lineNum">     413 </span><span class="lineCov">        115 :     hash2hex(sha1_result(&amp;info), hash, hash_len);</span>
 <span class="lineNum">     414 </span><span class="lineCov">        115 :     fclose(f);</span>
