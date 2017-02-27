@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 20:43:00</td>
+            <td class="headerValue">2017-02-26 21:49:59</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">8</td>
@@ -71,26 +71,26 @@
 <span class="lineNum">       9 </span>            : #include &quot;tune.h&quot;
 <a name="10"><span class="lineNum">      10 </span>            : </a>
 <span class="lineNum">      11 </span>            : int
-<span class="lineNum">      12 </span><span class="lineCov">       2866 : can_link_to(dbref who, object_flag_type what_type, dbref where)</span>
+<span class="lineNum">      12 </span><span class="lineCov">       3020 : can_link_to(dbref who, object_flag_type what_type, dbref where)</span>
 <span class="lineNum">      13 </span>            : {
 <span class="lineNum">      14 </span>            :     /* Can always link to HOME */
-<span class="lineNum">      15 </span><span class="lineCov">       2866 :     if (where == HOME)</span>
+<span class="lineNum">      15 </span><span class="lineCov">       3020 :     if (where == HOME)</span>
 <span class="lineNum">      16 </span><span class="lineNoCov">          0 :         return 1;</span>
 <span class="lineNum">      17 </span>            : 
 <span class="lineNum">      18 </span>            :     /* Exits can be linked to NIL */
-<span class="lineNum">      19 </span><span class="lineCov">       2866 :     if (where == NIL &amp;&amp; what_type == TYPE_EXIT)</span>
+<span class="lineNum">      19 </span><span class="lineCov">       3020 :     if (where == NIL &amp;&amp; what_type == TYPE_EXIT)</span>
 <span class="lineNum">      20 </span><span class="lineNoCov">          0 :         return 1;</span>
 <span class="lineNum">      21 </span>            : 
 <span class="lineNum">      22 </span>            :     /* Can't link to an invalid dbref */
-<span class="lineNum">      23 </span><span class="lineCov">       2866 :     if (!ObjExists(where))</span>
+<span class="lineNum">      23 </span><span class="lineCov">       3020 :     if (!ObjExists(where))</span>
 <span class="lineNum">      24 </span><span class="lineNoCov">          0 :         return 0;</span>
 <span class="lineNum">      25 </span>            : 
-<span class="lineNum">      26 </span><span class="lineCov">       2866 :     switch (what_type) {</span>
+<span class="lineNum">      26 </span><span class="lineCov">       3020 :     switch (what_type) {</span>
 <span class="lineNum">      27 </span>            :     case TYPE_EXIT:
 <span class="lineNum">      28 </span>            :         /* If the target is LINK_OK, then any exit may be linked
 <span class="lineNum">      29 </span>            :          * there.  Otherwise, only someone who controls the
 <span class="lineNum">      30 </span>            :          * target may link there. */
-<span class="lineNum">      31 </span><span class="lineCov">        359 :         return (controls(who, where) || ((FLAGS(where) &amp; LINK_OK) &amp;&amp; test_lock(NOTHING, who, where, MESGPROP_LINKLOCK)));</span>
+<span class="lineNum">      31 </span><span class="lineCov">        375 :         return (controls(who, where) || ((FLAGS(where) &amp; LINK_OK) &amp;&amp; test_lock(NOTHING, who, where, MESGPROP_LINKLOCK)));</span>
 <span class="lineNum">      32 </span>            :     case TYPE_PLAYER:
 <span class="lineNum">      33 </span>            :         /* Players may only be linked to rooms, that are either
 <span class="lineNum">      34 </span>            :          * controlled by the player or set either L or A. */
@@ -106,7 +106,7 @@
 <span class="lineNum">      44 </span><span class="lineCov">          3 :         return ((Typeof(where) == TYPE_ROOM || Typeof(where) == TYPE_PLAYER ||</span>
 <span class="lineNum">      45 </span><span class="lineCov">          3 :                  Typeof(where) == TYPE_THING) &amp;&amp; (controls(who, where) || (Linkable(where) &amp;&amp; test_lock(NOTHING, who, where, MESGPROP_LINKLOCK))));</span>
 <span class="lineNum">      46 </span>            :     case NOTYPE:
-<span class="lineNum">      47 </span><span class="lineCov">       4961 :         return (controls(who, where) || (test_lock(NOTHING, who, where, MESGPROP_LINKLOCK) &amp;&amp;</span>
+<span class="lineNum">      47 </span><span class="lineCov">       5237 :         return (controls(who, where) || (test_lock(NOTHING, who, where, MESGPROP_LINKLOCK) &amp;&amp;</span>
 <span class="lineNum">      48 </span><span class="lineCov">        116 :                 ((FLAGS(where) &amp; LINK_OK) || (Typeof(where) != TYPE_THING &amp;&amp; (FLAGS(where) &amp; ABODE)))));</span>
 <span class="lineNum">      49 </span>            :     default:
 <span class="lineNum">      50 </span><span class="lineNoCov">          0 :         return 0;</span>
@@ -115,10 +115,10 @@
 <span class="lineNum">      53 </span>            : 
 <a name="54"><span class="lineNum">      54 </span>            : /* This checks to see if what can be linked to something else by who. */</a>
 <span class="lineNum">      55 </span>            : int
-<span class="lineNum">      56 </span><span class="lineCov">        466 : can_link(dbref who, dbref what)</span>
+<span class="lineNum">      56 </span><span class="lineCov">        498 : can_link(dbref who, dbref what)</span>
 <span class="lineNum">      57 </span>            : {
 <span class="lineNum">      58 </span>            :     /* Anyone can link an exit that is currently unlinked. */
-<span class="lineNum">      59 </span><span class="lineCov">        927 :     return (controls(who, what) || ((Typeof(what) == TYPE_EXIT)</span>
+<span class="lineNum">      59 </span><span class="lineCov">        991 :     return (controls(who, what) || ((Typeof(what) == TYPE_EXIT)</span>
 <span class="lineNum">      60 </span><span class="lineNoCov">          0 :                                     &amp;&amp; DBFETCH(what)-&gt;sp.exit.ndest == 0));</span>
 <span class="lineNum">      61 </span>            : }
 <span class="lineNum">      62 </span>            : 
@@ -135,24 +135,24 @@
 <span class="lineNum">      73 </span>            :  * whether it's an exit or not.
 <a name="74"><span class="lineNum">      74 </span>            :  */</a>
 <span class="lineNum">      75 </span>            : int
-<span class="lineNum">      76 </span><span class="lineCov">        900 : could_doit(int descr, dbref player, dbref thing)</span>
+<span class="lineNum">      76 </span><span class="lineCov">        932 : could_doit(int descr, dbref player, dbref thing)</span>
 <span class="lineNum">      77 </span>            : {
 <span class="lineNum">      78 </span>            :     dbref source, dest, owner;
 <span class="lineNum">      79 </span>            : 
-<span class="lineNum">      80 </span><span class="lineCov">        900 :     if (Typeof(thing) == TYPE_EXIT) {</span>
+<span class="lineNum">      80 </span><span class="lineCov">        932 :     if (Typeof(thing) == TYPE_EXIT) {</span>
 <span class="lineNum">      81 </span>            :         /* If exit is unlinked, can't do it. */
-<span class="lineNum">      82 </span><span class="lineCov">        312 :         if (DBFETCH(thing)-&gt;sp.exit.ndest == 0) {</span>
+<span class="lineNum">      82 </span><span class="lineCov">        328 :         if (DBFETCH(thing)-&gt;sp.exit.ndest == 0) {</span>
 <span class="lineNum">      83 </span><span class="lineCov">          3 :             return 0;</span>
 <span class="lineNum">      84 </span>            :         }
 <span class="lineNum">      85 </span>            : 
-<span class="lineNum">      86 </span><span class="lineCov">        309 :         owner = OWNER(thing);</span>
-<span class="lineNum">      87 </span><span class="lineCov">        309 :         source = LOCATION(player);</span>
-<span class="lineNum">      88 </span><span class="lineCov">        309 :         dest = *(DBFETCH(thing)-&gt;sp.exit.dest);</span>
+<span class="lineNum">      86 </span><span class="lineCov">        325 :         owner = OWNER(thing);</span>
+<span class="lineNum">      87 </span><span class="lineCov">        325 :         source = LOCATION(player);</span>
+<span class="lineNum">      88 </span><span class="lineCov">        325 :         dest = *(DBFETCH(thing)-&gt;sp.exit.dest);</span>
 <span class="lineNum">      89 </span>            : 
-<span class="lineNum">      90 </span><span class="lineCov">        309 :         if (dest == NIL)</span>
+<span class="lineNum">      90 </span><span class="lineCov">        325 :         if (dest == NIL)</span>
 <span class="lineNum">      91 </span><span class="lineNoCov">          0 :             return (eval_boolexp(descr, player, GETLOCK(thing), thing));</span>
 <span class="lineNum">      92 </span>            : 
-<span class="lineNum">      93 </span><span class="lineCov">        309 :         if (Typeof(dest) == TYPE_PLAYER) {</span>
+<span class="lineNum">      93 </span><span class="lineCov">        325 :         if (Typeof(dest) == TYPE_PLAYER) {</span>
 <span class="lineNum">      94 </span>            :             /* Check for additional restrictions related to player dests */
 <span class="lineNum">      95 </span><span class="lineCov">         18 :             dbref destplayer = dest;</span>
 <span class="lineNum">      96 </span>            : 
@@ -164,24 +164,24 @@
 <span class="lineNum">     102 </span>            :             }
 <span class="lineNum">     103 </span>            :         }
 <span class="lineNum">     104 </span>            : 
-<span class="lineNum">     105 </span><span class="lineCov">        291 :         if (dest != HOME &amp;&amp; Typeof(dest) == TYPE_ROOM &amp;&amp; (FLAGS(dest) &amp; GUEST) &amp;&amp; ISGUEST(player)) {</span>
+<span class="lineNum">     105 </span><span class="lineCov">        307 :         if (dest != HOME &amp;&amp; Typeof(dest) == TYPE_ROOM &amp;&amp; (FLAGS(dest) &amp; GUEST) &amp;&amp; ISGUEST(player)) {</span>
 <span class="lineNum">     106 </span><span class="lineNoCov">          0 :             return 0;</span>
 <span class="lineNum">     107 </span>            :         }
 <span class="lineNum">     108 </span>            : 
 <span class="lineNum">     109 </span>            :         /* for actions */
-<span class="lineNum">     110 </span><span class="lineCov">        291 :         if ((LOCATION(thing) != NOTHING) &amp;&amp; (Typeof(LOCATION(thing)) != TYPE_ROOM)) {</span>
+<span class="lineNum">     110 </span><span class="lineCov">        307 :         if ((LOCATION(thing) != NOTHING) &amp;&amp; (Typeof(LOCATION(thing)) != TYPE_ROOM)) {</span>
 <span class="lineNum">     111 </span>            : 
 <span class="lineNum">     112 </span>            :             /* If this is an exit on a Thing or a Player... */
 <span class="lineNum">     113 </span>            : 
 <span class="lineNum">     114 </span>            :             /* If the destination is a room or player, and the current
 <span class="lineNum">     115 </span>            :              * location is set BOUND (note: if the player is in a vehicle
 <span class="lineNum">     116 </span>            :              * set BUILDER this will also return failure) */
-<span class="lineNum">     117 </span><span class="lineCov">        276 :             if ((Typeof(dest) == TYPE_ROOM || Typeof(dest) == TYPE_PLAYER) &amp;&amp;</span>
+<span class="lineNum">     117 </span><span class="lineCov">        292 :             if ((Typeof(dest) == TYPE_ROOM || Typeof(dest) == TYPE_PLAYER) &amp;&amp;</span>
 <span class="lineNum">     118 </span><span class="lineCov">          6 :                 (FLAGS(source) &amp; BUILDER))</span>
 <span class="lineNum">     119 </span><span class="lineNoCov">          0 :                 return 0;</span>
 <span class="lineNum">     120 </span>            : 
 <span class="lineNum">     121 </span>            :             /* If secure_teleport is true, and if the destination is a room */
-<span class="lineNum">     122 </span><span class="lineCov">        270 :             if (tp_secure_teleport &amp;&amp; Typeof(dest) == TYPE_ROOM) {</span>
+<span class="lineNum">     122 </span><span class="lineCov">        286 :             if (tp_secure_teleport &amp;&amp; Typeof(dest) == TYPE_ROOM) {</span>
 <span class="lineNum">     123 </span>            :                 /* if player doesn't control the source and the source isn't
 <span class="lineNum">     124 </span>            :                  * set Jump_OK, then if the destination isn't HOME,
 <span class="lineNum">     125 </span>            :                  * can't do it.  (Should this include getlink(owner)?  Not
@@ -198,22 +198,22 @@
 <span class="lineNum">     136 </span>            :     }
 <span class="lineNum">     137 </span>            : 
 <span class="lineNum">     138 </span>            :     /* Check the @lock on the thing, as a final test. */
-<span class="lineNum">     139 </span><span class="lineCov">        879 :     return (eval_boolexp(descr, player, GETLOCK(thing), thing));</span>
+<span class="lineNum">     139 </span><span class="lineCov">        911 :     return (eval_boolexp(descr, player, GETLOCK(thing), thing));</span>
 <span class="lineNum">     140 </span>            : }
 <a name="141"><span class="lineNum">     141 </span>            : </a>
 <span class="lineNum">     142 </span>            : int
-<span class="lineNum">     143 </span><span class="lineCov">        894 : can_doit(int descr, dbref player, dbref thing, const char *default_fail_msg)</span>
+<span class="lineNum">     143 </span><span class="lineCov">        926 : can_doit(int descr, dbref player, dbref thing, const char *default_fail_msg)</span>
 <span class="lineNum">     144 </span>            : {
 <span class="lineNum">     145 </span>            :     dbref loc;
 <span class="lineNum">     146 </span>            : 
-<span class="lineNum">     147 </span><span class="lineCov">        894 :     if ((loc = LOCATION(player)) == NOTHING)</span>
+<span class="lineNum">     147 </span><span class="lineCov">        926 :     if ((loc = LOCATION(player)) == NOTHING)</span>
 <span class="lineNum">     148 </span><span class="lineNoCov">          0 :         return 0;</span>
 <span class="lineNum">     149 </span>            : 
-<span class="lineNum">     150 </span><span class="lineCov">        894 :     if (!Wizard(OWNER(player)) &amp;&amp; Typeof(player) == TYPE_THING &amp;&amp; (FLAGS(thing) &amp; ZOMBIE)) {</span>
+<span class="lineNum">     150 </span><span class="lineCov">        926 :     if (!Wizard(OWNER(player)) &amp;&amp; Typeof(player) == TYPE_THING &amp;&amp; (FLAGS(thing) &amp; ZOMBIE)) {</span>
 <span class="lineNum">     151 </span><span class="lineNoCov">          0 :         notify(player, &quot;Sorry, but zombies can't do that.&quot;);</span>
 <span class="lineNum">     152 </span><span class="lineNoCov">          0 :         return 0;</span>
 <span class="lineNum">     153 </span>            :     }
-<span class="lineNum">     154 </span><span class="lineCov">        894 :     if (!could_doit(descr, player, thing)) {</span>
+<span class="lineNum">     154 </span><span class="lineCov">        926 :     if (!could_doit(descr, player, thing)) {</span>
 <span class="lineNum">     155 </span>            :         /* can't do it */
 <span class="lineNum">     156 </span><span class="lineCov">         43 :         if (GETFAIL(thing)) {</span>
 <span class="lineNum">     157 </span><span class="lineCov">         40 :             exec_or_notify_prop(descr, player, thing, MESGPROP_FAIL, &quot;(@Fail)&quot;);</span>
@@ -226,13 +226,13 @@
 <span class="lineNum">     164 </span><span class="lineCov">         43 :         return 0;</span>
 <span class="lineNum">     165 </span>            :     } else {
 <span class="lineNum">     166 </span>            :         /* can do it */
-<span class="lineNum">     167 </span><span class="lineCov">        851 :         if (GETSUCC(thing)) {</span>
+<span class="lineNum">     167 </span><span class="lineCov">        883 :         if (GETSUCC(thing)) {</span>
 <span class="lineNum">     168 </span><span class="lineCov">          6 :             exec_or_notify_prop(descr, player, thing, MESGPROP_SUCC, &quot;(@Succ)&quot;);</span>
 <span class="lineNum">     169 </span>            :         }
-<span class="lineNum">     170 </span><span class="lineCov">        851 :         if (GETOSUCC(thing) &amp;&amp; !Dark(player)) {</span>
-<span class="lineNum">     171 </span><span class="lineCov">        580 :             parse_oprop(descr, player, loc, thing, MESGPROP_OSUCC, NAME(player), &quot;(@Osucc)&quot;);</span>
+<span class="lineNum">     170 </span><span class="lineCov">        883 :         if (GETOSUCC(thing) &amp;&amp; !Dark(player)) {</span>
+<span class="lineNum">     171 </span><span class="lineCov">        596 :             parse_oprop(descr, player, loc, thing, MESGPROP_OSUCC, NAME(player), &quot;(@Osucc)&quot;);</span>
 <span class="lineNum">     172 </span>            :         }
-<span class="lineNum">     173 </span><span class="lineCov">        851 :         return 1;</span>
+<span class="lineNum">     173 </span><span class="lineCov">        883 :         return 1;</span>
 <span class="lineNum">     174 </span>            :     }
 <span class="lineNum">     175 </span>            : }
 <span class="lineNum">     176 </span>            : 
@@ -372,18 +372,18 @@
 <span class="lineNum">     310 </span>            : }
 <a name="311"><span class="lineNum">     311 </span>            : </a>
 <span class="lineNum">     312 </span>            : int
-<span class="lineNum">     313 </span><span class="lineCov">       4320 : can_move(int descr, dbref player, const char *direction, int lev)</span>
+<span class="lineNum">     313 </span><span class="lineCov">       4448 : can_move(int descr, dbref player, const char *direction, int lev)</span>
 <span class="lineNum">     314 </span>            : {
 <span class="lineNum">     315 </span>            :     struct match_data md;
 <span class="lineNum">     316 </span>            : 
-<span class="lineNum">     317 </span><span class="lineCov">       4320 :     if (tp_allow_home &amp;&amp; !strcasecmp(direction, &quot;home&quot;))</span>
+<span class="lineNum">     317 </span><span class="lineCov">       4448 :     if (tp_allow_home &amp;&amp; !strcasecmp(direction, &quot;home&quot;))</span>
 <span class="lineNum">     318 </span><span class="lineCov">          1 :         return 1;</span>
 <span class="lineNum">     319 </span>            : 
 <span class="lineNum">     320 </span>            :     /* otherwise match on exits */
-<span class="lineNum">     321 </span><span class="lineCov">       4319 :     init_match(descr, player, direction, TYPE_EXIT, &amp;md);</span>
-<span class="lineNum">     322 </span><span class="lineCov">       4319 :     md.match_level = lev;</span>
-<span class="lineNum">     323 </span><span class="lineCov">       4319 :     match_all_exits(&amp;md);</span>
-<span class="lineNum">     324 </span><span class="lineCov">       4319 :     return (last_match_result(&amp;md) != NOTHING);</span>
+<span class="lineNum">     321 </span><span class="lineCov">       4447 :     init_match(descr, player, direction, TYPE_EXIT, &amp;md);</span>
+<span class="lineNum">     322 </span><span class="lineCov">       4447 :     md.match_level = lev;</span>
+<span class="lineNum">     323 </span><span class="lineCov">       4447 :     match_all_exits(&amp;md);</span>
+<span class="lineNum">     324 </span><span class="lineCov">       4447 :     return (last_match_result(&amp;md) != NOTHING);</span>
 <span class="lineNum">     325 </span>            : }
 </pre>
       </td>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 20:43:00</td>
+            <td class="headerValue">2017-02-26 21:49:59</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -76,54 +76,54 @@
 <span class="lineNum">      14 </span>            :    would have occured.
 <a name="15"><span class="lineNum">      15 </span>            :  */</a>
 <span class="lineNum">      16 </span>            : char *
-<span class="lineNum">      17 </span><span class="lineCov">      82108 : insttotext(struct frame *fr, int lev, struct inst *theinst, char *buffer, int buflen,</span>
+<span class="lineNum">      17 </span><span class="lineCov">      87605 : insttotext(struct frame *fr, int lev, struct inst *theinst, char *buffer, int buflen,</span>
 <span class="lineNum">      18 </span>            :            int strmax, dbref program, int expandarrs)
 <span class="lineNum">      19 </span>            : {
 <span class="lineNum">      20 </span>            :     const char *ptr;
 <span class="lineNum">      21 </span>            :     char buf2[BUFFER_LEN];
 <span class="lineNum">      22 </span>            :     struct inst temp1;
 <span class="lineNum">      23 </span>            :     struct inst *oper2;
-<span class="lineNum">      24 </span><span class="lineCov">      82108 :     int length = -2;            /* unset mark. We don't use -1 since some snprintf() version will</span>
+<span class="lineNum">      24 </span><span class="lineCov">      87605 :     int length = -2;            /* unset mark. We don't use -1 since some snprintf() version will</span>
 <span class="lineNum">      25 </span>            :                                    return that if we would've overflowed. */
-<span class="lineNum">      26 </span><span class="lineCov">      82108 :     int firstflag = 1;</span>
-<span class="lineNum">      27 </span><span class="lineCov">      82108 :     int arrcount = 0;</span>
+<span class="lineNum">      26 </span><span class="lineCov">      87605 :     int firstflag = 1;</span>
+<span class="lineNum">      27 </span><span class="lineCov">      87605 :     int arrcount = 0;</span>
 <span class="lineNum">      28 </span>            : 
 <span class="lineNum">      29 </span>            :     assert(buflen &gt; 0);
 <span class="lineNum">      30 </span>            : 
-<span class="lineNum">      31 </span><span class="lineCov">      82108 :     strmax = (strmax &gt; buflen - 3) ? buflen - 3 : strmax;</span>
+<span class="lineNum">      31 </span><span class="lineCov">      87605 :     strmax = (strmax &gt; buflen - 3) ? buflen - 3 : strmax;</span>
 <span class="lineNum">      32 </span>            : 
-<span class="lineNum">      33 </span><span class="lineCov">      82108 :     switch (theinst-&gt;type) {</span>
+<span class="lineNum">      33 </span><span class="lineCov">      87605 :     switch (theinst-&gt;type) {</span>
 <span class="lineNum">      34 </span>            :     case PROG_PRIMITIVE:
-<span class="lineNum">      35 </span><span class="lineCov">       4980 :         if (theinst-&gt;data.number &gt;= 1 &amp;&amp; theinst-&gt;data.number &lt;= prim_count) {</span>
-<span class="lineNum">      36 </span><span class="lineCov">       4980 :             ptr = base_inst[theinst-&gt;data.number - 1];</span>
-<span class="lineNum">      37 </span><span class="lineCov">       9960 :             if (strlen(ptr) &gt;= (size_t) buflen)</span>
+<span class="lineNum">      35 </span><span class="lineCov">       5719 :         if (theinst-&gt;data.number &gt;= 1 &amp;&amp; theinst-&gt;data.number &lt;= prim_count) {</span>
+<span class="lineNum">      36 </span><span class="lineCov">       5719 :             ptr = base_inst[theinst-&gt;data.number - 1];</span>
+<span class="lineNum">      37 </span><span class="lineCov">      11438 :             if (strlen(ptr) &gt;= (size_t) buflen)</span>
 <span class="lineNum">      38 </span><span class="lineNoCov">          0 :                 *buffer = '\0';</span>
 <span class="lineNum">      39 </span>            :             else
-<span class="lineNum">      40 </span><span class="lineCov">       4980 :                 strcpyn(buffer, buflen, ptr);</span>
+<span class="lineNum">      40 </span><span class="lineCov">       5719 :                 strcpyn(buffer, buflen, ptr);</span>
 <span class="lineNum">      41 </span>            :         } else {
 <span class="lineNum">      42 </span><span class="lineNoCov">          0 :             if (buflen &gt; 3)</span>
 <span class="lineNum">      43 </span><span class="lineNoCov">          0 :                 strcpyn(buffer, buflen, &quot;???&quot;);</span>
 <span class="lineNum">      44 </span>            :             else
 <span class="lineNum">      45 </span><span class="lineNoCov">          0 :                 *buffer = '\0';</span>
 <span class="lineNum">      46 </span>            :         }
-<span class="lineNum">      47 </span><span class="lineCov">       4980 :         break;</span>
+<span class="lineNum">      47 </span><span class="lineCov">       5719 :         break;</span>
 <span class="lineNum">      48 </span>            :     case PROG_STRING:
-<span class="lineNum">      49 </span><span class="lineCov">      21220 :         if (!theinst-&gt;data.string) {</span>
-<span class="lineNum">      50 </span><span class="lineCov">       8069 :             if (buflen &gt; 2)</span>
-<span class="lineNum">      51 </span><span class="lineCov">       8069 :                 strcpyn(buffer, buflen, &quot;\&quot;\&quot;&quot;);</span>
+<span class="lineNum">      49 </span><span class="lineCov">      22949 :         if (!theinst-&gt;data.string) {</span>
+<span class="lineNum">      50 </span><span class="lineCov">       9249 :             if (buflen &gt; 2)</span>
+<span class="lineNum">      51 </span><span class="lineCov">       9249 :                 strcpyn(buffer, buflen, &quot;\&quot;\&quot;&quot;);</span>
 <span class="lineNum">      52 </span>            :             else
 <span class="lineNum">      53 </span><span class="lineNoCov">          0 :                 *buffer = '\0';</span>
-<span class="lineNum">      54 </span><span class="lineCov">       8069 :             break;</span>
+<span class="lineNum">      54 </span><span class="lineCov">       9249 :             break;</span>
 <span class="lineNum">      55 </span>            :         }
-<span class="lineNum">      56 </span><span class="lineCov">      13151 :         if (strmax &lt;= 0) {</span>
+<span class="lineNum">      56 </span><span class="lineCov">      13700 :         if (strmax &lt;= 0) {</span>
 <span class="lineNum">      57 </span><span class="lineNoCov">          0 :             *buffer = '\0';</span>
 <span class="lineNum">      58 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">      59 </span>            :         }
 <span class="lineNum">      60 </span>            :         /* we know we won't overflow, so don't set length */
-<span class="lineNum">      61 </span><span class="lineCov">      13151 :         snprintf(buffer, buflen, &quot;\&quot;%1.*s\&quot;&quot;, (strmax - 1), theinst-&gt;data.string-&gt;data);</span>
-<span class="lineNum">      62 </span><span class="lineCov">      13151 :         if (theinst-&gt;data.string-&gt;length &gt; strmax)</span>
+<span class="lineNum">      61 </span><span class="lineCov">      13700 :         snprintf(buffer, buflen, &quot;\&quot;%1.*s\&quot;&quot;, (strmax - 1), theinst-&gt;data.string-&gt;data);</span>
+<span class="lineNum">      62 </span><span class="lineCov">      13700 :         if (theinst-&gt;data.string-&gt;length &gt; strmax)</span>
 <span class="lineNum">      63 </span><span class="lineNoCov">          0 :             strcatn(buffer, buflen, &quot;_&quot;);</span>
-<span class="lineNum">      64 </span><span class="lineCov">      13151 :         break;</span>
+<span class="lineNum">      64 </span><span class="lineCov">      13700 :         break;</span>
 <span class="lineNum">      65 </span>            :     case PROG_MARK:
 <span class="lineNum">      66 </span><span class="lineCov">       1338 :         if (buflen &gt; 4)</span>
 <span class="lineNum">      67 </span><span class="lineCov">       1338 :             strcpyn(buffer, buflen, &quot;MARK&quot;);</span>
@@ -215,14 +215,14 @@
 <span class="lineNum">     153 </span>            :         }
 <span class="lineNum">     154 </span><span class="lineCov">       3015 :         break;</span>
 <span class="lineNum">     155 </span>            :     case PROG_INTEGER:
-<span class="lineNum">     156 </span><span class="lineCov">      45905 :         length = snprintf(buffer, buflen, &quot;%d&quot;, theinst-&gt;data.number);</span>
-<span class="lineNum">     157 </span><span class="lineCov">      45905 :         break;</span>
+<span class="lineNum">     156 </span><span class="lineCov">      47049 :         length = snprintf(buffer, buflen, &quot;%d&quot;, theinst-&gt;data.number);</span>
+<span class="lineNum">     157 </span><span class="lineCov">      47049 :         break;</span>
 <span class="lineNum">     158 </span>            :     case PROG_FLOAT:
-<span class="lineNum">     159 </span><span class="lineCov">       4000 :         length = snprintf(buffer, buflen, &quot;%.16g&quot;, theinst-&gt;data.fnumber);</span>
-<span class="lineNum">     160 </span><span class="lineCov">       4000 :         if (!strchr(buffer, '.') &amp;&amp; !strchr(buffer, 'n') &amp;&amp; !strchr(buffer, 'e')) {</span>
-<span class="lineNum">     161 </span><span class="lineCov">       3808 :             strcatn(buffer, buflen, &quot;.0&quot;);</span>
+<span class="lineNum">     159 </span><span class="lineCov">       4036 :         length = snprintf(buffer, buflen, &quot;%.16g&quot;, theinst-&gt;data.fnumber);</span>
+<span class="lineNum">     160 </span><span class="lineCov">       4036 :         if (!strchr(buffer, '.') &amp;&amp; !strchr(buffer, 'n') &amp;&amp; !strchr(buffer, 'e')) {</span>
+<span class="lineNum">     161 </span><span class="lineCov">       3844 :             strcatn(buffer, buflen, &quot;.0&quot;);</span>
 <span class="lineNum">     162 </span>            :         }
-<span class="lineNum">     163 </span><span class="lineCov">       4000 :         break;</span>
+<span class="lineNum">     163 </span><span class="lineCov">       4036 :         break;</span>
 <span class="lineNum">     164 </span>            :     case PROG_ADD:
 <span class="lineNum">     165 </span><span class="lineNoCov">          0 :         if (theinst-&gt;data.addr-&gt;data-&gt;type == PROG_FUNCTION &amp;&amp;</span>
 <span class="lineNum">     166 </span><span class="lineNoCov">          0 :             theinst-&gt;data.addr-&gt;data-&gt;data.mufproc != NULL) {</span>
@@ -244,8 +244,8 @@
 <span class="lineNum">     182 </span><span class="lineNoCov">          0 :         length = snprintf(buffer, buflen, &quot;TRY-&gt;line%d&quot;, theinst-&gt;data.call-&gt;line);</span>
 <span class="lineNum">     183 </span><span class="lineNoCov">          0 :         break;</span>
 <span class="lineNum">     184 </span>            :     case PROG_IF:
-<span class="lineNum">     185 </span><span class="lineCov">        216 :         length = snprintf(buffer, buflen, &quot;IF-&gt;line%d&quot;, theinst-&gt;data.call-&gt;line);</span>
-<span class="lineNum">     186 </span><span class="lineCov">        216 :         break;</span>
+<span class="lineNum">     185 </span><span class="lineCov">        229 :         length = snprintf(buffer, buflen, &quot;IF-&gt;line%d&quot;, theinst-&gt;data.call-&gt;line);</span>
+<span class="lineNum">     186 </span><span class="lineCov">        229 :         break;</span>
 <span class="lineNum">     187 </span>            :     case PROG_EXEC:
 <span class="lineNum">     188 </span><span class="lineNoCov">          0 :         if (theinst-&gt;data.call-&gt;type == PROG_FUNCTION) {</span>
 <span class="lineNum">     189 </span><span class="lineNoCov">          0 :             length = snprintf(buffer, buflen, &quot;EXEC-&gt;%s&quot;,</span>
@@ -263,11 +263,11 @@
 <span class="lineNum">     201 </span>            :         }
 <span class="lineNum">     202 </span><span class="lineCov">        165 :         break;</span>
 <span class="lineNum">     203 </span>            :     case PROG_OBJECT:
-<span class="lineNum">     204 </span><span class="lineCov">        572 :         length = snprintf(buffer, buflen, &quot;#%d&quot;, theinst-&gt;data.objref);</span>
-<span class="lineNum">     205 </span><span class="lineCov">        572 :         break;</span>
+<span class="lineNum">     204 </span><span class="lineCov">       2336 :         length = snprintf(buffer, buflen, &quot;#%d&quot;, theinst-&gt;data.objref);</span>
+<span class="lineNum">     205 </span><span class="lineCov">       2336 :         break;</span>
 <span class="lineNum">     206 </span>            :     case PROG_VAR:
-<span class="lineNum">     207 </span><span class="lineCov">        446 :         length = snprintf(buffer, buflen, &quot;V%d&quot;, theinst-&gt;data.number);</span>
-<span class="lineNum">     208 </span><span class="lineCov">        446 :         break;</span>
+<span class="lineNum">     207 </span><span class="lineCov">        464 :         length = snprintf(buffer, buflen, &quot;V%d&quot;, theinst-&gt;data.number);</span>
+<span class="lineNum">     208 </span><span class="lineCov">        464 :         break;</span>
 <span class="lineNum">     209 </span>            :     case PROG_SVAR:
 <span class="lineNum">     210 </span><span class="lineNoCov">          0 :         if (fr) {</span>
 <span class="lineNum">     211 </span><span class="lineNoCov">          0 :             length = snprintf(buffer, buflen, &quot;SV%d:%s&quot;, theinst-&gt;data.number,</span>
@@ -304,13 +304,13 @@
 <span class="lineNum">     242 </span><span class="lineNoCov">          0 :         length = snprintf(buffer, buflen, &quot;LV%d !&quot;, theinst-&gt;data.number);</span>
 <span class="lineNum">     243 </span><span class="lineNoCov">          0 :         break;</span>
 <span class="lineNum">     244 </span>            :     case PROG_FUNCTION:
-<span class="lineNum">     245 </span><span class="lineCov">        738 :         length = snprintf(buffer, buflen, &quot;INIT FUNC: %s (%d arg%s)&quot;,</span>
-<span class="lineNum">     246 </span><span class="lineCov">        246 :                           theinst-&gt;data.mufproc-&gt;procname,</span>
-<span class="lineNum">     247 </span><span class="lineCov">        246 :                           theinst-&gt;data.mufproc-&gt;args,</span>
-<span class="lineNum">     248 </span><span class="lineCov">        246 :                           theinst-&gt;data.mufproc-&gt;args == 1 ? &quot;&quot; : &quot;s&quot;);</span>
-<span class="lineNum">     249 </span><span class="lineCov">        246 :         break;</span>
+<span class="lineNum">     245 </span><span class="lineCov">        786 :         length = snprintf(buffer, buflen, &quot;INIT FUNC: %s (%d arg%s)&quot;,</span>
+<span class="lineNum">     246 </span><span class="lineCov">        262 :                           theinst-&gt;data.mufproc-&gt;procname,</span>
+<span class="lineNum">     247 </span><span class="lineCov">        262 :                           theinst-&gt;data.mufproc-&gt;args,</span>
+<span class="lineNum">     248 </span><span class="lineCov">        262 :                           theinst-&gt;data.mufproc-&gt;args == 1 ? &quot;&quot; : &quot;s&quot;);</span>
+<span class="lineNum">     249 </span><span class="lineCov">        262 :         break;</span>
 <span class="lineNum">     250 </span>            :     case PROG_LOCK:
-<span class="lineNum">     251 </span><span class="lineCov">          5 :         if (theinst-&gt;data.lock == TRUE_BOOLEXP) {</span>
+<span class="lineNum">     251 </span><span class="lineCov">         43 :         if (theinst-&gt;data.lock == TRUE_BOOLEXP) {</span>
 <span class="lineNum">     252 </span>            :             /*                  12345678901234 */
 <span class="lineNum">     253 </span>            :             /* 14 */
 <span class="lineNum">     254 </span><span class="lineNoCov">          0 :             if (buflen &gt; 14)</span>
@@ -319,9 +319,9 @@
 <span class="lineNum">     257 </span><span class="lineNoCov">          0 :                 *buffer = '\0';</span>
 <span class="lineNum">     258 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     259 </span>            :         }
-<span class="lineNum">     260 </span><span class="lineCov">          5 :         length = snprintf(buffer, buflen, &quot;[%1.*s]&quot;,</span>
+<span class="lineNum">     260 </span><span class="lineCov">         43 :         length = snprintf(buffer, buflen, &quot;[%1.*s]&quot;,</span>
 <span class="lineNum">     261 </span>            :                           (strmax - 1), unparse_boolexp(0, theinst-&gt;data.lock, 0));
-<span class="lineNum">     262 </span><span class="lineCov">          5 :         break;</span>
+<span class="lineNum">     262 </span><span class="lineCov">         43 :         break;</span>
 <span class="lineNum">     263 </span>            :     case PROG_CLEARED:
 <span class="lineNum">     264 </span><span class="lineNoCov">          0 :         length = snprintf(buffer, buflen, &quot;?&lt;%s:%d&gt;&quot;, (char *) theinst-&gt;data.addr,</span>
 <span class="lineNum">     265 </span><span class="lineNoCov">          0 :                           theinst-&gt;line);</span>
@@ -334,9 +334,9 @@
 <span class="lineNum">     272 </span><span class="lineNoCov">          0 :         break;</span>
 <span class="lineNum">     273 </span>            :     }
 <span class="lineNum">     274 </span>            : 
-<span class="lineNum">     275 </span><span class="lineCov">      82108 :     if (length == -1 || length &gt; buflen)</span>
+<span class="lineNum">     275 </span><span class="lineCov">      87605 :     if (length == -1 || length &gt; buflen)</span>
 <span class="lineNum">     276 </span><span class="lineNoCov">          0 :         *buffer = '\0';</span>
-<span class="lineNum">     277 </span><span class="lineCov">      82108 :     return buffer;</span>
+<span class="lineNum">     277 </span><span class="lineCov">      87605 :     return buffer;</span>
 <span class="lineNum">     278 </span>            : }
 <span class="lineNum">     279 </span>            : 
 </pre>

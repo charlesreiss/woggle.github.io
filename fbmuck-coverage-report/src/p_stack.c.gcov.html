@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 20:43:00</td>
+            <td class="headerValue">2017-02-26 21:49:59</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">26</td>
@@ -83,13 +83,13 @@
 <span class="lineNum">      21 </span>            : }
 <a name="22"><span class="lineNum">      22 </span>            : </a>
 <span class="lineNum">      23 </span>            : void
-<span class="lineNum">      24 </span><span class="lineCov">         66 : prim_dup(PRIM_PROTOTYPE)</span>
+<span class="lineNum">      24 </span><span class="lineCov">        145 : prim_dup(PRIM_PROTOTYPE)</span>
 <span class="lineNum">      25 </span>            : {
-<span class="lineNum">      26 </span><span class="lineCov">         66 :     CHECKOP_READONLY(1);</span>
-<span class="lineNum">      27 </span><span class="lineCov">         66 :     nargs = 0;</span>
-<span class="lineNum">      28 </span><span class="lineCov">         66 :     CHECKOFLOW(1);</span>
-<span class="lineNum">      29 </span><span class="lineCov">         66 :     copyinst(&amp;arg[*top - 1], &amp;arg[*top]);</span>
-<span class="lineNum">      30 </span><span class="lineCov">         66 :     (*top)++;</span>
+<span class="lineNum">      26 </span><span class="lineCov">        145 :     CHECKOP_READONLY(1);</span>
+<span class="lineNum">      27 </span><span class="lineCov">        145 :     nargs = 0;</span>
+<span class="lineNum">      28 </span><span class="lineCov">        145 :     CHECKOFLOW(1);</span>
+<span class="lineNum">      29 </span><span class="lineCov">        145 :     copyinst(&amp;arg[*top - 1], &amp;arg[*top]);</span>
+<span class="lineNum">      30 </span><span class="lineCov">        145 :     (*top)++;</span>
 <span class="lineNum">      31 </span>            : }
 <a name="32"><span class="lineNum">      32 </span>            : </a>
 <span class="lineNum">      33 </span>            : void
@@ -192,21 +192,21 @@
 <span class="lineNum">     130 </span>            : }
 <a name="131"><span class="lineNum">     131 </span>            : </a>
 <span class="lineNum">     132 </span>            : void
-<span class="lineNum">     133 </span><span class="lineCov">        241 : prim_at(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     133 </span><span class="lineCov">        250 : prim_at(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     134 </span>            : {
-<span class="lineNum">     135 </span><span class="lineCov">        241 :     CHECKOP(1);</span>
-<span class="lineNum">     136 </span><span class="lineCov">        241 :     temp1 = *(oper1 = POP());</span>
-<span class="lineNum">     137 </span><span class="lineCov">        241 :     if ((temp1.type != PROG_VAR) &amp;&amp; (temp1.type != PROG_LVAR) &amp;&amp; (temp1.type != PROG_SVAR))</span>
+<span class="lineNum">     135 </span><span class="lineCov">        250 :     CHECKOP(1);</span>
+<span class="lineNum">     136 </span><span class="lineCov">        250 :     temp1 = *(oper1 = POP());</span>
+<span class="lineNum">     137 </span><span class="lineCov">        250 :     if ((temp1.type != PROG_VAR) &amp;&amp; (temp1.type != PROG_LVAR) &amp;&amp; (temp1.type != PROG_SVAR))</span>
 <span class="lineNum">     138 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Non-variable argument.&quot;);</span>
-<span class="lineNum">     139 </span><span class="lineCov">        241 :     if (temp1.data.number &gt;= MAX_VAR || temp1.data.number &lt; 0)</span>
+<span class="lineNum">     139 </span><span class="lineCov">        250 :     if (temp1.data.number &gt;= MAX_VAR || temp1.data.number &lt; 0)</span>
 <span class="lineNum">     140 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Variable number out of range.&quot;);</span>
-<span class="lineNum">     141 </span><span class="lineCov">        241 :     if (temp1.type == PROG_LVAR) {</span>
+<span class="lineNum">     141 </span><span class="lineCov">        250 :     if (temp1.type == PROG_LVAR) {</span>
 <span class="lineNum">     142 </span>            :         /* LOCALVAR */
 <span class="lineNum">     143 </span><span class="lineNoCov">          0 :         struct localvars *tmp = localvars_get(fr, program);</span>
 <span class="lineNum">     144 </span><span class="lineNoCov">          0 :         copyinst(&amp;(tmp-&gt;lvars[temp1.data.number]), &amp;arg[(*top)++]);</span>
-<span class="lineNum">     145 </span><span class="lineCov">        241 :     } else if (temp1.type == PROG_VAR) {</span>
+<span class="lineNum">     145 </span><span class="lineCov">        250 :     } else if (temp1.type == PROG_VAR) {</span>
 <span class="lineNum">     146 </span>            :         /* GLOBALVAR */
-<span class="lineNum">     147 </span><span class="lineCov">        241 :         copyinst(&amp;(fr-&gt;variables[temp1.data.number]), &amp;arg[(*top)++]);</span>
+<span class="lineNum">     147 </span><span class="lineCov">        250 :         copyinst(&amp;(fr-&gt;variables[temp1.data.number]), &amp;arg[(*top)++]);</span>
 <span class="lineNum">     148 </span>            :     } else {
 <span class="lineNum">     149 </span>            :         /* SCOPEDVAR */
 <span class="lineNum">     150 </span>            :         struct inst *tmp;
@@ -216,7 +216,7 @@
 <span class="lineNum">     154 </span><span class="lineNoCov">          0 :             abort_interp(&quot;Scoped variable number out of range.&quot;);</span>
 <span class="lineNum">     155 </span><span class="lineNoCov">          0 :         copyinst(tmp, &amp;arg[(*top)++]);</span>
 <span class="lineNum">     156 </span>            :     }
-<span class="lineNum">     157 </span><span class="lineCov">        241 :     CLEAR(&amp;temp1);</span>
+<span class="lineNum">     157 </span><span class="lineCov">        250 :     CLEAR(&amp;temp1);</span>
 <span class="lineNum">     158 </span>            : }
 <a name="159"><span class="lineNum">     159 </span>            : </a>
 <span class="lineNum">     160 </span>            : void
@@ -277,23 +277,23 @@
 <span class="lineNum">     215 </span>            : }
 <a name="216"><span class="lineNum">     216 </span>            : </a>
 <span class="lineNum">     217 </span>            : void
-<span class="lineNum">     218 </span><span class="lineCov">        621 : prim_swap(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     218 </span><span class="lineCov">        636 : prim_swap(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     219 </span>            : {
-<span class="lineNum">     220 </span><span class="lineCov">        621 :     CHECKOP(2);</span>
-<span class="lineNum">     221 </span><span class="lineCov">        621 :     oper1 = POP();</span>
-<span class="lineNum">     222 </span><span class="lineCov">        621 :     temp2 = *(oper2 = POP());</span>
-<span class="lineNum">     223 </span><span class="lineCov">        621 :     arg[(*top)++] = *oper1;</span>
-<span class="lineNum">     224 </span><span class="lineCov">        621 :     arg[(*top)++] = temp2;</span>
+<span class="lineNum">     220 </span><span class="lineCov">        636 :     CHECKOP(2);</span>
+<span class="lineNum">     221 </span><span class="lineCov">        636 :     oper1 = POP();</span>
+<span class="lineNum">     222 </span><span class="lineCov">        636 :     temp2 = *(oper2 = POP());</span>
+<span class="lineNum">     223 </span><span class="lineCov">        636 :     arg[(*top)++] = *oper1;</span>
+<span class="lineNum">     224 </span><span class="lineCov">        636 :     arg[(*top)++] = temp2;</span>
 <span class="lineNum">     225 </span>            :     /* don't clean! */
 <span class="lineNum">     226 </span>            : }
 <a name="227"><span class="lineNum">     227 </span>            : </a>
 <span class="lineNum">     228 </span>            : void
-<span class="lineNum">     229 </span><span class="lineCov">        194 : prim_over(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     229 </span><span class="lineCov">        319 : prim_over(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     230 </span>            : {
-<span class="lineNum">     231 </span><span class="lineCov">        194 :     CHECKOP_READONLY(2);</span>
-<span class="lineNum">     232 </span><span class="lineCov">        194 :     CHECKOFLOW(1);</span>
-<span class="lineNum">     233 </span><span class="lineCov">        194 :     copyinst(&amp;arg[*top - 2], &amp;arg[*top]);</span>
-<span class="lineNum">     234 </span><span class="lineCov">        194 :     (*top)++;</span>
+<span class="lineNum">     231 </span><span class="lineCov">        319 :     CHECKOP_READONLY(2);</span>
+<span class="lineNum">     232 </span><span class="lineCov">        319 :     CHECKOFLOW(1);</span>
+<span class="lineNum">     233 </span><span class="lineCov">        319 :     copyinst(&amp;arg[*top - 2], &amp;arg[*top]);</span>
+<span class="lineNum">     234 </span><span class="lineCov">        319 :     (*top)++;</span>
 <span class="lineNum">     235 </span>            : }
 <a name="236"><span class="lineNum">     236 </span>            : </a>
 <span class="lineNum">     237 </span>            : void
@@ -495,13 +495,13 @@
 <span class="lineNum">     433 </span>            : }
 <a name="434"><span class="lineNum">     434 </span>            : </a>
 <span class="lineNum">     435 </span>            : void
-<span class="lineNum">     436 </span><span class="lineCov">          5 : prim_dbrefp(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     436 </span><span class="lineCov">          7 : prim_dbrefp(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     437 </span>            : {
-<span class="lineNum">     438 </span><span class="lineCov">          5 :     CHECKOP(1);</span>
-<span class="lineNum">     439 </span><span class="lineCov">          5 :     oper1 = POP();</span>
-<span class="lineNum">     440 </span><span class="lineCov">          5 :     result = (oper1-&gt;type == PROG_OBJECT);</span>
-<span class="lineNum">     441 </span><span class="lineCov">          5 :     CLEAR(oper1);</span>
-<span class="lineNum">     442 </span><span class="lineCov">          5 :     PushInt(result);</span>
+<span class="lineNum">     438 </span><span class="lineCov">          7 :     CHECKOP(1);</span>
+<span class="lineNum">     439 </span><span class="lineCov">          7 :     oper1 = POP();</span>
+<span class="lineNum">     440 </span><span class="lineCov">          7 :     result = (oper1-&gt;type == PROG_OBJECT);</span>
+<span class="lineNum">     441 </span><span class="lineCov">          7 :     CLEAR(oper1);</span>
+<span class="lineNum">     442 </span><span class="lineCov">          7 :     PushInt(result);</span>
 <span class="lineNum">     443 </span>            : }
 <a name="444"><span class="lineNum">     444 </span>            : </a>
 <span class="lineNum">     445 </span>            : void

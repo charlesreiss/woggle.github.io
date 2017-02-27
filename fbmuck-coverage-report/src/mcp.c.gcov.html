@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 20:43:00</td>
+            <td class="headerValue">2017-02-26 21:49:59</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">16</td>
@@ -395,24 +395,24 @@
 <span class="lineNum">     333 </span>            : }
 <a name="334"><span class="lineNum">     334 </span>            : </a>
 <span class="lineNum">     335 </span>            : void
-<span class="lineNum">     336 </span><span class="lineCov">        334 : clean_mcpbinds(struct mcp_binding *mypub)</span>
+<span class="lineNum">     336 </span><span class="lineCov">        350 : clean_mcpbinds(struct mcp_binding *mypub)</span>
 <span class="lineNum">     337 </span>            : {
 <span class="lineNum">     338 </span>            :     struct mcp_binding *tmppub;
 <span class="lineNum">     339 </span>            : 
-<span class="lineNum">     340 </span><span class="lineCov">        668 :     while (mypub) {</span>
+<span class="lineNum">     340 </span><span class="lineCov">        700 :     while (mypub) {</span>
 <span class="lineNum">     341 </span><span class="lineNoCov">          0 :         tmppub = mypub-&gt;next;</span>
 <span class="lineNum">     342 </span><span class="lineNoCov">          0 :         free(mypub-&gt;pkgname);</span>
 <span class="lineNum">     343 </span><span class="lineNoCov">          0 :         free(mypub-&gt;msgname);</span>
 <span class="lineNum">     344 </span><span class="lineNoCov">          0 :         free(mypub);</span>
 <span class="lineNum">     345 </span><span class="lineNoCov">          0 :         mypub = tmppub;</span>
 <span class="lineNum">     346 </span>            :     }
-<span class="lineNum">     347 </span><span class="lineCov">        334 : }</span>
+<span class="lineNum">     347 </span><span class="lineCov">        350 : }</span>
 <a name="348"><span class="lineNum">     348 </span>            : </a>
 <span class="lineNum">     349 </span>            : static void
-<span class="lineNum">     350 </span><span class="lineCov">    3624869 : SendText(McpFrame * mfr, const char *text)</span>
+<span class="lineNum">     350 </span><span class="lineCov">    3626447 : SendText(McpFrame * mfr, const char *text)</span>
 <span class="lineNum">     351 </span>            : {
-<span class="lineNum">     352 </span><span class="lineCov">    3624869 :     queue_write((struct descriptor_data *) mfr-&gt;descriptor, text, strlen(text));</span>
-<span class="lineNum">     353 </span><span class="lineCov">    3624869 : }</span>
+<span class="lineNum">     352 </span><span class="lineCov">    3626447 :     queue_write((struct descriptor_data *) mfr-&gt;descriptor, text, strlen(text));</span>
+<span class="lineNum">     353 </span><span class="lineCov">    3626447 : }</span>
 <a name="354"><span class="lineNum">     354 </span>            : </a>
 <span class="lineNum">     355 </span>            : static void
 <span class="lineNum">     356 </span><span class="lineNoCov">          0 : FlushText(McpFrame * mfr)</span>
@@ -448,29 +448,29 @@
 <span class="lineNum">     386 </span>            : 
 <a name="387"><span class="lineNum">     387 </span>            : /* Used internally to escape and quote argument values. */</a>
 <span class="lineNum">     388 </span>            : static int
-<span class="lineNum">     389 </span><span class="lineCov">       1168 : msgarg_escape(char *buf, int bufsize, const char *in)</span>
+<span class="lineNum">     389 </span><span class="lineCov">       1200 : msgarg_escape(char *buf, int bufsize, const char *in)</span>
 <span class="lineNum">     390 </span>            : {
-<span class="lineNum">     391 </span><span class="lineCov">       1168 :     char *out = buf;</span>
-<span class="lineNum">     392 </span><span class="lineCov">       1168 :     int len = 0;</span>
+<span class="lineNum">     391 </span><span class="lineCov">       1200 :     char *out = buf;</span>
+<span class="lineNum">     392 </span><span class="lineCov">       1200 :     int len = 0;</span>
 <span class="lineNum">     393 </span>            : 
-<span class="lineNum">     394 </span><span class="lineCov">       1168 :     if (bufsize &lt; 3) {</span>
+<span class="lineNum">     394 </span><span class="lineCov">       1200 :     if (bufsize &lt; 3) {</span>
 <span class="lineNum">     395 </span><span class="lineNoCov">          0 :         return 0;</span>
 <span class="lineNum">     396 </span>            :     }
-<span class="lineNum">     397 </span><span class="lineCov">       1168 :     *out++ = '&quot;';</span>
-<span class="lineNum">     398 </span><span class="lineCov">       1168 :     len++;</span>
-<span class="lineNum">     399 </span><span class="lineCov">       5840 :     while (*in &amp;&amp; len &lt; bufsize - 3) {</span>
-<span class="lineNum">     400 </span><span class="lineCov">       3504 :         if (*in == '&quot;' || *in == '\\') {</span>
+<span class="lineNum">     397 </span><span class="lineCov">       1200 :     *out++ = '&quot;';</span>
+<span class="lineNum">     398 </span><span class="lineCov">       1200 :     len++;</span>
+<span class="lineNum">     399 </span><span class="lineCov">       6000 :     while (*in &amp;&amp; len &lt; bufsize - 3) {</span>
+<span class="lineNum">     400 </span><span class="lineCov">       3600 :         if (*in == '&quot;' || *in == '\\') {</span>
 <span class="lineNum">     401 </span><span class="lineNoCov">          0 :             *out++ = '\\';</span>
 <span class="lineNum">     402 </span><span class="lineNoCov">          0 :             len++;</span>
 <span class="lineNum">     403 </span>            :         }
-<span class="lineNum">     404 </span><span class="lineCov">       3504 :         *out++ = *in++;</span>
-<span class="lineNum">     405 </span><span class="lineCov">       3504 :         len++;</span>
+<span class="lineNum">     404 </span><span class="lineCov">       3600 :         *out++ = *in++;</span>
+<span class="lineNum">     405 </span><span class="lineCov">       3600 :         len++;</span>
 <span class="lineNum">     406 </span>            :     }
-<span class="lineNum">     407 </span><span class="lineCov">       1168 :     *out++ = '&quot;';</span>
-<span class="lineNum">     408 </span><span class="lineCov">       1168 :     *out = '\0';</span>
-<span class="lineNum">     409 </span><span class="lineCov">       1168 :     len++;</span>
+<span class="lineNum">     407 </span><span class="lineCov">       1200 :     *out++ = '&quot;';</span>
+<span class="lineNum">     408 </span><span class="lineCov">       1200 :     *out = '\0';</span>
+<span class="lineNum">     409 </span><span class="lineCov">       1200 :     len++;</span>
 <span class="lineNum">     410 </span>            : 
-<span class="lineNum">     411 </span><span class="lineCov">       1168 :     return len;</span>
+<span class="lineNum">     411 </span><span class="lineCov">       1200 :     return len;</span>
 <span class="lineNum">     412 </span>            : }
 <span class="lineNum">     413 </span>            : 
 <span class="lineNum">     414 </span>            : /*****************************************************************/
@@ -480,31 +480,31 @@
 <span class="lineNum">     418 </span>            : /*****************************************************************/
 <a name="419"><span class="lineNum">     419 </span>            : </a>
 <span class="lineNum">     420 </span>            : void
-<span class="lineNum">     421 </span><span class="lineCov">       3636 : mcp_package_register(const char *pkgname, McpVer minver, McpVer maxver, McpPkg_CB callback,</span>
+<span class="lineNum">     421 </span><span class="lineCov">       3744 : mcp_package_register(const char *pkgname, McpVer minver, McpVer maxver, McpPkg_CB callback,</span>
 <span class="lineNum">     422 </span>            :                      void *context, ContextCleanup_CB cleanup)
 <span class="lineNum">     423 </span>            : {
-<span class="lineNum">     424 </span><span class="lineCov">       3636 :     McpPkg *nu = (McpPkg *) malloc(sizeof(McpPkg));</span>
+<span class="lineNum">     424 </span><span class="lineCov">       3744 :     McpPkg *nu = (McpPkg *) malloc(sizeof(McpPkg));</span>
 <span class="lineNum">     425 </span>            : 
-<span class="lineNum">     426 </span><span class="lineCov">       3636 :     nu-&gt;pkgname = strdup(pkgname);</span>
-<span class="lineNum">     427 </span><span class="lineCov">       3636 :     nu-&gt;minver = minver;</span>
-<span class="lineNum">     428 </span><span class="lineCov">       3636 :     nu-&gt;maxver = maxver;</span>
-<span class="lineNum">     429 </span><span class="lineCov">       3636 :     nu-&gt;callback = callback;</span>
-<span class="lineNum">     430 </span><span class="lineCov">       3636 :     nu-&gt;context = context;</span>
-<span class="lineNum">     431 </span><span class="lineCov">       3636 :     nu-&gt;cleanup = cleanup;</span>
+<span class="lineNum">     426 </span><span class="lineCov">       3744 :     nu-&gt;pkgname = strdup(pkgname);</span>
+<span class="lineNum">     427 </span><span class="lineCov">       3744 :     nu-&gt;minver = minver;</span>
+<span class="lineNum">     428 </span><span class="lineCov">       3744 :     nu-&gt;maxver = maxver;</span>
+<span class="lineNum">     429 </span><span class="lineCov">       3744 :     nu-&gt;callback = callback;</span>
+<span class="lineNum">     430 </span><span class="lineCov">       3744 :     nu-&gt;context = context;</span>
+<span class="lineNum">     431 </span><span class="lineCov">       3744 :     nu-&gt;cleanup = cleanup;</span>
 <span class="lineNum">     432 </span>            : 
-<span class="lineNum">     433 </span><span class="lineCov">       3636 :     mcp_package_deregister(pkgname);</span>
-<span class="lineNum">     434 </span><span class="lineCov">       3636 :     nu-&gt;next = mcp_PackageList;</span>
-<span class="lineNum">     435 </span><span class="lineCov">       3636 :     mcp_PackageList = nu;</span>
-<span class="lineNum">     436 </span><span class="lineCov">       3636 :     mcp_frame_package_renegotiate(pkgname);</span>
-<span class="lineNum">     437 </span><span class="lineCov">       3636 : }</span>
+<span class="lineNum">     433 </span><span class="lineCov">       3744 :     mcp_package_deregister(pkgname);</span>
+<span class="lineNum">     434 </span><span class="lineCov">       3744 :     nu-&gt;next = mcp_PackageList;</span>
+<span class="lineNum">     435 </span><span class="lineCov">       3744 :     mcp_PackageList = nu;</span>
+<span class="lineNum">     436 </span><span class="lineCov">       3744 :     mcp_frame_package_renegotiate(pkgname);</span>
+<span class="lineNum">     437 </span><span class="lineCov">       3744 : }</span>
 <a name="438"><span class="lineNum">     438 </span>            : </a>
 <span class="lineNum">     439 </span>            : void
-<span class="lineNum">     440 </span><span class="lineCov">       3636 : mcp_package_deregister(const char *pkgname)</span>
+<span class="lineNum">     440 </span><span class="lineCov">       3744 : mcp_package_deregister(const char *pkgname)</span>
 <span class="lineNum">     441 </span>            : {
-<span class="lineNum">     442 </span><span class="lineCov">       3636 :     McpPkg *ptr = mcp_PackageList;</span>
-<span class="lineNum">     443 </span><span class="lineCov">       3636 :     McpPkg *prev = NULL;</span>
+<span class="lineNum">     442 </span><span class="lineCov">       3744 :     McpPkg *ptr = mcp_PackageList;</span>
+<span class="lineNum">     443 </span><span class="lineCov">       3744 :     McpPkg *prev = NULL;</span>
 <span class="lineNum">     444 </span>            : 
-<span class="lineNum">     445 </span><span class="lineCov">       7272 :     while (ptr &amp;&amp; !strcasecmp(ptr-&gt;pkgname, pkgname)) {</span>
+<span class="lineNum">     445 </span><span class="lineCov">       7488 :     while (ptr &amp;&amp; !strcasecmp(ptr-&gt;pkgname, pkgname)) {</span>
 <span class="lineNum">     446 </span><span class="lineNoCov">          0 :         mcp_PackageList = ptr-&gt;next;</span>
 <span class="lineNum">     447 </span><span class="lineNoCov">          0 :         if (ptr-&gt;cleanup)</span>
 <span class="lineNum">     448 </span><span class="lineNoCov">          0 :             ptr-&gt;cleanup(ptr-&gt;context);</span>
@@ -514,12 +514,12 @@
 <span class="lineNum">     452 </span><span class="lineNoCov">          0 :         ptr = mcp_PackageList;</span>
 <span class="lineNum">     453 </span>            :     }
 <span class="lineNum">     454 </span>            : 
-<span class="lineNum">     455 </span><span class="lineCov">       3636 :     prev = mcp_PackageList;</span>
-<span class="lineNum">     456 </span><span class="lineCov">       3636 :     if (ptr)</span>
-<span class="lineNum">     457 </span><span class="lineCov">       3030 :         ptr = ptr-&gt;next;</span>
+<span class="lineNum">     455 </span><span class="lineCov">       3744 :     prev = mcp_PackageList;</span>
+<span class="lineNum">     456 </span><span class="lineCov">       3744 :     if (ptr)</span>
+<span class="lineNum">     457 </span><span class="lineCov">       3120 :         ptr = ptr-&gt;next;</span>
 <span class="lineNum">     458 </span>            : 
-<span class="lineNum">     459 </span><span class="lineCov">      13332 :     while (ptr) {</span>
-<span class="lineNum">     460 </span><span class="lineCov">       6060 :         if (!strcasecmp(pkgname, ptr-&gt;pkgname)) {</span>
+<span class="lineNum">     459 </span><span class="lineCov">      13728 :     while (ptr) {</span>
+<span class="lineNum">     460 </span><span class="lineCov">       6240 :         if (!strcasecmp(pkgname, ptr-&gt;pkgname)) {</span>
 <span class="lineNum">     461 </span><span class="lineNoCov">          0 :             prev-&gt;next = ptr-&gt;next;</span>
 <span class="lineNum">     462 </span><span class="lineNoCov">          0 :             if (ptr-&gt;cleanup)</span>
 <span class="lineNum">     463 </span><span class="lineNoCov">          0 :                 ptr-&gt;cleanup(ptr-&gt;context);</span>
@@ -528,12 +528,12 @@
 <span class="lineNum">     466 </span><span class="lineNoCov">          0 :             free(ptr);</span>
 <span class="lineNum">     467 </span><span class="lineNoCov">          0 :             ptr = prev-&gt;next;</span>
 <span class="lineNum">     468 </span>            :         } else {
-<span class="lineNum">     469 </span><span class="lineCov">       6060 :             prev = ptr;</span>
-<span class="lineNum">     470 </span><span class="lineCov">       6060 :             ptr = ptr-&gt;next;</span>
+<span class="lineNum">     469 </span><span class="lineCov">       6240 :             prev = ptr;</span>
+<span class="lineNum">     470 </span><span class="lineCov">       6240 :             ptr = ptr-&gt;next;</span>
 <span class="lineNum">     471 </span>            :         }
 <span class="lineNum">     472 </span>            :     }
-<span class="lineNum">     473 </span><span class="lineCov">       3636 :     mcp_frame_package_renegotiate(pkgname);</span>
-<span class="lineNum">     474 </span><span class="lineCov">       3636 : }</span>
+<span class="lineNum">     473 </span><span class="lineCov">       3744 :     mcp_frame_package_renegotiate(pkgname);</span>
+<span class="lineNum">     474 </span><span class="lineCov">       3744 : }</span>
 <span class="lineNum">     475 </span>            : 
 <span class="lineNum">     476 </span>            : /*****************************************************************/
 <span class="lineNum">     477 </span>            : /***                       ***************************************/
@@ -680,21 +680,21 @@
 <span class="lineNum">     618 </span>            :  *****************************************************************/
 <a name="619"><span class="lineNum">     619 </span>            : </a>
 <span class="lineNum">     620 </span>            : void
-<span class="lineNum">     621 </span><span class="lineCov">        606 : mcp_initialize(void)</span>
+<span class="lineNum">     621 </span><span class="lineCov">        624 : mcp_initialize(void)</span>
 <span class="lineNum">     622 </span>            : {
-<span class="lineNum">     623 </span><span class="lineCov">        606 :     McpVer oneoh = { 1, 0 };</span>
-<span class="lineNum">     624 </span><span class="lineCov">        606 :     McpVer twooh = { 2, 0 };</span>
+<span class="lineNum">     623 </span><span class="lineCov">        624 :     McpVer oneoh = { 1, 0 };</span>
+<span class="lineNum">     624 </span><span class="lineCov">        624 :     McpVer twooh = { 2, 0 };</span>
 <span class="lineNum">     625 </span>            : 
 <span class="lineNum">     626 </span>            :     /* McpVer twoone = {2,1}; */
 <span class="lineNum">     627 </span>            : 
-<span class="lineNum">     628 </span><span class="lineCov">        606 :     mcp_package_register(MCP_NEGOTIATE_PKG, oneoh, twooh, mcp_negotiate_handler, NULL, NULL);</span>
-<span class="lineNum">     629 </span><span class="lineCov">        606 :     mcp_package_register(&quot;org-fuzzball-help&quot;, oneoh, oneoh, mcppkg_help_request, NULL, NULL);</span>
-<span class="lineNum">     630 </span><span class="lineCov">        606 :     mcp_package_register(&quot;org-fuzzball-notify&quot;, oneoh, oneoh, mcppkg_simpleedit, NULL, NULL);</span>
-<span class="lineNum">     631 </span><span class="lineCov">        606 :     mcp_package_register(&quot;org-fuzzball-simpleedit&quot;, oneoh, oneoh, mcppkg_simpleedit, NULL,</span>
+<span class="lineNum">     628 </span><span class="lineCov">        624 :     mcp_package_register(MCP_NEGOTIATE_PKG, oneoh, twooh, mcp_negotiate_handler, NULL, NULL);</span>
+<span class="lineNum">     629 </span><span class="lineCov">        624 :     mcp_package_register(&quot;org-fuzzball-help&quot;, oneoh, oneoh, mcppkg_help_request, NULL, NULL);</span>
+<span class="lineNum">     630 </span><span class="lineCov">        624 :     mcp_package_register(&quot;org-fuzzball-notify&quot;, oneoh, oneoh, mcppkg_simpleedit, NULL, NULL);</span>
+<span class="lineNum">     631 </span><span class="lineCov">        624 :     mcp_package_register(&quot;org-fuzzball-simpleedit&quot;, oneoh, oneoh, mcppkg_simpleedit, NULL,</span>
 <span class="lineNum">     632 </span>            :                          NULL);
-<span class="lineNum">     633 </span><span class="lineCov">        606 :     mcp_package_register(&quot;dns-org-mud-moo-simpleedit&quot;, oneoh, oneoh, mcppkg_simpleedit, NULL,</span>
+<span class="lineNum">     633 </span><span class="lineCov">        624 :     mcp_package_register(&quot;dns-org-mud-moo-simpleedit&quot;, oneoh, oneoh, mcppkg_simpleedit, NULL,</span>
 <span class="lineNum">     634 </span>            :                          NULL);
-<span class="lineNum">     635 </span><span class="lineCov">        606 : }</span>
+<span class="lineNum">     635 </span><span class="lineCov">        624 : }</span>
 <span class="lineNum">     636 </span>            : 
 <span class="lineNum">     637 </span>            : /*****************************************************************
 <span class="lineNum">     638 </span>            :  *
@@ -703,18 +703,18 @@
 <span class="lineNum">     641 </span>            :  *****************************************************************/
 <a name="642"><span class="lineNum">     642 </span>            : </a>
 <span class="lineNum">     643 </span>            : void
-<span class="lineNum">     644 </span><span class="lineCov">        584 : mcp_negotiation_start(McpFrame * mfr)</span>
+<span class="lineNum">     644 </span><span class="lineCov">        600 : mcp_negotiation_start(McpFrame * mfr)</span>
 <span class="lineNum">     645 </span>            : {
 <span class="lineNum">     646 </span>            :     McpMesg reply;
 <span class="lineNum">     647 </span>            : 
-<span class="lineNum">     648 </span><span class="lineCov">        584 :     mfr-&gt;enabled = 1;</span>
-<span class="lineNum">     649 </span><span class="lineCov">        584 :     mcp_mesg_init(&amp;reply, MCP_INIT_PKG, &quot;&quot;);</span>
-<span class="lineNum">     650 </span><span class="lineCov">        584 :     mcp_mesg_arg_append(&amp;reply, &quot;version&quot;, &quot;2.1&quot;);</span>
-<span class="lineNum">     651 </span><span class="lineCov">        584 :     mcp_mesg_arg_append(&amp;reply, &quot;to&quot;, &quot;2.1&quot;);</span>
-<span class="lineNum">     652 </span><span class="lineCov">        584 :     mcp_frame_output_mesg(mfr, &amp;reply);</span>
-<span class="lineNum">     653 </span><span class="lineCov">        584 :     mcp_mesg_clear(&amp;reply);</span>
-<span class="lineNum">     654 </span><span class="lineCov">        584 :     mfr-&gt;enabled = 0;</span>
-<span class="lineNum">     655 </span><span class="lineCov">        584 : }</span>
+<span class="lineNum">     648 </span><span class="lineCov">        600 :     mfr-&gt;enabled = 1;</span>
+<span class="lineNum">     649 </span><span class="lineCov">        600 :     mcp_mesg_init(&amp;reply, MCP_INIT_PKG, &quot;&quot;);</span>
+<span class="lineNum">     650 </span><span class="lineCov">        600 :     mcp_mesg_arg_append(&amp;reply, &quot;version&quot;, &quot;2.1&quot;);</span>
+<span class="lineNum">     651 </span><span class="lineCov">        600 :     mcp_mesg_arg_append(&amp;reply, &quot;to&quot;, &quot;2.1&quot;);</span>
+<span class="lineNum">     652 </span><span class="lineCov">        600 :     mcp_frame_output_mesg(mfr, &amp;reply);</span>
+<span class="lineNum">     653 </span><span class="lineCov">        600 :     mcp_mesg_clear(&amp;reply);</span>
+<span class="lineNum">     654 </span><span class="lineCov">        600 :     mfr-&gt;enabled = 0;</span>
+<span class="lineNum">     655 </span><span class="lineCov">        600 : }</span>
 <span class="lineNum">     656 </span>            : 
 <span class="lineNum">     657 </span>            : /*****************************************************************
 <span class="lineNum">     658 </span>            :  *
@@ -725,23 +725,23 @@
 <span class="lineNum">     663 </span>            :  *****************************************************************/
 <a name="664"><span class="lineNum">     664 </span>            : </a>
 <span class="lineNum">     665 </span>            : void
-<span class="lineNum">     666 </span><span class="lineCov">        584 : mcp_frame_init(McpFrame * mfr, connection_t con)</span>
+<span class="lineNum">     666 </span><span class="lineCov">        600 : mcp_frame_init(McpFrame * mfr, connection_t con)</span>
 <span class="lineNum">     667 </span>            : {
 <span class="lineNum">     668 </span>            :     McpFrameList *mfrl;
 <span class="lineNum">     669 </span>            : 
-<span class="lineNum">     670 </span><span class="lineCov">        584 :     mfr-&gt;descriptor = con;</span>
-<span class="lineNum">     671 </span><span class="lineCov">        584 :     mfr-&gt;version.verminor = 0;</span>
-<span class="lineNum">     672 </span><span class="lineCov">        584 :     mfr-&gt;version.vermajor = 0;</span>
-<span class="lineNum">     673 </span><span class="lineCov">        584 :     mfr-&gt;authkey = NULL;</span>
-<span class="lineNum">     674 </span><span class="lineCov">        584 :     mfr-&gt;packages = NULL;</span>
-<span class="lineNum">     675 </span><span class="lineCov">        584 :     mfr-&gt;messages = NULL;</span>
-<span class="lineNum">     676 </span><span class="lineCov">        584 :     mfr-&gt;enabled = 0;</span>
+<span class="lineNum">     670 </span><span class="lineCov">        600 :     mfr-&gt;descriptor = con;</span>
+<span class="lineNum">     671 </span><span class="lineCov">        600 :     mfr-&gt;version.verminor = 0;</span>
+<span class="lineNum">     672 </span><span class="lineCov">        600 :     mfr-&gt;version.vermajor = 0;</span>
+<span class="lineNum">     673 </span><span class="lineCov">        600 :     mfr-&gt;authkey = NULL;</span>
+<span class="lineNum">     674 </span><span class="lineCov">        600 :     mfr-&gt;packages = NULL;</span>
+<span class="lineNum">     675 </span><span class="lineCov">        600 :     mfr-&gt;messages = NULL;</span>
+<span class="lineNum">     676 </span><span class="lineCov">        600 :     mfr-&gt;enabled = 0;</span>
 <span class="lineNum">     677 </span>            : 
-<span class="lineNum">     678 </span><span class="lineCov">        584 :     mfrl = (McpFrameList *) malloc(sizeof(McpFrameList));</span>
-<span class="lineNum">     679 </span><span class="lineCov">        584 :     mfrl-&gt;mfr = mfr;</span>
-<span class="lineNum">     680 </span><span class="lineCov">        584 :     mfrl-&gt;next = mcp_frame_list;</span>
-<span class="lineNum">     681 </span><span class="lineCov">        584 :     mcp_frame_list = mfrl;</span>
-<span class="lineNum">     682 </span><span class="lineCov">        584 : }</span>
+<span class="lineNum">     678 </span><span class="lineCov">        600 :     mfrl = (McpFrameList *) malloc(sizeof(McpFrameList));</span>
+<span class="lineNum">     679 </span><span class="lineCov">        600 :     mfrl-&gt;mfr = mfr;</span>
+<span class="lineNum">     680 </span><span class="lineCov">        600 :     mfrl-&gt;next = mcp_frame_list;</span>
+<span class="lineNum">     681 </span><span class="lineCov">        600 :     mcp_frame_list = mfrl;</span>
+<span class="lineNum">     682 </span><span class="lineCov">        600 : }</span>
 <span class="lineNum">     683 </span>            : 
 <span class="lineNum">     684 </span>            : /*****************************************************************
 <span class="lineNum">     685 </span>            :  *
@@ -751,38 +751,38 @@
 <span class="lineNum">     689 </span>            :  *****************************************************************/
 <a name="690"><span class="lineNum">     690 </span>            : </a>
 <span class="lineNum">     691 </span>            : void
-<span class="lineNum">     692 </span><span class="lineCov">        584 : mcp_frame_clear(McpFrame * mfr)</span>
+<span class="lineNum">     692 </span><span class="lineCov">        600 : mcp_frame_clear(McpFrame * mfr)</span>
 <span class="lineNum">     693 </span>            : {
-<span class="lineNum">     694 </span><span class="lineCov">        584 :     McpPkg *tmp = mfr-&gt;packages;</span>
-<span class="lineNum">     695 </span><span class="lineCov">        584 :     McpMesg *tmp2 = mfr-&gt;messages;</span>
-<span class="lineNum">     696 </span><span class="lineCov">        584 :     McpFrameList *mfrl = mcp_frame_list;</span>
+<span class="lineNum">     694 </span><span class="lineCov">        600 :     McpPkg *tmp = mfr-&gt;packages;</span>
+<span class="lineNum">     695 </span><span class="lineCov">        600 :     McpMesg *tmp2 = mfr-&gt;messages;</span>
+<span class="lineNum">     696 </span><span class="lineCov">        600 :     McpFrameList *mfrl = mcp_frame_list;</span>
 <span class="lineNum">     697 </span>            :     McpFrameList *prev;
 <span class="lineNum">     698 </span>            : 
-<span class="lineNum">     699 </span><span class="lineCov">        584 :     if (mfr-&gt;authkey) {</span>
+<span class="lineNum">     699 </span><span class="lineCov">        600 :     if (mfr-&gt;authkey) {</span>
 <span class="lineNum">     700 </span><span class="lineNoCov">          0 :         free(mfr-&gt;authkey);</span>
 <span class="lineNum">     701 </span><span class="lineNoCov">          0 :         mfr-&gt;authkey = NULL;</span>
 <span class="lineNum">     702 </span>            :     }
-<span class="lineNum">     703 </span><span class="lineCov">       1168 :     while (tmp) {</span>
+<span class="lineNum">     703 </span><span class="lineCov">       1200 :     while (tmp) {</span>
 <span class="lineNum">     704 </span><span class="lineNoCov">          0 :         mfr-&gt;packages = tmp-&gt;next;</span>
 <span class="lineNum">     705 </span><span class="lineNoCov">          0 :         if (tmp-&gt;pkgname)</span>
 <span class="lineNum">     706 </span><span class="lineNoCov">          0 :             free(tmp-&gt;pkgname);</span>
 <span class="lineNum">     707 </span><span class="lineNoCov">          0 :         free(tmp);</span>
 <span class="lineNum">     708 </span><span class="lineNoCov">          0 :         tmp = mfr-&gt;packages;</span>
 <span class="lineNum">     709 </span>            :     }
-<span class="lineNum">     710 </span><span class="lineCov">       1168 :     while (tmp2) {</span>
+<span class="lineNum">     710 </span><span class="lineCov">       1200 :     while (tmp2) {</span>
 <span class="lineNum">     711 </span><span class="lineNoCov">          0 :         mfr-&gt;messages = tmp2-&gt;next;</span>
 <span class="lineNum">     712 </span><span class="lineNoCov">          0 :         mcp_mesg_clear(tmp2);</span>
 <span class="lineNum">     713 </span><span class="lineNoCov">          0 :         free(tmp2);</span>
 <span class="lineNum">     714 </span><span class="lineNoCov">          0 :         tmp2 = mfr-&gt;messages;</span>
 <span class="lineNum">     715 </span>            :     }
 <span class="lineNum">     716 </span>            : 
-<span class="lineNum">     717 </span><span class="lineCov">       1752 :     while (mfrl &amp;&amp; mfrl-&gt;mfr == mfr) {</span>
-<span class="lineNum">     718 </span><span class="lineCov">        584 :         mcp_frame_list = mfrl-&gt;next;</span>
-<span class="lineNum">     719 </span><span class="lineCov">        584 :         free(mfrl);</span>
-<span class="lineNum">     720 </span><span class="lineCov">        584 :         mfrl = mcp_frame_list;</span>
+<span class="lineNum">     717 </span><span class="lineCov">       1800 :     while (mfrl &amp;&amp; mfrl-&gt;mfr == mfr) {</span>
+<span class="lineNum">     718 </span><span class="lineCov">        600 :         mcp_frame_list = mfrl-&gt;next;</span>
+<span class="lineNum">     719 </span><span class="lineCov">        600 :         free(mfrl);</span>
+<span class="lineNum">     720 </span><span class="lineCov">        600 :         mfrl = mcp_frame_list;</span>
 <span class="lineNum">     721 </span>            :     }
-<span class="lineNum">     722 </span><span class="lineCov">        584 :     if (!mcp_frame_list) {</span>
-<span class="lineNum">     723 </span><span class="lineCov">        584 :         return;</span>
+<span class="lineNum">     722 </span><span class="lineCov">        600 :     if (!mcp_frame_list) {</span>
+<span class="lineNum">     723 </span><span class="lineCov">        600 :         return;</span>
 <span class="lineNum">     724 </span>            :     }
 <span class="lineNum">     725 </span><span class="lineNoCov">          0 :     prev = mcp_frame_list;</span>
 <span class="lineNum">     726 </span><span class="lineNoCov">          0 :     mfrl = prev-&gt;next;</span>
@@ -807,38 +807,38 @@
 <span class="lineNum">     745 </span>            :  *****************************************************************/
 <a name="746"><span class="lineNum">     746 </span>            : </a>
 <span class="lineNum">     747 </span>            : void
-<span class="lineNum">     748 </span><span class="lineCov">       7272 : mcp_frame_package_renegotiate(const char *package)</span>
+<span class="lineNum">     748 </span><span class="lineCov">       7488 : mcp_frame_package_renegotiate(const char *package)</span>
 <span class="lineNum">     749 </span>            : {
-<span class="lineNum">     750 </span><span class="lineCov">       7272 :     McpVer nullver = { 0, 0 };</span>
-<span class="lineNum">     751 </span><span class="lineCov">       7272 :     McpFrameList *mfrl = mcp_frame_list;</span>
+<span class="lineNum">     750 </span><span class="lineCov">       7488 :     McpVer nullver = { 0, 0 };</span>
+<span class="lineNum">     751 </span><span class="lineCov">       7488 :     McpFrameList *mfrl = mcp_frame_list;</span>
 <span class="lineNum">     752 </span>            :     McpFrame *mfr;
 <span class="lineNum">     753 </span>            :     McpMesg cando;
 <span class="lineNum">     754 </span>            :     char verbuf[32];
 <span class="lineNum">     755 </span>            :     McpPkg *p;
 <span class="lineNum">     756 </span>            : 
-<span class="lineNum">     757 </span><span class="lineCov">       7272 :     p = mcp_PackageList;</span>
-<span class="lineNum">     758 </span><span class="lineCov">      23634 :     while (p) {</span>
-<span class="lineNum">     759 </span><span class="lineCov">      12726 :         if (!strcasecmp(p-&gt;pkgname, package)) {</span>
-<span class="lineNum">     760 </span><span class="lineCov">       3636 :             break;</span>
+<span class="lineNum">     757 </span><span class="lineCov">       7488 :     p = mcp_PackageList;</span>
+<span class="lineNum">     758 </span><span class="lineCov">      24336 :     while (p) {</span>
+<span class="lineNum">     759 </span><span class="lineCov">      13104 :         if (!strcasecmp(p-&gt;pkgname, package)) {</span>
+<span class="lineNum">     760 </span><span class="lineCov">       3744 :             break;</span>
 <span class="lineNum">     761 </span>            :         }
-<span class="lineNum">     762 </span><span class="lineCov">       9090 :         p = p-&gt;next;</span>
+<span class="lineNum">     762 </span><span class="lineCov">       9360 :         p = p-&gt;next;</span>
 <span class="lineNum">     763 </span>            :     }
 <span class="lineNum">     764 </span>            : 
-<span class="lineNum">     765 </span><span class="lineCov">       7272 :     if (!p) {</span>
-<span class="lineNum">     766 </span><span class="lineCov">       3636 :         mcp_mesg_init(&amp;cando, MCP_NEGOTIATE_PKG, &quot;can&quot;);</span>
-<span class="lineNum">     767 </span><span class="lineCov">       3636 :         mcp_mesg_arg_append(&amp;cando, &quot;package&quot;, package);</span>
-<span class="lineNum">     768 </span><span class="lineCov">       3636 :         mcp_mesg_arg_append(&amp;cando, &quot;min-version&quot;, &quot;0.0&quot;);</span>
-<span class="lineNum">     769 </span><span class="lineCov">       3636 :         mcp_mesg_arg_append(&amp;cando, &quot;max-version&quot;, &quot;0.0&quot;);</span>
+<span class="lineNum">     765 </span><span class="lineCov">       7488 :     if (!p) {</span>
+<span class="lineNum">     766 </span><span class="lineCov">       3744 :         mcp_mesg_init(&amp;cando, MCP_NEGOTIATE_PKG, &quot;can&quot;);</span>
+<span class="lineNum">     767 </span><span class="lineCov">       3744 :         mcp_mesg_arg_append(&amp;cando, &quot;package&quot;, package);</span>
+<span class="lineNum">     768 </span><span class="lineCov">       3744 :         mcp_mesg_arg_append(&amp;cando, &quot;min-version&quot;, &quot;0.0&quot;);</span>
+<span class="lineNum">     769 </span><span class="lineCov">       3744 :         mcp_mesg_arg_append(&amp;cando, &quot;max-version&quot;, &quot;0.0&quot;);</span>
 <span class="lineNum">     770 </span>            :     } else {
-<span class="lineNum">     771 </span><span class="lineCov">       3636 :         mcp_mesg_init(&amp;cando, MCP_NEGOTIATE_PKG, &quot;can&quot;);</span>
-<span class="lineNum">     772 </span><span class="lineCov">       3636 :         mcp_mesg_arg_append(&amp;cando, &quot;package&quot;, p-&gt;pkgname);</span>
-<span class="lineNum">     773 </span><span class="lineCov">       3636 :         snprintf(verbuf, sizeof(verbuf), &quot;%d.%d&quot;, p-&gt;minver.vermajor, p-&gt;minver.verminor);</span>
-<span class="lineNum">     774 </span><span class="lineCov">       3636 :         mcp_mesg_arg_append(&amp;cando, &quot;min-version&quot;, verbuf);</span>
-<span class="lineNum">     775 </span><span class="lineCov">       3636 :         snprintf(verbuf, sizeof(verbuf), &quot;%d.%d&quot;, p-&gt;maxver.vermajor, p-&gt;maxver.verminor);</span>
-<span class="lineNum">     776 </span><span class="lineCov">       3636 :         mcp_mesg_arg_append(&amp;cando, &quot;max-version&quot;, verbuf);</span>
+<span class="lineNum">     771 </span><span class="lineCov">       3744 :         mcp_mesg_init(&amp;cando, MCP_NEGOTIATE_PKG, &quot;can&quot;);</span>
+<span class="lineNum">     772 </span><span class="lineCov">       3744 :         mcp_mesg_arg_append(&amp;cando, &quot;package&quot;, p-&gt;pkgname);</span>
+<span class="lineNum">     773 </span><span class="lineCov">       3744 :         snprintf(verbuf, sizeof(verbuf), &quot;%d.%d&quot;, p-&gt;minver.vermajor, p-&gt;minver.verminor);</span>
+<span class="lineNum">     774 </span><span class="lineCov">       3744 :         mcp_mesg_arg_append(&amp;cando, &quot;min-version&quot;, verbuf);</span>
+<span class="lineNum">     775 </span><span class="lineCov">       3744 :         snprintf(verbuf, sizeof(verbuf), &quot;%d.%d&quot;, p-&gt;maxver.vermajor, p-&gt;maxver.verminor);</span>
+<span class="lineNum">     776 </span><span class="lineCov">       3744 :         mcp_mesg_arg_append(&amp;cando, &quot;max-version&quot;, verbuf);</span>
 <span class="lineNum">     777 </span>            :     }
 <span class="lineNum">     778 </span>            : 
-<span class="lineNum">     779 </span><span class="lineCov">      14544 :     while (mfrl) {</span>
+<span class="lineNum">     779 </span><span class="lineCov">      14976 :     while (mfrl) {</span>
 <span class="lineNum">     780 </span><span class="lineNoCov">          0 :         mfr = mfrl-&gt;mfr;</span>
 <span class="lineNum">     781 </span><span class="lineNoCov">          0 :         if (mfr-&gt;enabled) {</span>
 <span class="lineNum">     782 </span><span class="lineNoCov">          0 :             if (mcp_version_compare(mfr-&gt;version, nullver) &gt; 0) {</span>
@@ -848,14 +848,14 @@
 <span class="lineNum">     786 </span>            :         }
 <span class="lineNum">     787 </span><span class="lineNoCov">          0 :         mfrl = mfrl-&gt;next;</span>
 <span class="lineNum">     788 </span>            :     }
-<span class="lineNum">     789 </span><span class="lineCov">       7272 :     mcp_mesg_clear(&amp;cando);</span>
+<span class="lineNum">     789 </span><span class="lineCov">       7488 :     mcp_mesg_clear(&amp;cando);</span>
 <span class="lineNum">     790 </span>            : 
 <span class="lineNum">     791 </span>            :     /*
 <span class="lineNum">     792 </span>            :        mcp_mesg_init(&amp;cando, MCP_NEGOTIATE_PKG, &quot;end&quot;);
 <span class="lineNum">     793 </span>            :        mcp_frame_output_mesg(mfr, &amp;cando);
 <span class="lineNum">     794 </span>            :        mcp_mesg_clear(&amp;cando);
 <span class="lineNum">     795 </span>            :      */
-<span class="lineNum">     796 </span><span class="lineCov">       7272 : }</span>
+<span class="lineNum">     796 </span><span class="lineCov">       7488 : }</span>
 <span class="lineNum">     797 </span>            : 
 <span class="lineNum">     798 </span>            : /*****************************************************************
 <span class="lineNum">     799 </span>            :  *
@@ -1024,9 +1024,9 @@
 <span class="lineNum">     962 </span>            :  *****************************************************************/
 <a name="963"><span class="lineNum">     963 </span>            : </a>
 <span class="lineNum">     964 </span>            : int
-<span class="lineNum">     965 </span><span class="lineCov">     132577 : mcp_frame_process_input(McpFrame * mfr, const char *linein, char *outbuf, int bufsize)</span>
+<span class="lineNum">     965 </span><span class="lineCov">     133150 : mcp_frame_process_input(McpFrame * mfr, const char *linein, char *outbuf, int bufsize)</span>
 <span class="lineNum">     966 </span>            : {
-<span class="lineNum">     967 </span><span class="lineCov">     132577 :     if (!strncasecmp(linein, MCP_MESG_PREFIX, 3)) {</span>
+<span class="lineNum">     967 </span><span class="lineCov">     133150 :     if (!strncasecmp(linein, MCP_MESG_PREFIX, 3)) {</span>
 <span class="lineNum">     968 </span>            :         /* treat it as an out-of-band message, and parse it. */
 <span class="lineNum">     969 </span><span class="lineNoCov">          0 :         if (mfr-&gt;enabled || !strncasecmp(MCP_INIT_MESG, linein + 3, 4)) {</span>
 <span class="lineNum">     970 </span><span class="lineNoCov">          0 :             if (!mcp_internal_parse(mfr, linein + 3)) {</span>
@@ -1040,15 +1040,15 @@
 <span class="lineNum">     978 </span><span class="lineNoCov">          0 :             outbuf[bufsize - 1] = '\0';</span>
 <span class="lineNum">     979 </span><span class="lineNoCov">          0 :             return 1;</span>
 <span class="lineNum">     980 </span>            :         }
-<span class="lineNum">     981 </span><span class="lineCov">     132577 :     } else if (mfr-&gt;enabled &amp;&amp; !strncasecmp(linein, MCP_QUOTE_PREFIX, 3)) {</span>
+<span class="lineNum">     981 </span><span class="lineCov">     133150 :     } else if (mfr-&gt;enabled &amp;&amp; !strncasecmp(linein, MCP_QUOTE_PREFIX, 3)) {</span>
 <span class="lineNum">     982 </span>            :         /* It's quoted in-band data.  Strip the quoting. */
 <span class="lineNum">     983 </span><span class="lineNoCov">          0 :         strncpy(outbuf, linein + 3, bufsize);</span>
 <span class="lineNum">     984 </span>            :     } else {
 <span class="lineNum">     985 </span>            :         /* It's in-band data.  Return it raw. */
-<span class="lineNum">     986 </span><span class="lineCov">     132577 :         strncpy(outbuf, linein, bufsize);</span>
+<span class="lineNum">     986 </span><span class="lineCov">     133150 :         strncpy(outbuf, linein, bufsize);</span>
 <span class="lineNum">     987 </span>            :     }
-<span class="lineNum">     988 </span><span class="lineCov">     132577 :     outbuf[bufsize - 1] = '\0';</span>
-<span class="lineNum">     989 </span><span class="lineCov">     132577 :     return 1;</span>
+<span class="lineNum">     988 </span><span class="lineCov">     133150 :     outbuf[bufsize - 1] = '\0';</span>
+<span class="lineNum">     989 </span><span class="lineCov">     133150 :     return 1;</span>
 <span class="lineNum">     990 </span>            : }
 <span class="lineNum">     991 </span>            : 
 <span class="lineNum">     992 </span>            : /*****************************************************************
@@ -1059,18 +1059,18 @@
 <span class="lineNum">     997 </span>            :  *****************************************************************/
 <a name="998"><span class="lineNum">     998 </span>            : </a>
 <span class="lineNum">     999 </span>            : void
-<span class="lineNum">    1000 </span><span class="lineCov">    3623701 : mcp_frame_output_inband(McpFrame * mfr, const char *lineout)</span>
+<span class="lineNum">    1000 </span><span class="lineCov">    3625247 : mcp_frame_output_inband(McpFrame * mfr, const char *lineout)</span>
 <span class="lineNum">    1001 </span>            : {
-<span class="lineNum">    1002 </span><span class="lineCov">    3623701 :     if (!mfr-&gt;enabled ||</span>
+<span class="lineNum">    1002 </span><span class="lineCov">    3625247 :     if (!mfr-&gt;enabled ||</span>
 <span class="lineNum">    1003 </span><span class="lineNoCov">          0 :         (strncmp(lineout, MCP_MESG_PREFIX, 3) &amp;&amp; strncmp(lineout, MCP_QUOTE_PREFIX, 3))</span>
 <span class="lineNum">    1004 </span>            :             ) {
-<span class="lineNum">    1005 </span><span class="lineCov">    3623701 :         SendText(mfr, lineout);</span>
+<span class="lineNum">    1005 </span><span class="lineCov">    3625247 :         SendText(mfr, lineout);</span>
 <span class="lineNum">    1006 </span>            :     } else {
 <span class="lineNum">    1007 </span><span class="lineNoCov">          0 :         SendText(mfr, MCP_QUOTE_PREFIX);</span>
 <span class="lineNum">    1008 </span><span class="lineNoCov">          0 :         SendText(mfr, lineout);</span>
 <span class="lineNum">    1009 </span>            :     }
 <span class="lineNum">    1010 </span>            :     /* SendText(mfr, &quot;\r\n&quot;); */
-<span class="lineNum">    1011 </span><span class="lineCov">    3623701 : }</span>
+<span class="lineNum">    1011 </span><span class="lineCov">    3625247 : }</span>
 <span class="lineNum">    1012 </span>            : 
 <span class="lineNum">    1013 </span>            : /*****************************************************************
 <span class="lineNum">    1014 </span>            :  *
@@ -1082,31 +1082,31 @@
 <span class="lineNum">    1020 </span>            :  *****************************************************************/
 <a name="1021"><span class="lineNum">    1021 </span>            : </a>
 <span class="lineNum">    1022 </span>            : int
-<span class="lineNum">    1023 </span><span class="lineCov">        584 : mcp_frame_output_mesg(McpFrame * mfr, McpMesg * msg)</span>
+<span class="lineNum">    1023 </span><span class="lineCov">        600 : mcp_frame_output_mesg(McpFrame * mfr, McpMesg * msg)</span>
 <span class="lineNum">    1024 </span>            : {
 <span class="lineNum">    1025 </span>            :     char outbuf[BUFFER_LEN * 2];
-<span class="lineNum">    1026 </span><span class="lineCov">        584 :     int bufrem = sizeof(outbuf);</span>
+<span class="lineNum">    1026 </span><span class="lineCov">        600 :     int bufrem = sizeof(outbuf);</span>
 <span class="lineNum">    1027 </span>            :     char mesgname[128];
 <span class="lineNum">    1028 </span>            :     char datatag[32];
-<span class="lineNum">    1029 </span><span class="lineCov">        584 :     int mlineflag = 0;</span>
+<span class="lineNum">    1029 </span><span class="lineCov">        600 :     int mlineflag = 0;</span>
 <span class="lineNum">    1030 </span>            :     char *p;
 <span class="lineNum">    1031 </span>            :     char *out;
-<span class="lineNum">    1032 </span><span class="lineCov">        584 :     int flushcount = 8;</span>
+<span class="lineNum">    1032 </span><span class="lineCov">        600 :     int flushcount = 8;</span>
 <span class="lineNum">    1033 </span>            : 
-<span class="lineNum">    1034 </span><span class="lineCov">        584 :     if (!mfr-&gt;enabled &amp;&amp; strcasecmp(msg-&gt;package, MCP_INIT_PKG)) {</span>
+<span class="lineNum">    1034 </span><span class="lineCov">        600 :     if (!mfr-&gt;enabled &amp;&amp; strcasecmp(msg-&gt;package, MCP_INIT_PKG)) {</span>
 <span class="lineNum">    1035 </span><span class="lineNoCov">          0 :         return EMCP_NOMCP;</span>
 <span class="lineNum">    1036 </span>            :     }
 <span class="lineNum">    1037 </span>            : 
 <span class="lineNum">    1038 </span>            :     /* Create the message name from the package and message subnames */
-<span class="lineNum">    1039 </span><span class="lineCov">        584 :     if (msg-&gt;mesgname &amp;&amp; *msg-&gt;mesgname) {</span>
+<span class="lineNum">    1039 </span><span class="lineCov">        600 :     if (msg-&gt;mesgname &amp;&amp; *msg-&gt;mesgname) {</span>
 <span class="lineNum">    1040 </span><span class="lineNoCov">          0 :         snprintf(mesgname, sizeof(mesgname), &quot;%s-%s&quot;, msg-&gt;package, msg-&gt;mesgname);</span>
 <span class="lineNum">    1041 </span>            :     } else {
-<span class="lineNum">    1042 </span><span class="lineCov">        584 :         snprintf(mesgname, sizeof(mesgname), &quot;%s&quot;, msg-&gt;package);</span>
+<span class="lineNum">    1042 </span><span class="lineCov">        600 :         snprintf(mesgname, sizeof(mesgname), &quot;%s&quot;, msg-&gt;package);</span>
 <span class="lineNum">    1043 </span>            :     }
 <span class="lineNum">    1044 </span>            : 
-<span class="lineNum">    1045 </span><span class="lineCov">        584 :     strcpyn(outbuf, sizeof(outbuf), MCP_MESG_PREFIX);</span>
-<span class="lineNum">    1046 </span><span class="lineCov">        584 :     strcatn(outbuf, sizeof(outbuf), mesgname);</span>
-<span class="lineNum">    1047 </span><span class="lineCov">        584 :     if (strcasecmp(mesgname, MCP_INIT_PKG)) {</span>
+<span class="lineNum">    1045 </span><span class="lineCov">        600 :     strcpyn(outbuf, sizeof(outbuf), MCP_MESG_PREFIX);</span>
+<span class="lineNum">    1046 </span><span class="lineCov">        600 :     strcatn(outbuf, sizeof(outbuf), mesgname);</span>
+<span class="lineNum">    1047 </span><span class="lineCov">        600 :     if (strcasecmp(mesgname, MCP_INIT_PKG)) {</span>
 <span class="lineNum">    1048 </span><span class="lineNoCov">          0 :         McpVer nullver = { 0, 0 };</span>
 <span class="lineNum">    1049 </span>            : 
 <span class="lineNum">    1050 </span><span class="lineNoCov">          0 :         strcatn(outbuf, sizeof(outbuf), &quot; &quot;);</span>
@@ -1121,14 +1121,14 @@
 <span class="lineNum">    1059 </span>            :     }
 <span class="lineNum">    1060 </span>            : 
 <span class="lineNum">    1061 </span>            :     /* If the argument lines contain newlines, split them into separate lines. */
-<span class="lineNum">    1062 </span><span class="lineCov">       1752 :     for (McpArg *anarg = msg-&gt;args; anarg; anarg = anarg-&gt;next) {</span>
-<span class="lineNum">    1063 </span><span class="lineCov">       1168 :         if (anarg-&gt;value) {</span>
-<span class="lineNum">    1064 </span><span class="lineCov">       1168 :             McpArgPart *ap = anarg-&gt;value;</span>
+<span class="lineNum">    1062 </span><span class="lineCov">       1800 :     for (McpArg *anarg = msg-&gt;args; anarg; anarg = anarg-&gt;next) {</span>
+<span class="lineNum">    1063 </span><span class="lineCov">       1200 :         if (anarg-&gt;value) {</span>
+<span class="lineNum">    1064 </span><span class="lineCov">       1200 :             McpArgPart *ap = anarg-&gt;value;</span>
 <span class="lineNum">    1065 </span>            : 
-<span class="lineNum">    1066 </span><span class="lineCov">       3504 :             while (ap) {</span>
-<span class="lineNum">    1067 </span><span class="lineCov">       1168 :                 p = ap-&gt;value;</span>
-<span class="lineNum">    1068 </span><span class="lineCov">       5840 :                 while (*p) {</span>
-<span class="lineNum">    1069 </span><span class="lineCov">       3504 :                     if (*p == '\n' || *p == '\r') {</span>
+<span class="lineNum">    1066 </span><span class="lineCov">       3600 :             while (ap) {</span>
+<span class="lineNum">    1067 </span><span class="lineCov">       1200 :                 p = ap-&gt;value;</span>
+<span class="lineNum">    1068 </span><span class="lineCov">       6000 :                 while (*p) {</span>
+<span class="lineNum">    1069 </span><span class="lineCov">       3600 :                     if (*p == '\n' || *p == '\r') {</span>
 <span class="lineNum">    1070 </span><span class="lineNoCov">          0 :                         McpArgPart *nu = (McpArgPart *) malloc(sizeof(McpArgPart));</span>
 <span class="lineNum">    1071 </span>            : 
 <span class="lineNum">    1072 </span><span class="lineNoCov">          0 :                         nu-&gt;next = ap-&gt;next;</span>
@@ -1139,58 +1139,58 @@
 <span class="lineNum">    1077 </span><span class="lineNoCov">          0 :                         ap = nu;</span>
 <span class="lineNum">    1078 </span><span class="lineNoCov">          0 :                         p = nu-&gt;value;</span>
 <span class="lineNum">    1079 </span>            :                     } else {
-<span class="lineNum">    1080 </span><span class="lineCov">       3504 :                         p++;</span>
+<span class="lineNum">    1080 </span><span class="lineCov">       3600 :                         p++;</span>
 <span class="lineNum">    1081 </span>            :                     }
 <span class="lineNum">    1082 </span>            :                 }
-<span class="lineNum">    1083 </span><span class="lineCov">       1168 :                 ap = ap-&gt;next;</span>
+<span class="lineNum">    1083 </span><span class="lineCov">       1200 :                 ap = ap-&gt;next;</span>
 <span class="lineNum">    1084 </span>            :             }
 <span class="lineNum">    1085 </span>            :         }
 <span class="lineNum">    1086 </span>            :     }
 <span class="lineNum">    1087 </span>            : 
 <span class="lineNum">    1088 </span>            :     /* Build the initial message string */
-<span class="lineNum">    1089 </span><span class="lineCov">        584 :     out = outbuf;</span>
-<span class="lineNum">    1090 </span><span class="lineCov">        584 :     bufrem = outbuf + sizeof(outbuf) - out;</span>
-<span class="lineNum">    1091 </span><span class="lineCov">       1752 :     for (McpArg *anarg = msg-&gt;args; anarg; anarg = anarg-&gt;next) {</span>
-<span class="lineNum">    1092 </span><span class="lineCov">       1168 :         out += strlen(out);</span>
-<span class="lineNum">    1093 </span><span class="lineCov">       1168 :         bufrem = outbuf + sizeof(outbuf) - out;</span>
-<span class="lineNum">    1094 </span><span class="lineCov">       1168 :         if (!anarg-&gt;value) {</span>
+<span class="lineNum">    1089 </span><span class="lineCov">        600 :     out = outbuf;</span>
+<span class="lineNum">    1090 </span><span class="lineCov">        600 :     bufrem = outbuf + sizeof(outbuf) - out;</span>
+<span class="lineNum">    1091 </span><span class="lineCov">       1800 :     for (McpArg *anarg = msg-&gt;args; anarg; anarg = anarg-&gt;next) {</span>
+<span class="lineNum">    1092 </span><span class="lineCov">       1200 :         out += strlen(out);</span>
+<span class="lineNum">    1093 </span><span class="lineCov">       1200 :         bufrem = outbuf + sizeof(outbuf) - out;</span>
+<span class="lineNum">    1094 </span><span class="lineCov">       1200 :         if (!anarg-&gt;value) {</span>
 <span class="lineNum">    1095 </span><span class="lineNoCov">          0 :             anarg-&gt;was_shown = 1;</span>
 <span class="lineNum">    1096 </span><span class="lineNoCov">          0 :             snprintf(out, bufrem, &quot; %s: %s&quot;, anarg-&gt;name, MCP_ARG_EMPTY);</span>
 <span class="lineNum">    1097 </span><span class="lineNoCov">          0 :             out += strlen(out);</span>
 <span class="lineNum">    1098 </span><span class="lineNoCov">          0 :             bufrem = outbuf + sizeof(outbuf) - out;</span>
 <span class="lineNum">    1099 </span>            :         } else {
-<span class="lineNum">    1100 </span><span class="lineCov">       1168 :             int totlen = strlen(anarg-&gt;value-&gt;value) + strlen(anarg-&gt;name) + 5;</span>
+<span class="lineNum">    1100 </span><span class="lineCov">       1200 :             int totlen = strlen(anarg-&gt;value-&gt;value) + strlen(anarg-&gt;name) + 5;</span>
 <span class="lineNum">    1101 </span>            : 
-<span class="lineNum">    1102 </span><span class="lineCov">       1168 :             if (anarg-&gt;value-&gt;next || totlen &gt; ((BUFFER_LEN - (out - outbuf)) / 2)) {</span>
+<span class="lineNum">    1102 </span><span class="lineCov">       1200 :             if (anarg-&gt;value-&gt;next || totlen &gt; ((BUFFER_LEN - (out - outbuf)) / 2)) {</span>
 <span class="lineNum">    1103 </span>            :                 /* Value is multi-line or too long.  Send on separate line(s). */
 <span class="lineNum">    1104 </span><span class="lineNoCov">          0 :                 mlineflag = 1;</span>
 <span class="lineNum">    1105 </span><span class="lineNoCov">          0 :                 anarg-&gt;was_shown = 0;</span>
 <span class="lineNum">    1106 </span><span class="lineNoCov">          0 :                 snprintf(out, bufrem, &quot; %s*: %s&quot;, anarg-&gt;name, MCP_ARG_EMPTY);</span>
 <span class="lineNum">    1107 </span>            :             } else {
-<span class="lineNum">    1108 </span><span class="lineCov">       1168 :                 anarg-&gt;was_shown = 1;</span>
-<span class="lineNum">    1109 </span><span class="lineCov">       1168 :                 snprintf(out, bufrem, &quot; %s: &quot;, anarg-&gt;name);</span>
-<span class="lineNum">    1110 </span><span class="lineCov">       1168 :                 out += strlen(out);</span>
-<span class="lineNum">    1111 </span><span class="lineCov">       1168 :                 bufrem = outbuf + sizeof(outbuf) - out;</span>
+<span class="lineNum">    1108 </span><span class="lineCov">       1200 :                 anarg-&gt;was_shown = 1;</span>
+<span class="lineNum">    1109 </span><span class="lineCov">       1200 :                 snprintf(out, bufrem, &quot; %s: &quot;, anarg-&gt;name);</span>
+<span class="lineNum">    1110 </span><span class="lineCov">       1200 :                 out += strlen(out);</span>
+<span class="lineNum">    1111 </span><span class="lineCov">       1200 :                 bufrem = outbuf + sizeof(outbuf) - out;</span>
 <span class="lineNum">    1112 </span>            : 
-<span class="lineNum">    1113 </span><span class="lineCov">       1168 :                 msgarg_escape(out, bufrem, anarg-&gt;value-&gt;value);</span>
-<span class="lineNum">    1114 </span><span class="lineCov">       1168 :                 out += strlen(out);</span>
+<span class="lineNum">    1113 </span><span class="lineCov">       1200 :                 msgarg_escape(out, bufrem, anarg-&gt;value-&gt;value);</span>
+<span class="lineNum">    1114 </span><span class="lineCov">       1200 :                 out += strlen(out);</span>
 <span class="lineNum">    1115 </span>            :             }
-<span class="lineNum">    1116 </span><span class="lineCov">       1168 :             out += strlen(out);</span>
-<span class="lineNum">    1117 </span><span class="lineCov">       1168 :             bufrem = outbuf + sizeof(outbuf) - out;</span>
+<span class="lineNum">    1116 </span><span class="lineCov">       1200 :             out += strlen(out);</span>
+<span class="lineNum">    1117 </span><span class="lineCov">       1200 :             bufrem = outbuf + sizeof(outbuf) - out;</span>
 <span class="lineNum">    1118 </span>            :         }
 <span class="lineNum">    1119 </span>            :     }
 <span class="lineNum">    1120 </span>            : 
 <span class="lineNum">    1121 </span>            :     /* If the message is multi-line, make sure it has a _data-tag field. */
-<span class="lineNum">    1122 </span><span class="lineCov">        584 :     if (mlineflag) {</span>
+<span class="lineNum">    1122 </span><span class="lineCov">        600 :     if (mlineflag) {</span>
 <span class="lineNum">    1123 </span><span class="lineNoCov">          0 :         snprintf(datatag, sizeof(datatag), &quot;%.8lX&quot;, (unsigned long) (RANDOM() ^ RANDOM()));</span>
 <span class="lineNum">    1124 </span><span class="lineNoCov">          0 :         snprintf(out, bufrem, &quot; %s: %s&quot;, MCP_DATATAG, datatag);</span>
 <span class="lineNum">    1125 </span>            :     }
 <span class="lineNum">    1126 </span>            : 
 <span class="lineNum">    1127 </span>            :     /* Send the initial line. */
-<span class="lineNum">    1128 </span><span class="lineCov">        584 :     SendText(mfr, outbuf);</span>
-<span class="lineNum">    1129 </span><span class="lineCov">        584 :     SendText(mfr, &quot;\r\n&quot;);</span>
+<span class="lineNum">    1128 </span><span class="lineCov">        600 :     SendText(mfr, outbuf);</span>
+<span class="lineNum">    1129 </span><span class="lineCov">        600 :     SendText(mfr, &quot;\r\n&quot;);</span>
 <span class="lineNum">    1130 </span>            : 
-<span class="lineNum">    1131 </span><span class="lineCov">        584 :     if (mlineflag) {</span>
+<span class="lineNum">    1131 </span><span class="lineCov">        600 :     if (mlineflag) {</span>
 <span class="lineNum">    1132 </span>            :         /* Start sending arguments whose values weren't already sent. */
 <span class="lineNum">    1133 </span>            :         /* This is usually just multi-line argument values. */
 <span class="lineNum">    1134 </span><span class="lineNoCov">          0 :         for (McpArg *anarg = msg-&gt;args; anarg; anarg = anarg-&gt;next) {</span>
@@ -1218,7 +1218,7 @@
 <span class="lineNum">    1156 </span><span class="lineNoCov">          0 :         SendText(mfr, &quot;\r\n&quot;);</span>
 <span class="lineNum">    1157 </span>            :     }
 <span class="lineNum">    1158 </span>            : 
-<span class="lineNum">    1159 </span><span class="lineCov">        584 :     return EMCP_SUCCESS;</span>
+<span class="lineNum">    1159 </span><span class="lineCov">        600 :     return EMCP_SUCCESS;</span>
 <span class="lineNum">    1160 </span>            : }
 <span class="lineNum">    1161 </span>            : 
 <span class="lineNum">    1162 </span>            : /*****************************************************************/
@@ -1236,16 +1236,16 @@
 <span class="lineNum">    1174 </span>            :  *****************************************************************/
 <a name="1175"><span class="lineNum">    1175 </span>            : </a>
 <span class="lineNum">    1176 </span>            : void
-<span class="lineNum">    1177 </span><span class="lineCov">       7856 : mcp_mesg_init(McpMesg * msg, const char *package, const char *mesgname)</span>
+<span class="lineNum">    1177 </span><span class="lineCov">       8088 : mcp_mesg_init(McpMesg * msg, const char *package, const char *mesgname)</span>
 <span class="lineNum">    1178 </span>            : {
-<span class="lineNum">    1179 </span><span class="lineCov">       7856 :     msg-&gt;package = strdup(package);</span>
-<span class="lineNum">    1180 </span><span class="lineCov">       7856 :     msg-&gt;mesgname = strdup(mesgname);</span>
-<span class="lineNum">    1181 </span><span class="lineCov">       7856 :     msg-&gt;datatag = NULL;</span>
-<span class="lineNum">    1182 </span><span class="lineCov">       7856 :     msg-&gt;args = NULL;</span>
-<span class="lineNum">    1183 </span><span class="lineCov">       7856 :     msg-&gt;incomplete = 0;</span>
-<span class="lineNum">    1184 </span><span class="lineCov">       7856 :     msg-&gt;bytes = 0;</span>
-<span class="lineNum">    1185 </span><span class="lineCov">       7856 :     msg-&gt;next = NULL;</span>
-<span class="lineNum">    1186 </span><span class="lineCov">       7856 : }</span>
+<span class="lineNum">    1179 </span><span class="lineCov">       8088 :     msg-&gt;package = strdup(package);</span>
+<span class="lineNum">    1180 </span><span class="lineCov">       8088 :     msg-&gt;mesgname = strdup(mesgname);</span>
+<span class="lineNum">    1181 </span><span class="lineCov">       8088 :     msg-&gt;datatag = NULL;</span>
+<span class="lineNum">    1182 </span><span class="lineCov">       8088 :     msg-&gt;args = NULL;</span>
+<span class="lineNum">    1183 </span><span class="lineCov">       8088 :     msg-&gt;incomplete = 0;</span>
+<span class="lineNum">    1184 </span><span class="lineCov">       8088 :     msg-&gt;bytes = 0;</span>
+<span class="lineNum">    1185 </span><span class="lineCov">       8088 :     msg-&gt;next = NULL;</span>
+<span class="lineNum">    1186 </span><span class="lineCov">       8088 : }</span>
 <span class="lineNum">    1187 </span>            : 
 <span class="lineNum">    1188 </span>            : /*****************************************************************
 <span class="lineNum">    1189 </span>            :  *
@@ -1256,33 +1256,33 @@
 <span class="lineNum">    1194 </span>            :  *****************************************************************/
 <a name="1195"><span class="lineNum">    1195 </span>            : </a>
 <span class="lineNum">    1196 </span>            : void
-<span class="lineNum">    1197 </span><span class="lineCov">       7856 : mcp_mesg_clear(McpMesg * msg)</span>
+<span class="lineNum">    1197 </span><span class="lineCov">       8088 : mcp_mesg_clear(McpMesg * msg)</span>
 <span class="lineNum">    1198 </span>            : {
-<span class="lineNum">    1199 </span><span class="lineCov">       7856 :     if (msg-&gt;package)</span>
-<span class="lineNum">    1200 </span><span class="lineCov">       7856 :         free(msg-&gt;package);</span>
-<span class="lineNum">    1201 </span><span class="lineCov">       7856 :     if (msg-&gt;mesgname)</span>
-<span class="lineNum">    1202 </span><span class="lineCov">       7856 :         free(msg-&gt;mesgname);</span>
-<span class="lineNum">    1203 </span><span class="lineCov">       7856 :     if (msg-&gt;datatag)</span>
+<span class="lineNum">    1199 </span><span class="lineCov">       8088 :     if (msg-&gt;package)</span>
+<span class="lineNum">    1200 </span><span class="lineCov">       8088 :         free(msg-&gt;package);</span>
+<span class="lineNum">    1201 </span><span class="lineCov">       8088 :     if (msg-&gt;mesgname)</span>
+<span class="lineNum">    1202 </span><span class="lineCov">       8088 :         free(msg-&gt;mesgname);</span>
+<span class="lineNum">    1203 </span><span class="lineCov">       8088 :     if (msg-&gt;datatag)</span>
 <span class="lineNum">    1204 </span><span class="lineNoCov">          0 :         free(msg-&gt;datatag);</span>
 <span class="lineNum">    1205 </span>            : 
-<span class="lineNum">    1206 </span><span class="lineCov">      38696 :     while (msg-&gt;args) {</span>
-<span class="lineNum">    1207 </span><span class="lineCov">      22984 :         McpArg *tmp = msg-&gt;args;</span>
+<span class="lineNum">    1206 </span><span class="lineCov">      39840 :     while (msg-&gt;args) {</span>
+<span class="lineNum">    1207 </span><span class="lineCov">      23664 :         McpArg *tmp = msg-&gt;args;</span>
 <span class="lineNum">    1208 </span>            : 
-<span class="lineNum">    1209 </span><span class="lineCov">      22984 :         msg-&gt;args = tmp-&gt;next;</span>
-<span class="lineNum">    1210 </span><span class="lineCov">      22984 :         if (tmp-&gt;name)</span>
-<span class="lineNum">    1211 </span><span class="lineCov">      22984 :             free(tmp-&gt;name);</span>
-<span class="lineNum">    1212 </span><span class="lineCov">      68952 :         while (tmp-&gt;value) {</span>
-<span class="lineNum">    1213 </span><span class="lineCov">      22984 :             McpArgPart *ptr2 = tmp-&gt;value;</span>
+<span class="lineNum">    1209 </span><span class="lineCov">      23664 :         msg-&gt;args = tmp-&gt;next;</span>
+<span class="lineNum">    1210 </span><span class="lineCov">      23664 :         if (tmp-&gt;name)</span>
+<span class="lineNum">    1211 </span><span class="lineCov">      23664 :             free(tmp-&gt;name);</span>
+<span class="lineNum">    1212 </span><span class="lineCov">      70992 :         while (tmp-&gt;value) {</span>
+<span class="lineNum">    1213 </span><span class="lineCov">      23664 :             McpArgPart *ptr2 = tmp-&gt;value;</span>
 <span class="lineNum">    1214 </span>            : 
-<span class="lineNum">    1215 </span><span class="lineCov">      22984 :             tmp-&gt;value = tmp-&gt;value-&gt;next;</span>
-<span class="lineNum">    1216 </span><span class="lineCov">      22984 :             if (ptr2-&gt;value)</span>
-<span class="lineNum">    1217 </span><span class="lineCov">      22984 :                 free(ptr2-&gt;value);</span>
-<span class="lineNum">    1218 </span><span class="lineCov">      22984 :             free(ptr2);</span>
+<span class="lineNum">    1215 </span><span class="lineCov">      23664 :             tmp-&gt;value = tmp-&gt;value-&gt;next;</span>
+<span class="lineNum">    1216 </span><span class="lineCov">      23664 :             if (ptr2-&gt;value)</span>
+<span class="lineNum">    1217 </span><span class="lineCov">      23664 :                 free(ptr2-&gt;value);</span>
+<span class="lineNum">    1218 </span><span class="lineCov">      23664 :             free(ptr2);</span>
 <span class="lineNum">    1219 </span>            :         }
-<span class="lineNum">    1220 </span><span class="lineCov">      22984 :         free(tmp);</span>
+<span class="lineNum">    1220 </span><span class="lineCov">      23664 :         free(tmp);</span>
 <span class="lineNum">    1221 </span>            :     }
-<span class="lineNum">    1222 </span><span class="lineCov">       7856 :     msg-&gt;bytes = 0;</span>
-<span class="lineNum">    1223 </span><span class="lineCov">       7856 : }</span>
+<span class="lineNum">    1222 </span><span class="lineCov">       8088 :     msg-&gt;bytes = 0;</span>
+<span class="lineNum">    1223 </span><span class="lineCov">       8088 : }</span>
 <span class="lineNum">    1224 </span>            : 
 <span class="lineNum">    1225 </span>            : /*****************************************************************/
 <span class="lineNum">    1226 </span>            : /***                  ********************************************/
@@ -1359,67 +1359,67 @@
 <span class="lineNum">    1297 </span>            :  *****************************************************************/
 <a name="1298"><span class="lineNum">    1298 </span>            : </a>
 <span class="lineNum">    1299 </span>            : int
-<span class="lineNum">    1300 </span><span class="lineCov">      22984 : mcp_mesg_arg_append(McpMesg * msg, const char *argname, const char *argval)</span>
+<span class="lineNum">    1300 </span><span class="lineCov">      23664 : mcp_mesg_arg_append(McpMesg * msg, const char *argname, const char *argval)</span>
 <span class="lineNum">    1301 </span>            : {
-<span class="lineNum">    1302 </span><span class="lineCov">      22984 :     McpArg *ptr = msg-&gt;args;</span>
-<span class="lineNum">    1303 </span><span class="lineCov">      22984 :     int namelen = strlen(argname);</span>
-<span class="lineNum">    1304 </span><span class="lineCov">      22984 :     int vallen = argval ? strlen(argval) : 0;</span>
+<span class="lineNum">    1302 </span><span class="lineCov">      23664 :     McpArg *ptr = msg-&gt;args;</span>
+<span class="lineNum">    1303 </span><span class="lineCov">      23664 :     int namelen = strlen(argname);</span>
+<span class="lineNum">    1304 </span><span class="lineCov">      23664 :     int vallen = argval ? strlen(argval) : 0;</span>
 <span class="lineNum">    1305 </span>            : 
-<span class="lineNum">    1306 </span><span class="lineCov">      22984 :     if (namelen &gt; MAX_MCP_ARGNAME_LEN) {</span>
+<span class="lineNum">    1306 </span><span class="lineCov">      23664 :     if (namelen &gt; MAX_MCP_ARGNAME_LEN) {</span>
 <span class="lineNum">    1307 </span><span class="lineNoCov">          0 :         return EMCP_ARGNAMELEN;</span>
 <span class="lineNum">    1308 </span>            :     }
-<span class="lineNum">    1309 </span><span class="lineCov">      22984 :     if (vallen + msg-&gt;bytes &gt; MAX_MCP_MESG_SIZE) {</span>
+<span class="lineNum">    1309 </span><span class="lineCov">      23664 :     if (vallen + msg-&gt;bytes &gt; MAX_MCP_MESG_SIZE) {</span>
 <span class="lineNum">    1310 </span><span class="lineNoCov">          0 :         return EMCP_MESGSIZE;</span>
 <span class="lineNum">    1311 </span>            :     }
-<span class="lineNum">    1312 </span><span class="lineCov">      68368 :     while (ptr &amp;&amp; strcasecmp(ptr-&gt;name, argname)) {</span>
-<span class="lineNum">    1313 </span><span class="lineCov">      22400 :         ptr = ptr-&gt;next;</span>
+<span class="lineNum">    1312 </span><span class="lineCov">      70392 :     while (ptr &amp;&amp; strcasecmp(ptr-&gt;name, argname)) {</span>
+<span class="lineNum">    1313 </span><span class="lineCov">      23064 :         ptr = ptr-&gt;next;</span>
 <span class="lineNum">    1314 </span>            :     }
-<span class="lineNum">    1315 </span><span class="lineCov">      22984 :     if (!ptr) {</span>
-<span class="lineNum">    1316 </span><span class="lineCov">      22984 :         if (namelen + vallen + msg-&gt;bytes &gt; MAX_MCP_MESG_SIZE) {</span>
+<span class="lineNum">    1315 </span><span class="lineCov">      23664 :     if (!ptr) {</span>
+<span class="lineNum">    1316 </span><span class="lineCov">      23664 :         if (namelen + vallen + msg-&gt;bytes &gt; MAX_MCP_MESG_SIZE) {</span>
 <span class="lineNum">    1317 </span><span class="lineNoCov">          0 :             return EMCP_MESGSIZE;</span>
 <span class="lineNum">    1318 </span>            :         }
-<span class="lineNum">    1319 </span><span class="lineCov">      22984 :         ptr = (McpArg *) malloc(sizeof(McpArg));</span>
-<span class="lineNum">    1320 </span><span class="lineCov">      22984 :         ptr-&gt;name = (char *) malloc(namelen + 1);</span>
-<span class="lineNum">    1321 </span><span class="lineCov">      22984 :         strcpyn(ptr-&gt;name, namelen + 1, argname);</span>
-<span class="lineNum">    1322 </span><span class="lineCov">      22984 :         ptr-&gt;value = NULL;</span>
-<span class="lineNum">    1323 </span><span class="lineCov">      22984 :         ptr-&gt;last = NULL;</span>
-<span class="lineNum">    1324 </span><span class="lineCov">      22984 :         ptr-&gt;next = NULL;</span>
-<span class="lineNum">    1325 </span><span class="lineCov">      22984 :         if (!msg-&gt;args) {</span>
-<span class="lineNum">    1326 </span><span class="lineCov">       7856 :             msg-&gt;args = ptr;</span>
+<span class="lineNum">    1319 </span><span class="lineCov">      23664 :         ptr = (McpArg *) malloc(sizeof(McpArg));</span>
+<span class="lineNum">    1320 </span><span class="lineCov">      23664 :         ptr-&gt;name = (char *) malloc(namelen + 1);</span>
+<span class="lineNum">    1321 </span><span class="lineCov">      23664 :         strcpyn(ptr-&gt;name, namelen + 1, argname);</span>
+<span class="lineNum">    1322 </span><span class="lineCov">      23664 :         ptr-&gt;value = NULL;</span>
+<span class="lineNum">    1323 </span><span class="lineCov">      23664 :         ptr-&gt;last = NULL;</span>
+<span class="lineNum">    1324 </span><span class="lineCov">      23664 :         ptr-&gt;next = NULL;</span>
+<span class="lineNum">    1325 </span><span class="lineCov">      23664 :         if (!msg-&gt;args) {</span>
+<span class="lineNum">    1326 </span><span class="lineCov">       8088 :             msg-&gt;args = ptr;</span>
 <span class="lineNum">    1327 </span>            :         } else {
-<span class="lineNum">    1328 </span><span class="lineCov">      15128 :             int limit = MAX_MCP_MESG_ARGS;</span>
-<span class="lineNum">    1329 </span><span class="lineCov">      15128 :             McpArg *lastarg = msg-&gt;args;</span>
+<span class="lineNum">    1328 </span><span class="lineCov">      15576 :             int limit = MAX_MCP_MESG_ARGS;</span>
+<span class="lineNum">    1329 </span><span class="lineCov">      15576 :             McpArg *lastarg = msg-&gt;args;</span>
 <span class="lineNum">    1330 </span>            : 
-<span class="lineNum">    1331 </span><span class="lineCov">      37528 :             while (lastarg-&gt;next) {</span>
-<span class="lineNum">    1332 </span><span class="lineCov">       7272 :                 if (limit-- &lt;= 0) {</span>
+<span class="lineNum">    1331 </span><span class="lineCov">      38640 :             while (lastarg-&gt;next) {</span>
+<span class="lineNum">    1332 </span><span class="lineCov">       7488 :                 if (limit-- &lt;= 0) {</span>
 <span class="lineNum">    1333 </span><span class="lineNoCov">          0 :                     free(ptr-&gt;name);</span>
 <span class="lineNum">    1334 </span><span class="lineNoCov">          0 :                     free(ptr);</span>
 <span class="lineNum">    1335 </span><span class="lineNoCov">          0 :                     return EMCP_ARGCOUNT;</span>
 <span class="lineNum">    1336 </span>            :                 }
-<span class="lineNum">    1337 </span><span class="lineCov">       7272 :                 lastarg = lastarg-&gt;next;</span>
+<span class="lineNum">    1337 </span><span class="lineCov">       7488 :                 lastarg = lastarg-&gt;next;</span>
 <span class="lineNum">    1338 </span>            :             }
-<span class="lineNum">    1339 </span><span class="lineCov">      15128 :             lastarg-&gt;next = ptr;</span>
+<span class="lineNum">    1339 </span><span class="lineCov">      15576 :             lastarg-&gt;next = ptr;</span>
 <span class="lineNum">    1340 </span>            :         }
-<span class="lineNum">    1341 </span><span class="lineCov">      22984 :         msg-&gt;bytes += sizeof(McpArg) + namelen + 1;</span>
+<span class="lineNum">    1341 </span><span class="lineCov">      23664 :         msg-&gt;bytes += sizeof(McpArg) + namelen + 1;</span>
 <span class="lineNum">    1342 </span>            :     }
 <span class="lineNum">    1343 </span>            : 
-<span class="lineNum">    1344 </span><span class="lineCov">      22984 :     if (argval) {</span>
-<span class="lineNum">    1345 </span><span class="lineCov">      22984 :         McpArgPart *nu = (McpArgPart *) malloc(sizeof(McpArgPart));</span>
+<span class="lineNum">    1344 </span><span class="lineCov">      23664 :     if (argval) {</span>
+<span class="lineNum">    1345 </span><span class="lineCov">      23664 :         McpArgPart *nu = (McpArgPart *) malloc(sizeof(McpArgPart));</span>
 <span class="lineNum">    1346 </span>            : 
-<span class="lineNum">    1347 </span><span class="lineCov">      22984 :         nu-&gt;value = (char *) malloc(vallen + 1);</span>
-<span class="lineNum">    1348 </span><span class="lineCov">      22984 :         strcpyn(nu-&gt;value, vallen + 1, argval);</span>
-<span class="lineNum">    1349 </span><span class="lineCov">      22984 :         nu-&gt;next = NULL;</span>
+<span class="lineNum">    1347 </span><span class="lineCov">      23664 :         nu-&gt;value = (char *) malloc(vallen + 1);</span>
+<span class="lineNum">    1348 </span><span class="lineCov">      23664 :         strcpyn(nu-&gt;value, vallen + 1, argval);</span>
+<span class="lineNum">    1349 </span><span class="lineCov">      23664 :         nu-&gt;next = NULL;</span>
 <span class="lineNum">    1350 </span>            : 
-<span class="lineNum">    1351 </span><span class="lineCov">      22984 :         if (!ptr-&gt;last) {</span>
-<span class="lineNum">    1352 </span><span class="lineCov">      22984 :             ptr-&gt;value = ptr-&gt;last = nu;</span>
+<span class="lineNum">    1351 </span><span class="lineCov">      23664 :         if (!ptr-&gt;last) {</span>
+<span class="lineNum">    1352 </span><span class="lineCov">      23664 :             ptr-&gt;value = ptr-&gt;last = nu;</span>
 <span class="lineNum">    1353 </span>            :         } else {
 <span class="lineNum">    1354 </span><span class="lineNoCov">          0 :             ptr-&gt;last-&gt;next = nu;</span>
 <span class="lineNum">    1355 </span><span class="lineNoCov">          0 :             ptr-&gt;last = nu;</span>
 <span class="lineNum">    1356 </span>            :         }
-<span class="lineNum">    1357 </span><span class="lineCov">      22984 :         msg-&gt;bytes += sizeof(McpArgPart) + vallen + 1;</span>
+<span class="lineNum">    1357 </span><span class="lineCov">      23664 :         msg-&gt;bytes += sizeof(McpArgPart) + vallen + 1;</span>
 <span class="lineNum">    1358 </span>            :     }
-<span class="lineNum">    1359 </span><span class="lineCov">      22984 :     ptr-&gt;was_shown = 0;</span>
-<span class="lineNum">    1360 </span><span class="lineCov">      22984 :     return EMCP_SUCCESS;</span>
+<span class="lineNum">    1359 </span><span class="lineCov">      23664 :     ptr-&gt;was_shown = 0;</span>
+<span class="lineNum">    1360 </span><span class="lineCov">      23664 :     return EMCP_SUCCESS;</span>
 <span class="lineNum">    1361 </span>            : }
 <span class="lineNum">    1362 </span>            : 
 <span class="lineNum">    1363 </span>            : /*****************************************************************

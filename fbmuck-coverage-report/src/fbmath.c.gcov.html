@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 20:43:00</td>
+            <td class="headerValue">2017-02-26 21:49:59</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">10</td>
@@ -90,9 +90,9 @@
 <span class="lineNum">      28 </span>            : }
 <a name="29"><span class="lineNum">      29 </span>            : </a>
 <span class="lineNum">      30 </span>            : int
-<span class="lineNum">      31 </span><span class="lineCov">        925 : comp_t(short op_type)</span>
+<span class="lineNum">      31 </span><span class="lineCov">       1079 : comp_t(short op_type)</span>
 <span class="lineNum">      32 </span>            : {
-<span class="lineNum">      33 </span><span class="lineCov">        925 :     return (op_type == PROG_INTEGER || op_type == PROG_FLOAT || op_type == PROG_OBJECT);</span>
+<span class="lineNum">      33 </span><span class="lineCov">       1079 :     return (op_type == PROG_INTEGER || op_type == PROG_FLOAT || op_type == PROG_OBJECT);</span>
 <span class="lineNum">      34 </span>            : }
 <a name="35"><span class="lineNum">      35 </span>            : </a>
 <span class="lineNum">      36 </span>            : int
@@ -125,139 +125,139 @@
 <span class="lineNum">      63 </span>            :  * the data and converts bytes into longwords for this routine.
 <a name="64"><span class="lineNum">      64 </span>            :  */</a>
 <span class="lineNum">      65 </span>            : static void
-<span class="lineNum">      66 </span><span class="lineCov">        619 : xMD5Transform(word32 buf[4], word32 const in[16])</span>
+<span class="lineNum">      66 </span><span class="lineCov">        635 : xMD5Transform(word32 buf[4], word32 const in[16])</span>
 <span class="lineNum">      67 </span>            : {
 <span class="lineNum">      68 </span>            :     register word32 a, b, c, d;
 <span class="lineNum">      69 </span>            : 
-<span class="lineNum">      70 </span><span class="lineCov">        619 :     a = buf[0];</span>
-<span class="lineNum">      71 </span><span class="lineCov">        619 :     b = buf[1];</span>
-<span class="lineNum">      72 </span><span class="lineCov">        619 :     c = buf[2];</span>
-<span class="lineNum">      73 </span><span class="lineCov">        619 :     d = buf[3];</span>
+<span class="lineNum">      70 </span><span class="lineCov">        635 :     a = buf[0];</span>
+<span class="lineNum">      71 </span><span class="lineCov">        635 :     b = buf[1];</span>
+<span class="lineNum">      72 </span><span class="lineCov">        635 :     c = buf[2];</span>
+<span class="lineNum">      73 </span><span class="lineCov">        635 :     d = buf[3];</span>
 <span class="lineNum">      74 </span>            : 
-<span class="lineNum">      75 </span><span class="lineCov">        619 :     MD5STEP(F1, a, b, c, d, in[0] + 0xd76aa478, 7);</span>
-<span class="lineNum">      76 </span><span class="lineCov">        619 :     MD5STEP(F1, d, a, b, c, in[1] + 0xe8c7b756, 12);</span>
-<span class="lineNum">      77 </span><span class="lineCov">        619 :     MD5STEP(F1, c, d, a, b, in[2] + 0x242070db, 17);</span>
-<span class="lineNum">      78 </span><span class="lineCov">        619 :     MD5STEP(F1, b, c, d, a, in[3] + 0xc1bdceee, 22);</span>
-<span class="lineNum">      79 </span><span class="lineCov">        619 :     MD5STEP(F1, a, b, c, d, in[4] + 0xf57c0faf, 7);</span>
-<span class="lineNum">      80 </span><span class="lineCov">        619 :     MD5STEP(F1, d, a, b, c, in[5] + 0x4787c62a, 12);</span>
-<span class="lineNum">      81 </span><span class="lineCov">        619 :     MD5STEP(F1, c, d, a, b, in[6] + 0xa8304613, 17);</span>
-<span class="lineNum">      82 </span><span class="lineCov">        619 :     MD5STEP(F1, b, c, d, a, in[7] + 0xfd469501, 22);</span>
-<span class="lineNum">      83 </span><span class="lineCov">        619 :     MD5STEP(F1, a, b, c, d, in[8] + 0x698098d8, 7);</span>
-<span class="lineNum">      84 </span><span class="lineCov">        619 :     MD5STEP(F1, d, a, b, c, in[9] + 0x8b44f7af, 12);</span>
-<span class="lineNum">      85 </span><span class="lineCov">        619 :     MD5STEP(F1, c, d, a, b, in[10] + 0xffff5bb1, 17);</span>
-<span class="lineNum">      86 </span><span class="lineCov">        619 :     MD5STEP(F1, b, c, d, a, in[11] + 0x895cd7be, 22);</span>
-<span class="lineNum">      87 </span><span class="lineCov">        619 :     MD5STEP(F1, a, b, c, d, in[12] + 0x6b901122, 7);</span>
-<span class="lineNum">      88 </span><span class="lineCov">        619 :     MD5STEP(F1, d, a, b, c, in[13] + 0xfd987193, 12);</span>
-<span class="lineNum">      89 </span><span class="lineCov">        619 :     MD5STEP(F1, c, d, a, b, in[14] + 0xa679438e, 17);</span>
-<span class="lineNum">      90 </span><span class="lineCov">        619 :     MD5STEP(F1, b, c, d, a, in[15] + 0x49b40821, 22);</span>
+<span class="lineNum">      75 </span><span class="lineCov">        635 :     MD5STEP(F1, a, b, c, d, in[0] + 0xd76aa478, 7);</span>
+<span class="lineNum">      76 </span><span class="lineCov">        635 :     MD5STEP(F1, d, a, b, c, in[1] + 0xe8c7b756, 12);</span>
+<span class="lineNum">      77 </span><span class="lineCov">        635 :     MD5STEP(F1, c, d, a, b, in[2] + 0x242070db, 17);</span>
+<span class="lineNum">      78 </span><span class="lineCov">        635 :     MD5STEP(F1, b, c, d, a, in[3] + 0xc1bdceee, 22);</span>
+<span class="lineNum">      79 </span><span class="lineCov">        635 :     MD5STEP(F1, a, b, c, d, in[4] + 0xf57c0faf, 7);</span>
+<span class="lineNum">      80 </span><span class="lineCov">        635 :     MD5STEP(F1, d, a, b, c, in[5] + 0x4787c62a, 12);</span>
+<span class="lineNum">      81 </span><span class="lineCov">        635 :     MD5STEP(F1, c, d, a, b, in[6] + 0xa8304613, 17);</span>
+<span class="lineNum">      82 </span><span class="lineCov">        635 :     MD5STEP(F1, b, c, d, a, in[7] + 0xfd469501, 22);</span>
+<span class="lineNum">      83 </span><span class="lineCov">        635 :     MD5STEP(F1, a, b, c, d, in[8] + 0x698098d8, 7);</span>
+<span class="lineNum">      84 </span><span class="lineCov">        635 :     MD5STEP(F1, d, a, b, c, in[9] + 0x8b44f7af, 12);</span>
+<span class="lineNum">      85 </span><span class="lineCov">        635 :     MD5STEP(F1, c, d, a, b, in[10] + 0xffff5bb1, 17);</span>
+<span class="lineNum">      86 </span><span class="lineCov">        635 :     MD5STEP(F1, b, c, d, a, in[11] + 0x895cd7be, 22);</span>
+<span class="lineNum">      87 </span><span class="lineCov">        635 :     MD5STEP(F1, a, b, c, d, in[12] + 0x6b901122, 7);</span>
+<span class="lineNum">      88 </span><span class="lineCov">        635 :     MD5STEP(F1, d, a, b, c, in[13] + 0xfd987193, 12);</span>
+<span class="lineNum">      89 </span><span class="lineCov">        635 :     MD5STEP(F1, c, d, a, b, in[14] + 0xa679438e, 17);</span>
+<span class="lineNum">      90 </span><span class="lineCov">        635 :     MD5STEP(F1, b, c, d, a, in[15] + 0x49b40821, 22);</span>
 <span class="lineNum">      91 </span>            : 
-<span class="lineNum">      92 </span><span class="lineCov">        619 :     MD5STEP(F2, a, b, c, d, in[1] + 0xf61e2562, 5);</span>
-<span class="lineNum">      93 </span><span class="lineCov">        619 :     MD5STEP(F2, d, a, b, c, in[6] + 0xc040b340, 9);</span>
-<span class="lineNum">      94 </span><span class="lineCov">        619 :     MD5STEP(F2, c, d, a, b, in[11] + 0x265e5a51, 14);</span>
-<span class="lineNum">      95 </span><span class="lineCov">        619 :     MD5STEP(F2, b, c, d, a, in[0] + 0xe9b6c7aa, 20);</span>
-<span class="lineNum">      96 </span><span class="lineCov">        619 :     MD5STEP(F2, a, b, c, d, in[5] + 0xd62f105d, 5);</span>
-<span class="lineNum">      97 </span><span class="lineCov">        619 :     MD5STEP(F2, d, a, b, c, in[10] + 0x02441453, 9);</span>
-<span class="lineNum">      98 </span><span class="lineCov">        619 :     MD5STEP(F2, c, d, a, b, in[15] + 0xd8a1e681, 14);</span>
-<span class="lineNum">      99 </span><span class="lineCov">        619 :     MD5STEP(F2, b, c, d, a, in[4] + 0xe7d3fbc8, 20);</span>
-<span class="lineNum">     100 </span><span class="lineCov">        619 :     MD5STEP(F2, a, b, c, d, in[9] + 0x21e1cde6, 5);</span>
-<span class="lineNum">     101 </span><span class="lineCov">        619 :     MD5STEP(F2, d, a, b, c, in[14] + 0xc33707d6, 9);</span>
-<span class="lineNum">     102 </span><span class="lineCov">        619 :     MD5STEP(F2, c, d, a, b, in[3] + 0xf4d50d87, 14);</span>
-<span class="lineNum">     103 </span><span class="lineCov">        619 :     MD5STEP(F2, b, c, d, a, in[8] + 0x455a14ed, 20);</span>
-<span class="lineNum">     104 </span><span class="lineCov">        619 :     MD5STEP(F2, a, b, c, d, in[13] + 0xa9e3e905, 5);</span>
-<span class="lineNum">     105 </span><span class="lineCov">        619 :     MD5STEP(F2, d, a, b, c, in[2] + 0xfcefa3f8, 9);</span>
-<span class="lineNum">     106 </span><span class="lineCov">        619 :     MD5STEP(F2, c, d, a, b, in[7] + 0x676f02d9, 14);</span>
-<span class="lineNum">     107 </span><span class="lineCov">        619 :     MD5STEP(F2, b, c, d, a, in[12] + 0x8d2a4c8a, 20);</span>
+<span class="lineNum">      92 </span><span class="lineCov">        635 :     MD5STEP(F2, a, b, c, d, in[1] + 0xf61e2562, 5);</span>
+<span class="lineNum">      93 </span><span class="lineCov">        635 :     MD5STEP(F2, d, a, b, c, in[6] + 0xc040b340, 9);</span>
+<span class="lineNum">      94 </span><span class="lineCov">        635 :     MD5STEP(F2, c, d, a, b, in[11] + 0x265e5a51, 14);</span>
+<span class="lineNum">      95 </span><span class="lineCov">        635 :     MD5STEP(F2, b, c, d, a, in[0] + 0xe9b6c7aa, 20);</span>
+<span class="lineNum">      96 </span><span class="lineCov">        635 :     MD5STEP(F2, a, b, c, d, in[5] + 0xd62f105d, 5);</span>
+<span class="lineNum">      97 </span><span class="lineCov">        635 :     MD5STEP(F2, d, a, b, c, in[10] + 0x02441453, 9);</span>
+<span class="lineNum">      98 </span><span class="lineCov">        635 :     MD5STEP(F2, c, d, a, b, in[15] + 0xd8a1e681, 14);</span>
+<span class="lineNum">      99 </span><span class="lineCov">        635 :     MD5STEP(F2, b, c, d, a, in[4] + 0xe7d3fbc8, 20);</span>
+<span class="lineNum">     100 </span><span class="lineCov">        635 :     MD5STEP(F2, a, b, c, d, in[9] + 0x21e1cde6, 5);</span>
+<span class="lineNum">     101 </span><span class="lineCov">        635 :     MD5STEP(F2, d, a, b, c, in[14] + 0xc33707d6, 9);</span>
+<span class="lineNum">     102 </span><span class="lineCov">        635 :     MD5STEP(F2, c, d, a, b, in[3] + 0xf4d50d87, 14);</span>
+<span class="lineNum">     103 </span><span class="lineCov">        635 :     MD5STEP(F2, b, c, d, a, in[8] + 0x455a14ed, 20);</span>
+<span class="lineNum">     104 </span><span class="lineCov">        635 :     MD5STEP(F2, a, b, c, d, in[13] + 0xa9e3e905, 5);</span>
+<span class="lineNum">     105 </span><span class="lineCov">        635 :     MD5STEP(F2, d, a, b, c, in[2] + 0xfcefa3f8, 9);</span>
+<span class="lineNum">     106 </span><span class="lineCov">        635 :     MD5STEP(F2, c, d, a, b, in[7] + 0x676f02d9, 14);</span>
+<span class="lineNum">     107 </span><span class="lineCov">        635 :     MD5STEP(F2, b, c, d, a, in[12] + 0x8d2a4c8a, 20);</span>
 <span class="lineNum">     108 </span>            : 
-<span class="lineNum">     109 </span><span class="lineCov">        619 :     MD5STEP(F3, a, b, c, d, in[5] + 0xfffa3942, 4);</span>
-<span class="lineNum">     110 </span><span class="lineCov">        619 :     MD5STEP(F3, d, a, b, c, in[8] + 0x8771f681, 11);</span>
-<span class="lineNum">     111 </span><span class="lineCov">        619 :     MD5STEP(F3, c, d, a, b, in[11] + 0x6d9d6122, 16);</span>
-<span class="lineNum">     112 </span><span class="lineCov">        619 :     MD5STEP(F3, b, c, d, a, in[14] + 0xfde5380c, 23);</span>
-<span class="lineNum">     113 </span><span class="lineCov">        619 :     MD5STEP(F3, a, b, c, d, in[1] + 0xa4beea44, 4);</span>
-<span class="lineNum">     114 </span><span class="lineCov">        619 :     MD5STEP(F3, d, a, b, c, in[4] + 0x4bdecfa9, 11);</span>
-<span class="lineNum">     115 </span><span class="lineCov">        619 :     MD5STEP(F3, c, d, a, b, in[7] + 0xf6bb4b60, 16);</span>
-<span class="lineNum">     116 </span><span class="lineCov">        619 :     MD5STEP(F3, b, c, d, a, in[10] + 0xbebfbc70, 23);</span>
-<span class="lineNum">     117 </span><span class="lineCov">        619 :     MD5STEP(F3, a, b, c, d, in[13] + 0x289b7ec6, 4);</span>
-<span class="lineNum">     118 </span><span class="lineCov">        619 :     MD5STEP(F3, d, a, b, c, in[0] + 0xeaa127fa, 11);</span>
-<span class="lineNum">     119 </span><span class="lineCov">        619 :     MD5STEP(F3, c, d, a, b, in[3] + 0xd4ef3085, 16);</span>
-<span class="lineNum">     120 </span><span class="lineCov">        619 :     MD5STEP(F3, b, c, d, a, in[6] + 0x04881d05, 23);</span>
-<span class="lineNum">     121 </span><span class="lineCov">        619 :     MD5STEP(F3, a, b, c, d, in[9] + 0xd9d4d039, 4);</span>
-<span class="lineNum">     122 </span><span class="lineCov">        619 :     MD5STEP(F3, d, a, b, c, in[12] + 0xe6db99e5, 11);</span>
-<span class="lineNum">     123 </span><span class="lineCov">        619 :     MD5STEP(F3, c, d, a, b, in[15] + 0x1fa27cf8, 16);</span>
-<span class="lineNum">     124 </span><span class="lineCov">        619 :     MD5STEP(F3, b, c, d, a, in[2] + 0xc4ac5665, 23);</span>
+<span class="lineNum">     109 </span><span class="lineCov">        635 :     MD5STEP(F3, a, b, c, d, in[5] + 0xfffa3942, 4);</span>
+<span class="lineNum">     110 </span><span class="lineCov">        635 :     MD5STEP(F3, d, a, b, c, in[8] + 0x8771f681, 11);</span>
+<span class="lineNum">     111 </span><span class="lineCov">        635 :     MD5STEP(F3, c, d, a, b, in[11] + 0x6d9d6122, 16);</span>
+<span class="lineNum">     112 </span><span class="lineCov">        635 :     MD5STEP(F3, b, c, d, a, in[14] + 0xfde5380c, 23);</span>
+<span class="lineNum">     113 </span><span class="lineCov">        635 :     MD5STEP(F3, a, b, c, d, in[1] + 0xa4beea44, 4);</span>
+<span class="lineNum">     114 </span><span class="lineCov">        635 :     MD5STEP(F3, d, a, b, c, in[4] + 0x4bdecfa9, 11);</span>
+<span class="lineNum">     115 </span><span class="lineCov">        635 :     MD5STEP(F3, c, d, a, b, in[7] + 0xf6bb4b60, 16);</span>
+<span class="lineNum">     116 </span><span class="lineCov">        635 :     MD5STEP(F3, b, c, d, a, in[10] + 0xbebfbc70, 23);</span>
+<span class="lineNum">     117 </span><span class="lineCov">        635 :     MD5STEP(F3, a, b, c, d, in[13] + 0x289b7ec6, 4);</span>
+<span class="lineNum">     118 </span><span class="lineCov">        635 :     MD5STEP(F3, d, a, b, c, in[0] + 0xeaa127fa, 11);</span>
+<span class="lineNum">     119 </span><span class="lineCov">        635 :     MD5STEP(F3, c, d, a, b, in[3] + 0xd4ef3085, 16);</span>
+<span class="lineNum">     120 </span><span class="lineCov">        635 :     MD5STEP(F3, b, c, d, a, in[6] + 0x04881d05, 23);</span>
+<span class="lineNum">     121 </span><span class="lineCov">        635 :     MD5STEP(F3, a, b, c, d, in[9] + 0xd9d4d039, 4);</span>
+<span class="lineNum">     122 </span><span class="lineCov">        635 :     MD5STEP(F3, d, a, b, c, in[12] + 0xe6db99e5, 11);</span>
+<span class="lineNum">     123 </span><span class="lineCov">        635 :     MD5STEP(F3, c, d, a, b, in[15] + 0x1fa27cf8, 16);</span>
+<span class="lineNum">     124 </span><span class="lineCov">        635 :     MD5STEP(F3, b, c, d, a, in[2] + 0xc4ac5665, 23);</span>
 <span class="lineNum">     125 </span>            : 
-<span class="lineNum">     126 </span><span class="lineCov">        619 :     MD5STEP(F4, a, b, c, d, in[0] + 0xf4292244, 6);</span>
-<span class="lineNum">     127 </span><span class="lineCov">        619 :     MD5STEP(F4, d, a, b, c, in[7] + 0x432aff97, 10);</span>
-<span class="lineNum">     128 </span><span class="lineCov">        619 :     MD5STEP(F4, c, d, a, b, in[14] + 0xab9423a7, 15);</span>
-<span class="lineNum">     129 </span><span class="lineCov">        619 :     MD5STEP(F4, b, c, d, a, in[5] + 0xfc93a039, 21);</span>
-<span class="lineNum">     130 </span><span class="lineCov">        619 :     MD5STEP(F4, a, b, c, d, in[12] + 0x655b59c3, 6);</span>
-<span class="lineNum">     131 </span><span class="lineCov">        619 :     MD5STEP(F4, d, a, b, c, in[3] + 0x8f0ccc92, 10);</span>
-<span class="lineNum">     132 </span><span class="lineCov">        619 :     MD5STEP(F4, c, d, a, b, in[10] + 0xffeff47d, 15);</span>
-<span class="lineNum">     133 </span><span class="lineCov">        619 :     MD5STEP(F4, b, c, d, a, in[1] + 0x85845dd1, 21);</span>
-<span class="lineNum">     134 </span><span class="lineCov">        619 :     MD5STEP(F4, a, b, c, d, in[8] + 0x6fa87e4f, 6);</span>
-<span class="lineNum">     135 </span><span class="lineCov">        619 :     MD5STEP(F4, d, a, b, c, in[15] + 0xfe2ce6e0, 10);</span>
-<span class="lineNum">     136 </span><span class="lineCov">        619 :     MD5STEP(F4, c, d, a, b, in[6] + 0xa3014314, 15);</span>
-<span class="lineNum">     137 </span><span class="lineCov">        619 :     MD5STEP(F4, b, c, d, a, in[13] + 0x4e0811a1, 21);</span>
-<span class="lineNum">     138 </span><span class="lineCov">        619 :     MD5STEP(F4, a, b, c, d, in[4] + 0xf7537e82, 6);</span>
-<span class="lineNum">     139 </span><span class="lineCov">        619 :     MD5STEP(F4, d, a, b, c, in[11] + 0xbd3af235, 10);</span>
-<span class="lineNum">     140 </span><span class="lineCov">        619 :     MD5STEP(F4, c, d, a, b, in[2] + 0x2ad7d2bb, 15);</span>
-<span class="lineNum">     141 </span><span class="lineCov">        619 :     MD5STEP(F4, b, c, d, a, in[9] + 0xeb86d391, 21);</span>
+<span class="lineNum">     126 </span><span class="lineCov">        635 :     MD5STEP(F4, a, b, c, d, in[0] + 0xf4292244, 6);</span>
+<span class="lineNum">     127 </span><span class="lineCov">        635 :     MD5STEP(F4, d, a, b, c, in[7] + 0x432aff97, 10);</span>
+<span class="lineNum">     128 </span><span class="lineCov">        635 :     MD5STEP(F4, c, d, a, b, in[14] + 0xab9423a7, 15);</span>
+<span class="lineNum">     129 </span><span class="lineCov">        635 :     MD5STEP(F4, b, c, d, a, in[5] + 0xfc93a039, 21);</span>
+<span class="lineNum">     130 </span><span class="lineCov">        635 :     MD5STEP(F4, a, b, c, d, in[12] + 0x655b59c3, 6);</span>
+<span class="lineNum">     131 </span><span class="lineCov">        635 :     MD5STEP(F4, d, a, b, c, in[3] + 0x8f0ccc92, 10);</span>
+<span class="lineNum">     132 </span><span class="lineCov">        635 :     MD5STEP(F4, c, d, a, b, in[10] + 0xffeff47d, 15);</span>
+<span class="lineNum">     133 </span><span class="lineCov">        635 :     MD5STEP(F4, b, c, d, a, in[1] + 0x85845dd1, 21);</span>
+<span class="lineNum">     134 </span><span class="lineCov">        635 :     MD5STEP(F4, a, b, c, d, in[8] + 0x6fa87e4f, 6);</span>
+<span class="lineNum">     135 </span><span class="lineCov">        635 :     MD5STEP(F4, d, a, b, c, in[15] + 0xfe2ce6e0, 10);</span>
+<span class="lineNum">     136 </span><span class="lineCov">        635 :     MD5STEP(F4, c, d, a, b, in[6] + 0xa3014314, 15);</span>
+<span class="lineNum">     137 </span><span class="lineCov">        635 :     MD5STEP(F4, b, c, d, a, in[13] + 0x4e0811a1, 21);</span>
+<span class="lineNum">     138 </span><span class="lineCov">        635 :     MD5STEP(F4, a, b, c, d, in[4] + 0xf7537e82, 6);</span>
+<span class="lineNum">     139 </span><span class="lineCov">        635 :     MD5STEP(F4, d, a, b, c, in[11] + 0xbd3af235, 10);</span>
+<span class="lineNum">     140 </span><span class="lineCov">        635 :     MD5STEP(F4, c, d, a, b, in[2] + 0x2ad7d2bb, 15);</span>
+<span class="lineNum">     141 </span><span class="lineCov">        635 :     MD5STEP(F4, b, c, d, a, in[9] + 0xeb86d391, 21);</span>
 <span class="lineNum">     142 </span>            : 
-<span class="lineNum">     143 </span><span class="lineCov">        619 :     buf[0] += a;</span>
-<span class="lineNum">     144 </span><span class="lineCov">        619 :     buf[1] += b;</span>
-<span class="lineNum">     145 </span><span class="lineCov">        619 :     buf[2] += c;</span>
-<span class="lineNum">     146 </span><span class="lineCov">        619 :     buf[3] += d;</span>
-<span class="lineNum">     147 </span><span class="lineCov">        619 : }</span>
+<span class="lineNum">     143 </span><span class="lineCov">        635 :     buf[0] += a;</span>
+<span class="lineNum">     144 </span><span class="lineCov">        635 :     buf[1] += b;</span>
+<span class="lineNum">     145 </span><span class="lineCov">        635 :     buf[2] += c;</span>
+<span class="lineNum">     146 </span><span class="lineCov">        635 :     buf[3] += d;</span>
+<span class="lineNum">     147 </span><span class="lineCov">        635 : }</span>
 <span class="lineNum">     148 </span>            : 
 <span class="lineNum">     149 </span>            : /*
 <span class="lineNum">     150 </span>            :  * Shuffle the bytes into little-endian order within words, as per the
 <span class="lineNum">     151 </span>            :  * MD5 spec.  Note: this code works regardless of the byte order.
 <a name="152"><span class="lineNum">     152 </span>            :  */</a>
 <span class="lineNum">     153 </span>            : static void
-<span class="lineNum">     154 </span><span class="lineCov">       1238 : byteSwap(word32 * buf, unsigned words)</span>
+<span class="lineNum">     154 </span><span class="lineCov">       1270 : byteSwap(word32 * buf, unsigned words)</span>
 <span class="lineNum">     155 </span>            : {
-<span class="lineNum">     156 </span><span class="lineCov">       1238 :     byte *p = (byte *) buf;</span>
+<span class="lineNum">     156 </span><span class="lineCov">       1270 :     byte *p = (byte *) buf;</span>
 <span class="lineNum">     157 </span>            : 
 <span class="lineNum">     158 </span>            :     do {
-<span class="lineNum">     159 </span><span class="lineCov">      11142 :         *buf++ = (word32) ((unsigned) p[3] &lt;&lt; 8 | p[2]) &lt;&lt; 16 | ((unsigned) p[1] &lt;&lt; 8 | p[0]);</span>
-<span class="lineNum">     160 </span><span class="lineCov">      11142 :         p += 4;</span>
-<span class="lineNum">     161 </span><span class="lineCov">      11142 :     } while (--words);</span>
-<span class="lineNum">     162 </span><span class="lineCov">       1238 : }</span>
+<span class="lineNum">     159 </span><span class="lineCov">      11430 :         *buf++ = (word32) ((unsigned) p[3] &lt;&lt; 8 | p[2]) &lt;&lt; 16 | ((unsigned) p[1] &lt;&lt; 8 | p[0]);</span>
+<span class="lineNum">     160 </span><span class="lineCov">      11430 :         p += 4;</span>
+<span class="lineNum">     161 </span><span class="lineCov">      11430 :     } while (--words);</span>
+<span class="lineNum">     162 </span><span class="lineCov">       1270 : }</span>
 <span class="lineNum">     163 </span>            : 
 <span class="lineNum">     164 </span>            : /*
 <span class="lineNum">     165 </span>            :  * Start MD5 accumulation.  Set bit count to 0 and buffer to mysterious
 <span class="lineNum">     166 </span>            :  * initialization constants.
 <a name="167"><span class="lineNum">     167 </span>            :  */</a>
 <span class="lineNum">     168 </span>            : static void
-<span class="lineNum">     169 </span><span class="lineCov">        619 : xMD5Init(struct xMD5Context *ctx)</span>
+<span class="lineNum">     169 </span><span class="lineCov">        635 : xMD5Init(struct xMD5Context *ctx)</span>
 <span class="lineNum">     170 </span>            : {
-<span class="lineNum">     171 </span><span class="lineCov">        619 :     ctx-&gt;buf[0] = 0x67452301;</span>
-<span class="lineNum">     172 </span><span class="lineCov">        619 :     ctx-&gt;buf[1] = 0xefcdab89;</span>
-<span class="lineNum">     173 </span><span class="lineCov">        619 :     ctx-&gt;buf[2] = 0x98badcfe;</span>
-<span class="lineNum">     174 </span><span class="lineCov">        619 :     ctx-&gt;buf[3] = 0x10325476;</span>
+<span class="lineNum">     171 </span><span class="lineCov">        635 :     ctx-&gt;buf[0] = 0x67452301;</span>
+<span class="lineNum">     172 </span><span class="lineCov">        635 :     ctx-&gt;buf[1] = 0xefcdab89;</span>
+<span class="lineNum">     173 </span><span class="lineCov">        635 :     ctx-&gt;buf[2] = 0x98badcfe;</span>
+<span class="lineNum">     174 </span><span class="lineCov">        635 :     ctx-&gt;buf[3] = 0x10325476;</span>
 <span class="lineNum">     175 </span>            : 
-<span class="lineNum">     176 </span><span class="lineCov">        619 :     ctx-&gt;bytes[0] = 0;</span>
-<span class="lineNum">     177 </span><span class="lineCov">        619 :     ctx-&gt;bytes[1] = 0;</span>
-<span class="lineNum">     178 </span><span class="lineCov">        619 : }</span>
+<span class="lineNum">     176 </span><span class="lineCov">        635 :     ctx-&gt;bytes[0] = 0;</span>
+<span class="lineNum">     177 </span><span class="lineCov">        635 :     ctx-&gt;bytes[1] = 0;</span>
+<span class="lineNum">     178 </span><span class="lineCov">        635 : }</span>
 <span class="lineNum">     179 </span>            : 
 <span class="lineNum">     180 </span>            : /*
 <span class="lineNum">     181 </span>            :  * Update context to reflect the concatenation of another buffer full
 <span class="lineNum">     182 </span>            :  * of bytes.
 <a name="183"><span class="lineNum">     183 </span>            :  */</a>
 <span class="lineNum">     184 </span>            : static void
-<span class="lineNum">     185 </span><span class="lineCov">        619 : xMD5Update(struct xMD5Context *ctx, const byte * buf, int len)</span>
+<span class="lineNum">     185 </span><span class="lineCov">        635 : xMD5Update(struct xMD5Context *ctx, const byte * buf, int len)</span>
 <span class="lineNum">     186 </span>            : {
 <span class="lineNum">     187 </span>            :     word32 t;
 <span class="lineNum">     188 </span>            : 
 <span class="lineNum">     189 </span>            :     /* Update byte count */
 <span class="lineNum">     190 </span>            : 
-<span class="lineNum">     191 </span><span class="lineCov">        619 :     t = ctx-&gt;bytes[0];</span>
-<span class="lineNum">     192 </span><span class="lineCov">        619 :     if ((ctx-&gt;bytes[0] = t + len) &lt; t)</span>
+<span class="lineNum">     191 </span><span class="lineCov">        635 :     t = ctx-&gt;bytes[0];</span>
+<span class="lineNum">     192 </span><span class="lineCov">        635 :     if ((ctx-&gt;bytes[0] = t + len) &lt; t)</span>
 <span class="lineNum">     193 </span><span class="lineNoCov">          0 :         ctx-&gt;bytes[1]++;     /* Carry from low to high */</span>
 <span class="lineNum">     194 </span>            : 
-<span class="lineNum">     195 </span><span class="lineCov">        619 :     t = 64 - (t &amp; 0x3f);    /* Space available in ctx-&gt;in (at least 1) */</span>
-<span class="lineNum">     196 </span><span class="lineCov">        619 :     if ((unsigned) t &gt; (unsigned) len) {</span>
-<span class="lineNum">     197 </span><span class="lineCov">        619 :         bcopy(buf, (byte *) ctx-&gt;in + 64 - (unsigned) t, len);</span>
-<span class="lineNum">     198 </span><span class="lineCov">        619 :         return;</span>
+<span class="lineNum">     195 </span><span class="lineCov">        635 :     t = 64 - (t &amp; 0x3f);    /* Space available in ctx-&gt;in (at least 1) */</span>
+<span class="lineNum">     196 </span><span class="lineCov">        635 :     if ((unsigned) t &gt; (unsigned) len) {</span>
+<span class="lineNum">     197 </span><span class="lineCov">        635 :         bcopy(buf, (byte *) ctx-&gt;in + 64 - (unsigned) t, len);</span>
+<span class="lineNum">     198 </span><span class="lineCov">        635 :         return;</span>
 <span class="lineNum">     199 </span>            :     }
 <span class="lineNum">     200 </span>            :     /* First chunk is an odd size */
 <span class="lineNum">     201 </span><span class="lineNoCov">          0 :     bcopy(buf, (byte *) ctx-&gt;in + 64 - (unsigned) t, (unsigned) t);</span>
@@ -284,47 +284,47 @@
 <span class="lineNum">     222 </span>            :  * 1 0* (64-bit count of bits processed, MSB-first)
 <a name="223"><span class="lineNum">     223 </span>            :  */</a>
 <span class="lineNum">     224 </span>            : static void
-<span class="lineNum">     225 </span><span class="lineCov">        619 : xMD5Final(byte digest[16], struct xMD5Context *ctx)</span>
+<span class="lineNum">     225 </span><span class="lineCov">        635 : xMD5Final(byte digest[16], struct xMD5Context *ctx)</span>
 <span class="lineNum">     226 </span>            : {
-<span class="lineNum">     227 </span><span class="lineCov">        619 :     int count = (int) (ctx-&gt;bytes[0] &amp; 0x3f);    /* Bytes in ctx-&gt;in */</span>
-<span class="lineNum">     228 </span><span class="lineCov">        619 :     byte *p = (byte *) ctx-&gt;in + count;      /* First unused byte */</span>
+<span class="lineNum">     227 </span><span class="lineCov">        635 :     int count = (int) (ctx-&gt;bytes[0] &amp; 0x3f);    /* Bytes in ctx-&gt;in */</span>
+<span class="lineNum">     228 </span><span class="lineCov">        635 :     byte *p = (byte *) ctx-&gt;in + count;      /* First unused byte */</span>
 <span class="lineNum">     229 </span>            : 
 <span class="lineNum">     230 </span>            :     /* Set the first char of padding to 0x80.  There is always room. */
-<span class="lineNum">     231 </span><span class="lineCov">        619 :     *p++ = 0x80;</span>
+<span class="lineNum">     231 </span><span class="lineCov">        635 :     *p++ = 0x80;</span>
 <span class="lineNum">     232 </span>            : 
 <span class="lineNum">     233 </span>            :     /* Bytes of padding needed to make 56 bytes (-8..55) */
-<span class="lineNum">     234 </span><span class="lineCov">        619 :     count = 56 - 1 - count;</span>
+<span class="lineNum">     234 </span><span class="lineCov">        635 :     count = 56 - 1 - count;</span>
 <span class="lineNum">     235 </span>            : 
-<span class="lineNum">     236 </span><span class="lineCov">        619 :     if (count &lt; 0) {         /* Padding forces an extra block */</span>
+<span class="lineNum">     236 </span><span class="lineCov">        635 :     if (count &lt; 0) {         /* Padding forces an extra block */</span>
 <span class="lineNum">     237 </span><span class="lineNoCov">          0 :         bzero(p, count + 8);</span>
 <span class="lineNum">     238 </span><span class="lineNoCov">          0 :         byteSwap(ctx-&gt;in, 16);</span>
 <span class="lineNum">     239 </span><span class="lineNoCov">          0 :         xMD5Transform(ctx-&gt;buf, ctx-&gt;in);</span>
 <span class="lineNum">     240 </span><span class="lineNoCov">          0 :         p = (byte *) ctx-&gt;in;</span>
 <span class="lineNum">     241 </span><span class="lineNoCov">          0 :         count = 56;</span>
 <span class="lineNum">     242 </span>            :     }
-<span class="lineNum">     243 </span><span class="lineCov">        619 :     bzero(p, count + 8);</span>
-<span class="lineNum">     244 </span><span class="lineCov">        619 :     byteSwap(ctx-&gt;in, 14);</span>
+<span class="lineNum">     243 </span><span class="lineCov">        635 :     bzero(p, count + 8);</span>
+<span class="lineNum">     244 </span><span class="lineCov">        635 :     byteSwap(ctx-&gt;in, 14);</span>
 <span class="lineNum">     245 </span>            : 
 <span class="lineNum">     246 </span>            :     /* Append length in bits and transform */
-<span class="lineNum">     247 </span><span class="lineCov">        619 :     ctx-&gt;in[14] = ctx-&gt;bytes[0] &lt;&lt; 3;</span>
-<span class="lineNum">     248 </span><span class="lineCov">        619 :     ctx-&gt;in[15] = ctx-&gt;bytes[1] &lt;&lt; 3 | ctx-&gt;bytes[0] &gt;&gt; 29;</span>
-<span class="lineNum">     249 </span><span class="lineCov">        619 :     xMD5Transform(ctx-&gt;buf, ctx-&gt;in);</span>
+<span class="lineNum">     247 </span><span class="lineCov">        635 :     ctx-&gt;in[14] = ctx-&gt;bytes[0] &lt;&lt; 3;</span>
+<span class="lineNum">     248 </span><span class="lineCov">        635 :     ctx-&gt;in[15] = ctx-&gt;bytes[1] &lt;&lt; 3 | ctx-&gt;bytes[0] &gt;&gt; 29;</span>
+<span class="lineNum">     249 </span><span class="lineCov">        635 :     xMD5Transform(ctx-&gt;buf, ctx-&gt;in);</span>
 <span class="lineNum">     250 </span>            : 
-<span class="lineNum">     251 </span><span class="lineCov">        619 :     byteSwap(ctx-&gt;buf, 4);</span>
-<span class="lineNum">     252 </span><span class="lineCov">        619 :     bcopy((byte *) ctx-&gt;buf, digest, 16);</span>
-<span class="lineNum">     253 </span><span class="lineCov">        619 :     bzero((byte *) ctx, sizeof(ctx));</span>
-<span class="lineNum">     254 </span><span class="lineCov">        619 : }</span>
+<span class="lineNum">     251 </span><span class="lineCov">        635 :     byteSwap(ctx-&gt;buf, 4);</span>
+<span class="lineNum">     252 </span><span class="lineCov">        635 :     bcopy((byte *) ctx-&gt;buf, digest, 16);</span>
+<span class="lineNum">     253 </span><span class="lineCov">        635 :     bzero((byte *) ctx, sizeof(ctx));</span>
+<span class="lineNum">     254 </span><span class="lineCov">        635 : }</span>
 <span class="lineNum">     255 </span>            : 
 <a name="256"><span class="lineNum">     256 </span>            : /* dest buffer MUST be at least 16 bytes long. */</a>
 <span class="lineNum">     257 </span>            : static void
-<span class="lineNum">     258 </span><span class="lineCov">        619 : MD5hash(void *dest, const void *orig, int len)</span>
+<span class="lineNum">     258 </span><span class="lineCov">        635 : MD5hash(void *dest, const void *orig, int len)</span>
 <span class="lineNum">     259 </span>            : {
 <span class="lineNum">     260 </span>            :     struct xMD5Context context;
 <span class="lineNum">     261 </span>            : 
-<span class="lineNum">     262 </span><span class="lineCov">        619 :     xMD5Init(&amp;context);</span>
-<span class="lineNum">     263 </span><span class="lineCov">        619 :     xMD5Update(&amp;context, (const byte *) orig, len);</span>
-<span class="lineNum">     264 </span><span class="lineCov">        619 :     xMD5Final((byte *) dest, &amp;context);</span>
-<span class="lineNum">     265 </span><span class="lineCov">        619 : }</span>
+<span class="lineNum">     262 </span><span class="lineCov">        635 :     xMD5Init(&amp;context);</span>
+<span class="lineNum">     263 </span><span class="lineCov">        635 :     xMD5Update(&amp;context, (const byte *) orig, len);</span>
+<span class="lineNum">     264 </span><span class="lineCov">        635 :     xMD5Final((byte *) dest, &amp;context);</span>
+<span class="lineNum">     265 </span><span class="lineCov">        635 : }</span>
 <span class="lineNum">     266 </span>            : 
 <span class="lineNum">     267 </span>            : /*
 <span class="lineNum">     268 </span>            :  * outbuf MUST be at least (((strlen(inbuf)+3)/4)*3)+1 chars long to read
@@ -381,64 +381,64 @@
 <span class="lineNum">     319 </span>            :  * of the input buffer, plus five bytes.
 <a name="320"><span class="lineNum">     320 </span>            :  */</a>
 <span class="lineNum">     321 </span>            : static void
-<span class="lineNum">     322 </span><span class="lineCov">        619 : Base64Encode(char *outbuf, const void *inbuf, size_t inlen)</span>
+<span class="lineNum">     322 </span><span class="lineCov">        635 : Base64Encode(char *outbuf, const void *inbuf, size_t inlen)</span>
 <span class="lineNum">     323 </span>            : {
-<span class="lineNum">     324 </span><span class="lineCov">        619 :     const char b64[] = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;;</span>
-<span class="lineNum">     325 </span><span class="lineCov">        619 :     const unsigned char *inb = (unsigned char *) inbuf;</span>
-<span class="lineNum">     326 </span><span class="lineCov">        619 :     unsigned char *out = NULL;</span>
+<span class="lineNum">     324 </span><span class="lineCov">        635 :     const char b64[] = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;;</span>
+<span class="lineNum">     325 </span><span class="lineCov">        635 :     const unsigned char *inb = (unsigned char *) inbuf;</span>
+<span class="lineNum">     326 </span><span class="lineCov">        635 :     unsigned char *out = NULL;</span>
 <span class="lineNum">     327 </span>            :     size_t numb;
 <span class="lineNum">     328 </span>            :     size_t endcnt;
 <span class="lineNum">     329 </span>            :     size_t i;
 <span class="lineNum">     330 </span>            : 
-<span class="lineNum">     331 </span><span class="lineCov">        619 :     numb = inlen;</span>
-<span class="lineNum">     332 </span><span class="lineCov">        619 :     if (numb &gt; 0) {</span>
-<span class="lineNum">     333 </span><span class="lineCov">        619 :         unsigned int acc = 0;</span>
-<span class="lineNum">     334 </span><span class="lineCov">        619 :         out = (unsigned char *) outbuf;</span>
-<span class="lineNum">     335 </span><span class="lineCov">      10523 :         for (i = 0; i &lt; numb; i++) {</span>
-<span class="lineNum">     336 </span><span class="lineCov">       9904 :             if (i % 3 == 0) {</span>
-<span class="lineNum">     337 </span><span class="lineCov">       3714 :                 acc = inb[i];</span>
-<span class="lineNum">     338 </span><span class="lineCov">       6190 :             } else if (i % 3 == 1) {</span>
-<span class="lineNum">     339 </span><span class="lineCov">       3095 :                 acc &lt;&lt;= 8;</span>
-<span class="lineNum">     340 </span><span class="lineCov">       3095 :                 acc |= inb[i];</span>
+<span class="lineNum">     331 </span><span class="lineCov">        635 :     numb = inlen;</span>
+<span class="lineNum">     332 </span><span class="lineCov">        635 :     if (numb &gt; 0) {</span>
+<span class="lineNum">     333 </span><span class="lineCov">        635 :         unsigned int acc = 0;</span>
+<span class="lineNum">     334 </span><span class="lineCov">        635 :         out = (unsigned char *) outbuf;</span>
+<span class="lineNum">     335 </span><span class="lineCov">      10795 :         for (i = 0; i &lt; numb; i++) {</span>
+<span class="lineNum">     336 </span><span class="lineCov">      10160 :             if (i % 3 == 0) {</span>
+<span class="lineNum">     337 </span><span class="lineCov">       3810 :                 acc = inb[i];</span>
+<span class="lineNum">     338 </span><span class="lineCov">       6350 :             } else if (i % 3 == 1) {</span>
+<span class="lineNum">     339 </span><span class="lineCov">       3175 :                 acc &lt;&lt;= 8;</span>
+<span class="lineNum">     340 </span><span class="lineCov">       3175 :                 acc |= inb[i];</span>
 <span class="lineNum">     341 </span>            :             } else {
-<span class="lineNum">     342 </span><span class="lineCov">       3095 :                 acc &lt;&lt;= 8;</span>
-<span class="lineNum">     343 </span><span class="lineCov">       3095 :                 acc |= inb[i];</span>
+<span class="lineNum">     342 </span><span class="lineCov">       3175 :                 acc &lt;&lt;= 8;</span>
+<span class="lineNum">     343 </span><span class="lineCov">       3175 :                 acc |= inb[i];</span>
 <span class="lineNum">     344 </span>            : 
-<span class="lineNum">     345 </span><span class="lineCov">       3095 :                 *out++ = b64[(acc &gt;&gt; 18) &amp; 0x3f];</span>
-<span class="lineNum">     346 </span><span class="lineCov">       3095 :                 *out++ = b64[(acc &gt;&gt; 12) &amp; 0x3f];</span>
-<span class="lineNum">     347 </span><span class="lineCov">       3095 :                 *out++ = b64[(acc &gt;&gt; 6) &amp; 0x3f];</span>
-<span class="lineNum">     348 </span><span class="lineCov">       3095 :                 *out++ = b64[acc &amp; 0x3f];</span>
+<span class="lineNum">     345 </span><span class="lineCov">       3175 :                 *out++ = b64[(acc &gt;&gt; 18) &amp; 0x3f];</span>
+<span class="lineNum">     346 </span><span class="lineCov">       3175 :                 *out++ = b64[(acc &gt;&gt; 12) &amp; 0x3f];</span>
+<span class="lineNum">     347 </span><span class="lineCov">       3175 :                 *out++ = b64[(acc &gt;&gt; 6) &amp; 0x3f];</span>
+<span class="lineNum">     348 </span><span class="lineCov">       3175 :                 *out++ = b64[acc &amp; 0x3f];</span>
 <span class="lineNum">     349 </span>            :             }
 <span class="lineNum">     350 </span>            :         }
-<span class="lineNum">     351 </span><span class="lineCov">        619 :         if (i % 3 == 0) {</span>
+<span class="lineNum">     351 </span><span class="lineCov">        635 :         if (i % 3 == 0) {</span>
 <span class="lineNum">     352 </span><span class="lineNoCov">          0 :             endcnt = 0;</span>
-<span class="lineNum">     353 </span><span class="lineCov">        619 :         } else if (i % 3 == 1) {</span>
-<span class="lineNum">     354 </span><span class="lineCov">        619 :             endcnt = 2;</span>
+<span class="lineNum">     353 </span><span class="lineCov">        635 :         } else if (i % 3 == 1) {</span>
+<span class="lineNum">     354 </span><span class="lineCov">        635 :             endcnt = 2;</span>
 <span class="lineNum">     355 </span>            :         } else {
 <span class="lineNum">     356 </span><span class="lineNoCov">          0 :             endcnt = 1;</span>
 <span class="lineNum">     357 </span>            :         }
-<span class="lineNum">     358 </span><span class="lineCov">       1857 :         for (; i % 3; i++) {</span>
-<span class="lineNum">     359 </span><span class="lineCov">       1238 :             acc &lt;&lt;= 8;</span>
+<span class="lineNum">     358 </span><span class="lineCov">       1905 :         for (; i % 3; i++) {</span>
+<span class="lineNum">     359 </span><span class="lineCov">       1270 :             acc &lt;&lt;= 8;</span>
 <span class="lineNum">     360 </span>            :         }
-<span class="lineNum">     361 </span><span class="lineCov">        619 :         if (endcnt &gt; 0) {</span>
-<span class="lineNum">     362 </span><span class="lineCov">        619 :             *out++ = b64[(acc &gt;&gt; 18) &amp; 0x3f];</span>
-<span class="lineNum">     363 </span><span class="lineCov">        619 :             *out++ = b64[(acc &gt;&gt; 12) &amp; 0x3f];</span>
-<span class="lineNum">     364 </span><span class="lineCov">        619 :             if (endcnt &lt; 2)</span>
+<span class="lineNum">     361 </span><span class="lineCov">        635 :         if (endcnt &gt; 0) {</span>
+<span class="lineNum">     362 </span><span class="lineCov">        635 :             *out++ = b64[(acc &gt;&gt; 18) &amp; 0x3f];</span>
+<span class="lineNum">     363 </span><span class="lineCov">        635 :             *out++ = b64[(acc &gt;&gt; 12) &amp; 0x3f];</span>
+<span class="lineNum">     364 </span><span class="lineCov">        635 :             if (endcnt &lt; 2)</span>
 <span class="lineNum">     365 </span><span class="lineNoCov">          0 :                 *out++ = b64[(acc &gt;&gt; 6) &amp; 0x3f];</span>
-<span class="lineNum">     366 </span><span class="lineCov">        619 :             if (endcnt &lt; 1)</span>
+<span class="lineNum">     366 </span><span class="lineCov">        635 :             if (endcnt &lt; 1)</span>
 <span class="lineNum">     367 </span><span class="lineNoCov">          0 :                 *out++ = b64[acc &amp; 0x3f];</span>
-<span class="lineNum">     368 </span><span class="lineCov">       2476 :             while (endcnt-- &gt; 0)</span>
-<span class="lineNum">     369 </span><span class="lineCov">       1238 :                 *out++ = '=';</span>
+<span class="lineNum">     368 </span><span class="lineCov">       2540 :             while (endcnt-- &gt; 0)</span>
+<span class="lineNum">     369 </span><span class="lineCov">       1270 :                 *out++ = '=';</span>
 <span class="lineNum">     370 </span>            :         }
 <span class="lineNum">     371 </span>            :     }
-<span class="lineNum">     372 </span><span class="lineCov">        619 :     *out++ = '\0';</span>
+<span class="lineNum">     372 </span><span class="lineCov">        635 :     *out++ = '\0';</span>
 <span class="lineNum">     373 </span>            : 
-<span class="lineNum">     374 </span><span class="lineCov">        619 :     out = (unsigned char *) outbuf;</span>
-<span class="lineNum">     375 </span><span class="lineCov">      16094 :     while (*out) {</span>
-<span class="lineNum">     376 </span><span class="lineCov">      14856 :         if (*out++ &gt; 127)</span>
+<span class="lineNum">     374 </span><span class="lineCov">        635 :     out = (unsigned char *) outbuf;</span>
+<span class="lineNum">     375 </span><span class="lineCov">      16510 :     while (*out) {</span>
+<span class="lineNum">     376 </span><span class="lineCov">      15240 :         if (*out++ &gt; 127)</span>
 <span class="lineNum">     377 </span><span class="lineNoCov">          0 :             abort();</span>
 <span class="lineNum">     378 </span>            :     }
-<span class="lineNum">     379 </span><span class="lineCov">        619 : }</span>
+<span class="lineNum">     379 </span><span class="lineCov">        635 : }</span>
 <a name="380"><span class="lineNum">     380 </span>            : </a>
 <span class="lineNum">     381 </span>            : void
 <span class="lineNum">     382 </span><span class="lineNoCov">          0 : MD5hex(void *dest, const void *orig, int len)</span>
@@ -454,13 +454,13 @@
 <span class="lineNum">     392 </span>            : 
 <a name="393"><span class="lineNum">     393 </span>            : /* dest buffer MUST be at least 24 chars long. */</a>
 <span class="lineNum">     394 </span>            : void
-<span class="lineNum">     395 </span><span class="lineCov">        619 : MD5base64(char *dest, const void *orig, int len)</span>
+<span class="lineNum">     395 </span><span class="lineCov">        635 : MD5base64(char *dest, const void *orig, int len)</span>
 <span class="lineNum">     396 </span>            : {
-<span class="lineNum">     397 </span><span class="lineCov">        619 :     void *tmp = (void *) malloc(16);</span>
-<span class="lineNum">     398 </span><span class="lineCov">        619 :     MD5hash(tmp, orig, len);</span>
-<span class="lineNum">     399 </span><span class="lineCov">        619 :     Base64Encode(dest, tmp, 16);</span>
-<span class="lineNum">     400 </span><span class="lineCov">        619 :     free(tmp);</span>
-<span class="lineNum">     401 </span><span class="lineCov">        619 : }</span>
+<span class="lineNum">     397 </span><span class="lineCov">        635 :     void *tmp = (void *) malloc(16);</span>
+<span class="lineNum">     398 </span><span class="lineCov">        635 :     MD5hash(tmp, orig, len);</span>
+<span class="lineNum">     399 </span><span class="lineCov">        635 :     Base64Encode(dest, tmp, 16);</span>
+<span class="lineNum">     400 </span><span class="lineCov">        635 :     free(tmp);</span>
+<span class="lineNum">     401 </span><span class="lineCov">        635 : }</span>
 <span class="lineNum">     402 </span>            : 
 <span class="lineNum">     403 </span>            : /* Create the initial buffer for the given connection and dump some semi-
 <a name="404"><span class="lineNum">     404 </span>            :    random string into it to start.  If seed is zero, seed off the clock. */</a>
