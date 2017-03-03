@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 22:21:49</td>
+            <td class="headerValue">2017-03-02 21:39:54</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -574,23 +574,23 @@
 <span class="lineNum">     512 </span>            : }
 <a name="513"><span class="lineNum">     513 </span>            : </a>
 <span class="lineNum">     514 </span>            : void
-<span class="lineNum">     515 </span><span class="lineCov">          3 : prim_parselock(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     515 </span><span class="lineCov">          2 : prim_parselock(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     516 </span>            : {
 <span class="lineNum">     517 </span>            :     struct boolexp *lok;
 <span class="lineNum">     518 </span>            : 
-<span class="lineNum">     519 </span><span class="lineCov">          3 :     CHECKOP(1);</span>
-<span class="lineNum">     520 </span><span class="lineCov">          3 :     oper1 = POP();              /* string: lock string */</span>
-<span class="lineNum">     521 </span><span class="lineCov">          3 :     CHECKOFLOW(1);</span>
-<span class="lineNum">     522 </span><span class="lineCov">          3 :     if (oper1-&gt;type != PROG_STRING)</span>
+<span class="lineNum">     519 </span><span class="lineCov">          2 :     CHECKOP(1);</span>
+<span class="lineNum">     520 </span><span class="lineCov">          2 :     oper1 = POP();              /* string: lock string */</span>
+<span class="lineNum">     521 </span><span class="lineCov">          2 :     CHECKOFLOW(1);</span>
+<span class="lineNum">     522 </span><span class="lineCov">          2 :     if (oper1-&gt;type != PROG_STRING)</span>
 <span class="lineNum">     523 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Invalid argument.&quot;);</span>
-<span class="lineNum">     524 </span><span class="lineCov">          3 :     if (oper1-&gt;data.string != (struct shared_string *) NULL) {</span>
-<span class="lineNum">     525 </span><span class="lineCov">          3 :         lok = parse_boolexp(fr-&gt;descr, ProgUID, oper1-&gt;data.string-&gt;data, 0);</span>
+<span class="lineNum">     524 </span><span class="lineCov">          2 :     if (oper1-&gt;data.string != (struct shared_string *) NULL) {</span>
+<span class="lineNum">     525 </span><span class="lineCov">          2 :         lok = parse_boolexp(fr-&gt;descr, ProgUID, oper1-&gt;data.string-&gt;data, 0);</span>
 <span class="lineNum">     526 </span>            :     } else {
 <span class="lineNum">     527 </span><span class="lineNoCov">          0 :         lok = TRUE_BOOLEXP;</span>
 <span class="lineNum">     528 </span>            :     }
-<span class="lineNum">     529 </span><span class="lineCov">          3 :     CLEAR(oper1);</span>
-<span class="lineNum">     530 </span><span class="lineCov">          3 :     PushLock(lok);</span>
-<span class="lineNum">     531 </span><span class="lineCov">          3 :     free_boolexp(lok);</span>
+<span class="lineNum">     529 </span><span class="lineCov">          2 :     CLEAR(oper1);</span>
+<span class="lineNum">     530 </span><span class="lineCov">          2 :     PushLock(lok);</span>
+<span class="lineNum">     531 </span><span class="lineCov">          2 :     free_boolexp(lok);</span>
 <span class="lineNum">     532 </span>            : }
 <a name="533"><span class="lineNum">     533 </span>            : </a>
 <span class="lineNum">     534 </span>            : void

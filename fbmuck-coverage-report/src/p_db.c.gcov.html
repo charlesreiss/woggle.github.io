@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 22:21:49</td>
+            <td class="headerValue">2017-03-02 21:39:54</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">6</td>
@@ -297,27 +297,27 @@
 <span class="lineNum">     235 </span>            : }
 <a name="236"><span class="lineNum">     236 </span>            : </a>
 <span class="lineNum">     237 </span>            : void
-<span class="lineNum">     238 </span><span class="lineCov">          2 : prim_pennies(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     238 </span><span class="lineCov">          1 : prim_pennies(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     239 </span>            : {
-<span class="lineNum">     240 </span><span class="lineCov">          2 :     CHECKOP(1);</span>
-<span class="lineNum">     241 </span><span class="lineCov">          2 :     oper1 = POP();</span>
-<span class="lineNum">     242 </span><span class="lineCov">          2 :     if (!valid_object(oper1))</span>
+<span class="lineNum">     240 </span><span class="lineCov">          1 :     CHECKOP(1);</span>
+<span class="lineNum">     241 </span><span class="lineCov">          1 :     oper1 = POP();</span>
+<span class="lineNum">     242 </span><span class="lineCov">          1 :     if (!valid_object(oper1))</span>
 <span class="lineNum">     243 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Invalid argument.&quot;);</span>
-<span class="lineNum">     244 </span><span class="lineCov">          2 :     if (mlev &lt; tp_pennies_muf_mlev)</span>
+<span class="lineNum">     244 </span><span class="lineCov">          1 :     if (mlev &lt; tp_pennies_muf_mlev)</span>
 <span class="lineNum">     245 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Permission Denied (mlev &lt; tp_pennies_muf_mlev)&quot;);</span>
-<span class="lineNum">     246 </span><span class="lineCov">          2 :     CHECKREMOTE(oper1-&gt;data.objref);</span>
-<span class="lineNum">     247 </span><span class="lineCov">          2 :     switch (Typeof(oper1-&gt;data.objref)) {</span>
+<span class="lineNum">     246 </span><span class="lineCov">          1 :     CHECKREMOTE(oper1-&gt;data.objref);</span>
+<span class="lineNum">     247 </span><span class="lineCov">          1 :     switch (Typeof(oper1-&gt;data.objref)) {</span>
 <span class="lineNum">     248 </span>            :     case TYPE_PLAYER:
 <span class="lineNum">     249 </span><span class="lineNoCov">          0 :         result = GETVALUE(oper1-&gt;data.objref);</span>
 <span class="lineNum">     250 </span><span class="lineNoCov">          0 :         break;</span>
 <span class="lineNum">     251 </span>            :     case TYPE_THING:
-<span class="lineNum">     252 </span><span class="lineCov">          2 :         result = GETVALUE(oper1-&gt;data.objref);</span>
-<span class="lineNum">     253 </span><span class="lineCov">          2 :         break;</span>
+<span class="lineNum">     252 </span><span class="lineCov">          1 :         result = GETVALUE(oper1-&gt;data.objref);</span>
+<span class="lineNum">     253 </span><span class="lineCov">          1 :         break;</span>
 <span class="lineNum">     254 </span>            :     default:
 <span class="lineNum">     255 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Invalid argument.&quot;);</span>
 <span class="lineNum">     256 </span>            :     }
-<span class="lineNum">     257 </span><span class="lineCov">          2 :     CLEAR(oper1);</span>
-<span class="lineNum">     258 </span><span class="lineCov">          2 :     PushInt(result);</span>
+<span class="lineNum">     257 </span><span class="lineCov">          1 :     CLEAR(oper1);</span>
+<span class="lineNum">     258 </span><span class="lineCov">          1 :     PushInt(result);</span>
 <span class="lineNum">     259 </span>            : }
 <a name="260"><span class="lineNum">     260 </span>            : </a>
 <span class="lineNum">     261 </span>            : void
@@ -916,21 +916,21 @@
 <span class="lineNum">     854 </span>            : }
 <a name="855"><span class="lineNum">     855 </span>            : </a>
 <span class="lineNum">     856 </span>            : void
-<span class="lineNum">     857 </span><span class="lineCov">          2 : prim_thingp(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     857 </span><span class="lineCov">          1 : prim_thingp(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     858 </span>            : {
-<span class="lineNum">     859 </span><span class="lineCov">          2 :     CHECKOP(1);</span>
-<span class="lineNum">     860 </span><span class="lineCov">          2 :     oper1 = POP();</span>
-<span class="lineNum">     861 </span><span class="lineCov">          2 :     if (oper1-&gt;type != PROG_OBJECT)</span>
+<span class="lineNum">     859 </span><span class="lineCov">          1 :     CHECKOP(1);</span>
+<span class="lineNum">     860 </span><span class="lineCov">          1 :     oper1 = POP();</span>
+<span class="lineNum">     861 </span><span class="lineCov">          1 :     if (oper1-&gt;type != PROG_OBJECT)</span>
 <span class="lineNum">     862 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Invalid argument type.&quot;);</span>
-<span class="lineNum">     863 </span><span class="lineCov">          2 :     if (!valid_object(oper1) &amp;&amp; !is_home(oper1)) {</span>
+<span class="lineNum">     863 </span><span class="lineCov">          1 :     if (!valid_object(oper1) &amp;&amp; !is_home(oper1)) {</span>
 <span class="lineNum">     864 </span><span class="lineNoCov">          0 :         result = 0;</span>
 <span class="lineNum">     865 </span>            :     } else {
-<span class="lineNum">     866 </span><span class="lineCov">          2 :         ref = oper1-&gt;data.objref;</span>
-<span class="lineNum">     867 </span><span class="lineCov">          2 :         CHECKREMOTE(ref);</span>
-<span class="lineNum">     868 </span><span class="lineCov">          2 :         result = (Typeof(ref) == TYPE_THING);</span>
+<span class="lineNum">     866 </span><span class="lineCov">          1 :         ref = oper1-&gt;data.objref;</span>
+<span class="lineNum">     867 </span><span class="lineCov">          1 :         CHECKREMOTE(ref);</span>
+<span class="lineNum">     868 </span><span class="lineCov">          1 :         result = (Typeof(ref) == TYPE_THING);</span>
 <span class="lineNum">     869 </span>            :     }
-<span class="lineNum">     870 </span><span class="lineCov">          2 :     CLEAR(oper1);</span>
-<span class="lineNum">     871 </span><span class="lineCov">          2 :     PushInt(result);</span>
+<span class="lineNum">     870 </span><span class="lineCov">          1 :     CLEAR(oper1);</span>
+<span class="lineNum">     871 </span><span class="lineCov">          1 :     PushInt(result);</span>
 <span class="lineNum">     872 </span>            : }
 <a name="873"><span class="lineNum">     873 </span>            : </a>
 <span class="lineNum">     874 </span>            : void
@@ -998,46 +998,46 @@
 <span class="lineNum">     936 </span>            : }
 <a name="937"><span class="lineNum">     937 </span>            : </a>
 <span class="lineNum">     938 </span>            : void
-<span class="lineNum">     939 </span><span class="lineCov">          2 : prim_location(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     939 </span><span class="lineCov">          1 : prim_location(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     940 </span>            : {
-<span class="lineNum">     941 </span><span class="lineCov">          2 :     CHECKOP(1);</span>
-<span class="lineNum">     942 </span><span class="lineCov">          2 :     oper1 = POP();</span>
-<span class="lineNum">     943 </span><span class="lineCov">          2 :     if (!valid_object(oper1))</span>
+<span class="lineNum">     941 </span><span class="lineCov">          1 :     CHECKOP(1);</span>
+<span class="lineNum">     942 </span><span class="lineCov">          1 :     oper1 = POP();</span>
+<span class="lineNum">     943 </span><span class="lineCov">          1 :     if (!valid_object(oper1))</span>
 <span class="lineNum">     944 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Invalid object.&quot;);</span>
-<span class="lineNum">     945 </span><span class="lineCov">          2 :     CHECKREMOTE(oper1-&gt;data.objref);</span>
-<span class="lineNum">     946 </span><span class="lineCov">          2 :     ref = LOCATION(oper1-&gt;data.objref);</span>
-<span class="lineNum">     947 </span><span class="lineCov">          2 :     CLEAR(oper1);</span>
-<span class="lineNum">     948 </span><span class="lineCov">          2 :     PushObject(ref);</span>
+<span class="lineNum">     945 </span><span class="lineCov">          1 :     CHECKREMOTE(oper1-&gt;data.objref);</span>
+<span class="lineNum">     946 </span><span class="lineCov">          1 :     ref = LOCATION(oper1-&gt;data.objref);</span>
+<span class="lineNum">     947 </span><span class="lineCov">          1 :     CLEAR(oper1);</span>
+<span class="lineNum">     948 </span><span class="lineCov">          1 :     PushObject(ref);</span>
 <span class="lineNum">     949 </span>            : }
 <a name="950"><span class="lineNum">     950 </span>            : </a>
 <span class="lineNum">     951 </span>            : void
-<span class="lineNum">     952 </span><span class="lineCov">          2 : prim_owner(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     952 </span><span class="lineCov">          1 : prim_owner(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     953 </span>            : {
-<span class="lineNum">     954 </span><span class="lineCov">          2 :     CHECKOP(1);</span>
-<span class="lineNum">     955 </span><span class="lineCov">          2 :     oper1 = POP();</span>
-<span class="lineNum">     956 </span><span class="lineCov">          2 :     if (!valid_object(oper1))</span>
+<span class="lineNum">     954 </span><span class="lineCov">          1 :     CHECKOP(1);</span>
+<span class="lineNum">     955 </span><span class="lineCov">          1 :     oper1 = POP();</span>
+<span class="lineNum">     956 </span><span class="lineCov">          1 :     if (!valid_object(oper1))</span>
 <span class="lineNum">     957 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Invalid object.&quot;);</span>
-<span class="lineNum">     958 </span><span class="lineCov">          2 :     CHECKREMOTE(oper1-&gt;data.objref);</span>
-<span class="lineNum">     959 </span><span class="lineCov">          2 :     ref = OWNER(oper1-&gt;data.objref);</span>
-<span class="lineNum">     960 </span><span class="lineCov">          2 :     CLEAR(oper1);</span>
-<span class="lineNum">     961 </span><span class="lineCov">          2 :     PushObject(ref);</span>
+<span class="lineNum">     958 </span><span class="lineCov">          1 :     CHECKREMOTE(oper1-&gt;data.objref);</span>
+<span class="lineNum">     959 </span><span class="lineCov">          1 :     ref = OWNER(oper1-&gt;data.objref);</span>
+<span class="lineNum">     960 </span><span class="lineCov">          1 :     CLEAR(oper1);</span>
+<span class="lineNum">     961 </span><span class="lineCov">          1 :     PushObject(ref);</span>
 <span class="lineNum">     962 </span>            : }
 <a name="963"><span class="lineNum">     963 </span>            : </a>
 <span class="lineNum">     964 </span>            : void
-<span class="lineNum">     965 </span><span class="lineCov">          2 : prim_controls(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     965 </span><span class="lineCov">          1 : prim_controls(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     966 </span>            : {
-<span class="lineNum">     967 </span><span class="lineCov">          2 :     CHECKOP(2);</span>
-<span class="lineNum">     968 </span><span class="lineCov">          2 :     oper1 = POP();</span>
-<span class="lineNum">     969 </span><span class="lineCov">          2 :     oper2 = POP();</span>
-<span class="lineNum">     970 </span><span class="lineCov">          2 :     if (!valid_object(oper1))</span>
+<span class="lineNum">     967 </span><span class="lineCov">          1 :     CHECKOP(2);</span>
+<span class="lineNum">     968 </span><span class="lineCov">          1 :     oper1 = POP();</span>
+<span class="lineNum">     969 </span><span class="lineCov">          1 :     oper2 = POP();</span>
+<span class="lineNum">     970 </span><span class="lineCov">          1 :     if (!valid_object(oper1))</span>
 <span class="lineNum">     971 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Invalid object. (2)&quot;);</span>
-<span class="lineNum">     972 </span><span class="lineCov">          2 :     if (!valid_object(oper2))</span>
+<span class="lineNum">     972 </span><span class="lineCov">          1 :     if (!valid_object(oper2))</span>
 <span class="lineNum">     973 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Invalid object. (1)&quot;);</span>
-<span class="lineNum">     974 </span><span class="lineCov">          2 :     CHECKREMOTE(oper1-&gt;data.objref);</span>
-<span class="lineNum">     975 </span><span class="lineCov">          2 :     result = controls(oper2-&gt;data.objref, oper1-&gt;data.objref);</span>
-<span class="lineNum">     976 </span><span class="lineCov">          2 :     CLEAR(oper1);</span>
-<span class="lineNum">     977 </span><span class="lineCov">          2 :     CLEAR(oper2);</span>
-<span class="lineNum">     978 </span><span class="lineCov">          2 :     PushInt(result);</span>
+<span class="lineNum">     974 </span><span class="lineCov">          1 :     CHECKREMOTE(oper1-&gt;data.objref);</span>
+<span class="lineNum">     975 </span><span class="lineCov">          1 :     result = controls(oper2-&gt;data.objref, oper1-&gt;data.objref);</span>
+<span class="lineNum">     976 </span><span class="lineCov">          1 :     CLEAR(oper1);</span>
+<span class="lineNum">     977 </span><span class="lineCov">          1 :     CLEAR(oper2);</span>
+<span class="lineNum">     978 </span><span class="lineCov">          1 :     PushInt(result);</span>
 <span class="lineNum">     979 </span>            : }
 <a name="980"><span class="lineNum">     980 </span>            : </a>
 <span class="lineNum">     981 </span>            : void
@@ -1275,36 +1275,36 @@
 <span class="lineNum">    1213 </span>            : }
 <a name="1214"><span class="lineNum">    1214 </span>            : </a>
 <span class="lineNum">    1215 </span>            : void
-<span class="lineNum">    1216 </span><span class="lineCov">          4 : prim_newobject(PRIM_PROTOTYPE)</span>
+<span class="lineNum">    1216 </span><span class="lineCov">          2 : prim_newobject(PRIM_PROTOTYPE)</span>
 <span class="lineNum">    1217 </span>            : {
-<span class="lineNum">    1218 </span><span class="lineCov">          4 :     CHECKOP(2);</span>
-<span class="lineNum">    1219 </span><span class="lineCov">          4 :     oper1 = POP();              /* string: name */</span>
-<span class="lineNum">    1220 </span><span class="lineCov">          4 :     oper2 = POP();              /* dbref: location */</span>
-<span class="lineNum">    1221 </span><span class="lineCov">          4 :     if ((mlev &lt; 3) &amp;&amp; (fr-&gt;already_created))</span>
+<span class="lineNum">    1218 </span><span class="lineCov">          2 :     CHECKOP(2);</span>
+<span class="lineNum">    1219 </span><span class="lineCov">          2 :     oper1 = POP();              /* string: name */</span>
+<span class="lineNum">    1220 </span><span class="lineCov">          2 :     oper2 = POP();              /* dbref: location */</span>
+<span class="lineNum">    1221 </span><span class="lineCov">          2 :     if ((mlev &lt; 3) &amp;&amp; (fr-&gt;already_created))</span>
 <span class="lineNum">    1222 </span><span class="lineNoCov">          0 :         abort_interp(&quot;An object was already created this program run.&quot;);</span>
-<span class="lineNum">    1223 </span><span class="lineCov">          4 :     CHECKOFLOW(1);</span>
-<span class="lineNum">    1224 </span><span class="lineCov">          4 :     ref = oper2-&gt;data.objref;</span>
-<span class="lineNum">    1225 </span><span class="lineCov">          4 :     if (!valid_object(oper2) || !(valid_player(oper2) || (Typeof(ref) == TYPE_ROOM)))</span>
+<span class="lineNum">    1223 </span><span class="lineCov">          2 :     CHECKOFLOW(1);</span>
+<span class="lineNum">    1224 </span><span class="lineCov">          2 :     ref = oper2-&gt;data.objref;</span>
+<span class="lineNum">    1225 </span><span class="lineCov">          2 :     if (!valid_object(oper2) || !(valid_player(oper2) || (Typeof(ref) == TYPE_ROOM)))</span>
 <span class="lineNum">    1226 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Invalid argument (1)&quot;);</span>
-<span class="lineNum">    1227 </span><span class="lineCov">          4 :     if (oper1-&gt;type != PROG_STRING)</span>
+<span class="lineNum">    1227 </span><span class="lineCov">          2 :     if (oper1-&gt;type != PROG_STRING)</span>
 <span class="lineNum">    1228 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Invalid argument (2)&quot;);</span>
-<span class="lineNum">    1229 </span><span class="lineCov">          4 :     CHECKREMOTE(ref);</span>
-<span class="lineNum">    1230 </span><span class="lineCov">          4 :     if ((mlev &lt; 3) &amp;&amp; !permissions(ProgUID, ref))</span>
+<span class="lineNum">    1229 </span><span class="lineCov">          2 :     CHECKREMOTE(ref);</span>
+<span class="lineNum">    1230 </span><span class="lineCov">          2 :     if ((mlev &lt; 3) &amp;&amp; !permissions(ProgUID, ref))</span>
 <span class="lineNum">    1231 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Permission denied.&quot;);</span>
-<span class="lineNum">    1232 </span><span class="lineCov">          4 :     fr-&gt;already_created++;</span>
+<span class="lineNum">    1232 </span><span class="lineCov">          2 :     fr-&gt;already_created++;</span>
 <span class="lineNum">    1233 </span>            :     {
-<span class="lineNum">    1234 </span><span class="lineCov">          4 :         const char *b = DoNullInd(oper1-&gt;data.string);</span>
+<span class="lineNum">    1234 </span><span class="lineCov">          2 :         const char *b = DoNullInd(oper1-&gt;data.string);</span>
 <span class="lineNum">    1235 </span>            :         dbref loc;
 <span class="lineNum">    1236 </span>            : 
-<span class="lineNum">    1237 </span><span class="lineCov">          4 :         if (!ok_ascii_thing(b) || !ok_name(b))</span>
+<span class="lineNum">    1237 </span><span class="lineCov">          2 :         if (!ok_ascii_thing(b) || !ok_name(b))</span>
 <span class="lineNum">    1238 </span><span class="lineNoCov">          0 :             abort_interp(&quot;Invalid name. (2)&quot;);</span>
 <span class="lineNum">    1239 </span>            : 
-<span class="lineNum">    1240 </span><span class="lineCov">          4 :         ref = create_thing(player, b, oper2-&gt;data.objref);</span>
+<span class="lineNum">    1240 </span><span class="lineCov">          2 :         ref = create_thing(player, b, oper2-&gt;data.objref);</span>
 <span class="lineNum">    1241 </span>            :     }
 <span class="lineNum">    1242 </span>            : 
-<span class="lineNum">    1243 </span><span class="lineCov">          4 :     CLEAR(oper1);</span>
-<span class="lineNum">    1244 </span><span class="lineCov">          4 :     CLEAR(oper2);</span>
-<span class="lineNum">    1245 </span><span class="lineCov">          4 :     PushObject(ref);</span>
+<span class="lineNum">    1243 </span><span class="lineCov">          2 :     CLEAR(oper1);</span>
+<span class="lineNum">    1244 </span><span class="lineCov">          2 :     CLEAR(oper2);</span>
+<span class="lineNum">    1245 </span><span class="lineCov">          2 :     PushObject(ref);</span>
 <span class="lineNum">    1246 </span>            : }
 <a name="1247"><span class="lineNum">    1247 </span>            : </a>
 <span class="lineNum">    1248 </span>            : void

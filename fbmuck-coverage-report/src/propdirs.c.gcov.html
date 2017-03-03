@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-02-26 22:21:49</td>
+            <td class="headerValue">2017-03-02 21:39:54</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">5</td>
@@ -74,26 +74,26 @@
 <span class="lineNum">      12 </span>            :  * path is the name of the property to insert
 <a name="13"><span class="lineNum">      13 </span>            :  */</a>
 <span class="lineNum">      14 </span>            : PropPtr
-<span class="lineNum">      15 </span><span class="lineCov">       8401 : propdir_new_elem(PropPtr * root, char *path)</span>
+<span class="lineNum">      15 </span><span class="lineCov">       5182 : propdir_new_elem(PropPtr * root, char *path)</span>
 <span class="lineNum">      16 </span>            : {
 <span class="lineNum">      17 </span>            :     PropPtr p;
 <span class="lineNum">      18 </span>            :     char *n;
 <span class="lineNum">      19 </span>            : 
-<span class="lineNum">      20 </span><span class="lineCov">      16802 :     while (*path &amp;&amp; *path == PROPDIR_DELIMITER)</span>
+<span class="lineNum">      20 </span><span class="lineCov">      10364 :     while (*path &amp;&amp; *path == PROPDIR_DELIMITER)</span>
 <span class="lineNum">      21 </span><span class="lineNoCov">          0 :         path++;</span>
-<span class="lineNum">      22 </span><span class="lineCov">       8401 :     if (!*path)</span>
+<span class="lineNum">      22 </span><span class="lineCov">       5182 :     if (!*path)</span>
 <span class="lineNum">      23 </span><span class="lineNoCov">          0 :         return (NULL);</span>
-<span class="lineNum">      24 </span><span class="lineCov">       8401 :     n = index(path, PROPDIR_DELIMITER);</span>
-<span class="lineNum">      25 </span><span class="lineCov">      20949 :     while (n &amp;&amp; *n == PROPDIR_DELIMITER)</span>
-<span class="lineNum">      26 </span><span class="lineCov">       4147 :         *(n++) = '\0';</span>
-<span class="lineNum">      27 </span><span class="lineCov">       8401 :     if (n &amp;&amp; *n) {</span>
+<span class="lineNum">      24 </span><span class="lineCov">       5182 :     n = index(path, PROPDIR_DELIMITER);</span>
+<span class="lineNum">      25 </span><span class="lineCov">      12918 :     while (n &amp;&amp; *n == PROPDIR_DELIMITER)</span>
+<span class="lineNum">      26 </span><span class="lineCov">       2554 :         *(n++) = '\0';</span>
+<span class="lineNum">      27 </span><span class="lineCov">       5182 :     if (n &amp;&amp; *n) {</span>
 <span class="lineNum">      28 </span>            :         /* just another propdir in the path */
-<span class="lineNum">      29 </span><span class="lineCov">       4147 :         p = new_prop(root, path);</span>
-<span class="lineNum">      30 </span><span class="lineCov">       4147 :         return (propdir_new_elem(&amp;PropDir(p), n));</span>
+<span class="lineNum">      29 </span><span class="lineCov">       2554 :         p = new_prop(root, path);</span>
+<span class="lineNum">      30 </span><span class="lineCov">       2554 :         return (propdir_new_elem(&amp;PropDir(p), n));</span>
 <span class="lineNum">      31 </span>            :     } else {
 <span class="lineNum">      32 </span>            :         /* aha, we are finally to the property itself. */
-<span class="lineNum">      33 </span><span class="lineCov">       4254 :         p = new_prop(root, path);</span>
-<span class="lineNum">      34 </span><span class="lineCov">       4254 :         return (p);</span>
+<span class="lineNum">      33 </span><span class="lineCov">       2628 :         p = new_prop(root, path);</span>
+<span class="lineNum">      34 </span><span class="lineCov">       2628 :         return (p);</span>
 <span class="lineNum">      35 </span>            :     }
 <span class="lineNum">      36 </span>            : }
 <span class="lineNum">      37 </span>            : 
@@ -101,40 +101,40 @@
 <span class="lineNum">      39 </span>            : /* root is the pointer to the root propdir node */
 <a name="40"><span class="lineNum">      40 </span>            : /* path is the name of the property to delete */</a>
 <span class="lineNum">      41 </span>            : PropPtr
-<span class="lineNum">      42 </span><span class="lineCov">        502 : propdir_delete_elem(PropPtr root, char *path)</span>
+<span class="lineNum">      42 </span><span class="lineCov">        295 : propdir_delete_elem(PropPtr root, char *path)</span>
 <span class="lineNum">      43 </span>            : {
 <span class="lineNum">      44 </span>            :     PropPtr p;
 <span class="lineNum">      45 </span>            :     char *n;
 <span class="lineNum">      46 </span>            : 
-<span class="lineNum">      47 </span><span class="lineCov">        502 :     if (!root)</span>
+<span class="lineNum">      47 </span><span class="lineCov">        295 :     if (!root)</span>
 <span class="lineNum">      48 </span><span class="lineNoCov">          0 :         return (NULL);</span>
-<span class="lineNum">      49 </span><span class="lineCov">       1004 :     while (*path &amp;&amp; *path == PROPDIR_DELIMITER)</span>
+<span class="lineNum">      49 </span><span class="lineCov">        590 :     while (*path &amp;&amp; *path == PROPDIR_DELIMITER)</span>
 <span class="lineNum">      50 </span><span class="lineNoCov">          0 :         path++;</span>
-<span class="lineNum">      51 </span><span class="lineCov">        502 :     if (!*path)</span>
+<span class="lineNum">      51 </span><span class="lineCov">        295 :     if (!*path)</span>
 <span class="lineNum">      52 </span><span class="lineNoCov">          0 :         return (root);</span>
-<span class="lineNum">      53 </span><span class="lineCov">        502 :     n = index(path, PROPDIR_DELIMITER);</span>
-<span class="lineNum">      54 </span><span class="lineCov">       1245 :     while (n &amp;&amp; *n == PROPDIR_DELIMITER)</span>
-<span class="lineNum">      55 </span><span class="lineCov">        241 :         *(n++) = '\0';</span>
-<span class="lineNum">      56 </span><span class="lineCov">        502 :     if (n &amp;&amp; *n) {</span>
+<span class="lineNum">      53 </span><span class="lineCov">        295 :     n = index(path, PROPDIR_DELIMITER);</span>
+<span class="lineNum">      54 </span><span class="lineCov">        731 :     while (n &amp;&amp; *n == PROPDIR_DELIMITER)</span>
+<span class="lineNum">      55 </span><span class="lineCov">        141 :         *(n++) = '\0';</span>
+<span class="lineNum">      56 </span><span class="lineCov">        295 :     if (n &amp;&amp; *n) {</span>
 <span class="lineNum">      57 </span>            :         /* just another propdir in the path */
-<span class="lineNum">      58 </span><span class="lineCov">        241 :         p = locate_prop(root, path);</span>
-<span class="lineNum">      59 </span><span class="lineCov">        241 :         if (p &amp;&amp; PropDir(p)) {</span>
+<span class="lineNum">      58 </span><span class="lineCov">        141 :         p = locate_prop(root, path);</span>
+<span class="lineNum">      59 </span><span class="lineCov">        141 :         if (p &amp;&amp; PropDir(p)) {</span>
 <span class="lineNum">      60 </span>            :             /* yup, found the propdir */
-<span class="lineNum">      61 </span><span class="lineCov">        241 :             SetPDir(p, propdir_delete_elem(PropDir(p), n));</span>
-<span class="lineNum">      62 </span><span class="lineCov">        241 :             if (!PropDir(p) &amp;&amp; PropType(p) == PROP_DIRTYP) {</span>
+<span class="lineNum">      61 </span><span class="lineCov">        141 :             SetPDir(p, propdir_delete_elem(PropDir(p), n));</span>
+<span class="lineNum">      62 </span><span class="lineCov">        141 :             if (!PropDir(p) &amp;&amp; PropType(p) == PROP_DIRTYP) {</span>
 <span class="lineNum">      63 </span><span class="lineNoCov">          0 :                 root = delete_prop(&amp;root, PropName(p));</span>
 <span class="lineNum">      64 </span>            :             }
 <span class="lineNum">      65 </span>            :         }
 <span class="lineNum">      66 </span>            :         /* return the updated root pntr */
-<span class="lineNum">      67 </span><span class="lineCov">        241 :         return (root);</span>
+<span class="lineNum">      67 </span><span class="lineCov">        141 :         return (root);</span>
 <span class="lineNum">      68 </span>            :     } else {
 <span class="lineNum">      69 </span>            :         /* aha, we are finally to the property itself. */
-<span class="lineNum">      70 </span><span class="lineCov">        261 :         p = locate_prop(root, path);</span>
-<span class="lineNum">      71 </span><span class="lineCov">        261 :         if (p &amp;&amp; PropDir(p)) {</span>
-<span class="lineNum">      72 </span><span class="lineCov">          8 :             delete_proplist(PropDir(p));</span>
+<span class="lineNum">      70 </span><span class="lineCov">        154 :         p = locate_prop(root, path);</span>
+<span class="lineNum">      71 </span><span class="lineCov">        154 :         if (p &amp;&amp; PropDir(p)) {</span>
+<span class="lineNum">      72 </span><span class="lineCov">          6 :             delete_proplist(PropDir(p));</span>
 <span class="lineNum">      73 </span>            :         }
-<span class="lineNum">      74 </span><span class="lineCov">        261 :         (void) delete_prop(&amp;root, path);</span>
-<span class="lineNum">      75 </span><span class="lineCov">        261 :         return (root);</span>
+<span class="lineNum">      74 </span><span class="lineCov">        154 :         (void) delete_prop(&amp;root, path);</span>
+<span class="lineNum">      75 </span><span class="lineCov">        154 :         return (root);</span>
 <span class="lineNum">      76 </span>            :     }
 <span class="lineNum">      77 </span>            : }
 <span class="lineNum">      78 </span>            : 
@@ -142,35 +142,35 @@
 <span class="lineNum">      80 </span>            : /* root is the pointer to the root propdir node */
 <a name="81"><span class="lineNum">      81 </span>            : /* path is the name of the property to find */</a>
 <span class="lineNum">      82 </span>            : PropPtr
-<span class="lineNum">      83 </span><span class="lineCov">      15001 : propdir_get_elem(PropPtr root, char *path)</span>
+<span class="lineNum">      83 </span><span class="lineCov">       8599 : propdir_get_elem(PropPtr root, char *path)</span>
 <span class="lineNum">      84 </span>            : {
 <span class="lineNum">      85 </span>            :     PropPtr p;
 <span class="lineNum">      86 </span>            :     char *n;
 <span class="lineNum">      87 </span>            : 
-<span class="lineNum">      88 </span><span class="lineCov">      15001 :     if (!root)</span>
-<span class="lineNum">      89 </span><span class="lineCov">        650 :         return (NULL);</span>
-<span class="lineNum">      90 </span><span class="lineCov">      28809 :     while (*path &amp;&amp; *path == PROPDIR_DELIMITER)</span>
-<span class="lineNum">      91 </span><span class="lineCov">        107 :         path++;</span>
-<span class="lineNum">      92 </span><span class="lineCov">      14351 :     if (!*path)</span>
+<span class="lineNum">      88 </span><span class="lineCov">       8599 :     if (!root)</span>
+<span class="lineNum">      89 </span><span class="lineCov">        364 :         return (NULL);</span>
+<span class="lineNum">      90 </span><span class="lineCov">      16546 :     while (*path &amp;&amp; *path == PROPDIR_DELIMITER)</span>
+<span class="lineNum">      91 </span><span class="lineCov">         76 :         path++;</span>
+<span class="lineNum">      92 </span><span class="lineCov">       8235 :     if (!*path)</span>
 <span class="lineNum">      93 </span><span class="lineNoCov">          0 :         return (NULL);</span>
-<span class="lineNum">      94 </span><span class="lineCov">      14351 :     n = index(path, PROPDIR_DELIMITER);</span>
-<span class="lineNum">      95 </span><span class="lineCov">      32453 :     while (n &amp;&amp; *n == PROPDIR_DELIMITER)</span>
-<span class="lineNum">      96 </span><span class="lineCov">       3751 :         *(n++) = '\0';</span>
-<span class="lineNum">      97 </span><span class="lineCov">      14351 :     if (n &amp;&amp; *n) {</span>
+<span class="lineNum">      94 </span><span class="lineCov">       8235 :     n = index(path, PROPDIR_DELIMITER);</span>
+<span class="lineNum">      95 </span><span class="lineCov">      18614 :     while (n &amp;&amp; *n == PROPDIR_DELIMITER)</span>
+<span class="lineNum">      96 </span><span class="lineCov">       2144 :         *(n++) = '\0';</span>
+<span class="lineNum">      97 </span><span class="lineCov">       8235 :     if (n &amp;&amp; *n) {</span>
 <span class="lineNum">      98 </span>            :         /* just another propdir in the path */
-<span class="lineNum">      99 </span><span class="lineCov">       3579 :         p = locate_prop(root, path);</span>
-<span class="lineNum">     100 </span><span class="lineCov">       3579 :         if (p &amp;&amp; PropDir(p)) {</span>
+<span class="lineNum">      99 </span><span class="lineCov">       2052 :         p = locate_prop(root, path);</span>
+<span class="lineNum">     100 </span><span class="lineCov">       2052 :         if (p &amp;&amp; PropDir(p)) {</span>
 <span class="lineNum">     101 </span>            :             /* yup, found the propdir */
-<span class="lineNum">     102 </span><span class="lineCov">       2879 :             return (propdir_get_elem(PropDir(p), n));</span>
+<span class="lineNum">     102 </span><span class="lineCov">       1677 :             return (propdir_get_elem(PropDir(p), n));</span>
 <span class="lineNum">     103 </span>            :         }
-<span class="lineNum">     104 </span><span class="lineCov">        700 :         return (NULL);</span>
+<span class="lineNum">     104 </span><span class="lineCov">        375 :         return (NULL);</span>
 <span class="lineNum">     105 </span>            :     } else {
 <span class="lineNum">     106 </span>            :         /* aha, we are finally to the property subname itself. */
-<span class="lineNum">     107 </span><span class="lineCov">      10772 :         if ((p = locate_prop(root, path))) {</span>
+<span class="lineNum">     107 </span><span class="lineCov">       6183 :         if ((p = locate_prop(root, path))) {</span>
 <span class="lineNum">     108 </span>            :             /* found the property! */
-<span class="lineNum">     109 </span><span class="lineCov">       2239 :             return (p);</span>
+<span class="lineNum">     109 </span><span class="lineCov">       1335 :             return (p);</span>
 <span class="lineNum">     110 </span>            :         }
-<span class="lineNum">     111 </span><span class="lineCov">       8533 :         return (NULL);          /* nope, doesn't exist */</span>
+<span class="lineNum">     111 </span><span class="lineCov">       4848 :         return (NULL);          /* nope, doesn't exist */</span>
 <span class="lineNum">     112 </span>            :     }
 <span class="lineNum">     113 </span>            : }
 <span class="lineNum">     114 </span>            : 
@@ -178,17 +178,17 @@
 <span class="lineNum">     116 </span>            : /* root is the pointer to the root propdir node */
 <a name="117"><span class="lineNum">     117 </span>            : /* path is the name of the propdir to find the first node of */</a>
 <span class="lineNum">     118 </span>            : PropPtr
-<span class="lineNum">     119 </span><span class="lineCov">         12 : propdir_first_elem(PropPtr root, char *path)</span>
+<span class="lineNum">     119 </span><span class="lineCov">         10 : propdir_first_elem(PropPtr root, char *path)</span>
 <span class="lineNum">     120 </span>            : {
 <span class="lineNum">     121 </span>            :     PropPtr p;
 <span class="lineNum">     122 </span>            : 
-<span class="lineNum">     123 </span><span class="lineCov">         24 :     while (*path &amp;&amp; *path == PROPDIR_DELIMITER)</span>
+<span class="lineNum">     123 </span><span class="lineCov">         20 :     while (*path &amp;&amp; *path == PROPDIR_DELIMITER)</span>
 <span class="lineNum">     124 </span><span class="lineNoCov">          0 :         path++;</span>
-<span class="lineNum">     125 </span><span class="lineCov">         12 :     if (!*path)</span>
+<span class="lineNum">     125 </span><span class="lineCov">         10 :     if (!*path)</span>
 <span class="lineNum">     126 </span><span class="lineNoCov">          0 :         return (first_node(root));</span>
-<span class="lineNum">     127 </span><span class="lineCov">         12 :     p = propdir_get_elem(root, path);</span>
-<span class="lineNum">     128 </span><span class="lineCov">         12 :     if (p &amp;&amp; PropDir(p)) {</span>
-<span class="lineNum">     129 </span><span class="lineCov">         12 :         return (first_node(PropDir(p)));        /* found the property! */</span>
+<span class="lineNum">     127 </span><span class="lineCov">         10 :     p = propdir_get_elem(root, path);</span>
+<span class="lineNum">     128 </span><span class="lineCov">         10 :     if (p &amp;&amp; PropDir(p)) {</span>
+<span class="lineNum">     129 </span><span class="lineCov">         10 :         return (first_node(PropDir(p)));        /* found the property! */</span>
 <span class="lineNum">     130 </span>            :     }
 <span class="lineNum">     131 </span><span class="lineNoCov">          0 :     return (NULL);              /* nope, doesn't exist */</span>
 <span class="lineNum">     132 </span>            : }
@@ -199,31 +199,31 @@
 <span class="lineNum">     137 </span>            : /* Note: Finds the next alphabetical property, regardless of the existence
 <a name="138"><span class="lineNum">     138 </span>            :           of the original property given. */</a>
 <span class="lineNum">     139 </span>            : PropPtr
-<span class="lineNum">     140 </span><span class="lineCov">         24 : propdir_next_elem(PropPtr root, char *path)</span>
+<span class="lineNum">     140 </span><span class="lineCov">         20 : propdir_next_elem(PropPtr root, char *path)</span>
 <span class="lineNum">     141 </span>            : {
 <span class="lineNum">     142 </span>            :     PropPtr p;
 <span class="lineNum">     143 </span>            :     char *n;
 <span class="lineNum">     144 </span>            : 
-<span class="lineNum">     145 </span><span class="lineCov">         24 :     if (!root)</span>
+<span class="lineNum">     145 </span><span class="lineCov">         20 :     if (!root)</span>
 <span class="lineNum">     146 </span><span class="lineNoCov">          0 :         return (NULL);</span>
-<span class="lineNum">     147 </span><span class="lineCov">         48 :     while (*path &amp;&amp; *path == PROPDIR_DELIMITER)</span>
+<span class="lineNum">     147 </span><span class="lineCov">         40 :     while (*path &amp;&amp; *path == PROPDIR_DELIMITER)</span>
 <span class="lineNum">     148 </span><span class="lineNoCov">          0 :         path++;</span>
-<span class="lineNum">     149 </span><span class="lineCov">         24 :     if (!*path)</span>
+<span class="lineNum">     149 </span><span class="lineCov">         20 :     if (!*path)</span>
 <span class="lineNum">     150 </span><span class="lineNoCov">          0 :         return (NULL);</span>
-<span class="lineNum">     151 </span><span class="lineCov">         24 :     n = index(path, PROPDIR_DELIMITER);</span>
-<span class="lineNum">     152 </span><span class="lineCov">         60 :     while (n &amp;&amp; *n == PROPDIR_DELIMITER)</span>
-<span class="lineNum">     153 </span><span class="lineCov">         12 :         *(n++) = '\0';</span>
-<span class="lineNum">     154 </span><span class="lineCov">         24 :     if (n &amp;&amp; *n) {</span>
+<span class="lineNum">     151 </span><span class="lineCov">         20 :     n = index(path, PROPDIR_DELIMITER);</span>
+<span class="lineNum">     152 </span><span class="lineCov">         50 :     while (n &amp;&amp; *n == PROPDIR_DELIMITER)</span>
+<span class="lineNum">     153 </span><span class="lineCov">         10 :         *(n++) = '\0';</span>
+<span class="lineNum">     154 </span><span class="lineCov">         20 :     if (n &amp;&amp; *n) {</span>
 <span class="lineNum">     155 </span>            :         /* just another propdir in the path */
-<span class="lineNum">     156 </span><span class="lineCov">         12 :         p = locate_prop(root, path);</span>
-<span class="lineNum">     157 </span><span class="lineCov">         12 :         if (p &amp;&amp; PropDir(p)) {</span>
+<span class="lineNum">     156 </span><span class="lineCov">         10 :         p = locate_prop(root, path);</span>
+<span class="lineNum">     157 </span><span class="lineCov">         10 :         if (p &amp;&amp; PropDir(p)) {</span>
 <span class="lineNum">     158 </span>            :             /* yup, found the propdir */
-<span class="lineNum">     159 </span><span class="lineCov">         12 :             return (propdir_next_elem(PropDir(p), n));</span>
+<span class="lineNum">     159 </span><span class="lineCov">         10 :             return (propdir_next_elem(PropDir(p), n));</span>
 <span class="lineNum">     160 </span>            :         }
 <span class="lineNum">     161 </span><span class="lineNoCov">          0 :         return (NULL);</span>
 <span class="lineNum">     162 </span>            :     } else {
 <span class="lineNum">     163 </span>            :         /* aha, we are finally to the property subname itself. */
-<span class="lineNum">     164 </span><span class="lineCov">         12 :         return (next_node(root, path));</span>
+<span class="lineNum">     164 </span><span class="lineCov">         10 :         return (next_node(root, path));</span>
 <span class="lineNum">     165 </span>            :     }
 <span class="lineNum">     166 </span>            : }
 <a name="167"><span class="lineNum">     167 </span>            : </a>
