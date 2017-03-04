@@ -31,18 +31,18 @@
             <td class="headerValue">coverage-total</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">29</td>
+            <td class="headerCovTableEntry">432</td>
             <td class="headerCovTableEntry">1780</td>
-            <td class="headerCovTableEntryLo">1.6 %</td>
+            <td class="headerCovTableEntryLo">24.3 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-03-02 21:39:54</td>
+            <td class="headerValue">2017-03-04 16:58:35</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">6</td>
             <td class="headerCovTableEntry">46</td>
-            <td class="headerCovTableEntryLo">4.3 %</td>
+            <td class="headerCovTableEntryLo">13.0 %</td>
           </tr>
           <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
         </table>
@@ -86,68 +86,68 @@
 <span class="lineNum">      24 </span>            : #define FMTTOKEN '%'
 <a name="25"><span class="lineNum">      25 </span>            : </a>
 <span class="lineNum">      26 </span>            : void
-<span class="lineNum">      27 </span><span class="lineNoCov">          0 : prim_fmtstring(PRIM_PROTOTYPE)</span>
+<span class="lineNum">      27 </span><span class="lineCov">        187 : prim_fmtstring(PRIM_PROTOTYPE)</span>
 <span class="lineNum">      28 </span>            : {
 <span class="lineNum">      29 </span>            :     int slen, scnt, tstop, tlen, tnum, i;
 <span class="lineNum">      30 </span>            :     int slrj, spad1, spad2, slen1, slen2, temp;
 <span class="lineNum">      31 </span>            :     char sstr[BUFFER_LEN], sfmt[255], hold[256], tbuf[BUFFER_LEN];
 <span class="lineNum">      32 </span>            :     char *ptr, *begptr;
 <span class="lineNum">      33 </span>            : 
-<span class="lineNum">      34 </span><span class="lineNoCov">          0 :     CHECKOP(1);</span>
-<span class="lineNum">      35 </span><span class="lineNoCov">          0 :     oper1 = POP();</span>
-<span class="lineNum">      36 </span><span class="lineNoCov">          0 :     if (oper1-&gt;type != PROG_STRING)</span>
+<span class="lineNum">      34 </span><span class="lineCov">        198 :     CHECKOP(1);</span>
+<span class="lineNum">      35 </span><span class="lineCov">        187 :     oper1 = POP();</span>
+<span class="lineNum">      36 </span><span class="lineCov">        187 :     if (oper1-&gt;type != PROG_STRING)</span>
 <span class="lineNum">      37 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Top argument must be a string.&quot;);</span>
-<span class="lineNum">      38 </span><span class="lineNoCov">          0 :     if (!oper1-&gt;data.string) {</span>
+<span class="lineNum">      38 </span><span class="lineCov">        187 :     if (!oper1-&gt;data.string) {</span>
 <span class="lineNum">      39 </span><span class="lineNoCov">          0 :         CLEAR(oper1);</span>
 <span class="lineNum">      40 </span><span class="lineNoCov">          0 :         PushNullStr;</span>
 <span class="lineNum">      41 </span><span class="lineNoCov">          0 :         return;</span>
 <span class="lineNum">      42 </span>            :     }
 <span class="lineNum">      43 </span>            :     /* We now have the non-null format string, parse it */
-<span class="lineNum">      44 </span><span class="lineNoCov">          0 :     result = 0;                 /* End of current string, must be smaller than BUFFER_LEN */</span>
-<span class="lineNum">      45 </span><span class="lineNoCov">          0 :     tmp = 0;                    /* Number of props to search for/found */</span>
-<span class="lineNum">      46 </span><span class="lineNoCov">          0 :     slen = strlen(oper1-&gt;data.string-&gt;data);</span>
-<span class="lineNum">      47 </span><span class="lineNoCov">          0 :     scnt = 0;</span>
-<span class="lineNum">      48 </span><span class="lineNoCov">          0 :     tstop = 0;</span>
-<span class="lineNum">      49 </span><span class="lineNoCov">          0 :     strcpyn(sstr, sizeof(sstr), oper1-&gt;data.string-&gt;data);</span>
-<span class="lineNum">      50 </span><span class="lineNoCov">          0 :     CLEAR(oper1);</span>
-<span class="lineNum">      51 </span><span class="lineNoCov">          0 :     while ((scnt &lt; slen) &amp;&amp; (result &lt; BUFFER_LEN)) {</span>
-<span class="lineNum">      52 </span><span class="lineNoCov">          0 :         CHECKOP(0);</span>
-<span class="lineNum">      53 </span><span class="lineNoCov">          0 :         if (sstr[scnt] == FMTTOKEN) {</span>
-<span class="lineNum">      54 </span><span class="lineNoCov">          0 :             if (sstr[scnt + 1] == FMTTOKEN) {</span>
-<span class="lineNum">      55 </span><span class="lineNoCov">          0 :                 buf[result++] = FMTTOKEN;</span>
-<span class="lineNum">      56 </span><span class="lineNoCov">          0 :                 scnt += 2;</span>
+<span class="lineNum">      44 </span><span class="lineCov">        187 :     result = 0;                 /* End of current string, must be smaller than BUFFER_LEN */</span>
+<span class="lineNum">      45 </span><span class="lineCov">        187 :     tmp = 0;                    /* Number of props to search for/found */</span>
+<span class="lineNum">      46 </span><span class="lineCov">        187 :     slen = strlen(oper1-&gt;data.string-&gt;data);</span>
+<span class="lineNum">      47 </span><span class="lineCov">        187 :     scnt = 0;</span>
+<span class="lineNum">      48 </span><span class="lineCov">        187 :     tstop = 0;</span>
+<span class="lineNum">      49 </span><span class="lineCov">        187 :     strcpyn(sstr, sizeof(sstr), oper1-&gt;data.string-&gt;data);</span>
+<span class="lineNum">      50 </span><span class="lineCov">        187 :     CLEAR(oper1);</span>
+<span class="lineNum">      51 </span><span class="lineCov">        694 :     while ((scnt &lt; slen) &amp;&amp; (result &lt; BUFFER_LEN)) {</span>
+<span class="lineNum">      52 </span><span class="lineCov">        331 :         CHECKOP(0);</span>
+<span class="lineNum">      53 </span><span class="lineCov">        331 :         if (sstr[scnt] == FMTTOKEN) {</span>
+<span class="lineNum">      54 </span><span class="lineCov">        259 :             if (sstr[scnt + 1] == FMTTOKEN) {</span>
+<span class="lineNum">      55 </span><span class="lineCov">          3 :                 buf[result++] = FMTTOKEN;</span>
+<span class="lineNum">      56 </span><span class="lineCov">          3 :                 scnt += 2;</span>
 <span class="lineNum">      57 </span>            :             } else {
-<span class="lineNum">      58 </span><span class="lineNoCov">          0 :                 scnt++;</span>
-<span class="lineNum">      59 </span><span class="lineNoCov">          0 :                 if ((sstr[scnt] == '-') || (sstr[scnt] == '|')) {</span>
-<span class="lineNum">      60 </span><span class="lineNoCov">          0 :                     if (sstr[scnt] == '-')</span>
-<span class="lineNum">      61 </span><span class="lineNoCov">          0 :                         slrj = 1;</span>
+<span class="lineNum">      58 </span><span class="lineCov">        256 :                 scnt++;</span>
+<span class="lineNum">      59 </span><span class="lineCov">        256 :                 if ((sstr[scnt] == '-') || (sstr[scnt] == '|')) {</span>
+<span class="lineNum">      60 </span><span class="lineCov">         68 :                     if (sstr[scnt] == '-')</span>
+<span class="lineNum">      61 </span><span class="lineCov">         22 :                         slrj = 1;</span>
 <span class="lineNum">      62 </span>            :                     else
-<span class="lineNum">      63 </span><span class="lineNoCov">          0 :                         slrj = 2;</span>
-<span class="lineNum">      64 </span><span class="lineNoCov">          0 :                     scnt++;</span>
+<span class="lineNum">      63 </span><span class="lineCov">         46 :                         slrj = 2;</span>
+<span class="lineNum">      64 </span><span class="lineCov">         68 :                     scnt++;</span>
 <span class="lineNum">      65 </span>            :                 } else {
-<span class="lineNum">      66 </span><span class="lineNoCov">          0 :                     slrj = 0;</span>
+<span class="lineNum">      66 </span><span class="lineCov">        188 :                     slrj = 0;</span>
 <span class="lineNum">      67 </span>            :                 }
-<span class="lineNum">      68 </span><span class="lineNoCov">          0 :                 if ((sstr[scnt] == '+') || (sstr[scnt] == ' ')) {</span>
+<span class="lineNum">      68 </span><span class="lineCov">        256 :                 if ((sstr[scnt] == '+') || (sstr[scnt] == ' ')) {</span>
 <span class="lineNum">      69 </span><span class="lineNoCov">          0 :                     if (sstr[scnt] == '+')</span>
 <span class="lineNum">      70 </span><span class="lineNoCov">          0 :                         spad1 = 1;</span>
 <span class="lineNum">      71 </span>            :                     else
 <span class="lineNum">      72 </span><span class="lineNoCov">          0 :                         spad1 = 2;</span>
 <span class="lineNum">      73 </span><span class="lineNoCov">          0 :                     scnt++;</span>
 <span class="lineNum">      74 </span>            :                 } else {
-<span class="lineNum">      75 </span><span class="lineNoCov">          0 :                     spad1 = 0;</span>
+<span class="lineNum">      75 </span><span class="lineCov">        256 :                     spad1 = 0;</span>
 <span class="lineNum">      76 </span>            :                 }
-<span class="lineNum">      77 </span><span class="lineNoCov">          0 :                 if (sstr[scnt] == '0') {</span>
-<span class="lineNum">      78 </span><span class="lineNoCov">          0 :                     scnt++;</span>
-<span class="lineNum">      79 </span><span class="lineNoCov">          0 :                     spad2 = 1;</span>
+<span class="lineNum">      77 </span><span class="lineCov">        256 :                 if (sstr[scnt] == '0') {</span>
+<span class="lineNum">      78 </span><span class="lineCov">         12 :                     scnt++;</span>
+<span class="lineNum">      79 </span><span class="lineCov">         12 :                     spad2 = 1;</span>
 <span class="lineNum">      80 </span>            :                 } else {
-<span class="lineNum">      81 </span><span class="lineNoCov">          0 :                     spad2 = 0;</span>
+<span class="lineNum">      81 </span><span class="lineCov">        244 :                     spad2 = 0;</span>
 <span class="lineNum">      82 </span>            :                 }
-<span class="lineNum">      83 </span><span class="lineNoCov">          0 :                 slen1 = atoi(&amp;sstr[scnt]);</span>
-<span class="lineNum">      84 </span><span class="lineNoCov">          0 :                 if ((sstr[scnt] &gt;= '0') &amp;&amp; (sstr[scnt] &lt;= '9')) {</span>
-<span class="lineNum">      85 </span><span class="lineNoCov">          0 :                     while ((sstr[scnt] &gt;= '0') &amp;&amp; (sstr[scnt] &lt;= '9'))</span>
-<span class="lineNum">      86 </span><span class="lineNoCov">          0 :                         scnt++;</span>
+<span class="lineNum">      83 </span><span class="lineCov">        256 :                 slen1 = atoi(&amp;sstr[scnt]);</span>
+<span class="lineNum">      84 </span><span class="lineCov">        415 :                 if ((sstr[scnt] &gt;= '0') &amp;&amp; (sstr[scnt] &lt;= '9')) {</span>
+<span class="lineNum">      85 </span><span class="lineCov">        572 :                     while ((sstr[scnt] &gt;= '0') &amp;&amp; (sstr[scnt] &lt;= '9'))</span>
+<span class="lineNum">      86 </span><span class="lineCov">        254 :                         scnt++;</span>
 <span class="lineNum">      87 </span>            :                 } else {
-<span class="lineNum">      88 </span><span class="lineNoCov">          0 :                     if (sstr[scnt] == '*') {</span>
+<span class="lineNum">      88 </span><span class="lineCov">         97 :                     if (sstr[scnt] == '*') {</span>
 <span class="lineNum">      89 </span><span class="lineNoCov">          0 :                         scnt++;</span>
 <span class="lineNum">      90 </span><span class="lineNoCov">          0 :                         CHECKOP(1);</span>
 <span class="lineNum">      91 </span><span class="lineNoCov">          0 :                         oper2 = POP();</span>
@@ -156,15 +156,15 @@
 <span class="lineNum">      94 </span><span class="lineNoCov">          0 :                         slen1 = oper2-&gt;data.number;</span>
 <span class="lineNum">      95 </span><span class="lineNoCov">          0 :                         CLEAR(oper2);</span>
 <span class="lineNum">      96 </span>            :                     } else {
-<span class="lineNum">      97 </span><span class="lineNoCov">          0 :                         slen1 = 0;</span>
+<span class="lineNum">      97 </span><span class="lineCov">         97 :                         slen1 = 0;</span>
 <span class="lineNum">      98 </span>            :                     }
 <span class="lineNum">      99 </span>            :                 }
-<span class="lineNum">     100 </span><span class="lineNoCov">          0 :                 if (sstr[scnt] == '.') {</span>
-<span class="lineNum">     101 </span><span class="lineNoCov">          0 :                     scnt++;</span>
-<span class="lineNum">     102 </span><span class="lineNoCov">          0 :                     slen2 = atoi(&amp;sstr[scnt]);</span>
-<span class="lineNum">     103 </span><span class="lineNoCov">          0 :                     if ((sstr[scnt] &gt;= '0') &amp;&amp; (sstr[scnt] &lt;= '9')) {</span>
-<span class="lineNum">     104 </span><span class="lineNoCov">          0 :                         while ((sstr[scnt] &gt;= '0') &amp;&amp; (sstr[scnt] &lt;= '9'))</span>
-<span class="lineNum">     105 </span><span class="lineNoCov">          0 :                             scnt++;</span>
+<span class="lineNum">     100 </span><span class="lineCov">        256 :                 if (sstr[scnt] == '.') {</span>
+<span class="lineNum">     101 </span><span class="lineCov">         79 :                     scnt++;</span>
+<span class="lineNum">     102 </span><span class="lineCov">         79 :                     slen2 = atoi(&amp;sstr[scnt]);</span>
+<span class="lineNum">     103 </span><span class="lineCov">        158 :                     if ((sstr[scnt] &gt;= '0') &amp;&amp; (sstr[scnt] &lt;= '9')) {</span>
+<span class="lineNum">     104 </span><span class="lineCov">        237 :                         while ((sstr[scnt] &gt;= '0') &amp;&amp; (sstr[scnt] &lt;= '9'))</span>
+<span class="lineNum">     105 </span><span class="lineCov">         79 :                             scnt++;</span>
 <span class="lineNum">     106 </span>            :                     } else {
 <span class="lineNum">     107 </span><span class="lineNoCov">          0 :                         if (sstr[scnt] == '*') {</span>
 <span class="lineNum">     108 </span><span class="lineNoCov">          0 :                             scnt++;</span>
@@ -182,20 +182,20 @@
 <span class="lineNum">     120 </span>            :                         }
 <span class="lineNum">     121 </span>            :                     }
 <span class="lineNum">     122 </span>            :                 } else {
-<span class="lineNum">     123 </span><span class="lineNoCov">          0 :                     slen2 = -1;</span>
+<span class="lineNum">     123 </span><span class="lineCov">        177 :                     slen2 = -1;</span>
 <span class="lineNum">     124 </span>            :                 }
 <span class="lineNum">     125 </span>            : 
 <span class="lineNum">     126 </span>            :                 /* If s is the format and oper2 is really a string, repair the lengths to account for ansi codes. */
-<span class="lineNum">     127 </span><span class="lineNoCov">          0 :                 CHECKOP(1);</span>
-<span class="lineNum">     128 </span><span class="lineNoCov">          0 :                 oper2 = POP();</span>
-<span class="lineNum">     129 </span><span class="lineNoCov">          0 :                 if (('s' == sstr[scnt]) &amp;&amp; (PROG_STRING == oper2-&gt;type)</span>
-<span class="lineNum">     130 </span><span class="lineNoCov">          0 :                     &amp;&amp; (oper2-&gt;data.string)) {</span>
-<span class="lineNum">     131 </span><span class="lineNoCov">          0 :                     ptr = oper2-&gt;data.string-&gt;data;</span>
+<span class="lineNum">     127 </span><span class="lineCov">        256 :                 CHECKOP(1);</span>
+<span class="lineNum">     128 </span><span class="lineCov">        256 :                 oper2 = POP();</span>
+<span class="lineNum">     129 </span><span class="lineCov">        256 :                 if (('s' == sstr[scnt]) &amp;&amp; (PROG_STRING == oper2-&gt;type)</span>
+<span class="lineNum">     130 </span><span class="lineCov">        105 :                     &amp;&amp; (oper2-&gt;data.string)) {</span>
+<span class="lineNum">     131 </span><span class="lineCov">        105 :                     ptr = oper2-&gt;data.string-&gt;data;</span>
 <span class="lineNum">     132 </span>            : 
-<span class="lineNum">     133 </span><span class="lineNoCov">          0 :                     i = 0;</span>
-<span class="lineNum">     134 </span><span class="lineNoCov">          0 :                     while ((-1 == slen2 || i &lt; slen2) &amp;&amp; *ptr) {     /* adapted from prim_ansi_strlen */</span>
-<span class="lineNum">     135 </span><span class="lineNoCov">          0 :                         begptr = ptr;</span>
-<span class="lineNum">     136 </span><span class="lineNoCov">          0 :                         if (*ptr++ == ESCAPE_CHAR) {</span>
+<span class="lineNum">     133 </span><span class="lineCov">        105 :                     i = 0;</span>
+<span class="lineNum">     134 </span><span class="lineCov">      45241 :                     while ((-1 == slen2 || i &lt; slen2) &amp;&amp; *ptr) {     /* adapted from prim_ansi_strlen */</span>
+<span class="lineNum">     135 </span><span class="lineCov">      45031 :                         begptr = ptr;</span>
+<span class="lineNum">     136 </span><span class="lineCov">      45031 :                         if (*ptr++ == ESCAPE_CHAR) {</span>
 <span class="lineNum">     137 </span><span class="lineNoCov">          0 :                             if (*ptr == '\0') {;</span>
 <span class="lineNum">     138 </span><span class="lineNoCov">          0 :                             } else if (*ptr != '[') {</span>
 <span class="lineNum">     139 </span><span class="lineNoCov">          0 :                                 ptr++;</span>
@@ -211,35 +211,35 @@
 <span class="lineNum">     149 </span><span class="lineNoCov">          0 :                             if (-1 != slen2)</span>
 <span class="lineNum">     150 </span><span class="lineNoCov">          0 :                                 slen2 += (int) (ptr - begptr);</span>
 <span class="lineNum">     151 </span>            :                         } else {
-<span class="lineNum">     152 </span><span class="lineNoCov">          0 :                             i++;</span>
+<span class="lineNum">     152 </span><span class="lineCov">      45031 :                             i++;</span>
 <span class="lineNum">     153 </span>            :                         };
 <span class="lineNum">     154 </span>            :                     }
 <span class="lineNum">     155 </span>            :                 }
 <span class="lineNum">     156 </span>            : 
-<span class="lineNum">     157 </span><span class="lineNoCov">          0 :                 if (slen1 &amp;&amp; ((abs(slen1) + result) &gt; BUFFER_LEN))</span>
-<span class="lineNum">     158 </span><span class="lineNoCov">          0 :                     abort_interp(&quot;Specified format field width too large.&quot;);</span>
-<span class="lineNum">     159 </span><span class="lineNoCov">          0 :                 sfmt[0] = '%';</span>
-<span class="lineNum">     160 </span><span class="lineNoCov">          0 :                 sfmt[1] = '\0';</span>
-<span class="lineNum">     161 </span><span class="lineNoCov">          0 :                 if (slrj == 1)</span>
-<span class="lineNum">     162 </span><span class="lineNoCov">          0 :                     strcatn(sfmt, sizeof(sfmt), &quot;-&quot;);</span>
-<span class="lineNum">     163 </span><span class="lineNoCov">          0 :                 if (spad1) {</span>
+<span class="lineNum">     157 </span><span class="lineCov">        256 :                 if (slen1 &amp;&amp; ((abs(slen1) + result) &gt; BUFFER_LEN))</span>
+<span class="lineNum">     158 </span><span class="lineCov">          4 :                     abort_interp(&quot;Specified format field width too large.&quot;);</span>
+<span class="lineNum">     159 </span><span class="lineCov">        252 :                 sfmt[0] = '%';</span>
+<span class="lineNum">     160 </span><span class="lineCov">        252 :                 sfmt[1] = '\0';</span>
+<span class="lineNum">     161 </span><span class="lineCov">        252 :                 if (slrj == 1)</span>
+<span class="lineNum">     162 </span><span class="lineCov">         22 :                     strcatn(sfmt, sizeof(sfmt), &quot;-&quot;);</span>
+<span class="lineNum">     163 </span><span class="lineCov">        252 :                 if (spad1) {</span>
 <span class="lineNum">     164 </span><span class="lineNoCov">          0 :                     if (spad1 == 1)</span>
 <span class="lineNum">     165 </span><span class="lineNoCov">          0 :                         strcatn(sfmt, sizeof(sfmt), &quot;+&quot;);</span>
 <span class="lineNum">     166 </span>            :                     else
 <span class="lineNum">     167 </span><span class="lineNoCov">          0 :                         strcatn(sfmt, sizeof(sfmt), &quot; &quot;);</span>
 <span class="lineNum">     168 </span>            :                 }
-<span class="lineNum">     169 </span><span class="lineNoCov">          0 :                 if (spad2)</span>
-<span class="lineNum">     170 </span><span class="lineNoCov">          0 :                     strcatn(sfmt, sizeof(sfmt), &quot;0&quot;);</span>
-<span class="lineNum">     171 </span><span class="lineNoCov">          0 :                 if (slen1 != 0) {</span>
-<span class="lineNum">     172 </span><span class="lineNoCov">          0 :                     snprintf(tbuf, sizeof(tbuf), &quot;%d&quot;, slen1);</span>
-<span class="lineNum">     173 </span><span class="lineNoCov">          0 :                     strcatn(sfmt, sizeof(sfmt), tbuf);</span>
+<span class="lineNum">     169 </span><span class="lineCov">        252 :                 if (spad2)</span>
+<span class="lineNum">     170 </span><span class="lineCov">         12 :                     strcatn(sfmt, sizeof(sfmt), &quot;0&quot;);</span>
+<span class="lineNum">     171 </span><span class="lineCov">        252 :                 if (slen1 != 0) {</span>
+<span class="lineNum">     172 </span><span class="lineCov">        155 :                     snprintf(tbuf, sizeof(tbuf), &quot;%d&quot;, slen1);</span>
+<span class="lineNum">     173 </span><span class="lineCov">        155 :                     strcatn(sfmt, sizeof(sfmt), tbuf);</span>
 <span class="lineNum">     174 </span>            :                 }
-<span class="lineNum">     175 </span><span class="lineNoCov">          0 :                 if (slen2 != -1) {</span>
-<span class="lineNum">     176 </span><span class="lineNoCov">          0 :                     snprintf(tbuf, sizeof(tbuf), &quot;.%d&quot;, slen2);</span>
-<span class="lineNum">     177 </span><span class="lineNoCov">          0 :                     strcatn(sfmt, sizeof(sfmt), tbuf);</span>
+<span class="lineNum">     175 </span><span class="lineCov">        252 :                 if (slen2 != -1) {</span>
+<span class="lineNum">     176 </span><span class="lineCov">         79 :                     snprintf(tbuf, sizeof(tbuf), &quot;.%d&quot;, slen2);</span>
+<span class="lineNum">     177 </span><span class="lineCov">         79 :                     strcatn(sfmt, sizeof(sfmt), tbuf);</span>
 <span class="lineNum">     178 </span>            :                 }
 <span class="lineNum">     179 </span>            : 
-<span class="lineNum">     180 </span><span class="lineNoCov">          0 :                 if (sstr[scnt] == '~') {</span>
+<span class="lineNum">     180 </span><span class="lineCov">        252 :                 if (sstr[scnt] == '~') {</span>
 <span class="lineNum">     181 </span><span class="lineNoCov">          0 :                     switch (oper2-&gt;type) {</span>
 <span class="lineNum">     182 </span>            :                     case PROG_OBJECT:
 <span class="lineNum">     183 </span><span class="lineNoCov">          0 :                         sstr[scnt] = 'd';</span>
@@ -261,58 +261,58 @@
 <span class="lineNum">     199 </span><span class="lineNoCov">          0 :                         break;</span>
 <span class="lineNum">     200 </span>            :                     }
 <span class="lineNum">     201 </span>            :                 }
-<span class="lineNum">     202 </span><span class="lineNoCov">          0 :                 switch (sstr[scnt]) {</span>
+<span class="lineNum">     202 </span><span class="lineCov">        252 :                 switch (sstr[scnt]) {</span>
 <span class="lineNum">     203 </span>            :                 case 'i':
-<span class="lineNum">     204 </span><span class="lineNoCov">          0 :                     strcatn(sfmt, sizeof(sfmt), &quot;d&quot;);</span>
-<span class="lineNum">     205 </span><span class="lineNoCov">          0 :                     if (oper2-&gt;type != PROG_INTEGER)</span>
+<span class="lineNum">     204 </span><span class="lineCov">         20 :                     strcatn(sfmt, sizeof(sfmt), &quot;d&quot;);</span>
+<span class="lineNum">     205 </span><span class="lineCov">         20 :                     if (oper2-&gt;type != PROG_INTEGER)</span>
 <span class="lineNum">     206 </span><span class="lineNoCov">          0 :                         abort_interp(&quot;Format specified integer argument not found.&quot;);</span>
-<span class="lineNum">     207 </span><span class="lineNoCov">          0 :                     snprintf(tbuf, sizeof(tbuf), sfmt, oper2-&gt;data.number);</span>
-<span class="lineNum">     208 </span><span class="lineNoCov">          0 :                     tlen = strlen(tbuf);</span>
-<span class="lineNum">     209 </span><span class="lineNoCov">          0 :                     if (slrj == 2) {</span>
-<span class="lineNum">     210 </span><span class="lineNoCov">          0 :                         tnum = 0;</span>
-<span class="lineNum">     211 </span><span class="lineNoCov">          0 :                         while ((tbuf[tnum] == ' ') &amp;&amp; (tnum &lt; tlen))</span>
-<span class="lineNum">     212 </span><span class="lineNoCov">          0 :                             tnum++;</span>
-<span class="lineNum">     213 </span><span class="lineNoCov">          0 :                         if ((tnum) &amp;&amp; (tnum &lt; tlen)) {</span>
-<span class="lineNum">     214 </span><span class="lineNoCov">          0 :                             temp = tnum / 2;</span>
-<span class="lineNum">     215 </span><span class="lineNoCov">          0 :                             for (i = tnum; i &lt; tlen; i++)</span>
-<span class="lineNum">     216 </span><span class="lineNoCov">          0 :                                 tbuf[i - temp] = tbuf[i];</span>
-<span class="lineNum">     217 </span><span class="lineNoCov">          0 :                             for (i = tlen - temp; i &lt; tlen; i++)</span>
-<span class="lineNum">     218 </span><span class="lineNoCov">          0 :                                 tbuf[i] = ' ';</span>
+<span class="lineNum">     207 </span><span class="lineCov">         20 :                     snprintf(tbuf, sizeof(tbuf), sfmt, oper2-&gt;data.number);</span>
+<span class="lineNum">     208 </span><span class="lineCov">         20 :                     tlen = strlen(tbuf);</span>
+<span class="lineNum">     209 </span><span class="lineCov">         20 :                     if (slrj == 2) {</span>
+<span class="lineNum">     210 </span><span class="lineCov">          4 :                         tnum = 0;</span>
+<span class="lineNum">     211 </span><span class="lineCov">         16 :                         while ((tbuf[tnum] == ' ') &amp;&amp; (tnum &lt; tlen))</span>
+<span class="lineNum">     212 </span><span class="lineCov">          8 :                             tnum++;</span>
+<span class="lineNum">     213 </span><span class="lineCov">          4 :                         if ((tnum) &amp;&amp; (tnum &lt; tlen)) {</span>
+<span class="lineNum">     214 </span><span class="lineCov">          4 :                             temp = tnum / 2;</span>
+<span class="lineNum">     215 </span><span class="lineCov">         12 :                             for (i = tnum; i &lt; tlen; i++)</span>
+<span class="lineNum">     216 </span><span class="lineCov">          8 :                                 tbuf[i - temp] = tbuf[i];</span>
+<span class="lineNum">     217 </span><span class="lineCov">          8 :                             for (i = tlen - temp; i &lt; tlen; i++)</span>
+<span class="lineNum">     218 </span><span class="lineCov">          4 :                                 tbuf[i] = ' ';</span>
 <span class="lineNum">     219 </span>            :                         }
 <span class="lineNum">     220 </span>            :                     }
-<span class="lineNum">     221 </span><span class="lineNoCov">          0 :                     if (tlen + result &gt; BUFFER_LEN)</span>
+<span class="lineNum">     221 </span><span class="lineCov">         20 :                     if (tlen + result &gt; BUFFER_LEN)</span>
 <span class="lineNum">     222 </span><span class="lineNoCov">          0 :                         abort_interp(&quot;Resultant string would overflow buffer.&quot;);</span>
-<span class="lineNum">     223 </span><span class="lineNoCov">          0 :                     buf[result] = '\0';</span>
-<span class="lineNum">     224 </span><span class="lineNoCov">          0 :                     strcatn(buf, sizeof(buf), tbuf);</span>
-<span class="lineNum">     225 </span><span class="lineNoCov">          0 :                     result += tlen;</span>
-<span class="lineNum">     226 </span><span class="lineNoCov">          0 :                     CLEAR(oper2);</span>
-<span class="lineNum">     227 </span><span class="lineNoCov">          0 :                     break;</span>
+<span class="lineNum">     223 </span><span class="lineCov">         20 :                     buf[result] = '\0';</span>
+<span class="lineNum">     224 </span><span class="lineCov">         20 :                     strcatn(buf, sizeof(buf), tbuf);</span>
+<span class="lineNum">     225 </span><span class="lineCov">         20 :                     result += tlen;</span>
+<span class="lineNum">     226 </span><span class="lineCov">         20 :                     CLEAR(oper2);</span>
+<span class="lineNum">     227 </span><span class="lineCov">         20 :                     break;</span>
 <span class="lineNum">     228 </span>            :                 case 'S':
 <span class="lineNum">     229 </span>            :                 case 's':
-<span class="lineNum">     230 </span><span class="lineNoCov">          0 :                     strcatn(sfmt, sizeof(sfmt), &quot;s&quot;);</span>
-<span class="lineNum">     231 </span><span class="lineNoCov">          0 :                     if (oper2-&gt;type != PROG_STRING)</span>
+<span class="lineNum">     230 </span><span class="lineCov">        101 :                     strcatn(sfmt, sizeof(sfmt), &quot;s&quot;);</span>
+<span class="lineNum">     231 </span><span class="lineCov">        101 :                     if (oper2-&gt;type != PROG_STRING)</span>
 <span class="lineNum">     232 </span><span class="lineNoCov">          0 :                         abort_interp(&quot;Format specified string argument not found.&quot;);</span>
-<span class="lineNum">     233 </span><span class="lineNoCov">          0 :                     snprintf(tbuf, sizeof(tbuf), sfmt, DoNullInd(oper2-&gt;data.string));</span>
-<span class="lineNum">     234 </span><span class="lineNoCov">          0 :                     tlen = strlen(tbuf);</span>
-<span class="lineNum">     235 </span><span class="lineNoCov">          0 :                     if (slrj == 2) {</span>
-<span class="lineNum">     236 </span><span class="lineNoCov">          0 :                         tnum = 0;</span>
-<span class="lineNum">     237 </span><span class="lineNoCov">          0 :                         while ((tbuf[tnum] == ' ') &amp;&amp; (tnum &lt; tlen))</span>
-<span class="lineNum">     238 </span><span class="lineNoCov">          0 :                             tnum++;</span>
-<span class="lineNum">     239 </span><span class="lineNoCov">          0 :                         if ((tnum) &amp;&amp; (tnum &lt; tlen)) {</span>
-<span class="lineNum">     240 </span><span class="lineNoCov">          0 :                             temp = tnum / 2;</span>
-<span class="lineNum">     241 </span><span class="lineNoCov">          0 :                             for (i = tnum; i &lt; tlen; i++)</span>
-<span class="lineNum">     242 </span><span class="lineNoCov">          0 :                                 tbuf[i - temp] = tbuf[i];</span>
-<span class="lineNum">     243 </span><span class="lineNoCov">          0 :                             for (i = tlen - temp; i &lt; tlen; i++)</span>
-<span class="lineNum">     244 </span><span class="lineNoCov">          0 :                                 tbuf[i] = ' ';</span>
+<span class="lineNum">     233 </span><span class="lineCov">        101 :                     snprintf(tbuf, sizeof(tbuf), sfmt, DoNullInd(oper2-&gt;data.string));</span>
+<span class="lineNum">     234 </span><span class="lineCov">        101 :                     tlen = strlen(tbuf);</span>
+<span class="lineNum">     235 </span><span class="lineCov">        101 :                     if (slrj == 2) {</span>
+<span class="lineNum">     236 </span><span class="lineCov">          4 :                         tnum = 0;</span>
+<span class="lineNum">     237 </span><span class="lineCov">         16 :                         while ((tbuf[tnum] == ' ') &amp;&amp; (tnum &lt; tlen))</span>
+<span class="lineNum">     238 </span><span class="lineCov">          8 :                             tnum++;</span>
+<span class="lineNum">     239 </span><span class="lineCov">          4 :                         if ((tnum) &amp;&amp; (tnum &lt; tlen)) {</span>
+<span class="lineNum">     240 </span><span class="lineCov">          4 :                             temp = tnum / 2;</span>
+<span class="lineNum">     241 </span><span class="lineCov">         12 :                             for (i = tnum; i &lt; tlen; i++)</span>
+<span class="lineNum">     242 </span><span class="lineCov">          8 :                                 tbuf[i - temp] = tbuf[i];</span>
+<span class="lineNum">     243 </span><span class="lineCov">          8 :                             for (i = tlen - temp; i &lt; tlen; i++)</span>
+<span class="lineNum">     244 </span><span class="lineCov">          4 :                                 tbuf[i] = ' ';</span>
 <span class="lineNum">     245 </span>            :                         }
 <span class="lineNum">     246 </span>            :                     }
-<span class="lineNum">     247 </span><span class="lineNoCov">          0 :                     if (strlen(tbuf) + result &gt; BUFFER_LEN)</span>
-<span class="lineNum">     248 </span><span class="lineNoCov">          0 :                         abort_interp(&quot;Resultant string would overflow buffer.&quot;);</span>
-<span class="lineNum">     249 </span><span class="lineNoCov">          0 :                     buf[result] = '\0';</span>
-<span class="lineNum">     250 </span><span class="lineNoCov">          0 :                     strcatn(buf, sizeof(buf), tbuf);</span>
-<span class="lineNum">     251 </span><span class="lineNoCov">          0 :                     result += strlen(tbuf);</span>
-<span class="lineNum">     252 </span><span class="lineNoCov">          0 :                     CLEAR(oper2);</span>
-<span class="lineNum">     253 </span><span class="lineNoCov">          0 :                     break;</span>
+<span class="lineNum">     247 </span><span class="lineCov">        101 :                     if (strlen(tbuf) + result &gt; BUFFER_LEN)</span>
+<span class="lineNum">     248 </span><span class="lineCov">          5 :                         abort_interp(&quot;Resultant string would overflow buffer.&quot;);</span>
+<span class="lineNum">     249 </span><span class="lineCov">         96 :                     buf[result] = '\0';</span>
+<span class="lineNum">     250 </span><span class="lineCov">         96 :                     strcatn(buf, sizeof(buf), tbuf);</span>
+<span class="lineNum">     251 </span><span class="lineCov">         96 :                     result += strlen(tbuf);</span>
+<span class="lineNum">     252 </span><span class="lineCov">         96 :                     CLEAR(oper2);</span>
+<span class="lineNum">     253 </span><span class="lineCov">         96 :                     break;</span>
 <span class="lineNum">     254 </span>            :                 case '?':
 <span class="lineNum">     255 </span><span class="lineNoCov">          0 :                     strcatn(sfmt, sizeof(sfmt), &quot;s&quot;);</span>
 <span class="lineNum">     256 </span><span class="lineNoCov">          0 :                     switch (oper2-&gt;type) {</span>
@@ -386,75 +386,75 @@
 <span class="lineNum">     324 </span><span class="lineNoCov">          0 :                     CLEAR(oper2);</span>
 <span class="lineNum">     325 </span><span class="lineNoCov">          0 :                     break;</span>
 <span class="lineNum">     326 </span>            :                 case 'd':
-<span class="lineNum">     327 </span><span class="lineNoCov">          0 :                     strcatn(sfmt, sizeof(sfmt), &quot;s&quot;);</span>
-<span class="lineNum">     328 </span><span class="lineNoCov">          0 :                     if (oper2-&gt;type != PROG_OBJECT)</span>
+<span class="lineNum">     327 </span><span class="lineCov">         14 :                     strcatn(sfmt, sizeof(sfmt), &quot;s&quot;);</span>
+<span class="lineNum">     328 </span><span class="lineCov">         14 :                     if (oper2-&gt;type != PROG_OBJECT)</span>
 <span class="lineNum">     329 </span><span class="lineNoCov">          0 :                         abort_interp(&quot;Format specified object not found.&quot;);</span>
-<span class="lineNum">     330 </span><span class="lineNoCov">          0 :                     snprintf(hold, sizeof(hold), &quot;#%d&quot;, oper2-&gt;data.objref);</span>
-<span class="lineNum">     331 </span><span class="lineNoCov">          0 :                     snprintf(tbuf, sizeof(tbuf), sfmt, hold);</span>
-<span class="lineNum">     332 </span><span class="lineNoCov">          0 :                     tlen = strlen(tbuf);</span>
-<span class="lineNum">     333 </span><span class="lineNoCov">          0 :                     if (slrj == 2) {</span>
-<span class="lineNum">     334 </span><span class="lineNoCov">          0 :                         tnum = 0;</span>
-<span class="lineNum">     335 </span><span class="lineNoCov">          0 :                         while ((tbuf[tnum] == ' ') &amp;&amp; (tnum &lt; tlen))</span>
-<span class="lineNum">     336 </span><span class="lineNoCov">          0 :                             tnum++;</span>
-<span class="lineNum">     337 </span><span class="lineNoCov">          0 :                         if ((tnum) &amp;&amp; (tnum &lt; tlen)) {</span>
-<span class="lineNum">     338 </span><span class="lineNoCov">          0 :                             temp = tnum / 2;</span>
-<span class="lineNum">     339 </span><span class="lineNoCov">          0 :                             for (i = tnum; i &lt; tlen; i++)</span>
-<span class="lineNum">     340 </span><span class="lineNoCov">          0 :                                 tbuf[i - temp] = tbuf[i];</span>
-<span class="lineNum">     341 </span><span class="lineNoCov">          0 :                             for (i = tlen - temp; i &lt; tlen; i++)</span>
-<span class="lineNum">     342 </span><span class="lineNoCov">          0 :                                 tbuf[i] = ' ';</span>
+<span class="lineNum">     330 </span><span class="lineCov">         14 :                     snprintf(hold, sizeof(hold), &quot;#%d&quot;, oper2-&gt;data.objref);</span>
+<span class="lineNum">     331 </span><span class="lineCov">         14 :                     snprintf(tbuf, sizeof(tbuf), sfmt, hold);</span>
+<span class="lineNum">     332 </span><span class="lineCov">         14 :                     tlen = strlen(tbuf);</span>
+<span class="lineNum">     333 </span><span class="lineCov">         14 :                     if (slrj == 2) {</span>
+<span class="lineNum">     334 </span><span class="lineCov">          4 :                         tnum = 0;</span>
+<span class="lineNum">     335 </span><span class="lineCov">         18 :                         while ((tbuf[tnum] == ' ') &amp;&amp; (tnum &lt; tlen))</span>
+<span class="lineNum">     336 </span><span class="lineCov">         10 :                             tnum++;</span>
+<span class="lineNum">     337 </span><span class="lineCov">          4 :                         if ((tnum) &amp;&amp; (tnum &lt; tlen)) {</span>
+<span class="lineNum">     338 </span><span class="lineCov">          4 :                             temp = tnum / 2;</span>
+<span class="lineNum">     339 </span><span class="lineCov">         12 :                             for (i = tnum; i &lt; tlen; i++)</span>
+<span class="lineNum">     340 </span><span class="lineCov">          8 :                                 tbuf[i - temp] = tbuf[i];</span>
+<span class="lineNum">     341 </span><span class="lineCov">          8 :                             for (i = tlen - temp; i &lt; tlen; i++)</span>
+<span class="lineNum">     342 </span><span class="lineCov">          4 :                                 tbuf[i] = ' ';</span>
 <span class="lineNum">     343 </span>            :                         }
 <span class="lineNum">     344 </span>            :                     }
-<span class="lineNum">     345 </span><span class="lineNoCov">          0 :                     if (strlen(tbuf) + result &gt; BUFFER_LEN)</span>
+<span class="lineNum">     345 </span><span class="lineCov">         14 :                     if (strlen(tbuf) + result &gt; BUFFER_LEN)</span>
 <span class="lineNum">     346 </span><span class="lineNoCov">          0 :                         abort_interp(&quot;Resultant string would overflow buffer.&quot;);</span>
-<span class="lineNum">     347 </span><span class="lineNoCov">          0 :                     buf[result] = '\0';</span>
-<span class="lineNum">     348 </span><span class="lineNoCov">          0 :                     strcatn(buf, sizeof(buf), tbuf);</span>
-<span class="lineNum">     349 </span><span class="lineNoCov">          0 :                     result += strlen(tbuf);</span>
-<span class="lineNum">     350 </span><span class="lineNoCov">          0 :                     CLEAR(oper2);</span>
-<span class="lineNum">     351 </span><span class="lineNoCov">          0 :                     break;</span>
+<span class="lineNum">     347 </span><span class="lineCov">         14 :                     buf[result] = '\0';</span>
+<span class="lineNum">     348 </span><span class="lineCov">         14 :                     strcatn(buf, sizeof(buf), tbuf);</span>
+<span class="lineNum">     349 </span><span class="lineCov">         14 :                     result += strlen(tbuf);</span>
+<span class="lineNum">     350 </span><span class="lineCov">         14 :                     CLEAR(oper2);</span>
+<span class="lineNum">     351 </span><span class="lineCov">         14 :                     break;</span>
 <span class="lineNum">     352 </span>            :                 case 'D':
-<span class="lineNum">     353 </span><span class="lineNoCov">          0 :                     strcatn(sfmt, sizeof(sfmt), &quot;s&quot;);</span>
-<span class="lineNum">     354 </span><span class="lineNoCov">          0 :                     if (oper2-&gt;type != PROG_OBJECT)</span>
+<span class="lineNum">     353 </span><span class="lineCov">         10 :                     strcatn(sfmt, sizeof(sfmt), &quot;s&quot;);</span>
+<span class="lineNum">     354 </span><span class="lineCov">         10 :                     if (oper2-&gt;type != PROG_OBJECT)</span>
 <span class="lineNum">     355 </span><span class="lineNoCov">          0 :                         abort_interp(&quot;Format specified object not found.&quot;);</span>
-<span class="lineNum">     356 </span><span class="lineNoCov">          0 :                     if (!valid_object(oper2))</span>
+<span class="lineNum">     356 </span><span class="lineCov">         10 :                     if (!valid_object(oper2))</span>
 <span class="lineNum">     357 </span><span class="lineNoCov">          0 :                         abort_interp(&quot;Format specified object not valid.&quot;);</span>
-<span class="lineNum">     358 </span><span class="lineNoCov">          0 :                     ref = oper2-&gt;data.objref;</span>
-<span class="lineNum">     359 </span><span class="lineNoCov">          0 :                     CHECKREMOTE(ref);</span>
+<span class="lineNum">     358 </span><span class="lineCov">         10 :                     ref = oper2-&gt;data.objref;</span>
+<span class="lineNum">     359 </span><span class="lineCov">         10 :                     CHECKREMOTE(ref);</span>
 <span class="lineNum">     360 </span>            :                     /* if ((Typeof(ref) != TYPE_PLAYER) &amp;&amp; (Typeof(ref) != TYPE_PROGRAM))
 <span class="lineNum">     361 </span>            :                        ts_lastuseobject(ref); */
-<span class="lineNum">     362 </span><span class="lineNoCov">          0 :                     if (NAME(ref)) {</span>
-<span class="lineNum">     363 </span><span class="lineNoCov">          0 :                         strcpyn(hold, sizeof(hold), NAME(ref));</span>
+<span class="lineNum">     362 </span><span class="lineCov">         10 :                     if (NAME(ref)) {</span>
+<span class="lineNum">     363 </span><span class="lineCov">         10 :                         strcpyn(hold, sizeof(hold), NAME(ref));</span>
 <span class="lineNum">     364 </span>            :                     } else {
 <span class="lineNum">     365 </span><span class="lineNoCov">          0 :                         hold[0] = '\0';</span>
 <span class="lineNum">     366 </span>            :                     }
-<span class="lineNum">     367 </span><span class="lineNoCov">          0 :                     snprintf(tbuf, sizeof(tbuf), sfmt, hold);</span>
-<span class="lineNum">     368 </span><span class="lineNoCov">          0 :                     tlen = strlen(tbuf);</span>
-<span class="lineNum">     369 </span><span class="lineNoCov">          0 :                     if (slrj == 2) {</span>
-<span class="lineNum">     370 </span><span class="lineNoCov">          0 :                         tnum = 0;</span>
-<span class="lineNum">     371 </span><span class="lineNoCov">          0 :                         while ((tbuf[tnum] == ' ') &amp;&amp; (tnum &lt; tlen))</span>
-<span class="lineNum">     372 </span><span class="lineNoCov">          0 :                             tnum++;</span>
-<span class="lineNum">     373 </span><span class="lineNoCov">          0 :                         if ((tnum) &amp;&amp; (tnum &lt; tlen)) {</span>
-<span class="lineNum">     374 </span><span class="lineNoCov">          0 :                             temp = tnum / 2;</span>
-<span class="lineNum">     375 </span><span class="lineNoCov">          0 :                             for (i = tnum; i &lt; tlen; i++)</span>
-<span class="lineNum">     376 </span><span class="lineNoCov">          0 :                                 tbuf[i - temp] = tbuf[i];</span>
-<span class="lineNum">     377 </span><span class="lineNoCov">          0 :                             for (i = tlen - temp; i &lt; tlen; i++)</span>
-<span class="lineNum">     378 </span><span class="lineNoCov">          0 :                                 tbuf[i] = ' ';</span>
+<span class="lineNum">     367 </span><span class="lineCov">         10 :                     snprintf(tbuf, sizeof(tbuf), sfmt, hold);</span>
+<span class="lineNum">     368 </span><span class="lineCov">         10 :                     tlen = strlen(tbuf);</span>
+<span class="lineNum">     369 </span><span class="lineCov">         10 :                     if (slrj == 2) {</span>
+<span class="lineNum">     370 </span><span class="lineCov">          2 :                         tnum = 0;</span>
+<span class="lineNum">     371 </span><span class="lineCov">          8 :                         while ((tbuf[tnum] == ' ') &amp;&amp; (tnum &lt; tlen))</span>
+<span class="lineNum">     372 </span><span class="lineCov">          4 :                             tnum++;</span>
+<span class="lineNum">     373 </span><span class="lineCov">          2 :                         if ((tnum) &amp;&amp; (tnum &lt; tlen)) {</span>
+<span class="lineNum">     374 </span><span class="lineCov">          2 :                             temp = tnum / 2;</span>
+<span class="lineNum">     375 </span><span class="lineCov">          8 :                             for (i = tnum; i &lt; tlen; i++)</span>
+<span class="lineNum">     376 </span><span class="lineCov">          6 :                                 tbuf[i - temp] = tbuf[i];</span>
+<span class="lineNum">     377 </span><span class="lineCov">          4 :                             for (i = tlen - temp; i &lt; tlen; i++)</span>
+<span class="lineNum">     378 </span><span class="lineCov">          2 :                                 tbuf[i] = ' ';</span>
 <span class="lineNum">     379 </span>            :                         }
 <span class="lineNum">     380 </span>            :                     }
-<span class="lineNum">     381 </span><span class="lineNoCov">          0 :                     if (strlen(tbuf) + result &gt; BUFFER_LEN)</span>
+<span class="lineNum">     381 </span><span class="lineCov">         10 :                     if (strlen(tbuf) + result &gt; BUFFER_LEN)</span>
 <span class="lineNum">     382 </span><span class="lineNoCov">          0 :                         abort_interp(&quot;Resultant string would overflow buffer.&quot;);</span>
-<span class="lineNum">     383 </span><span class="lineNoCov">          0 :                     buf[result] = '\0';</span>
-<span class="lineNum">     384 </span><span class="lineNoCov">          0 :                     strcatn(buf, sizeof(buf), tbuf);</span>
-<span class="lineNum">     385 </span><span class="lineNoCov">          0 :                     result += strlen(tbuf);</span>
-<span class="lineNum">     386 </span><span class="lineNoCov">          0 :                     CLEAR(oper2);</span>
-<span class="lineNum">     387 </span><span class="lineNoCov">          0 :                     break;</span>
+<span class="lineNum">     383 </span><span class="lineCov">         10 :                     buf[result] = '\0';</span>
+<span class="lineNum">     384 </span><span class="lineCov">         10 :                     strcatn(buf, sizeof(buf), tbuf);</span>
+<span class="lineNum">     385 </span><span class="lineCov">         10 :                     result += strlen(tbuf);</span>
+<span class="lineNum">     386 </span><span class="lineCov">         10 :                     CLEAR(oper2);</span>
+<span class="lineNum">     387 </span><span class="lineCov">         10 :                     break;</span>
 <span class="lineNum">     388 </span>            :                 case 'l':
-<span class="lineNum">     389 </span><span class="lineNoCov">          0 :                     strcatn(sfmt, sizeof(sfmt), &quot;s&quot;);</span>
-<span class="lineNum">     390 </span><span class="lineNoCov">          0 :                     if (oper2-&gt;type != PROG_LOCK)</span>
+<span class="lineNum">     389 </span><span class="lineCov">          4 :                     strcatn(sfmt, sizeof(sfmt), &quot;s&quot;);</span>
+<span class="lineNum">     390 </span><span class="lineCov">          4 :                     if (oper2-&gt;type != PROG_LOCK)</span>
 <span class="lineNum">     391 </span><span class="lineNoCov">          0 :                         abort_interp(&quot;Format specified lock not found.&quot;);</span>
-<span class="lineNum">     392 </span><span class="lineNoCov">          0 :                     strcpyn(hold, sizeof(hold), unparse_boolexp(ProgUID, oper2-&gt;data.lock, 1));</span>
-<span class="lineNum">     393 </span><span class="lineNoCov">          0 :                     snprintf(tbuf, sizeof(tbuf), sfmt, hold);</span>
-<span class="lineNum">     394 </span><span class="lineNoCov">          0 :                     tlen = strlen(tbuf);</span>
-<span class="lineNum">     395 </span><span class="lineNoCov">          0 :                     if (slrj == 2) {</span>
+<span class="lineNum">     392 </span><span class="lineCov">          4 :                     strcpyn(hold, sizeof(hold), unparse_boolexp(ProgUID, oper2-&gt;data.lock, 1));</span>
+<span class="lineNum">     393 </span><span class="lineCov">          4 :                     snprintf(tbuf, sizeof(tbuf), sfmt, hold);</span>
+<span class="lineNum">     394 </span><span class="lineCov">          4 :                     tlen = strlen(tbuf);</span>
+<span class="lineNum">     395 </span><span class="lineCov">          4 :                     if (slrj == 2) {</span>
 <span class="lineNum">     396 </span><span class="lineNoCov">          0 :                         tnum = 0;</span>
 <span class="lineNum">     397 </span><span class="lineNoCov">          0 :                         while ((tbuf[tnum] == ' ') &amp;&amp; (tnum &lt; tlen))</span>
 <span class="lineNum">     398 </span><span class="lineNoCov">          0 :                             tnum++;</span>
@@ -466,50 +466,50 @@
 <span class="lineNum">     404 </span><span class="lineNoCov">          0 :                                 tbuf[i] = ' ';</span>
 <span class="lineNum">     405 </span>            :                         }
 <span class="lineNum">     406 </span>            :                     }
-<span class="lineNum">     407 </span><span class="lineNoCov">          0 :                     if (strlen(tbuf) + result &gt; BUFFER_LEN)</span>
+<span class="lineNum">     407 </span><span class="lineCov">          4 :                     if (strlen(tbuf) + result &gt; BUFFER_LEN)</span>
 <span class="lineNum">     408 </span><span class="lineNoCov">          0 :                         abort_interp(&quot;Resultant string would overflow buffer.&quot;);</span>
-<span class="lineNum">     409 </span><span class="lineNoCov">          0 :                     buf[result] = '\0';</span>
-<span class="lineNum">     410 </span><span class="lineNoCov">          0 :                     strcatn(buf, sizeof(buf), tbuf);</span>
-<span class="lineNum">     411 </span><span class="lineNoCov">          0 :                     result += strlen(tbuf);</span>
-<span class="lineNum">     412 </span><span class="lineNoCov">          0 :                     CLEAR(oper2);</span>
-<span class="lineNum">     413 </span><span class="lineNoCov">          0 :                     break;</span>
+<span class="lineNum">     409 </span><span class="lineCov">          4 :                     buf[result] = '\0';</span>
+<span class="lineNum">     410 </span><span class="lineCov">          4 :                     strcatn(buf, sizeof(buf), tbuf);</span>
+<span class="lineNum">     411 </span><span class="lineCov">          4 :                     result += strlen(tbuf);</span>
+<span class="lineNum">     412 </span><span class="lineCov">          4 :                     CLEAR(oper2);</span>
+<span class="lineNum">     413 </span><span class="lineCov">          4 :                     break;</span>
 <span class="lineNum">     414 </span>            :                 case 'f':
 <span class="lineNum">     415 </span>            :                 case 'e':
 <span class="lineNum">     416 </span>            :                 case 'g':
-<span class="lineNum">     417 </span><span class="lineNoCov">          0 :                     strcatn(sfmt, sizeof(sfmt), &quot;l&quot;);</span>
-<span class="lineNum">     418 </span><span class="lineNoCov">          0 :                     snprintf(hold, sizeof(hold), &quot;%c&quot;, sstr[scnt]);</span>
-<span class="lineNum">     419 </span><span class="lineNoCov">          0 :                     strcatn(sfmt, sizeof(sfmt), hold);</span>
-<span class="lineNum">     420 </span><span class="lineNoCov">          0 :                     if (oper2-&gt;type != PROG_FLOAT)</span>
-<span class="lineNum">     421 </span><span class="lineNoCov">          0 :                         abort_interp(&quot;Format specified float not found.&quot;);</span>
-<span class="lineNum">     422 </span><span class="lineNoCov">          0 :                     snprintf(tbuf, sizeof(tbuf), sfmt, oper2-&gt;data.fnumber);</span>
-<span class="lineNum">     423 </span><span class="lineNoCov">          0 :                     tlen = strlen(tbuf);</span>
-<span class="lineNum">     424 </span><span class="lineNoCov">          0 :                     if (slrj == 2) {</span>
-<span class="lineNum">     425 </span><span class="lineNoCov">          0 :                         tnum = 0;</span>
-<span class="lineNum">     426 </span><span class="lineNoCov">          0 :                         while ((tbuf[tnum] == ' ') &amp;&amp; (tnum &lt; tlen))</span>
-<span class="lineNum">     427 </span><span class="lineNoCov">          0 :                             tnum++;</span>
-<span class="lineNum">     428 </span><span class="lineNoCov">          0 :                         if ((tnum) &amp;&amp; (tnum &lt; tlen)) {</span>
-<span class="lineNum">     429 </span><span class="lineNoCov">          0 :                             temp = tnum / 2;</span>
-<span class="lineNum">     430 </span><span class="lineNoCov">          0 :                             for (i = tnum; i &lt; tlen; i++)</span>
-<span class="lineNum">     431 </span><span class="lineNoCov">          0 :                                 tbuf[i - temp] = tbuf[i];</span>
-<span class="lineNum">     432 </span><span class="lineNoCov">          0 :                             for (i = tlen - temp; i &lt; tlen; i++)</span>
-<span class="lineNum">     433 </span><span class="lineNoCov">          0 :                                 tbuf[i] = ' ';</span>
+<span class="lineNum">     417 </span><span class="lineCov">        103 :                     strcatn(sfmt, sizeof(sfmt), &quot;l&quot;);</span>
+<span class="lineNum">     418 </span><span class="lineCov">        103 :                     snprintf(hold, sizeof(hold), &quot;%c&quot;, sstr[scnt]);</span>
+<span class="lineNum">     419 </span><span class="lineCov">        103 :                     strcatn(sfmt, sizeof(sfmt), hold);</span>
+<span class="lineNum">     420 </span><span class="lineCov">        103 :                     if (oper2-&gt;type != PROG_FLOAT)</span>
+<span class="lineNum">     421 </span><span class="lineCov">          2 :                         abort_interp(&quot;Format specified float not found.&quot;);</span>
+<span class="lineNum">     422 </span><span class="lineCov">        101 :                     snprintf(tbuf, sizeof(tbuf), sfmt, oper2-&gt;data.fnumber);</span>
+<span class="lineNum">     423 </span><span class="lineCov">        101 :                     tlen = strlen(tbuf);</span>
+<span class="lineNum">     424 </span><span class="lineCov">        101 :                     if (slrj == 2) {</span>
+<span class="lineNum">     425 </span><span class="lineCov">         32 :                         tnum = 0;</span>
+<span class="lineNum">     426 </span><span class="lineCov">        108 :                         while ((tbuf[tnum] == ' ') &amp;&amp; (tnum &lt; tlen))</span>
+<span class="lineNum">     427 </span><span class="lineCov">         44 :                             tnum++;</span>
+<span class="lineNum">     428 </span><span class="lineCov">         32 :                         if ((tnum) &amp;&amp; (tnum &lt; tlen)) {</span>
+<span class="lineNum">     429 </span><span class="lineCov">         22 :                             temp = tnum / 2;</span>
+<span class="lineNum">     430 </span><span class="lineCov">        106 :                             for (i = tnum; i &lt; tlen; i++)</span>
+<span class="lineNum">     431 </span><span class="lineCov">         84 :                                 tbuf[i - temp] = tbuf[i];</span>
+<span class="lineNum">     432 </span><span class="lineCov">         44 :                             for (i = tlen - temp; i &lt; tlen; i++)</span>
+<span class="lineNum">     433 </span><span class="lineCov">         22 :                                 tbuf[i] = ' ';</span>
 <span class="lineNum">     434 </span>            :                         }
 <span class="lineNum">     435 </span>            :                     }
-<span class="lineNum">     436 </span><span class="lineNoCov">          0 :                     if (strlen(tbuf) + result &gt; BUFFER_LEN)</span>
+<span class="lineNum">     436 </span><span class="lineCov">        101 :                     if (strlen(tbuf) + result &gt; BUFFER_LEN)</span>
 <span class="lineNum">     437 </span><span class="lineNoCov">          0 :                         abort_interp(&quot;Resultant string would overflow buffer.&quot;);</span>
-<span class="lineNum">     438 </span><span class="lineNoCov">          0 :                     buf[result] = '\0';</span>
-<span class="lineNum">     439 </span><span class="lineNoCov">          0 :                     strcatn(buf, sizeof(buf), tbuf);</span>
-<span class="lineNum">     440 </span><span class="lineNoCov">          0 :                     result += strlen(tbuf);</span>
-<span class="lineNum">     441 </span><span class="lineNoCov">          0 :                     CLEAR(oper2);</span>
-<span class="lineNum">     442 </span><span class="lineNoCov">          0 :                     break;</span>
+<span class="lineNum">     438 </span><span class="lineCov">        101 :                     buf[result] = '\0';</span>
+<span class="lineNum">     439 </span><span class="lineCov">        101 :                     strcatn(buf, sizeof(buf), tbuf);</span>
+<span class="lineNum">     440 </span><span class="lineCov">        101 :                     result += strlen(tbuf);</span>
+<span class="lineNum">     441 </span><span class="lineCov">        101 :                     CLEAR(oper2);</span>
+<span class="lineNum">     442 </span><span class="lineCov">        101 :                     break;</span>
 <span class="lineNum">     443 </span>            :                 default:
 <span class="lineNum">     444 </span><span class="lineNoCov">          0 :                     abort_interp(&quot;Invalid format string.&quot;);</span>
 <span class="lineNum">     445 </span>            :                 }
-<span class="lineNum">     446 </span><span class="lineNoCov">          0 :                 scnt++;</span>
-<span class="lineNum">     447 </span><span class="lineNoCov">          0 :                 tstop += strlen(tbuf);</span>
+<span class="lineNum">     446 </span><span class="lineCov">        245 :                 scnt++;</span>
+<span class="lineNum">     447 </span><span class="lineCov">        245 :                 tstop += strlen(tbuf);</span>
 <span class="lineNum">     448 </span>            :             }
 <span class="lineNum">     449 </span>            :         } else {
-<span class="lineNum">     450 </span><span class="lineNoCov">          0 :             if ((sstr[scnt] == '\\') &amp;&amp; (sstr[scnt + 1] == 't')) {</span>
+<span class="lineNum">     450 </span><span class="lineCov">         72 :             if ((sstr[scnt] == '\\') &amp;&amp; (sstr[scnt + 1] == 't')) {</span>
 <span class="lineNum">     451 </span><span class="lineNoCov">          0 :                 if ((result - (tstop % 8) + 1) &gt;= BUFFER_LEN)</span>
 <span class="lineNum">     452 </span><span class="lineNoCov">          0 :                     abort_interp(&quot;Resultant string would overflow buffer.&quot;);</span>
 <span class="lineNum">     453 </span><span class="lineNoCov">          0 :                 if ((tstop % 8) == 0) {</span>
@@ -523,29 +523,29 @@
 <span class="lineNum">     461 </span><span class="lineNoCov">          0 :                 scnt += 2;</span>
 <span class="lineNum">     462 </span><span class="lineNoCov">          0 :                 tstop = 0;</span>
 <span class="lineNum">     463 </span>            :             } else {
-<span class="lineNum">     464 </span><span class="lineNoCov">          0 :                 if (sstr[scnt] == '\r') {</span>
+<span class="lineNum">     464 </span><span class="lineCov">         72 :                 if (sstr[scnt] == '\r') {</span>
 <span class="lineNum">     465 </span><span class="lineNoCov">          0 :                     tstop = 0;</span>
 <span class="lineNum">     466 </span><span class="lineNoCov">          0 :                     scnt++;</span>
 <span class="lineNum">     467 </span><span class="lineNoCov">          0 :                     buf[result++] = '\r';</span>
 <span class="lineNum">     468 </span>            :                 } else {
-<span class="lineNum">     469 </span><span class="lineNoCov">          0 :                     buf[result++] = sstr[scnt++];</span>
-<span class="lineNum">     470 </span><span class="lineNoCov">          0 :                     tstop++;</span>
+<span class="lineNum">     469 </span><span class="lineCov">         72 :                     buf[result++] = sstr[scnt++];</span>
+<span class="lineNum">     470 </span><span class="lineCov">         72 :                     tstop++;</span>
 <span class="lineNum">     471 </span>            :                 }
 <span class="lineNum">     472 </span>            :             }
 <span class="lineNum">     473 </span>            :         }
 <span class="lineNum">     474 </span>            :     }
-<span class="lineNum">     475 </span><span class="lineNoCov">          0 :     CHECKOP(0);</span>
-<span class="lineNum">     476 </span><span class="lineNoCov">          0 :     if (result &gt;= BUFFER_LEN)</span>
+<span class="lineNum">     475 </span><span class="lineCov">        176 :     CHECKOP(0);</span>
+<span class="lineNum">     476 </span><span class="lineCov">        176 :     if (result &gt;= BUFFER_LEN)</span>
 <span class="lineNum">     477 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Resultant string would overflow buffer.&quot;);</span>
-<span class="lineNum">     478 </span><span class="lineNoCov">          0 :     buf[result] = '\0';</span>
-<span class="lineNum">     479 </span><span class="lineNoCov">          0 :     if (result)</span>
-<span class="lineNum">     480 </span><span class="lineNoCov">          0 :         PushString(buf);</span>
+<span class="lineNum">     478 </span><span class="lineCov">        176 :     buf[result] = '\0';</span>
+<span class="lineNum">     479 </span><span class="lineCov">        176 :     if (result)</span>
+<span class="lineNum">     480 </span><span class="lineCov">        176 :         PushString(buf);</span>
 <span class="lineNum">     481 </span>            :     else
 <span class="lineNum">     482 </span><span class="lineNoCov">          0 :         PushNullStr;</span>
 <span class="lineNum">     483 </span>            : }
 <a name="484"><span class="lineNum">     484 </span>            : </a>
 <span class="lineNum">     485 </span>            : void
-<span class="lineNum">     486 </span><span class="lineNoCov">          0 : prim_array_fmtstrings(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     486 </span><span class="lineCov">         26 : prim_array_fmtstrings(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     487 </span>            : {
 <span class="lineNum">     488 </span>            :     int slen, scnt, tstop, tlen, tnum, i;
 <span class="lineNum">     489 </span>            :     int slrj, spad1, spad2, slen1, slen2, temp;
@@ -553,132 +553,132 @@
 <span class="lineNum">     491 </span>            :     char *ptr, *begptr;
 <span class="lineNum">     492 </span>            :     char fieldbuf[BUFFER_LEN];
 <span class="lineNum">     493 </span>            :     char *fieldname;
-<span class="lineNum">     494 </span><span class="lineNoCov">          0 :     char *fmtstr = NULL;</span>
-<span class="lineNum">     495 </span><span class="lineNoCov">          0 :     stk_array *arr = NULL;</span>
-<span class="lineNum">     496 </span><span class="lineNoCov">          0 :     stk_array *arr2 = NULL;</span>
-<span class="lineNum">     497 </span><span class="lineNoCov">          0 :     stk_array *nu = NULL;</span>
+<span class="lineNum">     494 </span><span class="lineCov">         26 :     char *fmtstr = NULL;</span>
+<span class="lineNum">     495 </span><span class="lineCov">         26 :     stk_array *arr = NULL;</span>
+<span class="lineNum">     496 </span><span class="lineCov">         26 :     stk_array *arr2 = NULL;</span>
+<span class="lineNum">     497 </span><span class="lineCov">         26 :     stk_array *nu = NULL;</span>
 <span class="lineNum">     498 </span>            : 
-<span class="lineNum">     499 </span><span class="lineNoCov">          0 :     CHECKOP(2);</span>
-<span class="lineNum">     500 </span><span class="lineNoCov">          0 :     oper2 = POP();</span>
-<span class="lineNum">     501 </span><span class="lineNoCov">          0 :     oper1 = POP();</span>
+<span class="lineNum">     499 </span><span class="lineCov">         29 :     CHECKOP(2);</span>
+<span class="lineNum">     500 </span><span class="lineCov">         26 :     oper2 = POP();</span>
+<span class="lineNum">     501 </span><span class="lineCov">         26 :     oper1 = POP();</span>
 <span class="lineNum">     502 </span>            : 
-<span class="lineNum">     503 </span><span class="lineNoCov">          0 :     if (oper1-&gt;type != PROG_ARRAY)</span>
+<span class="lineNum">     503 </span><span class="lineCov">         26 :     if (oper1-&gt;type != PROG_ARRAY)</span>
 <span class="lineNum">     504 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not an array of arrays. (1)&quot;);</span>
-<span class="lineNum">     505 </span><span class="lineNoCov">          0 :     if (!array_is_homogenous(oper1-&gt;data.array, PROG_ARRAY))</span>
-<span class="lineNum">     506 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Argument not a homogenous array of arrays. (1)&quot;);</span>
-<span class="lineNum">     507 </span><span class="lineNoCov">          0 :     arr = oper1-&gt;data.array;</span>
+<span class="lineNum">     505 </span><span class="lineCov">         26 :     if (!array_is_homogenous(oper1-&gt;data.array, PROG_ARRAY))</span>
+<span class="lineNum">     506 </span><span class="lineCov">          1 :         abort_interp(&quot;Argument not a homogenous array of arrays. (1)&quot;);</span>
+<span class="lineNum">     507 </span><span class="lineCov">         25 :     arr = oper1-&gt;data.array;</span>
 <span class="lineNum">     508 </span>            : 
-<span class="lineNum">     509 </span><span class="lineNoCov">          0 :     if (oper2-&gt;type != PROG_STRING)</span>
+<span class="lineNum">     509 </span><span class="lineCov">         25 :     if (oper2-&gt;type != PROG_STRING)</span>
 <span class="lineNum">     510 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Expected string argument. (2)&quot;);</span>
-<span class="lineNum">     511 </span><span class="lineNoCov">          0 :     fmtstr = DoNullInd(oper2-&gt;data.string);</span>
-<span class="lineNum">     512 </span><span class="lineNoCov">          0 :     slen = strlen(fmtstr);</span>
+<span class="lineNum">     511 </span><span class="lineCov">         25 :     fmtstr = DoNullInd(oper2-&gt;data.string);</span>
+<span class="lineNum">     512 </span><span class="lineCov">         25 :     slen = strlen(fmtstr);</span>
 <span class="lineNum">     513 </span>            : 
-<span class="lineNum">     514 </span><span class="lineNoCov">          0 :     nu = new_array_packed(0);</span>
-<span class="lineNum">     515 </span><span class="lineNoCov">          0 :     if (array_first(arr, &amp;temp1)) {</span>
+<span class="lineNum">     514 </span><span class="lineCov">         25 :     nu = new_array_packed(0);</span>
+<span class="lineNum">     515 </span><span class="lineCov">         25 :     if (array_first(arr, &amp;temp1)) {</span>
 <span class="lineNum">     516 </span>            :         do {
-<span class="lineNum">     517 </span><span class="lineNoCov">          0 :             strcpyn(sstr, sizeof(sstr), fmtstr);</span>
-<span class="lineNum">     518 </span><span class="lineNoCov">          0 :             result = 0;         /* End of current string, must be smaller than BUFFER_LEN */</span>
-<span class="lineNum">     519 </span><span class="lineNoCov">          0 :             tmp = 0;            /* Number of props to search for/found */</span>
-<span class="lineNum">     520 </span><span class="lineNoCov">          0 :             scnt = 0;</span>
-<span class="lineNum">     521 </span><span class="lineNoCov">          0 :             tstop = 0;</span>
+<span class="lineNum">     517 </span><span class="lineCov">         41 :             strcpyn(sstr, sizeof(sstr), fmtstr);</span>
+<span class="lineNum">     518 </span><span class="lineCov">         41 :             result = 0;         /* End of current string, must be smaller than BUFFER_LEN */</span>
+<span class="lineNum">     519 </span><span class="lineCov">         41 :             tmp = 0;            /* Number of props to search for/found */</span>
+<span class="lineNum">     520 </span><span class="lineCov">         41 :             scnt = 0;</span>
+<span class="lineNum">     521 </span><span class="lineCov">         41 :             tstop = 0;</span>
 <span class="lineNum">     522 </span>            :             /*   &quot;%-20.19[name]s %6[dbref]d&quot;   */
-<span class="lineNum">     523 </span><span class="lineNoCov">          0 :             while ((scnt &lt; slen) &amp;&amp; (result &lt; BUFFER_LEN)) {</span>
-<span class="lineNum">     524 </span><span class="lineNoCov">          0 :                 if (sstr[scnt] == FMTTOKEN) {</span>
-<span class="lineNum">     525 </span><span class="lineNoCov">          0 :                     if (sstr[scnt + 1] == FMTTOKEN) {</span>
+<span class="lineNum">     523 </span><span class="lineCov">        379 :             while ((scnt &lt; slen) &amp;&amp; (result &lt; BUFFER_LEN)) {</span>
+<span class="lineNum">     524 </span><span class="lineCov">        299 :                 if (sstr[scnt] == FMTTOKEN) {</span>
+<span class="lineNum">     525 </span><span class="lineCov">        170 :                     if (sstr[scnt + 1] == FMTTOKEN) {</span>
 <span class="lineNum">     526 </span><span class="lineNoCov">          0 :                         buf[result++] = FMTTOKEN;</span>
 <span class="lineNum">     527 </span><span class="lineNoCov">          0 :                         scnt += 2;</span>
 <span class="lineNum">     528 </span>            :                     } else {
-<span class="lineNum">     529 </span><span class="lineNoCov">          0 :                         scnt++;</span>
-<span class="lineNum">     530 </span><span class="lineNoCov">          0 :                         if ((sstr[scnt] == '-') || (sstr[scnt] == '|')) {</span>
-<span class="lineNum">     531 </span><span class="lineNoCov">          0 :                             if (sstr[scnt] == '-')</span>
-<span class="lineNum">     532 </span><span class="lineNoCov">          0 :                                 slrj = 1;</span>
+<span class="lineNum">     529 </span><span class="lineCov">        170 :                         scnt++;</span>
+<span class="lineNum">     530 </span><span class="lineCov">        170 :                         if ((sstr[scnt] == '-') || (sstr[scnt] == '|')) {</span>
+<span class="lineNum">     531 </span><span class="lineCov">         28 :                             if (sstr[scnt] == '-')</span>
+<span class="lineNum">     532 </span><span class="lineCov">         28 :                                 slrj = 1;</span>
 <span class="lineNum">     533 </span>            :                             else
 <span class="lineNum">     534 </span><span class="lineNoCov">          0 :                                 slrj = 2;</span>
-<span class="lineNum">     535 </span><span class="lineNoCov">          0 :                             scnt++;</span>
+<span class="lineNum">     535 </span><span class="lineCov">         28 :                             scnt++;</span>
 <span class="lineNum">     536 </span>            :                         } else {
-<span class="lineNum">     537 </span><span class="lineNoCov">          0 :                             slrj = 0;</span>
+<span class="lineNum">     537 </span><span class="lineCov">        142 :                             slrj = 0;</span>
 <span class="lineNum">     538 </span>            :                         }
-<span class="lineNum">     539 </span><span class="lineNoCov">          0 :                         if ((sstr[scnt] == '+') || (sstr[scnt] == ' ')) {</span>
+<span class="lineNum">     539 </span><span class="lineCov">        170 :                         if ((sstr[scnt] == '+') || (sstr[scnt] == ' ')) {</span>
 <span class="lineNum">     540 </span><span class="lineNoCov">          0 :                             if (sstr[scnt] == '+')</span>
 <span class="lineNum">     541 </span><span class="lineNoCov">          0 :                                 spad1 = 1;</span>
 <span class="lineNum">     542 </span>            :                             else
 <span class="lineNum">     543 </span><span class="lineNoCov">          0 :                                 spad1 = 2;</span>
 <span class="lineNum">     544 </span><span class="lineNoCov">          0 :                             scnt++;</span>
 <span class="lineNum">     545 </span>            :                         } else {
-<span class="lineNum">     546 </span><span class="lineNoCov">          0 :                             spad1 = 0;</span>
+<span class="lineNum">     546 </span><span class="lineCov">        170 :                             spad1 = 0;</span>
 <span class="lineNum">     547 </span>            :                         }
-<span class="lineNum">     548 </span><span class="lineNoCov">          0 :                         if (sstr[scnt] == '0') {</span>
-<span class="lineNum">     549 </span><span class="lineNoCov">          0 :                             scnt++;</span>
-<span class="lineNum">     550 </span><span class="lineNoCov">          0 :                             spad2 = 1;</span>
+<span class="lineNum">     548 </span><span class="lineCov">        170 :                         if (sstr[scnt] == '0') {</span>
+<span class="lineNum">     549 </span><span class="lineCov">          8 :                             scnt++;</span>
+<span class="lineNum">     550 </span><span class="lineCov">          8 :                             spad2 = 1;</span>
 <span class="lineNum">     551 </span>            :                         } else {
-<span class="lineNum">     552 </span><span class="lineNoCov">          0 :                             spad2 = 0;</span>
+<span class="lineNum">     552 </span><span class="lineCov">        162 :                             spad2 = 0;</span>
 <span class="lineNum">     553 </span>            :                         }
-<span class="lineNum">     554 </span><span class="lineNoCov">          0 :                         slen1 = atoi(&amp;sstr[scnt]);</span>
-<span class="lineNum">     555 </span><span class="lineNoCov">          0 :                         if ((sstr[scnt] &gt;= '0') &amp;&amp; (sstr[scnt] &lt;= '9')) {</span>
-<span class="lineNum">     556 </span><span class="lineNoCov">          0 :                             while ((sstr[scnt] &gt;= '0') &amp;&amp; (sstr[scnt] &lt;= '9'))</span>
-<span class="lineNum">     557 </span><span class="lineNoCov">          0 :                                 scnt++;</span>
+<span class="lineNum">     554 </span><span class="lineCov">        170 :                         slen1 = atoi(&amp;sstr[scnt]);</span>
+<span class="lineNum">     555 </span><span class="lineCov">        289 :                         if ((sstr[scnt] &gt;= '0') &amp;&amp; (sstr[scnt] &lt;= '9')) {</span>
+<span class="lineNum">     556 </span><span class="lineCov">        385 :                             while ((sstr[scnt] &gt;= '0') &amp;&amp; (sstr[scnt] &lt;= '9'))</span>
+<span class="lineNum">     557 </span><span class="lineCov">        147 :                                 scnt++;</span>
 <span class="lineNum">     558 </span>            :                         } else {
-<span class="lineNum">     559 </span><span class="lineNoCov">          0 :                             slen1 = -1;</span>
+<span class="lineNum">     559 </span><span class="lineCov">         51 :                             slen1 = -1;</span>
 <span class="lineNum">     560 </span>            :                         }
-<span class="lineNum">     561 </span><span class="lineNoCov">          0 :                         if (sstr[scnt] == '.') {</span>
-<span class="lineNum">     562 </span><span class="lineNoCov">          0 :                             scnt++;</span>
-<span class="lineNum">     563 </span><span class="lineNoCov">          0 :                             slen2 = atoi(&amp;sstr[scnt]);</span>
-<span class="lineNum">     564 </span><span class="lineNoCov">          0 :                             if ((sstr[scnt] &gt;= '0') &amp;&amp; (sstr[scnt] &lt;= '9')) {</span>
-<span class="lineNum">     565 </span><span class="lineNoCov">          0 :                                 while ((sstr[scnt] &gt;= '0') &amp;&amp; (sstr[scnt] &lt;= '9'))</span>
-<span class="lineNum">     566 </span><span class="lineNoCov">          0 :                                     scnt++;</span>
+<span class="lineNum">     561 </span><span class="lineCov">        170 :                         if (sstr[scnt] == '.') {</span>
+<span class="lineNum">     562 </span><span class="lineCov">         63 :                             scnt++;</span>
+<span class="lineNum">     563 </span><span class="lineCov">         63 :                             slen2 = atoi(&amp;sstr[scnt]);</span>
+<span class="lineNum">     564 </span><span class="lineCov">        126 :                             if ((sstr[scnt] &gt;= '0') &amp;&amp; (sstr[scnt] &lt;= '9')) {</span>
+<span class="lineNum">     565 </span><span class="lineCov">        217 :                                 while ((sstr[scnt] &gt;= '0') &amp;&amp; (sstr[scnt] &lt;= '9'))</span>
+<span class="lineNum">     566 </span><span class="lineCov">         91 :                                     scnt++;</span>
 <span class="lineNum">     567 </span>            :                             } else {
 <span class="lineNum">     568 </span><span class="lineNoCov">          0 :                                 abort_interp(&quot;Invalid format string.&quot;);</span>
 <span class="lineNum">     569 </span>            :                             }
 <span class="lineNum">     570 </span>            :                         } else {
-<span class="lineNum">     571 </span><span class="lineNoCov">          0 :                             slen2 = -1;</span>
+<span class="lineNum">     571 </span><span class="lineCov">        107 :                             slen2 = -1;</span>
 <span class="lineNum">     572 </span>            :                         }
 <span class="lineNum">     573 </span>            : 
-<span class="lineNum">     574 </span><span class="lineNoCov">          0 :                         if (sstr[scnt] == '[') {</span>
-<span class="lineNum">     575 </span><span class="lineNoCov">          0 :                             scnt++;</span>
-<span class="lineNum">     576 </span><span class="lineNoCov">          0 :                             fieldname = fieldbuf;</span>
-<span class="lineNum">     577 </span><span class="lineNoCov">          0 :                             while (sstr[scnt] &amp;&amp; sstr[scnt] != ']') {</span>
-<span class="lineNum">     578 </span><span class="lineNoCov">          0 :                                 *fieldname++ = sstr[scnt++];</span>
+<span class="lineNum">     574 </span><span class="lineCov">        170 :                         if (sstr[scnt] == '[') {</span>
+<span class="lineNum">     575 </span><span class="lineCov">        170 :                             scnt++;</span>
+<span class="lineNum">     576 </span><span class="lineCov">        170 :                             fieldname = fieldbuf;</span>
+<span class="lineNum">     577 </span><span class="lineCov">       1366 :                             while (sstr[scnt] &amp;&amp; sstr[scnt] != ']') {</span>
+<span class="lineNum">     578 </span><span class="lineCov">       1026 :                                 *fieldname++ = sstr[scnt++];</span>
 <span class="lineNum">     579 </span>            :                             }
-<span class="lineNum">     580 </span><span class="lineNoCov">          0 :                             if (sstr[scnt] != ']') {</span>
+<span class="lineNum">     580 </span><span class="lineCov">        170 :                             if (sstr[scnt] != ']') {</span>
 <span class="lineNum">     581 </span><span class="lineNoCov">          0 :                                 abort_interp</span>
 <span class="lineNum">     582 </span>            :                                         (&quot;Specified format field didn't have an array index terminator ']'.&quot;);
 <span class="lineNum">     583 </span>            :                             }
-<span class="lineNum">     584 </span><span class="lineNoCov">          0 :                             scnt++;</span>
-<span class="lineNum">     585 </span><span class="lineNoCov">          0 :                             *fieldname++ = '\0';</span>
+<span class="lineNum">     584 </span><span class="lineCov">        170 :                             scnt++;</span>
+<span class="lineNum">     585 </span><span class="lineCov">        170 :                             *fieldname++ = '\0';</span>
 <span class="lineNum">     586 </span>            : 
-<span class="lineNum">     587 </span><span class="lineNoCov">          0 :                             oper3 = array_getitem(arr, &amp;temp1);</span>
-<span class="lineNum">     588 </span><span class="lineNoCov">          0 :                             arr2 = oper3-&gt;data.array;</span>
-<span class="lineNum">     589 </span><span class="lineNoCov">          0 :                             oper3 = NULL;</span>
-<span class="lineNum">     590 </span><span class="lineNoCov">          0 :                             if (number(fieldbuf)) {</span>
-<span class="lineNum">     591 </span><span class="lineNoCov">          0 :                                 temp2.type = PROG_INTEGER;</span>
-<span class="lineNum">     592 </span><span class="lineNoCov">          0 :                                 temp2.data.number = atoi(fieldbuf);</span>
-<span class="lineNum">     593 </span><span class="lineNoCov">          0 :                                 oper3 = array_getitem(arr2, &amp;temp2);</span>
+<span class="lineNum">     587 </span><span class="lineCov">        170 :                             oper3 = array_getitem(arr, &amp;temp1);</span>
+<span class="lineNum">     588 </span><span class="lineCov">        170 :                             arr2 = oper3-&gt;data.array;</span>
+<span class="lineNum">     589 </span><span class="lineCov">        170 :                             oper3 = NULL;</span>
+<span class="lineNum">     590 </span><span class="lineCov">        170 :                             if (number(fieldbuf)) {</span>
+<span class="lineNum">     591 </span><span class="lineCov">         28 :                                 temp2.type = PROG_INTEGER;</span>
+<span class="lineNum">     592 </span><span class="lineCov">         28 :                                 temp2.data.number = atoi(fieldbuf);</span>
+<span class="lineNum">     593 </span><span class="lineCov">         28 :                                 oper3 = array_getitem(arr2, &amp;temp2);</span>
 <span class="lineNum">     594 </span>            :                             }
-<span class="lineNum">     595 </span><span class="lineNoCov">          0 :                             if (!oper3) {</span>
-<span class="lineNum">     596 </span><span class="lineNoCov">          0 :                                 temp2.type = PROG_STRING;</span>
-<span class="lineNum">     597 </span><span class="lineNoCov">          0 :                                 temp2.data.string = alloc_prog_string(fieldbuf);</span>
-<span class="lineNum">     598 </span><span class="lineNoCov">          0 :                                 oper3 = array_getitem(arr2, &amp;temp2);</span>
-<span class="lineNum">     599 </span><span class="lineNoCov">          0 :                                 CLEAR(&amp;temp2);</span>
+<span class="lineNum">     595 </span><span class="lineCov">        170 :                             if (!oper3) {</span>
+<span class="lineNum">     596 </span><span class="lineCov">        143 :                                 temp2.type = PROG_STRING;</span>
+<span class="lineNum">     597 </span><span class="lineCov">        143 :                                 temp2.data.string = alloc_prog_string(fieldbuf);</span>
+<span class="lineNum">     598 </span><span class="lineCov">        143 :                                 oper3 = array_getitem(arr2, &amp;temp2);</span>
+<span class="lineNum">     599 </span><span class="lineCov">        143 :                                 CLEAR(&amp;temp2);</span>
 <span class="lineNum">     600 </span>            :                             }
-<span class="lineNum">     601 </span><span class="lineNoCov">          0 :                             if (!oper3) {</span>
-<span class="lineNum">     602 </span><span class="lineNoCov">          0 :                                 temp3.type = PROG_STRING;</span>
-<span class="lineNum">     603 </span><span class="lineNoCov">          0 :                                 temp3.data.string = NULL;</span>
-<span class="lineNum">     604 </span><span class="lineNoCov">          0 :                                 oper3 = &amp;temp3;</span>
+<span class="lineNum">     601 </span><span class="lineCov">        170 :                             if (!oper3) {</span>
+<span class="lineNum">     602 </span><span class="lineCov">          1 :                                 temp3.type = PROG_STRING;</span>
+<span class="lineNum">     603 </span><span class="lineCov">          1 :                                 temp3.data.string = NULL;</span>
+<span class="lineNum">     604 </span><span class="lineCov">          1 :                                 oper3 = &amp;temp3;</span>
 <span class="lineNum">     605 </span>            :                             }
-<span class="lineNum">     606 </span><span class="lineNoCov">          0 :                             nargs = 2;</span>
+<span class="lineNum">     606 </span><span class="lineCov">        170 :                             nargs = 2;</span>
 <span class="lineNum">     607 </span>            :                         } else {
 <span class="lineNum">     608 </span><span class="lineNoCov">          0 :                             abort_interp(&quot;Specified format field didn't have an array index.&quot;);</span>
 <span class="lineNum">     609 </span>            :                         }
 <span class="lineNum">     610 </span>            : 
 <span class="lineNum">     611 </span>            :                         /* If s is the format and oper3 is really a string, repair the lengths to account for ansi codes. */
-<span class="lineNum">     612 </span><span class="lineNoCov">          0 :                         if (('s' == sstr[scnt]) &amp;&amp; (PROG_STRING == oper3-&gt;type)</span>
-<span class="lineNum">     613 </span><span class="lineNoCov">          0 :                             &amp;&amp; (oper3-&gt;data.string)) {</span>
-<span class="lineNum">     614 </span><span class="lineNoCov">          0 :                             ptr = oper3-&gt;data.string-&gt;data;</span>
+<span class="lineNum">     612 </span><span class="lineCov">        170 :                         if (('s' == sstr[scnt]) &amp;&amp; (PROG_STRING == oper3-&gt;type)</span>
+<span class="lineNum">     613 </span><span class="lineCov">         79 :                             &amp;&amp; (oper3-&gt;data.string)) {</span>
+<span class="lineNum">     614 </span><span class="lineCov">         79 :                             ptr = oper3-&gt;data.string-&gt;data;</span>
 <span class="lineNum">     615 </span>            : 
-<span class="lineNum">     616 </span><span class="lineNoCov">          0 :                             i = 0;</span>
-<span class="lineNum">     617 </span><span class="lineNoCov">          0 :                             while ((-1 == slen2 || i &lt; slen2) &amp;&amp; *ptr) {     /* adapted from prim_ansi_strlen */</span>
-<span class="lineNum">     618 </span><span class="lineNoCov">          0 :                                 begptr = ptr;</span>
-<span class="lineNum">     619 </span><span class="lineNoCov">          0 :                                 if (*ptr++ == ESCAPE_CHAR) {</span>
+<span class="lineNum">     616 </span><span class="lineCov">         79 :                             i = 0;</span>
+<span class="lineNum">     617 </span><span class="lineCov">      23457 :                             while ((-1 == slen2 || i &lt; slen2) &amp;&amp; *ptr) {     /* adapted from prim_ansi_strlen */</span>
+<span class="lineNum">     618 </span><span class="lineCov">      23299 :                                 begptr = ptr;</span>
+<span class="lineNum">     619 </span><span class="lineCov">      23299 :                                 if (*ptr++ == ESCAPE_CHAR) {</span>
 <span class="lineNum">     620 </span><span class="lineNoCov">          0 :                                     if (*ptr == '\0') {;</span>
 <span class="lineNum">     621 </span><span class="lineNoCov">          0 :                                     } else if (*ptr != '[') {</span>
 <span class="lineNum">     622 </span><span class="lineNoCov">          0 :                                         ptr++;</span>
@@ -694,34 +694,34 @@
 <span class="lineNum">     632 </span><span class="lineNoCov">          0 :                                     if (-1 != slen2)</span>
 <span class="lineNum">     633 </span><span class="lineNoCov">          0 :                                         slen2 += (int) (ptr - begptr);</span>
 <span class="lineNum">     634 </span>            :                                 } else {
-<span class="lineNum">     635 </span><span class="lineNoCov">          0 :                                     i++;</span>
+<span class="lineNum">     635 </span><span class="lineCov">      23299 :                                     i++;</span>
 <span class="lineNum">     636 </span>            :                                 };
 <span class="lineNum">     637 </span>            :                             }
 <span class="lineNum">     638 </span>            :                         }
-<span class="lineNum">     639 </span><span class="lineNoCov">          0 :                         if ((slen1 &gt; 0) &amp;&amp; ((slen1 + result) &gt; BUFFER_LEN))</span>
+<span class="lineNum">     639 </span><span class="lineCov">        170 :                         if ((slen1 &gt; 0) &amp;&amp; ((slen1 + result) &gt; BUFFER_LEN))</span>
 <span class="lineNum">     640 </span><span class="lineNoCov">          0 :                             abort_interp(&quot;Specified format field width too large.&quot;);</span>
 <span class="lineNum">     641 </span>            : 
-<span class="lineNum">     642 </span><span class="lineNoCov">          0 :                         sfmt[0] = '%';</span>
-<span class="lineNum">     643 </span><span class="lineNoCov">          0 :                         sfmt[1] = '\0';</span>
-<span class="lineNum">     644 </span><span class="lineNoCov">          0 :                         if (slrj == 1)</span>
-<span class="lineNum">     645 </span><span class="lineNoCov">          0 :                             strcatn(sfmt, sizeof(sfmt), &quot;-&quot;);</span>
-<span class="lineNum">     646 </span><span class="lineNoCov">          0 :                         if (spad1) {</span>
+<span class="lineNum">     642 </span><span class="lineCov">        170 :                         sfmt[0] = '%';</span>
+<span class="lineNum">     643 </span><span class="lineCov">        170 :                         sfmt[1] = '\0';</span>
+<span class="lineNum">     644 </span><span class="lineCov">        170 :                         if (slrj == 1)</span>
+<span class="lineNum">     645 </span><span class="lineCov">         28 :                             strcatn(sfmt, sizeof(sfmt), &quot;-&quot;);</span>
+<span class="lineNum">     646 </span><span class="lineCov">        170 :                         if (spad1) {</span>
 <span class="lineNum">     647 </span><span class="lineNoCov">          0 :                             if (spad1 == 1)</span>
 <span class="lineNum">     648 </span><span class="lineNoCov">          0 :                                 strcatn(sfmt, sizeof(sfmt), &quot;+&quot;);</span>
 <span class="lineNum">     649 </span>            :                             else
 <span class="lineNum">     650 </span><span class="lineNoCov">          0 :                                 strcatn(sfmt, sizeof(sfmt), &quot; &quot;);</span>
 <span class="lineNum">     651 </span>            :                         }
-<span class="lineNum">     652 </span><span class="lineNoCov">          0 :                         if (spad2)</span>
-<span class="lineNum">     653 </span><span class="lineNoCov">          0 :                             strcatn(sfmt, sizeof(sfmt), &quot;0&quot;);</span>
-<span class="lineNum">     654 </span><span class="lineNoCov">          0 :                         if (slen1 != -1) {</span>
-<span class="lineNum">     655 </span><span class="lineNoCov">          0 :                             snprintf(tbuf, sizeof(tbuf), &quot;%d&quot;, slen1);</span>
-<span class="lineNum">     656 </span><span class="lineNoCov">          0 :                             strcatn(sfmt, sizeof(sfmt), tbuf);</span>
+<span class="lineNum">     652 </span><span class="lineCov">        170 :                         if (spad2)</span>
+<span class="lineNum">     653 </span><span class="lineCov">          8 :                             strcatn(sfmt, sizeof(sfmt), &quot;0&quot;);</span>
+<span class="lineNum">     654 </span><span class="lineCov">        170 :                         if (slen1 != -1) {</span>
+<span class="lineNum">     655 </span><span class="lineCov">        119 :                             snprintf(tbuf, sizeof(tbuf), &quot;%d&quot;, slen1);</span>
+<span class="lineNum">     656 </span><span class="lineCov">        119 :                             strcatn(sfmt, sizeof(sfmt), tbuf);</span>
 <span class="lineNum">     657 </span>            :                         }
-<span class="lineNum">     658 </span><span class="lineNoCov">          0 :                         if (slen2 != -1) {</span>
-<span class="lineNum">     659 </span><span class="lineNoCov">          0 :                             snprintf(tbuf, sizeof(tbuf), &quot;.%d&quot;, slen2);</span>
-<span class="lineNum">     660 </span><span class="lineNoCov">          0 :                             strcatn(sfmt, sizeof(sfmt), tbuf);</span>
+<span class="lineNum">     658 </span><span class="lineCov">        170 :                         if (slen2 != -1) {</span>
+<span class="lineNum">     659 </span><span class="lineCov">         63 :                             snprintf(tbuf, sizeof(tbuf), &quot;.%d&quot;, slen2);</span>
+<span class="lineNum">     660 </span><span class="lineCov">         63 :                             strcatn(sfmt, sizeof(sfmt), tbuf);</span>
 <span class="lineNum">     661 </span>            :                         }
-<span class="lineNum">     662 </span><span class="lineNoCov">          0 :                         if (sstr[scnt] == '~') {</span>
+<span class="lineNum">     662 </span><span class="lineCov">        170 :                         if (sstr[scnt] == '~') {</span>
 <span class="lineNum">     663 </span><span class="lineNoCov">          0 :                             switch (oper3-&gt;type) {</span>
 <span class="lineNum">     664 </span>            :                             case PROG_OBJECT:
 <span class="lineNum">     665 </span><span class="lineNoCov">          0 :                                 sstr[scnt] = 'D';</span>
@@ -744,14 +744,14 @@
 <span class="lineNum">     682 </span><span class="lineNoCov">          0 :                                 break;</span>
 <span class="lineNum">     683 </span>            :                             }
 <span class="lineNum">     684 </span>            :                         }
-<span class="lineNum">     685 </span><span class="lineNoCov">          0 :                         switch (sstr[scnt]) {</span>
+<span class="lineNum">     685 </span><span class="lineCov">        170 :                         switch (sstr[scnt]) {</span>
 <span class="lineNum">     686 </span>            :                         case 'i':
-<span class="lineNum">     687 </span><span class="lineNoCov">          0 :                             strcatn(sfmt, sizeof(sfmt), &quot;d&quot;);</span>
-<span class="lineNum">     688 </span><span class="lineNoCov">          0 :                             if (oper3-&gt;type != PROG_INTEGER)</span>
+<span class="lineNum">     687 </span><span class="lineCov">         28 :                             strcatn(sfmt, sizeof(sfmt), &quot;d&quot;);</span>
+<span class="lineNum">     688 </span><span class="lineCov">         28 :                             if (oper3-&gt;type != PROG_INTEGER)</span>
 <span class="lineNum">     689 </span><span class="lineNoCov">          0 :                                 abort_interp(&quot;Format specified integer argument not found.&quot;);</span>
-<span class="lineNum">     690 </span><span class="lineNoCov">          0 :                             snprintf(tbuf, sizeof(tbuf), sfmt, oper3-&gt;data.number);</span>
-<span class="lineNum">     691 </span><span class="lineNoCov">          0 :                             tlen = strlen(tbuf);</span>
-<span class="lineNum">     692 </span><span class="lineNoCov">          0 :                             if (slrj == 2) {</span>
+<span class="lineNum">     690 </span><span class="lineCov">         28 :                             snprintf(tbuf, sizeof(tbuf), sfmt, oper3-&gt;data.number);</span>
+<span class="lineNum">     691 </span><span class="lineCov">         28 :                             tlen = strlen(tbuf);</span>
+<span class="lineNum">     692 </span><span class="lineCov">         28 :                             if (slrj == 2) {</span>
 <span class="lineNum">     693 </span><span class="lineNoCov">          0 :                                 tnum = 0;</span>
 <span class="lineNum">     694 </span><span class="lineNoCov">          0 :                                 while ((tbuf[tnum] == ' ') &amp;&amp; (tnum &lt; tlen))</span>
 <span class="lineNum">     695 </span><span class="lineNoCov">          0 :                                     tnum++;</span>
@@ -763,20 +763,20 @@
 <span class="lineNum">     701 </span><span class="lineNoCov">          0 :                                         tbuf[i] = ' ';</span>
 <span class="lineNum">     702 </span>            :                                 }
 <span class="lineNum">     703 </span>            :                             }
-<span class="lineNum">     704 </span><span class="lineNoCov">          0 :                             if (tlen + result &gt; BUFFER_LEN)</span>
+<span class="lineNum">     704 </span><span class="lineCov">         28 :                             if (tlen + result &gt; BUFFER_LEN)</span>
 <span class="lineNum">     705 </span><span class="lineNoCov">          0 :                                 abort_interp(&quot;Resultant string would overflow buffer.&quot;);</span>
-<span class="lineNum">     706 </span><span class="lineNoCov">          0 :                             buf[result] = '\0';</span>
-<span class="lineNum">     707 </span><span class="lineNoCov">          0 :                             strcatn(buf, sizeof(buf), tbuf);</span>
-<span class="lineNum">     708 </span><span class="lineNoCov">          0 :                             result += tlen;</span>
-<span class="lineNum">     709 </span><span class="lineNoCov">          0 :                             break;</span>
+<span class="lineNum">     706 </span><span class="lineCov">         28 :                             buf[result] = '\0';</span>
+<span class="lineNum">     707 </span><span class="lineCov">         28 :                             strcatn(buf, sizeof(buf), tbuf);</span>
+<span class="lineNum">     708 </span><span class="lineCov">         28 :                             result += tlen;</span>
+<span class="lineNum">     709 </span><span class="lineCov">         28 :                             break;</span>
 <span class="lineNum">     710 </span>            :                         case 'S':
 <span class="lineNum">     711 </span>            :                         case 's':
-<span class="lineNum">     712 </span><span class="lineNoCov">          0 :                             strcatn(sfmt, sizeof(sfmt), &quot;s&quot;);</span>
-<span class="lineNum">     713 </span><span class="lineNoCov">          0 :                             if (oper3-&gt;type != PROG_STRING)</span>
+<span class="lineNum">     712 </span><span class="lineCov">         79 :                             strcatn(sfmt, sizeof(sfmt), &quot;s&quot;);</span>
+<span class="lineNum">     713 </span><span class="lineCov">         79 :                             if (oper3-&gt;type != PROG_STRING)</span>
 <span class="lineNum">     714 </span><span class="lineNoCov">          0 :                                 abort_interp(&quot;Format specified string argument not found.&quot;);</span>
-<span class="lineNum">     715 </span><span class="lineNoCov">          0 :                             snprintf(tbuf, sizeof(tbuf), sfmt, DoNullInd(oper3-&gt;data.string));</span>
-<span class="lineNum">     716 </span><span class="lineNoCov">          0 :                             tlen = strlen(tbuf);</span>
-<span class="lineNum">     717 </span><span class="lineNoCov">          0 :                             if (slrj == 2) {</span>
+<span class="lineNum">     715 </span><span class="lineCov">         79 :                             snprintf(tbuf, sizeof(tbuf), sfmt, DoNullInd(oper3-&gt;data.string));</span>
+<span class="lineNum">     716 </span><span class="lineCov">         79 :                             tlen = strlen(tbuf);</span>
+<span class="lineNum">     717 </span><span class="lineCov">         79 :                             if (slrj == 2) {</span>
 <span class="lineNum">     718 </span><span class="lineNoCov">          0 :                                 tnum = 0;</span>
 <span class="lineNum">     719 </span><span class="lineNoCov">          0 :                                 while ((tbuf[tnum] == ' ') &amp;&amp; (tnum &lt; tlen))</span>
 <span class="lineNum">     720 </span><span class="lineNoCov">          0 :                                     tnum++;</span>
@@ -788,12 +788,12 @@
 <span class="lineNum">     726 </span><span class="lineNoCov">          0 :                                         tbuf[i] = ' ';</span>
 <span class="lineNum">     727 </span>            :                                 }
 <span class="lineNum">     728 </span>            :                             }
-<span class="lineNum">     729 </span><span class="lineNoCov">          0 :                             if (strlen(tbuf) + result &gt; BUFFER_LEN)</span>
-<span class="lineNum">     730 </span><span class="lineNoCov">          0 :                                 abort_interp(&quot;Resultant string would overflow buffer.&quot;);</span>
-<span class="lineNum">     731 </span><span class="lineNoCov">          0 :                             buf[result] = '\0';</span>
-<span class="lineNum">     732 </span><span class="lineNoCov">          0 :                             strcatn(buf, sizeof(buf), tbuf);</span>
-<span class="lineNum">     733 </span><span class="lineNoCov">          0 :                             result += strlen(tbuf);</span>
-<span class="lineNum">     734 </span><span class="lineNoCov">          0 :                             break;</span>
+<span class="lineNum">     729 </span><span class="lineCov">         79 :                             if (strlen(tbuf) + result &gt; BUFFER_LEN)</span>
+<span class="lineNum">     730 </span><span class="lineCov">          1 :                                 abort_interp(&quot;Resultant string would overflow buffer.&quot;);</span>
+<span class="lineNum">     731 </span><span class="lineCov">         78 :                             buf[result] = '\0';</span>
+<span class="lineNum">     732 </span><span class="lineCov">         78 :                             strcatn(buf, sizeof(buf), tbuf);</span>
+<span class="lineNum">     733 </span><span class="lineCov">         78 :                             result += strlen(tbuf);</span>
+<span class="lineNum">     734 </span><span class="lineCov">         78 :                             break;</span>
 <span class="lineNum">     735 </span>            :                         case '?':
 <span class="lineNum">     736 </span><span class="lineNoCov">          0 :                             strcatn(sfmt, sizeof(sfmt), &quot;s&quot;);</span>
 <span class="lineNum">     737 </span><span class="lineNoCov">          0 :                             switch (oper3-&gt;type) {</span>
@@ -866,13 +866,13 @@
 <span class="lineNum">     804 </span><span class="lineNoCov">          0 :                             result += strlen(tbuf);</span>
 <span class="lineNum">     805 </span><span class="lineNoCov">          0 :                             break;</span>
 <span class="lineNum">     806 </span>            :                         case 'd':
-<span class="lineNum">     807 </span><span class="lineNoCov">          0 :                             strcatn(sfmt, sizeof(sfmt), &quot;s&quot;);</span>
-<span class="lineNum">     808 </span><span class="lineNoCov">          0 :                             if (oper3-&gt;type != PROG_OBJECT)</span>
+<span class="lineNum">     807 </span><span class="lineCov">         28 :                             strcatn(sfmt, sizeof(sfmt), &quot;s&quot;);</span>
+<span class="lineNum">     808 </span><span class="lineCov">         28 :                             if (oper3-&gt;type != PROG_OBJECT)</span>
 <span class="lineNum">     809 </span><span class="lineNoCov">          0 :                                 abort_interp(&quot;Format specified object not found.&quot;);</span>
-<span class="lineNum">     810 </span><span class="lineNoCov">          0 :                             snprintf(hold, sizeof(hold), &quot;#%d&quot;, oper3-&gt;data.objref);</span>
-<span class="lineNum">     811 </span><span class="lineNoCov">          0 :                             snprintf(tbuf, sizeof(tbuf), sfmt, hold);</span>
-<span class="lineNum">     812 </span><span class="lineNoCov">          0 :                             tlen = strlen(tbuf);</span>
-<span class="lineNum">     813 </span><span class="lineNoCov">          0 :                             if (slrj == 2) {</span>
+<span class="lineNum">     810 </span><span class="lineCov">         28 :                             snprintf(hold, sizeof(hold), &quot;#%d&quot;, oper3-&gt;data.objref);</span>
+<span class="lineNum">     811 </span><span class="lineCov">         28 :                             snprintf(tbuf, sizeof(tbuf), sfmt, hold);</span>
+<span class="lineNum">     812 </span><span class="lineCov">         28 :                             tlen = strlen(tbuf);</span>
+<span class="lineNum">     813 </span><span class="lineCov">         28 :                             if (slrj == 2) {</span>
 <span class="lineNum">     814 </span><span class="lineNoCov">          0 :                                 tnum = 0;</span>
 <span class="lineNum">     815 </span><span class="lineNoCov">          0 :                                 while ((tbuf[tnum] == ' ') &amp;&amp; (tnum &lt; tlen))</span>
 <span class="lineNum">     816 </span><span class="lineNoCov">          0 :                                     tnum++;</span>
@@ -884,12 +884,12 @@
 <span class="lineNum">     822 </span><span class="lineNoCov">          0 :                                         tbuf[i] = ' ';</span>
 <span class="lineNum">     823 </span>            :                                 }
 <span class="lineNum">     824 </span>            :                             }
-<span class="lineNum">     825 </span><span class="lineNoCov">          0 :                             if (strlen(tbuf) + result &gt; BUFFER_LEN)</span>
+<span class="lineNum">     825 </span><span class="lineCov">         28 :                             if (strlen(tbuf) + result &gt; BUFFER_LEN)</span>
 <span class="lineNum">     826 </span><span class="lineNoCov">          0 :                                 abort_interp(&quot;Resultant string would overflow buffer.&quot;);</span>
-<span class="lineNum">     827 </span><span class="lineNoCov">          0 :                             buf[result] = '\0';</span>
-<span class="lineNum">     828 </span><span class="lineNoCov">          0 :                             strcatn(buf, sizeof(buf), tbuf);</span>
-<span class="lineNum">     829 </span><span class="lineNoCov">          0 :                             result += strlen(tbuf);</span>
-<span class="lineNum">     830 </span><span class="lineNoCov">          0 :                             break;</span>
+<span class="lineNum">     827 </span><span class="lineCov">         28 :                             buf[result] = '\0';</span>
+<span class="lineNum">     828 </span><span class="lineCov">         28 :                             strcatn(buf, sizeof(buf), tbuf);</span>
+<span class="lineNum">     829 </span><span class="lineCov">         28 :                             result += strlen(tbuf);</span>
+<span class="lineNum">     830 </span><span class="lineCov">         28 :                             break;</span>
 <span class="lineNum">     831 </span>            :                         case 'D':
 <span class="lineNum">     832 </span><span class="lineNoCov">          0 :                             strcatn(sfmt, sizeof(sfmt), &quot;s&quot;);</span>
 <span class="lineNum">     833 </span><span class="lineNoCov">          0 :                             if (oper3-&gt;type != PROG_OBJECT)</span>
@@ -952,14 +952,14 @@
 <span class="lineNum">     890 </span>            :                         case 'f':
 <span class="lineNum">     891 </span>            :                         case 'e':
 <span class="lineNum">     892 </span>            :                         case 'g':
-<span class="lineNum">     893 </span><span class="lineNoCov">          0 :                             strcatn(sfmt, sizeof(sfmt), &quot;l&quot;);</span>
-<span class="lineNum">     894 </span><span class="lineNoCov">          0 :                             snprintf(hold, sizeof(hold), &quot;%c&quot;, sstr[scnt]);</span>
-<span class="lineNum">     895 </span><span class="lineNoCov">          0 :                             strcatn(sfmt, sizeof(sfmt), hold);</span>
-<span class="lineNum">     896 </span><span class="lineNoCov">          0 :                             if (oper3-&gt;type != PROG_FLOAT)</span>
-<span class="lineNum">     897 </span><span class="lineNoCov">          0 :                                 abort_interp(&quot;Format specified float not found.&quot;);</span>
-<span class="lineNum">     898 </span><span class="lineNoCov">          0 :                             snprintf(tbuf, sizeof(tbuf), sfmt, oper3-&gt;data.fnumber);</span>
-<span class="lineNum">     899 </span><span class="lineNoCov">          0 :                             tlen = strlen(tbuf);</span>
-<span class="lineNum">     900 </span><span class="lineNoCov">          0 :                             if (slrj == 2) {</span>
+<span class="lineNum">     893 </span><span class="lineCov">         35 :                             strcatn(sfmt, sizeof(sfmt), &quot;l&quot;);</span>
+<span class="lineNum">     894 </span><span class="lineCov">         35 :                             snprintf(hold, sizeof(hold), &quot;%c&quot;, sstr[scnt]);</span>
+<span class="lineNum">     895 </span><span class="lineCov">         35 :                             strcatn(sfmt, sizeof(sfmt), hold);</span>
+<span class="lineNum">     896 </span><span class="lineCov">         35 :                             if (oper3-&gt;type != PROG_FLOAT)</span>
+<span class="lineNum">     897 </span><span class="lineCov">          1 :                                 abort_interp(&quot;Format specified float not found.&quot;);</span>
+<span class="lineNum">     898 </span><span class="lineCov">         34 :                             snprintf(tbuf, sizeof(tbuf), sfmt, oper3-&gt;data.fnumber);</span>
+<span class="lineNum">     899 </span><span class="lineCov">         34 :                             tlen = strlen(tbuf);</span>
+<span class="lineNum">     900 </span><span class="lineCov">         34 :                             if (slrj == 2) {</span>
 <span class="lineNum">     901 </span><span class="lineNoCov">          0 :                                 tnum = 0;</span>
 <span class="lineNum">     902 </span><span class="lineNoCov">          0 :                                 while ((tbuf[tnum] == ' ') &amp;&amp; (tnum &lt; tlen))</span>
 <span class="lineNum">     903 </span><span class="lineNoCov">          0 :                                     tnum++;</span>
@@ -971,21 +971,21 @@
 <span class="lineNum">     909 </span><span class="lineNoCov">          0 :                                         tbuf[i] = ' ';</span>
 <span class="lineNum">     910 </span>            :                                 }
 <span class="lineNum">     911 </span>            :                             }
-<span class="lineNum">     912 </span><span class="lineNoCov">          0 :                             if (strlen(tbuf) + result &gt; BUFFER_LEN)</span>
+<span class="lineNum">     912 </span><span class="lineCov">         34 :                             if (strlen(tbuf) + result &gt; BUFFER_LEN)</span>
 <span class="lineNum">     913 </span><span class="lineNoCov">          0 :                                 abort_interp(&quot;Resultant string would overflow buffer.&quot;);</span>
-<span class="lineNum">     914 </span><span class="lineNoCov">          0 :                             buf[result] = '\0';</span>
-<span class="lineNum">     915 </span><span class="lineNoCov">          0 :                             strcatn(buf, sizeof(buf), tbuf);</span>
-<span class="lineNum">     916 </span><span class="lineNoCov">          0 :                             result += strlen(tbuf);</span>
-<span class="lineNum">     917 </span><span class="lineNoCov">          0 :                             break;</span>
+<span class="lineNum">     914 </span><span class="lineCov">         34 :                             buf[result] = '\0';</span>
+<span class="lineNum">     915 </span><span class="lineCov">         34 :                             strcatn(buf, sizeof(buf), tbuf);</span>
+<span class="lineNum">     916 </span><span class="lineCov">         34 :                             result += strlen(tbuf);</span>
+<span class="lineNum">     917 </span><span class="lineCov">         34 :                             break;</span>
 <span class="lineNum">     918 </span>            :                         default:
 <span class="lineNum">     919 </span><span class="lineNoCov">          0 :                             abort_interp(&quot;Invalid format string.&quot;);</span>
 <span class="lineNum">     920 </span>            :                         }
-<span class="lineNum">     921 </span><span class="lineNoCov">          0 :                         nargs = 2;</span>
-<span class="lineNum">     922 </span><span class="lineNoCov">          0 :                         scnt++;</span>
-<span class="lineNum">     923 </span><span class="lineNoCov">          0 :                         tstop += strlen(tbuf);</span>
+<span class="lineNum">     921 </span><span class="lineCov">        168 :                         nargs = 2;</span>
+<span class="lineNum">     922 </span><span class="lineCov">        168 :                         scnt++;</span>
+<span class="lineNum">     923 </span><span class="lineCov">        168 :                         tstop += strlen(tbuf);</span>
 <span class="lineNum">     924 </span>            :                     }
 <span class="lineNum">     925 </span>            :                 } else {
-<span class="lineNum">     926 </span><span class="lineNoCov">          0 :                     if ((sstr[scnt] == '\\') &amp;&amp; (sstr[scnt + 1] == 't')) {</span>
+<span class="lineNum">     926 </span><span class="lineCov">        129 :                     if ((sstr[scnt] == '\\') &amp;&amp; (sstr[scnt + 1] == 't')) {</span>
 <span class="lineNum">     927 </span><span class="lineNoCov">          0 :                         if ((result - (tstop % 8) + 1) &gt;= BUFFER_LEN)</span>
 <span class="lineNum">     928 </span><span class="lineNoCov">          0 :                             abort_interp(&quot;Resultant string would overflow buffer.&quot;);</span>
 <span class="lineNum">     929 </span><span class="lineNoCov">          0 :                         if ((tstop % 8) == 0) {</span>
@@ -999,31 +999,31 @@
 <span class="lineNum">     937 </span><span class="lineNoCov">          0 :                         scnt += 2;</span>
 <span class="lineNum">     938 </span><span class="lineNoCov">          0 :                         tstop = 0;</span>
 <span class="lineNum">     939 </span>            :                     } else {
-<span class="lineNum">     940 </span><span class="lineNoCov">          0 :                         if (sstr[scnt] == '\r') {</span>
+<span class="lineNum">     940 </span><span class="lineCov">        129 :                         if (sstr[scnt] == '\r') {</span>
 <span class="lineNum">     941 </span><span class="lineNoCov">          0 :                             tstop = 0;</span>
 <span class="lineNum">     942 </span><span class="lineNoCov">          0 :                             scnt++;</span>
 <span class="lineNum">     943 </span><span class="lineNoCov">          0 :                             buf[result++] = '\r';</span>
 <span class="lineNum">     944 </span>            :                         } else {
-<span class="lineNum">     945 </span><span class="lineNoCov">          0 :                             buf[result++] = sstr[scnt++];</span>
-<span class="lineNum">     946 </span><span class="lineNoCov">          0 :                             tstop++;</span>
+<span class="lineNum">     945 </span><span class="lineCov">        129 :                             buf[result++] = sstr[scnt++];</span>
+<span class="lineNum">     946 </span><span class="lineCov">        129 :                             tstop++;</span>
 <span class="lineNum">     947 </span>            :                         }
 <span class="lineNum">     948 </span>            :                     }
 <span class="lineNum">     949 </span>            :                 }
 <span class="lineNum">     950 </span>            :             }
-<span class="lineNum">     951 </span><span class="lineNoCov">          0 :             if (result &gt;= BUFFER_LEN)</span>
+<span class="lineNum">     951 </span><span class="lineCov">         39 :             if (result &gt;= BUFFER_LEN)</span>
 <span class="lineNum">     952 </span><span class="lineNoCov">          0 :                 abort_interp(&quot;Resultant string would overflow buffer.&quot;);</span>
-<span class="lineNum">     953 </span><span class="lineNoCov">          0 :             buf[result] = '\0';</span>
+<span class="lineNum">     953 </span><span class="lineCov">         39 :             buf[result] = '\0';</span>
 <span class="lineNum">     954 </span>            : 
-<span class="lineNum">     955 </span><span class="lineNoCov">          0 :             temp2.type = PROG_STRING;</span>
-<span class="lineNum">     956 </span><span class="lineNoCov">          0 :             temp2.data.string = alloc_prog_string(buf);</span>
-<span class="lineNum">     957 </span><span class="lineNoCov">          0 :             array_appenditem(&amp;nu, &amp;temp2);</span>
-<span class="lineNum">     958 </span><span class="lineNoCov">          0 :             CLEAR(&amp;temp2);</span>
-<span class="lineNum">     959 </span><span class="lineNoCov">          0 :         } while (array_next(arr, &amp;temp1));</span>
+<span class="lineNum">     955 </span><span class="lineCov">         39 :             temp2.type = PROG_STRING;</span>
+<span class="lineNum">     956 </span><span class="lineCov">         39 :             temp2.data.string = alloc_prog_string(buf);</span>
+<span class="lineNum">     957 </span><span class="lineCov">         39 :             array_appenditem(&amp;nu, &amp;temp2);</span>
+<span class="lineNum">     958 </span><span class="lineCov">         39 :             CLEAR(&amp;temp2);</span>
+<span class="lineNum">     959 </span><span class="lineCov">         39 :         } while (array_next(arr, &amp;temp1));</span>
 <span class="lineNum">     960 </span>            :     }
 <span class="lineNum">     961 </span>            : 
-<span class="lineNum">     962 </span><span class="lineNoCov">          0 :     CLEAR(oper1);</span>
-<span class="lineNum">     963 </span><span class="lineNoCov">          0 :     CLEAR(oper2);</span>
-<span class="lineNum">     964 </span><span class="lineNoCov">          0 :     PushArrayRaw(nu);</span>
+<span class="lineNum">     962 </span><span class="lineCov">         23 :     CLEAR(oper1);</span>
+<span class="lineNum">     963 </span><span class="lineCov">         23 :     CLEAR(oper2);</span>
+<span class="lineNum">     964 </span><span class="lineCov">         23 :     PushArrayRaw(nu);</span>
 <span class="lineNum">     965 </span>            : }
 <a name="966"><span class="lineNum">     966 </span>            : </a>
 <span class="lineNum">     967 </span>            : void
@@ -1301,22 +1301,22 @@
 <span class="lineNum">    1239 </span>            : }
 <a name="1240"><span class="lineNum">    1240 </span>            : </a>
 <span class="lineNum">    1241 </span>            : void
-<span class="lineNum">    1242 </span><span class="lineCov">         62 : prim_strcmp(PRIM_PROTOTYPE)</span>
+<span class="lineNum">    1242 </span><span class="lineCov">        450 : prim_strcmp(PRIM_PROTOTYPE)</span>
 <span class="lineNum">    1243 </span>            : {
-<span class="lineNum">    1244 </span><span class="lineCov">         62 :     CHECKOP(2);</span>
-<span class="lineNum">    1245 </span><span class="lineCov">         62 :     oper1 = POP();</span>
-<span class="lineNum">    1246 </span><span class="lineCov">         62 :     oper2 = POP();</span>
-<span class="lineNum">    1247 </span><span class="lineCov">         62 :     if (oper1-&gt;type != PROG_STRING || oper2-&gt;type != PROG_STRING)</span>
+<span class="lineNum">    1244 </span><span class="lineCov">        450 :     CHECKOP(2);</span>
+<span class="lineNum">    1245 </span><span class="lineCov">        450 :     oper1 = POP();</span>
+<span class="lineNum">    1246 </span><span class="lineCov">        450 :     oper2 = POP();</span>
+<span class="lineNum">    1247 </span><span class="lineCov">        450 :     if (oper1-&gt;type != PROG_STRING || oper2-&gt;type != PROG_STRING)</span>
 <span class="lineNum">    1248 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Non-string argument.&quot;);</span>
-<span class="lineNum">    1249 </span><span class="lineCov">         62 :     if (oper1-&gt;data.string == oper2-&gt;data.string)</span>
-<span class="lineNum">    1250 </span><span class="lineCov">          1 :         result = 0;</span>
-<span class="lineNum">    1251 </span><span class="lineCov">         61 :     else if (!(oper2-&gt;data.string &amp;&amp; oper1-&gt;data.string))</span>
+<span class="lineNum">    1249 </span><span class="lineCov">        450 :     if (oper1-&gt;data.string == oper2-&gt;data.string)</span>
+<span class="lineNum">    1250 </span><span class="lineCov">          4 :         result = 0;</span>
+<span class="lineNum">    1251 </span><span class="lineCov">        446 :     else if (!(oper2-&gt;data.string &amp;&amp; oper1-&gt;data.string))</span>
 <span class="lineNum">    1252 </span><span class="lineNoCov">          0 :         result = oper1-&gt;data.string ? -1 : 1;</span>
 <span class="lineNum">    1253 </span>            :     else
-<span class="lineNum">    1254 </span><span class="lineCov">         61 :         result = strcmp(oper2-&gt;data.string-&gt;data, oper1-&gt;data.string-&gt;data);</span>
-<span class="lineNum">    1255 </span><span class="lineCov">         62 :     CLEAR(oper1);</span>
-<span class="lineNum">    1256 </span><span class="lineCov">         62 :     CLEAR(oper2);</span>
-<span class="lineNum">    1257 </span><span class="lineCov">         62 :     PushInt(result);</span>
+<span class="lineNum">    1254 </span><span class="lineCov">        446 :         result = strcmp(oper2-&gt;data.string-&gt;data, oper1-&gt;data.string-&gt;data);</span>
+<span class="lineNum">    1255 </span><span class="lineCov">        450 :     CLEAR(oper1);</span>
+<span class="lineNum">    1256 </span><span class="lineCov">        450 :     CLEAR(oper2);</span>
+<span class="lineNum">    1257 </span><span class="lineCov">        450 :     PushInt(result);</span>
 <span class="lineNum">    1258 </span>            : }
 <a name="1259"><span class="lineNum">    1259 </span>            : </a>
 <span class="lineNum">    1260 </span>            : void
@@ -1394,34 +1394,34 @@
 <span class="lineNum">    1332 </span>            : }
 <a name="1333"><span class="lineNum">    1333 </span>            : </a>
 <span class="lineNum">    1334 </span>            : void
-<span class="lineNum">    1335 </span><span class="lineNoCov">          0 : prim_strcat(PRIM_PROTOTYPE)</span>
+<span class="lineNum">    1335 </span><span class="lineCov">          1 : prim_strcat(PRIM_PROTOTYPE)</span>
 <span class="lineNum">    1336 </span>            : {
 <span class="lineNum">    1337 </span>            :     struct shared_string *string;
 <span class="lineNum">    1338 </span>            : 
-<span class="lineNum">    1339 </span><span class="lineNoCov">          0 :     CHECKOP(2);</span>
-<span class="lineNum">    1340 </span><span class="lineNoCov">          0 :     oper1 = POP();</span>
-<span class="lineNum">    1341 </span><span class="lineNoCov">          0 :     oper2 = POP();</span>
-<span class="lineNum">    1342 </span><span class="lineNoCov">          0 :     if (oper1-&gt;type != PROG_STRING || oper2-&gt;type != PROG_STRING)</span>
+<span class="lineNum">    1339 </span><span class="lineCov">          1 :     CHECKOP(2);</span>
+<span class="lineNum">    1340 </span><span class="lineCov">          1 :     oper1 = POP();</span>
+<span class="lineNum">    1341 </span><span class="lineCov">          1 :     oper2 = POP();</span>
+<span class="lineNum">    1342 </span><span class="lineCov">          1 :     if (oper1-&gt;type != PROG_STRING || oper2-&gt;type != PROG_STRING)</span>
 <span class="lineNum">    1343 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Non-string argument.&quot;);</span>
-<span class="lineNum">    1344 </span><span class="lineNoCov">          0 :     if (!oper1-&gt;data.string &amp;&amp; !oper2-&gt;data.string)</span>
+<span class="lineNum">    1344 </span><span class="lineCov">          1 :     if (!oper1-&gt;data.string &amp;&amp; !oper2-&gt;data.string)</span>
 <span class="lineNum">    1345 </span><span class="lineNoCov">          0 :         string = NULL;</span>
-<span class="lineNum">    1346 </span><span class="lineNoCov">          0 :     else if (!oper2-&gt;data.string) {</span>
+<span class="lineNum">    1346 </span><span class="lineCov">          1 :     else if (!oper2-&gt;data.string) {</span>
 <span class="lineNum">    1347 </span><span class="lineNoCov">          0 :         oper1-&gt;data.string-&gt;links++;</span>
 <span class="lineNum">    1348 </span><span class="lineNoCov">          0 :         string = oper1-&gt;data.string;</span>
-<span class="lineNum">    1349 </span><span class="lineNoCov">          0 :     } else if (!oper1-&gt;data.string) {</span>
+<span class="lineNum">    1349 </span><span class="lineCov">          1 :     } else if (!oper1-&gt;data.string) {</span>
 <span class="lineNum">    1350 </span><span class="lineNoCov">          0 :         oper2-&gt;data.string-&gt;links++;</span>
 <span class="lineNum">    1351 </span><span class="lineNoCov">          0 :         string = oper2-&gt;data.string;</span>
-<span class="lineNum">    1352 </span><span class="lineNoCov">          0 :     } else if (oper1-&gt;data.string-&gt;length + oper2-&gt;data.string-&gt;length &gt; (BUFFER_LEN) - 1) {</span>
+<span class="lineNum">    1352 </span><span class="lineCov">          1 :     } else if (oper1-&gt;data.string-&gt;length + oper2-&gt;data.string-&gt;length &gt; (BUFFER_LEN) - 1) {</span>
 <span class="lineNum">    1353 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Operation would result in overflow.&quot;);</span>
 <span class="lineNum">    1354 </span>            :     } else {
-<span class="lineNum">    1355 </span><span class="lineNoCov">          0 :         bcopy(oper2-&gt;data.string-&gt;data, buf, oper2-&gt;data.string-&gt;length);</span>
-<span class="lineNum">    1356 </span><span class="lineNoCov">          0 :         bcopy(oper1-&gt;data.string-&gt;data, buf + oper2-&gt;data.string-&gt;length,</span>
+<span class="lineNum">    1355 </span><span class="lineCov">          1 :         bcopy(oper2-&gt;data.string-&gt;data, buf, oper2-&gt;data.string-&gt;length);</span>
+<span class="lineNum">    1356 </span><span class="lineCov">          1 :         bcopy(oper1-&gt;data.string-&gt;data, buf + oper2-&gt;data.string-&gt;length,</span>
 <span class="lineNum">    1357 </span>            :               oper1-&gt;data.string-&gt;length + 1);
-<span class="lineNum">    1358 </span><span class="lineNoCov">          0 :         string = alloc_prog_string(buf);</span>
+<span class="lineNum">    1358 </span><span class="lineCov">          1 :         string = alloc_prog_string(buf);</span>
 <span class="lineNum">    1359 </span>            :     }
-<span class="lineNum">    1360 </span><span class="lineNoCov">          0 :     CLEAR(oper1);</span>
-<span class="lineNum">    1361 </span><span class="lineNoCov">          0 :     CLEAR(oper2);</span>
-<span class="lineNum">    1362 </span><span class="lineNoCov">          0 :     PushStrRaw(string);</span>
+<span class="lineNum">    1360 </span><span class="lineCov">          1 :     CLEAR(oper1);</span>
+<span class="lineNum">    1361 </span><span class="lineCov">          1 :     CLEAR(oper2);</span>
+<span class="lineNum">    1362 </span><span class="lineCov">          1 :     PushStrRaw(string);</span>
 <span class="lineNum">    1363 </span>            : }
 <a name="1364"><span class="lineNum">    1364 </span>            : </a>
 <span class="lineNum">    1365 </span>            : void
@@ -1438,33 +1438,33 @@
 <span class="lineNum">    1376 </span>            : }
 <a name="1377"><span class="lineNum">    1377 </span>            : </a>
 <span class="lineNum">    1378 </span>            : void
-<span class="lineNum">    1379 </span><span class="lineCov">         40 : prim_notify(PRIM_PROTOTYPE)</span>
+<span class="lineNum">    1379 </span><span class="lineCov">        527 : prim_notify(PRIM_PROTOTYPE)</span>
 <span class="lineNum">    1380 </span>            : {
-<span class="lineNum">    1381 </span><span class="lineCov">         40 :     struct inst *oper1 = NULL;  /* prevents re-entrancy issues! */</span>
-<span class="lineNum">    1382 </span><span class="lineCov">         40 :     struct inst *oper2 = NULL;  /* prevents re-entrancy issues! */</span>
+<span class="lineNum">    1381 </span><span class="lineCov">        527 :     struct inst *oper1 = NULL;  /* prevents re-entrancy issues! */</span>
+<span class="lineNum">    1382 </span><span class="lineCov">        527 :     struct inst *oper2 = NULL;  /* prevents re-entrancy issues! */</span>
 <span class="lineNum">    1383 </span>            : 
-<span class="lineNum">    1384 </span><span class="lineCov">         40 :     CHECKOP(2);</span>
-<span class="lineNum">    1385 </span><span class="lineCov">         40 :     oper1 = POP();</span>
-<span class="lineNum">    1386 </span><span class="lineCov">         40 :     oper2 = POP();</span>
-<span class="lineNum">    1387 </span><span class="lineCov">         40 :     if (oper1-&gt;type != PROG_STRING)</span>
-<span class="lineNum">    1388 </span><span class="lineCov">          6 :         abort_interp(&quot;Non-string argument (2)&quot;);</span>
-<span class="lineNum">    1389 </span><span class="lineCov">         34 :     if (!valid_object(oper2))</span>
+<span class="lineNum">    1384 </span><span class="lineCov">        527 :     CHECKOP(2);</span>
+<span class="lineNum">    1385 </span><span class="lineCov">        527 :     oper1 = POP();</span>
+<span class="lineNum">    1386 </span><span class="lineCov">        527 :     oper2 = POP();</span>
+<span class="lineNum">    1387 </span><span class="lineCov">        527 :     if (oper1-&gt;type != PROG_STRING)</span>
+<span class="lineNum">    1388 </span><span class="lineCov">         24 :         abort_interp(&quot;Non-string argument (2)&quot;);</span>
+<span class="lineNum">    1389 </span><span class="lineCov">        503 :     if (!valid_object(oper2))</span>
 <span class="lineNum">    1390 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Invalid object argument (1)&quot;);</span>
-<span class="lineNum">    1391 </span><span class="lineCov">         34 :     CHECKREMOTE(oper2-&gt;data.objref);</span>
+<span class="lineNum">    1391 </span><span class="lineCov">        503 :     CHECKREMOTE(oper2-&gt;data.objref);</span>
 <span class="lineNum">    1392 </span>            : 
-<span class="lineNum">    1393 </span><span class="lineCov">         34 :     if (oper1-&gt;data.string) {</span>
-<span class="lineNum">    1394 </span><span class="lineCov">         34 :         if (tp_force_mlev1_name_notify &amp;&amp; mlev &lt; 2 &amp;&amp; player != oper2-&gt;data.objref) {</span>
+<span class="lineNum">    1393 </span><span class="lineCov">        503 :     if (oper1-&gt;data.string) {</span>
+<span class="lineNum">    1394 </span><span class="lineCov">        503 :         if (tp_force_mlev1_name_notify &amp;&amp; mlev &lt; 2 &amp;&amp; player != oper2-&gt;data.objref) {</span>
 <span class="lineNum">    1395 </span><span class="lineNoCov">          0 :             prefix_message(buf, oper1-&gt;data.string-&gt;data, NAME(player), BUFFER_LEN, 1);</span>
 <span class="lineNum">    1396 </span>            :         } else {
 <span class="lineNum">    1397 </span>            :             /* TODO: The original code made this copy, is it really necessary? */
-<span class="lineNum">    1398 </span><span class="lineCov">         34 :             strcpyn(buf, sizeof(buf), oper1-&gt;data.string-&gt;data);</span>
+<span class="lineNum">    1398 </span><span class="lineCov">        503 :             strcpyn(buf, sizeof(buf), oper1-&gt;data.string-&gt;data);</span>
 <span class="lineNum">    1399 </span>            :         }
 <span class="lineNum">    1400 </span>            : 
-<span class="lineNum">    1401 </span><span class="lineCov">         34 :         notify_listeners(player, program, oper2-&gt;data.objref,</span>
-<span class="lineNum">    1402 </span><span class="lineCov">         34 :                          LOCATION(oper2-&gt;data.objref), buf, 1);</span>
+<span class="lineNum">    1401 </span><span class="lineCov">        503 :         notify_listeners(player, program, oper2-&gt;data.objref,</span>
+<span class="lineNum">    1402 </span><span class="lineCov">        503 :                          LOCATION(oper2-&gt;data.objref), buf, 1);</span>
 <span class="lineNum">    1403 </span>            :     }
-<span class="lineNum">    1404 </span><span class="lineCov">         34 :     CLEAR(oper1);</span>
-<span class="lineNum">    1405 </span><span class="lineCov">         34 :     CLEAR(oper2);</span>
+<span class="lineNum">    1404 </span><span class="lineCov">        503 :     CLEAR(oper1);</span>
+<span class="lineNum">    1405 </span><span class="lineCov">        503 :     CLEAR(oper2);</span>
 <span class="lineNum">    1406 </span>            : }
 <a name="1407"><span class="lineNum">    1407 </span>            : </a>
 <span class="lineNum">    1408 </span>            : void
@@ -1824,47 +1824,47 @@
 <span class="lineNum">    1762 </span>            : }
 <a name="1763"><span class="lineNum">    1763 </span>            : </a>
 <span class="lineNum">    1764 </span>            : void
-<span class="lineNum">    1765 </span><span class="lineNoCov">          0 : prim_instring(PRIM_PROTOTYPE)</span>
+<span class="lineNum">    1765 </span><span class="lineCov">          4 : prim_instring(PRIM_PROTOTYPE)</span>
 <span class="lineNum">    1766 </span>            : {
-<span class="lineNum">    1767 </span><span class="lineNoCov">          0 :     CHECKOP(2);</span>
-<span class="lineNum">    1768 </span><span class="lineNoCov">          0 :     oper1 = POP();</span>
-<span class="lineNum">    1769 </span><span class="lineNoCov">          0 :     oper2 = POP();</span>
-<span class="lineNum">    1770 </span><span class="lineNoCov">          0 :     if (oper1-&gt;type != PROG_STRING)</span>
+<span class="lineNum">    1767 </span><span class="lineCov">          4 :     CHECKOP(2);</span>
+<span class="lineNum">    1768 </span><span class="lineCov">          4 :     oper1 = POP();</span>
+<span class="lineNum">    1769 </span><span class="lineCov">          4 :     oper2 = POP();</span>
+<span class="lineNum">    1770 </span><span class="lineCov">          4 :     if (oper1-&gt;type != PROG_STRING)</span>
 <span class="lineNum">    1771 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Invalid argument type (2)&quot;);</span>
-<span class="lineNum">    1772 </span><span class="lineNoCov">          0 :     if (!(oper1-&gt;data.string))</span>
+<span class="lineNum">    1772 </span><span class="lineCov">          4 :     if (!(oper1-&gt;data.string))</span>
 <span class="lineNum">    1773 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Empty string argument (2)&quot;);</span>
-<span class="lineNum">    1774 </span><span class="lineNoCov">          0 :     if (oper2-&gt;type != PROG_STRING)</span>
+<span class="lineNum">    1774 </span><span class="lineCov">          4 :     if (oper2-&gt;type != PROG_STRING)</span>
 <span class="lineNum">    1775 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Non-string argument (1)&quot;);</span>
-<span class="lineNum">    1776 </span><span class="lineNoCov">          0 :     if (!oper2-&gt;data.string) {</span>
+<span class="lineNum">    1776 </span><span class="lineCov">          4 :     if (!oper2-&gt;data.string) {</span>
 <span class="lineNum">    1777 </span><span class="lineNoCov">          0 :         result = 0;</span>
 <span class="lineNum">    1778 </span>            :     } else {
 <span class="lineNum">    1779 </span>            :         char buf2[BUFFER_LEN];
 <span class="lineNum">    1780 </span>            :         const char *remaining, *match;
 <span class="lineNum">    1781 </span>            :         char *cp;
 <span class="lineNum">    1782 </span>            : 
-<span class="lineNum">    1783 </span><span class="lineNoCov">          0 :         strcpyn(buf, sizeof(buf), oper1-&gt;data.string-&gt;data);</span>
-<span class="lineNum">    1784 </span><span class="lineNoCov">          0 :         strcpyn(buf2, sizeof(buf2), oper2-&gt;data.string-&gt;data);</span>
-<span class="lineNum">    1785 </span><span class="lineNoCov">          0 :         for (cp = buf; *cp; cp++)</span>
-<span class="lineNum">    1786 </span><span class="lineNoCov">          0 :             *cp = tolower(*cp);</span>
-<span class="lineNum">    1787 </span><span class="lineNoCov">          0 :         for (cp = buf2; *cp; cp++)</span>
-<span class="lineNum">    1788 </span><span class="lineNoCov">          0 :             *cp = tolower(*cp);</span>
-<span class="lineNum">    1789 </span><span class="lineNoCov">          0 :         match = buf;</span>
-<span class="lineNum">    1790 </span><span class="lineNoCov">          0 :         remaining = buf2;</span>
+<span class="lineNum">    1783 </span><span class="lineCov">          4 :         strcpyn(buf, sizeof(buf), oper1-&gt;data.string-&gt;data);</span>
+<span class="lineNum">    1784 </span><span class="lineCov">          4 :         strcpyn(buf2, sizeof(buf2), oper2-&gt;data.string-&gt;data);</span>
+<span class="lineNum">    1785 </span><span class="lineCov">         68 :         for (cp = buf; *cp; cp++)</span>
+<span class="lineNum">    1786 </span><span class="lineCov">         64 :             *cp = tolower(*cp);</span>
+<span class="lineNum">    1787 </span><span class="lineCov">        112 :         for (cp = buf2; *cp; cp++)</span>
+<span class="lineNum">    1788 </span><span class="lineCov">        108 :             *cp = tolower(*cp);</span>
+<span class="lineNum">    1789 </span><span class="lineCov">          4 :         match = buf;</span>
+<span class="lineNum">    1790 </span><span class="lineCov">          4 :         remaining = buf2;</span>
 <span class="lineNum">    1791 </span>            : 
-<span class="lineNum">    1792 </span><span class="lineNoCov">          0 :         int step = 1;</span>
+<span class="lineNum">    1792 </span><span class="lineCov">          4 :         int step = 1;</span>
 <span class="lineNum">    1793 </span>            : 
-<span class="lineNum">    1794 </span><span class="lineNoCov">          0 :         result = 0;</span>
+<span class="lineNum">    1794 </span><span class="lineCov">          4 :         result = 0;</span>
 <span class="lineNum">    1795 </span>            :         do {
-<span class="lineNum">    1796 </span><span class="lineNoCov">          0 :             if (!strncmp(remaining, match, oper1-&gt;data.string-&gt;length)) {</span>
-<span class="lineNum">    1797 </span><span class="lineNoCov">          0 :                 result = remaining - buf2 + 1;</span>
-<span class="lineNum">    1798 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">    1796 </span><span class="lineCov">          4 :             if (!strncmp(remaining, match, oper1-&gt;data.string-&gt;length)) {</span>
+<span class="lineNum">    1797 </span><span class="lineCov">          4 :                 result = remaining - buf2 + 1;</span>
+<span class="lineNum">    1798 </span><span class="lineCov">          4 :                 break;</span>
 <span class="lineNum">    1799 </span>            :             }
 <span class="lineNum">    1800 </span><span class="lineNoCov">          0 :             remaining += step;</span>
 <span class="lineNum">    1801 </span><span class="lineNoCov">          0 :         } while (remaining &gt;= buf2 &amp;&amp; *remaining);</span>
 <span class="lineNum">    1802 </span>            :     }
-<span class="lineNum">    1803 </span><span class="lineNoCov">          0 :     CLEAR(oper1);</span>
-<span class="lineNum">    1804 </span><span class="lineNoCov">          0 :     CLEAR(oper2);</span>
-<span class="lineNum">    1805 </span><span class="lineNoCov">          0 :     PushInt(result);</span>
+<span class="lineNum">    1803 </span><span class="lineCov">          4 :     CLEAR(oper1);</span>
+<span class="lineNum">    1804 </span><span class="lineCov">          4 :     CLEAR(oper2);</span>
+<span class="lineNum">    1805 </span><span class="lineCov">          4 :     PushInt(result);</span>
 <span class="lineNum">    1806 </span>            : }
 <a name="1807"><span class="lineNum">    1807 </span>            : </a>
 <span class="lineNum">    1808 </span>            : void

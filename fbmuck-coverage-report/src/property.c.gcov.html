@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-03-02 21:39:54</td>
+            <td class="headerValue">2017-03-04 16:58:35</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">40</td>
@@ -80,151 +80,151 @@
 <span class="lineNum">      18 </span>            : #include &quot;tune.h&quot;
 <a name="19"><span class="lineNum">      19 </span>            : </a>
 <span class="lineNum">      20 </span>            : void
-<span class="lineNum">      21 </span><span class="lineCov">       2628 : set_property_nofetch(dbref player, const char *pname, PData * dat, int sync)</span>
+<span class="lineNum">      21 </span><span class="lineCov">      17493 : set_property_nofetch(dbref player, const char *pname, PData * dat, int sync)</span>
 <span class="lineNum">      22 </span>            : {
 <span class="lineNum">      23 </span>            :     PropPtr p;
 <span class="lineNum">      24 </span>            :     char buf[BUFFER_LEN];
 <span class="lineNum">      25 </span>            :     char *n, *w;
 <span class="lineNum">      26 </span>            : 
 <span class="lineNum">      27 </span>            :     /* Make sure that we are passed a valid property name */
-<span class="lineNum">      28 </span><span class="lineCov">       2628 :     if (!pname)</span>
+<span class="lineNum">      28 </span><span class="lineCov">      17493 :     if (!pname)</span>
 <span class="lineNum">      29 </span><span class="lineNoCov">          0 :         return;</span>
 <span class="lineNum">      30 </span>            : 
-<span class="lineNum">      31 </span><span class="lineCov">       5276 :     while (*pname == PROPDIR_DELIMITER)</span>
-<span class="lineNum">      32 </span><span class="lineCov">         20 :         pname++;</span>
-<span class="lineNum">      33 </span><span class="lineCov">       5247 :     if ((!(FLAGS(player) &amp; LISTENER)) &amp;&amp;</span>
-<span class="lineNum">      34 </span><span class="lineCov">       5234 :         (string_prefix(pname, LISTEN_PROPQUEUE) ||</span>
-<span class="lineNum">      35 </span><span class="lineCov">       5230 :          string_prefix(pname, WLISTEN_PROPQUEUE) || string_prefix(pname, WOLISTEN_PROPQUEUE))) {</span>
-<span class="lineNum">      36 </span><span class="lineCov">          4 :         FLAGS(player) |= LISTENER;</span>
+<span class="lineNum">      31 </span><span class="lineCov">      35066 :     while (*pname == PROPDIR_DELIMITER)</span>
+<span class="lineNum">      32 </span><span class="lineCov">         80 :         pname++;</span>
+<span class="lineNum">      33 </span><span class="lineCov">      34950 :     if ((!(FLAGS(player) &amp; LISTENER)) &amp;&amp;</span>
+<span class="lineNum">      34 </span><span class="lineCov">      34898 :         (string_prefix(pname, LISTEN_PROPQUEUE) ||</span>
+<span class="lineNum">      35 </span><span class="lineCov">      34882 :          string_prefix(pname, WLISTEN_PROPQUEUE) || string_prefix(pname, WOLISTEN_PROPQUEUE))) {</span>
+<span class="lineNum">      36 </span><span class="lineCov">         16 :         FLAGS(player) |= LISTENER;</span>
 <span class="lineNum">      37 </span>            :     }
 <span class="lineNum">      38 </span>            : 
-<span class="lineNum">      39 </span><span class="lineCov">       2628 :     w = strcpyn(buf, sizeof(buf), pname);</span>
+<span class="lineNum">      39 </span><span class="lineCov">      17493 :     w = strcpyn(buf, sizeof(buf), pname);</span>
 <span class="lineNum">      40 </span>            : 
 <span class="lineNum">      41 </span>            :     /* truncate propnames with a ':' in them at the ':' */
-<span class="lineNum">      42 </span><span class="lineCov">       2628 :     n = index(buf, PROP_DELIMITER);</span>
-<span class="lineNum">      43 </span><span class="lineCov">       2628 :     if (n)</span>
+<span class="lineNum">      42 </span><span class="lineCov">      17493 :     n = index(buf, PROP_DELIMITER);</span>
+<span class="lineNum">      43 </span><span class="lineCov">      17493 :     if (n)</span>
 <span class="lineNum">      44 </span><span class="lineNoCov">          0 :         *n = '\0';</span>
-<span class="lineNum">      45 </span><span class="lineCov">       2628 :     if (!*buf)</span>
+<span class="lineNum">      45 </span><span class="lineCov">      17493 :     if (!*buf)</span>
 <span class="lineNum">      46 </span><span class="lineNoCov">          0 :         return;</span>
 <span class="lineNum">      47 </span>            : 
-<span class="lineNum">      48 </span><span class="lineCov">       2628 :     p = propdir_new_elem(&amp;(DBFETCH(player)-&gt;properties), w);</span>
+<span class="lineNum">      48 </span><span class="lineCov">      17493 :     p = propdir_new_elem(&amp;(DBFETCH(player)-&gt;properties), w);</span>
 <span class="lineNum">      49 </span>            : 
 <span class="lineNum">      50 </span>            :     /* free up any old values */
-<span class="lineNum">      51 </span><span class="lineCov">       2628 :     clear_propnode(p);</span>
+<span class="lineNum">      51 </span><span class="lineCov">      17493 :     clear_propnode(p);</span>
 <span class="lineNum">      52 </span>            : 
-<span class="lineNum">      53 </span><span class="lineCov">       2628 :     SetPFlagsRaw(p, dat-&gt;flags);</span>
-<span class="lineNum">      54 </span><span class="lineCov">       2628 :     if (PropFlags(p) &amp; PROP_ISUNLOADED) {</span>
+<span class="lineNum">      53 </span><span class="lineCov">      17493 :     SetPFlagsRaw(p, dat-&gt;flags);</span>
+<span class="lineNum">      54 </span><span class="lineCov">      17493 :     if (PropFlags(p) &amp; PROP_ISUNLOADED) {</span>
 <span class="lineNum">      55 </span><span class="lineNoCov">          0 :         SetPDataUnion(p, dat-&gt;data);</span>
 <span class="lineNum">      56 </span><span class="lineNoCov">          0 :         return;</span>
 <span class="lineNum">      57 </span>            :     }
-<span class="lineNum">      58 </span><span class="lineCov">       2628 :     switch (PropType(p)) {</span>
+<span class="lineNum">      58 </span><span class="lineCov">      17493 :     switch (PropType(p)) {</span>
 <span class="lineNum">      59 </span>            :     case PROP_STRTYP:
-<span class="lineNum">      60 </span><span class="lineCov">        607 :         if (!dat-&gt;data.str || !*(dat-&gt;data.str)) {</span>
+<span class="lineNum">      60 </span><span class="lineCov">       4070 :         if (!dat-&gt;data.str || !*(dat-&gt;data.str)) {</span>
 <span class="lineNum">      61 </span><span class="lineNoCov">          0 :             SetPType(p, PROP_DIRTYP);</span>
 <span class="lineNum">      62 </span><span class="lineNoCov">          0 :             SetPDataStr(p, NULL);</span>
 <span class="lineNum">      63 </span><span class="lineNoCov">          0 :             if (!PropDir(p)) {</span>
 <span class="lineNum">      64 </span><span class="lineNoCov">          0 :                 remove_property_nofetch(player, pname, 0);</span>
 <span class="lineNum">      65 </span>            :             }
 <span class="lineNum">      66 </span>            :         } else {
-<span class="lineNum">      67 </span><span class="lineCov">        607 :             SetPDataStr(p, alloc_string(dat-&gt;data.str));</span>
+<span class="lineNum">      67 </span><span class="lineCov">       4070 :             SetPDataStr(p, alloc_string(dat-&gt;data.str));</span>
 <span class="lineNum">      68 </span>            :         }
-<span class="lineNum">      69 </span><span class="lineCov">        607 :         break;</span>
+<span class="lineNum">      69 </span><span class="lineCov">       4070 :         break;</span>
 <span class="lineNum">      70 </span>            :     case PROP_INTTYP:
-<span class="lineNum">      71 </span><span class="lineCov">       1805 :         SetPDataVal(p, dat-&gt;data.val);</span>
-<span class="lineNum">      72 </span><span class="lineCov">       1805 :         if (!dat-&gt;data.val) {</span>
+<span class="lineNum">      71 </span><span class="lineCov">      12107 :         SetPDataVal(p, dat-&gt;data.val);</span>
+<span class="lineNum">      72 </span><span class="lineCov">      12107 :         if (!dat-&gt;data.val) {</span>
 <span class="lineNum">      73 </span><span class="lineNoCov">          0 :             SetPType(p, PROP_DIRTYP);</span>
 <span class="lineNum">      74 </span><span class="lineNoCov">          0 :             if (!PropDir(p)) {</span>
 <span class="lineNum">      75 </span><span class="lineNoCov">          0 :                 remove_property_nofetch(player, pname, 0);</span>
 <span class="lineNum">      76 </span>            :             }
 <span class="lineNum">      77 </span>            :         }
-<span class="lineNum">      78 </span><span class="lineCov">       1805 :         break;</span>
+<span class="lineNum">      78 </span><span class="lineCov">      12107 :         break;</span>
 <span class="lineNum">      79 </span>            :     case PROP_FLTTYP:
-<span class="lineNum">      80 </span><span class="lineCov">          5 :         SetPDataFVal(p, dat-&gt;data.fval);</span>
-<span class="lineNum">      81 </span><span class="lineCov">          5 :         if (dat-&gt;data.fval == 0.0) {</span>
+<span class="lineNum">      80 </span><span class="lineCov">         36 :         SetPDataFVal(p, dat-&gt;data.fval);</span>
+<span class="lineNum">      81 </span><span class="lineCov">         36 :         if (dat-&gt;data.fval == 0.0) {</span>
 <span class="lineNum">      82 </span><span class="lineNoCov">          0 :             SetPType(p, PROP_DIRTYP);</span>
 <span class="lineNum">      83 </span><span class="lineNoCov">          0 :             if (!PropDir(p)) {</span>
 <span class="lineNum">      84 </span><span class="lineNoCov">          0 :                 remove_property_nofetch(player, pname, 0);</span>
 <span class="lineNum">      85 </span>            :             }
 <span class="lineNum">      86 </span>            :         }
-<span class="lineNum">      87 </span><span class="lineCov">          5 :         break;</span>
+<span class="lineNum">      87 </span><span class="lineCov">         36 :         break;</span>
 <span class="lineNum">      88 </span>            :     case PROP_REFTYP:
-<span class="lineNum">      89 </span><span class="lineCov">         15 :         SetPDataRef(p, dat-&gt;data.ref);</span>
-<span class="lineNum">      90 </span><span class="lineCov">         15 :         if (dat-&gt;data.ref == NOTHING) {</span>
+<span class="lineNum">      89 </span><span class="lineCov">         76 :         SetPDataRef(p, dat-&gt;data.ref);</span>
+<span class="lineNum">      90 </span><span class="lineCov">         76 :         if (dat-&gt;data.ref == NOTHING) {</span>
 <span class="lineNum">      91 </span><span class="lineNoCov">          0 :             SetPType(p, PROP_DIRTYP);</span>
 <span class="lineNum">      92 </span><span class="lineNoCov">          0 :             SetPDataRef(p, 0);</span>
 <span class="lineNum">      93 </span><span class="lineNoCov">          0 :             if (!PropDir(p)) {</span>
 <span class="lineNum">      94 </span><span class="lineNoCov">          0 :                 remove_property_nofetch(player, pname, 0);</span>
 <span class="lineNum">      95 </span>            :             }
 <span class="lineNum">      96 </span>            :         }
-<span class="lineNum">      97 </span><span class="lineCov">         15 :         break;</span>
+<span class="lineNum">      97 </span><span class="lineCov">         76 :         break;</span>
 <span class="lineNum">      98 </span>            :     case PROP_LOKTYP:
-<span class="lineNum">      99 </span><span class="lineCov">         48 :         SetPDataLok(p, dat-&gt;data.lok);</span>
-<span class="lineNum">     100 </span><span class="lineCov">         48 :         break;</span>
+<span class="lineNum">      99 </span><span class="lineCov">        210 :         SetPDataLok(p, dat-&gt;data.lok);</span>
+<span class="lineNum">     100 </span><span class="lineCov">        210 :         break;</span>
 <span class="lineNum">     101 </span>            :     case PROP_DIRTYP:
-<span class="lineNum">     102 </span><span class="lineCov">        148 :         SetPDataVal(p, 0);</span>
-<span class="lineNum">     103 </span><span class="lineCov">        148 :         if (!PropDir(p)) {</span>
-<span class="lineNum">     104 </span><span class="lineCov">        145 :             remove_property_nofetch(player, pname, 0);</span>
+<span class="lineNum">     102 </span><span class="lineCov">        994 :         SetPDataVal(p, 0);</span>
+<span class="lineNum">     103 </span><span class="lineCov">        994 :         if (!PropDir(p)) {</span>
+<span class="lineNum">     104 </span><span class="lineCov">        982 :             remove_property_nofetch(player, pname, 0);</span>
 <span class="lineNum">     105 </span>            :         }
-<span class="lineNum">     106 </span><span class="lineCov">        148 :         break;</span>
+<span class="lineNum">     106 </span><span class="lineCov">        994 :         break;</span>
 <span class="lineNum">     107 </span>            :     }
 <span class="lineNum">     108 </span>            : 
-<span class="lineNum">     109 </span><span class="lineCov">       2628 :     if (Typeof(player) == TYPE_PLAYER) {</span>
-<span class="lineNum">     110 </span><span class="lineCov">        191 :         if (!strcasecmp(pname, LEGACY_GUEST_PROP)) {</span>
+<span class="lineNum">     109 </span><span class="lineCov">      17493 :     if (Typeof(player) == TYPE_PLAYER) {</span>
+<span class="lineNum">     110 </span><span class="lineCov">       1242 :         if (!strcasecmp(pname, LEGACY_GUEST_PROP)) {</span>
 <span class="lineNum">     111 </span><span class="lineNoCov">          0 :             FLAGS(player) |= GUEST;</span>
-<span class="lineNum">     112 </span><span class="lineCov">        191 :         } else if (!sync &amp;&amp; strcasecmp(tp_gender_prop, LEGACY_GENDER_PROP)) {</span>
+<span class="lineNum">     112 </span><span class="lineCov">       1242 :         } else if (!sync &amp;&amp; strcasecmp(tp_gender_prop, LEGACY_GENDER_PROP)) {</span>
 <span class="lineNum">     113 </span>            :             const char *current;
 <span class="lineNum">     114 </span>            :             const char *legacy;
-<span class="lineNum">     115 </span><span class="lineCov">          6 :             current = tp_gender_prop;</span>
-<span class="lineNum">     116 </span><span class="lineCov">          6 :             legacy = LEGACY_GENDER_PROP;</span>
+<span class="lineNum">     115 </span><span class="lineCov">         24 :             current = tp_gender_prop;</span>
+<span class="lineNum">     116 </span><span class="lineCov">         24 :             legacy = LEGACY_GENDER_PROP;</span>
 <span class="lineNum">     117 </span>            : 
-<span class="lineNum">     118 </span><span class="lineCov">         12 :             while (*current == PROPDIR_DELIMITER)</span>
+<span class="lineNum">     118 </span><span class="lineCov">         48 :             while (*current == PROPDIR_DELIMITER)</span>
 <span class="lineNum">     119 </span><span class="lineNoCov">          0 :                 current++;</span>
-<span class="lineNum">     120 </span><span class="lineCov">         12 :             while (*legacy == PROPDIR_DELIMITER)</span>
+<span class="lineNum">     120 </span><span class="lineCov">         48 :             while (*legacy == PROPDIR_DELIMITER)</span>
 <span class="lineNum">     121 </span><span class="lineNoCov">          0 :                 legacy++;</span>
-<span class="lineNum">     122 </span><span class="lineCov">          6 :             if (!strcasecmp(pname, current)) {</span>
-<span class="lineNum">     123 </span><span class="lineCov">          2 :                 set_property(player, (char *) legacy, dat, 1);</span>
-<span class="lineNum">     124 </span><span class="lineCov">          4 :             } else if (!strcasecmp(pname, legacy)) {</span>
-<span class="lineNum">     125 </span><span class="lineCov">          3 :                 set_property(player, current, dat, 1);</span>
+<span class="lineNum">     122 </span><span class="lineCov">         24 :             if (!strcasecmp(pname, current)) {</span>
+<span class="lineNum">     123 </span><span class="lineCov">          8 :                 set_property(player, (char *) legacy, dat, 1);</span>
+<span class="lineNum">     124 </span><span class="lineCov">         16 :             } else if (!strcasecmp(pname, legacy)) {</span>
+<span class="lineNum">     125 </span><span class="lineCov">         12 :                 set_property(player, current, dat, 1);</span>
 <span class="lineNum">     126 </span>            :             }
 <span class="lineNum">     127 </span>            :         }
 <span class="lineNum">     128 </span>            :     }
 <span class="lineNum">     129 </span>            : }
 <a name="130"><span class="lineNum">     130 </span>            : </a>
 <span class="lineNum">     131 </span>            : void
-<span class="lineNum">     132 </span><span class="lineCov">         90 : set_property(dbref player, const char *name, PData * dat, int sync)</span>
+<span class="lineNum">     132 </span><span class="lineCov">        502 : set_property(dbref player, const char *name, PData * dat, int sync)</span>
 <span class="lineNum">     133 </span>            : {
 <span class="lineNum">     134 </span>            : #ifdef DISKBASE
 <span class="lineNum">     135 </span>            :     fetchprops(player, propdir_name(name));
 <span class="lineNum">     136 </span>            :     set_property_nofetch(player, name, dat, sync);
 <span class="lineNum">     137 </span>            :     dirtyprops(player);
 <span class="lineNum">     138 </span>            : #else
-<span class="lineNum">     139 </span><span class="lineCov">         90 :     set_property_nofetch(player, name, dat, sync);</span>
+<span class="lineNum">     139 </span><span class="lineCov">        502 :     set_property_nofetch(player, name, dat, sync);</span>
 <span class="lineNum">     140 </span>            : #endif
-<span class="lineNum">     141 </span><span class="lineCov">         90 :     DBDIRTY(player);</span>
-<span class="lineNum">     142 </span><span class="lineCov">         90 : }</span>
+<span class="lineNum">     141 </span><span class="lineCov">        502 :     DBDIRTY(player);</span>
+<span class="lineNum">     142 </span><span class="lineCov">        502 : }</span>
 <span class="lineNum">     143 </span>            : 
 <a name="144"><span class="lineNum">     144 </span>            : /* adds a new property to an object */</a>
 <span class="lineNum">     145 </span>            : void
-<span class="lineNum">     146 </span><span class="lineCov">       1256 : add_prop_nofetch(dbref player, const char *pname, const char *strval, int value)</span>
+<span class="lineNum">     146 </span><span class="lineCov">       8317 : add_prop_nofetch(dbref player, const char *pname, const char *strval, int value)</span>
 <span class="lineNum">     147 </span>            : {
 <span class="lineNum">     148 </span>            :     PData mydat;
 <span class="lineNum">     149 </span>            : 
-<span class="lineNum">     150 </span><span class="lineCov">       1256 :     if (strval &amp;&amp; *strval) {</span>
-<span class="lineNum">     151 </span><span class="lineCov">        158 :         mydat.flags = PROP_STRTYP;</span>
-<span class="lineNum">     152 </span><span class="lineCov">        158 :         mydat.data.str = (char *) strval;</span>
-<span class="lineNum">     153 </span><span class="lineCov">       1098 :     } else if (value) {</span>
-<span class="lineNum">     154 </span><span class="lineCov">        956 :         mydat.flags = PROP_INTTYP;</span>
-<span class="lineNum">     155 </span><span class="lineCov">        956 :         mydat.data.val = value;</span>
+<span class="lineNum">     150 </span><span class="lineCov">       8317 :     if (strval &amp;&amp; *strval) {</span>
+<span class="lineNum">     151 </span><span class="lineCov">       1068 :         mydat.flags = PROP_STRTYP;</span>
+<span class="lineNum">     152 </span><span class="lineCov">       1068 :         mydat.data.str = (char *) strval;</span>
+<span class="lineNum">     153 </span><span class="lineCov">       7249 :     } else if (value) {</span>
+<span class="lineNum">     154 </span><span class="lineCov">       6279 :         mydat.flags = PROP_INTTYP;</span>
+<span class="lineNum">     155 </span><span class="lineCov">       6279 :         mydat.data.val = value;</span>
 <span class="lineNum">     156 </span>            :     } else {
-<span class="lineNum">     157 </span><span class="lineCov">        142 :         mydat.flags = PROP_DIRTYP;</span>
-<span class="lineNum">     158 </span><span class="lineCov">        142 :         mydat.data.str = NULL;</span>
+<span class="lineNum">     157 </span><span class="lineCov">        970 :         mydat.flags = PROP_DIRTYP;</span>
+<span class="lineNum">     158 </span><span class="lineCov">        970 :         mydat.data.str = NULL;</span>
 <span class="lineNum">     159 </span>            :     }
-<span class="lineNum">     160 </span><span class="lineCov">       1256 :     set_property_nofetch(player, pname, &amp;mydat, 0);</span>
-<span class="lineNum">     161 </span><span class="lineCov">       1256 : }</span>
+<span class="lineNum">     160 </span><span class="lineCov">       8317 :     set_property_nofetch(player, pname, &amp;mydat, 0);</span>
+<span class="lineNum">     161 </span><span class="lineCov">       8317 : }</span>
 <span class="lineNum">     162 </span>            : 
 <a name="163"><span class="lineNum">     163 </span>            : /* adds a new property to an object */</a>
 <span class="lineNum">     164 </span>            : void
-<span class="lineNum">     165 </span><span class="lineCov">       1256 : add_property(dbref player, const char *pname, const char *strval, int value)</span>
+<span class="lineNum">     165 </span><span class="lineCov">       8317 : add_property(dbref player, const char *pname, const char *strval, int value)</span>
 <span class="lineNum">     166 </span>            : {
 <span class="lineNum">     167 </span>            : 
 <span class="lineNum">     168 </span>            : #ifdef DISKBASE
@@ -232,37 +232,37 @@
 <span class="lineNum">     170 </span>            :     add_prop_nofetch(player, pname, strval, value);
 <span class="lineNum">     171 </span>            :     dirtyprops(player);
 <span class="lineNum">     172 </span>            : #else
-<span class="lineNum">     173 </span><span class="lineCov">       1256 :     add_prop_nofetch(player, pname, strval, value);</span>
+<span class="lineNum">     173 </span><span class="lineCov">       8317 :     add_prop_nofetch(player, pname, strval, value);</span>
 <span class="lineNum">     174 </span>            : #endif
-<span class="lineNum">     175 </span><span class="lineCov">       1256 :     DBDIRTY(player);</span>
-<span class="lineNum">     176 </span><span class="lineCov">       1256 : }</span>
+<span class="lineNum">     175 </span><span class="lineCov">       8317 :     DBDIRTY(player);</span>
+<span class="lineNum">     176 </span><span class="lineCov">       8317 : }</span>
 <a name="177"><span class="lineNum">     177 </span>            : </a>
 <span class="lineNum">     178 </span>            : static void
-<span class="lineNum">     179 </span><span class="lineCov">          7 : remove_proplist_item(dbref player, PropPtr p, int allp)</span>
+<span class="lineNum">     179 </span><span class="lineCov">         28 : remove_proplist_item(dbref player, PropPtr p, int allp)</span>
 <span class="lineNum">     180 </span>            : {
 <span class="lineNum">     181 </span>            :     const char *ptr;
 <span class="lineNum">     182 </span>            : 
-<span class="lineNum">     183 </span><span class="lineCov">          7 :     if (!p)</span>
+<span class="lineNum">     183 </span><span class="lineCov">         28 :     if (!p)</span>
 <span class="lineNum">     184 </span><span class="lineNoCov">          0 :         return;</span>
-<span class="lineNum">     185 </span><span class="lineCov">          7 :     ptr = PropName(p);</span>
+<span class="lineNum">     185 </span><span class="lineCov">         28 :     ptr = PropName(p);</span>
 <span class="lineNum">     186 </span>            : 
-<span class="lineNum">     187 </span><span class="lineCov">          7 :     if (Prop_System(ptr))</span>
+<span class="lineNum">     187 </span><span class="lineCov">         28 :     if (Prop_System(ptr))</span>
 <span class="lineNum">     188 </span><span class="lineNoCov">          0 :         return;</span>
 <span class="lineNum">     189 </span>            : 
-<span class="lineNum">     190 </span><span class="lineCov">          7 :     if (!allp) {</span>
-<span class="lineNum">     191 </span><span class="lineCov">          3 :         if (*ptr == PROP_HIDDEN)</span>
-<span class="lineNum">     192 </span><span class="lineCov">          1 :             return;</span>
-<span class="lineNum">     193 </span><span class="lineCov">          2 :         if (*ptr == PROP_SEEONLY)</span>
-<span class="lineNum">     194 </span><span class="lineCov">          1 :             return;</span>
-<span class="lineNum">     195 </span><span class="lineCov">          1 :         if (ptr[0] == '_' &amp;&amp; ptr[1] == '\0')</span>
+<span class="lineNum">     190 </span><span class="lineCov">         28 :     if (!allp) {</span>
+<span class="lineNum">     191 </span><span class="lineCov">         12 :         if (*ptr == PROP_HIDDEN)</span>
+<span class="lineNum">     192 </span><span class="lineCov">          4 :             return;</span>
+<span class="lineNum">     193 </span><span class="lineCov">          8 :         if (*ptr == PROP_SEEONLY)</span>
+<span class="lineNum">     194 </span><span class="lineCov">          4 :             return;</span>
+<span class="lineNum">     195 </span><span class="lineCov">          4 :         if (ptr[0] == '_' &amp;&amp; ptr[1] == '\0')</span>
 <span class="lineNum">     196 </span><span class="lineNoCov">          0 :             return;</span>
 <span class="lineNum">     197 </span>            :     }
-<span class="lineNum">     198 </span><span class="lineCov">          5 :     remove_property(player, ptr, 0);</span>
+<span class="lineNum">     198 </span><span class="lineCov">         20 :     remove_property(player, ptr, 0);</span>
 <span class="lineNum">     199 </span>            : }
 <span class="lineNum">     200 </span>            : 
 <a name="201"><span class="lineNum">     201 </span>            : /* removes property list --- if it's not there then ignore */</a>
 <span class="lineNum">     202 </span>            : void
-<span class="lineNum">     203 </span><span class="lineCov">          3 : remove_property_list(dbref player, int all)</span>
+<span class="lineNum">     203 </span><span class="lineCov">         12 : remove_property_list(dbref player, int all)</span>
 <span class="lineNum">     204 </span>            : {
 <span class="lineNum">     205 </span>            :     PropPtr l;
 <span class="lineNum">     206 </span>            :     PropPtr p;
@@ -272,76 +272,76 @@
 <span class="lineNum">     210 </span>            :     fetchprops(player, NULL);
 <span class="lineNum">     211 </span>            : #endif
 <span class="lineNum">     212 </span>            : 
-<span class="lineNum">     213 </span><span class="lineCov">          3 :     if ((l = DBFETCH(player)-&gt;properties) != NULL) {</span>
-<span class="lineNum">     214 </span><span class="lineCov">          3 :         p = first_node(l);</span>
-<span class="lineNum">     215 </span><span class="lineCov">         13 :         while (p) {</span>
-<span class="lineNum">     216 </span><span class="lineCov">          7 :             n = next_node(l, PropName(p));</span>
-<span class="lineNum">     217 </span><span class="lineCov">          7 :             remove_proplist_item(player, p, all);</span>
-<span class="lineNum">     218 </span><span class="lineCov">          7 :             l = DBFETCH(player)-&gt;properties;</span>
-<span class="lineNum">     219 </span><span class="lineCov">          7 :             p = n;</span>
+<span class="lineNum">     213 </span><span class="lineCov">         12 :     if ((l = DBFETCH(player)-&gt;properties) != NULL) {</span>
+<span class="lineNum">     214 </span><span class="lineCov">         12 :         p = first_node(l);</span>
+<span class="lineNum">     215 </span><span class="lineCov">         52 :         while (p) {</span>
+<span class="lineNum">     216 </span><span class="lineCov">         28 :             n = next_node(l, PropName(p));</span>
+<span class="lineNum">     217 </span><span class="lineCov">         28 :             remove_proplist_item(player, p, all);</span>
+<span class="lineNum">     218 </span><span class="lineCov">         28 :             l = DBFETCH(player)-&gt;properties;</span>
+<span class="lineNum">     219 </span><span class="lineCov">         28 :             p = n;</span>
 <span class="lineNum">     220 </span>            :         }
 <span class="lineNum">     221 </span>            :     }
 <span class="lineNum">     222 </span>            : #ifdef DISKBASE
 <span class="lineNum">     223 </span>            :     dirtyprops(player);
 <span class="lineNum">     224 </span>            : #endif
 <span class="lineNum">     225 </span>            : 
-<span class="lineNum">     226 </span><span class="lineCov">          3 :     DBDIRTY(player);</span>
-<span class="lineNum">     227 </span><span class="lineCov">          3 : }</span>
+<span class="lineNum">     226 </span><span class="lineCov">         12 :     DBDIRTY(player);</span>
+<span class="lineNum">     227 </span><span class="lineCov">         12 : }</span>
 <span class="lineNum">     228 </span>            : 
 <a name="229"><span class="lineNum">     229 </span>            : /* removes property --- if it's not there then ignore */</a>
 <span class="lineNum">     230 </span>            : void
-<span class="lineNum">     231 </span><span class="lineCov">        154 : remove_property_nofetch(dbref player, const char *pname, int sync)</span>
+<span class="lineNum">     231 </span><span class="lineCov">       1022 : remove_property_nofetch(dbref player, const char *pname, int sync)</span>
 <span class="lineNum">     232 </span>            : {
 <span class="lineNum">     233 </span>            :     PropPtr l;
 <span class="lineNum">     234 </span>            :     char buf[BUFFER_LEN];
 <span class="lineNum">     235 </span>            :     char *w;
 <span class="lineNum">     236 </span>            : 
-<span class="lineNum">     237 </span><span class="lineCov">        154 :     w = strcpyn(buf, sizeof(buf), pname);</span>
+<span class="lineNum">     237 </span><span class="lineCov">       1022 :     w = strcpyn(buf, sizeof(buf), pname);</span>
 <span class="lineNum">     238 </span>            : 
-<span class="lineNum">     239 </span><span class="lineCov">        154 :     l = DBFETCH(player)-&gt;properties;</span>
-<span class="lineNum">     240 </span><span class="lineCov">        154 :     l = propdir_delete_elem(l, w);</span>
-<span class="lineNum">     241 </span><span class="lineCov">        154 :     DBFETCH(player)-&gt;properties = l;</span>
+<span class="lineNum">     239 </span><span class="lineCov">       1022 :     l = DBFETCH(player)-&gt;properties;</span>
+<span class="lineNum">     240 </span><span class="lineCov">       1022 :     l = propdir_delete_elem(l, w);</span>
+<span class="lineNum">     241 </span><span class="lineCov">       1022 :     DBFETCH(player)-&gt;properties = l;</span>
 <span class="lineNum">     242 </span>            : 
-<span class="lineNum">     243 </span><span class="lineCov">        154 :     if (Typeof(player) == TYPE_PLAYER) {</span>
-<span class="lineNum">     244 </span><span class="lineCov">          4 :         if (!strcasecmp(pname, LEGACY_GUEST_PROP)) {</span>
+<span class="lineNum">     243 </span><span class="lineCov">       1022 :     if (Typeof(player) == TYPE_PLAYER) {</span>
+<span class="lineNum">     244 </span><span class="lineCov">         20 :         if (!strcasecmp(pname, LEGACY_GUEST_PROP)) {</span>
 <span class="lineNum">     245 </span><span class="lineNoCov">          0 :             FLAGS(player) &amp;= ~GUEST;</span>
 <span class="lineNum">     246 </span><span class="lineNoCov">          0 :             DBDIRTY(player);</span>
-<span class="lineNum">     247 </span><span class="lineCov">          4 :         } else if (!sync &amp;&amp; strcasecmp(tp_gender_prop, LEGACY_GENDER_PROP)) {</span>
+<span class="lineNum">     247 </span><span class="lineCov">         20 :         } else if (!sync &amp;&amp; strcasecmp(tp_gender_prop, LEGACY_GENDER_PROP)) {</span>
 <span class="lineNum">     248 </span>            :             const char *current;
 <span class="lineNum">     249 </span>            :             const char *legacy;
-<span class="lineNum">     250 </span><span class="lineCov">          1 :             current = tp_gender_prop;</span>
-<span class="lineNum">     251 </span><span class="lineCov">          1 :             legacy = LEGACY_GENDER_PROP;</span>
+<span class="lineNum">     250 </span><span class="lineCov">          4 :             current = tp_gender_prop;</span>
+<span class="lineNum">     251 </span><span class="lineCov">          4 :             legacy = LEGACY_GENDER_PROP;</span>
 <span class="lineNum">     252 </span>            : 
-<span class="lineNum">     253 </span><span class="lineCov">          2 :             while (*current == PROPDIR_DELIMITER)</span>
+<span class="lineNum">     253 </span><span class="lineCov">          8 :             while (*current == PROPDIR_DELIMITER)</span>
 <span class="lineNum">     254 </span><span class="lineNoCov">          0 :                 current++;</span>
-<span class="lineNum">     255 </span><span class="lineCov">          2 :             while (*legacy == PROPDIR_DELIMITER)</span>
+<span class="lineNum">     255 </span><span class="lineCov">          8 :             while (*legacy == PROPDIR_DELIMITER)</span>
 <span class="lineNum">     256 </span><span class="lineNoCov">          0 :                 legacy++;</span>
-<span class="lineNum">     257 </span><span class="lineCov">          1 :             if (!strcasecmp(pname, current)) {</span>
+<span class="lineNum">     257 </span><span class="lineCov">          4 :             if (!strcasecmp(pname, current)) {</span>
 <span class="lineNum">     258 </span><span class="lineNoCov">          0 :                 remove_property(player, (char *) legacy, 1);</span>
-<span class="lineNum">     259 </span><span class="lineCov">          1 :             } else if (!strcasecmp(pname, legacy)) {</span>
-<span class="lineNum">     260 </span><span class="lineCov">          1 :                 remove_property(player, current, 1);</span>
+<span class="lineNum">     259 </span><span class="lineCov">          4 :             } else if (!strcasecmp(pname, legacy)) {</span>
+<span class="lineNum">     260 </span><span class="lineCov">          4 :                 remove_property(player, current, 1);</span>
 <span class="lineNum">     261 </span>            :             }
 <span class="lineNum">     262 </span>            :         }
 <span class="lineNum">     263 </span>            :     }
 <span class="lineNum">     264 </span>            : 
-<span class="lineNum">     265 </span><span class="lineCov">        154 : }</span>
+<span class="lineNum">     265 </span><span class="lineCov">       1022 : }</span>
 <a name="266"><span class="lineNum">     266 </span>            : </a>
 <span class="lineNum">     267 </span>            : void
-<span class="lineNum">     268 </span><span class="lineCov">          9 : remove_property(dbref player, const char *pname, int sync)</span>
+<span class="lineNum">     268 </span><span class="lineCov">         40 : remove_property(dbref player, const char *pname, int sync)</span>
 <span class="lineNum">     269 </span>            : {
 <span class="lineNum">     270 </span>            : #ifdef DISKBASE
 <span class="lineNum">     271 </span>            :     fetchprops(player, propdir_name(pname));
 <span class="lineNum">     272 </span>            : #endif
 <span class="lineNum">     273 </span>            : 
-<span class="lineNum">     274 </span><span class="lineCov">          9 :     remove_property_nofetch(player, pname, sync);</span>
+<span class="lineNum">     274 </span><span class="lineCov">         40 :     remove_property_nofetch(player, pname, sync);</span>
 <span class="lineNum">     275 </span>            : 
 <span class="lineNum">     276 </span>            : #ifdef DISKBASE
 <span class="lineNum">     277 </span>            :     dirtyprops(player);
 <span class="lineNum">     278 </span>            : #endif
-<span class="lineNum">     279 </span><span class="lineCov">          9 : }</span>
+<span class="lineNum">     279 </span><span class="lineCov">         40 : }</span>
 <a name="280"><span class="lineNum">     280 </span>            : </a>
 <span class="lineNum">     281 </span>            : PropPtr
-<span class="lineNum">     282 </span><span class="lineCov">       5341 : get_property(dbref player, const char *pname)</span>
+<span class="lineNum">     282 </span><span class="lineCov">      34607 : get_property(dbref player, const char *pname)</span>
 <span class="lineNum">     283 </span>            : {
 <span class="lineNum">     284 </span>            :     PropPtr p;
 <span class="lineNum">     285 </span>            :     char buf[BUFFER_LEN];
@@ -351,27 +351,27 @@
 <span class="lineNum">     289 </span>            :     fetchprops(player, propdir_name(pname));
 <span class="lineNum">     290 </span>            : #endif
 <span class="lineNum">     291 </span>            : 
-<span class="lineNum">     292 </span><span class="lineCov">       5341 :     w = strcpyn(buf, sizeof(buf), pname);</span>
+<span class="lineNum">     292 </span><span class="lineCov">      34607 :     w = strcpyn(buf, sizeof(buf), pname);</span>
 <span class="lineNum">     293 </span>            : 
-<span class="lineNum">     294 </span><span class="lineCov">       5341 :     p = propdir_get_elem(DBFETCH(player)-&gt;properties, w);</span>
-<span class="lineNum">     295 </span><span class="lineCov">       5341 :     return (p);</span>
+<span class="lineNum">     294 </span><span class="lineCov">      34607 :     p = propdir_get_elem(DBFETCH(player)-&gt;properties, w);</span>
+<span class="lineNum">     295 </span><span class="lineCov">      34607 :     return (p);</span>
 <span class="lineNum">     296 </span>            : }
 <span class="lineNum">     297 </span>            : 
 <span class="lineNum">     298 </span>            : /* checks if object has property, returning 1 if it or any of its contents has
 <a name="299"><span class="lineNum">     299 </span>            :    the property stated                                                      */</a>
 <span class="lineNum">     300 </span>            : int
-<span class="lineNum">     301 </span><span class="lineCov">          4 : has_property(int descr, dbref player, dbref what, const char *pname, const char *strval,</span>
+<span class="lineNum">     301 </span><span class="lineCov">         16 : has_property(int descr, dbref player, dbref what, const char *pname, const char *strval,</span>
 <span class="lineNum">     302 </span>            :              int value)
 <span class="lineNum">     303 </span>            : {
 <span class="lineNum">     304 </span>            :     dbref things;
 <span class="lineNum">     305 </span>            : 
-<span class="lineNum">     306 </span><span class="lineCov">          4 :     if (has_property_strict(descr, player, what, pname, strval, value))</span>
+<span class="lineNum">     306 </span><span class="lineCov">         16 :     if (has_property_strict(descr, player, what, pname, strval, value))</span>
 <span class="lineNum">     307 </span><span class="lineNoCov">          0 :         return 1;</span>
-<span class="lineNum">     308 </span><span class="lineCov">          4 :     for (things = CONTENTS(what); things != NOTHING; things = NEXTOBJ(things)) {</span>
+<span class="lineNum">     308 </span><span class="lineCov">         16 :     for (things = CONTENTS(what); things != NOTHING; things = NEXTOBJ(things)) {</span>
 <span class="lineNum">     309 </span><span class="lineNoCov">          0 :         if (has_property(descr, player, things, pname, strval, value))</span>
 <span class="lineNum">     310 </span><span class="lineNoCov">          0 :             return 1;</span>
 <span class="lineNum">     311 </span>            :     }
-<span class="lineNum">     312 </span><span class="lineCov">          4 :     if (tp_lock_envcheck) {</span>
+<span class="lineNum">     312 </span><span class="lineCov">         16 :     if (tp_lock_envcheck) {</span>
 <span class="lineNum">     313 </span><span class="lineNoCov">          0 :         things = getparent(what);</span>
 <span class="lineNum">     314 </span><span class="lineNoCov">          0 :         while (things != NOTHING) {</span>
 <span class="lineNum">     315 </span><span class="lineNoCov">          0 :             if (has_property_strict(descr, player, things, pname, strval, value))</span>
@@ -379,13 +379,13 @@
 <span class="lineNum">     317 </span><span class="lineNoCov">          0 :             things = getparent(things);</span>
 <span class="lineNum">     318 </span>            :         }
 <span class="lineNum">     319 </span>            :     }
-<span class="lineNum">     320 </span><span class="lineCov">          4 :     return 0;</span>
+<span class="lineNum">     320 </span><span class="lineCov">         16 :     return 0;</span>
 <span class="lineNum">     321 </span>            : }
 <span class="lineNum">     322 </span>            : 
 <span class="lineNum">     323 </span>            : static int has_prop_recursion_limit = 2;
 <a name="324"><span class="lineNum">     324 </span>            : /* checks if object has property, returns 1 if it has the property */</a>
 <span class="lineNum">     325 </span>            : int
-<span class="lineNum">     326 </span><span class="lineCov">          9 : has_property_strict(int descr, dbref player, dbref what, const char *pname, const char *strval,</span>
+<span class="lineNum">     326 </span><span class="lineCov">         36 : has_property_strict(int descr, dbref player, dbref what, const char *pname, const char *strval,</span>
 <span class="lineNum">     327 </span>            :                     int value)
 <span class="lineNum">     328 </span>            : {
 <span class="lineNum">     329 </span>            :     PropPtr p;
@@ -393,26 +393,26 @@
 <span class="lineNum">     331 </span>            :     char *ptr;
 <span class="lineNum">     332 </span>            :     char buf[BUFFER_LEN];
 <span class="lineNum">     333 </span>            : 
-<span class="lineNum">     334 </span><span class="lineCov">          9 :     p = get_property(what, pname);</span>
+<span class="lineNum">     334 </span><span class="lineCov">         36 :     p = get_property(what, pname);</span>
 <span class="lineNum">     335 </span>            : 
-<span class="lineNum">     336 </span><span class="lineCov">          9 :     if (p) {</span>
+<span class="lineNum">     336 </span><span class="lineCov">         36 :     if (p) {</span>
 <span class="lineNum">     337 </span>            : #ifdef DISKBASE
 <span class="lineNum">     338 </span>            :         propfetch(what, p);
 <span class="lineNum">     339 </span>            : #endif
-<span class="lineNum">     340 </span><span class="lineCov">          3 :         switch (PropType(p)) {</span>
+<span class="lineNum">     340 </span><span class="lineCov">         12 :         switch (PropType(p)) {</span>
 <span class="lineNum">     341 </span>            :         case PROP_STRTYP:
-<span class="lineNum">     342 </span><span class="lineCov">          3 :             str = DoNull(PropDataStr(p));</span>
+<span class="lineNum">     342 </span><span class="lineCov">         12 :             str = DoNull(PropDataStr(p));</span>
 <span class="lineNum">     343 </span>            : 
-<span class="lineNum">     344 </span><span class="lineCov">          3 :             if (has_prop_recursion_limit-- &gt; 0) {</span>
-<span class="lineNum">     345 </span><span class="lineCov">          2 :                 ptr = do_parse_mesg(descr, player, what, str, &quot;(Lock)&quot;, buf, sizeof(buf),</span>
+<span class="lineNum">     344 </span><span class="lineCov">         12 :             if (has_prop_recursion_limit-- &gt; 0) {</span>
+<span class="lineNum">     345 </span><span class="lineCov">          8 :                 ptr = do_parse_mesg(descr, player, what, str, &quot;(Lock)&quot;, buf, sizeof(buf),</span>
 <span class="lineNum">     346 </span>            :                                     (MPI_ISPRIVATE | MPI_ISLOCK |
-<span class="lineNum">     347 </span><span class="lineCov">          2 :                                      ((PropFlags(p) &amp; PROP_BLESSED) ? MPI_ISBLESSED : 0)));</span>
+<span class="lineNum">     347 </span><span class="lineCov">          8 :                                      ((PropFlags(p) &amp; PROP_BLESSED) ? MPI_ISBLESSED : 0)));</span>
 <span class="lineNum">     348 </span>            :             } else {
-<span class="lineNum">     349 </span><span class="lineCov">          1 :                 strcpyn(buf, sizeof(buf), str);</span>
-<span class="lineNum">     350 </span><span class="lineCov">          1 :                 ptr = buf;</span>
+<span class="lineNum">     349 </span><span class="lineCov">          4 :                 strcpyn(buf, sizeof(buf), str);</span>
+<span class="lineNum">     350 </span><span class="lineCov">          4 :                 ptr = buf;</span>
 <span class="lineNum">     351 </span>            :             }
-<span class="lineNum">     352 </span><span class="lineCov">          3 :             has_prop_recursion_limit++;</span>
-<span class="lineNum">     353 </span><span class="lineCov">          3 :             return (equalstr((char *) strval, ptr));</span>
+<span class="lineNum">     352 </span><span class="lineCov">         12 :             has_prop_recursion_limit++;</span>
+<span class="lineNum">     353 </span><span class="lineCov">         12 :             return (equalstr((char *) strval, ptr));</span>
 <span class="lineNum">     354 </span>            : 
 <span class="lineNum">     355 </span>            :         case PROP_INTTYP:
 <span class="lineNum">     356 </span><span class="lineNoCov">          0 :             return (value == PropDataVal(p));</span>
@@ -423,45 +423,45 @@
 <span class="lineNum">     361 </span><span class="lineNoCov">          0 :             return 0;</span>
 <span class="lineNum">     362 </span>            :         }
 <span class="lineNum">     363 </span>            :     }
-<span class="lineNum">     364 </span><span class="lineCov">          6 :     return 0;</span>
+<span class="lineNum">     364 </span><span class="lineCov">         24 :     return 0;</span>
 <span class="lineNum">     365 </span>            : }
 <span class="lineNum">     366 </span>            : 
 <a name="367"><span class="lineNum">     367 </span>            : /* return string value of property */</a>
 <span class="lineNum">     368 </span>            : const char *
-<span class="lineNum">     369 </span><span class="lineCov">       2984 : get_property_class(dbref player, const char *pname)</span>
+<span class="lineNum">     369 </span><span class="lineCov">      19438 : get_property_class(dbref player, const char *pname)</span>
 <span class="lineNum">     370 </span>            : {
 <span class="lineNum">     371 </span>            :     PropPtr p;
 <span class="lineNum">     372 </span>            : 
-<span class="lineNum">     373 </span><span class="lineCov">       2984 :     p = get_property(player, pname);</span>
-<span class="lineNum">     374 </span><span class="lineCov">       2984 :     if (p) {</span>
+<span class="lineNum">     373 </span><span class="lineCov">      19438 :     p = get_property(player, pname);</span>
+<span class="lineNum">     374 </span><span class="lineCov">      19438 :     if (p) {</span>
 <span class="lineNum">     375 </span>            : #ifdef DISKBASE
 <span class="lineNum">     376 </span>            :         propfetch(player, p);
 <span class="lineNum">     377 </span>            : #endif
-<span class="lineNum">     378 </span><span class="lineCov">        709 :         if (PropType(p) != PROP_STRTYP)</span>
-<span class="lineNum">     379 </span><span class="lineCov">         10 :             return (char *) NULL;</span>
-<span class="lineNum">     380 </span><span class="lineCov">        699 :         return (PropDataStr(p));</span>
+<span class="lineNum">     378 </span><span class="lineCov">       4560 :         if (PropType(p) != PROP_STRTYP)</span>
+<span class="lineNum">     379 </span><span class="lineCov">         40 :             return (char *) NULL;</span>
+<span class="lineNum">     380 </span><span class="lineCov">       4520 :         return (PropDataStr(p));</span>
 <span class="lineNum">     381 </span>            :     } else {
-<span class="lineNum">     382 </span><span class="lineCov">       2275 :         return (char *) NULL;</span>
+<span class="lineNum">     382 </span><span class="lineCov">      14878 :         return (char *) NULL;</span>
 <span class="lineNum">     383 </span>            :     }
 <span class="lineNum">     384 </span>            : }
 <span class="lineNum">     385 </span>            : 
 <a name="386"><span class="lineNum">     386 </span>            : /* return value of property */</a>
 <span class="lineNum">     387 </span>            : int
-<span class="lineNum">     388 </span><span class="lineCov">         50 : get_property_value(dbref player, const char *pname)</span>
+<span class="lineNum">     388 </span><span class="lineCov">        311 : get_property_value(dbref player, const char *pname)</span>
 <span class="lineNum">     389 </span>            : {
 <span class="lineNum">     390 </span>            :     PropPtr p;
 <span class="lineNum">     391 </span>            : 
-<span class="lineNum">     392 </span><span class="lineCov">         50 :     p = get_property(player, pname);</span>
+<span class="lineNum">     392 </span><span class="lineCov">        311 :     p = get_property(player, pname);</span>
 <span class="lineNum">     393 </span>            : 
-<span class="lineNum">     394 </span><span class="lineCov">         50 :     if (p) {</span>
+<span class="lineNum">     394 </span><span class="lineCov">        311 :     if (p) {</span>
 <span class="lineNum">     395 </span>            : #ifdef DISKBASE
 <span class="lineNum">     396 </span>            :         propfetch(player, p);
 <span class="lineNum">     397 </span>            : #endif
-<span class="lineNum">     398 </span><span class="lineCov">         40 :         if (PropType(p) != PROP_INTTYP)</span>
+<span class="lineNum">     398 </span><span class="lineCov">        259 :         if (PropType(p) != PROP_INTTYP)</span>
 <span class="lineNum">     399 </span><span class="lineNoCov">          0 :             return 0;</span>
-<span class="lineNum">     400 </span><span class="lineCov">         40 :         return (PropDataVal(p));</span>
+<span class="lineNum">     400 </span><span class="lineCov">        259 :         return (PropDataVal(p));</span>
 <span class="lineNum">     401 </span>            :     } else {
-<span class="lineNum">     402 </span><span class="lineCov">         10 :         return 0;</span>
+<span class="lineNum">     402 </span><span class="lineCov">         52 :         return 0;</span>
 <span class="lineNum">     403 </span>            :     }
 <span class="lineNum">     404 </span>            : }
 <span class="lineNum">     405 </span>            : 
@@ -486,50 +486,50 @@
 <span class="lineNum">     424 </span>            : 
 <a name="425"><span class="lineNum">     425 </span>            : /* return boolexp lock of property */</a>
 <span class="lineNum">     426 </span>            : dbref
-<span class="lineNum">     427 </span><span class="lineCov">       1406 : get_property_dbref(dbref player, const char *pname)</span>
+<span class="lineNum">     427 </span><span class="lineCov">       9410 : get_property_dbref(dbref player, const char *pname)</span>
 <span class="lineNum">     428 </span>            : {
 <span class="lineNum">     429 </span>            :     PropPtr p;
 <span class="lineNum">     430 </span>            : 
-<span class="lineNum">     431 </span><span class="lineCov">       1406 :     p = get_property(player, pname);</span>
-<span class="lineNum">     432 </span><span class="lineCov">       1406 :     if (!p)</span>
-<span class="lineNum">     433 </span><span class="lineCov">       1386 :         return NOTHING;</span>
+<span class="lineNum">     431 </span><span class="lineCov">       9410 :     p = get_property(player, pname);</span>
+<span class="lineNum">     432 </span><span class="lineCov">       9410 :     if (!p)</span>
+<span class="lineNum">     433 </span><span class="lineCov">       9330 :         return NOTHING;</span>
 <span class="lineNum">     434 </span>            : #ifdef DISKBASE
 <span class="lineNum">     435 </span>            :     propfetch(player, p);
 <span class="lineNum">     436 </span>            : #endif
-<span class="lineNum">     437 </span><span class="lineCov">         20 :     if (PropType(p) != PROP_REFTYP)</span>
-<span class="lineNum">     438 </span><span class="lineCov">         15 :         return NOTHING;</span>
-<span class="lineNum">     439 </span><span class="lineCov">          5 :     return PropDataRef(p);</span>
+<span class="lineNum">     437 </span><span class="lineCov">         80 :     if (PropType(p) != PROP_REFTYP)</span>
+<span class="lineNum">     438 </span><span class="lineCov">         60 :         return NOTHING;</span>
+<span class="lineNum">     439 </span><span class="lineCov">         20 :     return PropDataRef(p);</span>
 <span class="lineNum">     440 </span>            : }
 <span class="lineNum">     441 </span>            : 
 <a name="442"><span class="lineNum">     442 </span>            : /* return boolexp lock of property */</a>
 <span class="lineNum">     443 </span>            : struct boolexp *
-<span class="lineNum">     444 </span><span class="lineCov">        457 : get_property_lock(dbref player, const char *pname)</span>
+<span class="lineNum">     444 </span><span class="lineCov">       2666 : get_property_lock(dbref player, const char *pname)</span>
 <span class="lineNum">     445 </span>            : {
 <span class="lineNum">     446 </span>            :     PropPtr p;
 <span class="lineNum">     447 </span>            : 
-<span class="lineNum">     448 </span><span class="lineCov">        457 :     p = get_property(player, pname);</span>
-<span class="lineNum">     449 </span><span class="lineCov">        457 :     if (!p)</span>
-<span class="lineNum">     450 </span><span class="lineCov">        436 :         return TRUE_BOOLEXP;</span>
+<span class="lineNum">     448 </span><span class="lineCov">       2666 :     p = get_property(player, pname);</span>
+<span class="lineNum">     449 </span><span class="lineCov">       2666 :     if (!p)</span>
+<span class="lineNum">     450 </span><span class="lineCov">       2580 :         return TRUE_BOOLEXP;</span>
 <span class="lineNum">     451 </span>            : #ifdef DISKBASE
 <span class="lineNum">     452 </span>            :     propfetch(player, p);
 <span class="lineNum">     453 </span>            :     if (PropFlags(p) &amp; PROP_ISUNLOADED)
 <span class="lineNum">     454 </span>            :         return TRUE_BOOLEXP;
 <span class="lineNum">     455 </span>            : #endif
-<span class="lineNum">     456 </span><span class="lineCov">         21 :     if (PropType(p) != PROP_LOKTYP)</span>
+<span class="lineNum">     456 </span><span class="lineCov">         86 :     if (PropType(p) != PROP_LOKTYP)</span>
 <span class="lineNum">     457 </span><span class="lineNoCov">          0 :         return TRUE_BOOLEXP;</span>
-<span class="lineNum">     458 </span><span class="lineCov">         21 :     return PropDataLok(p);</span>
+<span class="lineNum">     458 </span><span class="lineCov">         86 :     return PropDataLok(p);</span>
 <span class="lineNum">     459 </span>            : }
 <span class="lineNum">     460 </span>            : 
 <a name="461"><span class="lineNum">     461 </span>            : /* return flags of property */</a>
 <span class="lineNum">     462 </span>            : int
-<span class="lineNum">     463 </span><span class="lineCov">        341 : get_property_flags(dbref player, const char *pname)</span>
+<span class="lineNum">     463 </span><span class="lineCov">       2224 : get_property_flags(dbref player, const char *pname)</span>
 <span class="lineNum">     464 </span>            : {
 <span class="lineNum">     465 </span>            :     PropPtr p;
 <span class="lineNum">     466 </span>            : 
-<span class="lineNum">     467 </span><span class="lineCov">        341 :     p = get_property(player, pname);</span>
+<span class="lineNum">     467 </span><span class="lineCov">       2224 :     p = get_property(player, pname);</span>
 <span class="lineNum">     468 </span>            : 
-<span class="lineNum">     469 </span><span class="lineCov">        341 :     if (p) {</span>
-<span class="lineNum">     470 </span><span class="lineCov">        341 :         return (PropFlags(p));</span>
+<span class="lineNum">     469 </span><span class="lineCov">       2224 :     if (p) {</span>
+<span class="lineNum">     470 </span><span class="lineCov">       2224 :         return (PropFlags(p));</span>
 <span class="lineNum">     471 </span>            :     } else {
 <span class="lineNum">     472 </span><span class="lineNoCov">          0 :         return 0;</span>
 <span class="lineNum">     473 </span>            :     }
@@ -537,35 +537,35 @@
 <span class="lineNum">     475 </span>            : 
 <a name="476"><span class="lineNum">     476 </span>            : /* return flags of property */</a>
 <span class="lineNum">     477 </span>            : void
-<span class="lineNum">     478 </span><span class="lineCov">          1 : clear_property_flags(dbref player, const char *pname, int flags)</span>
+<span class="lineNum">     478 </span><span class="lineCov">          3 : clear_property_flags(dbref player, const char *pname, int flags)</span>
 <span class="lineNum">     479 </span>            : {
 <span class="lineNum">     480 </span>            :     PropPtr p;
 <span class="lineNum">     481 </span>            : 
-<span class="lineNum">     482 </span><span class="lineCov">          1 :     flags &amp;= ~PROP_TYPMASK;</span>
-<span class="lineNum">     483 </span><span class="lineCov">          1 :     p = get_property(player, pname);</span>
-<span class="lineNum">     484 </span><span class="lineCov">          1 :     if (p) {</span>
-<span class="lineNum">     485 </span><span class="lineCov">          1 :         SetPFlags(p, (PropFlags(p) &amp; ~flags));</span>
+<span class="lineNum">     482 </span><span class="lineCov">          3 :     flags &amp;= ~PROP_TYPMASK;</span>
+<span class="lineNum">     483 </span><span class="lineCov">          3 :     p = get_property(player, pname);</span>
+<span class="lineNum">     484 </span><span class="lineCov">          3 :     if (p) {</span>
+<span class="lineNum">     485 </span><span class="lineCov">          3 :         SetPFlags(p, (PropFlags(p) &amp; ~flags));</span>
 <span class="lineNum">     486 </span>            : #ifdef DISKBASE
 <span class="lineNum">     487 </span>            :         dirtyprops(player);
 <span class="lineNum">     488 </span>            : #endif
 <span class="lineNum">     489 </span>            :     }
-<span class="lineNum">     490 </span><span class="lineCov">          1 : }</span>
+<span class="lineNum">     490 </span><span class="lineCov">          3 : }</span>
 <span class="lineNum">     491 </span>            : 
 <a name="492"><span class="lineNum">     492 </span>            : /* return flags of property */</a>
 <span class="lineNum">     493 </span>            : void
-<span class="lineNum">     494 </span><span class="lineCov">          6 : set_property_flags(dbref player, const char *pname, int flags)</span>
+<span class="lineNum">     494 </span><span class="lineCov">         23 : set_property_flags(dbref player, const char *pname, int flags)</span>
 <span class="lineNum">     495 </span>            : {
 <span class="lineNum">     496 </span>            :     PropPtr p;
 <span class="lineNum">     497 </span>            : 
-<span class="lineNum">     498 </span><span class="lineCov">          6 :     flags &amp;= ~PROP_TYPMASK;</span>
-<span class="lineNum">     499 </span><span class="lineCov">          6 :     p = get_property(player, pname);</span>
-<span class="lineNum">     500 </span><span class="lineCov">          6 :     if (p) {</span>
-<span class="lineNum">     501 </span><span class="lineCov">          6 :         SetPFlags(p, (PropFlags(p) | flags));</span>
+<span class="lineNum">     498 </span><span class="lineCov">         23 :     flags &amp;= ~PROP_TYPMASK;</span>
+<span class="lineNum">     499 </span><span class="lineCov">         23 :     p = get_property(player, pname);</span>
+<span class="lineNum">     500 </span><span class="lineCov">         23 :     if (p) {</span>
+<span class="lineNum">     501 </span><span class="lineCov">         23 :         SetPFlags(p, (PropFlags(p) | flags));</span>
 <span class="lineNum">     502 </span>            : #ifdef DISKBASE
 <span class="lineNum">     503 </span>            :         dirtyprops(player);
 <span class="lineNum">     504 </span>            : #endif
 <span class="lineNum">     505 </span>            :     }
-<span class="lineNum">     506 </span><span class="lineCov">          6 : }</span>
+<span class="lineNum">     506 </span><span class="lineCov">         23 : }</span>
 <span class="lineNum">     507 </span>            : 
 <a name="508"><span class="lineNum">     508 </span>            : /* return type of property */</a>
 <span class="lineNum">     509 </span>            : static int
@@ -600,42 +600,42 @@
 <span class="lineNum">     538 </span>            :    property name into 'name'.  Returns NULL if the property list is empty
 <a name="539"><span class="lineNum">     539 </span>            :    or does not exist. */</a>
 <span class="lineNum">     540 </span>            : PropPtr
-<span class="lineNum">     541 </span><span class="lineCov">        194 : first_prop_nofetch(dbref player, const char *dir, PropPtr * list, char *name, int maxlen)</span>
+<span class="lineNum">     541 </span><span class="lineCov">       1590 : first_prop_nofetch(dbref player, const char *dir, PropPtr * list, char *name, int maxlen)</span>
 <span class="lineNum">     542 </span>            : {
 <span class="lineNum">     543 </span>            :     char buf[BUFFER_LEN];
 <span class="lineNum">     544 </span>            :     PropPtr p;
 <span class="lineNum">     545 </span>            : 
-<span class="lineNum">     546 </span><span class="lineCov">        194 :     if (dir) {</span>
-<span class="lineNum">     547 </span><span class="lineCov">        552 :         while (*dir &amp;&amp; *dir == PROPDIR_DELIMITER) {</span>
-<span class="lineNum">     548 </span><span class="lineCov">        164 :             dir++;</span>
+<span class="lineNum">     546 </span><span class="lineCov">       1590 :     if (dir) {</span>
+<span class="lineNum">     547 </span><span class="lineCov">       4631 :         while (*dir &amp;&amp; *dir == PROPDIR_DELIMITER) {</span>
+<span class="lineNum">     548 </span><span class="lineCov">       1451 :             dir++;</span>
 <span class="lineNum">     549 </span>            :         }
 <span class="lineNum">     550 </span>            :     }
-<span class="lineNum">     551 </span><span class="lineCov">        194 :     if (!dir || !*dir) {</span>
-<span class="lineNum">     552 </span><span class="lineCov">         30 :         *list = DBFETCH(player)-&gt;properties;</span>
-<span class="lineNum">     553 </span><span class="lineCov">         30 :         p = first_node(*list);</span>
-<span class="lineNum">     554 </span><span class="lineCov">         30 :         if (p) {</span>
-<span class="lineNum">     555 </span><span class="lineCov">         28 :             strcpyn(name, maxlen, PropName(p));</span>
+<span class="lineNum">     551 </span><span class="lineCov">       1590 :     if (!dir || !*dir) {</span>
+<span class="lineNum">     552 </span><span class="lineCov">        123 :         *list = DBFETCH(player)-&gt;properties;</span>
+<span class="lineNum">     553 </span><span class="lineCov">        123 :         p = first_node(*list);</span>
+<span class="lineNum">     554 </span><span class="lineCov">        123 :         if (p) {</span>
+<span class="lineNum">     555 </span><span class="lineCov">        115 :             strcpyn(name, maxlen, PropName(p));</span>
 <span class="lineNum">     556 </span>            :         } else {
-<span class="lineNum">     557 </span><span class="lineCov">          2 :             *name = '\0';</span>
+<span class="lineNum">     557 </span><span class="lineCov">          8 :             *name = '\0';</span>
 <span class="lineNum">     558 </span>            :         }
-<span class="lineNum">     559 </span><span class="lineCov">         30 :         return (p);</span>
+<span class="lineNum">     559 </span><span class="lineCov">        123 :         return (p);</span>
 <span class="lineNum">     560 </span>            :     }
 <span class="lineNum">     561 </span>            : 
-<span class="lineNum">     562 </span><span class="lineCov">        164 :     strcpyn(buf, sizeof(buf), dir);</span>
-<span class="lineNum">     563 </span><span class="lineCov">        164 :     *list = p = propdir_get_elem(DBFETCH(player)-&gt;properties, buf);</span>
-<span class="lineNum">     564 </span><span class="lineCov">        164 :     if (!p) {</span>
-<span class="lineNum">     565 </span><span class="lineCov">         82 :         *name = '\0';</span>
-<span class="lineNum">     566 </span><span class="lineCov">         82 :         return NULL;</span>
+<span class="lineNum">     562 </span><span class="lineCov">       1467 :     strcpyn(buf, sizeof(buf), dir);</span>
+<span class="lineNum">     563 </span><span class="lineCov">       1467 :     *list = p = propdir_get_elem(DBFETCH(player)-&gt;properties, buf);</span>
+<span class="lineNum">     564 </span><span class="lineCov">       1467 :     if (!p) {</span>
+<span class="lineNum">     565 </span><span class="lineCov">       1120 :         *name = '\0';</span>
+<span class="lineNum">     566 </span><span class="lineCov">       1120 :         return NULL;</span>
 <span class="lineNum">     567 </span>            :     }
-<span class="lineNum">     568 </span><span class="lineCov">         82 :     *list = PropDir(p);</span>
-<span class="lineNum">     569 </span><span class="lineCov">         82 :     p = first_node(*list);</span>
-<span class="lineNum">     570 </span><span class="lineCov">         82 :     if (p) {</span>
-<span class="lineNum">     571 </span><span class="lineCov">         28 :         strcpyn(name, maxlen, PropName(p));</span>
+<span class="lineNum">     568 </span><span class="lineCov">        347 :     *list = PropDir(p);</span>
+<span class="lineNum">     569 </span><span class="lineCov">        347 :     p = first_node(*list);</span>
+<span class="lineNum">     570 </span><span class="lineCov">        347 :     if (p) {</span>
+<span class="lineNum">     571 </span><span class="lineCov">        128 :         strcpyn(name, maxlen, PropName(p));</span>
 <span class="lineNum">     572 </span>            :     } else {
-<span class="lineNum">     573 </span><span class="lineCov">         54 :         *name = '\0';</span>
+<span class="lineNum">     573 </span><span class="lineCov">        219 :         *name = '\0';</span>
 <span class="lineNum">     574 </span>            :     }
 <span class="lineNum">     575 </span>            : 
-<span class="lineNum">     576 </span><span class="lineCov">         82 :     return (p);</span>
+<span class="lineNum">     576 </span><span class="lineCov">        347 :     return (p);</span>
 <span class="lineNum">     577 </span>            : }
 <span class="lineNum">     578 </span>            : 
 <span class="lineNum">     579 </span>            : /* first_prop() returns a pointer to the first property.
@@ -646,14 +646,14 @@
 <span class="lineNum">     584 </span>            :  */
 <a name="585"><span class="lineNum">     585 </span>            : </a>
 <span class="lineNum">     586 </span>            : PropPtr
-<span class="lineNum">     587 </span><span class="lineCov">        194 : first_prop(dbref player, const char *dir, PropPtr * list, char *name, int maxlen)</span>
+<span class="lineNum">     587 </span><span class="lineCov">       1590 : first_prop(dbref player, const char *dir, PropPtr * list, char *name, int maxlen)</span>
 <span class="lineNum">     588 </span>            : {
 <span class="lineNum">     589 </span>            : 
 <span class="lineNum">     590 </span>            : #ifdef DISKBASE
 <span class="lineNum">     591 </span>            :     fetchprops(player, (char *) dir);
 <span class="lineNum">     592 </span>            : #endif
 <span class="lineNum">     593 </span>            : 
-<span class="lineNum">     594 </span><span class="lineCov">        194 :     return (first_prop_nofetch(player, dir, list, name, maxlen));</span>
+<span class="lineNum">     594 </span><span class="lineCov">       1590 :     return (first_prop_nofetch(player, dir, list, name, maxlen));</span>
 <span class="lineNum">     595 </span>            : }
 <span class="lineNum">     596 </span>            : 
 <span class="lineNum">     597 </span>            : /* next_prop() returns a pointer to the next property node.
@@ -663,15 +663,15 @@
 <span class="lineNum">     601 </span>            :  */
 <a name="602"><span class="lineNum">     602 </span>            : </a>
 <span class="lineNum">     603 </span>            : PropPtr
-<span class="lineNum">     604 </span><span class="lineCov">        176 : next_prop(PropPtr list, PropPtr prop, char *name, int maxlen)</span>
+<span class="lineNum">     604 </span><span class="lineCov">        782 : next_prop(PropPtr list, PropPtr prop, char *name, int maxlen)</span>
 <span class="lineNum">     605 </span>            : {
-<span class="lineNum">     606 </span><span class="lineCov">        176 :     PropPtr p = prop;</span>
+<span class="lineNum">     606 </span><span class="lineCov">        782 :     PropPtr p = prop;</span>
 <span class="lineNum">     607 </span>            : 
-<span class="lineNum">     608 </span><span class="lineCov">        176 :     if (!p || !(p = next_node(list, PropName(p))))</span>
-<span class="lineNum">     609 </span><span class="lineCov">         56 :         return ((PropPtr) 0);</span>
+<span class="lineNum">     608 </span><span class="lineCov">        782 :     if (!p || !(p = next_node(list, PropName(p))))</span>
+<span class="lineNum">     609 </span><span class="lineCov">        243 :         return ((PropPtr) 0);</span>
 <span class="lineNum">     610 </span>            : 
-<span class="lineNum">     611 </span><span class="lineCov">        120 :     strcpyn(name, maxlen, PropName(p));</span>
-<span class="lineNum">     612 </span><span class="lineCov">        120 :     return (p);</span>
+<span class="lineNum">     611 </span><span class="lineCov">        539 :     strcpyn(name, maxlen, PropName(p));</span>
+<span class="lineNum">     612 </span><span class="lineCov">        539 :     return (p);</span>
 <span class="lineNum">     613 </span>            : }
 <span class="lineNum">     614 </span>            : 
 <span class="lineNum">     615 </span>            : /* next_prop_name() returns a ptr to the string name of the next property.
@@ -684,7 +684,7 @@
 <span class="lineNum">     622 </span>            :  */
 <a name="623"><span class="lineNum">     623 </span>            : </a>
 <span class="lineNum">     624 </span>            : char *
-<span class="lineNum">     625 </span><span class="lineCov">         20 : next_prop_name(dbref player, char *outbuf, int outbuflen, char *name)</span>
+<span class="lineNum">     625 </span><span class="lineCov">         80 : next_prop_name(dbref player, char *outbuf, int outbuflen, char *name)</span>
 <span class="lineNum">     626 </span>            : {
 <span class="lineNum">     627 </span>            :     char *ptr;
 <span class="lineNum">     628 </span>            :     char buf[BUFFER_LEN];
@@ -694,22 +694,22 @@
 <span class="lineNum">     632 </span>            :     fetchprops(player, propdir_name(name));
 <span class="lineNum">     633 </span>            : #endif
 <span class="lineNum">     634 </span>            : 
-<span class="lineNum">     635 </span><span class="lineCov">         20 :     strcpyn(buf, sizeof(buf), name);</span>
-<span class="lineNum">     636 </span><span class="lineCov">         20 :     if (!*name || name[strlen(name) - 1] == PROPDIR_DELIMITER) {</span>
-<span class="lineNum">     637 </span><span class="lineCov">         10 :         l = DBFETCH(player)-&gt;properties;</span>
-<span class="lineNum">     638 </span><span class="lineCov">         10 :         p = propdir_first_elem(l, buf);</span>
-<span class="lineNum">     639 </span><span class="lineCov">         10 :         if (!p) {</span>
+<span class="lineNum">     635 </span><span class="lineCov">         80 :     strcpyn(buf, sizeof(buf), name);</span>
+<span class="lineNum">     636 </span><span class="lineCov">         80 :     if (!*name || name[strlen(name) - 1] == PROPDIR_DELIMITER) {</span>
+<span class="lineNum">     637 </span><span class="lineCov">         40 :         l = DBFETCH(player)-&gt;properties;</span>
+<span class="lineNum">     638 </span><span class="lineCov">         40 :         p = propdir_first_elem(l, buf);</span>
+<span class="lineNum">     639 </span><span class="lineCov">         40 :         if (!p) {</span>
 <span class="lineNum">     640 </span><span class="lineNoCov">          0 :             *outbuf = '\0';</span>
 <span class="lineNum">     641 </span><span class="lineNoCov">          0 :             return NULL;</span>
 <span class="lineNum">     642 </span>            :         }
-<span class="lineNum">     643 </span><span class="lineCov">         10 :         strcpyn(outbuf, outbuflen, name);</span>
-<span class="lineNum">     644 </span><span class="lineCov">         10 :         strcatn(outbuf, outbuflen, PropName(p));</span>
+<span class="lineNum">     643 </span><span class="lineCov">         40 :         strcpyn(outbuf, outbuflen, name);</span>
+<span class="lineNum">     644 </span><span class="lineCov">         40 :         strcatn(outbuf, outbuflen, PropName(p));</span>
 <span class="lineNum">     645 </span>            :     } else {
-<span class="lineNum">     646 </span><span class="lineCov">         10 :         l = DBFETCH(player)-&gt;properties;</span>
-<span class="lineNum">     647 </span><span class="lineCov">         10 :         p = propdir_next_elem(l, buf);</span>
-<span class="lineNum">     648 </span><span class="lineCov">         10 :         if (!p) {</span>
-<span class="lineNum">     649 </span><span class="lineCov">         10 :             *outbuf = '\0';</span>
-<span class="lineNum">     650 </span><span class="lineCov">         10 :             return NULL;</span>
+<span class="lineNum">     646 </span><span class="lineCov">         40 :         l = DBFETCH(player)-&gt;properties;</span>
+<span class="lineNum">     647 </span><span class="lineCov">         40 :         p = propdir_next_elem(l, buf);</span>
+<span class="lineNum">     648 </span><span class="lineCov">         40 :         if (!p) {</span>
+<span class="lineNum">     649 </span><span class="lineCov">         40 :             *outbuf = '\0';</span>
+<span class="lineNum">     650 </span><span class="lineCov">         40 :             return NULL;</span>
 <span class="lineNum">     651 </span>            :         }
 <span class="lineNum">     652 </span><span class="lineNoCov">          0 :         strcpyn(outbuf, outbuflen, name);</span>
 <span class="lineNum">     653 </span><span class="lineNoCov">          0 :         ptr = rindex(outbuf, PROPDIR_DELIMITER);</span>
@@ -718,12 +718,12 @@
 <span class="lineNum">     656 </span><span class="lineNoCov">          0 :         *(ptr++) = PROPDIR_DELIMITER;</span>
 <span class="lineNum">     657 </span><span class="lineNoCov">          0 :         strcpyn(ptr, outbuflen - (ptr - outbuf), PropName(p));</span>
 <span class="lineNum">     658 </span>            :     }
-<span class="lineNum">     659 </span><span class="lineCov">         10 :     return outbuf;</span>
+<span class="lineNum">     659 </span><span class="lineCov">         40 :     return outbuf;</span>
 <span class="lineNum">     660 </span>            : }
 <span class="lineNum">     661 </span>            : 
 <a name="662"><span class="lineNum">     662 </span>            : </a>
 <span class="lineNum">     663 </span>            : long
-<span class="lineNum">     664 </span><span class="lineCov">         29 : size_properties(dbref player, int load)</span>
+<span class="lineNum">     664 </span><span class="lineCov">        110 : size_properties(dbref player, int load)</span>
 <span class="lineNum">     665 </span>            : {
 <span class="lineNum">     666 </span>            : #ifdef DISKBASE
 <span class="lineNum">     667 </span>            :     if (load) {
@@ -731,32 +731,32 @@
 <span class="lineNum">     669 </span>            :         fetch_propvals(player, &quot;/&quot;);
 <span class="lineNum">     670 </span>            :     }
 <span class="lineNum">     671 </span>            : #endif
-<span class="lineNum">     672 </span><span class="lineCov">         29 :     return size_proplist(DBFETCH(player)-&gt;properties);</span>
+<span class="lineNum">     672 </span><span class="lineCov">        110 :     return size_proplist(DBFETCH(player)-&gt;properties);</span>
 <span class="lineNum">     673 </span>            : }
 <span class="lineNum">     674 </span>            : 
 <a name="675"><span class="lineNum">     675 </span>            : /* return true if a property contains a propdir */</a>
 <span class="lineNum">     676 </span>            : static int
-<span class="lineNum">     677 </span><span class="lineCov">       1407 : is_propdir_nofetch(dbref player, const char *pname)</span>
+<span class="lineNum">     677 </span><span class="lineCov">       9414 : is_propdir_nofetch(dbref player, const char *pname)</span>
 <span class="lineNum">     678 </span>            : {
 <span class="lineNum">     679 </span>            :     PropPtr p;
 <span class="lineNum">     680 </span>            :     char w[BUFFER_LEN];
 <span class="lineNum">     681 </span>            : 
-<span class="lineNum">     682 </span><span class="lineCov">       1407 :     strcpyn(w, sizeof(w), pname);</span>
-<span class="lineNum">     683 </span><span class="lineCov">       1407 :     p = propdir_get_elem(DBFETCH(player)-&gt;properties, w);</span>
-<span class="lineNum">     684 </span><span class="lineCov">       1407 :     if (!p)</span>
-<span class="lineNum">     685 </span><span class="lineCov">       1386 :         return 0;</span>
-<span class="lineNum">     686 </span><span class="lineCov">         21 :     return (PropDir(p) != (PropPtr) NULL);</span>
+<span class="lineNum">     682 </span><span class="lineCov">       9414 :     strcpyn(w, sizeof(w), pname);</span>
+<span class="lineNum">     683 </span><span class="lineCov">       9414 :     p = propdir_get_elem(DBFETCH(player)-&gt;properties, w);</span>
+<span class="lineNum">     684 </span><span class="lineCov">       9414 :     if (!p)</span>
+<span class="lineNum">     685 </span><span class="lineCov">       9330 :         return 0;</span>
+<span class="lineNum">     686 </span><span class="lineCov">         84 :     return (PropDir(p) != (PropPtr) NULL);</span>
 <span class="lineNum">     687 </span>            : }
 <a name="688"><span class="lineNum">     688 </span>            : </a>
 <span class="lineNum">     689 </span>            : int
-<span class="lineNum">     690 </span><span class="lineCov">       1407 : is_propdir(dbref player, const char *pname)</span>
+<span class="lineNum">     690 </span><span class="lineCov">       9414 : is_propdir(dbref player, const char *pname)</span>
 <span class="lineNum">     691 </span>            : {
 <span class="lineNum">     692 </span>            : 
 <span class="lineNum">     693 </span>            : #ifdef DISKBASE
 <span class="lineNum">     694 </span>            :     fetchprops(player, propdir_name(pname));
 <span class="lineNum">     695 </span>            : #endif
 <span class="lineNum">     696 </span>            : 
-<span class="lineNum">     697 </span><span class="lineCov">       1407 :     return (is_propdir_nofetch(player, pname));</span>
+<span class="lineNum">     697 </span><span class="lineCov">       9414 :     return (is_propdir_nofetch(player, pname));</span>
 <span class="lineNum">     698 </span>            : }
 <a name="699"><span class="lineNum">     699 </span>            : </a>
 <span class="lineNum">     700 </span>            : PropPtr
@@ -791,63 +791,63 @@
 <span class="lineNum">     729 </span>            : }
 <a name="730"><span class="lineNum">     730 </span>            : </a>
 <span class="lineNum">     731 </span>            : char *
-<span class="lineNum">     732 </span><span class="lineCov">         49 : displayprop(dbref player, dbref obj, const char *name, char *buf, size_t bufsiz)</span>
+<span class="lineNum">     732 </span><span class="lineCov">        201 : displayprop(dbref player, dbref obj, const char *name, char *buf, size_t bufsiz)</span>
 <span class="lineNum">     733 </span>            : {
 <span class="lineNum">     734 </span>            :     char mybuf[BUFFER_LEN];
 <span class="lineNum">     735 </span>            :     char unparse_buf[BUFFER_LEN];
 <span class="lineNum">     736 </span>            :     int pdflag;
-<span class="lineNum">     737 </span><span class="lineCov">         49 :     char blesschar = '-';</span>
-<span class="lineNum">     738 </span><span class="lineCov">         49 :     PropPtr p = get_property(obj, name);</span>
+<span class="lineNum">     737 </span><span class="lineCov">        201 :     char blesschar = '-';</span>
+<span class="lineNum">     738 </span><span class="lineCov">        201 :     PropPtr p = get_property(obj, name);</span>
 <span class="lineNum">     739 </span>            : 
-<span class="lineNum">     740 </span><span class="lineCov">         49 :     if (!p) {</span>
+<span class="lineNum">     740 </span><span class="lineCov">        201 :     if (!p) {</span>
 <span class="lineNum">     741 </span><span class="lineNoCov">          0 :         snprintf(buf, bufsiz, &quot;%s: No such property.&quot;, name);</span>
 <span class="lineNum">     742 </span><span class="lineNoCov">          0 :         return buf;</span>
 <span class="lineNum">     743 </span>            :     }
 <span class="lineNum">     744 </span>            : #ifdef DISKBASE
 <span class="lineNum">     745 </span>            :     propfetch(obj, p);
 <span class="lineNum">     746 </span>            : #endif
-<span class="lineNum">     747 </span><span class="lineCov">         49 :     if (PropFlags(p) &amp; PROP_BLESSED)</span>
-<span class="lineNum">     748 </span><span class="lineCov">          2 :         blesschar = 'B';</span>
-<span class="lineNum">     749 </span><span class="lineCov">         49 :     pdflag = (PropDir(p) != NULL);</span>
-<span class="lineNum">     750 </span><span class="lineCov">         49 :     snprintf(mybuf, bufsiz, &quot;%.*s%c&quot;, (BUFFER_LEN / 4), name,</span>
+<span class="lineNum">     747 </span><span class="lineCov">        201 :     if (PropFlags(p) &amp; PROP_BLESSED)</span>
+<span class="lineNum">     748 </span><span class="lineCov">          7 :         blesschar = 'B';</span>
+<span class="lineNum">     749 </span><span class="lineCov">        201 :     pdflag = (PropDir(p) != NULL);</span>
+<span class="lineNum">     750 </span><span class="lineCov">        201 :     snprintf(mybuf, bufsiz, &quot;%.*s%c&quot;, (BUFFER_LEN / 4), name,</span>
 <span class="lineNum">     751 </span>            :              (pdflag) ? PROPDIR_DELIMITER : '\0');
-<span class="lineNum">     752 </span><span class="lineCov">         49 :     switch (PropType(p)) {</span>
+<span class="lineNum">     752 </span><span class="lineCov">        201 :     switch (PropType(p)) {</span>
 <span class="lineNum">     753 </span>            :     case PROP_STRTYP:
-<span class="lineNum">     754 </span><span class="lineCov">         20 :         snprintf(buf, bufsiz, &quot;%c str %s:%.*s&quot;, blesschar, mybuf, (BUFFER_LEN / 2),</span>
+<span class="lineNum">     754 </span><span class="lineCov">         85 :         snprintf(buf, bufsiz, &quot;%c str %s:%.*s&quot;, blesschar, mybuf, (BUFFER_LEN / 2),</span>
 <span class="lineNum">     755 </span>            :                  PropDataStr(p));
-<span class="lineNum">     756 </span><span class="lineCov">         20 :         break;</span>
+<span class="lineNum">     756 </span><span class="lineCov">         85 :         break;</span>
 <span class="lineNum">     757 </span>            :     case PROP_REFTYP:
-<span class="lineNum">     758 </span><span class="lineCov">          5 :         unparse_object(player, PropDataRef(p), unparse_buf, sizeof(unparse_buf));</span>
-<span class="lineNum">     759 </span><span class="lineCov">          5 :         snprintf(buf, bufsiz, &quot;%c ref %s:%s&quot;, blesschar, mybuf, unparse_buf);</span>
-<span class="lineNum">     760 </span><span class="lineCov">          5 :         break;</span>
+<span class="lineNum">     758 </span><span class="lineCov">         20 :         unparse_object(player, PropDataRef(p), unparse_buf, sizeof(unparse_buf));</span>
+<span class="lineNum">     759 </span><span class="lineCov">         20 :         snprintf(buf, bufsiz, &quot;%c ref %s:%s&quot;, blesschar, mybuf, unparse_buf);</span>
+<span class="lineNum">     760 </span><span class="lineCov">         20 :         break;</span>
 <span class="lineNum">     761 </span>            :     case PROP_INTTYP:
-<span class="lineNum">     762 </span><span class="lineCov">          4 :         snprintf(buf, bufsiz, &quot;%c int %s:%d&quot;, blesschar, mybuf, PropDataVal(p));</span>
-<span class="lineNum">     763 </span><span class="lineCov">          4 :         break;</span>
+<span class="lineNum">     762 </span><span class="lineCov">         16 :         snprintf(buf, bufsiz, &quot;%c int %s:%d&quot;, blesschar, mybuf, PropDataVal(p));</span>
+<span class="lineNum">     763 </span><span class="lineCov">         16 :         break;</span>
 <span class="lineNum">     764 </span>            :     case PROP_FLTTYP:
-<span class="lineNum">     765 </span><span class="lineCov">          2 :         snprintf(buf, bufsiz, &quot;%c flt %s:%.17g&quot;, blesschar, mybuf, PropDataFVal(p));</span>
-<span class="lineNum">     766 </span><span class="lineCov">          2 :         break;</span>
+<span class="lineNum">     765 </span><span class="lineCov">          8 :         snprintf(buf, bufsiz, &quot;%c flt %s:%.17g&quot;, blesschar, mybuf, PropDataFVal(p));</span>
+<span class="lineNum">     766 </span><span class="lineCov">          8 :         break;</span>
 <span class="lineNum">     767 </span>            :     case PROP_LOKTYP:
-<span class="lineNum">     768 </span><span class="lineCov">          4 :         if (PropFlags(p) &amp; PROP_ISUNLOADED) {</span>
+<span class="lineNum">     768 </span><span class="lineCov">         16 :         if (PropFlags(p) &amp; PROP_ISUNLOADED) {</span>
 <span class="lineNum">     769 </span><span class="lineNoCov">          0 :             snprintf(buf, bufsiz, &quot;%c lok %s:%s&quot;, blesschar, mybuf, PROP_UNLOCKED_VAL);</span>
 <span class="lineNum">     770 </span>            :         } else {
-<span class="lineNum">     771 </span><span class="lineCov">          4 :             snprintf(buf, bufsiz, &quot;%c lok %s:%.*s&quot;, blesschar, mybuf, (BUFFER_LEN / 2),</span>
+<span class="lineNum">     771 </span><span class="lineCov">         16 :             snprintf(buf, bufsiz, &quot;%c lok %s:%.*s&quot;, blesschar, mybuf, (BUFFER_LEN / 2),</span>
 <span class="lineNum">     772 </span>            :                      unparse_boolexp(player, PropDataLok(p), 1));
 <span class="lineNum">     773 </span>            :         }
-<span class="lineNum">     774 </span><span class="lineCov">          4 :         break;</span>
+<span class="lineNum">     774 </span><span class="lineCov">         16 :         break;</span>
 <span class="lineNum">     775 </span>            :     case PROP_DIRTYP:
-<span class="lineNum">     776 </span><span class="lineCov">         14 :         snprintf(buf, bufsiz, &quot;%c dir %s:(no value)&quot;, blesschar, mybuf);</span>
-<span class="lineNum">     777 </span><span class="lineCov">         14 :         break;</span>
+<span class="lineNum">     776 </span><span class="lineCov">         56 :         snprintf(buf, bufsiz, &quot;%c dir %s:(no value)&quot;, blesschar, mybuf);</span>
+<span class="lineNum">     777 </span><span class="lineCov">         56 :         break;</span>
 <span class="lineNum">     778 </span>            :     }
-<span class="lineNum">     779 </span><span class="lineCov">         49 :     return buf;</span>
+<span class="lineNum">     779 </span><span class="lineCov">        201 :     return buf;</span>
 <span class="lineNum">     780 </span>            : }
 <a name="781"><span class="lineNum">     781 </span>            : </a>
 <span class="lineNum">     782 </span>            : int
-<span class="lineNum">     783 </span><span class="lineCov">       1578 : db_get_single_prop(FILE * f, dbref obj, long pos, PropPtr pnode, const char *pdir)</span>
+<span class="lineNum">     783 </span><span class="lineCov">      10646 : db_get_single_prop(FILE * f, dbref obj, long pos, PropPtr pnode, const char *pdir)</span>
 <span class="lineNum">     784 </span>            : {
 <span class="lineNum">     785 </span>            :     char getprop_buf[BUFFER_LEN * 3];
 <span class="lineNum">     786 </span>            :     char *name, *flags, *value, *p;
 <span class="lineNum">     787 </span>            :     int flg;
-<span class="lineNum">     788 </span><span class="lineCov">       1578 :     long tpos = 0L;</span>
+<span class="lineNum">     788 </span><span class="lineCov">      10646 :     long tpos = 0L;</span>
 <span class="lineNum">     789 </span>            :     struct boolexp *lok;
 <span class="lineNum">     790 </span>            :     short do_diskbase_propvals;
 <span class="lineNum">     791 </span>            :     PData mydat;
@@ -855,16 +855,16 @@
 <span class="lineNum">     793 </span>            : #ifdef DISKBASE
 <span class="lineNum">     794 </span>            :     do_diskbase_propvals = tp_diskbase_propvals;
 <span class="lineNum">     795 </span>            : #else
-<span class="lineNum">     796 </span><span class="lineCov">       1578 :     do_diskbase_propvals = 0;</span>
+<span class="lineNum">     796 </span><span class="lineCov">      10646 :     do_diskbase_propvals = 0;</span>
 <span class="lineNum">     797 </span>            : #endif
 <span class="lineNum">     798 </span>            : 
-<span class="lineNum">     799 </span><span class="lineCov">       1578 :     if (pos) {</span>
+<span class="lineNum">     799 </span><span class="lineCov">      10646 :     if (pos) {</span>
 <span class="lineNum">     800 </span><span class="lineNoCov">          0 :         fseek(f, pos, 0);</span>
-<span class="lineNum">     801 </span><span class="lineCov">       1578 :     } else if (do_diskbase_propvals) {</span>
+<span class="lineNum">     801 </span><span class="lineCov">      10646 :     } else if (do_diskbase_propvals) {</span>
 <span class="lineNum">     802 </span><span class="lineNoCov">          0 :         tpos = ftell(f);</span>
 <span class="lineNum">     803 </span>            :     }
-<span class="lineNum">     804 </span><span class="lineCov">       1578 :     name = fgets(getprop_buf, sizeof(getprop_buf), f);</span>
-<span class="lineNum">     805 </span><span class="lineCov">       1578 :     if (!name) {</span>
+<span class="lineNum">     804 </span><span class="lineCov">      10646 :     name = fgets(getprop_buf, sizeof(getprop_buf), f);</span>
+<span class="lineNum">     805 </span><span class="lineCov">      10646 :     if (!name) {</span>
 <span class="lineNum">     806 </span><span class="lineNoCov">          0 :         wall_wizards</span>
 <span class="lineNum">     807 </span>            :                 (&quot;## WARNING! A corrupt property was found while trying to read it from disk.&quot;);
 <span class="lineNum">     808 </span><span class="lineNoCov">          0 :         wall_wizards</span>
@@ -875,17 +875,17 @@
 <span class="lineNum">     813 </span>            :                  obj, pos, pdir);
 <span class="lineNum">     814 </span><span class="lineNoCov">          0 :         return -1;</span>
 <span class="lineNum">     815 </span>            :     }
-<span class="lineNum">     816 </span><span class="lineCov">       1578 :     if (*name == '*') {</span>
-<span class="lineNum">     817 </span><span class="lineCov">        296 :         if (!strcmp(name, &quot;*End*\n&quot;)) {</span>
-<span class="lineNum">     818 </span><span class="lineCov">        296 :             return 0;</span>
+<span class="lineNum">     816 </span><span class="lineCov">      10646 :     if (*name == '*') {</span>
+<span class="lineNum">     817 </span><span class="lineCov">       1972 :         if (!strcmp(name, &quot;*End*\n&quot;)) {</span>
+<span class="lineNum">     818 </span><span class="lineCov">       1972 :             return 0;</span>
 <span class="lineNum">     819 </span>            :         }
 <span class="lineNum">     820 </span><span class="lineNoCov">          0 :         if (name[1] == '\n') {</span>
 <span class="lineNum">     821 </span><span class="lineNoCov">          0 :             return 2;</span>
 <span class="lineNum">     822 </span>            :         }
 <span class="lineNum">     823 </span>            :     }
 <span class="lineNum">     824 </span>            : 
-<span class="lineNum">     825 </span><span class="lineCov">       1282 :     flags = index(name, PROP_DELIMITER);</span>
-<span class="lineNum">     826 </span><span class="lineCov">       1282 :     if (!flags) {</span>
+<span class="lineNum">     825 </span><span class="lineCov">       8674 :     flags = index(name, PROP_DELIMITER);</span>
+<span class="lineNum">     826 </span><span class="lineCov">       8674 :     if (!flags) {</span>
 <span class="lineNum">     827 </span><span class="lineNoCov">          0 :         wall_wizards</span>
 <span class="lineNum">     828 </span>            :                 (&quot;## WARNING! A corrupt property was found while trying to read it from disk.&quot;);
 <span class="lineNum">     829 </span><span class="lineNoCov">          0 :         wall_wizards</span>
@@ -896,10 +896,10 @@
 <span class="lineNum">     834 </span>            :                  obj, pos, pdir, name);
 <span class="lineNum">     835 </span><span class="lineNoCov">          0 :         return -1;</span>
 <span class="lineNum">     836 </span>            :     }
-<span class="lineNum">     837 </span><span class="lineCov">       1282 :     *flags++ = '\0';</span>
+<span class="lineNum">     837 </span><span class="lineCov">       8674 :     *flags++ = '\0';</span>
 <span class="lineNum">     838 </span>            : 
-<span class="lineNum">     839 </span><span class="lineCov">       1282 :     value = index(flags, PROP_DELIMITER);</span>
-<span class="lineNum">     840 </span><span class="lineCov">       1282 :     if (!value) {</span>
+<span class="lineNum">     839 </span><span class="lineCov">       8674 :     value = index(flags, PROP_DELIMITER);</span>
+<span class="lineNum">     840 </span><span class="lineCov">       8674 :     if (!value) {</span>
 <span class="lineNum">     841 </span><span class="lineNoCov">          0 :         wall_wizards</span>
 <span class="lineNum">     842 </span>            :                 (&quot;## WARNING! A corrupt property was found while trying to read it from disk.&quot;);
 <span class="lineNum">     843 </span><span class="lineNoCov">          0 :         wall_wizards</span>
@@ -910,14 +910,14 @@
 <span class="lineNum">     848 </span>            :                  obj, pos, pdir, name, flags);
 <span class="lineNum">     849 </span><span class="lineNoCov">          0 :         return -1;</span>
 <span class="lineNum">     850 </span>            :     }
-<span class="lineNum">     851 </span><span class="lineCov">       1282 :     *value++ = '\0';</span>
+<span class="lineNum">     851 </span><span class="lineCov">       8674 :     *value++ = '\0';</span>
 <span class="lineNum">     852 </span>            : 
-<span class="lineNum">     853 </span><span class="lineCov">       1282 :     p = index(value, '\n');</span>
-<span class="lineNum">     854 </span><span class="lineCov">       1282 :     if (p) {</span>
-<span class="lineNum">     855 </span><span class="lineCov">       1282 :         *p = '\0';</span>
+<span class="lineNum">     853 </span><span class="lineCov">       8674 :     p = index(value, '\n');</span>
+<span class="lineNum">     854 </span><span class="lineCov">       8674 :     if (p) {</span>
+<span class="lineNum">     855 </span><span class="lineCov">       8674 :         *p = '\0';</span>
 <span class="lineNum">     856 </span>            :     }
 <span class="lineNum">     857 </span>            : 
-<span class="lineNum">     858 </span><span class="lineCov">       1282 :     if (!number(flags)) {</span>
+<span class="lineNum">     858 </span><span class="lineCov">       8674 :     if (!number(flags)) {</span>
 <span class="lineNum">     859 </span><span class="lineNoCov">          0 :         wall_wizards</span>
 <span class="lineNum">     860 </span>            :                 (&quot;## WARNING! A corrupt property was found while trying to read it from disk.&quot;);
 <span class="lineNum">     861 </span><span class="lineNoCov">          0 :         wall_wizards</span>
@@ -928,19 +928,19 @@
 <span class="lineNum">     866 </span>            :                  obj, pos, pdir, name, flags, value);
 <span class="lineNum">     867 </span><span class="lineNoCov">          0 :         return -1;</span>
 <span class="lineNum">     868 </span>            :     }
-<span class="lineNum">     869 </span><span class="lineCov">       1282 :     flg = atoi(flags);</span>
+<span class="lineNum">     869 </span><span class="lineCov">       8674 :     flg = atoi(flags);</span>
 <span class="lineNum">     870 </span>            : 
-<span class="lineNum">     871 </span><span class="lineCov">       1282 :     switch (flg &amp; PROP_TYPMASK) {</span>
+<span class="lineNum">     871 </span><span class="lineCov">       8674 :     switch (flg &amp; PROP_TYPMASK) {</span>
 <span class="lineNum">     872 </span>            :     case PROP_STRTYP:
-<span class="lineNum">     873 </span><span class="lineCov">        435 :         if (!do_diskbase_propvals || pos) {</span>
-<span class="lineNum">     874 </span><span class="lineCov">        435 :             flg &amp;= ~PROP_ISUNLOADED;</span>
-<span class="lineNum">     875 </span><span class="lineCov">        870 :             if (pnode) {</span>
+<span class="lineNum">     873 </span><span class="lineCov">       2922 :         if (!do_diskbase_propvals || pos) {</span>
+<span class="lineNum">     874 </span><span class="lineCov">       2922 :             flg &amp;= ~PROP_ISUNLOADED;</span>
+<span class="lineNum">     875 </span><span class="lineCov">       5844 :             if (pnode) {</span>
 <span class="lineNum">     876 </span><span class="lineNoCov">          0 :                 SetPDataStr(pnode, alloc_string(value));</span>
 <span class="lineNum">     877 </span><span class="lineNoCov">          0 :                 SetPFlagsRaw(pnode, flg);</span>
 <span class="lineNum">     878 </span>            :             } else {
-<span class="lineNum">     879 </span><span class="lineCov">        435 :                 mydat.flags = flg;</span>
-<span class="lineNum">     880 </span><span class="lineCov">        435 :                 mydat.data.str = value;</span>
-<span class="lineNum">     881 </span><span class="lineCov">        435 :                 set_property_nofetch(obj, name, &amp;mydat, 0);</span>
+<span class="lineNum">     879 </span><span class="lineCov">       2922 :                 mydat.flags = flg;</span>
+<span class="lineNum">     880 </span><span class="lineCov">       2922 :                 mydat.data.str = value;</span>
+<span class="lineNum">     881 </span><span class="lineCov">       2922 :                 set_property_nofetch(obj, name, &amp;mydat, 0);</span>
 <span class="lineNum">     882 </span>            :             }
 <span class="lineNum">     883 </span>            :         } else {
 <span class="lineNum">     884 </span><span class="lineNoCov">          0 :             flg |= PROP_ISUNLOADED;</span>
@@ -948,18 +948,18 @@
 <span class="lineNum">     886 </span><span class="lineNoCov">          0 :             mydat.data.val = tpos;</span>
 <span class="lineNum">     887 </span><span class="lineNoCov">          0 :             set_property_nofetch(obj, name, &amp;mydat, 0);</span>
 <span class="lineNum">     888 </span>            :         }
-<span class="lineNum">     889 </span><span class="lineCov">        435 :         break;</span>
+<span class="lineNum">     889 </span><span class="lineCov">       2922 :         break;</span>
 <span class="lineNum">     890 </span>            :     case PROP_LOKTYP:
-<span class="lineNum">     891 </span><span class="lineCov">          2 :         if (!do_diskbase_propvals || pos) {</span>
-<span class="lineNum">     892 </span><span class="lineCov">          2 :             lok = parse_boolexp(-1, (dbref) 1, value, 32767);</span>
-<span class="lineNum">     893 </span><span class="lineCov">          2 :             flg &amp;= ~PROP_ISUNLOADED;</span>
-<span class="lineNum">     894 </span><span class="lineCov">          4 :             if (pnode) {</span>
+<span class="lineNum">     891 </span><span class="lineCov">          8 :         if (!do_diskbase_propvals || pos) {</span>
+<span class="lineNum">     892 </span><span class="lineCov">          8 :             lok = parse_boolexp(-1, (dbref) 1, value, 32767);</span>
+<span class="lineNum">     893 </span><span class="lineCov">          8 :             flg &amp;= ~PROP_ISUNLOADED;</span>
+<span class="lineNum">     894 </span><span class="lineCov">         16 :             if (pnode) {</span>
 <span class="lineNum">     895 </span><span class="lineNoCov">          0 :                 SetPDataLok(pnode, lok);</span>
 <span class="lineNum">     896 </span><span class="lineNoCov">          0 :                 SetPFlagsRaw(pnode, flg);</span>
 <span class="lineNum">     897 </span>            :             } else {
-<span class="lineNum">     898 </span><span class="lineCov">          2 :                 mydat.flags = flg;</span>
-<span class="lineNum">     899 </span><span class="lineCov">          2 :                 mydat.data.lok = lok;</span>
-<span class="lineNum">     900 </span><span class="lineCov">          2 :                 set_property_nofetch(obj, name, &amp;mydat, 0);</span>
+<span class="lineNum">     898 </span><span class="lineCov">          8 :                 mydat.flags = flg;</span>
+<span class="lineNum">     899 </span><span class="lineCov">          8 :                 mydat.data.lok = lok;</span>
+<span class="lineNum">     900 </span><span class="lineCov">          8 :                 set_property_nofetch(obj, name, &amp;mydat, 0);</span>
 <span class="lineNum">     901 </span>            :             }
 <span class="lineNum">     902 </span>            :         } else {
 <span class="lineNum">     903 </span><span class="lineNoCov">          0 :             flg |= PROP_ISUNLOADED;</span>
@@ -967,9 +967,9 @@
 <span class="lineNum">     905 </span><span class="lineNoCov">          0 :             mydat.data.val = tpos;</span>
 <span class="lineNum">     906 </span><span class="lineNoCov">          0 :             set_property_nofetch(obj, name, &amp;mydat, 0);</span>
 <span class="lineNum">     907 </span>            :         }
-<span class="lineNum">     908 </span><span class="lineCov">          2 :         break;</span>
+<span class="lineNum">     908 </span><span class="lineCov">          8 :         break;</span>
 <span class="lineNum">     909 </span>            :     case PROP_INTTYP:
-<span class="lineNum">     910 </span><span class="lineCov">        843 :         if (!number(value)) {</span>
+<span class="lineNum">     910 </span><span class="lineCov">       5736 :         if (!number(value)) {</span>
 <span class="lineNum">     911 </span><span class="lineNoCov">          0 :             wall_wizards</span>
 <span class="lineNum">     912 </span>            :                     (&quot;## WARNING! A corrupt property was found while trying to read it from disk.&quot;);
 <span class="lineNum">     913 </span><span class="lineNoCov">          0 :             wall_wizards</span>
@@ -980,10 +980,10 @@
 <span class="lineNum">     918 </span>            :                      obj, pos, pdir, name, flags, value);
 <span class="lineNum">     919 </span><span class="lineNoCov">          0 :             return -1;</span>
 <span class="lineNum">     920 </span>            :         }
-<span class="lineNum">     921 </span><span class="lineCov">        843 :         mydat.flags = flg;</span>
-<span class="lineNum">     922 </span><span class="lineCov">        843 :         mydat.data.val = atoi(value);</span>
-<span class="lineNum">     923 </span><span class="lineCov">        843 :         set_property_nofetch(obj, name, &amp;mydat, 0);</span>
-<span class="lineNum">     924 </span><span class="lineCov">        843 :         break;</span>
+<span class="lineNum">     921 </span><span class="lineCov">       5736 :         mydat.flags = flg;</span>
+<span class="lineNum">     922 </span><span class="lineCov">       5736 :         mydat.data.val = atoi(value);</span>
+<span class="lineNum">     923 </span><span class="lineCov">       5736 :         set_property_nofetch(obj, name, &amp;mydat, 0);</span>
+<span class="lineNum">     924 </span><span class="lineCov">       5736 :         break;</span>
 <span class="lineNum">     925 </span>            :     case PROP_FLTTYP:
 <span class="lineNum">     926 </span><span class="lineNoCov">          0 :         mydat.flags = flg;</span>
 <span class="lineNum">     927 </span><span class="lineNoCov">          0 :         if (!number(value) &amp;&amp; !ifloat(value)) {</span>
@@ -1019,7 +1019,7 @@
 <span class="lineNum">     957 </span><span class="lineNoCov">          0 :         set_property_nofetch(obj, name, &amp;mydat, 0);</span>
 <span class="lineNum">     958 </span><span class="lineNoCov">          0 :         break;</span>
 <span class="lineNum">     959 </span>            :     case PROP_REFTYP:
-<span class="lineNum">     960 </span><span class="lineCov">          2 :         if (!number(value)) {</span>
+<span class="lineNum">     960 </span><span class="lineCov">          8 :         if (!number(value)) {</span>
 <span class="lineNum">     961 </span><span class="lineNoCov">          0 :             wall_wizards</span>
 <span class="lineNum">     962 </span>            :                     (&quot;## WARNING! A corrupt property was found while trying to read it from disk.&quot;);
 <span class="lineNum">     963 </span><span class="lineNoCov">          0 :             wall_wizards</span>
@@ -1030,77 +1030,77 @@
 <span class="lineNum">     968 </span>            :                      obj, pos, pdir, name, flags, value);
 <span class="lineNum">     969 </span><span class="lineNoCov">          0 :             return -1;</span>
 <span class="lineNum">     970 </span>            :         }
-<span class="lineNum">     971 </span><span class="lineCov">          2 :         mydat.flags = flg;</span>
-<span class="lineNum">     972 </span><span class="lineCov">          2 :         mydat.data.ref = atoi(value);</span>
-<span class="lineNum">     973 </span><span class="lineCov">          2 :         set_property_nofetch(obj, name, &amp;mydat, 0);</span>
-<span class="lineNum">     974 </span><span class="lineCov">          2 :         break;</span>
+<span class="lineNum">     971 </span><span class="lineCov">          8 :         mydat.flags = flg;</span>
+<span class="lineNum">     972 </span><span class="lineCov">          8 :         mydat.data.ref = atoi(value);</span>
+<span class="lineNum">     973 </span><span class="lineCov">          8 :         set_property_nofetch(obj, name, &amp;mydat, 0);</span>
+<span class="lineNum">     974 </span><span class="lineCov">          8 :         break;</span>
 <span class="lineNum">     975 </span>            :     case PROP_DIRTYP:
 <span class="lineNum">     976 </span><span class="lineNoCov">          0 :         break;</span>
 <span class="lineNum">     977 </span>            :     }
-<span class="lineNum">     978 </span><span class="lineCov">       1282 :     return 1;</span>
+<span class="lineNum">     978 </span><span class="lineCov">       8674 :     return 1;</span>
 <span class="lineNum">     979 </span>            : }
 <a name="980"><span class="lineNum">     980 </span>            : </a>
 <span class="lineNum">     981 </span>            : void
-<span class="lineNum">     982 </span><span class="lineCov">        296 : db_getprops(FILE * f, dbref obj, const char *pdir)</span>
+<span class="lineNum">     982 </span><span class="lineCov">       1972 : db_getprops(FILE * f, dbref obj, const char *pdir)</span>
 <span class="lineNum">     983 </span>            : {
-<span class="lineNum">     984 </span><span class="lineCov">        296 :     while (db_get_single_prop(f, obj, 0L, (PropPtr) NULL, pdir)) ;</span>
-<span class="lineNum">     985 </span><span class="lineCov">        296 : }</span>
+<span class="lineNum">     984 </span><span class="lineCov">       1972 :     while (db_get_single_prop(f, obj, 0L, (PropPtr) NULL, pdir)) ;</span>
+<span class="lineNum">     985 </span><span class="lineCov">       1972 : }</span>
 <span class="lineNum">     986 </span>            : 
 <a name="987"><span class="lineNum">     987 </span>            : </a>
 <span class="lineNum">     988 </span>            : void
-<span class="lineNum">     989 </span><span class="lineCov">       2146 : db_putprop(FILE * f, const char *dir, PropPtr p)</span>
+<span class="lineNum">     989 </span><span class="lineCov">      14466 : db_putprop(FILE * f, const char *dir, PropPtr p)</span>
 <span class="lineNum">     990 </span>            : {
 <span class="lineNum">     991 </span>            :     char buf[BUFFER_LEN * 2];
 <span class="lineNum">     992 </span>            :     const char *ptr2;
 <span class="lineNum">     993 </span>            :     char tbuf[50];
-<span class="lineNum">     994 </span><span class="lineCov">       2146 :     int outflags = (PropFlagsRaw(p) &amp; ~(PROP_TOUCHED | PROP_ISUNLOADED | PROP_DIRUNLOADED));</span>
+<span class="lineNum">     994 </span><span class="lineCov">      14466 :     int outflags = (PropFlagsRaw(p) &amp; ~(PROP_TOUCHED | PROP_ISUNLOADED | PROP_DIRUNLOADED));</span>
 <span class="lineNum">     995 </span>            : 
-<span class="lineNum">     996 </span><span class="lineCov">       2146 :     if (PropType(p) == PROP_DIRTYP)</span>
-<span class="lineNum">     997 </span><span class="lineCov">       1170 :         return;</span>
+<span class="lineNum">     996 </span><span class="lineCov">      14466 :     if (PropType(p) == PROP_DIRTYP)</span>
+<span class="lineNum">     997 </span><span class="lineCov">       8054 :         return;</span>
 <span class="lineNum">     998 </span>            : 
-<span class="lineNum">     999 </span><span class="lineCov">       1561 :     ptr2 = &quot;&quot;;</span>
-<span class="lineNum">    1000 </span><span class="lineCov">       1561 :     switch (PropType(p)) {</span>
+<span class="lineNum">     999 </span><span class="lineCov">      10439 :     ptr2 = &quot;&quot;;</span>
+<span class="lineNum">    1000 </span><span class="lineCov">      10439 :     switch (PropType(p)) {</span>
 <span class="lineNum">    1001 </span>            :     case PROP_INTTYP:
-<span class="lineNum">    1002 </span><span class="lineCov">        906 :         if (!PropDataVal(p))</span>
+<span class="lineNum">    1002 </span><span class="lineCov">       6130 :         if (!PropDataVal(p))</span>
 <span class="lineNum">    1003 </span><span class="lineNoCov">          0 :             return;</span>
-<span class="lineNum">    1004 </span><span class="lineCov">        906 :         ptr2 = intostr(PropDataVal(p));</span>
-<span class="lineNum">    1005 </span><span class="lineCov">        906 :         break;</span>
+<span class="lineNum">    1004 </span><span class="lineCov">       6130 :         ptr2 = intostr(PropDataVal(p));</span>
+<span class="lineNum">    1005 </span><span class="lineCov">       6130 :         break;</span>
 <span class="lineNum">    1006 </span>            :     case PROP_FLTTYP:
-<span class="lineNum">    1007 </span><span class="lineCov">          5 :         if (!PropDataFVal(p))</span>
+<span class="lineNum">    1007 </span><span class="lineCov">         36 :         if (!PropDataFVal(p))</span>
 <span class="lineNum">    1008 </span><span class="lineNoCov">          0 :             return;</span>
-<span class="lineNum">    1009 </span><span class="lineCov">          5 :         snprintf(tbuf, sizeof(tbuf), &quot;%.17g&quot;, PropDataFVal(p));</span>
-<span class="lineNum">    1010 </span><span class="lineCov">          5 :         ptr2 = tbuf;</span>
-<span class="lineNum">    1011 </span><span class="lineCov">          5 :         break;</span>
+<span class="lineNum">    1009 </span><span class="lineCov">         36 :         snprintf(tbuf, sizeof(tbuf), &quot;%.17g&quot;, PropDataFVal(p));</span>
+<span class="lineNum">    1010 </span><span class="lineCov">         36 :         ptr2 = tbuf;</span>
+<span class="lineNum">    1011 </span><span class="lineCov">         36 :         break;</span>
 <span class="lineNum">    1012 </span>            :     case PROP_REFTYP:
-<span class="lineNum">    1013 </span><span class="lineCov">         15 :         if (PropDataRef(p) == NOTHING)</span>
+<span class="lineNum">    1013 </span><span class="lineCov">         76 :         if (PropDataRef(p) == NOTHING)</span>
 <span class="lineNum">    1014 </span><span class="lineNoCov">          0 :             return;</span>
-<span class="lineNum">    1015 </span><span class="lineCov">         15 :         ptr2 = intostr(PropDataRef(p));</span>
-<span class="lineNum">    1016 </span><span class="lineCov">         15 :         break;</span>
+<span class="lineNum">    1015 </span><span class="lineCov">         76 :         ptr2 = intostr(PropDataRef(p));</span>
+<span class="lineNum">    1016 </span><span class="lineCov">         76 :         break;</span>
 <span class="lineNum">    1017 </span>            :     case PROP_STRTYP:
-<span class="lineNum">    1018 </span><span class="lineCov">        587 :         if (!*PropDataStr(p))</span>
+<span class="lineNum">    1018 </span><span class="lineCov">       3987 :         if (!*PropDataStr(p))</span>
 <span class="lineNum">    1019 </span><span class="lineNoCov">          0 :             return;</span>
-<span class="lineNum">    1020 </span><span class="lineCov">        587 :         ptr2 = PropDataStr(p);</span>
-<span class="lineNum">    1021 </span><span class="lineCov">        587 :         break;</span>
+<span class="lineNum">    1020 </span><span class="lineCov">       3987 :         ptr2 = PropDataStr(p);</span>
+<span class="lineNum">    1021 </span><span class="lineCov">       3987 :         break;</span>
 <span class="lineNum">    1022 </span>            :     case PROP_LOKTYP:
-<span class="lineNum">    1023 </span><span class="lineCov">         48 :         if (PropFlags(p) &amp; PROP_ISUNLOADED)</span>
+<span class="lineNum">    1023 </span><span class="lineCov">        210 :         if (PropFlags(p) &amp; PROP_ISUNLOADED)</span>
 <span class="lineNum">    1024 </span><span class="lineNoCov">          0 :             return;</span>
-<span class="lineNum">    1025 </span><span class="lineCov">         48 :         if (PropDataLok(p) == TRUE_BOOLEXP)</span>
+<span class="lineNum">    1025 </span><span class="lineCov">        210 :         if (PropDataLok(p) == TRUE_BOOLEXP)</span>
 <span class="lineNum">    1026 </span><span class="lineNoCov">          0 :             return;</span>
-<span class="lineNum">    1027 </span><span class="lineCov">         48 :         ptr2 = unparse_boolexp((dbref) 1, PropDataLok(p), 0);</span>
-<span class="lineNum">    1028 </span><span class="lineCov">         48 :         break;</span>
+<span class="lineNum">    1027 </span><span class="lineCov">        210 :         ptr2 = unparse_boolexp((dbref) 1, PropDataLok(p), 0);</span>
+<span class="lineNum">    1028 </span><span class="lineCov">        210 :         break;</span>
 <span class="lineNum">    1029 </span>            :     }
 <span class="lineNum">    1030 </span>            : 
-<span class="lineNum">    1031 </span><span class="lineCov">       1561 :     snprintf(buf, sizeof(buf), &quot;%s%s%c%d%c%s\n&quot;,</span>
-<span class="lineNum">    1032 </span><span class="lineCov">       1561 :              dir + 1, PropName(p), PROP_DELIMITER, outflags, PROP_DELIMITER, ptr2);</span>
+<span class="lineNum">    1031 </span><span class="lineCov">      10439 :     snprintf(buf, sizeof(buf), &quot;%s%s%c%d%c%s\n&quot;,</span>
+<span class="lineNum">    1032 </span><span class="lineCov">      10439 :              dir + 1, PropName(p), PROP_DELIMITER, outflags, PROP_DELIMITER, ptr2);</span>
 <span class="lineNum">    1033 </span>            : 
-<span class="lineNum">    1034 </span><span class="lineCov">       1561 :     if (fputs(buf, f) == EOF) {</span>
+<span class="lineNum">    1034 </span><span class="lineCov">      10439 :     if (fputs(buf, f) == EOF) {</span>
 <span class="lineNum">    1035 </span><span class="lineNoCov">          0 :         log_sanity(&quot;Failed to write out property db_putprop(dir = %s)&quot;, dir);</span>
 <span class="lineNum">    1036 </span><span class="lineNoCov">          0 :         abort();</span>
 <span class="lineNum">    1037 </span>            :     }
 <span class="lineNum">    1038 </span>            : }
 <a name="1039"><span class="lineNum">    1039 </span>            : </a>
 <span class="lineNum">    1040 </span>            : static int
-<span class="lineNum">    1041 </span><span class="lineCov">       5377 : db_dump_props_rec(dbref obj, FILE * f, const char *dir, PropPtr p)</span>
+<span class="lineNum">    1041 </span><span class="lineCov">      36574 : db_dump_props_rec(dbref obj, FILE * f, const char *dir, PropPtr p)</span>
 <span class="lineNum">    1042 </span>            : {
 <span class="lineNum">    1043 </span>            :     char buf[BUFFER_LEN];
 <span class="lineNum">    1044 </span>            : #ifdef DISKBASE
@@ -1108,13 +1108,13 @@
 <span class="lineNum">    1046 </span>            :     int flg;
 <span class="lineNum">    1047 </span>            :     short wastouched = 0;
 <span class="lineNum">    1048 </span>            : #endif
-<span class="lineNum">    1049 </span><span class="lineCov">       5377 :     int count = 0;</span>
+<span class="lineNum">    1049 </span><span class="lineCov">      36574 :     int count = 0;</span>
 <span class="lineNum">    1050 </span>            :     int pdcount;
 <span class="lineNum">    1051 </span>            : 
-<span class="lineNum">    1052 </span><span class="lineCov">       5377 :     if (!p)</span>
-<span class="lineNum">    1053 </span><span class="lineCov">       3231 :         return 0;</span>
+<span class="lineNum">    1052 </span><span class="lineCov">      36574 :     if (!p)</span>
+<span class="lineNum">    1053 </span><span class="lineCov">      22108 :         return 0;</span>
 <span class="lineNum">    1054 </span>            : 
-<span class="lineNum">    1055 </span><span class="lineCov">       2146 :     count += db_dump_props_rec(obj, f, dir, p-&gt;left);</span>
+<span class="lineNum">    1055 </span><span class="lineCov">      14466 :     count += db_dump_props_rec(obj, f, dir, p-&gt;left);</span>
 <span class="lineNum">    1056 </span>            : 
 <span class="lineNum">    1057 </span>            : #ifdef DISKBASE
 <span class="lineNum">    1058 </span>            :     wastouched = (PropFlags(p) &amp; PROP_TOUCHED);
@@ -1129,7 +1129,7 @@
 <span class="lineNum">    1067 </span>            :     }
 <span class="lineNum">    1068 </span>            : #endif
 <span class="lineNum">    1069 </span>            : 
-<span class="lineNum">    1070 </span><span class="lineCov">       2146 :     db_putprop(f, dir, p);</span>
+<span class="lineNum">    1070 </span><span class="lineCov">      14466 :     db_putprop(f, dir, p);</span>
 <span class="lineNum">    1071 </span>            : 
 <span class="lineNum">    1072 </span>            : #ifdef DISKBASE
 <span class="lineNum">    1073 </span>            :     if (tp_diskbase_propvals &amp;&amp; !wastouched) {
@@ -1142,61 +1142,61 @@
 <span class="lineNum">    1080 </span>            :     }
 <span class="lineNum">    1081 </span>            : #endif
 <span class="lineNum">    1082 </span>            : 
-<span class="lineNum">    1083 </span><span class="lineCov">       2146 :     if (PropDir(p)) {</span>
+<span class="lineNum">    1083 </span><span class="lineCov">      14466 :     if (PropDir(p)) {</span>
 <span class="lineNum">    1084 </span>            :         const char *iptr;
 <span class="lineNum">    1085 </span>            :         char *optr;
 <span class="lineNum">    1086 </span>            : 
-<span class="lineNum">    1087 </span><span class="lineCov">       1770 :         for (iptr = dir, optr = buf; *iptr;)</span>
-<span class="lineNum">    1088 </span><span class="lineCov">        590 :             *optr++ = *iptr++;</span>
-<span class="lineNum">    1089 </span><span class="lineCov">       2328 :         for (iptr = PropName(p); *iptr;)</span>
-<span class="lineNum">    1090 </span><span class="lineCov">       1148 :             *optr++ = *iptr++;</span>
-<span class="lineNum">    1091 </span><span class="lineCov">        590 :         *optr++ = PROPDIR_DELIMITER;</span>
-<span class="lineNum">    1092 </span><span class="lineCov">        590 :         *optr++ = '\0';</span>
+<span class="lineNum">    1087 </span><span class="lineCov">      12393 :         for (iptr = dir, optr = buf; *iptr;)</span>
+<span class="lineNum">    1088 </span><span class="lineCov">       4275 :             *optr++ = *iptr++;</span>
+<span class="lineNum">    1089 </span><span class="lineCov">      16024 :         for (iptr = PropName(p); *iptr;)</span>
+<span class="lineNum">    1090 </span><span class="lineCov">       7906 :             *optr++ = *iptr++;</span>
+<span class="lineNum">    1091 </span><span class="lineCov">       4059 :         *optr++ = PROPDIR_DELIMITER;</span>
+<span class="lineNum">    1092 </span><span class="lineCov">       4059 :         *optr++ = '\0';</span>
 <span class="lineNum">    1093 </span>            : 
-<span class="lineNum">    1094 </span><span class="lineCov">        590 :         pdcount = db_dump_props_rec(obj, f, buf, PropDir(p));</span>
-<span class="lineNum">    1095 </span><span class="lineCov">        590 :         count += pdcount;</span>
+<span class="lineNum">    1094 </span><span class="lineCov">       4059 :         pdcount = db_dump_props_rec(obj, f, buf, PropDir(p));</span>
+<span class="lineNum">    1095 </span><span class="lineCov">       4059 :         count += pdcount;</span>
 <span class="lineNum">    1096 </span>            :     }
 <span class="lineNum">    1097 </span>            : 
-<span class="lineNum">    1098 </span><span class="lineCov">       2146 :     count += db_dump_props_rec(obj, f, dir, p-&gt;right);</span>
+<span class="lineNum">    1098 </span><span class="lineCov">      14466 :     count += db_dump_props_rec(obj, f, dir, p-&gt;right);</span>
 <span class="lineNum">    1099 </span>            : 
-<span class="lineNum">    1100 </span><span class="lineCov">       2146 :     return count;</span>
+<span class="lineNum">    1100 </span><span class="lineCov">      14466 :     return count;</span>
 <span class="lineNum">    1101 </span>            : }
 <a name="1102"><span class="lineNum">    1102 </span>            : </a>
 <span class="lineNum">    1103 </span>            : void
-<span class="lineNum">    1104 </span><span class="lineCov">        495 : db_dump_props(FILE * f, dbref obj)</span>
+<span class="lineNum">    1104 </span><span class="lineCov">       3583 : db_dump_props(FILE * f, dbref obj)</span>
 <span class="lineNum">    1105 </span>            : {
-<span class="lineNum">    1106 </span><span class="lineCov">        495 :     db_dump_props_rec(obj, f, &quot;/&quot;, DBFETCH(obj)-&gt;properties);</span>
-<span class="lineNum">    1107 </span><span class="lineCov">        495 : }</span>
+<span class="lineNum">    1106 </span><span class="lineCov">       3583 :     db_dump_props_rec(obj, f, &quot;/&quot;, DBFETCH(obj)-&gt;properties);</span>
+<span class="lineNum">    1107 </span><span class="lineCov">       3583 : }</span>
 <a name="1108"><span class="lineNum">    1108 </span>            : </a>
 <span class="lineNum">    1109 </span>            : static void
-<span class="lineNum">    1110 </span><span class="lineCov">      23311 : untouchprop_rec(PropPtr p)</span>
+<span class="lineNum">    1110 </span><span class="lineCov">     114829 : untouchprop_rec(PropPtr p)</span>
 <span class="lineNum">    1111 </span>            : {
-<span class="lineNum">    1112 </span><span class="lineCov">      23311 :     if (!p)</span>
-<span class="lineNum">    1113 </span><span class="lineCov">      15983 :         return;</span>
-<span class="lineNum">    1114 </span><span class="lineCov">       7328 :     SetPFlags(p, (PropFlags(p) &amp; ~PROP_TOUCHED));</span>
-<span class="lineNum">    1115 </span><span class="lineCov">       7328 :     untouchprop_rec(p-&gt;left);</span>
-<span class="lineNum">    1116 </span><span class="lineCov">       7328 :     untouchprop_rec(p-&gt;right);</span>
-<span class="lineNum">    1117 </span><span class="lineCov">       7328 :     untouchprop_rec(PropDir(p));</span>
+<span class="lineNum">    1112 </span><span class="lineCov">     114829 :     if (!p)</span>
+<span class="lineNum">    1113 </span><span class="lineCov">      78727 :         return;</span>
+<span class="lineNum">    1114 </span><span class="lineCov">      36102 :     SetPFlags(p, (PropFlags(p) &amp; ~PROP_TOUCHED));</span>
+<span class="lineNum">    1115 </span><span class="lineCov">      36102 :     untouchprop_rec(p-&gt;left);</span>
+<span class="lineNum">    1116 </span><span class="lineCov">      36102 :     untouchprop_rec(p-&gt;right);</span>
+<span class="lineNum">    1117 </span><span class="lineCov">      36102 :     untouchprop_rec(PropDir(p));</span>
 <span class="lineNum">    1118 </span>            : }
 <span class="lineNum">    1119 </span>            : 
 <span class="lineNum">    1120 </span>            : static dbref untouch_lastdone = 0;
 <a name="1121"><span class="lineNum">    1121 </span>            : </a>
 <span class="lineNum">    1122 </span>            : void
-<span class="lineNum">    1123 </span><span class="lineCov">       1327 : untouchprops_incremental(int limit)</span>
+<span class="lineNum">    1123 </span><span class="lineCov">       6523 : untouchprops_incremental(int limit)</span>
 <span class="lineNum">    1124 </span>            : {
 <span class="lineNum">    1125 </span>            :     PropPtr p;
 <span class="lineNum">    1126 </span>            : 
-<span class="lineNum">    1127 </span><span class="lineCov">       4108 :     while (untouch_lastdone &lt; db_top) {</span>
+<span class="lineNum">    1127 </span><span class="lineCov">      20416 :     while (untouch_lastdone &lt; db_top) {</span>
 <span class="lineNum">    1128 </span>            :         /* clear the touch flags */
-<span class="lineNum">    1129 </span><span class="lineCov">       2299 :         p = DBFETCH(untouch_lastdone)-&gt;properties;</span>
-<span class="lineNum">    1130 </span><span class="lineCov">       2299 :         if (p) {</span>
-<span class="lineNum">    1131 </span><span class="lineCov">       2172 :             if (!limit--)</span>
-<span class="lineNum">    1132 </span><span class="lineCov">        845 :                 return;</span>
-<span class="lineNum">    1133 </span><span class="lineCov">       1327 :             untouchprop_rec(p);</span>
+<span class="lineNum">    1129 </span><span class="lineCov">      11722 :         p = DBFETCH(untouch_lastdone)-&gt;properties;</span>
+<span class="lineNum">    1130 </span><span class="lineCov">      11722 :         if (p) {</span>
+<span class="lineNum">    1131 </span><span class="lineCov">      10875 :             if (!limit--)</span>
+<span class="lineNum">    1132 </span><span class="lineCov">       4352 :                 return;</span>
+<span class="lineNum">    1133 </span><span class="lineCov">       6523 :             untouchprop_rec(p);</span>
 <span class="lineNum">    1134 </span>            :         }
-<span class="lineNum">    1135 </span><span class="lineCov">       1454 :         untouch_lastdone++;</span>
+<span class="lineNum">    1135 </span><span class="lineCov">       7370 :         untouch_lastdone++;</span>
 <span class="lineNum">    1136 </span>            :     }
-<span class="lineNum">    1137 </span><span class="lineCov">        482 :     untouch_lastdone = 0;</span>
+<span class="lineNum">    1137 </span><span class="lineCov">       2171 :     untouch_lastdone = 0;</span>
 <span class="lineNum">    1138 </span>            : }
 <a name="1139"><span class="lineNum">    1139 </span>            : </a>
 <span class="lineNum">    1140 </span>            : void
@@ -1274,18 +1274,18 @@
 <span class="lineNum">    1212 </span><span class="lineNoCov">          0 : }</span>
 <a name="1213"><span class="lineNum">    1213 </span>            : </a>
 <span class="lineNum">    1214 </span>            : void
-<span class="lineNum">    1215 </span><span class="lineCov">          5 : reflist_del(dbref obj, const char *propname, dbref todel)</span>
+<span class="lineNum">    1215 </span><span class="lineCov">         15 : reflist_del(dbref obj, const char *propname, dbref todel)</span>
 <span class="lineNum">    1216 </span>            : {
 <span class="lineNum">    1217 </span>            :     PropPtr ptr;
 <span class="lineNum">    1218 </span>            :     const char *temp;
 <span class="lineNum">    1219 </span>            :     const char *list;
-<span class="lineNum">    1220 </span><span class="lineCov">          5 :     int count = 0;</span>
-<span class="lineNum">    1221 </span><span class="lineCov">          5 :     int charcount = 0;</span>
+<span class="lineNum">    1220 </span><span class="lineCov">         15 :     int count = 0;</span>
+<span class="lineNum">    1221 </span><span class="lineCov">         15 :     int charcount = 0;</span>
 <span class="lineNum">    1222 </span>            :     char buf[BUFFER_LEN];
 <span class="lineNum">    1223 </span>            :     char outbuf[BUFFER_LEN];
 <span class="lineNum">    1224 </span>            : 
-<span class="lineNum">    1225 </span><span class="lineCov">          5 :     ptr = get_property(obj, propname);</span>
-<span class="lineNum">    1226 </span><span class="lineCov">          5 :     if (ptr) {</span>
+<span class="lineNum">    1225 </span><span class="lineCov">         15 :     ptr = get_property(obj, propname);</span>
+<span class="lineNum">    1226 </span><span class="lineCov">         15 :     if (ptr) {</span>
 <span class="lineNum">    1227 </span><span class="lineNoCov">          0 :         const char *pat = NULL;</span>
 <span class="lineNum">    1228 </span>            : 
 <span class="lineNum">    1229 </span>            : #ifdef DISKBASE
@@ -1333,7 +1333,7 @@
 <span class="lineNum">    1271 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">    1272 </span>            :         }
 <span class="lineNum">    1273 </span>            :     }
-<span class="lineNum">    1274 </span><span class="lineCov">          5 : }</span>
+<span class="lineNum">    1274 </span><span class="lineCov">         15 : }</span>
 <a name="1275"><span class="lineNum">    1275 </span>            : </a>
 <span class="lineNum">    1276 </span>            : int
 <span class="lineNum">    1277 </span><span class="lineNoCov">          0 : reflist_find(dbref obj, const char *propname, dbref tofind)</span>
@@ -1389,52 +1389,52 @@
 <span class="lineNum">    1327 </span>            : }
 <a name="1328"><span class="lineNum">    1328 </span>            : </a>
 <span class="lineNum">    1329 </span>            : void
-<span class="lineNum">    1330 </span><span class="lineCov">         49 : set_standard_property(int descr, dbref player, const char *objname,</span>
+<span class="lineNum">    1330 </span><span class="lineCov">        220 : set_standard_property(int descr, dbref player, const char *objname,</span>
 <span class="lineNum">    1331 </span>            :                       const char *propname, const char *proplabel, const char *propvalue)
 <span class="lineNum">    1332 </span>            : {
 <span class="lineNum">    1333 </span>            :     dbref object;
 <span class="lineNum">    1334 </span>            : 
-<span class="lineNum">    1335 </span><span class="lineCov">         49 :     if ((object = match_controlled(descr, player, objname)) != NOTHING) {</span>
-<span class="lineNum">    1336 </span><span class="lineCov">         49 :         SETMESG(object, propname, propvalue);</span>
-<span class="lineNum">    1337 </span><span class="lineCov">         49 :         ts_modifyobject(object);</span>
-<span class="lineNum">    1338 </span><span class="lineCov">         49 :         notifyf(player, &quot;%s %s.&quot;, proplabel, propvalue &amp;&amp; *propvalue ? &quot;set&quot; : &quot;cleared&quot;);</span>
+<span class="lineNum">    1335 </span><span class="lineCov">        220 :     if ((object = match_controlled(descr, player, objname)) != NOTHING) {</span>
+<span class="lineNum">    1336 </span><span class="lineCov">        220 :         SETMESG(object, propname, propvalue);</span>
+<span class="lineNum">    1337 </span><span class="lineCov">        220 :         ts_modifyobject(object);</span>
+<span class="lineNum">    1338 </span><span class="lineCov">        220 :         notifyf(player, &quot;%s %s.&quot;, proplabel, propvalue &amp;&amp; *propvalue ? &quot;set&quot; : &quot;cleared&quot;);</span>
 <span class="lineNum">    1339 </span>            :     }
-<span class="lineNum">    1340 </span><span class="lineCov">         49 : }</span>
+<span class="lineNum">    1340 </span><span class="lineCov">        220 : }</span>
 <a name="1341"><span class="lineNum">    1341 </span>            : </a>
 <span class="lineNum">    1342 </span>            : void
-<span class="lineNum">    1343 </span><span class="lineCov">         37 : set_standard_lock(int descr, dbref player, const char *objname,</span>
+<span class="lineNum">    1343 </span><span class="lineCov">        150 : set_standard_lock(int descr, dbref player, const char *objname,</span>
 <span class="lineNum">    1344 </span>            :                   const char *propname, const char *proplabel, const char *keyvalue)
 <span class="lineNum">    1345 </span>            : {
 <span class="lineNum">    1346 </span>            :     dbref object;
 <span class="lineNum">    1347 </span>            :     PData property;
 <span class="lineNum">    1348 </span>            :     struct boolexp *key;
 <span class="lineNum">    1349 </span>            : 
-<span class="lineNum">    1350 </span><span class="lineCov">         37 :     if ((object = match_controlled(descr, player, objname)) != NOTHING) {</span>
-<span class="lineNum">    1351 </span><span class="lineCov">         37 :         if (!*keyvalue) {</span>
+<span class="lineNum">    1350 </span><span class="lineCov">        150 :     if ((object = match_controlled(descr, player, objname)) != NOTHING) {</span>
+<span class="lineNum">    1351 </span><span class="lineCov">        150 :         if (!*keyvalue) {</span>
 <span class="lineNum">    1352 </span><span class="lineNoCov">          0 :             remove_property(object, propname, 0);</span>
 <span class="lineNum">    1353 </span><span class="lineNoCov">          0 :             ts_modifyobject(object);</span>
 <span class="lineNum">    1354 </span><span class="lineNoCov">          0 :             notifyf(player, &quot;%s cleared.&quot;, proplabel);</span>
 <span class="lineNum">    1355 </span><span class="lineNoCov">          0 :             return;</span>
 <span class="lineNum">    1356 </span>            :         }
 <span class="lineNum">    1357 </span>            : 
-<span class="lineNum">    1358 </span><span class="lineCov">         37 :         key = parse_boolexp(descr, player, keyvalue, 0);</span>
-<span class="lineNum">    1359 </span><span class="lineCov">         37 :         if (key == TRUE_BOOLEXP) {</span>
+<span class="lineNum">    1358 </span><span class="lineCov">        150 :         key = parse_boolexp(descr, player, keyvalue, 0);</span>
+<span class="lineNum">    1359 </span><span class="lineCov">        150 :         if (key == TRUE_BOOLEXP) {</span>
 <span class="lineNum">    1360 </span><span class="lineNoCov">          0 :             notify(player, &quot;I don't understand that key.&quot;);</span>
 <span class="lineNum">    1361 </span><span class="lineNoCov">          0 :             return;</span>
 <span class="lineNum">    1362 </span>            :         }
 <span class="lineNum">    1363 </span>            : 
-<span class="lineNum">    1364 </span><span class="lineCov">         37 :         property.flags = PROP_LOKTYP;</span>
-<span class="lineNum">    1365 </span><span class="lineCov">         37 :         property.data.lok = key;</span>
-<span class="lineNum">    1366 </span><span class="lineCov">         37 :         set_property(object, propname, &amp;property, 0);</span>
-<span class="lineNum">    1367 </span><span class="lineCov">         37 :         ts_modifyobject(object);</span>
-<span class="lineNum">    1368 </span><span class="lineCov">         37 :         notifyf(player, &quot;%s set.&quot;, proplabel);</span>
+<span class="lineNum">    1364 </span><span class="lineCov">        150 :         property.flags = PROP_LOKTYP;</span>
+<span class="lineNum">    1365 </span><span class="lineCov">        150 :         property.data.lok = key;</span>
+<span class="lineNum">    1366 </span><span class="lineCov">        150 :         set_property(object, propname, &amp;property, 0);</span>
+<span class="lineNum">    1367 </span><span class="lineCov">        150 :         ts_modifyobject(object);</span>
+<span class="lineNum">    1368 </span><span class="lineCov">        150 :         notifyf(player, &quot;%s set.&quot;, proplabel);</span>
 <span class="lineNum">    1369 </span>            :     }
 <span class="lineNum">    1370 </span>            : }
 <span class="lineNum">    1371 </span>            : 
 <span class="lineNum">    1372 </span>            : #define EXEC_SIGNAL '@'         /* Symbol which tells us what we're looking at
 <a name="1373"><span class="lineNum">    1373 </span>            :                                    is an execution order and not a message.    */</a>
 <span class="lineNum">    1374 </span>            : void
-<span class="lineNum">    1375 </span><span class="lineCov">        164 : exec_or_notify(int descr, dbref player, dbref thing,</span>
+<span class="lineNum">    1375 </span><span class="lineCov">       1086 : exec_or_notify(int descr, dbref player, dbref thing,</span>
 <span class="lineNum">    1376 </span>            :                const char *message, const char *whatcalled, int mpiflags)
 <span class="lineNum">    1377 </span>            : {
 <span class="lineNum">    1378 </span>            :     const char *p;
@@ -1444,9 +1444,9 @@
 <span class="lineNum">    1382 </span>            :     char tmpcmd[BUFFER_LEN];
 <span class="lineNum">    1383 </span>            :     char tmparg[BUFFER_LEN];
 <span class="lineNum">    1384 </span>            : 
-<span class="lineNum">    1385 </span><span class="lineCov">        164 :     p = message;</span>
+<span class="lineNum">    1385 </span><span class="lineCov">       1086 :     p = message;</span>
 <span class="lineNum">    1386 </span>            : 
-<span class="lineNum">    1387 </span><span class="lineCov">        164 :     if (*p == EXEC_SIGNAL) {</span>
+<span class="lineNum">    1387 </span><span class="lineCov">       1086 :     if (*p == EXEC_SIGNAL) {</span>
 <span class="lineNum">    1388 </span>            :         int i;
 <span class="lineNum">    1389 </span>            : 
 <span class="lineNum">    1390 </span><span class="lineNoCov">          0 :         if (*(++p) == REGISTERED_TOKEN) {</span>
@@ -1493,48 +1493,48 @@
 <span class="lineNum">    1431 </span><span class="lineNoCov">          0 :             strcpyn(match_cmdname, sizeof(match_cmdname), tmpcmd);</span>
 <span class="lineNum">    1432 </span>            :         }
 <span class="lineNum">    1433 </span>            :     } else {
-<span class="lineNum">    1434 </span><span class="lineCov">        164 :         p = do_parse_mesg(descr, player, thing, p, whatcalled, buf, sizeof(buf),</span>
+<span class="lineNum">    1434 </span><span class="lineCov">       1086 :         p = do_parse_mesg(descr, player, thing, p, whatcalled, buf, sizeof(buf),</span>
 <span class="lineNum">    1435 </span>            :                           MPI_ISPRIVATE | mpiflags);
-<span class="lineNum">    1436 </span><span class="lineCov">        164 :         notify(player, p);</span>
+<span class="lineNum">    1436 </span><span class="lineCov">       1086 :         notify(player, p);</span>
 <span class="lineNum">    1437 </span>            :     }
-<span class="lineNum">    1438 </span><span class="lineCov">        164 : }</span>
+<span class="lineNum">    1438 </span><span class="lineCov">       1086 : }</span>
 <a name="1439"><span class="lineNum">    1439 </span>            : </a>
 <span class="lineNum">    1440 </span>            : void
-<span class="lineNum">    1441 </span><span class="lineCov">         16 : exec_or_notify_prop(int descr, dbref player, dbref thing,</span>
+<span class="lineNum">    1441 </span><span class="lineCov">         72 : exec_or_notify_prop(int descr, dbref player, dbref thing,</span>
 <span class="lineNum">    1442 </span>            :                     const char *propname, const char *whatcalled)
 <span class="lineNum">    1443 </span>            : {
-<span class="lineNum">    1444 </span><span class="lineCov">         16 :     const char *message = get_property_class(thing, propname);</span>
-<span class="lineNum">    1445 </span><span class="lineCov">         16 :     int mpiflags = Prop_Blessed(thing, propname) ? MPI_ISBLESSED : 0;</span>
+<span class="lineNum">    1444 </span><span class="lineCov">         72 :     const char *message = get_property_class(thing, propname);</span>
+<span class="lineNum">    1445 </span><span class="lineCov">         72 :     int mpiflags = Prop_Blessed(thing, propname) ? MPI_ISBLESSED : 0;</span>
 <span class="lineNum">    1446 </span>            : 
-<span class="lineNum">    1447 </span><span class="lineCov">         16 :     if (message)</span>
-<span class="lineNum">    1448 </span><span class="lineCov">         16 :         exec_or_notify(descr, player, thing, message, whatcalled, mpiflags);</span>
-<span class="lineNum">    1449 </span><span class="lineCov">         16 : }</span>
+<span class="lineNum">    1447 </span><span class="lineCov">         72 :     if (message)</span>
+<span class="lineNum">    1448 </span><span class="lineCov">         72 :         exec_or_notify(descr, player, thing, message, whatcalled, mpiflags);</span>
+<span class="lineNum">    1449 </span><span class="lineCov">         72 : }</span>
 <a name="1450"><span class="lineNum">    1450 </span>            : </a>
 <span class="lineNum">    1451 </span>            : void
-<span class="lineNum">    1452 </span><span class="lineCov">        151 : parse_oprop(int descr, dbref player, dbref dest, dbref exit, const char *propname,</span>
+<span class="lineNum">    1452 </span><span class="lineCov">       1034 : parse_oprop(int descr, dbref player, dbref dest, dbref exit, const char *propname,</span>
 <span class="lineNum">    1453 </span>            :             const char *prefix, const char *whatcalled)
 <span class="lineNum">    1454 </span>            : {
-<span class="lineNum">    1455 </span><span class="lineCov">        151 :     const char *msg = get_property_class(exit, propname);</span>
-<span class="lineNum">    1456 </span><span class="lineCov">        151 :     int ival = 0;</span>
-<span class="lineNum">    1457 </span><span class="lineCov">        151 :     if (Prop_Blessed(exit, propname))</span>
+<span class="lineNum">    1455 </span><span class="lineCov">       1034 :     const char *msg = get_property_class(exit, propname);</span>
+<span class="lineNum">    1456 </span><span class="lineCov">       1034 :     int ival = 0;</span>
+<span class="lineNum">    1457 </span><span class="lineCov">       1034 :     if (Prop_Blessed(exit, propname))</span>
 <span class="lineNum">    1458 </span><span class="lineNoCov">          0 :         ival |= MPI_ISBLESSED;</span>
 <span class="lineNum">    1459 </span>            : 
-<span class="lineNum">    1460 </span><span class="lineCov">        151 :     if (msg)</span>
-<span class="lineNum">    1461 </span><span class="lineCov">        151 :         parse_omessage(descr, player, dest, exit, msg, prefix, whatcalled, ival);</span>
-<span class="lineNum">    1462 </span><span class="lineCov">        151 : }</span>
+<span class="lineNum">    1460 </span><span class="lineCov">       1034 :     if (msg)</span>
+<span class="lineNum">    1461 </span><span class="lineCov">       1034 :         parse_omessage(descr, player, dest, exit, msg, prefix, whatcalled, ival);</span>
+<span class="lineNum">    1462 </span><span class="lineCov">       1034 : }</span>
 <a name="1463"><span class="lineNum">    1463 </span>            : </a>
 <span class="lineNum">    1464 </span>            : void
-<span class="lineNum">    1465 </span><span class="lineCov">        151 : parse_omessage(int descr, dbref player, dbref dest, dbref exit, const char *msg,</span>
+<span class="lineNum">    1465 </span><span class="lineCov">       1034 : parse_omessage(int descr, dbref player, dbref dest, dbref exit, const char *msg,</span>
 <span class="lineNum">    1466 </span>            :                const char *prefix, const char *whatcalled, int mpiflags)
 <span class="lineNum">    1467 </span>            : {
 <span class="lineNum">    1468 </span>            :     char buf[BUFFER_LEN];
 <span class="lineNum">    1469 </span>            :     char *ptr;
 <span class="lineNum">    1470 </span>            : 
-<span class="lineNum">    1471 </span><span class="lineCov">        151 :     do_parse_mesg(descr, player, exit, msg, whatcalled, buf, sizeof(buf),</span>
+<span class="lineNum">    1471 </span><span class="lineCov">       1034 :     do_parse_mesg(descr, player, exit, msg, whatcalled, buf, sizeof(buf),</span>
 <span class="lineNum">    1472 </span>            :                   MPI_ISPUBLIC | mpiflags);
-<span class="lineNum">    1473 </span><span class="lineCov">        151 :     ptr = pronoun_substitute(descr, player, buf);</span>
-<span class="lineNum">    1474 </span><span class="lineCov">        151 :     if (!*ptr)</span>
-<span class="lineNum">    1475 </span><span class="lineCov">          2 :         return;</span>
+<span class="lineNum">    1473 </span><span class="lineCov">       1034 :     ptr = pronoun_substitute(descr, player, buf);</span>
+<span class="lineNum">    1474 </span><span class="lineCov">       1034 :     if (!*ptr)</span>
+<span class="lineNum">    1475 </span><span class="lineCov">         16 :         return;</span>
 <span class="lineNum">    1476 </span>            : 
 <span class="lineNum">    1477 </span>            :     /* 
 <span class="lineNum">    1478 </span>            :        TODO: Find out if this should be prefixing with NAME(player), or if
@@ -1542,9 +1542,9 @@
 <span class="lineNum">    1480 </span>            :        the prefix argument...
 <span class="lineNum">    1481 </span>            :      */
 <span class="lineNum">    1482 </span>            : 
-<span class="lineNum">    1483 </span><span class="lineCov">        149 :     prefix_message(buf, ptr, prefix, BUFFER_LEN, 1);</span>
+<span class="lineNum">    1483 </span><span class="lineCov">       1018 :     prefix_message(buf, ptr, prefix, BUFFER_LEN, 1);</span>
 <span class="lineNum">    1484 </span>            : 
-<span class="lineNum">    1485 </span><span class="lineCov">        149 :     notify_except(CONTENTS(dest), player, buf, player);</span>
+<span class="lineNum">    1485 </span><span class="lineCov">       1018 :     notify_except(CONTENTS(dest), player, buf, player);</span>
 <span class="lineNum">    1486 </span>            : }
 </pre>
       </td>
