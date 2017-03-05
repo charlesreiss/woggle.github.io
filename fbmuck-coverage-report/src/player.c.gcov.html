@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-03-04 20:10:00</td>
+            <td class="headerValue">2017-03-05 00:54:08</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">11</td>
@@ -76,49 +76,49 @@
 <span class="lineNum">      14 </span>            : static hash_tab player_list[PLAYER_HASH_SIZE];
 <a name="15"><span class="lineNum">      15 </span>            : </a>
 <span class="lineNum">      16 </span>            : dbref
-<span class="lineNum">      17 </span><span class="lineCov">        319 : lookup_player(const char *name)</span>
+<span class="lineNum">      17 </span><span class="lineCov">        394 : lookup_player(const char *name)</span>
 <span class="lineNum">      18 </span>            : {
 <span class="lineNum">      19 </span>            :     hash_data *hd;
 <span class="lineNum">      20 </span>            : 
-<span class="lineNum">      21 </span><span class="lineCov">        319 :     if ((hd = find_hash(name, player_list, PLAYER_HASH_SIZE)) == NULL) {</span>
+<span class="lineNum">      21 </span><span class="lineCov">        394 :     if ((hd = find_hash(name, player_list, PLAYER_HASH_SIZE)) == NULL) {</span>
 <span class="lineNum">      22 </span><span class="lineCov">         24 :         return NOTHING;</span>
 <span class="lineNum">      23 </span>            :     } else {
-<span class="lineNum">      24 </span><span class="lineCov">        295 :         return (hd-&gt;dbval);</span>
+<span class="lineNum">      24 </span><span class="lineCov">        370 :         return (hd-&gt;dbval);</span>
 <span class="lineNum">      25 </span>            :     }
 <span class="lineNum">      26 </span>            : }
 <a name="27"><span class="lineNum">      27 </span>            : </a>
 <span class="lineNum">      28 </span>            : int
-<span class="lineNum">      29 </span><span class="lineCov">        273 : check_password(dbref player, const char *password)</span>
+<span class="lineNum">      29 </span><span class="lineCov">        348 : check_password(dbref player, const char *password)</span>
 <span class="lineNum">      30 </span>            : {
 <span class="lineNum">      31 </span>            :     char md5buf[64];
-<span class="lineNum">      32 </span><span class="lineCov">        273 :     const char *processed = password;</span>
-<span class="lineNum">      33 </span><span class="lineCov">        273 :     const char *pword = PLAYER_PASSWORD(player);</span>
+<span class="lineNum">      32 </span><span class="lineCov">        348 :     const char *processed = password;</span>
+<span class="lineNum">      33 </span><span class="lineCov">        348 :     const char *pword = PLAYER_PASSWORD(player);</span>
 <span class="lineNum">      34 </span>            : 
-<span class="lineNum">      35 </span><span class="lineCov">        273 :     if (password == NULL) {</span>
+<span class="lineNum">      35 </span><span class="lineCov">        348 :     if (password == NULL) {</span>
 <span class="lineNum">      36 </span><span class="lineNoCov">          0 :         MD5base64(md5buf, &quot;&quot;, 0);</span>
 <span class="lineNum">      37 </span><span class="lineNoCov">          0 :         processed = md5buf;</span>
 <span class="lineNum">      38 </span>            :     } else {
-<span class="lineNum">      39 </span><span class="lineCov">        273 :         if (*password) {</span>
-<span class="lineNum">      40 </span><span class="lineCov">        273 :             MD5base64(md5buf, password, strlen(password));</span>
-<span class="lineNum">      41 </span><span class="lineCov">        273 :             processed = md5buf;</span>
+<span class="lineNum">      39 </span><span class="lineCov">        348 :         if (*password) {</span>
+<span class="lineNum">      40 </span><span class="lineCov">        348 :             MD5base64(md5buf, password, strlen(password));</span>
+<span class="lineNum">      41 </span><span class="lineCov">        348 :             processed = md5buf;</span>
 <span class="lineNum">      42 </span>            :         }
 <span class="lineNum">      43 </span>            :     }
 <span class="lineNum">      44 </span>            : 
-<span class="lineNum">      45 </span><span class="lineCov">        273 :     if (!pword || !*pword)</span>
+<span class="lineNum">      45 </span><span class="lineCov">        348 :     if (!pword || !*pword)</span>
 <span class="lineNum">      46 </span><span class="lineNoCov">          0 :         return 1;</span>
 <span class="lineNum">      47 </span>            : 
-<span class="lineNum">      48 </span><span class="lineCov">        273 :     if (!strcmp(pword, processed))</span>
-<span class="lineNum">      49 </span><span class="lineCov">        273 :         return 1;</span>
+<span class="lineNum">      48 </span><span class="lineCov">        348 :     if (!strcmp(pword, processed))</span>
+<span class="lineNum">      49 </span><span class="lineCov">        348 :         return 1;</span>
 <span class="lineNum">      50 </span>            : 
 <span class="lineNum">      51 </span><span class="lineNoCov">          0 :     return 0;</span>
 <span class="lineNum">      52 </span>            : }
 <a name="53"><span class="lineNum">      53 </span>            : </a>
 <span class="lineNum">      54 </span>            : void
-<span class="lineNum">      55 </span><span class="lineCov">        310 : set_password_raw(dbref player, const char *password)</span>
+<span class="lineNum">      55 </span><span class="lineCov">        385 : set_password_raw(dbref player, const char *password)</span>
 <span class="lineNum">      56 </span>            : {
-<span class="lineNum">      57 </span><span class="lineCov">        310 :     PLAYER_SET_PASSWORD(player, password);</span>
-<span class="lineNum">      58 </span><span class="lineCov">        310 :     DBDIRTY(player);</span>
-<span class="lineNum">      59 </span><span class="lineCov">        310 : }</span>
+<span class="lineNum">      57 </span><span class="lineCov">        385 :     PLAYER_SET_PASSWORD(player, password);</span>
+<span class="lineNum">      58 </span><span class="lineCov">        385 :     DBDIRTY(player);</span>
+<span class="lineNum">      59 </span><span class="lineCov">        385 : }</span>
 <a name="60"><span class="lineNum">      60 </span>            : </a>
 <span class="lineNum">      61 </span>            : void
 <span class="lineNum">      62 </span><span class="lineCov">         23 : set_password(dbref player, const char *password)</span>
@@ -192,22 +192,22 @@
 <span class="lineNum">     130 </span><span class="lineNoCov">          0 : }</span>
 <a name="131"><span class="lineNum">     131 </span>            : </a>
 <span class="lineNum">     132 </span>            : void
-<span class="lineNum">     133 </span><span class="lineCov">        262 : clear_players(void)</span>
+<span class="lineNum">     133 </span><span class="lineCov">        337 : clear_players(void)</span>
 <span class="lineNum">     134 </span>            : {
-<span class="lineNum">     135 </span><span class="lineCov">        262 :     kill_hash(player_list, PLAYER_HASH_SIZE, 0);</span>
-<span class="lineNum">     136 </span><span class="lineCov">        262 :     return;</span>
+<span class="lineNum">     135 </span><span class="lineCov">        337 :     kill_hash(player_list, PLAYER_HASH_SIZE, 0);</span>
+<span class="lineNum">     136 </span><span class="lineCov">        337 :     return;</span>
 <span class="lineNum">     137 </span>            : }
 <a name="138"><span class="lineNum">     138 </span>            : </a>
 <span class="lineNum">     139 </span>            : void
-<span class="lineNum">     140 </span><span class="lineCov">        287 : add_player(dbref who)</span>
+<span class="lineNum">     140 </span><span class="lineCov">        362 : add_player(dbref who)</span>
 <span class="lineNum">     141 </span>            : {
 <span class="lineNum">     142 </span>            :     hash_data hd;
 <span class="lineNum">     143 </span>            : 
-<span class="lineNum">     144 </span><span class="lineCov">        287 :     hd.dbval = who;</span>
-<span class="lineNum">     145 </span><span class="lineCov">        287 :     if (add_hash(NAME(who), hd, player_list, PLAYER_HASH_SIZE) == NULL) {</span>
+<span class="lineNum">     144 </span><span class="lineCov">        362 :     hd.dbval = who;</span>
+<span class="lineNum">     145 </span><span class="lineCov">        362 :     if (add_hash(NAME(who), hd, player_list, PLAYER_HASH_SIZE) == NULL) {</span>
 <span class="lineNum">     146 </span><span class="lineNoCov">          0 :         panic(&quot;Out of memory&quot;);</span>
 <span class="lineNum">     147 </span>            :     } else {
-<span class="lineNum">     148 </span><span class="lineCov">        287 :         return;</span>
+<span class="lineNum">     148 </span><span class="lineCov">        362 :         return;</span>
 <span class="lineNum">     149 </span>            :     }
 <span class="lineNum">     150 </span>            : }
 <a name="151"><span class="lineNum">     151 </span>            : </a>
@@ -271,12 +271,12 @@
 <span class="lineNum">     209 </span>            : /* Removes 'cost' value from 'who', and returns 1 if the act has been
 <a name="210"><span class="lineNum">     210 </span>            :  * paid for, else returns 0. */</a>
 <span class="lineNum">     211 </span>            : int
-<span class="lineNum">     212 </span><span class="lineCov">        437 : payfor(dbref who, int cost)</span>
+<span class="lineNum">     212 </span><span class="lineCov">        587 : payfor(dbref who, int cost)</span>
 <span class="lineNum">     213 </span>            : {
-<span class="lineNum">     214 </span><span class="lineCov">        437 :     who = OWNER(who);</span>
+<span class="lineNum">     214 </span><span class="lineCov">        587 :     who = OWNER(who);</span>
 <span class="lineNum">     215 </span>            :     /* Wizards don't have to pay for anything. */
-<span class="lineNum">     216 </span><span class="lineCov">        437 :     if (Wizard(who)) {</span>
-<span class="lineNum">     217 </span><span class="lineCov">        431 :         return 1;</span>
+<span class="lineNum">     216 </span><span class="lineCov">        587 :     if (Wizard(who)) {</span>
+<span class="lineNum">     217 </span><span class="lineCov">        581 :         return 1;</span>
 <span class="lineNum">     218 </span><span class="lineCov">          6 :     } else if (GETVALUE(who) &gt;= cost) {</span>
 <span class="lineNum">     219 </span><span class="lineCov">          5 :         SETVALUE(who, GETVALUE(who) - cost);</span>
 <span class="lineNum">     220 </span><span class="lineCov">          5 :         DBDIRTY(who);</span>

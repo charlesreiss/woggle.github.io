@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-03-04 20:10:00</td>
+            <td class="headerValue">2017-03-05 00:54:08</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">6</td>
@@ -118,17 +118,17 @@
 <span class="lineNum">      56 </span><span class="lineCov">          1 : }</span>
 <a name="57"><span class="lineNum">      57 </span>            : </a>
 <span class="lineNum">      58 </span>            : void
-<span class="lineNum">      59 </span><span class="lineCov">        255 : do_pose(dbref player, const char *message)</span>
+<span class="lineNum">      59 </span><span class="lineCov">        330 : do_pose(dbref player, const char *message)</span>
 <span class="lineNum">      60 </span>            : {
 <span class="lineNum">      61 </span>            :     dbref loc;
 <span class="lineNum">      62 </span>            :     char buf[BUFFER_LEN];
 <span class="lineNum">      63 </span>            : 
-<span class="lineNum">      64 </span><span class="lineCov">        255 :     if ((loc = LOCATION(player)) == NOTHING)</span>
+<span class="lineNum">      64 </span><span class="lineCov">        330 :     if ((loc = LOCATION(player)) == NOTHING)</span>
 <span class="lineNum">      65 </span><span class="lineNoCov">          0 :         return;</span>
 <span class="lineNum">      66 </span>            : 
 <span class="lineNum">      67 </span>            :     /* notify everybody */
-<span class="lineNum">      68 </span><span class="lineCov">        255 :     snprintf(buf, sizeof(buf), &quot;%s %s&quot;, NAME(player), message);</span>
-<span class="lineNum">      69 </span><span class="lineCov">        255 :     notify_except(CONTENTS(loc), NOTHING, buf, player);</span>
+<span class="lineNum">      68 </span><span class="lineCov">        330 :     snprintf(buf, sizeof(buf), &quot;%s %s&quot;, NAME(player), message);</span>
+<span class="lineNum">      69 </span><span class="lineCov">        330 :     notify_except(CONTENTS(loc), NOTHING, buf, player);</span>
 <span class="lineNum">      70 </span>            : }
 <a name="71"><span class="lineNum">      71 </span>            : </a>
 <span class="lineNum">      72 </span>            : void

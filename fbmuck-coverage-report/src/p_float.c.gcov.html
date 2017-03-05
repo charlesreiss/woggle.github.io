@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-03-04 20:10:00</td>
+            <td class="headerValue">2017-03-05 00:54:08</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">27</td>
@@ -702,23 +702,23 @@
 <span class="lineNum">     640 </span>            : }
 <a name="641"><span class="lineNum">     641 </span>            : </a>
 <span class="lineNum">     642 </span>            : void
-<span class="lineNum">     643 </span><span class="lineCov">          7 : prim_strtof(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     643 </span><span class="lineCov">          8 : prim_strtof(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     644 </span>            : {
-<span class="lineNum">     645 </span><span class="lineCov">          7 :     CHECKOP(1);</span>
-<span class="lineNum">     646 </span><span class="lineCov">          7 :     oper1 = POP();</span>
-<span class="lineNum">     647 </span><span class="lineCov">          7 :     if (oper1-&gt;type != PROG_STRING)</span>
+<span class="lineNum">     645 </span><span class="lineCov">          8 :     CHECKOP(1);</span>
+<span class="lineNum">     646 </span><span class="lineCov">          8 :     oper1 = POP();</span>
+<span class="lineNum">     647 </span><span class="lineCov">          8 :     if (oper1-&gt;type != PROG_STRING)</span>
 <span class="lineNum">     648 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Non-string argument. (1)&quot;);</span>
 <span class="lineNum">     649 </span>            : 
-<span class="lineNum">     650 </span><span class="lineCov">          7 :     if (!oper1-&gt;data.string || (!ifloat(oper1-&gt;data.string-&gt;data)</span>
+<span class="lineNum">     650 </span><span class="lineCov">          8 :     if (!oper1-&gt;data.string || (!ifloat(oper1-&gt;data.string-&gt;data)</span>
 <span class="lineNum">     651 </span><span class="lineNoCov">          0 :                                 &amp;&amp; !number(oper1-&gt;data.string-&gt;data))) {</span>
 <span class="lineNum">     652 </span><span class="lineNoCov">          0 :         fresult = 0.0;</span>
 <span class="lineNum">     653 </span><span class="lineNoCov">          0 :         fr-&gt;error.error_flags.nan = 1;</span>
 <span class="lineNum">     654 </span>            :     } else {
-<span class="lineNum">     655 </span><span class="lineCov">          7 :         sscanf(oper1-&gt;data.string-&gt;data, &quot;%lg&quot;, &amp;fresult);</span>
+<span class="lineNum">     655 </span><span class="lineCov">          8 :         sscanf(oper1-&gt;data.string-&gt;data, &quot;%lg&quot;, &amp;fresult);</span>
 <span class="lineNum">     656 </span>            :     }
 <span class="lineNum">     657 </span>            : 
-<span class="lineNum">     658 </span><span class="lineCov">          7 :     CLEAR(oper1);</span>
-<span class="lineNum">     659 </span><span class="lineCov">          7 :     PushFloat(fresult);</span>
+<span class="lineNum">     658 </span><span class="lineCov">          8 :     CLEAR(oper1);</span>
+<span class="lineNum">     659 </span><span class="lineCov">          8 :     PushFloat(fresult);</span>
 <span class="lineNum">     660 </span>            : }
 <a name="661"><span class="lineNum">     661 </span>            : </a>
 <span class="lineNum">     662 </span>            : void

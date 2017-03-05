@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-03-04 20:10:00</td>
+            <td class="headerValue">2017-03-05 00:54:08</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">11</td>
@@ -67,46 +67,46 @@
 <span class="lineNum">       5 </span>            : #include &quot;fbtime.h&quot;
 <a name="6"><span class="lineNum">       6 </span>            : </a>
 <span class="lineNum">       7 </span>            : void
-<span class="lineNum">       8 </span><span class="lineCov">        988 : ts_newobject(dbref thing)</span>
+<span class="lineNum">       8 </span><span class="lineCov">       1296 : ts_newobject(dbref thing)</span>
 <span class="lineNum">       9 </span>            : {
-<span class="lineNum">      10 </span><span class="lineCov">        988 :     time_t now = time(NULL);</span>
+<span class="lineNum">      10 </span><span class="lineCov">       1296 :     time_t now = time(NULL);</span>
 <span class="lineNum">      11 </span>            : 
-<span class="lineNum">      12 </span><span class="lineCov">        988 :     DBFETCH(thing)-&gt;ts_created = now;</span>
-<span class="lineNum">      13 </span><span class="lineCov">        988 :     DBFETCH(thing)-&gt;ts_modified = now;</span>
-<span class="lineNum">      14 </span><span class="lineCov">        988 :     DBFETCH(thing)-&gt;ts_lastused = now;</span>
-<span class="lineNum">      15 </span><span class="lineCov">        988 :     DBFETCH(thing)-&gt;ts_usecount = 0;</span>
-<span class="lineNum">      16 </span><span class="lineCov">        988 : }</span>
+<span class="lineNum">      12 </span><span class="lineCov">       1296 :     DBFETCH(thing)-&gt;ts_created = now;</span>
+<span class="lineNum">      13 </span><span class="lineCov">       1296 :     DBFETCH(thing)-&gt;ts_modified = now;</span>
+<span class="lineNum">      14 </span><span class="lineCov">       1296 :     DBFETCH(thing)-&gt;ts_lastused = now;</span>
+<span class="lineNum">      15 </span><span class="lineCov">       1296 :     DBFETCH(thing)-&gt;ts_usecount = 0;</span>
+<span class="lineNum">      16 </span><span class="lineCov">       1296 : }</span>
 <a name="17"><span class="lineNum">      17 </span>            : </a>
 <span class="lineNum">      18 </span>            : void
-<span class="lineNum">      19 </span><span class="lineCov">       1195 : ts_useobject(dbref thing)</span>
+<span class="lineNum">      19 </span><span class="lineCov">       1553 : ts_useobject(dbref thing)</span>
 <span class="lineNum">      20 </span>            : {
-<span class="lineNum">      21 </span><span class="lineCov">       1195 :     if (thing == NOTHING)</span>
-<span class="lineNum">      22 </span><span class="lineCov">        280 :         return;</span>
-<span class="lineNum">      23 </span><span class="lineCov">        915 :     DBFETCH(thing)-&gt;ts_lastused = time(NULL);</span>
-<span class="lineNum">      24 </span><span class="lineCov">        915 :     DBFETCH(thing)-&gt;ts_usecount++;</span>
-<span class="lineNum">      25 </span><span class="lineCov">        915 :     DBDIRTY(thing);</span>
-<span class="lineNum">      26 </span><span class="lineCov">        915 :     if (Typeof(thing) == TYPE_ROOM)</span>
-<span class="lineNum">      27 </span><span class="lineCov">        286 :         ts_useobject(LOCATION(thing));</span>
+<span class="lineNum">      21 </span><span class="lineCov">       1553 :     if (thing == NOTHING)</span>
+<span class="lineNum">      22 </span><span class="lineCov">        355 :         return;</span>
+<span class="lineNum">      23 </span><span class="lineCov">       1198 :     DBFETCH(thing)-&gt;ts_lastused = time(NULL);</span>
+<span class="lineNum">      24 </span><span class="lineCov">       1198 :     DBFETCH(thing)-&gt;ts_usecount++;</span>
+<span class="lineNum">      25 </span><span class="lineCov">       1198 :     DBDIRTY(thing);</span>
+<span class="lineNum">      26 </span><span class="lineCov">       1198 :     if (Typeof(thing) == TYPE_ROOM)</span>
+<span class="lineNum">      27 </span><span class="lineCov">        361 :         ts_useobject(LOCATION(thing));</span>
 <span class="lineNum">      28 </span>            : }
 <a name="29"><span class="lineNum">      29 </span>            : </a>
 <span class="lineNum">      30 </span>            : void
-<span class="lineNum">      31 </span><span class="lineCov">      46370 : ts_lastuseobject(dbref thing)</span>
+<span class="lineNum">      31 </span><span class="lineCov">      48525 : ts_lastuseobject(dbref thing)</span>
 <span class="lineNum">      32 </span>            : {
-<span class="lineNum">      33 </span><span class="lineCov">      46370 :     if (thing == NOTHING)</span>
+<span class="lineNum">      33 </span><span class="lineCov">      48525 :     if (thing == NOTHING)</span>
 <span class="lineNum">      34 </span><span class="lineNoCov">          0 :         return;</span>
-<span class="lineNum">      35 </span><span class="lineCov">      46370 :     DBSTORE(thing, ts_lastused, time(NULL));</span>
-<span class="lineNum">      36 </span><span class="lineCov">      46370 :     if (Typeof(thing) == TYPE_ROOM)</span>
+<span class="lineNum">      35 </span><span class="lineCov">      48525 :     DBSTORE(thing, ts_lastused, time(NULL));</span>
+<span class="lineNum">      36 </span><span class="lineCov">      48525 :     if (Typeof(thing) == TYPE_ROOM)</span>
 <span class="lineNum">      37 </span><span class="lineNoCov">          0 :         ts_lastuseobject(LOCATION(thing));</span>
 <span class="lineNum">      38 </span>            : }
 <a name="39"><span class="lineNum">      39 </span>            : </a>
 <span class="lineNum">      40 </span>            : void
-<span class="lineNum">      41 </span><span class="lineCov">        378 : ts_modifyobject(dbref thing)</span>
+<span class="lineNum">      41 </span><span class="lineCov">        503 : ts_modifyobject(dbref thing)</span>
 <span class="lineNum">      42 </span>            : {
-<span class="lineNum">      43 </span><span class="lineCov">        378 :     DBSTORE(thing, ts_modified, time(NULL));</span>
-<span class="lineNum">      44 </span><span class="lineCov">        378 : }</span>
+<span class="lineNum">      43 </span><span class="lineCov">        503 :     DBSTORE(thing, ts_modified, time(NULL));</span>
+<span class="lineNum">      44 </span><span class="lineCov">        503 : }</span>
 <a name="45"><span class="lineNum">      45 </span>            : </a>
 <span class="lineNum">      46 </span>            : int
-<span class="lineNum">      47 </span><span class="lineCov">      49320 : format_time(char *buf, int max_len, const char *fmt, struct tm *tmval)</span>
+<span class="lineNum">      47 </span><span class="lineCov">      52256 : format_time(char *buf, int max_len, const char *fmt, struct tm *tmval)</span>
 <span class="lineNum">      48 </span>            : {
 <span class="lineNum">      49 </span>            : 
 <span class="lineNum">      50 </span>            : #ifdef USE_STRFTIME
@@ -117,19 +117,19 @@
 <span class="lineNum">      55 </span>            : 
 <span class="lineNum">      56 </span>            :     /* struct timezone tz; */
 <span class="lineNum">      57 </span>            : 
-<span class="lineNum">      58 </span><span class="lineCov">      49320 :     pos = 0;</span>
-<span class="lineNum">      59 </span><span class="lineCov">      49320 :     max_len--;</span>
-<span class="lineNum">      60 </span><span class="lineCov">     641328 :     while ((*fmt) &amp;&amp; (pos &lt; max_len))</span>
-<span class="lineNum">      61 </span><span class="lineCov">     542688 :         if ((buf[pos++] = *(fmt++)) == '%')</span>
-<span class="lineNum">      62 </span><span class="lineCov">     295569 :             if (*fmt) {</span>
-<span class="lineNum">      63 </span><span class="lineCov">     295569 :                 pos--;</span>
-<span class="lineNum">      64 </span><span class="lineCov">     295569 :                 *tmp = '\0';</span>
-<span class="lineNum">      65 </span><span class="lineCov">     295569 :                 switch (*(fmt++)) {</span>
+<span class="lineNum">      58 </span><span class="lineCov">      52256 :     pos = 0;</span>
+<span class="lineNum">      59 </span><span class="lineCov">      52256 :     max_len--;</span>
+<span class="lineNum">      60 </span><span class="lineCov">     679226 :     while ((*fmt) &amp;&amp; (pos &lt; max_len))</span>
+<span class="lineNum">      61 </span><span class="lineCov">     574714 :         if ((buf[pos++] = *(fmt++)) == '%')</span>
+<span class="lineNum">      62 </span><span class="lineCov">     313050 :             if (*fmt) {</span>
+<span class="lineNum">      63 </span><span class="lineCov">     313050 :                 pos--;</span>
+<span class="lineNum">      64 </span><span class="lineCov">     313050 :                 *tmp = '\0';</span>
+<span class="lineNum">      65 </span><span class="lineCov">     313050 :                 switch (*(fmt++)) {</span>
 <span class="lineNum">      66 </span>            :                 case 'a':
 <span class="lineNum">      67 </span><span class="lineCov">         87 :                     switch (tmval-&gt;tm_wday) {</span>
 <span class="lineNum">      68 </span>            :                     case 0:
-<span class="lineNum">      69 </span><span class="lineNoCov">          0 :                         (void) strcpyn(tmp, sizeof(tmp), &quot;Sun&quot;);</span>
-<span class="lineNum">      70 </span><span class="lineNoCov">          0 :                         break;</span>
+<span class="lineNum">      69 </span><span class="lineCov">         81 :                         (void) strcpyn(tmp, sizeof(tmp), &quot;Sun&quot;);</span>
+<span class="lineNum">      70 </span><span class="lineCov">         81 :                         break;</span>
 <span class="lineNum">      71 </span>            :                     case 1:
 <span class="lineNum">      72 </span><span class="lineNoCov">          0 :                         (void) strcpyn(tmp, sizeof(tmp), &quot;Mon&quot;);</span>
 <span class="lineNum">      73 </span><span class="lineNoCov">          0 :                         break;</span>
@@ -146,8 +146,8 @@
 <span class="lineNum">      84 </span><span class="lineNoCov">          0 :                         (void) strcpyn(tmp, sizeof(tmp), &quot;Fri&quot;);</span>
 <span class="lineNum">      85 </span><span class="lineNoCov">          0 :                         break;</span>
 <span class="lineNum">      86 </span>            :                     case 6:
-<span class="lineNum">      87 </span><span class="lineCov">         81 :                         (void) strcpyn(tmp, sizeof(tmp), &quot;Sat&quot;);</span>
-<span class="lineNum">      88 </span><span class="lineCov">         81 :                         break;</span>
+<span class="lineNum">      87 </span><span class="lineNoCov">          0 :                         (void) strcpyn(tmp, sizeof(tmp), &quot;Sat&quot;);</span>
+<span class="lineNum">      88 </span><span class="lineNoCov">          0 :                         break;</span>
 <span class="lineNum">      89 </span>            :                     }
 <span class="lineNum">      90 </span><span class="lineCov">         87 :                     break;</span>
 <span class="lineNum">      91 </span>            :                 case 'A':
@@ -257,11 +257,11 @@
 <span class="lineNum">     195 </span>            :                     }
 <span class="lineNum">     196 </span><span class="lineNoCov">          0 :                     break;</span>
 <span class="lineNum">     197 </span>            :                 case 'c':
-<span class="lineNum">     198 </span><span class="lineCov">          6 :                     if (!(ret = format_time(buf + pos, max_len - pos,</span>
+<span class="lineNum">     198 </span><span class="lineCov">         15 :                     if (!(ret = format_time(buf + pos, max_len - pos,</span>
 <span class="lineNum">     199 </span>            :                                             (char *) &quot;%x %X&quot;, tmval)))
 <span class="lineNum">     200 </span><span class="lineNoCov">          0 :                         return (0);</span>
-<span class="lineNum">     201 </span><span class="lineCov">          6 :                     pos += ret;</span>
-<span class="lineNum">     202 </span><span class="lineCov">          6 :                     break;</span>
+<span class="lineNum">     201 </span><span class="lineCov">         15 :                     pos += ret;</span>
+<span class="lineNum">     202 </span><span class="lineCov">         15 :                     break;</span>
 <span class="lineNum">     203 </span>            :                 case 'C':
 <span class="lineNum">     204 </span><span class="lineNoCov">          0 :                     if (!(ret = format_time(buf + pos, max_len - pos,</span>
 <span class="lineNum">     205 </span>            :                                             (char *) &quot;%A %B %e, %Y&quot;, tmval)))
@@ -269,8 +269,8 @@
 <span class="lineNum">     207 </span><span class="lineNoCov">          0 :                     pos += ret;</span>
 <span class="lineNum">     208 </span><span class="lineNoCov">          0 :                     break;</span>
 <span class="lineNum">     209 </span>            :                 case 'd':
-<span class="lineNum">     210 </span><span class="lineCov">      49128 :                     int2str(tmp, tmval-&gt;tm_mday, 2, '0');</span>
-<span class="lineNum">     211 </span><span class="lineCov">      49128 :                     break;</span>
+<span class="lineNum">     210 </span><span class="lineCov">      52037 :                     int2str(tmp, tmval-&gt;tm_mday, 2, '0');</span>
+<span class="lineNum">     211 </span><span class="lineCov">      52037 :                     break;</span>
 <span class="lineNum">     212 </span>            :                 case 'D':
 <span class="lineNum">     213 </span><span class="lineNoCov">          0 :                     if (!(ret = format_time(buf + pos, max_len - pos,</span>
 <span class="lineNum">     214 </span>            :                                             (char *) &quot;%m/%d/%y&quot;, tmval)))
@@ -281,8 +281,8 @@
 <span class="lineNum">     219 </span><span class="lineCov">         87 :                     int2str(tmp, tmval-&gt;tm_mday, 2, ' ');</span>
 <span class="lineNum">     220 </span><span class="lineCov">         87 :                     break;</span>
 <span class="lineNum">     221 </span>            :                 case 'H':
-<span class="lineNum">     222 </span><span class="lineCov">      49215 :                     int2str(tmp, tmval-&gt;tm_hour, 2, '0');</span>
-<span class="lineNum">     223 </span><span class="lineCov">      49215 :                     break;</span>
+<span class="lineNum">     222 </span><span class="lineCov">      52124 :                     int2str(tmp, tmval-&gt;tm_hour, 2, '0');</span>
+<span class="lineNum">     223 </span><span class="lineCov">      52124 :                     break;</span>
 <span class="lineNum">     224 </span>            :                 case 'I':
 <span class="lineNum">     225 </span><span class="lineNoCov">          0 :                     int2str(tmp, (tmval-&gt;tm_hour + 11) % 12 + 1, 2, '0');</span>
 <span class="lineNum">     226 </span><span class="lineNoCov">          0 :                     break;</span>
@@ -296,11 +296,11 @@
 <span class="lineNum">     234 </span><span class="lineNoCov">          0 :                     int2str(tmp, (tmval-&gt;tm_hour + 11) % 12 + 1, 2, ' ');</span>
 <span class="lineNum">     235 </span><span class="lineNoCov">          0 :                     break;</span>
 <span class="lineNum">     236 </span>            :                 case 'm':
-<span class="lineNum">     237 </span><span class="lineCov">      49128 :                     int2str(tmp, tmval-&gt;tm_mon + 1, 2, '0');</span>
-<span class="lineNum">     238 </span><span class="lineCov">      49128 :                     break;</span>
+<span class="lineNum">     237 </span><span class="lineCov">      52037 :                     int2str(tmp, tmval-&gt;tm_mon + 1, 2, '0');</span>
+<span class="lineNum">     238 </span><span class="lineCov">      52037 :                     break;</span>
 <span class="lineNum">     239 </span>            :                 case 'M':
-<span class="lineNum">     240 </span><span class="lineCov">      49215 :                     int2str(tmp, tmval-&gt;tm_min, 2, '0');</span>
-<span class="lineNum">     241 </span><span class="lineCov">      49215 :                     break;</span>
+<span class="lineNum">     240 </span><span class="lineCov">      52124 :                     int2str(tmp, tmval-&gt;tm_min, 2, '0');</span>
+<span class="lineNum">     241 </span><span class="lineCov">      52124 :                     break;</span>
 <span class="lineNum">     242 </span>            :                 case 'p':
 <span class="lineNum">     243 </span><span class="lineNoCov">          0 :                     tmp[0] = ((tmval-&gt;tm_hour &lt; 12) ? 'A' : 'P');</span>
 <span class="lineNum">     244 </span><span class="lineNoCov">          0 :                     tmp[1] = 'M';</span>
@@ -319,8 +319,8 @@
 <span class="lineNum">     257 </span><span class="lineNoCov">          0 :                     pos += ret;</span>
 <span class="lineNum">     258 </span><span class="lineNoCov">          0 :                     break;</span>
 <span class="lineNum">     259 </span>            :                 case 'S':
-<span class="lineNum">     260 </span><span class="lineCov">      49215 :                     int2str(tmp, tmval-&gt;tm_sec, 2, '0');</span>
-<span class="lineNum">     261 </span><span class="lineCov">      49215 :                     break;</span>
+<span class="lineNum">     260 </span><span class="lineCov">      52124 :                     int2str(tmp, tmval-&gt;tm_sec, 2, '0');</span>
+<span class="lineNum">     261 </span><span class="lineCov">      52124 :                     break;</span>
 <span class="lineNum">     262 </span>            :                 case 'T':
 <span class="lineNum">     263 </span><span class="lineCov">         87 :                     if (!(ret = format_time(buf + pos, max_len - pos,</span>
 <span class="lineNum">     264 </span>            :                                             (char *) &quot;%H:%M:%S&quot;, tmval)))
@@ -342,23 +342,23 @@
 <span class="lineNum">     280 </span><span class="lineNoCov">          0 :                              ((13 + tmval-&gt;tm_wday - (tmval-&gt;tm_yday % 7)) % 7)) / 7, 2, '0');</span>
 <span class="lineNum">     281 </span><span class="lineNoCov">          0 :                     break;</span>
 <span class="lineNum">     282 </span>            :                 case 'x':
-<span class="lineNum">     283 </span><span class="lineCov">          6 :                     if (!(ret = format_time(buf + pos, max_len - pos,</span>
+<span class="lineNum">     283 </span><span class="lineCov">         15 :                     if (!(ret = format_time(buf + pos, max_len - pos,</span>
 <span class="lineNum">     284 </span>            :                                             (char *) &quot;%m/%d/%y&quot;, tmval)))
 <span class="lineNum">     285 </span><span class="lineNoCov">          0 :                         return (0);</span>
-<span class="lineNum">     286 </span><span class="lineCov">          6 :                     pos += ret;</span>
-<span class="lineNum">     287 </span><span class="lineCov">          6 :                     break;</span>
+<span class="lineNum">     286 </span><span class="lineCov">         15 :                     pos += ret;</span>
+<span class="lineNum">     287 </span><span class="lineCov">         15 :                     break;</span>
 <span class="lineNum">     288 </span>            :                 case 'X':
-<span class="lineNum">     289 </span><span class="lineCov">          6 :                     if (!(ret = format_time(buf + pos, max_len - pos,</span>
+<span class="lineNum">     289 </span><span class="lineCov">         15 :                     if (!(ret = format_time(buf + pos, max_len - pos,</span>
 <span class="lineNum">     290 </span>            :                                             (char *) &quot;%H:%M:%S&quot;, tmval)))
 <span class="lineNum">     291 </span><span class="lineNoCov">          0 :                         return (0);</span>
-<span class="lineNum">     292 </span><span class="lineCov">          6 :                     pos += ret;</span>
-<span class="lineNum">     293 </span><span class="lineCov">          6 :                     break;</span>
+<span class="lineNum">     292 </span><span class="lineCov">         15 :                     pos += ret;</span>
+<span class="lineNum">     293 </span><span class="lineCov">         15 :                     break;</span>
 <span class="lineNum">     294 </span>            :                 case 'y':
-<span class="lineNum">     295 </span><span class="lineCov">          6 :                     int2str(tmp, (tmval-&gt;tm_year % 100), 2, '0');</span>
-<span class="lineNum">     296 </span><span class="lineCov">          6 :                     break;</span>
+<span class="lineNum">     295 </span><span class="lineCov">         15 :                     int2str(tmp, (tmval-&gt;tm_year % 100), 2, '0');</span>
+<span class="lineNum">     296 </span><span class="lineCov">         15 :                     break;</span>
 <span class="lineNum">     297 </span>            :                 case 'Y':
-<span class="lineNum">     298 </span><span class="lineCov">      49209 :                     int2str(tmp, tmval-&gt;tm_year + 1900, 4, '0');</span>
-<span class="lineNum">     299 </span><span class="lineCov">      49209 :                     break;</span>
+<span class="lineNum">     298 </span><span class="lineCov">      52109 :                     int2str(tmp, tmval-&gt;tm_year + 1900, 4, '0');</span>
+<span class="lineNum">     299 </span><span class="lineCov">      52109 :                     break;</span>
 <span class="lineNum">     300 </span>            :                 case 'Z':
 <span class="lineNum">     301 </span>            : #ifdef HAVE_STRUCT_TM_TM_ZONE
 <span class="lineNum">     302 </span><span class="lineCov">         87 :                     strcpyn(tmp, sizeof(tmp), tmval-&gt;tm_zone);</span>
@@ -378,13 +378,13 @@
 <span class="lineNum">     316 </span><span class="lineNoCov">          0 :                     tmp[2] = '\0';</span>
 <span class="lineNum">     317 </span><span class="lineNoCov">          0 :                     break;</span>
 <span class="lineNum">     318 </span>            :                 }
-<span class="lineNum">     319 </span><span class="lineCov">     295569 :                 if (pos + strlen(tmp) &gt; (size_t) max_len)</span>
+<span class="lineNum">     319 </span><span class="lineCov">     313050 :                 if (pos + strlen(tmp) &gt; (size_t) max_len)</span>
 <span class="lineNum">     320 </span><span class="lineNoCov">          0 :                     return (0);</span>
-<span class="lineNum">     321 </span><span class="lineCov">     295569 :                 (void) strcpyn(buf + pos, max_len - pos, tmp);</span>
-<span class="lineNum">     322 </span><span class="lineCov">     295569 :                 pos += strlen(tmp);</span>
+<span class="lineNum">     321 </span><span class="lineCov">     313050 :                 (void) strcpyn(buf + pos, max_len - pos, tmp);</span>
+<span class="lineNum">     322 </span><span class="lineCov">     313050 :                 pos += strlen(tmp);</span>
 <span class="lineNum">     323 </span>            :             }
-<span class="lineNum">     324 </span><span class="lineCov">      49320 :     buf[pos] = '\0';</span>
-<span class="lineNum">     325 </span><span class="lineCov">      49320 :     return (pos);</span>
+<span class="lineNum">     324 </span><span class="lineCov">      52256 :     buf[pos] = '\0';</span>
+<span class="lineNum">     325 </span><span class="lineCov">      52256 :     return (pos);</span>
 <span class="lineNum">     326 </span>            : #endif                          /* USE_STRFTIME */
 <span class="lineNum">     327 </span>            : }
 <a name="328"><span class="lineNum">     328 </span>            : </a>
@@ -444,51 +444,51 @@
 <span class="lineNum">     382 </span>            : }
 <a name="383"><span class="lineNum">     383 </span>            : </a>
 <span class="lineNum">     384 </span>            : int
-<span class="lineNum">     385 </span><span class="lineCov">       1794 : msec_diff(struct timeval now, struct timeval then)</span>
+<span class="lineNum">     385 </span><span class="lineCov">       2238 : msec_diff(struct timeval now, struct timeval then)</span>
 <span class="lineNum">     386 </span>            : {
-<span class="lineNum">     387 </span><span class="lineCov">       1794 :     return ((now.tv_sec - then.tv_sec) * 1000 + (now.tv_usec - then.tv_usec) / 1000);</span>
+<span class="lineNum">     387 </span><span class="lineCov">       2238 :     return ((now.tv_sec - then.tv_sec) * 1000 + (now.tv_usec - then.tv_usec) / 1000);</span>
 <span class="lineNum">     388 </span>            : }
 <a name="389"><span class="lineNum">     389 </span>            : </a>
 <span class="lineNum">     390 </span>            : struct timeval
-<span class="lineNum">     391 </span><span class="lineCov">       3578 : msec_add(struct timeval t, int x)</span>
+<span class="lineNum">     391 </span><span class="lineCov">       4468 : msec_add(struct timeval t, int x)</span>
 <span class="lineNum">     392 </span>            : {
-<span class="lineNum">     393 </span><span class="lineCov">       3578 :     t.tv_sec += x / 1000;</span>
-<span class="lineNum">     394 </span><span class="lineCov">       3578 :     t.tv_usec += (x % 1000) * 1000;</span>
-<span class="lineNum">     395 </span><span class="lineCov">       3578 :     if (t.tv_usec &gt;= 1000000) {</span>
-<span class="lineNum">     396 </span><span class="lineCov">          1 :         t.tv_sec += t.tv_usec / 1000000;</span>
-<span class="lineNum">     397 </span><span class="lineCov">          1 :         t.tv_usec = t.tv_usec % 1000000;</span>
+<span class="lineNum">     393 </span><span class="lineCov">       4468 :     t.tv_sec += x / 1000;</span>
+<span class="lineNum">     394 </span><span class="lineCov">       4468 :     t.tv_usec += (x % 1000) * 1000;</span>
+<span class="lineNum">     395 </span><span class="lineCov">       4468 :     if (t.tv_usec &gt;= 1000000) {</span>
+<span class="lineNum">     396 </span><span class="lineCov">          2 :         t.tv_sec += t.tv_usec / 1000000;</span>
+<span class="lineNum">     397 </span><span class="lineCov">          2 :         t.tv_usec = t.tv_usec % 1000000;</span>
 <span class="lineNum">     398 </span>            :     }
-<span class="lineNum">     399 </span><span class="lineCov">       3578 :     return t;</span>
+<span class="lineNum">     399 </span><span class="lineCov">       4468 :     return t;</span>
 <span class="lineNum">     400 </span>            : }
 <a name="401"><span class="lineNum">     401 </span>            : </a>
 <span class="lineNum">     402 </span>            : struct timeval
-<span class="lineNum">     403 </span><span class="lineCov">       1784 : timeval_sub(struct timeval now, struct timeval then)</span>
+<span class="lineNum">     403 </span><span class="lineCov">       2230 : timeval_sub(struct timeval now, struct timeval then)</span>
 <span class="lineNum">     404 </span>            : {
-<span class="lineNum">     405 </span><span class="lineCov">       1784 :     now.tv_sec -= then.tv_sec;</span>
-<span class="lineNum">     406 </span><span class="lineCov">       1784 :     now.tv_usec -= then.tv_usec;</span>
-<span class="lineNum">     407 </span><span class="lineCov">       1784 :     if (now.tv_usec &lt; 0) {</span>
-<span class="lineNum">     408 </span><span class="lineCov">       1603 :         now.tv_usec += 1000000;</span>
-<span class="lineNum">     409 </span><span class="lineCov">       1603 :         now.tv_sec--;</span>
+<span class="lineNum">     405 </span><span class="lineCov">       2230 :     now.tv_sec -= then.tv_sec;</span>
+<span class="lineNum">     406 </span><span class="lineCov">       2230 :     now.tv_usec -= then.tv_usec;</span>
+<span class="lineNum">     407 </span><span class="lineCov">       2230 :     if (now.tv_usec &lt; 0) {</span>
+<span class="lineNum">     408 </span><span class="lineCov">       1975 :         now.tv_usec += 1000000;</span>
+<span class="lineNum">     409 </span><span class="lineCov">       1975 :         now.tv_sec--;</span>
 <span class="lineNum">     410 </span>            :     }
-<span class="lineNum">     411 </span><span class="lineCov">       1784 :     return now;</span>
+<span class="lineNum">     411 </span><span class="lineCov">       2230 :     return now;</span>
 <span class="lineNum">     412 </span>            : }
 <a name="413"><span class="lineNum">     413 </span>            : </a>
 <span class="lineNum">     414 </span>            : const char *
-<span class="lineNum">     415 </span><span class="lineCov">       1572 : timestr_full(long dtime)</span>
+<span class="lineNum">     415 </span><span class="lineCov">       2022 : timestr_full(long dtime)</span>
 <span class="lineNum">     416 </span>            : {
 <span class="lineNum">     417 </span>            :     static char buf[32];
 <span class="lineNum">     418 </span>            :     int days, hours, minutes, seconds;
 <span class="lineNum">     419 </span>            : 
-<span class="lineNum">     420 </span><span class="lineCov">       1572 :     days = dtime / 86400;</span>
-<span class="lineNum">     421 </span><span class="lineCov">       1572 :     dtime %= 86400;</span>
-<span class="lineNum">     422 </span><span class="lineCov">       1572 :     hours = dtime / 3600;</span>
-<span class="lineNum">     423 </span><span class="lineCov">       1572 :     dtime %= 3600;</span>
-<span class="lineNum">     424 </span><span class="lineCov">       1572 :     minutes = dtime / 60;</span>
-<span class="lineNum">     425 </span><span class="lineCov">       1572 :     seconds = dtime % 60;</span>
+<span class="lineNum">     420 </span><span class="lineCov">       2022 :     days = dtime / 86400;</span>
+<span class="lineNum">     421 </span><span class="lineCov">       2022 :     dtime %= 86400;</span>
+<span class="lineNum">     422 </span><span class="lineCov">       2022 :     hours = dtime / 3600;</span>
+<span class="lineNum">     423 </span><span class="lineCov">       2022 :     dtime %= 3600;</span>
+<span class="lineNum">     424 </span><span class="lineCov">       2022 :     minutes = dtime / 60;</span>
+<span class="lineNum">     425 </span><span class="lineCov">       2022 :     seconds = dtime % 60;</span>
 <span class="lineNum">     426 </span>            : 
-<span class="lineNum">     427 </span><span class="lineCov">       1572 :     snprintf(buf, sizeof(buf), &quot;%3dd %2d:%02d:%02d&quot;, days, hours, minutes, seconds);</span>
+<span class="lineNum">     427 </span><span class="lineCov">       2022 :     snprintf(buf, sizeof(buf), &quot;%3dd %2d:%02d:%02d&quot;, days, hours, minutes, seconds);</span>
 <span class="lineNum">     428 </span>            : 
-<span class="lineNum">     429 </span><span class="lineCov">       1572 :     return buf;</span>
+<span class="lineNum">     429 </span><span class="lineCov">       2022 :     return buf;</span>
 <span class="lineNum">     430 </span>            : }
 </pre>
       </td>

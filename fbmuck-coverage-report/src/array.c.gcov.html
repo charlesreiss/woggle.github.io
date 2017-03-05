@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-03-04 20:10:00</td>
+            <td class="headerValue">2017-03-05 00:54:08</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">41</td>
@@ -134,11 +134,11 @@
 <span class="lineNum">      72 </span>            : ** Returns -1 is a &lt; b.  Returns 1 is a &gt; b.  Returns 0 if a == b.
 <a name="73"><span class="lineNum">      73 </span>            : */</a>
 <span class="lineNum">      74 </span>            : static int
-<span class="lineNum">      75 </span><span class="lineCov">       2592 : array_tree_compare(array_iter * a, array_iter * b, int case_sens)</span>
+<span class="lineNum">      75 </span><span class="lineCov">       2690 : array_tree_compare(array_iter * a, array_iter * b, int case_sens)</span>
 <span class="lineNum">      76 </span>            : {
 <span class="lineNum">      77 </span>            :     assert(a != NULL);
 <span class="lineNum">      78 </span>            :     assert(b != NULL);
-<span class="lineNum">      79 </span><span class="lineCov">       2592 :     if (a-&gt;type != b-&gt;type) {</span>
+<span class="lineNum">      79 </span><span class="lineCov">       2690 :     if (a-&gt;type != b-&gt;type) {</span>
 <span class="lineNum">      80 </span><span class="lineCov">        435 :         if (a-&gt;type == PROG_INTEGER &amp;&amp; b-&gt;type == PROG_FLOAT) {</span>
 <span class="lineNum">      81 </span><span class="lineNoCov">          0 :             if (fabs(((double) a-&gt;data.number - b-&gt;data.fnumber) / (double) a-&gt;data.number) &lt;</span>
 <span class="lineNum">      82 </span>            :                 DBL_EPSILON) {
@@ -160,7 +160,7 @@
 <span class="lineNum">      98 </span><span class="lineCov">        435 :         return (a-&gt;type - b-&gt;type);</span>
 <span class="lineNum">      99 </span>            :     }
 <span class="lineNum">     100 </span>            :     /* Indexes are of same type if we reached here. */
-<span class="lineNum">     101 </span><span class="lineCov">       2157 :     if (a-&gt;type == PROG_FLOAT) {</span>
+<span class="lineNum">     101 </span><span class="lineCov">       2255 :     if (a-&gt;type == PROG_FLOAT) {</span>
 <span class="lineNum">     102 </span><span class="lineCov">          5 :         if (a-&gt;data.fnumber == b-&gt;data.fnumber) {</span>
 <span class="lineNum">     103 </span><span class="lineCov">          5 :             return 0;</span>
 <span class="lineNum">     104 </span><span class="lineNoCov">          0 :         } else if (fabs((a-&gt;data.fnumber - b-&gt;data.fnumber) / a-&gt;data.fnumber) &lt; DBL_EPSILON) {</span>
@@ -170,18 +170,18 @@
 <span class="lineNum">     108 </span>            :         } else {
 <span class="lineNum">     109 </span><span class="lineNoCov">          0 :             return -1;</span>
 <span class="lineNum">     110 </span>            :         }
-<span class="lineNum">     111 </span><span class="lineCov">       2152 :     } else if (a-&gt;type == PROG_STRING) {</span>
-<span class="lineNum">     112 </span><span class="lineCov">       1238 :         char *astr = DoNullInd(a-&gt;data.string);</span>
-<span class="lineNum">     113 </span><span class="lineCov">       1238 :         char *bstr = DoNullInd(b-&gt;data.string);</span>
+<span class="lineNum">     111 </span><span class="lineCov">       2250 :     } else if (a-&gt;type == PROG_STRING) {</span>
+<span class="lineNum">     112 </span><span class="lineCov">       1290 :         char *astr = DoNullInd(a-&gt;data.string);</span>
+<span class="lineNum">     113 </span><span class="lineCov">       1290 :         char *bstr = DoNullInd(b-&gt;data.string);</span>
 <span class="lineNum">     114 </span>            : 
-<span class="lineNum">     115 </span><span class="lineCov">       1238 :         if (0 != case_sens) {</span>
+<span class="lineNum">     115 </span><span class="lineCov">       1290 :         if (0 != case_sens) {</span>
 <span class="lineNum">     116 </span><span class="lineCov">         17 :             return strcmp(astr, bstr);</span>
 <span class="lineNum">     117 </span>            :         } else {
-<span class="lineNum">     118 </span><span class="lineCov">       1221 :             return strcasecmp(astr, bstr);</span>
+<span class="lineNum">     118 </span><span class="lineCov">       1273 :             return strcasecmp(astr, bstr);</span>
 <span class="lineNum">     119 </span>            :         }
-<span class="lineNum">     120 </span><span class="lineCov">        914 :     } else if (a-&gt;type == PROG_ARRAY) {</span>
+<span class="lineNum">     120 </span><span class="lineCov">        960 :     } else if (a-&gt;type == PROG_ARRAY) {</span>
 <span class="lineNum">     121 </span><span class="lineCov">          3 :         return array_tree_compare_arrays(a, b, case_sens);</span>
-<span class="lineNum">     122 </span><span class="lineCov">        911 :     } else if (a-&gt;type == PROG_LOCK) {</span>
+<span class="lineNum">     122 </span><span class="lineCov">        957 :     } else if (a-&gt;type == PROG_LOCK) {</span>
 <span class="lineNum">     123 </span>            :         /*
 <span class="lineNum">     124 </span>            :          * In a perfect world, we'd compare the locks by element,
 <span class="lineNum">     125 </span>            :          * instead of unparsing them into strings for strcmp()s.
@@ -195,7 +195,7 @@
 <span class="lineNum">     133 </span><span class="lineCov">          3 :         retval = strcmp(la, lb);</span>
 <span class="lineNum">     134 </span><span class="lineCov">          3 :         free(la);</span>
 <span class="lineNum">     135 </span><span class="lineCov">          3 :         return retval;</span>
-<span class="lineNum">     136 </span><span class="lineCov">        908 :     } else if (a-&gt;type == PROG_ADD) {</span>
+<span class="lineNum">     136 </span><span class="lineCov">        954 :     } else if (a-&gt;type == PROG_ADD) {</span>
 <span class="lineNum">     137 </span><span class="lineNoCov">          0 :         int result = (a-&gt;data.addr-&gt;progref - b-&gt;data.addr-&gt;progref);</span>
 <span class="lineNum">     138 </span>            : 
 <span class="lineNum">     139 </span><span class="lineNoCov">          0 :         if (0 != result) {</span>
@@ -203,7 +203,7 @@
 <span class="lineNum">     141 </span>            :         }
 <span class="lineNum">     142 </span><span class="lineNoCov">          0 :         return (a-&gt;data.addr-&gt;data - b-&gt;data.addr-&gt;data);</span>
 <span class="lineNum">     143 </span>            :     } else {
-<span class="lineNum">     144 </span><span class="lineCov">        908 :         return (a-&gt;data.number - b-&gt;data.number);</span>
+<span class="lineNum">     144 </span><span class="lineCov">        954 :         return (a-&gt;data.number - b-&gt;data.number);</span>
 <span class="lineNum">     145 </span>            :     }
 <span class="lineNum">     146 </span>            : }
 <a name="147"><span class="lineNum">     147 </span>            : </a>
@@ -583,51 +583,51 @@
 <span class="lineNum">     521 </span>            :  *****************************************************************/
 <a name="522"><span class="lineNum">     522 </span>            : </a>
 <span class="lineNum">     523 </span>            : stk_array *
-<span class="lineNum">     524 </span><span class="lineCov">        164 : new_array(void)</span>
+<span class="lineNum">     524 </span><span class="lineCov">        203 : new_array(void)</span>
 <span class="lineNum">     525 </span>            : {
 <span class="lineNum">     526 </span>            :     stk_array *nu;
 <span class="lineNum">     527 </span>            : 
-<span class="lineNum">     528 </span><span class="lineCov">        164 :     nu = (stk_array *) malloc(sizeof(stk_array));</span>
+<span class="lineNum">     528 </span><span class="lineCov">        203 :     nu = (stk_array *) malloc(sizeof(stk_array));</span>
 <span class="lineNum">     529 </span>            :     assert(nu != NULL);
-<span class="lineNum">     530 </span><span class="lineCov">        164 :     if (nu == NULL) {</span>
+<span class="lineNum">     530 </span><span class="lineCov">        203 :     if (nu == NULL) {</span>
 <span class="lineNum">     531 </span><span class="lineNoCov">          0 :         fprintf(stderr, &quot;new_array(): Out of Memory!&quot;);</span>
 <span class="lineNum">     532 </span><span class="lineNoCov">          0 :         abort();</span>
 <span class="lineNum">     533 </span>            :     }
-<span class="lineNum">     534 </span><span class="lineCov">        164 :     nu-&gt;links = 1;</span>
-<span class="lineNum">     535 </span><span class="lineCov">        164 :     nu-&gt;type = ARRAY_UNDEFINED;</span>
-<span class="lineNum">     536 </span><span class="lineCov">        164 :     nu-&gt;items = 0;</span>
-<span class="lineNum">     537 </span><span class="lineCov">        164 :     nu-&gt;pinned = 0;</span>
-<span class="lineNum">     538 </span><span class="lineCov">        164 :     nu-&gt;data.packed = NULL;</span>
+<span class="lineNum">     534 </span><span class="lineCov">        203 :     nu-&gt;links = 1;</span>
+<span class="lineNum">     535 </span><span class="lineCov">        203 :     nu-&gt;type = ARRAY_UNDEFINED;</span>
+<span class="lineNum">     536 </span><span class="lineCov">        203 :     nu-&gt;items = 0;</span>
+<span class="lineNum">     537 </span><span class="lineCov">        203 :     nu-&gt;pinned = 0;</span>
+<span class="lineNum">     538 </span><span class="lineCov">        203 :     nu-&gt;data.packed = NULL;</span>
 <span class="lineNum">     539 </span>            : 
-<span class="lineNum">     540 </span><span class="lineCov">        164 :     return nu;</span>
+<span class="lineNum">     540 </span><span class="lineCov">        203 :     return nu;</span>
 <span class="lineNum">     541 </span>            : }
 <a name="542"><span class="lineNum">     542 </span>            : </a>
 <span class="lineNum">     543 </span>            : stk_array *
-<span class="lineNum">     544 </span><span class="lineCov">        137 : new_array_packed(int size)</span>
+<span class="lineNum">     544 </span><span class="lineCov">        176 : new_array_packed(int size)</span>
 <span class="lineNum">     545 </span>            : {
 <span class="lineNum">     546 </span>            :     stk_array *nu;
 <span class="lineNum">     547 </span>            : 
-<span class="lineNum">     548 </span><span class="lineCov">        137 :     if (size &lt; 0) {</span>
+<span class="lineNum">     548 </span><span class="lineCov">        176 :     if (size &lt; 0) {</span>
 <span class="lineNum">     549 </span><span class="lineNoCov">          0 :         return NULL;</span>
 <span class="lineNum">     550 </span>            :     }
 <span class="lineNum">     551 </span>            : 
-<span class="lineNum">     552 </span><span class="lineCov">        137 :     nu = new_array();</span>
+<span class="lineNum">     552 </span><span class="lineCov">        176 :     nu = new_array();</span>
 <span class="lineNum">     553 </span>            :     assert(nu != NULL);         /* Redundant, but I'm coding defensively */
-<span class="lineNum">     554 </span><span class="lineCov">        137 :     nu-&gt;items = size;</span>
-<span class="lineNum">     555 </span><span class="lineCov">        137 :     nu-&gt;type = ARRAY_PACKED;</span>
-<span class="lineNum">     556 </span><span class="lineCov">        137 :     if (size &lt; 1)</span>
-<span class="lineNum">     557 </span><span class="lineCov">         29 :         size = 1;</span>
-<span class="lineNum">     558 </span><span class="lineCov">        137 :     nu-&gt;data.packed = (array_data *) malloc(sizeof(array_data) * size);</span>
-<span class="lineNum">     559 </span><span class="lineCov">        137 :     if (nu-&gt;data.packed == NULL) {</span>
+<span class="lineNum">     554 </span><span class="lineCov">        176 :     nu-&gt;items = size;</span>
+<span class="lineNum">     555 </span><span class="lineCov">        176 :     nu-&gt;type = ARRAY_PACKED;</span>
+<span class="lineNum">     556 </span><span class="lineCov">        176 :     if (size &lt; 1)</span>
+<span class="lineNum">     557 </span><span class="lineCov">         31 :         size = 1;</span>
+<span class="lineNum">     558 </span><span class="lineCov">        176 :     nu-&gt;data.packed = (array_data *) malloc(sizeof(array_data) * size);</span>
+<span class="lineNum">     559 </span><span class="lineCov">        176 :     if (nu-&gt;data.packed == NULL) {</span>
 <span class="lineNum">     560 </span><span class="lineNoCov">          0 :         fprintf(stderr, &quot;new_array_packed(): Out of Memory!&quot;);</span>
 <span class="lineNum">     561 </span><span class="lineNoCov">          0 :         abort();</span>
 <span class="lineNum">     562 </span>            :     }
-<span class="lineNum">     563 </span><span class="lineCov">        803 :     for (int i = size; i-- &gt; 0;) {</span>
-<span class="lineNum">     564 </span><span class="lineCov">        529 :         nu-&gt;data.packed[i].type = PROG_INTEGER;</span>
-<span class="lineNum">     565 </span><span class="lineCov">        529 :         nu-&gt;data.packed[i].line = 0;</span>
-<span class="lineNum">     566 </span><span class="lineCov">        529 :         nu-&gt;data.packed[i].data.number = 0;</span>
+<span class="lineNum">     563 </span><span class="lineCov">       1000 :     for (int i = size; i-- &gt; 0;) {</span>
+<span class="lineNum">     564 </span><span class="lineCov">        648 :         nu-&gt;data.packed[i].type = PROG_INTEGER;</span>
+<span class="lineNum">     565 </span><span class="lineCov">        648 :         nu-&gt;data.packed[i].line = 0;</span>
+<span class="lineNum">     566 </span><span class="lineCov">        648 :         nu-&gt;data.packed[i].data.number = 0;</span>
 <span class="lineNum">     567 </span>            :     }
-<span class="lineNum">     568 </span><span class="lineCov">        137 :     return nu;</span>
+<span class="lineNum">     568 </span><span class="lineCov">        176 :     return nu;</span>
 <span class="lineNum">     569 </span>            : }
 <a name="570"><span class="lineNum">     570 </span>            : </a>
 <span class="lineNum">     571 </span>            : stk_array *
@@ -700,22 +700,22 @@
 <span class="lineNum">     638 </span>            : }
 <a name="639"><span class="lineNum">     639 </span>            : </a>
 <span class="lineNum">     640 </span>            : void
-<span class="lineNum">     641 </span><span class="lineCov">        220 : array_free(stk_array * arr)</span>
+<span class="lineNum">     641 </span><span class="lineCov">        259 : array_free(stk_array * arr)</span>
 <span class="lineNum">     642 </span>            : {
-<span class="lineNum">     643 </span><span class="lineCov">        220 :     if (arr == NULL) {</span>
+<span class="lineNum">     643 </span><span class="lineCov">        259 :     if (arr == NULL) {</span>
 <span class="lineNum">     644 </span><span class="lineCov">          7 :         return;</span>
 <span class="lineNum">     645 </span>            :     }
-<span class="lineNum">     646 </span><span class="lineCov">        213 :     arr-&gt;links--;</span>
-<span class="lineNum">     647 </span><span class="lineCov">        213 :     if (arr-&gt;links &gt; 0) {</span>
+<span class="lineNum">     646 </span><span class="lineCov">        252 :     arr-&gt;links--;</span>
+<span class="lineNum">     647 </span><span class="lineCov">        252 :     if (arr-&gt;links &gt; 0) {</span>
 <span class="lineNum">     648 </span><span class="lineCov">         49 :         return;</span>
 <span class="lineNum">     649 </span>            :     }
-<span class="lineNum">     650 </span><span class="lineCov">        164 :     switch (arr-&gt;type) {</span>
+<span class="lineNum">     650 </span><span class="lineCov">        203 :     switch (arr-&gt;type) {</span>
 <span class="lineNum">     651 </span>            :     case ARRAY_PACKED:{
-<span class="lineNum">     652 </span><span class="lineCov">        862 :             for (int i = arr-&gt;items; i-- &gt; 0;) {</span>
-<span class="lineNum">     653 </span><span class="lineCov">        588 :                 CLEAR(&amp;arr-&gt;data.packed[i]);</span>
+<span class="lineNum">     652 </span><span class="lineCov">       1062 :             for (int i = arr-&gt;items; i-- &gt; 0;) {</span>
+<span class="lineNum">     653 </span><span class="lineCov">        710 :                 CLEAR(&amp;arr-&gt;data.packed[i]);</span>
 <span class="lineNum">     654 </span>            :             }
-<span class="lineNum">     655 </span><span class="lineCov">        137 :             free(arr-&gt;data.packed);</span>
-<span class="lineNum">     656 </span><span class="lineCov">        137 :             break;</span>
+<span class="lineNum">     655 </span><span class="lineCov">        176 :             free(arr-&gt;data.packed);</span>
+<span class="lineNum">     656 </span><span class="lineCov">        176 :             break;</span>
 <span class="lineNum">     657 </span>            :         }
 <span class="lineNum">     658 </span>            :     case ARRAY_DICTIONARY:
 <span class="lineNum">     659 </span><span class="lineCov">         27 :         array_tree_delete_all(arr-&gt;data.dict);</span>
@@ -725,41 +725,41 @@
 <span class="lineNum">     663 </span><span class="lineNoCov">          0 :             break;</span>
 <span class="lineNum">     664 </span>            :         }
 <span class="lineNum">     665 </span>            :     }
-<span class="lineNum">     666 </span><span class="lineCov">        164 :     arr-&gt;items = 0;</span>
-<span class="lineNum">     667 </span><span class="lineCov">        164 :     arr-&gt;data.packed = NULL;</span>
-<span class="lineNum">     668 </span><span class="lineCov">        164 :     arr-&gt;type = ARRAY_UNDEFINED;</span>
-<span class="lineNum">     669 </span><span class="lineCov">        164 :     free(arr);</span>
+<span class="lineNum">     666 </span><span class="lineCov">        203 :     arr-&gt;items = 0;</span>
+<span class="lineNum">     667 </span><span class="lineCov">        203 :     arr-&gt;data.packed = NULL;</span>
+<span class="lineNum">     668 </span><span class="lineCov">        203 :     arr-&gt;type = ARRAY_UNDEFINED;</span>
+<span class="lineNum">     669 </span><span class="lineCov">        203 :     free(arr);</span>
 <span class="lineNum">     670 </span>            : }
 <a name="671"><span class="lineNum">     671 </span>            : </a>
 <span class="lineNum">     672 </span>            : int
-<span class="lineNum">     673 </span><span class="lineCov">         61 : array_count(stk_array * arr)</span>
+<span class="lineNum">     673 </span><span class="lineCov">         66 : array_count(stk_array * arr)</span>
 <span class="lineNum">     674 </span>            : {
-<span class="lineNum">     675 </span><span class="lineCov">         61 :     if (arr == NULL) {</span>
+<span class="lineNum">     675 </span><span class="lineCov">         66 :     if (arr == NULL) {</span>
 <span class="lineNum">     676 </span><span class="lineNoCov">          0 :         return 0;</span>
 <span class="lineNum">     677 </span>            :     }
-<span class="lineNum">     678 </span><span class="lineCov">         61 :     return arr-&gt;items;</span>
+<span class="lineNum">     678 </span><span class="lineCov">         66 :     return arr-&gt;items;</span>
 <span class="lineNum">     679 </span>            : }
 <a name="680"><span class="lineNum">     680 </span>            : </a>
 <span class="lineNum">     681 </span>            : int
-<span class="lineNum">     682 </span><span class="lineCov">        475 : array_idxcmp_case(array_iter * a, array_iter * b, int case_sens)</span>
+<span class="lineNum">     682 </span><span class="lineCov">        573 : array_idxcmp_case(array_iter * a, array_iter * b, int case_sens)</span>
 <span class="lineNum">     683 </span>            : {
 <span class="lineNum">     684 </span>            :     assert(a != NULL);
 <span class="lineNum">     685 </span>            :     assert(b != NULL);
-<span class="lineNum">     686 </span><span class="lineCov">        475 :     return array_tree_compare(a, b, case_sens);</span>
+<span class="lineNum">     686 </span><span class="lineCov">        573 :     return array_tree_compare(a, b, case_sens);</span>
 <span class="lineNum">     687 </span>            : }
 <a name="688"><span class="lineNum">     688 </span>            : </a>
 <span class="lineNum">     689 </span>            : int
-<span class="lineNum">     690 </span><span class="lineCov">       1050 : array_first(stk_array * arr, array_iter * item)</span>
+<span class="lineNum">     690 </span><span class="lineCov">       1230 : array_first(stk_array * arr, array_iter * item)</span>
 <span class="lineNum">     691 </span>            : {
 <span class="lineNum">     692 </span>            :     assert(item != NULL);
-<span class="lineNum">     693 </span><span class="lineCov">       1050 :     if ((arr == NULL) || (arr-&gt;items == 0)) {</span>
-<span class="lineNum">     694 </span><span class="lineCov">          1 :         return 0;</span>
+<span class="lineNum">     693 </span><span class="lineCov">       1230 :     if ((arr == NULL) || (arr-&gt;items == 0)) {</span>
+<span class="lineNum">     694 </span><span class="lineCov">          4 :         return 0;</span>
 <span class="lineNum">     695 </span>            :     }
-<span class="lineNum">     696 </span><span class="lineCov">       1049 :     switch (arr-&gt;type) {</span>
+<span class="lineNum">     696 </span><span class="lineCov">       1226 :     switch (arr-&gt;type) {</span>
 <span class="lineNum">     697 </span>            :     case ARRAY_PACKED:{
-<span class="lineNum">     698 </span><span class="lineCov">        911 :             item-&gt;type = PROG_INTEGER;</span>
-<span class="lineNum">     699 </span><span class="lineCov">        911 :             item-&gt;data.number = 0;</span>
-<span class="lineNum">     700 </span><span class="lineCov">        911 :             return 1;</span>
+<span class="lineNum">     698 </span><span class="lineCov">       1088 :             item-&gt;type = PROG_INTEGER;</span>
+<span class="lineNum">     699 </span><span class="lineCov">       1088 :             item-&gt;data.number = 0;</span>
+<span class="lineNum">     700 </span><span class="lineCov">       1088 :             return 1;</span>
 <span class="lineNum">     701 </span>            :         }
 <span class="lineNum">     702 </span>            :     case ARRAY_DICTIONARY:{
 <span class="lineNum">     703 </span>            :             array_tree *p;
@@ -857,37 +857,37 @@
 <span class="lineNum">     795 </span>            : }
 <a name="796"><span class="lineNum">     796 </span>            : </a>
 <span class="lineNum">     797 </span>            : int
-<span class="lineNum">     798 </span><span class="lineCov">       4182 : array_next(stk_array * arr, array_iter * item)</span>
+<span class="lineNum">     798 </span><span class="lineCov">       4733 : array_next(stk_array * arr, array_iter * item)</span>
 <span class="lineNum">     799 </span>            : {
 <span class="lineNum">     800 </span>            :     assert(item != NULL);
-<span class="lineNum">     801 </span><span class="lineCov">       4182 :     if ((arr == NULL) || (arr-&gt;items == 0)) {</span>
+<span class="lineNum">     801 </span><span class="lineCov">       4733 :     if ((arr == NULL) || (arr-&gt;items == 0)) {</span>
 <span class="lineNum">     802 </span><span class="lineNoCov">          0 :         return 0;</span>
 <span class="lineNum">     803 </span>            :     }
-<span class="lineNum">     804 </span><span class="lineCov">       4182 :     switch (arr-&gt;type) {</span>
+<span class="lineNum">     804 </span><span class="lineCov">       4733 :     switch (arr-&gt;type) {</span>
 <span class="lineNum">     805 </span>            :     case ARRAY_PACKED:{
 <span class="lineNum">     806 </span>            :             int idx;
 <span class="lineNum">     807 </span>            : 
-<span class="lineNum">     808 </span><span class="lineCov">       3794 :             if (item-&gt;type == PROG_STRING) {</span>
+<span class="lineNum">     808 </span><span class="lineCov">       4345 :             if (item-&gt;type == PROG_STRING) {</span>
 <span class="lineNum">     809 </span><span class="lineNoCov">          0 :                 CLEAR(item);</span>
 <span class="lineNum">     810 </span><span class="lineNoCov">          0 :                 return 0;</span>
-<span class="lineNum">     811 </span><span class="lineCov">       3794 :             } else if (item-&gt;type == PROG_FLOAT) {</span>
+<span class="lineNum">     811 </span><span class="lineCov">       4345 :             } else if (item-&gt;type == PROG_FLOAT) {</span>
 <span class="lineNum">     812 </span><span class="lineNoCov">          0 :                 if (item-&gt;data.fnumber &lt; 0.0) {</span>
 <span class="lineNum">     813 </span><span class="lineNoCov">          0 :                     idx = 0;</span>
 <span class="lineNum">     814 </span>            :                 } else {
 <span class="lineNum">     815 </span><span class="lineNoCov">          0 :                     idx = (int)item-&gt;data.fnumber + 1;</span>
 <span class="lineNum">     816 </span>            :                 }
 <span class="lineNum">     817 </span>            :             } else {
-<span class="lineNum">     818 </span><span class="lineCov">       3794 :                 idx = item-&gt;data.number + 1;</span>
+<span class="lineNum">     818 </span><span class="lineCov">       4345 :                 idx = item-&gt;data.number + 1;</span>
 <span class="lineNum">     819 </span>            :             }
-<span class="lineNum">     820 </span><span class="lineCov">       3794 :             CLEAR(item);</span>
-<span class="lineNum">     821 </span><span class="lineCov">       3794 :             if (idx &gt;= arr-&gt;items) {</span>
-<span class="lineNum">     822 </span><span class="lineCov">        875 :                 return 0;</span>
-<span class="lineNum">     823 </span><span class="lineCov">       2919 :             } else if (idx &lt; 0) {</span>
+<span class="lineNum">     820 </span><span class="lineCov">       4345 :             CLEAR(item);</span>
+<span class="lineNum">     821 </span><span class="lineCov">       4345 :             if (idx &gt;= arr-&gt;items) {</span>
+<span class="lineNum">     822 </span><span class="lineCov">       1042 :                 return 0;</span>
+<span class="lineNum">     823 </span><span class="lineCov">       3303 :             } else if (idx &lt; 0) {</span>
 <span class="lineNum">     824 </span><span class="lineNoCov">          0 :                 idx = 0;</span>
 <span class="lineNum">     825 </span>            :             }
-<span class="lineNum">     826 </span><span class="lineCov">       2919 :             item-&gt;type = PROG_INTEGER;</span>
-<span class="lineNum">     827 </span><span class="lineCov">       2919 :             item-&gt;data.number = idx;</span>
-<span class="lineNum">     828 </span><span class="lineCov">       2919 :             return 1;</span>
+<span class="lineNum">     826 </span><span class="lineCov">       3303 :             item-&gt;type = PROG_INTEGER;</span>
+<span class="lineNum">     827 </span><span class="lineCov">       3303 :             item-&gt;data.number = idx;</span>
+<span class="lineNum">     828 </span><span class="lineCov">       3303 :             return 1;</span>
 <span class="lineNum">     829 </span>            :         }
 <span class="lineNum">     830 </span>            :     case ARRAY_DICTIONARY:{
 <span class="lineNum">     831 </span>            :             array_tree *p;
@@ -907,20 +907,20 @@
 <span class="lineNum">     845 </span>            : }
 <a name="846"><span class="lineNum">     846 </span>            : </a>
 <span class="lineNum">     847 </span>            : array_data *
-<span class="lineNum">     848 </span><span class="lineCov">       4491 : array_getitem(stk_array * arr, array_iter * idx)</span>
+<span class="lineNum">     848 </span><span class="lineCov">       5052 : array_getitem(stk_array * arr, array_iter * idx)</span>
 <span class="lineNum">     849 </span>            : {
-<span class="lineNum">     850 </span><span class="lineCov">       4491 :     if (!arr || !idx) {</span>
+<span class="lineNum">     850 </span><span class="lineCov">       5052 :     if (!arr || !idx) {</span>
 <span class="lineNum">     851 </span><span class="lineNoCov">          0 :         return NULL;</span>
 <span class="lineNum">     852 </span>            :     }
-<span class="lineNum">     853 </span><span class="lineCov">       4491 :     switch (arr-&gt;type) {</span>
+<span class="lineNum">     853 </span><span class="lineCov">       5052 :     switch (arr-&gt;type) {</span>
 <span class="lineNum">     854 </span>            :     case ARRAY_PACKED:
-<span class="lineNum">     855 </span><span class="lineCov">       3983 :         if (idx-&gt;type != PROG_INTEGER) {</span>
+<span class="lineNum">     855 </span><span class="lineCov">       4544 :         if (idx-&gt;type != PROG_INTEGER) {</span>
 <span class="lineNum">     856 </span><span class="lineNoCov">          0 :             return NULL;</span>
 <span class="lineNum">     857 </span>            :         }
-<span class="lineNum">     858 </span><span class="lineCov">       3983 :         if (idx-&gt;data.number &lt; 0 || idx-&gt;data.number &gt;= arr-&gt;items) {</span>
+<span class="lineNum">     858 </span><span class="lineCov">       4544 :         if (idx-&gt;data.number &lt; 0 || idx-&gt;data.number &gt;= arr-&gt;items) {</span>
 <span class="lineNum">     859 </span><span class="lineNoCov">          0 :             return NULL;</span>
 <span class="lineNum">     860 </span>            :         }
-<span class="lineNum">     861 </span><span class="lineCov">       3983 :         return &amp;arr-&gt;data.packed[idx-&gt;data.number];</span>
+<span class="lineNum">     861 </span><span class="lineCov">       4544 :         return &amp;arr-&gt;data.packed[idx-&gt;data.number];</span>
 <span class="lineNum">     862 </span>            : 
 <span class="lineNum">     863 </span>            :     case ARRAY_DICTIONARY:{
 <span class="lineNum">     864 </span>            :             array_tree *p;
@@ -939,43 +939,43 @@
 <span class="lineNum">     877 </span>            : }
 <a name="878"><span class="lineNum">     878 </span>            : </a>
 <span class="lineNum">     879 </span>            : int
-<span class="lineNum">     880 </span><span class="lineCov">        607 : array_setitem(stk_array ** harr, array_iter * idx, array_data * item)</span>
+<span class="lineNum">     880 </span><span class="lineCov">        729 : array_setitem(stk_array ** harr, array_iter * idx, array_data * item)</span>
 <span class="lineNum">     881 </span>            : {
 <span class="lineNum">     882 </span>            :     stk_array *arr;
 <span class="lineNum">     883 </span>            : 
 <span class="lineNum">     884 </span>            :     assert(harr != NULL);
 <span class="lineNum">     885 </span>            :     assert(*harr != NULL);
 <span class="lineNum">     886 </span>            :     assert(idx != NULL);
-<span class="lineNum">     887 </span><span class="lineCov">        607 :     if (!harr || !*harr || !idx) {</span>
+<span class="lineNum">     887 </span><span class="lineCov">        729 :     if (!harr || !*harr || !idx) {</span>
 <span class="lineNum">     888 </span><span class="lineNoCov">          0 :         return -1;</span>
 <span class="lineNum">     889 </span>            :     }
-<span class="lineNum">     890 </span><span class="lineCov">        607 :     arr = *harr;</span>
-<span class="lineNum">     891 </span><span class="lineCov">        607 :     switch (arr-&gt;type) {</span>
+<span class="lineNum">     890 </span><span class="lineCov">        729 :     arr = *harr;</span>
+<span class="lineNum">     891 </span><span class="lineCov">        729 :     switch (arr-&gt;type) {</span>
 <span class="lineNum">     892 </span>            :     case ARRAY_PACKED:{
-<span class="lineNum">     893 </span><span class="lineCov">        548 :             if (idx-&gt;type != PROG_INTEGER) {</span>
+<span class="lineNum">     893 </span><span class="lineCov">        670 :             if (idx-&gt;type != PROG_INTEGER) {</span>
 <span class="lineNum">     894 </span><span class="lineNoCov">          0 :                 return -1;</span>
 <span class="lineNum">     895 </span>            :             }
-<span class="lineNum">     896 </span><span class="lineCov">        548 :             if (idx-&gt;data.number &gt;= 0 &amp;&amp; idx-&gt;data.number &lt; arr-&gt;items) {</span>
-<span class="lineNum">     897 </span><span class="lineCov">        503 :                 if (arr-&gt;links &gt; 1 &amp;&amp; !arr-&gt;pinned) {</span>
+<span class="lineNum">     896 </span><span class="lineCov">        670 :             if (idx-&gt;data.number &gt;= 0 &amp;&amp; idx-&gt;data.number &lt; arr-&gt;items) {</span>
+<span class="lineNum">     897 </span><span class="lineCov">        620 :                 if (arr-&gt;links &gt; 1 &amp;&amp; !arr-&gt;pinned) {</span>
 <span class="lineNum">     898 </span><span class="lineNoCov">          0 :                     arr-&gt;links--;</span>
 <span class="lineNum">     899 </span><span class="lineNoCov">          0 :                     arr = *harr = array_decouple(arr);</span>
 <span class="lineNum">     900 </span>            :                 }
-<span class="lineNum">     901 </span><span class="lineCov">        503 :                 CLEAR(&amp;arr-&gt;data.packed[idx-&gt;data.number]);</span>
-<span class="lineNum">     902 </span><span class="lineCov">        503 :                 copyinst(item, &amp;arr-&gt;data.packed[idx-&gt;data.number]);</span>
-<span class="lineNum">     903 </span><span class="lineCov">        503 :                 return arr-&gt;items;</span>
-<span class="lineNum">     904 </span><span class="lineCov">         45 :             } else if (idx-&gt;data.number == arr-&gt;items) {</span>
-<span class="lineNum">     905 </span><span class="lineCov">         45 :                 if (arr-&gt;links &gt; 1 &amp;&amp; !arr-&gt;pinned) {</span>
+<span class="lineNum">     901 </span><span class="lineCov">        620 :                 CLEAR(&amp;arr-&gt;data.packed[idx-&gt;data.number]);</span>
+<span class="lineNum">     902 </span><span class="lineCov">        620 :                 copyinst(item, &amp;arr-&gt;data.packed[idx-&gt;data.number]);</span>
+<span class="lineNum">     903 </span><span class="lineCov">        620 :                 return arr-&gt;items;</span>
+<span class="lineNum">     904 </span><span class="lineCov">         50 :             } else if (idx-&gt;data.number == arr-&gt;items) {</span>
+<span class="lineNum">     905 </span><span class="lineCov">         50 :                 if (arr-&gt;links &gt; 1 &amp;&amp; !arr-&gt;pinned) {</span>
 <span class="lineNum">     906 </span><span class="lineNoCov">          0 :                     arr-&gt;links--;</span>
 <span class="lineNum">     907 </span><span class="lineNoCov">          0 :                     arr = *harr = array_decouple(arr);</span>
 <span class="lineNum">     908 </span>            :                 }
-<span class="lineNum">     909 </span><span class="lineCov">         45 :                 arr-&gt;data.packed = (array_data *)</span>
-<span class="lineNum">     910 </span><span class="lineCov">         45 :                         realloc(arr-&gt;data.packed, sizeof(array_data) * (arr-&gt;items + 1));</span>
-<span class="lineNum">     911 </span><span class="lineCov">         45 :                 if (arr-&gt;data.packed == NULL) {</span>
+<span class="lineNum">     909 </span><span class="lineCov">         50 :                 arr-&gt;data.packed = (array_data *)</span>
+<span class="lineNum">     910 </span><span class="lineCov">         50 :                         realloc(arr-&gt;data.packed, sizeof(array_data) * (arr-&gt;items + 1));</span>
+<span class="lineNum">     911 </span><span class="lineCov">         50 :                 if (arr-&gt;data.packed == NULL) {</span>
 <span class="lineNum">     912 </span><span class="lineNoCov">          0 :                     fprintf(stderr, &quot;array_setitem(): Out of Memory!&quot;);</span>
 <span class="lineNum">     913 </span><span class="lineNoCov">          0 :                     abort();</span>
 <span class="lineNum">     914 </span>            :                 }
-<span class="lineNum">     915 </span><span class="lineCov">         45 :                 copyinst(item, &amp;arr-&gt;data.packed[arr-&gt;items]);</span>
-<span class="lineNum">     916 </span><span class="lineCov">         45 :                 return (++arr-&gt;items);</span>
+<span class="lineNum">     915 </span><span class="lineCov">         50 :                 copyinst(item, &amp;arr-&gt;data.packed[arr-&gt;items]);</span>
+<span class="lineNum">     916 </span><span class="lineCov">         50 :                 return (++arr-&gt;items);</span>
 <span class="lineNum">     917 </span>            :             } else {
 <span class="lineNum">     918 </span><span class="lineNoCov">          0 :                 return -1;</span>
 <span class="lineNum">     919 </span>            :             }
@@ -1071,7 +1071,7 @@
 <span class="lineNum">    1009 </span>            : }
 <a name="1010"><span class="lineNum">    1010 </span>            : </a>
 <span class="lineNum">    1011 </span>            : int
-<span class="lineNum">    1012 </span><span class="lineCov">         34 : array_appenditem(stk_array ** harr, array_data * item)</span>
+<span class="lineNum">    1012 </span><span class="lineCov">         39 : array_appenditem(stk_array ** harr, array_data * item)</span>
 <span class="lineNum">    1013 </span>            : {
 <span class="lineNum">    1014 </span>            :     struct inst key;
 <span class="lineNum">    1015 </span>            : 
@@ -1079,14 +1079,14 @@
 <span class="lineNum">    1017 </span>            :     assert(*harr != NULL);
 <span class="lineNum">    1018 </span>            :     assert(item != NULL);
 <span class="lineNum">    1019 </span>            : 
-<span class="lineNum">    1020 </span><span class="lineCov">         34 :     if (!harr || !*harr)</span>
+<span class="lineNum">    1020 </span><span class="lineCov">         39 :     if (!harr || !*harr)</span>
 <span class="lineNum">    1021 </span><span class="lineNoCov">          0 :         return -1;</span>
-<span class="lineNum">    1022 </span><span class="lineCov">         34 :     if ((*harr)-&gt;type != ARRAY_PACKED)</span>
+<span class="lineNum">    1022 </span><span class="lineCov">         39 :     if ((*harr)-&gt;type != ARRAY_PACKED)</span>
 <span class="lineNum">    1023 </span><span class="lineNoCov">          0 :         return -1;</span>
-<span class="lineNum">    1024 </span><span class="lineCov">         34 :     key.type = PROG_INTEGER;</span>
-<span class="lineNum">    1025 </span><span class="lineCov">         34 :     key.data.number = array_count(*harr);</span>
+<span class="lineNum">    1024 </span><span class="lineCov">         39 :     key.type = PROG_INTEGER;</span>
+<span class="lineNum">    1025 </span><span class="lineCov">         39 :     key.data.number = array_count(*harr);</span>
 <span class="lineNum">    1026 </span>            : 
-<span class="lineNum">    1027 </span><span class="lineCov">         34 :     return array_setitem(harr, &amp;key, item);</span>
+<span class="lineNum">    1027 </span><span class="lineCov">         39 :     return array_setitem(harr, &amp;key, item);</span>
 <span class="lineNum">    1028 </span>            : }
 <a name="1029"><span class="lineNum">    1029 </span>            : </a>
 <span class="lineNum">    1030 </span>            : stk_array *
