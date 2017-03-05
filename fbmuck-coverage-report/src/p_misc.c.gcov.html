@@ -31,13 +31,13 @@
             <td class="headerValue">coverage-total</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">45</td>
+            <td class="headerCovTableEntry">44</td>
             <td class="headerCovTableEntry">750</td>
-            <td class="headerCovTableEntryLo">6.0 %</td>
+            <td class="headerCovTableEntryLo">5.9 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-03-04 16:58:35</td>
+            <td class="headerValue">2017-03-04 20:10:00</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">4</td>
@@ -574,89 +574,89 @@
 <span class="lineNum">     512 </span>            : }
 <a name="513"><span class="lineNum">     513 </span>            : </a>
 <span class="lineNum">     514 </span>            : void
-<span class="lineNum">     515 </span><span class="lineCov">         54 : prim_parselock(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     515 </span><span class="lineCov">         14 : prim_parselock(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     516 </span>            : {
 <span class="lineNum">     517 </span>            :     struct boolexp *lok;
 <span class="lineNum">     518 </span>            : 
-<span class="lineNum">     519 </span><span class="lineCov">         54 :     CHECKOP(1);</span>
-<span class="lineNum">     520 </span><span class="lineCov">         54 :     oper1 = POP();              /* string: lock string */</span>
-<span class="lineNum">     521 </span><span class="lineCov">         54 :     CHECKOFLOW(1);</span>
-<span class="lineNum">     522 </span><span class="lineCov">         54 :     if (oper1-&gt;type != PROG_STRING)</span>
+<span class="lineNum">     519 </span><span class="lineCov">         14 :     CHECKOP(1);</span>
+<span class="lineNum">     520 </span><span class="lineCov">         14 :     oper1 = POP();              /* string: lock string */</span>
+<span class="lineNum">     521 </span><span class="lineCov">         14 :     CHECKOFLOW(1);</span>
+<span class="lineNum">     522 </span><span class="lineCov">         14 :     if (oper1-&gt;type != PROG_STRING)</span>
 <span class="lineNum">     523 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Invalid argument.&quot;);</span>
-<span class="lineNum">     524 </span><span class="lineCov">         54 :     if (oper1-&gt;data.string != (struct shared_string *) NULL) {</span>
-<span class="lineNum">     525 </span><span class="lineCov">         54 :         lok = parse_boolexp(fr-&gt;descr, ProgUID, oper1-&gt;data.string-&gt;data, 0);</span>
+<span class="lineNum">     524 </span><span class="lineCov">         14 :     if (oper1-&gt;data.string != (struct shared_string *) NULL) {</span>
+<span class="lineNum">     525 </span><span class="lineCov">         14 :         lok = parse_boolexp(fr-&gt;descr, ProgUID, oper1-&gt;data.string-&gt;data, 0);</span>
 <span class="lineNum">     526 </span>            :     } else {
 <span class="lineNum">     527 </span><span class="lineNoCov">          0 :         lok = TRUE_BOOLEXP;</span>
 <span class="lineNum">     528 </span>            :     }
-<span class="lineNum">     529 </span><span class="lineCov">         54 :     CLEAR(oper1);</span>
-<span class="lineNum">     530 </span><span class="lineCov">         54 :     PushLock(lok);</span>
-<span class="lineNum">     531 </span><span class="lineCov">         54 :     free_boolexp(lok);</span>
+<span class="lineNum">     529 </span><span class="lineCov">         14 :     CLEAR(oper1);</span>
+<span class="lineNum">     530 </span><span class="lineCov">         14 :     PushLock(lok);</span>
+<span class="lineNum">     531 </span><span class="lineCov">         14 :     free_boolexp(lok);</span>
 <span class="lineNum">     532 </span>            : }
 <a name="533"><span class="lineNum">     533 </span>            : </a>
 <span class="lineNum">     534 </span>            : void
-<span class="lineNum">     535 </span><span class="lineCov">         16 : prim_unparselock(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     535 </span><span class="lineCov">          4 : prim_unparselock(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     536 </span>            : {
 <span class="lineNum">     537 </span>            :     const char *ptr;
 <span class="lineNum">     538 </span>            : 
-<span class="lineNum">     539 </span><span class="lineCov">         16 :     CHECKOP(1);</span>
-<span class="lineNum">     540 </span><span class="lineCov">         16 :     oper1 = POP();              /* lock: lock */</span>
-<span class="lineNum">     541 </span><span class="lineCov">         16 :     if (oper1-&gt;type != PROG_LOCK)</span>
+<span class="lineNum">     539 </span><span class="lineCov">          4 :     CHECKOP(1);</span>
+<span class="lineNum">     540 </span><span class="lineCov">          4 :     oper1 = POP();              /* lock: lock */</span>
+<span class="lineNum">     541 </span><span class="lineCov">          4 :     if (oper1-&gt;type != PROG_LOCK)</span>
 <span class="lineNum">     542 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Invalid argument.&quot;);</span>
-<span class="lineNum">     543 </span><span class="lineCov">         16 :     if (oper1-&gt;data.lock != (struct boolexp *) TRUE_BOOLEXP) {</span>
-<span class="lineNum">     544 </span><span class="lineCov">         16 :         ptr = unparse_boolexp(ProgUID, oper1-&gt;data.lock, 0);</span>
+<span class="lineNum">     543 </span><span class="lineCov">          4 :     if (oper1-&gt;data.lock != (struct boolexp *) TRUE_BOOLEXP) {</span>
+<span class="lineNum">     544 </span><span class="lineCov">          4 :         ptr = unparse_boolexp(ProgUID, oper1-&gt;data.lock, 0);</span>
 <span class="lineNum">     545 </span>            :     } else {
 <span class="lineNum">     546 </span><span class="lineNoCov">          0 :         ptr = NULL;</span>
 <span class="lineNum">     547 </span>            :     }
-<span class="lineNum">     548 </span><span class="lineCov">         16 :     CHECKOFLOW(1);</span>
-<span class="lineNum">     549 </span><span class="lineCov">         16 :     CLEAR(oper1);</span>
-<span class="lineNum">     550 </span><span class="lineCov">         16 :     if (ptr) {</span>
-<span class="lineNum">     551 </span><span class="lineCov">         16 :         PushString(ptr);</span>
+<span class="lineNum">     548 </span><span class="lineCov">          4 :     CHECKOFLOW(1);</span>
+<span class="lineNum">     549 </span><span class="lineCov">          4 :     CLEAR(oper1);</span>
+<span class="lineNum">     550 </span><span class="lineCov">          4 :     if (ptr) {</span>
+<span class="lineNum">     551 </span><span class="lineCov">          4 :         PushString(ptr);</span>
 <span class="lineNum">     552 </span>            :     } else {
 <span class="lineNum">     553 </span><span class="lineNoCov">          0 :         PushNullStr;</span>
 <span class="lineNum">     554 </span>            :     }
 <span class="lineNum">     555 </span>            : }
 <a name="556"><span class="lineNum">     556 </span>            : </a>
 <span class="lineNum">     557 </span>            : void
-<span class="lineNum">     558 </span><span class="lineCov">          8 : prim_prettylock(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     558 </span><span class="lineCov">          2 : prim_prettylock(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     559 </span>            : {
 <span class="lineNum">     560 </span>            :     const char *ptr;
 <span class="lineNum">     561 </span>            : 
-<span class="lineNum">     562 </span><span class="lineCov">          8 :     CHECKOP(1);</span>
-<span class="lineNum">     563 </span><span class="lineCov">          8 :     oper1 = POP();              /* lock: lock */</span>
-<span class="lineNum">     564 </span><span class="lineCov">          8 :     if (oper1-&gt;type != PROG_LOCK)</span>
-<span class="lineNum">     565 </span><span class="lineCov">          2 :         abort_interp(&quot;Invalid argument.&quot;);</span>
-<span class="lineNum">     566 </span><span class="lineCov">          6 :     ptr = unparse_boolexp(ProgUID, oper1-&gt;data.lock, 1);</span>
-<span class="lineNum">     567 </span><span class="lineCov">          6 :     CHECKOFLOW(1);</span>
-<span class="lineNum">     568 </span><span class="lineCov">          6 :     CLEAR(oper1);</span>
-<span class="lineNum">     569 </span><span class="lineCov">          6 :     PushString(ptr);</span>
+<span class="lineNum">     562 </span><span class="lineCov">          2 :     CHECKOP(1);</span>
+<span class="lineNum">     563 </span><span class="lineCov">          2 :     oper1 = POP();              /* lock: lock */</span>
+<span class="lineNum">     564 </span><span class="lineCov">          2 :     if (oper1-&gt;type != PROG_LOCK)</span>
+<span class="lineNum">     565 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Invalid argument.&quot;);</span>
+<span class="lineNum">     566 </span><span class="lineCov">          2 :     ptr = unparse_boolexp(ProgUID, oper1-&gt;data.lock, 1);</span>
+<span class="lineNum">     567 </span><span class="lineCov">          2 :     CHECKOFLOW(1);</span>
+<span class="lineNum">     568 </span><span class="lineCov">          2 :     CLEAR(oper1);</span>
+<span class="lineNum">     569 </span><span class="lineCov">          2 :     PushString(ptr);</span>
 <span class="lineNum">     570 </span>            : }
 <a name="571"><span class="lineNum">     571 </span>            : </a>
 <span class="lineNum">     572 </span>            : void
-<span class="lineNum">     573 </span><span class="lineCov">          4 : prim_testlock(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     573 </span><span class="lineCov">          1 : prim_testlock(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     574 </span>            : {
-<span class="lineNum">     575 </span><span class="lineCov">          4 :     struct inst *oper1 = NULL;  /* prevents re-entrancy issues! */</span>
-<span class="lineNum">     576 </span><span class="lineCov">          4 :     struct inst *oper2 = NULL;  /* prevents re-entrancy issues! */</span>
+<span class="lineNum">     575 </span><span class="lineCov">          1 :     struct inst *oper1 = NULL;  /* prevents re-entrancy issues! */</span>
+<span class="lineNum">     576 </span><span class="lineCov">          1 :     struct inst *oper2 = NULL;  /* prevents re-entrancy issues! */</span>
 <span class="lineNum">     577 </span>            : 
 <span class="lineNum">     578 </span>            : 
 <span class="lineNum">     579 </span>            :     /* d d - i */
-<span class="lineNum">     580 </span><span class="lineCov">          4 :     CHECKOP(2);</span>
-<span class="lineNum">     581 </span><span class="lineCov">          4 :     oper1 = POP();              /* boolexp lock */</span>
-<span class="lineNum">     582 </span><span class="lineCov">          4 :     oper2 = POP();              /* player dbref */</span>
-<span class="lineNum">     583 </span><span class="lineCov">          4 :     if (fr-&gt;level &gt; 8)</span>
+<span class="lineNum">     580 </span><span class="lineCov">          1 :     CHECKOP(2);</span>
+<span class="lineNum">     581 </span><span class="lineCov">          1 :     oper1 = POP();              /* boolexp lock */</span>
+<span class="lineNum">     582 </span><span class="lineCov">          1 :     oper2 = POP();              /* player dbref */</span>
+<span class="lineNum">     583 </span><span class="lineCov">          1 :     if (fr-&gt;level &gt; 8)</span>
 <span class="lineNum">     584 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Interp call loops not allowed.&quot;);</span>
-<span class="lineNum">     585 </span><span class="lineCov">          4 :     if (!valid_object(oper2))</span>
+<span class="lineNum">     585 </span><span class="lineCov">          1 :     if (!valid_object(oper2))</span>
 <span class="lineNum">     586 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Invalid argument (1).&quot;);</span>
-<span class="lineNum">     587 </span><span class="lineCov">          4 :     if (Typeof(oper2-&gt;data.objref) != TYPE_PLAYER &amp;&amp; Typeof(oper2-&gt;data.objref) != TYPE_THING) {</span>
+<span class="lineNum">     587 </span><span class="lineCov">          1 :     if (Typeof(oper2-&gt;data.objref) != TYPE_PLAYER &amp;&amp; Typeof(oper2-&gt;data.objref) != TYPE_THING) {</span>
 <span class="lineNum">     588 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Invalid object type (1).&quot;);</span>
 <span class="lineNum">     589 </span>            :     }
-<span class="lineNum">     590 </span><span class="lineCov">          4 :     CHECKREMOTE(oper2-&gt;data.objref);</span>
-<span class="lineNum">     591 </span><span class="lineCov">          4 :     if (oper1-&gt;type != PROG_LOCK)</span>
+<span class="lineNum">     590 </span><span class="lineCov">          1 :     CHECKREMOTE(oper2-&gt;data.objref);</span>
+<span class="lineNum">     591 </span><span class="lineCov">          1 :     if (oper1-&gt;type != PROG_LOCK)</span>
 <span class="lineNum">     592 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Invalid argument (2).&quot;);</span>
-<span class="lineNum">     593 </span><span class="lineCov">          4 :     result = eval_boolexp(fr-&gt;descr, oper2-&gt;data.objref, oper1-&gt;data.lock,</span>
-<span class="lineNum">     594 </span><span class="lineCov">          4 :                           tp_consistent_lock_source ? fr-&gt;trig : player);</span>
-<span class="lineNum">     595 </span><span class="lineCov">          4 :     CLEAR(oper1);</span>
-<span class="lineNum">     596 </span><span class="lineCov">          4 :     CLEAR(oper2);</span>
-<span class="lineNum">     597 </span><span class="lineCov">          4 :     PushInt(result);</span>
+<span class="lineNum">     593 </span><span class="lineCov">          1 :     result = eval_boolexp(fr-&gt;descr, oper2-&gt;data.objref, oper1-&gt;data.lock,</span>
+<span class="lineNum">     594 </span><span class="lineCov">          1 :                           tp_consistent_lock_source ? fr-&gt;trig : player);</span>
+<span class="lineNum">     595 </span><span class="lineCov">          1 :     CLEAR(oper1);</span>
+<span class="lineNum">     596 </span><span class="lineCov">          1 :     CLEAR(oper2);</span>
+<span class="lineNum">     597 </span><span class="lineCov">          1 :     PushInt(result);</span>
 <span class="lineNum">     598 </span>            : }
 <a name="599"><span class="lineNum">     599 </span>            : </a>
 <span class="lineNum">     600 </span>            : void
