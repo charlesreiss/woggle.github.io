@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-03-05 00:54:08</td>
+            <td class="headerValue">2017-03-15 22:49:01</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">11</td>
@@ -94,95 +94,95 @@
 <span class="lineNum">      32 </span>            : static int err_init = 0;
 <a name="33"><span class="lineNum">      33 </span>            : </a>
 <span class="lineNum">      34 </span>            : static void
-<span class="lineNum">      35 </span><span class="lineCov">         23 : init_err_val(void)</span>
+<span class="lineNum">      35 </span><span class="lineCov">        115 : init_err_val(void)</span>
 <span class="lineNum">      36 </span>            : {
-<span class="lineNum">      37 </span><span class="lineCov">        138 :     for (int i = 0; i &lt; ERROR_NUM; i++)</span>
-<span class="lineNum">      38 </span><span class="lineCov">        115 :         err_bits[i].is_flags = 0;</span>
-<span class="lineNum">      39 </span><span class="lineCov">         23 :     err_bits[0].error_flags.div_zero = 1;</span>
-<span class="lineNum">      40 </span><span class="lineCov">         23 :     err_bits[1].error_flags.nan = 1;</span>
-<span class="lineNum">      41 </span><span class="lineCov">         23 :     err_bits[2].error_flags.imaginary = 1;</span>
-<span class="lineNum">      42 </span><span class="lineCov">         23 :     err_bits[3].error_flags.f_bounds = 1;</span>
-<span class="lineNum">      43 </span><span class="lineCov">         23 :     err_bits[4].error_flags.i_bounds = 1;</span>
-<span class="lineNum">      44 </span><span class="lineCov">         23 :     err_init = 1;</span>
-<span class="lineNum">      45 </span><span class="lineCov">         23 : }</span>
+<span class="lineNum">      37 </span><span class="lineCov">        690 :     for (int i = 0; i &lt; ERROR_NUM; i++)</span>
+<span class="lineNum">      38 </span><span class="lineCov">        575 :         err_bits[i].is_flags = 0;</span>
+<span class="lineNum">      39 </span><span class="lineCov">        115 :     err_bits[0].error_flags.div_zero = 1;</span>
+<span class="lineNum">      40 </span><span class="lineCov">        115 :     err_bits[1].error_flags.nan = 1;</span>
+<span class="lineNum">      41 </span><span class="lineCov">        115 :     err_bits[2].error_flags.imaginary = 1;</span>
+<span class="lineNum">      42 </span><span class="lineCov">        115 :     err_bits[3].error_flags.f_bounds = 1;</span>
+<span class="lineNum">      43 </span><span class="lineCov">        115 :     err_bits[4].error_flags.i_bounds = 1;</span>
+<span class="lineNum">      44 </span><span class="lineCov">        115 :     err_init = 1;</span>
+<span class="lineNum">      45 </span><span class="lineCov">        115 : }</span>
 <a name="46"><span class="lineNum">      46 </span>            : </a>
 <span class="lineNum">      47 </span>            : void
-<span class="lineNum">      48 </span><span class="lineCov">          1 : prim_clear(PRIM_PROTOTYPE)</span>
+<span class="lineNum">      48 </span><span class="lineCov">          5 : prim_clear(PRIM_PROTOTYPE)</span>
 <span class="lineNum">      49 </span>            : {
-<span class="lineNum">      50 </span><span class="lineCov">          1 :     CHECKOP(0);</span>
-<span class="lineNum">      51 </span><span class="lineCov">          1 :     fr-&gt;error.is_flags = 0;</span>
+<span class="lineNum">      50 </span><span class="lineCov">          5 :     CHECKOP(0);</span>
+<span class="lineNum">      51 </span><span class="lineCov">          5 :     fr-&gt;error.is_flags = 0;</span>
 <span class="lineNum">      52 </span>            : }
 <a name="53"><span class="lineNum">      53 </span>            : </a>
 <span class="lineNum">      54 </span>            : void
-<span class="lineNum">      55 </span><span class="lineCov">          1 : prim_error_num(PRIM_PROTOTYPE)</span>
+<span class="lineNum">      55 </span><span class="lineCov">          5 : prim_error_num(PRIM_PROTOTYPE)</span>
 <span class="lineNum">      56 </span>            : {
-<span class="lineNum">      57 </span><span class="lineCov">          1 :     CHECKOP(0);</span>
-<span class="lineNum">      58 </span><span class="lineCov">          1 :     CHECKOFLOW(1);</span>
-<span class="lineNum">      59 </span><span class="lineCov">          1 :     result = ERROR_NUM;</span>
-<span class="lineNum">      60 </span><span class="lineCov">          1 :     PushInt(result);</span>
+<span class="lineNum">      57 </span><span class="lineCov">          5 :     CHECKOP(0);</span>
+<span class="lineNum">      58 </span><span class="lineCov">          5 :     CHECKOFLOW(1);</span>
+<span class="lineNum">      59 </span><span class="lineCov">          5 :     result = ERROR_NUM;</span>
+<span class="lineNum">      60 </span><span class="lineCov">          5 :     PushInt(result);</span>
 <span class="lineNum">      61 </span>            : }
 <a name="62"><span class="lineNum">      62 </span>            : </a>
 <span class="lineNum">      63 </span>            : static void
-<span class="lineNum">      64 </span><span class="lineCov">          9 : to_upper_string_n(char *buffer, const char *input, int limit) {</span>
+<span class="lineNum">      64 </span><span class="lineCov">         45 : to_upper_string_n(char *buffer, const char *input, int limit) {</span>
 <span class="lineNum">      65 </span>            :     int i;
-<span class="lineNum">      66 </span><span class="lineCov">         76 :     for (i = 0; input[i] &amp;&amp; i &lt; limit - 1; ++i) {</span>
-<span class="lineNum">      67 </span><span class="lineCov">         67 :         buffer[i] = toupper(input[i]);</span>
+<span class="lineNum">      66 </span><span class="lineCov">        380 :     for (i = 0; input[i] &amp;&amp; i &lt; limit - 1; ++i) {</span>
+<span class="lineNum">      67 </span><span class="lineCov">        335 :         buffer[i] = toupper(input[i]);</span>
 <span class="lineNum">      68 </span>            :     }
-<span class="lineNum">      69 </span><span class="lineCov">          9 :     buffer[i] = '\0';</span>
-<span class="lineNum">      70 </span><span class="lineCov">          9 : }</span>
+<span class="lineNum">      69 </span><span class="lineCov">         45 :     buffer[i] = '\0';</span>
+<span class="lineNum">      70 </span><span class="lineCov">         45 : }</span>
 <a name="71"><span class="lineNum">      71 </span>            : </a>
 <span class="lineNum">      72 </span>            : void
-<span class="lineNum">      73 </span><span class="lineCov">          2 : prim_clear_error(PRIM_PROTOTYPE)</span>
+<span class="lineNum">      73 </span><span class="lineCov">         10 : prim_clear_error(PRIM_PROTOTYPE)</span>
 <span class="lineNum">      74 </span>            : {
 <span class="lineNum">      75 </span>            :     int loop;
 <span class="lineNum">      76 </span>            : 
-<span class="lineNum">      77 </span><span class="lineCov">          2 :     CHECKOP(1);</span>
-<span class="lineNum">      78 </span><span class="lineCov">          2 :     oper1 = POP();</span>
-<span class="lineNum">      79 </span><span class="lineCov">          2 :     if (oper1-&gt;type != PROG_STRING &amp;&amp; oper1-&gt;type != PROG_INTEGER)</span>
+<span class="lineNum">      77 </span><span class="lineCov">         10 :     CHECKOP(1);</span>
+<span class="lineNum">      78 </span><span class="lineCov">         10 :     oper1 = POP();</span>
+<span class="lineNum">      79 </span><span class="lineCov">         10 :     if (oper1-&gt;type != PROG_STRING &amp;&amp; oper1-&gt;type != PROG_INTEGER)</span>
 <span class="lineNum">      80 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Invalid argument type. (1)&quot;);</span>
-<span class="lineNum">      81 </span><span class="lineCov">          2 :     if (!err_init)</span>
+<span class="lineNum">      81 </span><span class="lineCov">         10 :     if (!err_init)</span>
 <span class="lineNum">      82 </span><span class="lineNoCov">          0 :         init_err_val();</span>
-<span class="lineNum">      83 </span><span class="lineCov">          2 :     if (oper1-&gt;type == PROG_INTEGER) {</span>
-<span class="lineNum">      84 </span><span class="lineCov">          1 :         if ((oper1-&gt;data.number &lt; 0) || (oper1-&gt;data.number &gt;= ERROR_NUM)) {</span>
+<span class="lineNum">      83 </span><span class="lineCov">         10 :     if (oper1-&gt;type == PROG_INTEGER) {</span>
+<span class="lineNum">      84 </span><span class="lineCov">          5 :         if ((oper1-&gt;data.number &lt; 0) || (oper1-&gt;data.number &gt;= ERROR_NUM)) {</span>
 <span class="lineNum">      85 </span><span class="lineNoCov">          0 :             result = 0;</span>
 <span class="lineNum">      86 </span>            :         } else {
-<span class="lineNum">      87 </span><span class="lineCov">          1 :             fr-&gt;error.is_flags = fr-&gt;error.is_flags &amp; (~err_bits[oper1-&gt;data.number].is_flags);</span>
-<span class="lineNum">      88 </span><span class="lineCov">          1 :             result = 1;</span>
+<span class="lineNum">      87 </span><span class="lineCov">          5 :             fr-&gt;error.is_flags = fr-&gt;error.is_flags &amp; (~err_bits[oper1-&gt;data.number].is_flags);</span>
+<span class="lineNum">      88 </span><span class="lineCov">          5 :             result = 1;</span>
 <span class="lineNum">      89 </span>            :         }
 <span class="lineNum">      90 </span>            :     } else {
-<span class="lineNum">      91 </span><span class="lineCov">          1 :         if (!oper1-&gt;data.string) {</span>
+<span class="lineNum">      91 </span><span class="lineCov">          5 :         if (!oper1-&gt;data.string) {</span>
 <span class="lineNum">      92 </span><span class="lineNoCov">          0 :             result = 0;</span>
 <span class="lineNum">      93 </span>            :         } else {
-<span class="lineNum">      94 </span><span class="lineCov">          1 :             to_upper_string_n(buf, oper1-&gt;data.string-&gt;data, BUFFER_LEN);</span>
-<span class="lineNum">      95 </span><span class="lineCov">          1 :             result = 0;</span>
-<span class="lineNum">      96 </span><span class="lineCov">          1 :             loop = 0;</span>
-<span class="lineNum">      97 </span><span class="lineCov">          6 :             while (loop &lt; ERROR_NUM) {</span>
-<span class="lineNum">      98 </span><span class="lineCov">          5 :                 if (!strcmp(buf, err_defs[loop].error_name)) {</span>
-<span class="lineNum">      99 </span><span class="lineCov">          1 :                     result = 1;</span>
-<span class="lineNum">     100 </span><span class="lineCov">          1 :                     fr-&gt;error.is_flags = fr-&gt;error.is_flags &amp; (~err_bits[loop].is_flags);</span>
-<span class="lineNum">     101 </span><span class="lineCov">          1 :                     break;</span>
+<span class="lineNum">      94 </span><span class="lineCov">          5 :             to_upper_string_n(buf, oper1-&gt;data.string-&gt;data, BUFFER_LEN);</span>
+<span class="lineNum">      95 </span><span class="lineCov">          5 :             result = 0;</span>
+<span class="lineNum">      96 </span><span class="lineCov">          5 :             loop = 0;</span>
+<span class="lineNum">      97 </span><span class="lineCov">         30 :             while (loop &lt; ERROR_NUM) {</span>
+<span class="lineNum">      98 </span><span class="lineCov">         25 :                 if (!strcmp(buf, err_defs[loop].error_name)) {</span>
+<span class="lineNum">      99 </span><span class="lineCov">          5 :                     result = 1;</span>
+<span class="lineNum">     100 </span><span class="lineCov">          5 :                     fr-&gt;error.is_flags = fr-&gt;error.is_flags &amp; (~err_bits[loop].is_flags);</span>
+<span class="lineNum">     101 </span><span class="lineCov">          5 :                     break;</span>
 <span class="lineNum">     102 </span>            :                 } else {
-<span class="lineNum">     103 </span><span class="lineCov">          4 :                     loop++;</span>
+<span class="lineNum">     103 </span><span class="lineCov">         20 :                     loop++;</span>
 <span class="lineNum">     104 </span>            :                 }
 <span class="lineNum">     105 </span>            :             }
 <span class="lineNum">     106 </span>            :         }
 <span class="lineNum">     107 </span>            :     }
-<span class="lineNum">     108 </span><span class="lineCov">          2 :     CLEAR(oper1);</span>
-<span class="lineNum">     109 </span><span class="lineCov">          2 :     PushInt(result);</span>
+<span class="lineNum">     108 </span><span class="lineCov">         10 :     CLEAR(oper1);</span>
+<span class="lineNum">     109 </span><span class="lineCov">         10 :     PushInt(result);</span>
 <span class="lineNum">     110 </span>            : }
 <a name="111"><span class="lineNum">     111 </span>            : </a>
 <span class="lineNum">     112 </span>            : void
-<span class="lineNum">     113 </span><span class="lineCov">          4 : prim_set_error(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     113 </span><span class="lineCov">         20 : prim_set_error(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     114 </span>            : {
 <span class="lineNum">     115 </span>            :     int loop;
 <span class="lineNum">     116 </span>            : 
-<span class="lineNum">     117 </span><span class="lineCov">          4 :     CHECKOP(1);</span>
-<span class="lineNum">     118 </span><span class="lineCov">          4 :     oper1 = POP();</span>
-<span class="lineNum">     119 </span><span class="lineCov">          4 :     if (oper1-&gt;type != PROG_STRING &amp;&amp; oper1-&gt;type != PROG_INTEGER)</span>
+<span class="lineNum">     117 </span><span class="lineCov">         20 :     CHECKOP(1);</span>
+<span class="lineNum">     118 </span><span class="lineCov">         20 :     oper1 = POP();</span>
+<span class="lineNum">     119 </span><span class="lineCov">         20 :     if (oper1-&gt;type != PROG_STRING &amp;&amp; oper1-&gt;type != PROG_INTEGER)</span>
 <span class="lineNum">     120 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Invalid argument type. (1)&quot;);</span>
-<span class="lineNum">     121 </span><span class="lineCov">          4 :     if (!err_init)</span>
-<span class="lineNum">     122 </span><span class="lineCov">          1 :         init_err_val();</span>
-<span class="lineNum">     123 </span><span class="lineCov">          4 :     if (oper1-&gt;type == PROG_INTEGER) {</span>
+<span class="lineNum">     121 </span><span class="lineCov">         20 :     if (!err_init)</span>
+<span class="lineNum">     122 </span><span class="lineCov">          5 :         init_err_val();</span>
+<span class="lineNum">     123 </span><span class="lineCov">         20 :     if (oper1-&gt;type == PROG_INTEGER) {</span>
 <span class="lineNum">     124 </span><span class="lineNoCov">          0 :         if ((oper1-&gt;data.number &lt; 0) || (oper1-&gt;data.number &gt;= ERROR_NUM)) {</span>
 <span class="lineNum">     125 </span><span class="lineNoCov">          0 :             result = 0;</span>
 <span class="lineNum">     126 </span>            :         } else {
@@ -190,81 +190,81 @@
 <span class="lineNum">     128 </span><span class="lineNoCov">          0 :             result = 1;</span>
 <span class="lineNum">     129 </span>            :         }
 <span class="lineNum">     130 </span>            :     } else {
-<span class="lineNum">     131 </span><span class="lineCov">          4 :         if (!oper1-&gt;data.string) {</span>
+<span class="lineNum">     131 </span><span class="lineCov">         20 :         if (!oper1-&gt;data.string) {</span>
 <span class="lineNum">     132 </span><span class="lineNoCov">          0 :             result = 0;</span>
 <span class="lineNum">     133 </span>            :         } else {
-<span class="lineNum">     134 </span><span class="lineCov">          4 :             to_upper_string_n(buf, oper1-&gt;data.string-&gt;data, BUFFER_LEN);</span>
-<span class="lineNum">     135 </span><span class="lineCov">          4 :             result = 0;</span>
-<span class="lineNum">     136 </span><span class="lineCov">          4 :             loop = 0;</span>
-<span class="lineNum">     137 </span><span class="lineCov">         16 :             while (loop &lt; ERROR_NUM) {</span>
-<span class="lineNum">     138 </span><span class="lineCov">         12 :                 if (!strcmp(buf, err_defs[loop].error_name)) {</span>
-<span class="lineNum">     139 </span><span class="lineCov">          4 :                     result = 1;</span>
-<span class="lineNum">     140 </span><span class="lineCov">          4 :                     fr-&gt;error.is_flags = fr-&gt;error.is_flags | err_bits[loop].is_flags;</span>
-<span class="lineNum">     141 </span><span class="lineCov">          4 :                     break;</span>
+<span class="lineNum">     134 </span><span class="lineCov">         20 :             to_upper_string_n(buf, oper1-&gt;data.string-&gt;data, BUFFER_LEN);</span>
+<span class="lineNum">     135 </span><span class="lineCov">         20 :             result = 0;</span>
+<span class="lineNum">     136 </span><span class="lineCov">         20 :             loop = 0;</span>
+<span class="lineNum">     137 </span><span class="lineCov">         80 :             while (loop &lt; ERROR_NUM) {</span>
+<span class="lineNum">     138 </span><span class="lineCov">         60 :                 if (!strcmp(buf, err_defs[loop].error_name)) {</span>
+<span class="lineNum">     139 </span><span class="lineCov">         20 :                     result = 1;</span>
+<span class="lineNum">     140 </span><span class="lineCov">         20 :                     fr-&gt;error.is_flags = fr-&gt;error.is_flags | err_bits[loop].is_flags;</span>
+<span class="lineNum">     141 </span><span class="lineCov">         20 :                     break;</span>
 <span class="lineNum">     142 </span>            :                 } else {
-<span class="lineNum">     143 </span><span class="lineCov">          8 :                     loop++;</span>
+<span class="lineNum">     143 </span><span class="lineCov">         40 :                     loop++;</span>
 <span class="lineNum">     144 </span>            :                 }
 <span class="lineNum">     145 </span>            :             }
 <span class="lineNum">     146 </span>            :         }
 <span class="lineNum">     147 </span>            :     }
-<span class="lineNum">     148 </span><span class="lineCov">          4 :     CLEAR(oper1);</span>
-<span class="lineNum">     149 </span><span class="lineCov">          4 :     PushInt(result);</span>
+<span class="lineNum">     148 </span><span class="lineCov">         20 :     CLEAR(oper1);</span>
+<span class="lineNum">     149 </span><span class="lineCov">         20 :     PushInt(result);</span>
 <span class="lineNum">     150 </span>            : }
 <a name="151"><span class="lineNum">     151 </span>            : </a>
 <span class="lineNum">     152 </span>            : void
-<span class="lineNum">     153 </span><span class="lineCov">         31 : prim_is_set(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     153 </span><span class="lineCov">        155 : prim_is_set(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     154 </span>            : {
 <span class="lineNum">     155 </span>            :     int loop;
 <span class="lineNum">     156 </span>            : 
-<span class="lineNum">     157 </span><span class="lineCov">         31 :     CHECKOP(1);</span>
-<span class="lineNum">     158 </span><span class="lineCov">         31 :     oper1 = POP();</span>
-<span class="lineNum">     159 </span><span class="lineCov">         31 :     if (oper1-&gt;type != PROG_STRING &amp;&amp; oper1-&gt;type != PROG_INTEGER)</span>
+<span class="lineNum">     157 </span><span class="lineCov">        155 :     CHECKOP(1);</span>
+<span class="lineNum">     158 </span><span class="lineCov">        155 :     oper1 = POP();</span>
+<span class="lineNum">     159 </span><span class="lineCov">        155 :     if (oper1-&gt;type != PROG_STRING &amp;&amp; oper1-&gt;type != PROG_INTEGER)</span>
 <span class="lineNum">     160 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Invalid argument type. (1)&quot;);</span>
-<span class="lineNum">     161 </span><span class="lineCov">         31 :     if (!err_init)</span>
-<span class="lineNum">     162 </span><span class="lineCov">         22 :         init_err_val();</span>
-<span class="lineNum">     163 </span><span class="lineCov">         31 :     if (oper1-&gt;type == PROG_INTEGER) {</span>
-<span class="lineNum">     164 </span><span class="lineCov">         28 :         if ((oper1-&gt;data.number &lt; 0) || (oper1-&gt;data.number &gt;= ERROR_NUM)) {</span>
+<span class="lineNum">     161 </span><span class="lineCov">        155 :     if (!err_init)</span>
+<span class="lineNum">     162 </span><span class="lineCov">        110 :         init_err_val();</span>
+<span class="lineNum">     163 </span><span class="lineCov">        155 :     if (oper1-&gt;type == PROG_INTEGER) {</span>
+<span class="lineNum">     164 </span><span class="lineCov">        140 :         if ((oper1-&gt;data.number &lt; 0) || (oper1-&gt;data.number &gt;= ERROR_NUM)) {</span>
 <span class="lineNum">     165 </span><span class="lineNoCov">          0 :             result = 0;</span>
 <span class="lineNum">     166 </span>            :         } else {
-<span class="lineNum">     167 </span><span class="lineCov">         28 :             result = ((fr-&gt;error.is_flags &amp; err_bits[oper1-&gt;data.number].is_flags) != 0);</span>
+<span class="lineNum">     167 </span><span class="lineCov">        140 :             result = ((fr-&gt;error.is_flags &amp; err_bits[oper1-&gt;data.number].is_flags) != 0);</span>
 <span class="lineNum">     168 </span>            :         }
 <span class="lineNum">     169 </span>            :     } else {
-<span class="lineNum">     170 </span><span class="lineCov">          3 :         if (!oper1-&gt;data.string) {</span>
+<span class="lineNum">     170 </span><span class="lineCov">         15 :         if (!oper1-&gt;data.string) {</span>
 <span class="lineNum">     171 </span><span class="lineNoCov">          0 :             result = 0;</span>
 <span class="lineNum">     172 </span>            :         } else {
-<span class="lineNum">     173 </span><span class="lineCov">          3 :             to_upper_string_n(buf, oper1-&gt;data.string-&gt;data, BUFFER_LEN);</span>
-<span class="lineNum">     174 </span><span class="lineCov">          3 :             result = 0;</span>
-<span class="lineNum">     175 </span><span class="lineCov">          3 :             loop = 0;</span>
-<span class="lineNum">     176 </span><span class="lineCov">         14 :             while (loop &lt; ERROR_NUM) {</span>
-<span class="lineNum">     177 </span><span class="lineCov">         11 :                 if (!strcmp(buf, err_defs[loop].error_name)) {</span>
-<span class="lineNum">     178 </span><span class="lineCov">          3 :                     result = ((fr-&gt;error.is_flags &amp; err_bits[loop].is_flags) != 0);</span>
-<span class="lineNum">     179 </span><span class="lineCov">          3 :                     break;</span>
+<span class="lineNum">     173 </span><span class="lineCov">         15 :             to_upper_string_n(buf, oper1-&gt;data.string-&gt;data, BUFFER_LEN);</span>
+<span class="lineNum">     174 </span><span class="lineCov">         15 :             result = 0;</span>
+<span class="lineNum">     175 </span><span class="lineCov">         15 :             loop = 0;</span>
+<span class="lineNum">     176 </span><span class="lineCov">         70 :             while (loop &lt; ERROR_NUM) {</span>
+<span class="lineNum">     177 </span><span class="lineCov">         55 :                 if (!strcmp(buf, err_defs[loop].error_name)) {</span>
+<span class="lineNum">     178 </span><span class="lineCov">         15 :                     result = ((fr-&gt;error.is_flags &amp; err_bits[loop].is_flags) != 0);</span>
+<span class="lineNum">     179 </span><span class="lineCov">         15 :                     break;</span>
 <span class="lineNum">     180 </span>            :                 } else {
-<span class="lineNum">     181 </span><span class="lineCov">          8 :                     loop++;</span>
+<span class="lineNum">     181 </span><span class="lineCov">         40 :                     loop++;</span>
 <span class="lineNum">     182 </span>            :                 }
 <span class="lineNum">     183 </span>            :             }
 <span class="lineNum">     184 </span>            :         }
 <span class="lineNum">     185 </span>            :     }
-<span class="lineNum">     186 </span><span class="lineCov">         31 :     CLEAR(oper1);</span>
-<span class="lineNum">     187 </span><span class="lineCov">         31 :     PushInt(result);</span>
+<span class="lineNum">     186 </span><span class="lineCov">        155 :     CLEAR(oper1);</span>
+<span class="lineNum">     187 </span><span class="lineCov">        155 :     PushInt(result);</span>
 <span class="lineNum">     188 </span>            : }
 <a name="189"><span class="lineNum">     189 </span>            : </a>
 <span class="lineNum">     190 </span>            : void
-<span class="lineNum">     191 </span><span class="lineCov">          1 : prim_error_str(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     191 </span><span class="lineCov">          5 : prim_error_str(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     192 </span>            : {
 <span class="lineNum">     193 </span>            :     int loop;
 <span class="lineNum">     194 </span>            : 
-<span class="lineNum">     195 </span><span class="lineCov">          1 :     CHECKOP(1);</span>
-<span class="lineNum">     196 </span><span class="lineCov">          1 :     oper1 = POP();</span>
-<span class="lineNum">     197 </span><span class="lineCov">          1 :     if (oper1-&gt;type != PROG_STRING &amp;&amp; oper1-&gt;type != PROG_INTEGER)</span>
+<span class="lineNum">     195 </span><span class="lineCov">          5 :     CHECKOP(1);</span>
+<span class="lineNum">     196 </span><span class="lineCov">          5 :     oper1 = POP();</span>
+<span class="lineNum">     197 </span><span class="lineCov">          5 :     if (oper1-&gt;type != PROG_STRING &amp;&amp; oper1-&gt;type != PROG_INTEGER)</span>
 <span class="lineNum">     198 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Invalid argument type. (1)&quot;);</span>
-<span class="lineNum">     199 </span><span class="lineCov">          1 :     if (!err_init)</span>
+<span class="lineNum">     199 </span><span class="lineCov">          5 :     if (!err_init)</span>
 <span class="lineNum">     200 </span><span class="lineNoCov">          0 :         init_err_val();</span>
-<span class="lineNum">     201 </span><span class="lineCov">          1 :     if (oper1-&gt;type == PROG_INTEGER) {</span>
-<span class="lineNum">     202 </span><span class="lineCov">          1 :         if ((oper1-&gt;data.number &lt; 0) || (oper1-&gt;data.number &gt;= ERROR_NUM)) {</span>
+<span class="lineNum">     201 </span><span class="lineCov">          5 :     if (oper1-&gt;type == PROG_INTEGER) {</span>
+<span class="lineNum">     202 </span><span class="lineCov">          5 :         if ((oper1-&gt;data.number &lt; 0) || (oper1-&gt;data.number &gt;= ERROR_NUM)) {</span>
 <span class="lineNum">     203 </span><span class="lineNoCov">          0 :             result = -1;</span>
 <span class="lineNum">     204 </span>            :         } else {
-<span class="lineNum">     205 </span><span class="lineCov">          1 :             result = oper1-&gt;data.number;</span>
+<span class="lineNum">     205 </span><span class="lineCov">          5 :             result = oper1-&gt;data.number;</span>
 <span class="lineNum">     206 </span>            :         }
 <span class="lineNum">     207 </span>            :     } else {
 <span class="lineNum">     208 </span><span class="lineNoCov">          0 :         if (!oper1-&gt;data.string) {</span>
@@ -283,73 +283,73 @@
 <span class="lineNum">     221 </span>            :             }
 <span class="lineNum">     222 </span>            :         }
 <span class="lineNum">     223 </span>            :     }
-<span class="lineNum">     224 </span><span class="lineCov">          1 :     CLEAR(oper1);</span>
-<span class="lineNum">     225 </span><span class="lineCov">          1 :     if (result == -1) {</span>
+<span class="lineNum">     224 </span><span class="lineCov">          5 :     CLEAR(oper1);</span>
+<span class="lineNum">     225 </span><span class="lineCov">          5 :     if (result == -1) {</span>
 <span class="lineNum">     226 </span><span class="lineNoCov">          0 :         PushNullStr;</span>
 <span class="lineNum">     227 </span>            :     } else {
-<span class="lineNum">     228 </span><span class="lineCov">          1 :         PushString(err_defs[result].error_string);</span>
+<span class="lineNum">     228 </span><span class="lineCov">          5 :         PushString(err_defs[result].error_string);</span>
 <span class="lineNum">     229 </span>            :     }
 <span class="lineNum">     230 </span>            : }
 <a name="231"><span class="lineNum">     231 </span>            : </a>
 <span class="lineNum">     232 </span>            : void
-<span class="lineNum">     233 </span><span class="lineCov">          1 : prim_error_name(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     233 </span><span class="lineCov">          5 : prim_error_name(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     234 </span>            : {
-<span class="lineNum">     235 </span><span class="lineCov">          1 :     CHECKOP(1);</span>
-<span class="lineNum">     236 </span><span class="lineCov">          1 :     oper1 = POP();</span>
-<span class="lineNum">     237 </span><span class="lineCov">          1 :     if (oper1-&gt;type != PROG_INTEGER)</span>
+<span class="lineNum">     235 </span><span class="lineCov">          5 :     CHECKOP(1);</span>
+<span class="lineNum">     236 </span><span class="lineCov">          5 :     oper1 = POP();</span>
+<span class="lineNum">     237 </span><span class="lineCov">          5 :     if (oper1-&gt;type != PROG_INTEGER)</span>
 <span class="lineNum">     238 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Invalid argument type. (1)&quot;);</span>
-<span class="lineNum">     239 </span><span class="lineCov">          1 :     if (!err_init)</span>
+<span class="lineNum">     239 </span><span class="lineCov">          5 :     if (!err_init)</span>
 <span class="lineNum">     240 </span><span class="lineNoCov">          0 :         init_err_val();</span>
-<span class="lineNum">     241 </span><span class="lineCov">          1 :     if ((oper1-&gt;data.number &lt; 0) || (oper1-&gt;data.number &gt;= ERROR_NUM)) {</span>
+<span class="lineNum">     241 </span><span class="lineCov">          5 :     if ((oper1-&gt;data.number &lt; 0) || (oper1-&gt;data.number &gt;= ERROR_NUM)) {</span>
 <span class="lineNum">     242 </span><span class="lineNoCov">          0 :         result = -1;</span>
 <span class="lineNum">     243 </span>            :     } else {
-<span class="lineNum">     244 </span><span class="lineCov">          1 :         result = oper1-&gt;data.number;</span>
+<span class="lineNum">     244 </span><span class="lineCov">          5 :         result = oper1-&gt;data.number;</span>
 <span class="lineNum">     245 </span>            :     }
-<span class="lineNum">     246 </span><span class="lineCov">          1 :     CLEAR(oper1);</span>
-<span class="lineNum">     247 </span><span class="lineCov">          1 :     if (result == -1) {</span>
+<span class="lineNum">     246 </span><span class="lineCov">          5 :     CLEAR(oper1);</span>
+<span class="lineNum">     247 </span><span class="lineCov">          5 :     if (result == -1) {</span>
 <span class="lineNum">     248 </span><span class="lineNoCov">          0 :         PushNullStr;</span>
 <span class="lineNum">     249 </span>            :     } else {
-<span class="lineNum">     250 </span><span class="lineCov">          1 :         PushString(err_defs[result].error_name);</span>
+<span class="lineNum">     250 </span><span class="lineCov">          5 :         PushString(err_defs[result].error_name);</span>
 <span class="lineNum">     251 </span>            :     }
 <span class="lineNum">     252 </span>            : }
 <a name="253"><span class="lineNum">     253 </span>            : </a>
 <span class="lineNum">     254 </span>            : void
-<span class="lineNum">     255 </span><span class="lineCov">          1 : prim_error_bit(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     255 </span><span class="lineCov">          5 : prim_error_bit(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     256 </span>            : {
 <span class="lineNum">     257 </span>            :     int loop;
 <span class="lineNum">     258 </span>            : 
-<span class="lineNum">     259 </span><span class="lineCov">          1 :     CHECKOP(1);</span>
-<span class="lineNum">     260 </span><span class="lineCov">          1 :     oper1 = POP();</span>
-<span class="lineNum">     261 </span><span class="lineCov">          1 :     if (oper1-&gt;type != PROG_STRING)</span>
+<span class="lineNum">     259 </span><span class="lineCov">          5 :     CHECKOP(1);</span>
+<span class="lineNum">     260 </span><span class="lineCov">          5 :     oper1 = POP();</span>
+<span class="lineNum">     261 </span><span class="lineCov">          5 :     if (oper1-&gt;type != PROG_STRING)</span>
 <span class="lineNum">     262 </span><span class="lineNoCov">          0 :         abort_interp(&quot;Invalid argument type. (1)&quot;);</span>
-<span class="lineNum">     263 </span><span class="lineCov">          1 :     if (!err_init)</span>
+<span class="lineNum">     263 </span><span class="lineCov">          5 :     if (!err_init)</span>
 <span class="lineNum">     264 </span><span class="lineNoCov">          0 :         init_err_val();</span>
-<span class="lineNum">     265 </span><span class="lineCov">          1 :     if (!oper1-&gt;data.string) {</span>
+<span class="lineNum">     265 </span><span class="lineCov">          5 :     if (!oper1-&gt;data.string) {</span>
 <span class="lineNum">     266 </span><span class="lineNoCov">          0 :         result = -1;</span>
 <span class="lineNum">     267 </span>            :     } else {
-<span class="lineNum">     268 </span><span class="lineCov">          1 :         to_upper_string_n(buf, oper1-&gt;data.string-&gt;data, BUFFER_LEN);</span>
-<span class="lineNum">     269 </span><span class="lineCov">          1 :         result = -1;</span>
-<span class="lineNum">     270 </span><span class="lineCov">          1 :         loop = 0;</span>
-<span class="lineNum">     271 </span><span class="lineCov">          2 :         while (loop &lt; ERROR_NUM) {</span>
-<span class="lineNum">     272 </span><span class="lineCov">          1 :             if (!strcmp(buf, err_defs[loop].error_name)) {</span>
-<span class="lineNum">     273 </span><span class="lineCov">          1 :                 result = loop;</span>
-<span class="lineNum">     274 </span><span class="lineCov">          1 :                 break;</span>
+<span class="lineNum">     268 </span><span class="lineCov">          5 :         to_upper_string_n(buf, oper1-&gt;data.string-&gt;data, BUFFER_LEN);</span>
+<span class="lineNum">     269 </span><span class="lineCov">          5 :         result = -1;</span>
+<span class="lineNum">     270 </span><span class="lineCov">          5 :         loop = 0;</span>
+<span class="lineNum">     271 </span><span class="lineCov">         10 :         while (loop &lt; ERROR_NUM) {</span>
+<span class="lineNum">     272 </span><span class="lineCov">          5 :             if (!strcmp(buf, err_defs[loop].error_name)) {</span>
+<span class="lineNum">     273 </span><span class="lineCov">          5 :                 result = loop;</span>
+<span class="lineNum">     274 </span><span class="lineCov">          5 :                 break;</span>
 <span class="lineNum">     275 </span>            :             } else {
 <span class="lineNum">     276 </span><span class="lineNoCov">          0 :                 loop++;</span>
 <span class="lineNum">     277 </span>            :             }
 <span class="lineNum">     278 </span>            :         }
 <span class="lineNum">     279 </span>            :     }
-<span class="lineNum">     280 </span><span class="lineCov">          1 :     CLEAR(oper1);</span>
-<span class="lineNum">     281 </span><span class="lineCov">          1 :     PushInt(result);</span>
+<span class="lineNum">     280 </span><span class="lineCov">          5 :     CLEAR(oper1);</span>
+<span class="lineNum">     281 </span><span class="lineCov">          5 :     PushInt(result);</span>
 <span class="lineNum">     282 </span>            : }
 <a name="283"><span class="lineNum">     283 </span>            : </a>
 <span class="lineNum">     284 </span>            : void
-<span class="lineNum">     285 </span><span class="lineCov">         46 : prim_is_error(PRIM_PROTOTYPE)</span>
+<span class="lineNum">     285 </span><span class="lineCov">        230 : prim_is_error(PRIM_PROTOTYPE)</span>
 <span class="lineNum">     286 </span>            : {
-<span class="lineNum">     287 </span><span class="lineCov">         46 :     CHECKOP(0);</span>
-<span class="lineNum">     288 </span><span class="lineCov">         46 :     CHECKOFLOW(1);</span>
-<span class="lineNum">     289 </span><span class="lineCov">         46 :     result = ((fr-&gt;error.is_flags) != 0);</span>
-<span class="lineNum">     290 </span><span class="lineCov">         46 :     PushInt(result);</span>
+<span class="lineNum">     287 </span><span class="lineCov">        230 :     CHECKOP(0);</span>
+<span class="lineNum">     288 </span><span class="lineCov">        230 :     CHECKOFLOW(1);</span>
+<span class="lineNum">     289 </span><span class="lineCov">        230 :     result = ((fr-&gt;error.is_flags) != 0);</span>
+<span class="lineNum">     290 </span><span class="lineCov">        230 :     PushInt(result);</span>
 <span class="lineNum">     291 </span>            : }
 </pre>
       </td>
